@@ -5,7 +5,7 @@ class CourierAPIException(Exception):
     def __init__(self, response):
         self.response = response
         respJSON = response.json()
-        msg = respJSON["Message"] or respJSON["message"]
+        msg = respJSON.get("Message") or respJSON.get("message")
         self.message = "Call to {uri} returned {status_code}\n{msg}".format(
             uri=response.url,
             status_code=response.status_code,
