@@ -1,2 +1,4 @@
+wheel
+twine
 flake8
 requests==2.23.0

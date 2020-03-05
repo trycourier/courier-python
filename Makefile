@@ -10,5 +10,13 @@ install: venv
 analysis:
 				. env/bin/activate; flake8 trycourier
 
+build: install
+				. env/bin/activate; python setup.py sdist
+				. env/bin/activate; python setup.py bdist_wheel
+
+release: build; twine upload -r pypi dist/*
+
+release-test: build; twine upload -r test dist/*
+
 clean:
 				rm -rf env build dist *.egg-info
