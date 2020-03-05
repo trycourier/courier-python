@@ -1,5 +1,7 @@
 from os import environ
 from urllib.parse import urljoin
+
+from .exceptions import CourierAPIException
 from .session import CourierAPISession
 
 __version__ = '1.0.0'
@@ -64,4 +66,8 @@ class Courier(object):
             payload['override'] = override
 
         resp = self.session.post(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
         return resp.json()
