@@ -60,6 +60,16 @@ print(resp['messageId'])
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/trycourier/courier-python.
 
+### Local development
+
+- Fork this repository
+- Clone your fork
+- Install virtualenv: `pip install virtualenv`
+- Run `make install`
+- Run `source env/bin/activate`
+- Write code!
+- When finished, run `deactivate` to stop using this environment.
+
 ## License
 
 The package is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

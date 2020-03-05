@@ -1,1 +1,1 @@
-from .client import Courier
+from .client import Courier  # noqa

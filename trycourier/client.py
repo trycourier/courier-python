@@ -7,7 +7,11 @@ __version__ = '1.0.0'
 
 class Courier(object):
 
-    def __init__(self, base_url='https://api.trycourier.app', auth_token=None, username=None, password=None):
+    def __init__(self,
+                 base_url='https://api.trycourier.app',
+                 auth_token=None,
+                 username=None,
+                 password=None):
         """
         Instantiate a new API client.
         Args:
@@ -34,7 +38,13 @@ class Courier(object):
             self.session.init_token_auth(auth_token)
 
     # Perform an API request
-    def send(self, event, recipient, data={}, profile=None, preferences=None, override=None):
+    def send(self,
+             event,
+             recipient,
+             data={},
+             profile=None,
+             preferences=None,
+             override=None):
         """
         Send a notification for the provided event to the provided recipient
         """
