@@ -1,0 +1,2 @@
+class CourierAPIException(Exception):
+    pass
