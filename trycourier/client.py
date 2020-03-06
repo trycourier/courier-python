@@ -1,5 +1,4 @@
 from os import environ
-from urllib.parse import urljoin
 
 from .exceptions import CourierAPIException
 from .session import CourierAPISession
@@ -50,7 +49,7 @@ class Courier(object):
         """
         Send a notification for the provided event to the provided recipient
         """
-        url = urljoin(self.base_url, "send")
+        url = "%s/%s" % (self.base_url, "send")
         payload = {
             'event': event,
             'recipient': recipient,
