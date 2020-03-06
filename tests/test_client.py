@@ -60,7 +60,8 @@ def test_success_send_with_options():
         preferences={'preferrred_channel': 'email'},
         override={'provider': {}}
     )
-    request_params = json.loads(responses.calls[0].request.body)
+    request_params = json.loads(
+        responses.calls[0].request.body.decode('utf-8'))
 
     assert r == {"status": "ok"}
     assert request_params["profile"] == {'email': 'test@example.com'}
