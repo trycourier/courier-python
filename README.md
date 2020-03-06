@@ -10,7 +10,7 @@ Install from PyPI using [pip](http://www.pip-installer.org/en/latest/):
 $ pip install trycourier
 ```
 
-Python 2.7 or later is required.
+Python 3.5 or later is required.
 
 ## Usage
 
