@@ -10,6 +10,9 @@ install: venv
 analysis:
 				. env/bin/activate; flake8 trycourier
 
+test: analysis
+				. env/bin/activate; py.test --cov-report term-missing --cov-report html --cov trycourier tests/
+
 build: install
 				. env/bin/activate; python setup.py sdist
 				. env/bin/activate; python setup.py bdist_wheel
