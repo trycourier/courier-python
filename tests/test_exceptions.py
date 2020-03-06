@@ -1,5 +1,4 @@
 import json
-import pytest
 from requests import Response
 
 from trycourier.exceptions import CourierAPIException
