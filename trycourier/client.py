@@ -70,3 +70,63 @@ class Courier(object):
             raise CourierAPIException(resp)
 
         return resp.json()
+
+    def get_profile(self, recipient_id):
+        """Get the profile stored under the specified recipient ID.
+
+        Arguments:
+            recipient_id {str} -- A unique identifier representing the
+            recipient associated with the requested profile.
+        """
+        url = "%s/%s/%s" % (self.base_url, "profiles", recipient_id)
+
+        resp = self.session.get(url)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def replace_profile(self, recipient_id, profile):
+        """Replace an existing profile with the supplied values or create
+        a new profile if one does not already exist.
+
+        Arguments:
+            recipient_id {str} -- A unique identifier representing the
+            recipient associated with the requested profile.
+            profile {dict} -- Key-value pairs required by your chosen
+            Integrations.
+        """
+        url = "%s/%s/%s" % (self.base_url, "profiles", recipient_id)
+        payload = {
+            'profile': profile
+        }
+
+        resp = self.session.put(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def merge_profile(self, recipient_id, profile):
+        """Merge the supplied values with an existing profile or create
+        a new profile if one doesn't already exist.
+
+        Arguments:
+            recipient_id {str} -- A unique identifier representing the
+            recipient associated with the requested profile.
+            profile {dict} -- Key-value pairs required by your chosen
+            Integrations.
+        """
+        url = "%s/%s/%s" % (self.base_url, "profiles", recipient_id)
+        payload = {
+            'profile': profile
+        }
+
+        resp = self.session.post(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
