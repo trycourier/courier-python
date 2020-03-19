@@ -85,3 +85,112 @@ def test_fail_send():
             event='1234',
             recipient='4321'
         )
+
+
+@responses.activate
+def test_success_get_profile():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/profiles/1234',
+        status=200,
+        content_type='application/json',
+        body='{"profile": { "email": "test@example.com"}}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_profile("1234")
+
+    assert r == {"profile": {"email": "test@example.com"}}
+
+
+def test_fail_get_profile():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/profiles/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occured"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.get_profile("1234")
+
+
+@responses.activate
+def test_success_replace_profile():
+    responses.add(
+        responses.PUT,
+        'https://api.trycourier.app/profiles/1234',
+        status=200,
+        content_type='application/json',
+        body='{"status": "SUCCESS"}'
+    )
+
+    profile = {
+        "email": "text@example.com"
+    }
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.replace_profile("1234", profile)
+
+    assert r == {"status": "SUCCESS"}
+
+
+def test_fail_replace_profile():
+    responses.add(
+        responses.PUT,
+        'https://api.trycourier.app/profiles/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occured"}'
+    )
+
+    profile = {
+        "email": "text@example.com"
+    }
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.replace_profile("1234", profile)
+
+
+@responses.activate
+def test_success_merge_profile():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/profiles/1234',
+        status=200,
+        content_type='application/json',
+        body='{"status": "SUCCESS"}'
+    )
+
+    profile = {
+        "email": "text@example.com"
+    }
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.merge_profile("1234", profile)
+
+    assert r == {"status": "SUCCESS"}
+
+
+def test_fail_merge_profile():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/profiles/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occured"}'
+    )
+
+    profile = {
+        "email": "text@example.com"
+    }
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.merge_profile("1234", profile)
