@@ -3,7 +3,7 @@ from os import environ
 from .exceptions import CourierAPIException
 from .session import CourierAPISession
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 
 class Courier(object):
@@ -48,7 +48,30 @@ class Courier(object):
              override=None):
         """
         Send a notification for the provided event to the provided recipient
+
+        Args:
+            event (str): A unique identifier that can be mapped to an
+            individual Notification.
+            recipient (str): A unique identifier associated with the
+            recipient of the delivered message.
+            data (dict, optional): An object that includes any data you want to
+            pass to a message template. Defaults to {}.
+            profile (dict, optional): Any key-value pairs required by your
+            chosen Integrations. Defaults to None.
+            preferences (dict, optional): Any preferences for the recipient.
+            Defaults to None.
+            override (dict, optional): An object that is merged into the
+            request sent by Courier to the provider to override properties or
+            to gain access to features in the provider API that are not
+            natively supported by Courier. Defaults to None.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains a messageId
         """
+
         url = "%s/%s" % (self.base_url, "send")
         payload = {
             'event': event,
@@ -72,12 +95,20 @@ class Courier(object):
         return resp.json()
 
     def get_profile(self, recipient_id):
-        """Get the profile stored under the specified recipient ID.
-
-        Arguments:
-            recipient_id {str} -- A unique identifier representing the
-            recipient associated with the requested profile.
         """
+        Get the profile stored under the specified recipient ID.
+
+        Args:
+            recipient_id (str): A unique identifier representing the
+            recipient associated with the requested profile.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains a success
+        """
+
         url = "%s/%s/%s" % (self.base_url, "profiles", recipient_id)
 
         resp = self.session.get(url)
@@ -88,14 +119,21 @@ class Courier(object):
         return resp.json()
 
     def replace_profile(self, recipient_id, profile):
-        """Replace an existing profile with the supplied values or create
-        a new profile if one does not already exist.
+        """
+        Replace an existing profile with the supplied values or create a new
+        profile if one does not already exist.
 
-        Arguments:
-            recipient_id {str} -- A unique identifier representing the
+        Args:
+            recipient_id (str): A unique identifier representing the
             recipient associated with the requested profile.
-            profile {dict} -- Key-value pairs required by your chosen
+            profile (dict): Key-value pairs required by your chosen
             Integrations.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains a success
         """
         url = "%s/%s/%s" % (self.base_url, "profiles", recipient_id)
         payload = {
@@ -110,15 +148,23 @@ class Courier(object):
         return resp.json()
 
     def merge_profile(self, recipient_id, profile):
-        """Merge the supplied values with an existing profile or create
-        a new profile if one doesn't already exist.
-
-        Arguments:
-            recipient_id {str} -- A unique identifier representing the
-            recipient associated with the requested profile.
-            profile {dict} -- Key-value pairs required by your chosen
-            Integrations.
         """
+        Merge the supplied values with an existing profile or create a new
+        profile if one doesn't already exist.
+
+        Args:
+            recipient_id (str): A unique identifier representing the
+            recipient associated with the requested profile.
+            profile (dict): Key-value pairs required by your chosen
+            Integrations.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains a success
+        """
+
         url = "%s/%s/%s" % (self.base_url, "profiles", recipient_id)
         payload = {
             'profile': profile
