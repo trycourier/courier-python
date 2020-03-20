@@ -69,6 +69,7 @@ def test_success_send_with_options():
     assert request_params["override"] == {'provider': {}}
 
 
+@responses.activate
 def test_fail_send():
     responses.add(
         responses.POST,
@@ -103,6 +104,7 @@ def test_success_get_profile():
     assert r == {"profile": {"email": "test@example.com"}}
 
 
+@responses.activate
 def test_fail_get_profile():
     responses.add(
         responses.GET,
@@ -138,6 +140,7 @@ def test_success_replace_profile():
     assert r == {"status": "SUCCESS"}
 
 
+@responses.activate
 def test_fail_replace_profile():
     responses.add(
         responses.PUT,
@@ -177,6 +180,7 @@ def test_success_merge_profile():
     assert r == {"status": "SUCCESS"}
 
 
+@responses.activate
 def test_fail_merge_profile():
     responses.add(
         responses.POST,
