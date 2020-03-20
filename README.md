@@ -56,6 +56,55 @@ resp = client.send(
 print(resp['messageId'])
 ```
 
+## Advanced Usage
+
+```python
+from trycourier import Courier
+
+client = Courier(auth_token="your-auth-token")
+
+"""
+Example: send a message
+"""
+resp = client.send(
+    event="your-event-id",
+    recipient="your-recipient-id",
+    profile={}, # optional
+    data={}, # optional
+    preferences={}, # optional
+    override={} # optional
+)
+print(resp['messageId'])
+
+"""
+Example: replace or create a recipient's profile
+"""
+resp = client.replace_profile(
+  recipient_id,
+  {
+    "email": "example@example.com"
+  }
+)
+print(resp['status'])
+
+"""
+Example: merge or create a recipient's profile
+"""
+resp = client.merge_profile(
+  recipient_id,
+  {
+    "phone_number": "+15555555555"
+  }
+)
+print(resp['status'])
+
+"""
+Example: get a recipient's profile
+"""
+resp = client.get_profile(recipient_id)
+print(resp)
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/trycourier/courier-python. See [CONTRIBUTING.md](CONTRIBUTING.md) for more info.
