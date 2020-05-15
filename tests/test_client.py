@@ -198,3 +198,21 @@ def test_fail_merge_profile():
 
     with pytest.raises(CourierAPIException):
         c.merge_profile("1234", profile)
+
+
+@responses.activate
+def test_success_get_message_status():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/messages/1234',
+        status=200,
+        content_type='application/json',
+        body='{"status": "DELIVERED"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_message_status(
+        message_id='1234',
+    )
+
+    assert r == {"status": "DELIVERED"}
