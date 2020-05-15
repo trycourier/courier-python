@@ -176,3 +176,28 @@ class Courier(object):
             raise CourierAPIException(resp)
 
         return resp.json()
+
+    def get_message_status(self, message_id):
+        """
+        Get the status of the message corresponding to message_id.
+
+        Args:
+            message_id (str): A unique identifier representing the
+            message associated with the requested message.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains a success, as well as details
+        """
+
+        url = "%s/%s/%s" % (self.base_url, "messages", message_id)
+
+        resp = self.session.get(url)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
