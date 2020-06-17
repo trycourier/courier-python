@@ -216,3 +216,21 @@ def test_success_get_message():
     )
 
     assert r == {"status": "DELIVERED"}
+
+
+@responses.activate
+def test_fail_get_message():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/messages/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occurred"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.get_message(
+            message_id='1234',
+        )
