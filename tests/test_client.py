@@ -201,7 +201,7 @@ def test_fail_merge_profile():
 
 
 @responses.activate
-def test_success_get_message_status():
+def test_success_get_message():
     responses.add(
         responses.GET,
         'https://api.trycourier.app/messages/1234',
@@ -211,7 +211,7 @@ def test_success_get_message_status():
     )
 
     c = Courier(auth_token='123456789ABCDF')
-    r = c.get_message_status(
+    r = c.get_message(
         message_id='1234',
     )
 

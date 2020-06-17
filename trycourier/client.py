@@ -177,7 +177,7 @@ class Courier(object):
 
         return resp.json()
 
-    def get_message_status(self, message_id):
+    def get_message(self, message_id):
         """
         Get the status of the message corresponding to message_id.
 
