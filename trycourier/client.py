@@ -200,4 +200,3 @@ class Courier(object):
             raise CourierAPIException(resp)
 
         return resp.json()
-
