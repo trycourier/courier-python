@@ -282,3 +282,103 @@ def test_fail_get_message():
         c.get_message(
             message_id='1234',
         )
+
+
+@responses.activate
+def test_success_get_events():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/events',
+        status=200,
+        content_type='application/json',
+        body='{"results": []}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_events()
+
+    assert r == {"results": []}
+
+
+@responses.activate
+def test_fail_get_events():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/events',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occurred"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.get_events()
+
+
+@responses.activate
+def test_success_get_event():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/events/1234',
+        status=200,
+        content_type='application/json',
+        body='{"status": "DELIVERED"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_event(
+        event_id='1234',
+    )
+
+    assert r == {"status": "DELIVERED"}
+
+
+@responses.activate
+def test_fail_get_event():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/events/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occurred"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.get_event(
+            event_id='1234',
+        )
+
+
+@responses.activate
+def test_success_replace_event():
+    responses.add(
+        responses.PUT,
+        'https://api.trycourier.app/events/1234',
+        status=200,
+        content_type='application/json',
+        body='{"id": "notification-id-1", "type": "notification"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.replace_event("1234", notification_id="notification-id-1")
+
+    assert r == {"id": "notification-id-1", "type": "notification"}
+
+
+@responses.activate
+def test_fail_replace_event():
+    responses.add(
+        responses.PUT,
+        'https://api.trycourier.app/events/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occured"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.replace_event("1234", notification_id="notification-id-1")

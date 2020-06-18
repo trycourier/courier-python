@@ -116,6 +116,25 @@ resp = client.get_messages(
 Example: fetch the status of a message you've previously sent
 """
 resp = client.get_message(message_id)
+
+"""
+Example: fetch the list of events
+"""
+resp = client.get_events()
+
+"""
+Example: fetch a specific event by event ID
+"""
+resp = client.get_event(event_id)
+
+"""
+Example: create or replace an event map
+"""
+resp = client.replace_event(
+  event_id,
+  notification_id="GRPVB5P0BHMEZSNY6TP2X7TQHEBF",
+  type="notificaton" ## optional, defaults to notification
+)
 ```
 
 ## Contributing

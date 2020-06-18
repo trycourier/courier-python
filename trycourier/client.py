@@ -233,3 +233,71 @@ class Courier(object):
             raise CourierAPIException(resp)
 
         return resp.json()
+
+    def get_events(self):
+        """
+        Fetch the list of events
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contain results
+        """
+        url = "%s/%s" % (self.base_url, "events")
+
+        resp = self.session.get(url)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def get_event(self, event_id):
+        """
+        Fetch a specific event by event ID.
+
+        Args:
+            event_id (str): A unique identifier associated with the event you
+            wish to retrieve
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contain results
+        """
+        url = "%s/%s/%s" % (self.base_url, "events", event_id)
+
+        resp = self.session.get(url)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def replace_event(self, event_id, notification_id, type="notification"):
+        """
+        Replace an existing event map the supplied values or create a new event
+        map if one does not already exist.
+
+        Args:
+            event_id (str): A unique identifier associated with the event you
+            wish to update.
+            notification_id (str): The ID of the notification this event
+            maps to
+            type (str, optional): The type of event map. Defaults to
+            "notification".
+        """
+        url = "%s/%s/%s" % (self.base_url, "events", event_id)
+        payload = {
+            'id': notification_id,
+            'type': type
+        }
+
+        resp = self.session.put(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
