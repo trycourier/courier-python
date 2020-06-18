@@ -177,6 +177,39 @@ class Courier(object):
 
         return resp.json()
 
+    def get_messages(self, cursor=None, recipient=None):
+        """
+        Fetch the statuses of messages you've previously sent.
+
+        Args:
+            cursor (str, optional): A unique identifier that allows for
+            fetching the next set of message statuses. Defaults to None.
+            recipient (str, optional): A unique identifier representing the
+            recipient to filter the returned messages. Defaults to None.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains results and paging info
+        """
+
+        url = "%s/%s" % (self.base_url, "messages")
+        params = {}
+
+        if cursor:
+            params['cursor'] = cursor
+
+        if recipient:
+            params['recipient'] = recipient
+
+        resp = self.session.get(url, params=params)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
     def get_message(self, message_id):
         """
         Get the status of the message corresponding to message_id.
