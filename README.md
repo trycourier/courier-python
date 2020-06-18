@@ -103,6 +103,19 @@ Example: get a recipient's profile
 """
 resp = client.get_profile(recipient_id)
 print(resp)
+
+"""
+Example: fetch the statuses of messages you've previously sent.
+"""
+resp = client.get_messages(
+  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
+  recipient=recipient_id, # optional
+)
+
+"""
+Example: fetch the status of a message you've previously sent
+"""
+resp = client.get_message(message_id)
 ```
 
 ## Contributing

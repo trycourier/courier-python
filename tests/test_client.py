@@ -201,6 +201,54 @@ def test_fail_merge_profile():
 
 
 @responses.activate
+def test_success_get_messages():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/messages',
+        status=200,
+        content_type='application/json',
+        body='{"paging": {}, "results": []}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_messages()
+
+    assert r == {"paging": {}, "results": []}
+
+
+@responses.activate
+def test_success_get_messages_with_params():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/messages?cursor=ABCD1234&recipient=1234',
+        status=200,
+        content_type='application/json',
+        body='{"paging": {}, "results": []}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_messages(cursor="ABCD1234", recipient="1234")
+
+    assert r == {"paging": {}, "results": []}
+
+
+@responses.activate
+def test_fail_get_messages():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/messages',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occurred"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.get_messages()
+
+
+@responses.activate
 def test_success_get_message():
     responses.add(
         responses.GET,
