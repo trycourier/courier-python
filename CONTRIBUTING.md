@@ -20,7 +20,6 @@ To put courier-python on PyPI
 - Update the CHANGELOG.md
 - Bump the package version in `setup.py` and `trycourier/client.py`
 - Submit a PR to merge changes into master
-- Ensure you have maintainer privileges in PyPI
 - Create and push a new version tag
 
   ```bash
