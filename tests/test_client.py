@@ -57,6 +57,7 @@ def test_success_send_with_options():
         event='1234',
         recipient='4321',
         profile={'email': 'test@example.com'},
+        brand='W50NC77P524K14M5300PGPEK4JMJ',
         preferences={'preferrred_channel': 'email'},
         override={'provider': {}}
     )
@@ -65,6 +66,7 @@ def test_success_send_with_options():
 
     assert r == {"status": "ok"}
     assert request_params["profile"] == {'email': 'test@example.com'}
+    assert request_params["brand"] == 'W50NC77P524K14M5300PGPEK4JMJ'
     assert request_params["preferences"] == {'preferrred_channel': 'email'}
     assert request_params["override"] == {'provider': {}}
 

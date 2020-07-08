@@ -44,6 +44,7 @@ class Courier(object):
              recipient,
              data={},
              profile=None,
+             brand=None,
              preferences=None,
              override=None):
         """
@@ -58,6 +59,8 @@ class Courier(object):
             pass to a message template. Defaults to {}.
             profile (dict, optional): Any key-value pairs required by your
             chosen Integrations. Defaults to None.
+            brand (str, optional): A unique identifier that represents the
+            brand that should be used for rendering the notification.
             preferences (dict, optional): Any preferences for the recipient.
             Defaults to None.
             override (dict, optional): An object that is merged into the
@@ -80,6 +83,9 @@ class Courier(object):
         }
         if profile:
             payload['profile'] = profile
+
+        if brand:
+            payload['brand'] = brand
 
         if preferences:
             payload['preferences'] = preferences
