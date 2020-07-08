@@ -70,6 +70,7 @@ resp = client.send(
     event="your-event-id",
     recipient="your-recipient-id",
     profile={}, # optional
+    brand="your-brand-id", # optional
     data={}, # optional
     preferences={}, # optional
     override={} # optional
