@@ -294,6 +294,9 @@ class Courier(object):
             maps to.
             type (str, optional): The type of event map. Defaults to
             "notification".
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
         """
         url = "%s/%s/%s" % (self.base_url, "events", event_id)
         payload = {
@@ -307,3 +310,152 @@ class Courier(object):
             raise CourierAPIException(resp)
 
         return resp.json()
+
+    def get_brands(self, cursor=None):
+        """
+        Get the list of brands
+
+        Args:
+            cursor (str, optional): A unique identifier that allows for
+            fetching the next set of brands.. Defaults to None.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains results and paging info
+        """
+        url = "%s/%s" % (self.base_url, "brands")
+        params = {}
+
+        if cursor:
+            params['cursor'] = cursor
+
+        resp = self.session.get(url, params=params)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def get_brand(self, brand_id):
+        """
+        Fetch a specific brand by brand ID.
+
+        Args:
+            brand_id (str): A unique identifier associated with the brand you
+            wish to retrieve.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains result
+        """
+        url = "%s/%s/%s" % (self.base_url, "brands", brand_id)
+
+        resp = self.session.get(url)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def create_brand(self,
+                     name,
+                     settings,
+                     id=None,
+                     snippets=None):
+        """
+        Create a new brand
+
+        Args:
+            name (str): Brand name
+            settings (dict): Brand colors and Email settings
+            id (str, optional): Brand identifier. Defaults to None.
+            snippets (dict, optional): Reusable handlebars templates that can
+            be used in your notifications. Defaults to None.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains resulting brand
+        """
+
+        url = "%s/%s" % (self.base_url, "brands")
+        payload = {
+            'name': name,
+            'settings': settings
+        }
+
+        if id:
+            payload['id'] = id
+
+        if snippets:
+            payload['snippets'] = snippets
+
+        resp = self.session.post(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def replace_brand(self,
+                      brand_id,
+                      name,
+                      settings,
+                      snippets=None):
+        """
+        Replace an existing brand with the supplied values.
+
+        Args:
+            brand_id (str): A unique identifier associated with the brand you
+            wish to update.
+            name (str): Brand name
+            settings (dict): Brand colors and Email settings
+            snippets (dict, optional): Reusable handlebars templates that can
+            be used in your notifications. Defaults to None.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains resulting brand
+        """
+
+        url = "%s/%s/%s" % (self.base_url, "brands", brand_id)
+        payload = {
+            'name': name,
+            'settings': settings
+        }
+
+        if snippets:
+            payload['snippets'] = snippets
+
+        resp = self.session.put(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def delete_brand(self, brand_id):
+        """
+        Delete a brand by brand ID.
+
+        Args:
+            brand_id (str): A unique identifier associated with the brand you
+            wish to delete.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+        """
+
+        url = "%s/%s/%s" % (self.base_url, "brands", brand_id)
+
+        resp = self.session.delete(url)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)

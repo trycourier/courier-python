@@ -384,3 +384,225 @@ def test_fail_replace_event():
 
     with pytest.raises(CourierAPIException):
         c.replace_event("1234", notification_id="notification-id-1")
+
+
+@responses.activate
+def test_success_get_brands():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/brands',
+        status=200,
+        content_type='application/json',
+        body='{"paging": {}, "results": []}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_brands()
+
+    assert r == {"paging": {}, "results": []}
+
+
+@responses.activate
+def test_success_get_brands_with_params():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/brands?cursor=ABCD1234',
+        status=200,
+        content_type='application/json',
+        body='{"paging": {}, "results": []}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_brands(cursor="ABCD1234")
+
+    assert r == {"paging": {}, "results": []}
+
+
+@responses.activate
+def test_fail_get_brands():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/brands',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occurred"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.get_brands()
+
+
+@responses.activate
+def test_success_get_brand():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/brands/1234',
+        status=200,
+        content_type='application/json',
+        body='{"status": "DELIVERED"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.get_brand(brand_id='1234')
+
+    assert r == {"status": "DELIVERED"}
+
+
+@responses.activate
+def test_fail_get_brand():
+    responses.add(
+        responses.GET,
+        'https://api.trycourier.app/brands/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occurred"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.get_brand(brand_id='1234')
+
+
+@responses.activate
+def test_success_create_brand():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/brands',
+        status=200,
+        content_type='application/json',
+        body='{"id": "1234", "name": "my brand"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.create_brand(name="my brand", settings={})
+
+    assert r == {"id": "1234", "name": "my brand"}
+
+
+@responses.activate
+def test_success_create_brand_with_options():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/brands',
+        status=200,
+        content_type='application/json',
+        body='{"id": "1234", "name": "my brand"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.create_brand(name="my brand",
+                       settings={},
+                       id='1234',
+                       snippets={
+                           'format': 'handlebars',
+                           'name': 'test',
+                           'value': '{{test}}'
+                       })
+
+    assert r == {"id": "1234", "name": "my brand"}
+
+
+@responses.activate
+def test_fail_create_brand():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/brands',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occured"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.create_brand(name="my brand", settings={})
+
+
+@responses.activate
+def test_success_replace_brand():
+    responses.add(
+        responses.PUT,
+        'https://api.trycourier.app/brands/1234',
+        status=200,
+        content_type='application/json',
+        body='{"id": "1234", "name": "my brand"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.replace_brand("1234", name="my brand", settings={})
+
+    assert r == {"id": "1234", "name": "my brand"}
+
+
+@responses.activate
+def test_success_replace_brand_with_options():
+    responses.add(
+        responses.PUT,
+        'https://api.trycourier.app/brands/1234',
+        status=200,
+        content_type='application/json',
+        body='{"id": "1234", "name": "my brand"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.replace_brand("1234",
+                        name="my brand",
+                        settings={},
+                        snippets={
+                           'format': 'handlebars',
+                           'name': 'test',
+                           'value': '{{test}}'
+                        })
+
+    assert r == {"id": "1234", "name": "my brand"}
+
+
+@responses.activate
+def test_fail_replace_brand():
+    responses.add(
+        responses.PUT,
+        'https://api.trycourier.app/brands/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occured"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.replace_brand("1234",
+                        name="my brand",
+                        settings={})
+
+
+@responses.activate
+def test_success_delete_brand():
+    responses.add(
+        responses.DELETE,
+        'https://api.trycourier.app/brands/1234',
+        status=204
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    c.delete_brand('1234')
+
+    assert len(responses.calls) == 1
+
+
+@responses.activate
+def test_fail_delete_brand():
+    responses.add(
+        responses.DELETE,
+        'https://api.trycourier.app/brands/1234',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occurred"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.delete_brand('1234')
