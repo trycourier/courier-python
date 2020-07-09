@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.4.0] - 2020-07-09
+
+### Add
+- Added the ability to configure timeouts when creating a client with a default of 5 seconds for both 
+Connect and Read by @aydrian
+
 ## [v1.3.0] - 2020-07-09
 
 ### Added
@@ -35,6 +41,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
+[v1.4.0]: https://github.com/trycourier/courier-python/compare/v1.3.0...v1.4.0
 [v1.3.0]: https://github.com/trycourier/courier-python/compare/v1.2.0...v1.3.0
 [v1.2.0]: https://github.com/trycourier/courier-python/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/trycourier/courier-python/compare/v1.0.0...v1.1.0
