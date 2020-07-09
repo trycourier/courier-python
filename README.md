@@ -56,6 +56,18 @@ resp = client.send(
 print(resp['messageId'])
 ```
 
+### Timeouts
+
+As of v1.4.0, the timeout is defaulted to 5 seconds. This is configurable using the `timeout` parameter when creating a client. You can specify the time in seconds using a `float` value for both Connect and Read or use a tuple to set them for each individual one `(Connect, Read)`.
+
+```python
+client = Courier(auth_token="your-auth-token",
+                 timeout=3.5)
+
+client = Courier(auth_token="your-auth-token",
+                 timeout=(3.2, 3.3))
+```
+
 ## Advanced Usage
 
 ```python
