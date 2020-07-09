@@ -112,30 +112,86 @@ resp = client.get_messages(
   cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
   recipient=recipient_id, # optional
 )
+print(resp)
 
 """
 Example: fetch the status of a message you've previously sent
 """
 resp = client.get_message(message_id)
+print(resp)
 
 """
 Example: fetch the list of events
 """
 resp = client.get_events()
+print(resp)
 
 """
 Example: fetch a specific event by event ID
 """
 resp = client.get_event(event_id)
+print(resp)
 
 """
-Example: create or replace an event map
+Example: create or replace an event
 """
 resp = client.replace_event(
   event_id,
   notification_id="GRPVB5P0BHMEZSNY6TP2X7TQHEBF",
   type="notificaton" ## optional, defaults to notification
 )
+print(resp)
+
+"""
+Example: get all brands
+"""
+resp = client.get_brands(
+  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
+)
+print(resp)
+
+"""
+Example: get a specific brand
+"""
+resp = client.get_brand(brand_id)
+print(resp)
+
+"""
+Example: create a brand
+"""
+resp = client.create_brand({
+  name="My Brand",
+  settings={
+    "color": {
+      "primary": "#0000FF",
+      "secondary": "#FF0000",
+      "tertiary": "#00FF00"
+    }
+  }
+})
+print resp
+
+"""
+Example: replace a brand
+"""
+resp = client.replace_brand(
+  brand_id,
+  name="My New Brand",
+  settings={
+    "color": {
+      "primary": "#FF0000",
+      "secondary": "#00FF00",
+      "tertiary": "#0000FF"
+    }
+  }
+)
+print resp
+
+"""
+Example: delete a brand
+"""
+client.delete_brand(brand_id)
+
 ```
 
 ## Contributing
