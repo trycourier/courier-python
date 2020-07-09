@@ -3,7 +3,7 @@ from os import environ
 from .exceptions import CourierAPIException
 from .session import CourierAPISession
 
-__version__ = '1.2.0'
+__version__ = '1.3.0'
 
 
 class Courier(object):
