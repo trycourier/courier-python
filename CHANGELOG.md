@@ -14,6 +14,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `DELETE /brands/:brand_id` with `delete_brand` method
 - Support for specifying notification brand during [send](https://docs.trycourier.com/reference/send-api#sendmessage) by @aydrian
 
+### Changed
+- Updated [requests](https://pypi.org/project/requests/) library to v2.24.0
+
 ## [v1.2.0] - 2020-06-18
 
 ### Added
