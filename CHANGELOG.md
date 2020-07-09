@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [v1.4.0] - 2020-07-09
 
-### Add
+### Added
 - Added the ability to configure timeouts when creating a client with a default of 5 seconds for both 
 Connect and Read by @aydrian
 
