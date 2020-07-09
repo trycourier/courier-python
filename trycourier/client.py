@@ -12,7 +12,8 @@ class Courier(object):
                  base_url='https://api.trycourier.app',
                  auth_token=None,
                  username=None,
-                 password=None):
+                 password=None,
+                 timeout=5):
         """
         Instantiate a new API client.
         Args:
@@ -20,11 +21,13 @@ class Courier(object):
           auth_token (str): Auth Token used for Token Auth
           username (str): Username used for Basic Auth
           password (str): Password used for Basic Auth
+          timeout (float|tuple): Timeout in seconds. (Connect, Read) Defaults
+          to 5 seconds for both.
         """
         self.base_url = base_url
 
         # Initialize the session.
-        self.session = CourierAPISession()
+        self.session = CourierAPISession(timeout)
         self.session.init_library_version(__version__)
 
         # Pass auth creds to the session
