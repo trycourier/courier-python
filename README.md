@@ -206,6 +206,33 @@ client.delete_brand(brand_id)
 
 ```
 
+### Idempotency
+
+For `POST` methods, you can supply an `idempotency_key` to ensure the idempotency of the API Call for 24 hours. We recommend that you use a `V4 UUID` for the key.
+
+```python
+import uuid
+from trycourier import Courier
+
+client = Courier()
+
+idempotency_key = uuid.uuid4()
+
+resp = client.send(
+    event="your-event-id",
+    recipient="your-recipient-id",
+    profile={
+        "email": "example@example.com",
+        "phone_number": "555-867-5309"
+    },
+    data={
+      "world": "Python!"
+    },
+    idempotency_key=idempotency_key
+)
+print(resp['messageId'])
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/trycourier/courier-python. See [CONTRIBUTING.md](CONTRIBUTING.md) for more info.

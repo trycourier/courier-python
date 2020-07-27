@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.5.0] - 2020-07-27
+
+### Added
+- Support for Idempotency. You can now pass an `idempotency_key` to the following methods:
+  - `send()`
+  - `merge_profile()`
+  - `create_brand()`
+
 ## [v1.4.0] - 2020-07-09
 
 ### Added
@@ -41,6 +49,7 @@ Connect and Read by @aydrian
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
+[v1.5.0]: https://github.com/trycourier/courier-python/compare/v1.4.0...v1.5.0
 [v1.4.0]: https://github.com/trycourier/courier-python/compare/v1.3.0...v1.4.0
 [v1.3.0]: https://github.com/trycourier/courier-python/compare/v1.2.0...v1.3.0
 [v1.2.0]: https://github.com/trycourier/courier-python/compare/v1.1.0...v1.2.0
