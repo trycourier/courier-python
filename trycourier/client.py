@@ -17,7 +17,7 @@ class Courier(object):
         """
         Instantiate a new API client.
         Args:
-          host (str): Hostname of courier instance.
+          host (str): Hostname of Courier instance.
           auth_token (str): Auth Token used for Token Auth
           username (str): Username used for Basic Auth
           password (str): Password used for Basic Auth
@@ -49,7 +49,8 @@ class Courier(object):
              profile=None,
              brand=None,
              preferences=None,
-             override=None):
+             override=None,
+             idempotency_key=None):
         """
         Send a notification for the provided event to the provided recipient.
 
@@ -70,6 +71,9 @@ class Courier(object):
             request sent by Courier to the provider to override properties or
             to gain access to features in the provider API that are not
             natively supported by Courier. Defaults to None.
+            idempotency_key (str, optional): A unique identifier used to ensure
+            idempotency of the the request. Passed in the Idempotency-Key HTTP
+            header. Defaults to None.
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
@@ -79,6 +83,7 @@ class Courier(object):
         """
 
         url = "%s/%s" % (self.base_url, "send")
+        headers = {}
         payload = {
             'event': event,
             'recipient': recipient,
@@ -96,7 +101,10 @@ class Courier(object):
         if override:
             payload['override'] = override
 
-        resp = self.session.post(url, json=payload)
+        if idempotency_key:
+            headers['Idempotency-Key'] = idempotency_key
+
+        resp = self.session.post(url, json=payload, headers=headers)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
@@ -156,7 +164,7 @@ class Courier(object):
 
         return resp.json()
 
-    def merge_profile(self, recipient_id, profile):
+    def merge_profile(self, recipient_id, profile, idempotency_key=None):
         """
         Merge the supplied values with an existing profile or create a new
         profile if one doesn't already exist.
@@ -166,6 +174,9 @@ class Courier(object):
             recipient associated with the requested profile.
             profile (dict): Key-value pairs required by your chosen
             Integrations.
+            idempotency_key (str, optional): A unique identifier used to ensure
+            idempotency of the the request. Passed in the Idempotency-Key HTTP
+            header. Defaults to None.
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
@@ -175,11 +186,15 @@ class Courier(object):
         """
 
         url = "%s/%s/%s" % (self.base_url, "profiles", recipient_id)
+        headers = {}
         payload = {
             'profile': profile
         }
 
-        resp = self.session.post(url, json=payload)
+        if idempotency_key:
+            headers['Idempotency-Key'] = idempotency_key
+
+        resp = self.session.post(url, json=payload, headers=headers)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
@@ -368,7 +383,8 @@ class Courier(object):
                      name,
                      settings,
                      id=None,
-                     snippets=None):
+                     snippets=None,
+                     idempotency_key=None):
         """
         Create a new brand
 
@@ -378,6 +394,9 @@ class Courier(object):
             id (str, optional): Brand identifier. Defaults to None.
             snippets (dict, optional): Reusable handlebars templates that can
             be used in your notifications. Defaults to None.
+            idempotency_key (str, optional): A unique identifier used to ensure
+            idempotency of the the request. Passed in the Idempotency-Key HTTP
+            header. Defaults to None.
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
@@ -387,6 +406,7 @@ class Courier(object):
         """
 
         url = "%s/%s" % (self.base_url, "brands")
+        headers = {}
         payload = {
             'name': name,
             'settings': settings
@@ -398,7 +418,10 @@ class Courier(object):
         if snippets:
             payload['snippets'] = snippets
 
-        resp = self.session.post(url, json=payload)
+        if idempotency_key:
+            headers['Idempotency-Key'] = idempotency_key
+
+        resp = self.session.post(url, json=payload, headers=headers)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
