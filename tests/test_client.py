@@ -72,6 +72,27 @@ def test_success_send_with_options():
 
 
 @responses.activate
+def test_success_send_idempotent():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/send',
+        status=200,
+        content_type='application/json',
+        body='{"status": "ok"}'
+    )
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.send(
+        event='1234',
+        recipient='4321',
+        idempotency_key='1234ABCD'
+    )
+
+    assert responses.calls[0].request.headers.get(
+        'Idempotency-Key') == '1234ABCD'
+    assert r == {"status": "ok"}
+
+
+@responses.activate
 def test_fail_send():
     responses.add(
         responses.POST,
@@ -179,6 +200,28 @@ def test_success_merge_profile():
     c = Courier(auth_token='123456789ABCDF')
     r = c.merge_profile("1234", profile)
 
+    assert r == {"status": "SUCCESS"}
+
+
+@responses.activate
+def test_success_merge_profile_idempotent():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/profiles/1234',
+        status=200,
+        content_type='application/json',
+        body='{"status": "SUCCESS"}'
+    )
+
+    profile = {
+        "email": "text@example.com"
+    }
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.merge_profile("1234", profile, idempotency_key="1234ABCD")
+
+    assert responses.calls[0].request.headers.get(
+        'Idempotency-Key') == '1234ABCD'
     assert r == {"status": "SUCCESS"}
 
 
@@ -506,6 +549,25 @@ def test_success_create_brand_with_options():
 
 
 @responses.activate
+def test_success_create_brand_idempotent():
+    responses.add(
+        responses.POST,
+        'https://api.trycourier.app/brands',
+        status=200,
+        content_type='application/json',
+        body='{"id": "1234", "name": "my brand"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.create_brand(name="my brand", settings={},
+                       idempotency_key="1234ABCD")
+
+    assert responses.calls[0].request.headers.get(
+        'Idempotency-Key') == '1234ABCD'
+    assert r == {"id": "1234", "name": "my brand"}
+
+
+@responses.activate
 def test_fail_create_brand():
     responses.add(
         responses.POST,
@@ -552,9 +614,9 @@ def test_success_replace_brand_with_options():
                         name="my brand",
                         settings={},
                         snippets={
-                           'format': 'handlebars',
-                           'name': 'test',
-                           'value': '{{test}}'
+                            'format': 'handlebars',
+                            'name': 'test',
+                            'value': '{{test}}'
                         })
 
     assert r == {"id": "1234", "name": "my brand"}
