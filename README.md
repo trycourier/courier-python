@@ -208,7 +208,7 @@ client.delete_brand(brand_id)
 
 ### Idempotency
 
-For `POST` methods, you can supply an `idempotency_key` to ensure the idempotency of the API Call for 24 hours. We recommend that you use a `V4 UUID` for the key.
+For `POST` methods, you can supply an `idempotency_key` to ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key. Keys are eligible to be removed from the system after they're at least 24 hours old, and a new request is generated if a key is reused after the original has been removed.
 
 ```python
 import uuid

@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [v1.5.0] - 2020-07-27
 
 ### Added
-- Support for Idempotency. You can now pass an `idempotency_key` to the following methods:
+- Support for Idempotency. You can now pass an `idempotency_key` to the following methods by @aydrian:
   - `send()`
   - `merge_profile()`
   - `create_brand()`
