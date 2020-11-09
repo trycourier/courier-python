@@ -5,7 +5,7 @@ from .session import CourierAPISession
 
 from .lists import Lists
 
-__version__ = '1.5.0'
+__version__ = '1.6.0'
 
 
 class Courier(object):
@@ -339,7 +339,7 @@ class Courier(object):
 
         Args:
             cursor (str, optional): A unique identifier that allows for
-            fetching the next set of brands.. Defaults to None.
+            fetching the next set of brands. Defaults to None.
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
