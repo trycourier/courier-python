@@ -1,6 +1,6 @@
 # `trycourier`
 
-This Python Package helps you send notifications through [Courier](https://www.trycourier.com/), the smartest way to design &amp; deliver notifications. Design your notifications once using our drag &amp; drop editor, then deliver to any channel through one API. Email, mobile push, SMS, Slack &mdash; you name it!
+This Python Package helps you send notifications through [Courier](https://www.courier.com/), the smartest way to design &amp; deliver notifications. Design your notifications once using our drag &amp; drop editor, then deliver to any channel through one API. Email, mobile push, SMS, Slack &mdash; you name it!
 
 ## Installation
 
@@ -76,7 +76,7 @@ from trycourier import Courier
 client = Courier(auth_token="your-auth-token")
 
 """
-Example: send a message
+Example: send a message to a recipient
 """
 resp = client.send(
     event="your-event-id",
@@ -86,6 +86,30 @@ resp = client.send(
     data={}, # optional
     preferences={}, # optional
     override={} # optional
+)
+print(resp['messageId'])
+
+"""
+Example: send a message to a list
+"""
+resp = client.lists.send(
+  event="your-event-id",
+  list="your.list.id",
+  brand="your-brand-id", # optional
+  data={}, # optional
+  override={} # optional
+)
+print(resp['messageId'])
+
+"""
+Example: send a message to a list pattern
+"""
+resp = client.lists.send(
+  event="your-event-id",
+  pattern="your.list.*",
+  brand="your-brand-id", # optional
+  data={}, # optional
+  override={} # optional
 )
 print(resp['messageId'])
 
@@ -203,6 +227,69 @@ print resp
 Example: delete a brand
 """
 client.delete_brand(brand_id)
+
+"""
+Example: get all lists
+"""
+resp = client.lists.list(
+  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
+)
+print resp
+
+"""
+Example: get a specific list
+"""
+resp = client.lists.get(list_id)
+print resp
+
+"""
+Example: create or replace a list
+"""
+client.lists.put(list_id, name="My List")
+
+"""
+Example: delete a list
+"""
+client.lists.delete(list_id)
+
+"""
+Example: restore a list
+"""
+client.lists.restore(list_id)
+
+"""
+Example: get a list's subscribptions
+"""
+resp = client.lists.get_subscriptions(list_id,
+  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
+)
+print resp
+
+"""
+Example: replace many recipients to a new or existing list
+"""
+client.lists.put_subscriptions(list_id, [
+  "RECIPIENT_ID_1",
+  "RECIPIENT_ID_2"
+])
+
+"""
+Example: Example: subscribe single recipient to a new or existing list
+"""
+client.lists.subscribe(list_id, recipient_id)
+
+"""
+Example: unsubscribe recipient from list
+"""
+client.lists.unsubscribe(list_id, recipient_id)
+
+"""
+Example: get a recipient's subscribed lists
+"""
+resp = client.lists.find_by_recipient_id(recipient_id,
+  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
+)
+print resp
 
 ```
 

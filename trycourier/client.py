@@ -3,13 +3,15 @@ from os import environ
 from .exceptions import CourierAPIException
 from .session import CourierAPISession
 
-__version__ = '1.5.0'
+from .lists import Lists
+
+__version__ = '1.6.0'
 
 
 class Courier(object):
 
     def __init__(self,
-                 base_url='https://api.trycourier.app',
+                 base_url='https://api.courier.com',
                  auth_token=None,
                  username=None,
                  password=None,
@@ -40,6 +42,8 @@ class Courier(object):
 
         if auth_token:
             self.session.init_token_auth(auth_token)
+
+        self.lists = Lists(self.base_url, self.session)
 
     # Perform an API request
     def send(self,
@@ -335,7 +339,7 @@ class Courier(object):
 
         Args:
             cursor (str, optional): A unique identifier that allows for
-            fetching the next set of brands.. Defaults to None.
+            fetching the next set of brands. Defaults to None.
 
         Raises:
             CourierAPIException: Any error returned by the Courier API

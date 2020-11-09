@@ -5,9 +5,9 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="trycourier",
-    version="1.5.0",
+    version="1.6.0",
     author="Courier",
-    author_email="support@trycourier.com",
+    author_email="support@courier.com",
     description="A Python Package for communicating with the Courier REST API.",
     long_description=long_description,
     long_description_content_type="text/markdown",

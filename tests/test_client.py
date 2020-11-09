@@ -29,7 +29,7 @@ def test_init_basic_auth():
 def test_success_send():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/send',
+        'https://api.courier.com/send',
         status=200,
         content_type='application/json',
         body='{"status": "ok"}'
@@ -47,7 +47,7 @@ def test_success_send():
 def test_success_send_with_options():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/send',
+        'https://api.courier.com/send',
         status=200,
         content_type='application/json',
         body='{"status": "ok"}'
@@ -75,7 +75,7 @@ def test_success_send_with_options():
 def test_success_send_idempotent():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/send',
+        'https://api.courier.com/send',
         status=200,
         content_type='application/json',
         body='{"status": "ok"}'
@@ -96,7 +96,7 @@ def test_success_send_idempotent():
 def test_fail_send():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/send',
+        'https://api.courier.com/send',
         status=400,
         content_type='application/json',
         body='{"message": "An error occured"}'
@@ -115,7 +115,7 @@ def test_fail_send():
 def test_success_get_profile():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/profiles/1234',
+        'https://api.courier.com/profiles/1234',
         status=200,
         content_type='application/json',
         body='{"profile": { "email": "test@example.com"}}'
@@ -131,7 +131,7 @@ def test_success_get_profile():
 def test_fail_get_profile():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/profiles/1234',
+        'https://api.courier.com/profiles/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occured"}'
@@ -147,7 +147,7 @@ def test_fail_get_profile():
 def test_success_replace_profile():
     responses.add(
         responses.PUT,
-        'https://api.trycourier.app/profiles/1234',
+        'https://api.courier.com/profiles/1234',
         status=200,
         content_type='application/json',
         body='{"status": "SUCCESS"}'
@@ -167,7 +167,7 @@ def test_success_replace_profile():
 def test_fail_replace_profile():
     responses.add(
         responses.PUT,
-        'https://api.trycourier.app/profiles/1234',
+        'https://api.courier.com/profiles/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occured"}'
@@ -187,7 +187,7 @@ def test_fail_replace_profile():
 def test_success_merge_profile():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/profiles/1234',
+        'https://api.courier.com/profiles/1234',
         status=200,
         content_type='application/json',
         body='{"status": "SUCCESS"}'
@@ -207,7 +207,7 @@ def test_success_merge_profile():
 def test_success_merge_profile_idempotent():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/profiles/1234',
+        'https://api.courier.com/profiles/1234',
         status=200,
         content_type='application/json',
         body='{"status": "SUCCESS"}'
@@ -229,7 +229,7 @@ def test_success_merge_profile_idempotent():
 def test_fail_merge_profile():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/profiles/1234',
+        'https://api.courier.com/profiles/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occured"}'
@@ -249,7 +249,7 @@ def test_fail_merge_profile():
 def test_success_get_messages():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/messages',
+        'https://api.courier.com/messages',
         status=200,
         content_type='application/json',
         body='{"paging": {}, "results": []}'
@@ -265,7 +265,7 @@ def test_success_get_messages():
 def test_success_get_messages_with_params():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/messages?cursor=ABCD1234&recipient=1234',
+        'https://api.courier.com/messages?cursor=ABCD1234&recipient=1234',
         status=200,
         content_type='application/json',
         body='{"paging": {}, "results": []}'
@@ -281,7 +281,7 @@ def test_success_get_messages_with_params():
 def test_fail_get_messages():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/messages',
+        'https://api.courier.com/messages',
         status=400,
         content_type='application/json',
         body='{"message": "An error occurred"}'
@@ -297,7 +297,7 @@ def test_fail_get_messages():
 def test_success_get_message():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/messages/1234',
+        'https://api.courier.com/messages/1234',
         status=200,
         content_type='application/json',
         body='{"status": "DELIVERED"}'
@@ -315,7 +315,7 @@ def test_success_get_message():
 def test_fail_get_message():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/messages/1234',
+        'https://api.courier.com/messages/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occurred"}'
@@ -333,7 +333,7 @@ def test_fail_get_message():
 def test_success_get_events():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/events',
+        'https://api.courier.com/events',
         status=200,
         content_type='application/json',
         body='{"results": []}'
@@ -349,7 +349,7 @@ def test_success_get_events():
 def test_fail_get_events():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/events',
+        'https://api.courier.com/events',
         status=400,
         content_type='application/json',
         body='{"message": "An error occurred"}'
@@ -365,7 +365,7 @@ def test_fail_get_events():
 def test_success_get_event():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/events/1234',
+        'https://api.courier.com/events/1234',
         status=200,
         content_type='application/json',
         body='{"status": "DELIVERED"}'
@@ -383,7 +383,7 @@ def test_success_get_event():
 def test_fail_get_event():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/events/1234',
+        'https://api.courier.com/events/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occurred"}'
@@ -401,7 +401,7 @@ def test_fail_get_event():
 def test_success_replace_event():
     responses.add(
         responses.PUT,
-        'https://api.trycourier.app/events/1234',
+        'https://api.courier.com/events/1234',
         status=200,
         content_type='application/json',
         body='{"id": "notification-id-1", "type": "notification"}'
@@ -417,7 +417,7 @@ def test_success_replace_event():
 def test_fail_replace_event():
     responses.add(
         responses.PUT,
-        'https://api.trycourier.app/events/1234',
+        'https://api.courier.com/events/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occured"}'
@@ -433,7 +433,7 @@ def test_fail_replace_event():
 def test_success_get_brands():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/brands',
+        'https://api.courier.com/brands',
         status=200,
         content_type='application/json',
         body='{"paging": {}, "results": []}'
@@ -449,7 +449,7 @@ def test_success_get_brands():
 def test_success_get_brands_with_params():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/brands?cursor=ABCD1234',
+        'https://api.courier.com/brands?cursor=ABCD1234',
         status=200,
         content_type='application/json',
         body='{"paging": {}, "results": []}'
@@ -465,7 +465,7 @@ def test_success_get_brands_with_params():
 def test_fail_get_brands():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/brands',
+        'https://api.courier.com/brands',
         status=400,
         content_type='application/json',
         body='{"message": "An error occurred"}'
@@ -481,7 +481,7 @@ def test_fail_get_brands():
 def test_success_get_brand():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/brands/1234',
+        'https://api.courier.com/brands/1234',
         status=200,
         content_type='application/json',
         body='{"status": "DELIVERED"}'
@@ -497,7 +497,7 @@ def test_success_get_brand():
 def test_fail_get_brand():
     responses.add(
         responses.GET,
-        'https://api.trycourier.app/brands/1234',
+        'https://api.courier.com/brands/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occurred"}'
@@ -513,7 +513,7 @@ def test_fail_get_brand():
 def test_success_create_brand():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/brands',
+        'https://api.courier.com/brands',
         status=200,
         content_type='application/json',
         body='{"id": "1234", "name": "my brand"}'
@@ -529,7 +529,7 @@ def test_success_create_brand():
 def test_success_create_brand_with_options():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/brands',
+        'https://api.courier.com/brands',
         status=200,
         content_type='application/json',
         body='{"id": "1234", "name": "my brand"}'
@@ -552,7 +552,7 @@ def test_success_create_brand_with_options():
 def test_success_create_brand_idempotent():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/brands',
+        'https://api.courier.com/brands',
         status=200,
         content_type='application/json',
         body='{"id": "1234", "name": "my brand"}'
@@ -571,7 +571,7 @@ def test_success_create_brand_idempotent():
 def test_fail_create_brand():
     responses.add(
         responses.POST,
-        'https://api.trycourier.app/brands',
+        'https://api.courier.com/brands',
         status=400,
         content_type='application/json',
         body='{"message": "An error occured"}'
@@ -587,7 +587,7 @@ def test_fail_create_brand():
 def test_success_replace_brand():
     responses.add(
         responses.PUT,
-        'https://api.trycourier.app/brands/1234',
+        'https://api.courier.com/brands/1234',
         status=200,
         content_type='application/json',
         body='{"id": "1234", "name": "my brand"}'
@@ -603,7 +603,7 @@ def test_success_replace_brand():
 def test_success_replace_brand_with_options():
     responses.add(
         responses.PUT,
-        'https://api.trycourier.app/brands/1234',
+        'https://api.courier.com/brands/1234',
         status=200,
         content_type='application/json',
         body='{"id": "1234", "name": "my brand"}'
@@ -626,7 +626,7 @@ def test_success_replace_brand_with_options():
 def test_fail_replace_brand():
     responses.add(
         responses.PUT,
-        'https://api.trycourier.app/brands/1234',
+        'https://api.courier.com/brands/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occured"}'
@@ -644,7 +644,7 @@ def test_fail_replace_brand():
 def test_success_delete_brand():
     responses.add(
         responses.DELETE,
-        'https://api.trycourier.app/brands/1234',
+        'https://api.courier.com/brands/1234',
         status=204
     )
 
@@ -658,7 +658,7 @@ def test_success_delete_brand():
 def test_fail_delete_brand():
     responses.add(
         responses.DELETE,
-        'https://api.trycourier.app/brands/1234',
+        'https://api.courier.com/brands/1234',
         status=400,
         content_type='application/json',
         body='{"message": "An error occurred"}'
