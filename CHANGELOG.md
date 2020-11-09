@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.6.0] - 2020-11-09
+
+### Added
+
+- Support for [Lists API](https://docs.courier.com/reference/lists-api) by @aydrian
+  - `POST /send/list` with `client.lists.send` method
+  - `GET /profiles/{recipient_id}/lists` with `client.lists.find_by_recipient_id` method
+  - `GET /lists` with `client.lists.list` method
+  - `GET /lists/{list_id}` with `client.lists.get` method
+  - `PUT /lists/{list_id}` with `client.lists.put` method
+  - `DELETE /lists/{list_id}` with `client.lists.delete` method
+  - `PUT /lists/{list_id}/restore` with `client.lists.restore` method
+  - `GET /lists/{list_id}/subscriptions` with `client.lists.get_subscriptions` method
+  - `PUT /lists/{list_id}/subscriptions` with `client.lists.put_subscriptions` method
+  - `PUT /lists/{list_id}/subscriptions/{recipient_id}` with `client.lists.subscribe` method
+  - `DELETE /lists/{list_id}/subscriptions/{recipient_id}` with `client.lists.unsubscribe` method
+
+### Changed
+
+- Default `base_url` is now `api.courier.com`
+
 ## [v1.5.0] - 2020-07-27
 
 ### Added
@@ -53,6 +74,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
+[v1.6.0]: https://github.com/trycourier/courier-python/compare/v1.5.0...v1.6.0
 [v1.5.0]: https://github.com/trycourier/courier-python/compare/v1.4.0...v1.5.0
 [v1.4.0]: https://github.com/trycourier/courier-python/compare/v1.3.0...v1.4.0
 [v1.3.0]: https://github.com/trycourier/courier-python/compare/v1.2.0...v1.3.0
