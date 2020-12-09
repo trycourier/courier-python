@@ -12,6 +12,9 @@ $ pip install trycourier
 
 Python 3.5 or later is required.
 
+## Reference Docs
+https://docs.contour.so/trycourier/courier-python/README
+
 ## Usage
 
 ### Using Token Auth
