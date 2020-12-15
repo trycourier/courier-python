@@ -99,7 +99,7 @@ def test_fail_lists_send():
         'https://api.courier.com/send/list',
         status=400,
         content_type='application/json',
-        body='{"message": "An error occured"}'
+        body='{"message": "An error occurred"}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
@@ -170,7 +170,7 @@ def test_fail_lists_list():
         'https://api.courier.com/lists',
         status=400,
         content_type='application/json',
-        body='{"message": "An error occured"}'
+        body='{"message": "An error occurred"}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
@@ -180,7 +180,7 @@ def test_fail_lists_list():
 
 
 @responses.activate
-def test_succes_lists_get():
+def test_success_lists_get():
     responses.add(
         responses.GET,
         'https://api.courier.com/lists/my.list.id',
