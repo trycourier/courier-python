@@ -144,16 +144,29 @@ print(resp)
 """
 Example: fetch the statuses of messages you've previously sent.
 """
-resp = client.get_messages(
+resp = client.messages.list(
   cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
-  recipient=recipient_id, # optional
+  event="your-event-id", # optional
+  list="your-list-id, #optional
+  message_id="your-message-id" #optional
+  notification=["message-status-1", "message-status-2",...] #optional
+  recipient="recipient-id", # optional
 )
 print(resp)
 
 """
 Example: fetch the status of a message you've previously sent
 """
-resp = client.get_message(message_id)
+resp = client.messages.get(message_id)
+print(resp)
+
+"""
+Example: fetch the array of events of a message you've previously sent.
+"""
+resp = client.messages.get_history(
+message_id="your-message-id",
+type="list-type" #optional ("FILTERED", "RENDERED", "MAPPED", "PROFILE_LOADED")
+)
 print(resp)
 
 """
