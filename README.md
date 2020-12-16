@@ -150,7 +150,7 @@ resp = client.messages.list(
   list="your-list-id, #optional
   message_id="your-message-id" #optional
   notification=["message-status-1", "message-status-2",...] #optional
-  recipient="recipient-id", # optional
+  recipient="recipient-id" # optional
 )
 print(resp)
 
