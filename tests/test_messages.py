@@ -1,9 +1,8 @@
-import json
 import responses
 import pytest
 
 from trycourier.client import Courier
-from trycourier.exceptions import CorierAPIException
+from trycourier.exceptions import CourierAPIException
 
 @responses.activate
 def test_success_messages_list():
@@ -25,14 +24,16 @@ def test_success_messages_list():
 def test_success_messages_list_with_params():
     responses.add(
         responses.GET,
-        'https://api.courier.com/messages?cursor=1234&event=my.event.id&recipient=1234',
+        'https://api.courier.com/messages?cursor=12&event=34&recipient=56'
+        '&notification=78&messageId=91&list=23',
         status=200,
         content_type='application/json',
         body='{"paging": {}, "items": []}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
-    r = c.messages.list(cursor='1234', event='my.event.id', recipient="1234")
+    r = c.messages.list(cursor='12', event='34', recipient='56',
+                        notification='78', message_id='91', list_id='23')
 
     assert r == {'paging': {}, 'items': []}
 

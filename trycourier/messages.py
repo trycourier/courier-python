@@ -46,9 +46,9 @@ class Messages():
         if event:
             params['event'] = event
         if list_id:
-            params['list_id'] = list_id
+            params['list'] = list_id
         if message_id:
-            params['message_id'] = message_id
+            params['messageId'] = message_id
         if notification:
             params['notification'] = notification
         if recipient:
