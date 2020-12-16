@@ -2,8 +2,8 @@ from os import environ
 
 from .exceptions import CourierAPIException
 from .session import CourierAPISession
-
 from .lists import Lists
+from .messages import Messages
 
 __version__ = '1.6.0'
 
@@ -44,6 +44,7 @@ class Courier(object):
             self.session.init_token_auth(auth_token)
 
         self.lists = Lists(self.base_url, self.session)
+        self.messages = Messages(self.base_url, self.session)
 
     # Perform an API request
     def send(self,
