@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased][unreleased]
+
+### Added
+
+- Support for [Messages API](https://docs.courier.com/reference/messages-api) by @jrweingart
+  - `GET /messages` with `client.messages.list` method
+  - `GET /messages/{message_id}` with `client.messages.get` method
+  - `GET /messages/{message_id}/history` with `client.messages.get_history` method
+
 ## [v1.6.0] - 2020-11-09
 
 ### Added
@@ -74,6 +83,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
+[unreleased]: https://github.com/trycourier/courier-python/compare/v1.6.0...HEAD
 [v1.6.0]: https://github.com/trycourier/courier-python/compare/v1.5.0...v1.6.0
 [v1.5.0]: https://github.com/trycourier/courier-python/compare/v1.4.0...v1.5.0
 [v1.4.0]: https://github.com/trycourier/courier-python/compare/v1.3.0...v1.4.0
