@@ -1,6 +1,7 @@
 import json
 import responses
 import pytest
+from os import environ
 
 from trycourier.client import Courier
 from trycourier.exceptions import CourierAPIException
@@ -12,6 +13,19 @@ def test_init_base_url():
 
     assert c.base_url == 'http://someurl'
 
+def test_init_base_url_env():
+    environ['COURIER_BASE_URL'] = 'http://someurl'
+    c = Courier(auth_token='123456789ABCDF')
+
+    environ['COURIER_BASE_URL'] = 'https://api.courier.com'
+    assert c.base_url == 'http://someurl'
+
+def test_iniit_default_base_url():
+    environ.pop('COURIER_BASE_URL')
+    c = Courier(auth_token='123456789ABCDF')
+
+    environ['COURIER_BASE_URL'] = 'https://api.courier.com'
+    assert c.base_url == 'https://api.courier.com'
 
 def test_init_token_auth():
     c = Courier(auth_token='123456789ABCDF')
@@ -24,6 +38,11 @@ def test_init_basic_auth():
 
     assert 'Authorization' in c.session.headers
 
+def test_init_basic_auth_env():
+    environ['COURIER_AUTH_USERNAME'] = 'user'
+    environ['COURIER_AUTH_PASSWORD'] = 'pass'
+    c = Courier()
+    assert 'Authorization' in c.session.headers
 
 @responses.activate
 def test_success_send():

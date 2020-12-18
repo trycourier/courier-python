@@ -12,7 +12,7 @@ __version__ = '1.6.0'
 class Courier(object):
 
     def __init__(self,
-                 base_url='https://api.courier.com',
+                 base_url=None,
                  auth_token=None,
                  username=None,
                  password=None,
@@ -27,7 +27,13 @@ class Courier(object):
           timeout (float|tuple): Timeout in seconds. (Connect, Read) Defaults
           to 5 seconds for both.
         """
-        self.base_url = base_url
+        if not base_url:
+            if 'COURIER_BASE_URL' in environ:
+                self.base_url = environ.get('COURIER_BASE_URL', None)
+            else:
+                self.base_url = "https://api.courier.com"
+        if base_url:
+            self.base_url = base_url
 
         # Initialize the session.
         self.session = CourierAPISession(timeout)
@@ -35,6 +41,10 @@ class Courier(object):
 
         # Pass auth creds to the session
         if username and password:
+            self.session.init_basic_auth(username, password)
+        else:
+            username = environ.get('COURIER_AUTH_USERNAME', None)
+            password = environ.get('COURIER_AUTH_PASSWORD', None)
             self.session.init_basic_auth(username, password)
 
         # Check environment variable for auth Key
