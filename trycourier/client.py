@@ -4,6 +4,7 @@ from .exceptions import CourierAPIException
 from .session import CourierAPISession
 from .lists import Lists
 from .messages import Messages
+from .profiles import Profiles
 
 __version__ = '1.6.0'
 
@@ -11,7 +12,7 @@ __version__ = '1.6.0'
 class Courier(object):
 
     def __init__(self,
-                 base_url='https://api.courier.com',
+                 base_url=None,
                  auth_token=None,
                  username=None,
                  password=None,
@@ -26,25 +27,35 @@ class Courier(object):
           timeout (float|tuple): Timeout in seconds. (Connect, Read) Defaults
           to 5 seconds for both.
         """
-        self.base_url = base_url
+        if base_url:
+            self.base_url = base_url
+
+        else:
+            default_url = "https://api.courier.com"
+            self.base_url = environ.get('COURIER_BASE_URL', default_url)
 
         # Initialize the session.
         self.session = CourierAPISession(timeout)
         self.session.init_library_version(__version__)
 
-        # Pass auth creds to the session
-        if username and password:
-            self.session.init_basic_auth(username, password)
-
-        # Check environment variable for auth Key
-        if not auth_token:
-            auth_token = environ.get('COURIER_AUTH_TOKEN', None)
-
+        # Token Auth takes precedence
         if auth_token:
             self.session.init_token_auth(auth_token)
+        elif 'COURIER_AUTH_TOKEN' in environ:
+            self.session.init_token_auth(environ['COURIER_AUTH_TOKEN'])
+
+        # If no token auth, then Basic Auth
+        elif username and password:
+            self.session.init_basic_auth(username, password)
+        elif 'COURIER_AUTH_USERNAME' in environ \
+                and 'COURIER_AUTH_PASSWORD' in environ:
+            username = environ.get('COURIER_AUTH_USERNAME', None)
+            password = environ.get('COURIER_AUTH_PASSWORD', None)
+            self.session.init_basic_auth(username, password)
 
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)
+        self.profiles = Profiles(self.base_url, self.session)
 
     # Perform an API request
     def send(self,

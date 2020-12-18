@@ -114,9 +114,19 @@ resp = client.lists.send(
 print(resp['messageId'])
 
 """
+Example: create a recipient's profile
+"""
+resp = client.profile.add(
+  recipient_id,
+  {
+    "email":"example@example.com",
+    "name":"Example Name"
+  }
+)
+
 Example: replace or create a recipient's profile
 """
-resp = client.replace_profile(
+resp = client.profile.replace(
   recipient_id,
   {
     "email": "example@example.com"
@@ -127,7 +137,7 @@ print(resp['status'])
 """
 Example: merge or create a recipient's profile
 """
-resp = client.merge_profile(
+resp = client.profile.merge(
   recipient_id,
   {
     "phone_number": "+15555555555"
@@ -136,10 +146,48 @@ resp = client.merge_profile(
 print(resp['status'])
 
 """
+Example: get the subscribed lists of a recipient
+"""
+resp = client.profile.get_subscriptions(
+  recipient_id,
+  cursor #optional
+)
+print(resp)
+
+"""
+Example: edit the contents of a recipient's profile with a patch operation 
+(follows JSON Patch conventions: RFC 6902). 
+"""
+resp = client.profile.patch(
+  recipient_id,
+  [
+    { 
+      "op": "add", #operation 1: add this email to profile
+      "path": "/parent",
+      "value": "example@example.com"
+    }
+    {
+      "op": "replace", #operation 2: update with new email
+      "path": "/parent",
+      "value": "jane@doe.com"
+    }
+    {
+      "op": "copy", #operation 3: copy that email to /emergency_contact
+      "from": "/parent",
+      "path": "/emergency_contact"
+    }
+    ...
+  ]
+)
+print(resp)
+
+
+"""
 Example: get a recipient's profile
 """
-resp = client.get_profile(recipient_id)
+resp = client.profile.get(recipient_id)
 print(resp)
+
 
 """
 Example: fetch the statuses of messages you've previously sent.
