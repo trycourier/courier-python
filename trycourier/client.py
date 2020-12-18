@@ -27,32 +27,31 @@ class Courier(object):
           timeout (float|tuple): Timeout in seconds. (Connect, Read) Defaults
           to 5 seconds for both.
         """
-        if not base_url:
-            if 'COURIER_BASE_URL' in environ:
-                self.base_url = environ.get('COURIER_BASE_URL', None)
-            else:
-                self.base_url = "https://api.courier.com"
         if base_url:
             self.base_url = base_url
+
+        else:
+            default_url = "https://api.courier.com"
+            self.base_url = environ.get('COURIER_BASE_URL', default_url)
 
         # Initialize the session.
         self.session = CourierAPISession(timeout)
         self.session.init_library_version(__version__)
 
-        # Pass auth creds to the session
-        if username and password:
+        # Token Auth takes precedence
+        if auth_token:
+            self.session.init_token_auth(auth_token)
+        elif 'COURIER_AUTH_TOKEN' in environ:
+            self.session.init_token_auth(environ['COURIER_AUTH_TOKEN'])
+
+        # If no token auth, then Basic Auth
+        elif username and password:
             self.session.init_basic_auth(username, password)
-        else:
+        elif 'COURIER_AUTH_USERNAME' in environ \
+                and 'COURIER_AUTH_PASSWORD' in environ:
             username = environ.get('COURIER_AUTH_USERNAME', None)
             password = environ.get('COURIER_AUTH_PASSWORD', None)
             self.session.init_basic_auth(username, password)
-
-        # Check environment variable for auth Key
-        if not auth_token:
-            auth_token = environ.get('COURIER_AUTH_TOKEN', None)
-
-        if auth_token:
-            self.session.init_token_auth(auth_token)
 
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)

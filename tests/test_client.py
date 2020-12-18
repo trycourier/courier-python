@@ -32,17 +32,28 @@ def test_init_token_auth():
 
     assert 'Authorization' in c.session.headers
 
+def test_init_token_auth_env():
+    environ['COURIER_AUTH_TOKEN'] = '123456789ABCDF'
+
+    c = Courier()
+    assert 'Authorization' in c.session.headers
 
 def test_init_basic_auth():
+    environ['COURIER_AUTH_TOKEN'] = "abcd"
+    environ.pop('COURIER_AUTH_TOKEN')
     c = Courier(username='user', password='pass')
 
     assert 'Authorization' in c.session.headers
 
+@responses.activate
 def test_init_basic_auth_env():
+    environ['COURIER_AUTH_TOKEN'] = "abcd"
+    environ.pop('COURIER_AUTH_TOKEN')
     environ['COURIER_AUTH_USERNAME'] = 'user'
     environ['COURIER_AUTH_PASSWORD'] = 'pass'
     c = Courier()
     assert 'Authorization' in c.session.headers
+
 
 @responses.activate
 def test_success_send():
