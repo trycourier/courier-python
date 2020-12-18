@@ -1,5 +1,6 @@
 from .exceptions import CourierAPIException
 
+
 class Profiles():
     key = "profiles"
 
@@ -42,6 +43,8 @@ class Profiles():
         Args:
             recipient_id (str): A unique identifier representing the
             recipient associated with the requested profile.
+            cursor (str, optional): A unique identifier that allows for
+            fetching the next set of list subscriptions
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
@@ -51,20 +54,20 @@ class Profiles():
         """
         params = {}
         if cursor:
-            params['cursor']=cursor
+            params['cursor'] = cursor
         url = "%s/%s/lists" % (self.uri, recipient_id)
-        resp = self.session.get(url)
+        resp = self.session.get(url, params=params)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
-        return resp.json
+        return resp.json()
 
     def add(self, recipient_id, profile):
         """
         Simply a wrapper for replace() for those who want to add a new profile
         """
-        self.replace(recipient_id, profile)
+        return self.replace(recipient_id, profile)
 
     def replace(self, recipient_id, profile):
         """
@@ -153,7 +156,7 @@ class Profiles():
         payload = {
             "patch": operations
         }
-        resp = self.session.post(url, json=payload)
+        resp = self.session.patch(url, json=payload)
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
