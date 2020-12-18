@@ -6,11 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 
 ### Added
-- Environment Variables for authentication: 
-  - `COURIER_AUTH_USERNAME` and `COURIER_AUTH_PASSWORD` for basic auth
-  - `COURIER_AUTH_TOKEN` for token auth
-  - Can also pass as params
-
+- Environment Variables for Basic Authentication: 
+  - `COURIER_AUTH_USERNAME` and `COURIER_AUTH_PASSWORD`
+- Environment Variable to set Base URL:
+  - `COURIER_BASE_URL`
+  
 - Support for [Messages API](https://docs.courier.com/reference/messages-api) by @jrweingart
   - `GET /messages` with `client.messages.list` method
   - `GET /messages/{message_id}` with `client.messages.get` method
