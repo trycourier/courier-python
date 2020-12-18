@@ -4,6 +4,7 @@ from .exceptions import CourierAPIException
 from .session import CourierAPISession
 from .lists import Lists
 from .messages import Messages
+from .profiles import Profiles
 
 __version__ = '1.6.0'
 
@@ -55,10 +56,7 @@ class Courier(object):
 
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)
-<<<<<<< HEAD
         self.profiles = Profiles(self.base_url, self.session)
-=======
->>>>>>> 0f9e37dec85cd7a2a0ad04bee031caba546f4b77
 
     # Perform an API request
     def send(self,
