@@ -57,10 +57,7 @@ class Courier(object):
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)
         self.profiles = Profiles(self.base_url, self.session)
-<<<<<<< HEAD
         self.events = Events(self.base_url, self.session)
-=======
->>>>>>> upstream/master
 
     # Perform an API request
     def send(self,
