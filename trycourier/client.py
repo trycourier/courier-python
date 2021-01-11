@@ -5,6 +5,7 @@ from .session import CourierAPISession
 from .lists import Lists
 from .messages import Messages
 from .profiles import Profiles
+from .events import Events
 
 __version__ = '1.6.0'
 
@@ -56,6 +57,7 @@ class Courier(object):
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)
         self.profiles = Profiles(self.base_url, self.session)
+        self.events = Events(self.base_url, self.session)
 
     # Perform an API request
     def send(self,

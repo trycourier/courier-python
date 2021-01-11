@@ -20,7 +20,7 @@ def test_init_base_url_env():
     environ['COURIER_BASE_URL'] = 'https://api.courier.com'
     assert c.base_url == 'http://someurl'
 
-def test_iniit_default_base_url():
+def test_init_default_base_url():
     environ.pop('COURIER_BASE_URL')
     c = Courier(auth_token='123456789ABCDF')
 
