@@ -8,13 +8,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [v1.7.0] - 2020-12-18
 
 ### Added
-
 - Environment Variables for Basic Authentication:
   - `COURIER_AUTH_USERNAME` and `COURIER_AUTH_PASSWORD`
 - Environment Variable to set Base URL:
   - `COURIER_BASE_URL`
+  
 - Support for [Messages API](https://docs.courier.com/reference/messages-api) by @jrweingart
-
   - `GET /messages` with `client.messages.list` method
   - `GET /messages/{message_id}` with `client.messages.get` method
   - `GET /messages/{message_id}/history` with `client.messages.get_history` method
