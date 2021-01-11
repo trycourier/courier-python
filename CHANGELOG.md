@@ -5,8 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v1.7.0] - 2020-12-18
+
 ### Added
-- Environment Variables for Basic Authentication: 
+- Environment Variables for Basic Authentication:
   - `COURIER_AUTH_USERNAME` and `COURIER_AUTH_PASSWORD`
 - Environment Variable to set Base URL:
   - `COURIER_BASE_URL`
@@ -22,7 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - `PUT /profiles/{recipient_id}` with `client.profiles.replace` and `client.profiles.add` methods
   - `PATCH /profiles/{recipient_id}` with `client.profiles.patch` method
   - `POST /profiles/{recipient_id}` with `client.profiles.merge` method
-  
+
 ## [v1.6.0] - 2020-11-09
 
 ### Added
@@ -94,7 +96,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v1.6.0...HEAD
+[unreleased]: https://github.com/trycourier/courier-python/compare/v1.7.0...HEAD
+[v1.7.0]: https://github.com/trycourier/courier-python/compare/v1.6.0...v1.7.0
 [v1.6.0]: https://github.com/trycourier/courier-python/compare/v1.5.0...v1.6.0
 [v1.5.0]: https://github.com/trycourier/courier-python/compare/v1.4.0...v1.5.0
 [v1.4.0]: https://github.com/trycourier/courier-python/compare/v1.3.0...v1.4.0
