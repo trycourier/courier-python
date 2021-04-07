@@ -1,5 +1,6 @@
 from os import environ
 
+from .automations import Automations
 from .exceptions import CourierAPIException
 from .session import CourierAPISession
 from .lists import Lists
@@ -53,6 +54,7 @@ class Courier(object):
             password = environ.get('COURIER_AUTH_PASSWORD', None)
             self.session.init_basic_auth(username, password)
 
+        self.automations = Automations(self.base_url, self.session)
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)
         self.profiles = Profiles(self.base_url, self.session)
