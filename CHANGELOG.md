@@ -9,7 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Automations API by @tk26
+- Support for [Automation API](https://docs.courier.com/reference/automation-api) by @tk26
+  - `POST /automations/invoke` with `client.automations.invokeAdHocAutomation` method
+  - `POST /automations/{template_id}/invoke` with `client.automations.invokeAutomationTemplate` method
 
 ## [v1.7.0] - 2020-12-18
 
