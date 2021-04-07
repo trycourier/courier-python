@@ -16,7 +16,7 @@ def test_success_invoke_ad_hoc_automation():
         body='{"runId": "12345"}'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.automations.invokeAdHocAutomation(
+    r = c.automations.invoke_ad_hoc_automation(
         automation={'steps': [{ 'action': 'send' }]},
         brand='W50NC77P524K14M5300PGPEK4JMJ',
         data={'foo': 'bar'},
@@ -48,7 +48,7 @@ def test_fail_invoke_ad_hoc_automation():
     c = Courier(auth_token='123456789ABCDF')
 
     with pytest.raises(CourierAPIException):
-        c.automations.invokeAdHocAutomation(automation={})
+        c.automations.invoke_ad_hoc_automation(automation={})
 
 @responses.activate
 def test_success_invoke_automation_template():
@@ -60,7 +60,7 @@ def test_success_invoke_automation_template():
         body='{"runId": "12345"}'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.automations.invokeAutomationTemplate(
+    r = c.automations.invoke_automation_template(
         template_id='my-automation-template',
         brand='W50NC77P524K14M5300PGPEK4JMJ',
         data={'foo': 'bar'},
@@ -91,4 +91,4 @@ def test_fail_invoke_automation_template():
     c = Courier(auth_token='123456789ABCDF')
 
     with pytest.raises(CourierAPIException):
-        c.automations.invokeAutomationTemplate(template_id='my-automation-template')
+        c.automations.invoke_automation_template(template_id='my-automation-template')

@@ -12,8 +12,8 @@ class Automations():
     def uri(self):
         return "%s/%s" % (self.base_url, self.key)
 
-    def invokeAdHocAutomation(self, automation, brand=None, data=None,
-                              profile=None, recipient=None, template=None):
+    def invoke_ad_hoc_automation(self, automation, brand=None, data=None,
+                                 profile=None, recipient=None, template=None):
         """
         Invoke an ad-hoc automation
 
@@ -67,8 +67,9 @@ class Automations():
 
         return resp.json()
 
-    def invokeAutomationTemplate(self, template_id, brand=None, data=None,
-                                 profile=None, recipient=None, template=None):
+    def invoke_automation_template(self, template_id, brand=None,
+                                   data=None, profile=None,
+                                   recipient=None, template=None):
         """
         Invoke an automation template
 
