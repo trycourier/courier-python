@@ -155,13 +155,13 @@ resp = client.profile.get_subscriptions(
 print(resp)
 
 """
-Example: edit the contents of a recipient's profile with a patch operation 
-(follows JSON Patch conventions: RFC 6902). 
+Example: edit the contents of a recipient's profile with a patch operation
+(follows JSON Patch conventions: RFC 6902).
 """
 resp = client.profile.patch(
   recipient_id,
   [
-    { 
+    {
       "op": "add", #operation 1: add this email to profile
       "path": "/parent",
       "value": "example@example.com"
@@ -351,6 +351,33 @@ resp = client.lists.find_by_recipient_id(recipient_id,
   cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
 )
 print resp
+
+"""
+Example: Invoke an ad-hoc automation
+"""
+
+resp = client.automations.invoke(
+    automation={'steps': [{ 'action': 'send' }]},
+    brand="your-brand-id", # optional
+    data={}, # optional
+    profile={}, # optional
+    recipient="your-recipient-id", # optional
+    template="your-notification-template-id" # optional
+)
+print(resp['runId'])
+
+"""
+Example: Invoke an automation template
+"""
+resp = client.automations.invoke_template(
+    template_id="your-automation-template-id",
+    brand="your-brand-id", # optional
+    data={}, # optional
+    profile={}, # optional
+    recipient="your-recipient-id", # optional
+    template="your-notification-template-id" # optional
+)
+print(resp['runId'])
 
 ```
 

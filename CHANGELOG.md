@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v1.8.0] - 2021-04-07
+
+### Added
+
+- Support for [Automation API](https://docs.courier.com/reference/automation-api) by @tk26
+  - `POST /automations/invoke` with `client.automations.invoke` method
+  - `POST /automations/{template_id}/invoke` with `client.automations.invoke_template` method
+
 ## [v1.7.0] - 2020-12-18
 
 ### Added
@@ -97,7 +105,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v1.7.0...HEAD
+[unreleased]: https://github.com/trycourier/courier-python/compare/v1.8.0...HEAD
+[v1.8.0]: https://github.com/trycourier/courier-python/compare/v1.7.0...v1.8.0
 [v1.7.0]: https://github.com/trycourier/courier-python/compare/v1.6.0...v1.7.0
 [v1.6.0]: https://github.com/trycourier/courier-python/compare/v1.5.0...v1.6.0
 [v1.5.0]: https://github.com/trycourier/courier-python/compare/v1.4.0...v1.5.0
