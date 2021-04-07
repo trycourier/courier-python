@@ -356,7 +356,7 @@ print resp
 Example: Invoke an ad-hoc automation
 """
 
-resp = client.automations.invoke_ad_hoc_automation(
+resp = client.automations.invoke(
     automation={'steps': [{ 'action': 'send' }]},
     brand="your-brand-id", # optional
     data={}, # optional
@@ -369,7 +369,7 @@ print(resp['runId'])
 """
 Example: Invoke an automation template
 """
-resp = client.automations.invoke_automation_template(
+resp = client.automations.invoke_template(
     template_id="your-automation-template-id",
     brand="your-brand-id", # optional
     data={}, # optional

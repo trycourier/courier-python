@@ -7,7 +7,7 @@ from trycourier.client import Courier
 from trycourier.exceptions import CourierAPIException
 
 @responses.activate
-def test_success_invoke_ad_hoc_automation():
+def test_success_invoke():
     responses.add(
         responses.POST,
         'https://api.courier.com/automations/invoke',
@@ -16,7 +16,7 @@ def test_success_invoke_ad_hoc_automation():
         body='{"runId": "12345"}'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.automations.invoke_ad_hoc_automation(
+    r = c.automations.invoke(
         automation={'steps': [{ 'action': 'send' }]},
         brand='W50NC77P524K14M5300PGPEK4JMJ',
         data={'foo': 'bar'},
@@ -36,7 +36,7 @@ def test_success_invoke_ad_hoc_automation():
     assert request_params["template"] == 'template-001'
 
 @responses.activate
-def test_fail_invoke_ad_hoc_automation():
+def test_fail_invoke():
     responses.add(
         responses.POST,
         'https://api.courier.com/automations/invoke',
@@ -48,10 +48,10 @@ def test_fail_invoke_ad_hoc_automation():
     c = Courier(auth_token='123456789ABCDF')
 
     with pytest.raises(CourierAPIException):
-        c.automations.invoke_ad_hoc_automation(automation={})
+        c.automations.invoke(automation={})
 
 @responses.activate
-def test_success_invoke_automation_template():
+def test_success_invoke_template():
     responses.add(
         responses.POST,
         'https://api.courier.com/automations/my-automation-template/invoke',
@@ -60,7 +60,7 @@ def test_success_invoke_automation_template():
         body='{"runId": "12345"}'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.automations.invoke_automation_template(
+    r = c.automations.invoke_template(
         template_id='my-automation-template',
         brand='W50NC77P524K14M5300PGPEK4JMJ',
         data={'foo': 'bar'},
@@ -79,7 +79,7 @@ def test_success_invoke_automation_template():
     assert request_params["template"] == 'template-001'
 
 @responses.activate
-def test_fail_invoke_automation_template():
+def test_fail_invoke_template():
     responses.add(
         responses.POST,
         'https://api.courier.com/automations/my-automation-template/invoke',
@@ -91,4 +91,4 @@ def test_fail_invoke_automation_template():
     c = Courier(auth_token='123456789ABCDF')
 
     with pytest.raises(CourierAPIException):
-        c.automations.invoke_automation_template(template_id='my-automation-template')
+        c.automations.invoke_template(template_id='my-automation-template')
