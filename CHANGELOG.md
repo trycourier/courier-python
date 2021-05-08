@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+### Updated
+
+- Fix profile -> profiles in README
+
 ## [v1.8.0] - 2021-04-07
 
 ### Added
