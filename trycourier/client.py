@@ -7,7 +7,7 @@ from .lists import Lists
 from .messages import Messages
 from .profiles import Profiles
 
-__version__ = '1.8.0'
+__version__ = '1.8.1'
 
 
 class Courier(object):

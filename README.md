@@ -116,7 +116,7 @@ print(resp['messageId'])
 """
 Example: create a recipient's profile
 """
-resp = client.profile.add(
+resp = client.profiles.add(
   recipient_id,
   {
     "email":"example@example.com",
@@ -126,7 +126,7 @@ resp = client.profile.add(
 
 Example: replace or create a recipient's profile
 """
-resp = client.profile.replace(
+resp = client.profiles.replace(
   recipient_id,
   {
     "email": "example@example.com"
@@ -137,7 +137,7 @@ print(resp['status'])
 """
 Example: merge or create a recipient's profile
 """
-resp = client.profile.merge(
+resp = client.profiles.merge(
   recipient_id,
   {
     "phone_number": "+15555555555"
@@ -148,7 +148,7 @@ print(resp['status'])
 """
 Example: get the subscribed lists of a recipient
 """
-resp = client.profile.get_subscriptions(
+resp = client.profiles.get_subscriptions(
   recipient_id,
   cursor #optional
 )
@@ -158,7 +158,7 @@ print(resp)
 Example: edit the contents of a recipient's profile with a patch operation
 (follows JSON Patch conventions: RFC 6902).
 """
-resp = client.profile.patch(
+resp = client.profiles.patch(
   recipient_id,
   [
     {
@@ -185,7 +185,7 @@ print(resp)
 """
 Example: get a recipient's profile
 """
-resp = client.profile.get(recipient_id)
+resp = client.profiles.get(recipient_id)
 print(resp)
 
 
