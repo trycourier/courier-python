@@ -7,7 +7,7 @@ from .lists import Lists
 from .messages import Messages
 from .profiles import Profiles
 
-__version__ = '1.8.0'
+__version__ = '1.9.0'
 
 
 class Courier(object):
@@ -68,7 +68,8 @@ class Courier(object):
              brand=None,
              preferences=None,
              override=None,
-             idempotency_key=None):
+             idempotency_key=None, 
+             idempotency_expiration=None):
         """
         Send a notification for the provided event to the provided recipient.
 
@@ -121,6 +122,9 @@ class Courier(object):
 
         if idempotency_key:
             headers['Idempotency-Key'] = idempotency_key
+        
+        if idempotency_expiration:
+            headers['x-idempotency-expiration'] = idempotency_expiration
 
         resp = self.session.post(url, json=payload, headers=headers)
 
@@ -182,7 +186,11 @@ class Courier(object):
 
         return resp.json()
 
-    def merge_profile(self, recipient_id, profile, idempotency_key=None):
+    def merge_profile(self,
+                      recipient_id,
+                      profile,
+                      idempotency_key=None,
+                      idempotency_expiration=None):
         """
         Merge the supplied values with an existing profile or create a new
         profile if one doesn't already exist.
@@ -211,6 +219,9 @@ class Courier(object):
 
         if idempotency_key:
             headers['Idempotency-Key'] = idempotency_key
+
+        if idempotency_expiration:
+            headers['x-idempotency-expiration'] = idempotency_expiration
 
         resp = self.session.post(url, json=payload, headers=headers)
 
@@ -402,7 +413,8 @@ class Courier(object):
                      settings,
                      id=None,
                      snippets=None,
-                     idempotency_key=None):
+                     idempotency_key=None, 
+                     idempotency_expiration=None):
         """
         Create a new brand
 
@@ -438,6 +450,9 @@ class Courier(object):
 
         if idempotency_key:
             headers['Idempotency-Key'] = idempotency_key
+        
+        if idempotency_expiration:
+            headers['x-idempotency-expiration'] = idempotency_expiration
 
         resp = self.session.post(url, json=payload, headers=headers)
 

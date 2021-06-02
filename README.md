@@ -383,15 +383,19 @@ print(resp['runId'])
 
 ### Idempotency
 
-For `POST` methods, you can supply an `idempotency_key` to ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key. Keys are eligible to be removed from the system after they're at least 24 hours old, and a new request is generated if a key is reused after the original has been removed.
+For `POST` methods, you can supply an `idempotency_key` to ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key. By default, keys are eligible to be removed from the system after they're at least 24 hours old, and a new request is generated if a key is reused after the original has been removed.
+
+Also, the expiration of an idempotency key can be altered by setting a `idempotency_expiration` header value. The value of this header can be either epoch milliseconds or an ISO-8601 formatted date string. The minimum value that can be set is 24 hours. The maximum value that can be set is 1 year.
 
 ```python
 import uuid
+from datetime import datetime, timedelta
 from trycourier import Courier
 
 client = Courier()
 
 idempotency_key = uuid.uuid4()
+expiration = (datetime.now()+timedelta(days=7)).isoformat()
 
 resp = client.send(
     event="your-event-id",
@@ -403,7 +407,8 @@ resp = client.send(
     data={
       "world": "Python!"
     },
-    idempotency_key=idempotency_key
+    idempotency_key=idempotency_key,
+    idempotency_expiration=expiration
 )
 print(resp['messageId'])
 ```

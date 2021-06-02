@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v1.9.0] - 2021-06-01
+
+### Added
+
+- Support for Idempotency Key Expiration. You can pass `idempotency_expiration` to the following methods by @andrewmilas10:
+  - `send()`
+  - `merge_profile()`
+  - `create_brand()`
+
 ### Updated
 
 - Fix profile -> profiles in README
@@ -109,7 +118,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v1.8.0...HEAD
+[unreleased]: https://github.com/trycourier/courier-python/compare/v1.9.0...HEAD
+[v1.9.0]: https://github.com/trycourier/courier-python/compare/v1.8.0...v1.9.0
 [v1.8.0]: https://github.com/trycourier/courier-python/compare/v1.7.0...v1.8.0
 [v1.7.0]: https://github.com/trycourier/courier-python/compare/v1.6.0...v1.7.0
 [v1.6.0]: https://github.com/trycourier/courier-python/compare/v1.5.0...v1.6.0
