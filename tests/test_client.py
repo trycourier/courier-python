@@ -2,6 +2,7 @@ import json
 import responses
 import pytest
 from os import environ
+from datetime import datetime, timedelta
 
 from trycourier.client import Courier
 from trycourier.exceptions import CourierAPIException
@@ -111,14 +112,18 @@ def test_success_send_idempotent():
         body='{"status": "ok"}'
     )
     c = Courier(auth_token='123456789ABCDF')
+    x = (datetime.now()+timedelta(days=7)).isoformat()
     r = c.send(
         event='1234',
         recipient='4321',
-        idempotency_key='1234ABCD'
+        idempotency_key='1234ABCD',
+        x_idempotency_expiration=x
     )
 
     assert responses.calls[0].request.headers.get(
         'Idempotency-Key') == '1234ABCD'
+    assert responses.calls[0].request.headers.get(
+        'x-idempotency-expiration') == x
     assert r == {"status": "ok"}
 
 
@@ -248,10 +253,18 @@ def test_success_merge_profile_idempotent():
     }
 
     c = Courier(auth_token='123456789ABCDF')
-    r = c.merge_profile("1234", profile, idempotency_key="1234ABCD")
+    x = (datetime.now()+timedelta(days=7)).isoformat()
+    r = c.merge_profile(
+        recipient_id="1234", 
+        profile=profile, 
+        idempotency_key="1234ABCD",
+        x_idempotency_expiration=x
+    )
 
     assert responses.calls[0].request.headers.get(
         'Idempotency-Key') == '1234ABCD'
+    assert responses.calls[0].request.headers.get(
+        'x-idempotency-expiration') == x
     assert r == {"status": "SUCCESS"}
 
 
@@ -589,11 +602,15 @@ def test_success_create_brand_idempotent():
     )
 
     c = Courier(auth_token='123456789ABCDF')
+    x = (datetime.now()+timedelta(days=7)).isoformat()
     r = c.create_brand(name="my brand", settings={},
-                       idempotency_key="1234ABCD")
+                       idempotency_key="1234ABCD",
+                       x_idempotency_expiration=x)
 
     assert responses.calls[0].request.headers.get(
         'Idempotency-Key') == '1234ABCD'
+    assert responses.calls[0].request.headers.get(
+        'x-idempotency-expiration') == x
     assert r == {"id": "1234", "name": "my brand"}
 
 
