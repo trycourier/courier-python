@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Support for Idempotency Key Expiration. You can pass `x-idempotency-expiration` to the following methods by @andrewmilas10:
+- Support for Idempotency Key Expiration. You can pass `idempotency_expiration` to the following methods by @andrewmilas10:
   - `send()`
   - `merge_profile()`
   - `create_brand()`

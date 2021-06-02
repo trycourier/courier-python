@@ -117,7 +117,7 @@ def test_success_send_idempotent():
         event='1234',
         recipient='4321',
         idempotency_key='1234ABCD',
-        x_idempotency_expiration=expiration_date
+        idempotency_expiration=expiration_date
     )
 
     assert responses.calls[0].request.headers.get(
@@ -258,7 +258,7 @@ def test_success_merge_profile_idempotent():
         recipient_id="1234", 
         profile=profile, 
         idempotency_key="1234ABCD",
-        x_idempotency_expiration=expiration_date
+        idempotency_expiration=expiration_date
     )
 
     assert responses.calls[0].request.headers.get(
@@ -605,7 +605,7 @@ def test_success_create_brand_idempotent():
     expiration_date = (datetime.now()+timedelta(days=7)).isoformat()
     r = c.create_brand(name="my brand", settings={},
                        idempotency_key="1234ABCD",
-                       x_idempotency_expiration=expiration_date)
+                       idempotency_expiration=expiration_date)
 
     assert responses.calls[0].request.headers.get(
         'Idempotency-Key') == '1234ABCD'

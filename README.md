@@ -385,7 +385,7 @@ print(resp['runId'])
 
 For `POST` methods, you can supply an `idempotency_key` to ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key. By default, keys are eligible to be removed from the system after they're at least 24 hours old, and a new request is generated if a key is reused after the original has been removed.
 
-Also, the expiration of an idempotency key can be altered by setting a `x_idempotency_expiration` header value. The value of this header can be either epoch milliseconds or an ISO-8601 formatted date string. The minimum value that can be set is 24 hours. The maximum value that can be set is 1 year.
+Also, the expiration of an idempotency key can be altered by setting a `idempotency_expiration` header value. The value of this header can be either epoch milliseconds or an ISO-8601 formatted date string. The minimum value that can be set is 24 hours. The maximum value that can be set is 1 year.
 
 ```python
 import uuid
@@ -408,7 +408,7 @@ resp = client.send(
       "world": "Python!"
     },
     idempotency_key=idempotency_key,
-    x_idempotency_expiration=expiration
+    idempotency_expiration=expiration
 )
 print(resp['messageId'])
 ```
