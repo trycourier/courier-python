@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
-## [v1.8.1] - 2021-06-01
+## [v1.9.0] - 2021-06-01
 
 ### Added
 
@@ -118,8 +118,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v1.8.1...HEAD
-[v1.8.1]: https://github.com/trycourier/courier-python/compare/v1.8.0...v1.8.1
+[unreleased]: https://github.com/trycourier/courier-python/compare/v1.9.0...HEAD
+[v1.9.0]: https://github.com/trycourier/courier-python/compare/v1.8.0...v1.9.0
 [v1.8.0]: https://github.com/trycourier/courier-python/compare/v1.7.0...v1.8.0
 [v1.7.0]: https://github.com/trycourier/courier-python/compare/v1.6.0...v1.7.0
 [v1.6.0]: https://github.com/trycourier/courier-python/compare/v1.5.0...v1.6.0
