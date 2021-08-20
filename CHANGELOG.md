@@ -5,6 +5,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v2.0.0] - 2021-08-20
+
+### Added
+
+- Support for Notifications API by @tk26
+  - `GET /notifications` with `client.notifications.list` method
+  - `GET /notifications/{notification_id}/content` with `client.notifications.getContent` method
+  - `GET /notifications/{notification_id}/draft/content` with `client.notifications.getDraftContent` method
+  - `POST /notifications/{notification_id}/variations` with `client.notifications.postVariations` method
+  - `POST /notifications/{notification_id}/draft/variations` with `client.notifications.postDraftVariations` method
+  - `GET /notifications/{notification_id}/{submission_id}/checks` with `client.notifications.getSubmissionChecks` method
+  - `PUT /notifications/{notification_id}/{submission_id}/checks` with `client.notifications.putSubmissionChecks` method
+  - `DELETE /notifications/{notification_id}/{submission_id}/checks` with `client.notifications.deleteSubmissionChecks` method
+
 ## [v1.9.0] - 2021-06-01
 
 ### Added
@@ -118,7 +132,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v1.9.0...HEAD
+[unreleased]: https://github.com/trycourier/courier-python/compare/v2.0.0...HEAD
+[v2.0.0]: https://github.com/trycourier/courier-python/compare/v1.9.0...v2.0.0
 [v1.9.0]: https://github.com/trycourier/courier-python/compare/v1.8.0...v1.9.0
 [v1.8.0]: https://github.com/trycourier/courier-python/compare/v1.7.0...v1.8.0
 [v1.7.0]: https://github.com/trycourier/courier-python/compare/v1.6.0...v1.7.0

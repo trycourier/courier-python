@@ -5,9 +5,10 @@ from .exceptions import CourierAPIException
 from .session import CourierAPISession
 from .lists import Lists
 from .messages import Messages
+from .notifications import Notifications
 from .profiles import Profiles
 
-__version__ = '1.9.0'
+__version__ = '2.0.0'
 
 
 class Courier(object):
@@ -57,6 +58,7 @@ class Courier(object):
         self.automations = Automations(self.base_url, self.session)
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)
+        self.notifications = Notifications(self.base_url, self.session)
         self.profiles = Profiles(self.base_url, self.session)
 
     # Perform an API request
@@ -68,7 +70,7 @@ class Courier(object):
              brand=None,
              preferences=None,
              override=None,
-             idempotency_key=None, 
+             idempotency_key=None,
              idempotency_expiration=None):
         """
         Send a notification for the provided event to the provided recipient.
@@ -122,7 +124,7 @@ class Courier(object):
 
         if idempotency_key:
             headers['Idempotency-Key'] = idempotency_key
-        
+
         if idempotency_expiration:
             headers['x-idempotency-expiration'] = idempotency_expiration
 
@@ -413,7 +415,7 @@ class Courier(object):
                      settings,
                      id=None,
                      snippets=None,
-                     idempotency_key=None, 
+                     idempotency_key=None,
                      idempotency_expiration=None):
         """
         Create a new brand
@@ -450,7 +452,7 @@ class Courier(object):
 
         if idempotency_key:
             headers['Idempotency-Key'] = idempotency_key
-        
+
         if idempotency_expiration:
             headers['x-idempotency-expiration'] = idempotency_expiration
 
