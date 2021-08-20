@@ -54,8 +54,7 @@ def test_success_post_variations():
         responses.POST,
         'https://api.courier.com/notifications/my-notification/variations',
         status=200,
-        content_type='application/json',
-        body='{"blocks": [], "channels": []}'
+        content_type='application/json'
     )
     c = Courier(auth_token='123456789ABCDF')
     r = c.notifications.postVariations('my-notification', [], [])
@@ -68,8 +67,7 @@ def test_success_post_draft_variations():
         responses.POST,
         'https://api.courier.com/notifications/my-notification/draft/variations',
         status=200,
-        content_type='application/json',
-        body='{"blocks": [], "channels": []}'
+        content_type='application/json'
     )
     c = Courier(auth_token='123456789ABCDF')
     r = c.notifications.postDraftVariations('my-notification', [], [])
@@ -110,8 +108,7 @@ def test_success_delete_submission_checks():
         responses.DELETE,
         'https://api.courier.com/notifications/my-notification/my-submission/checks',
         status=200,
-        content_type='application/json',
-        body='{"checks": []}'
+        content_type='application/json'
     )
     c = Courier(auth_token='123456789ABCDF')
     r = c.notifications.deleteSubmissionChecks('my-notification', 'my-submission')

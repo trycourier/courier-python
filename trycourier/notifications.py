@@ -208,5 +208,3 @@ class Notifications():
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
-
-        return resp.json()
