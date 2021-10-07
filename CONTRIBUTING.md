@@ -8,7 +8,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/trycou
 - Clone your fork
 - Install virtualenv: `pip install virtualenv`
 - Run `make install`
-- Run `source env/bin/activate`
+- Run `source env/bin/activate` (`source env/bin/activate.fish` for fish shell)
 - Write code!
 - Test your code using `make test`
 - When finished, run `deactivate` to stop using this environment.
