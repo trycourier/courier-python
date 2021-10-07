@@ -5,6 +5,37 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v3.0.0] - 2021-08-23
+
+Adds support for notification locales
+
+### Added:
+
+- Notifications API
+  - `PUT /notifications/{notification_id}/locales` with `client.notifications.put_locales` method
+  - `PUT /notifications/{notification_id}/draft/locales` with `client.notifications.put_draft_locales` method
+  - `PUT /notifications/{notification_id}/locales/{locale_id}` with `client.notifications.put_locale` method
+  - `PUT /notifications/{notification_id}/draft/locales/{locale_id}` with `client.notifications.put_draft_locale` method
+  - `PUT /notifications/{notification_id}/blocks/{block_id}/locales` with `client.notifications.put_block_locales` method
+  - `PUT /notifications/{notification_id}/draft/blocks/{block_id}/locales` with `client.notifications.put_draft_block_locales` method
+  - `PUT /notifications/{notification_id}/channels/{channel_id}/locales` with `client.notifications.put_channel_locales` method
+  - `PUT /notifications/{notification_id}/draft/channels/{channel_id}/locales` with `client.notifications.put_draft_channel_locales` method
+
+### Changed
+
+- Notifications API
+  - `client.notifications.getContent` to `client.notifications.get_content`
+  - `client.notifications.getDraftContent` to `client.notifications.get_draft_content`
+  - `client.notifications.getSubmissionChecks` to `client.notifications.get_submission_checks`
+  - `client.notifications.putSubmissionChecks` to `client.notifications.put_submission_checks`
+  - `client.notifications.deleteSubmissionChecks` to ``client.notifications.delete_submission_checks`
+
+### Removed
+
+- Notifications API
+  - `POST /notifications/{notification_id}/variations` with `client.notifications.postVariations` method
+  - `POST /notifications/{notification_id}/draft/variations` with `client.notifications.postDraftVariations` method
+
 ## [v2.0.0] - 2021-08-23
 
 ### Added

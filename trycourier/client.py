@@ -8,7 +8,7 @@ from .messages import Messages
 from .notifications import Notifications
 from .profiles import Profiles
 
-__version__ = '2.0.0'
+__version__ = '3.0.0'
 
 
 class Courier(object):
