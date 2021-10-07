@@ -91,8 +91,8 @@ class Notifications():
         Args:
             - notification_id (str): A unique identifier associated with
             the notification
-            - blocks (list): Variation Blocks
-            - channels (list, optional): Variation Channels
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
 
         Raises:
             - CourierAPIException: Any error returned by the Courier API
@@ -115,8 +115,8 @@ class Notifications():
         Args:
             - notification_id (str): A unique identifier associated with
             the notification
-            - blocks (list): Variation Blocks
-            - channels (list, optional): Variation Channels
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
 
         Raises:
             - CourierAPIException: Any error returned by the Courier API
@@ -140,8 +140,8 @@ class Notifications():
             - notification_id (str): A unique identifier associated with
             the notification
             - locale_id (str): A  unique identifier associated with the locale
-            - blocks (list): Variation Blocks
-            channels (list, optional): Variation Channels
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
 
         Raises:
             - CourierAPIException: Any error returned by the Courier API
@@ -166,8 +166,8 @@ class Notifications():
             - notification_id (str): A unique identifier associated with
             the notification
             - locale_id (str): A  unique identifier associated with the locale
-            - blocks (list): Variation Blocks
-            channels (list, optional): Variation Channels
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
 
         Raises:
             - CourierAPIException: Any error returned by the Courier API
