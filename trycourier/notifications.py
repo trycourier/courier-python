@@ -17,14 +17,14 @@ class Notifications():
         Get the list of notifications
 
         Args::
-            cursor (str, optional): A unique identifier that allows for
-            fetching the next set of notifications. Defaults to None.
+            - cursor (str, optional): A unique identifier that allows for
+            - fetching the next set of notifications. Defaults to None.
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains results and paging info
+            - dict: Contains results and paging info
         """
         params = {}
 
@@ -38,19 +38,19 @@ class Notifications():
 
         return resp.json()
 
-    def getContent(self, notification_id):
+    def get_content(self, notification_id):
         """
         Get the notification content
 
         Args:
-            notification_id (str): A unique identifier associated with
+            - notification_id (str): A unique identifier associated with
             the notification
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains notification content
+            - dict: Contains notification content
         """
         url = "%s/%s/content" % (self.uri, notification_id)
 
@@ -61,19 +61,19 @@ class Notifications():
 
         return resp.json()
 
-    def getDraftContent(self, notification_id):
+    def get_draft_content(self, notification_id):
         """
         Get the notification draft content
 
         Args:
-            notification_id (str): A unique identifier associated with
+            - notification_id (str): A unique identifier associated with
             the notification
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains notification draft content
+            - dict: Contains notification draft content
         """
         url = "%s/%s/draft/content" % (self.uri, notification_id)
 
@@ -84,69 +84,210 @@ class Notifications():
 
         return resp.json()
 
-    def postVariations(self, notification_id, blocks, channels=None):
+    def put_locales(self, notification_id, blocks, channels=None):
         """
-        Post the notification variations
+        Put notification locales
 
         Args:
-            notification_id (str): A unique identifier associated with
+            - notification_id (str): A unique identifier associated with
             the notification
-            blocks (list): Variation Blocks
-            channels (list, optional): Variation Channels
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
         """
-        url = "%s/%s/variations" % (self.uri, notification_id)
+        url = "%s/%s/locales" % (self.uri, notification_id)
         payload = {
             'blocks': blocks,
             'channels': channels
         }
 
-        resp = self.session.post(url, json=payload)
+        resp = self.session.put(url, json=payload)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
-    def postDraftVariations(self, notification_id, blocks, channels=None):
+    def put_draft_locales(self, notification_id, blocks, channels=None):
         """
-        Post the notification draft variations
+        Put notification draft locales
 
         Args:
-            notification_id (str): A unique identifier associated with
+            - notification_id (str): A unique identifier associated with
             the notification
-            blocks (list): Variation Blocks
-            channels (list, optional): Variation Channels
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
         """
-        url = "%s/%s/draft/variations" % (self.uri, notification_id)
+        url = "%s/%s/draft/locales" % (self.uri, notification_id)
         payload = {
             'blocks': blocks,
             'channels': channels
         }
 
-        resp = self.session.post(url, json=payload)
+        resp = self.session.put(url, json=payload)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
-    def getSubmissionChecks(self, notification_id, submission_id):
+    def put_locale(self, notification_id, locale_id, blocks, channels=None):
+        """
+        Put notification locale
+
+        Args:
+            - notification_id (str): A unique identifier associated with
+            the notification
+            - locale_id (str): A  unique identifier associated with the locale
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
+
+        Raises:
+            - CourierAPIException: Any error returned by the Courier API
+        """
+        url = "%s/%s/locales/%s" % (self.uri, notification_id, locale_id)
+        payload = {
+            'blocks': blocks,
+            'channels': channels
+        }
+
+        resp = self.session.put(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+    def put_draft_locale(self, notification_id, locale_id, blocks,
+                         channels=None):
+        """
+        Put notification draft locale
+
+        Args:
+            - notification_id (str): A unique identifier associated with
+            the notification
+            - locale_id (str): A  unique identifier associated with the locale
+            - blocks (list): Locale Blocks
+            - channels (list, optional): Locale Channels
+
+        Raises:
+            - CourierAPIException: Any error returned by the Courier API
+        """
+        url = "%s/%s/draft/locales/%s" % (self.uri, notification_id, locale_id)
+        payload = {
+            'blocks': blocks,
+            'channels': channels
+        }
+
+        resp = self.session.put(url, json=payload)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+    def put_block_locales(self, notification_id, block_id, block_locales):
+        """
+        Put notification block locales
+
+        Args:
+            - notification_id (str): A unique identifier associated with
+            - the notification
+            - locale_id (str): A  unique identifier associated with the locale
+            - block_locales (dict): Block locales where key is locale_id and
+            value is str or { "parent"?: str, "children"?: str }
+
+        Raises:
+            - CourierAPIException: Any error returned by the Courier API
+        """
+        url = "%s/%s/blocks/%s/locales" % (self.uri, notification_id, block_id)
+
+        resp = self.session.put(url, json=block_locales)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+    def put_draft_block_locales(self, notification_id, block_id,
+                                block_locales):
+        """
+        Put draft notification block locales
+
+        Args:
+            - notification_id (str): A unique identifier associated with
+            - the notification
+            - locale_id (str): A  unique identifier associated with the locale
+            - block_locales (dict): Block locales where key is locale_id and
+            value is str or { "parent"?: str, "children"?: str }
+
+        Raises:
+            - CourierAPIException: Any error returned by the Courier API
+        """
+        url = "%s/%s/draft/blocks/%s/locales" % (
+            self.uri, notification_id, block_id)
+
+        resp = self.session.put(url, json=block_locales)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+    def put_channel_locales(self, notification_id, channel_id,
+                            channel_locales):
+        """
+        Put notification channel locales
+
+        Args:
+            - notification_id (str): A unique identifier associated with
+            - the notification
+            - locale_id (str): A  unique identifier associated with the locale
+            - channel_locales (dict): Channel locales where key is locale_id
+            and value is str
+
+        Raises:
+            - CourierAPIException: Any error returned by the Courier API
+        """
+        url = "%s/%s/channels/%s/locales" % (self.uri,
+                                             notification_id, channel_id)
+
+        resp = self.session.put(url, json=channel_locales)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+    def put_draft_channel_locales(self, notification_id, channel_id,
+                                  channel_locales):
+        """
+        Put draft notification channel locales
+
+        Args:
+            - notification_id (str): A unique identifier associated with
+            - the notification
+            - locale_id (str): A  unique identifier associated with the locale
+            - channel_locales (dict): Channel locales where key is locale_id
+            and value is str
+
+        Raises:
+            - CourierAPIException: Any error returned by the Courier API
+        """
+        url = "%s/%s/draft/channels/%s/locales" % (self.uri,
+                                                   notification_id, channel_id)
+
+        resp = self.session.put(url, json=channel_locales)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+    def get_submission_checks(self, notification_id, submission_id):
         """
         Get the notification submission checks
 
         Args:
-            notification_id (str): A unique identifier associated with
+            - notification_id (str): A unique identifier associated with
             the notification
-            submission_id (str): A unique identifier associated with
+            - submission_id (str): A unique identifier associated with
             the submission
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains notification submission checks
+            - dict: Contains notification submission checks
         """
         url = "%s/%s/%s/checks" % (self.uri, notification_id, submission_id)
 
@@ -157,22 +298,22 @@ class Notifications():
 
         return resp.json()
 
-    def putSubmissionChecks(self, notification_id, submission_id, checks):
+    def put_submission_checks(self, notification_id, submission_id, checks):
         """
         Post the notification submission checks
 
         Args:
-            notification_id (str): A unique identifier associated with
+            - notification_id (str): A unique identifier associated with
             the notification
-            submission_id (str): A unique identifier associated with
+            - submission_id (str): A unique identifier associated with
             the submission
-            checks (list): A list of checks
+            - checks (list): A list of checks
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains notification submission checks
+            - dict: Contains notification submission checks
         """
         url = "%s/%s/%s/checks" % (self.uri, notification_id, submission_id)
 
@@ -189,18 +330,18 @@ class Notifications():
 
         return resp.json()
 
-    def deleteSubmissionChecks(self, notification_id, submission_id):
+    def delete_submission_checks(self, notification_id, submission_id):
         """
         Delete the notification submission checks
 
         Args:
-            notification_id (str): A unique identifier associated with
+            - notification_id (str): A unique identifier associated with
             the notification
-            submission_id (str): A unique identifier associated with
+            - submission_id (str): A unique identifier associated with
             the submission
 
         Raises:
-            CourierAPIException: Any error returned by the Courier API
+            - CourierAPIException: Any error returned by the Courier API
         """
         url = "%s/%s/%s/checks" % (self.uri, notification_id, submission_id)
 
