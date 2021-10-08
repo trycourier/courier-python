@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
-## [v3.0.0] - 2021-08-23
+## [v3.0.0] - 2021-10-07
 
 Adds support for notification locales
 
