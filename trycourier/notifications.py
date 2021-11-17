@@ -183,9 +183,9 @@ class Notifications():
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
-    def put_block_locales(self, notification_id, block_id, block_locales):
+    def post_block_locales(self, notification_id, block_id, block_locales):
         """
-        Put notification block locales
+        Post notification block locales
 
         Args:
             - notification_id (str): A unique identifier associated with
@@ -199,15 +199,15 @@ class Notifications():
         """
         url = "%s/%s/blocks/%s/locales" % (self.uri, notification_id, block_id)
 
-        resp = self.session.put(url, json=block_locales)
+        resp = self.session.post(url, json=block_locales)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
-    def put_draft_block_locales(self, notification_id, block_id,
-                                block_locales):
+    def post_draft_block_locales(self, notification_id,
+                                 block_id, block_locales):
         """
-        Put draft notification block locales
+        Post draft notification block locales
 
         Args:
             - notification_id (str): A unique identifier associated with
@@ -222,15 +222,15 @@ class Notifications():
         url = "%s/%s/draft/blocks/%s/locales" % (
             self.uri, notification_id, block_id)
 
-        resp = self.session.put(url, json=block_locales)
+        resp = self.session.post(url, json=block_locales)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
-    def put_channel_locales(self, notification_id, channel_id,
-                            channel_locales):
+    def post_channel_locales(self, notification_id,
+                             channel_id, channel_locales):
         """
-        Put notification channel locales
+        Post notification channel locales
 
         Args:
             - notification_id (str): A unique identifier associated with
@@ -245,15 +245,15 @@ class Notifications():
         url = "%s/%s/channels/%s/locales" % (self.uri,
                                              notification_id, channel_id)
 
-        resp = self.session.put(url, json=channel_locales)
+        resp = self.session.post(url, json=channel_locales)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
 
-    def put_draft_channel_locales(self, notification_id, channel_id,
-                                  channel_locales):
+    def post_draft_channel_locales(self, notification_id,
+                                   channel_id, channel_locales):
         """
-        Put draft notification channel locales
+        Post draft notification channel locales
 
         Args:
             - notification_id (str): A unique identifier associated with
@@ -268,7 +268,7 @@ class Notifications():
         url = "%s/%s/draft/channels/%s/locales" % (self.uri,
                                                    notification_id, channel_id)
 
-        resp = self.session.put(url, json=channel_locales)
+        resp = self.session.post(url, json=channel_locales)
 
         if resp.status_code >= 400:
             raise CourierAPIException(resp)
