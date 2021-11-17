@@ -5,6 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v4.0.0] - 2021-11-17
+
+Make Notifications API endpoints semantically correct
+
+### Changed
+
+- Notifications API
+  - `client.notifications.put_block_locales` to `client.notifications.post_block_locales`
+  - `client.notifications.put_draft_block_locales` to `client.notifications.post_draft_block_locales`
+  - `client.notifications.put_channel_locales` to `client.notifications.post_channel_locales`
+  - `client.notifications.put_draft_channel_locales` to `client.notifications.post_draft_channel_locales`
+
 ## [v3.0.0] - 2021-10-07
 
 Adds support for notification locales
@@ -163,7 +175,9 @@ Adds support for notification locales
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v2.0.0...HEAD
+[unreleased]: https://github.com/trycourier/courier-python/compare/v4.0.0...HEAD
+[v4.0.0]: https://github.com/trycourier/courier-python/compare/v3.0.0...v4.0.0
+[v3.0.0]: https://github.com/trycourier/courier-python/compare/v2.0.0...v3.0.0
 [v2.0.0]: https://github.com/trycourier/courier-python/compare/v1.9.0...v2.0.0
 [v1.9.0]: https://github.com/trycourier/courier-python/compare/v1.8.0...v1.9.0
 [v1.8.0]: https://github.com/trycourier/courier-python/compare/v1.7.0...v1.8.0

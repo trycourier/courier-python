@@ -106,60 +106,60 @@ def test_success_put_draft_locale():
 
 
 @responses.activate
-def test_success_put_block_locales():
+def test_success_post_block_locales():
     responses.add(
-        responses.PUT,
+        responses.POST,
         'https://api.courier.com/notifications/my-notification/blocks/my-block/locales',
         status=200,
         content_type='application/json'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.notifications.put_block_locales(
+    r = c.notifications.post_block_locales(
         'my-notification', 'my-block', [])
 
     assert len(responses.calls) == 1
 
 
 @responses.activate
-def test_success_put_draft_block_locales():
+def test_success_post_draft_block_locales():
     responses.add(
-        responses.PUT,
+        responses.POST,
         'https://api.courier.com/notifications/my-notification/draft/blocks/my-block/locales',
         status=200,
         content_type='application/json'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.notifications.put_draft_block_locales(
+    r = c.notifications.post_draft_block_locales(
         'my-notification', 'my-block', [])
 
     assert len(responses.calls) == 1
 
 
 @responses.activate
-def test_success_put_channel_locales():
+def test_success_post_channel_locales():
     responses.add(
-        responses.PUT,
+        responses.POST,
         'https://api.courier.com/notifications/my-notification/channels/my-channel/locales',
         status=200,
         content_type='application/json'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.notifications.put_channel_locales(
+    r = c.notifications.post_channel_locales(
         'my-notification', 'my-channel', [])
 
     assert len(responses.calls) == 1
 
 
 @responses.activate
-def test_success_put_draft_channel_locales():
+def test_success_post_draft_channel_locales():
     responses.add(
-        responses.PUT,
+        responses.POST,
         'https://api.courier.com/notifications/my-notification/draft/channels/my-channel/locales',
         status=200,
         content_type='application/json'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.notifications.put_draft_channel_locales(
+    r = c.notifications.post_draft_channel_locales(
         'my-notification', 'my-channel', [])
 
     assert len(responses.calls) == 1
