@@ -1,6 +1,7 @@
 from os import environ
 
 from .automations import Automations
+from .bulk import Bulk
 from .exceptions import CourierAPIException
 from .session import CourierAPISession
 from .lists import Lists
@@ -8,7 +9,7 @@ from .messages import Messages
 from .notifications import Notifications
 from .profiles import Profiles
 
-__version__ = '4.0.0'
+__version__ = '4.1.0'
 
 
 class Courier(object):
@@ -56,6 +57,7 @@ class Courier(object):
             self.session.init_basic_auth(username, password)
 
         self.automations = Automations(self.base_url, self.session)
+        self.bulk = Bulk(self.base_url, self.session)
         self.lists = Lists(self.base_url, self.session)
         self.messages = Messages(self.base_url, self.session)
         self.notifications = Notifications(self.base_url, self.session)
