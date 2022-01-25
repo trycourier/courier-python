@@ -124,6 +124,7 @@ resp = client.profiles.add(
   }
 )
 
+"""
 Example: replace or create a recipient's profile
 """
 resp = client.profiles.replace(
@@ -195,9 +196,9 @@ Example: fetch the statuses of messages you've previously sent.
 resp = client.messages.list(
   cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
   event="your-event-id", # optional
-  list="your-list-id, #optional
-  message_id="your-message-id" #optional
-  notification=["message-status-1", "message-status-2",...] #optional
+  list="your-list-id", #optional
+  message_id="your-message-id", #optional
+  notification=["message-status-1", "message-status-2",...], #optional
   recipient="recipient-id" # optional
 )
 print(resp)
@@ -379,6 +380,51 @@ resp = client.automations.invoke_template(
 )
 print(resp['runId'])
 
+"""
+Bulk Processing:
+"""
+
+"""
+Example: Create a bulk processing job
+"""
+resp = client.bulk.create_job(
+    message={'event': 'foo'},
+    idempotency_key='1234ABCD', # optional
+    idempotency_expiration='expiration-date' # optional
+)
+print(resp['jobId'])
+
+"""
+Example: Ingest users into a bulk processing job
+"""
+resp = client.bulk.ingest_users(
+    job_id='12345',
+    users=[{ 'profile': { 'email': 'foo@bar.com' } }],
+    idempotency_key='1234ABCD', # optional
+    idempotency_expiration='expiration-date' # optional
+)
+print(resp)
+
+"""
+Example: Run a bulk processing job
+"""
+client.bulk.run_job(
+    job_id='12345',
+    idempotency_key='1234ABCD', # optional
+    idempotency_expiration='expiration-date' # optional
+)
+
+"""
+Example: Get bulk processing job
+"""
+resp = client.bulk.get_job('12345')
+print(resp)
+
+"""
+Example: Get bulk processing job user details
+"""
+resp = client.bulk.get_job_users('12345', cursor='abc') # cursor is optional
+print(resp)
 ```
 
 ### Idempotency
