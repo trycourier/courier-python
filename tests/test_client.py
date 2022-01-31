@@ -145,6 +145,67 @@ def test_fail_send():
             recipient='4321'
         )
 
+@responses.activate
+def test_success_send_message():
+    responses.add(
+        responses.POST,
+        'https://api.courier.com/send',
+        status=202,
+        content_type='application/json',
+        body='{"status": "accepted"}'
+    )
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.send_message(
+        message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
+    )
+    request_params = json.loads(
+        responses.calls[0].request.body.decode('utf-8'))
+
+    assert r == {"status": "accepted"}
+    assert request_params["message"] == {'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
+
+
+@responses.activate
+def test_success_send_message_idempotent():
+    responses.add(
+        responses.POST,
+        'https://api.courier.com/send',
+        status=200,
+        content_type='application/json',
+        body='{"status": "accepted"}'
+    )
+    c = Courier(auth_token='123456789ABCDF')
+    expiration_date = (datetime.now()+timedelta(days=7)).isoformat()
+    r = c.send_message(
+        message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}},
+        idempotency_key='1234ABCD',
+        idempotency_expiration=expiration_date
+    )
+
+    assert responses.calls[0].request.headers.get(
+        'Idempotency-Key') == '1234ABCD'
+    assert responses.calls[0].request.headers.get(
+        'x-idempotency-expiration') == expiration_date
+    assert r == {"status": "accepted"}
+
+
+@responses.activate
+def test_fail_send_message():
+    responses.add(
+        responses.POST,
+        'https://api.courier.com/send',
+        status=400,
+        content_type='application/json',
+        body='{"message": "An error occured"}'
+    )
+
+    c = Courier(auth_token='123456789ABCDF')
+
+    with pytest.raises(CourierAPIException):
+        c.send_message(
+            message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
+        )
+
 
 @responses.activate
 def test_success_get_profile():
@@ -255,8 +316,8 @@ def test_success_merge_profile_idempotent():
     c = Courier(auth_token='123456789ABCDF')
     expiration_date = (datetime.now()+timedelta(days=7)).isoformat()
     r = c.merge_profile(
-        recipient_id="1234", 
-        profile=profile, 
+        recipient_id="1234",
+        profile=profile,
         idempotency_key="1234ABCD",
         idempotency_expiration=expiration_date
     )

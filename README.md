@@ -90,6 +90,13 @@ resp = client.send(
 print(resp['messageId'])
 
 """
+Example: send message using a message object that unlocks enhanced power features
+"""
+resp = client.send_message(
+    message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
+)
+print(resp['requestId'])
+"""
 Example: send a message to a list
 """
 resp = client.lists.send(

@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v4.2.0] - 2022-01-31
+
+Adds support for enhanced features in Send API
+
 ## [v4.1.0] - 2022-01-25
 
 Adds support for bulk processing API
@@ -179,7 +183,8 @@ Adds support for notification locales
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v4.1.0...HEAD
+[unreleased]: https://github.com/trycourier/courier-python/compare/v4.2.0...HEAD
+[v4.2.0]: https://github.com/trycourier/courier-python/compare/v4.1.0...v4.2.0
 [v4.1.0]: https://github.com/trycourier/courier-python/compare/v4.0.0...v4.1.0
 [v4.0.0]: https://github.com/trycourier/courier-python/compare/v3.0.0...v4.0.0
 [v3.0.0]: https://github.com/trycourier/courier-python/compare/v2.0.0...v3.0.0
