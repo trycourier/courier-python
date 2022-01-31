@@ -9,7 +9,7 @@ from .messages import Messages
 from .notifications import Notifications
 from .profiles import Profiles
 
-__version__ = '4.1.0'
+__version__ = '4.2.0'
 
 
 class Courier(object):
@@ -123,6 +123,48 @@ class Courier(object):
 
         if override:
             payload['override'] = override
+
+        if idempotency_key:
+            headers['Idempotency-Key'] = idempotency_key
+
+        if idempotency_expiration:
+            headers['x-idempotency-expiration'] = idempotency_expiration
+
+        resp = self.session.post(url, json=payload, headers=headers)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
+
+    def send_message(self,
+                     message,
+                     idempotency_key=None,
+                     idempotency_expiration=None):
+        """
+        Send a message based on its configuration
+
+        Args:
+            message (dict): An object that the message you want to send.
+            idempotency_key (str, optional): A unique identifier used to ensure
+            idempotency of the the request. Passed in the Idempotency-Key HTTP
+            header. Defaults to None.
+            idempotency_expiration (str, optional): A unique identifier used to
+            ensure idempotency of the the request. Passed in the
+            x-idempotency-expiration HTTP header. Defaults to None.
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains a requestId
+        """
+
+        url = "%s/%s" % (self.base_url, "send")
+        headers = {}
+        payload = {
+            'message': message
+        }
 
         if idempotency_key:
             headers['Idempotency-Key'] = idempotency_key
