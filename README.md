@@ -97,6 +97,26 @@ resp = client.send_message(
 )
 print(resp['requestId'])
 """
+
+Example: send a message to a list, pattern and user
+"""
+resp = client.send_message(
+    message={'template': 'my-template', 'to': [
+      {
+        list_pattern: "<PATTERN>", // e.g. example.list.*
+      },
+      {
+        list_id: "<LIST_ID>", // e.g. your Courier List Id
+      },
+      {
+        email: "test@email.com"
+      }
+    ]
+  }
+)
+print(resp['requestId'])
+"""
+
 Example: send a message to a list
 """
 resp = client.lists.send(
