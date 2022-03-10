@@ -90,7 +90,7 @@ resp = client.send(
     data={
       "world": "Python!"
     }
-
+)
 print(resp['messageId'])
 ```
 
