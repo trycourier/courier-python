@@ -94,7 +94,6 @@ resp = client.send(
 print(resp['messageId'])
 ```
 
-
 **With API V2**
 
 ```python
@@ -205,7 +204,8 @@ resp = client.send_message(
       {
         "email": "test@email.com"
       }
-    ]
+    ]}
+)
 print(resp['messageId'])
 
 """
