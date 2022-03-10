@@ -159,7 +159,7 @@ resp = client.send(
     data={}, # optional
     preferences={}, # optional
     override={} # optional
-)   
+)
 print(resp['messageId'])
 
 """
