@@ -68,7 +68,7 @@ resp = client.send_message(
   }
 )
 
-print(resp['messageId'])
+print(resp['requestId'])
 ```
 
 ### Using Basic Auth
@@ -126,7 +126,7 @@ resp = client.send_message(
   }
 )
 
-print(resp['messageId'])
+print(resp['requestId'])
 ```
 
 ### Timeouts
@@ -188,7 +188,7 @@ resp = client.send_message(
     }
   }
 )
-print(resp['messageId'])
+print(resp['requestId'])
 
 """
 Example: send a message to a list, pattern and user  with API V1
@@ -205,7 +205,7 @@ resp = client.send_message(
         "email": "test@email.com"
       }
     ]
-print(resp['requestId'])
+print(resp['messageId'])
 
 """
 Example: send a message to a list, pattern and user  with API V2
@@ -255,7 +255,7 @@ resp = client.send_message(
     },
   }
 )
-print(resp['messageId'])
+print(resp['requestId'])
 
 """
 Example: send a message to a list pattern with API V1
@@ -284,7 +284,7 @@ resp = client.send_message(
     },
   }
 )
-print(resp['messageId'])
+print(resp['requestId'])
 
 """
 Example: create a recipient's profile
