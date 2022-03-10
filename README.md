@@ -16,6 +16,8 @@ Python 3.5 or later is required.
 
 ### Using Token Auth
 
+**With API V1**
+
 ```python
 from trycourier import Courier
 
@@ -35,7 +37,43 @@ resp = client.send(
 print(resp['messageId'])
 ```
 
+**With API V2**
+
+```python
+from trycourier import Courier
+
+client = Courier(auth_token="your-auth-token") #or set via COURIER_AUTH_TOKEN env var
+
+resp = client.send_message(
+  message={
+    "to": {
+      "email": "example@example.com",
+    },
+    "content": {
+      "title": "Welcome!",
+      "body": "Thanks for signing up, {{name}}.",
+    },
+    "data": {
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
+    "channels": {
+      "email": {
+        "providers": ["gmail"]
+      }
+    }
+  }
+)
+
+print(resp['requestId'])
+```
+
 ### Using Basic Auth
+
+**With API V1**
 
 ```python
 from trycourier import Courier
@@ -54,6 +92,40 @@ resp = client.send(
     }
 )
 print(resp['messageId'])
+```
+
+**With API V2**
+
+```python
+from trycourier import Courier
+
+client = Courier(username="your-username", password="your-password")
+
+resp = client.send_message(
+  message={
+    "to": {
+      "email": "example@example.com",
+    },
+    "content": {
+      "title": "Welcome!",
+      "body": "Thanks for signing up, {{name}}.",
+    },
+    "data": {
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
+    "channels": {
+      "email": {
+        "providers": ["gmail"]
+      }
+    }
+  }
+)
+
+print(resp['requestId'])
 ```
 
 ### Timeouts
@@ -76,7 +148,7 @@ from trycourier import Courier
 client = Courier(auth_token="your-auth-token")
 
 """
-Example: send a message to a recipient
+Example: send a message to a recipient with API V1
 """
 resp = client.send(
     event="your-event-id",
@@ -90,15 +162,36 @@ resp = client.send(
 print(resp['messageId'])
 
 """
-Example: send message using a message object that unlocks enhanced power features
+Example: send a message to a recipient with API V2
 """
 resp = client.send_message(
-    message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
+  message={
+    "to": {
+      "email": "example@example.com",
+      "user_id": "user-12345",
+    },
+    "content": {
+      "title": "Welcome!",
+      "body": "Thanks for signing up, {{name}}.",
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
+    "channels": {
+      "email": {
+        "providers": ["gmail"]
+      }
+    }
+  }
 )
 print(resp['requestId'])
-"""
 
-Example: send a message to a list, pattern and user
+"""
+Example: send a message to a list, pattern and user  with API V1
 """
 resp = client.send_message(
     message={'template': 'my-template', 'to': [
@@ -111,13 +204,34 @@ resp = client.send_message(
       {
         "email": "test@email.com"
       }
-    ]
+    ]}
+)
+print(resp['messageId'])
+
+"""
+Example: send a message to a list, pattern and user  with API V2
+"""
+resp = client.send_message(
+  message={
+    "template": "<TEMPLATE_OR_EVENT_ID>",
+    "to": {
+      "list_pattern": "<PATTERN>", # e.g. example.list.*
+      "list_id": "<LIST_ID>", # e.g. your Courier List Id
+      "email": "example@example.com",
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
   }
 )
 print(resp['requestId'])
-"""
 
-Example: send a message to a list
+"""
+Example: send a message to a list with API V1
 """
 resp = client.lists.send(
   event="your-event-id",
@@ -129,7 +243,23 @@ resp = client.lists.send(
 print(resp['messageId'])
 
 """
-Example: send a message to a list pattern
+Example: send a message to a list with API V2
+"""
+resp = client.send_message(
+  message={
+    "template": "<TEMPLATE_OR_EVENT_ID>",
+    "to": {
+      "list": "<LIST_ID>",  # e.g. your Courier List Id
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+  }
+)
+print(resp['requestId'])
+
+"""
+Example: send a message to a list pattern with API V1
 """
 resp = client.lists.send(
   event="your-event-id",
@@ -139,6 +269,23 @@ resp = client.lists.send(
   override={} # optional
 )
 print(resp['messageId'])
+
+
+"""
+Example: send a message to a list pattern with API V2
+"""
+resp = client.send_message(
+  message={
+    "template": "<TEMPLATE_OR_EVENT_ID>",
+    "to": {
+      "list_pattern": "<PATTERN>", # e.g. example.list.*
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+  }
+)
+print(resp['requestId'])
 
 """
 Example: create a recipient's profile
