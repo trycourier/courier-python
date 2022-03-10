@@ -21,17 +21,30 @@ from trycourier import Courier
 
 client = Courier(auth_token="your-auth-token") #or set via COURIER_AUTH_TOKEN env var
 
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={
-        "email": "example@example.com",
-        "phone_number": "555-867-5309"
+resp = client.send_message(
+  message={
+    "to": {
+      "email": "example@example.com",
     },
-    data={
-      "world": "Python!"
-    }
+    "content": {
+      "title": "Welcome!",
+      "body": "Thanks for signing up, {{name}}.",
+    },
+    "data": {
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
+    "channels": {
+			"email": {
+				"providers": ["gmail"]
+			}
+		}
+  }
 )
+
 print(resp['messageId'])
 ```
 
@@ -42,17 +55,30 @@ from trycourier import Courier
 
 client = Courier(username="your-username", password="your-password")
 
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={
-        "email": "example@example.com",
-        "phone_number": "555-867-5309"
+resp = client.send_message(
+  message={
+    "to": {
+      "email": "example@example.com",
     },
-    data={
-      "world": "Python!"
-    }
+    "content": {
+      "title": "Welcome!",
+      "body": "Thanks for signing up, {{name}}.",
+    },
+    "data": {
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
+    "channels": {
+			"email": {
+				"providers": ["gmail"]
+			}
+		}
+  }
 )
+
 print(resp['messageId'])
 ```
 
@@ -78,40 +104,50 @@ client = Courier(auth_token="your-auth-token")
 """
 Example: send a message to a recipient
 """
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={}, # optional
-    brand="your-brand-id", # optional
-    data={}, # optional
-    preferences={}, # optional
-    override={} # optional
+resp = client.send_message(
+  message={
+    "to": {
+      "email": "shreya@courier.com",
+      "user_id": "user-12345",
+    },
+    "content": {
+      "title": "Welcome!",
+      "body": "Thanks for signing up, {{name}}.",
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
+    "channels": { # optional
+			"email": {
+				"providers": ["gmail"]
+			}
+		}
+  }
 )
 print(resp['messageId'])
 
 """
-Example: send message using a message object that unlocks enhanced power features
-"""
-resp = client.send_message(
-    message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
-)
-print(resp['requestId'])
-"""
-
 Example: send a message to a list, pattern and user
 """
 resp = client.send_message(
-    message={'template': 'my-template', 'to': [
-      {
-        "list_pattern": "<PATTERN>", #e.g. example.list.*
-      },
-      {
-        "list_id": "<LIST_ID>", #e.g. your Courier List Id
-      },
-      {
-        "email": "test@email.com"
-      }
-    ]
+  message={
+    "template": "<TEMPLATE_OR_EVENT_ID>",
+    "to": {
+      "list_pattern": "<PATTERN>", # e.g. example.list.*
+      "list_id": "<LIST_ID>", # e.g. your Courier List Id
+      "email": "example@example.com",
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+    "routing": {
+      "method": "single",
+      "channels": ["email"],
+    },
   }
 )
 print(resp['requestId'])
@@ -119,24 +155,32 @@ print(resp['requestId'])
 
 Example: send a message to a list
 """
-resp = client.lists.send(
-  event="your-event-id",
-  list="your.list.id",
-  brand="your-brand-id", # optional
-  data={}, # optional
-  override={} # optional
+resp = client.send_message(
+  message={
+    "template": "<TEMPLATE_OR_EVENT_ID>",
+    "to": {
+      "list": "<LIST_ID>",  # e.g. your Courier List Id
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+  }
 )
 print(resp['messageId'])
 
 """
 Example: send a message to a list pattern
 """
-resp = client.lists.send(
-  event="your-event-id",
-  pattern="your.list.*",
-  brand="your-brand-id", # optional
-  data={}, # optional
-  override={} # optional
+resp = client.send_message(
+  message={
+    "template": "<TEMPLATE_OR_EVENT_ID>",
+    "to": {
+      "list_pattern": "<PATTERN>", # e.g. example.list.*
+    },
+    "data": { # optional
+      "name": "Peter Parker",
+    },
+  }
 )
 print(resp['messageId'])
 
