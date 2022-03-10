@@ -16,6 +16,29 @@ Python 3.5 or later is required.
 
 ### Using Token Auth
 
+**With API V1**
+
+```python
+from trycourier import Courier
+
+client = Courier(auth_token="your-auth-token") #or set via COURIER_AUTH_TOKEN env var
+
+resp = client.send(
+    event="your-event-id",
+    recipient="your-recipient-id",
+    profile={
+        "email": "example@example.com",
+        "phone_number": "555-867-5309"
+    },
+    data={
+      "world": "Python!"
+    }
+
+print(resp['messageId'])
+```
+
+**With API V2**
+
 ```python
 from trycourier import Courier
 
@@ -38,10 +61,10 @@ resp = client.send_message(
       "channels": ["email"],
     },
     "channels": {
-			"email": {
-				"providers": ["gmail"]
-			}
-		}
+      "email": {
+        "providers": ["gmail"]
+      }
+    }
   }
 )
 
@@ -49,6 +72,30 @@ print(resp['messageId'])
 ```
 
 ### Using Basic Auth
+
+**With API V1**
+
+```python
+from trycourier import Courier
+
+client = Courier(username="your-username", password="your-password")
+
+resp = client.send(
+    event="your-event-id",
+    recipient="your-recipient-id",
+    profile={
+        "email": "example@example.com",
+        "phone_number": "555-867-5309"
+    },
+    data={
+      "world": "Python!"
+    }
+
+print(resp['messageId'])
+```
+
+
+**With API V2**
 
 ```python
 from trycourier import Courier
@@ -72,10 +119,10 @@ resp = client.send_message(
       "channels": ["email"],
     },
     "channels": {
-			"email": {
-				"providers": ["gmail"]
-			}
-		}
+      "email": {
+        "providers": ["gmail"]
+      }
+    }
   }
 )
 
@@ -102,7 +149,20 @@ from trycourier import Courier
 client = Courier(auth_token="your-auth-token")
 
 """
-Example: send a message to a recipient
+Example: send a message to a recipient with API V1
+"""
+resp = client.send(
+    event="your-event-id",
+    recipient="your-recipient-id",
+    profile={}, # optional
+    brand="your-brand-id", # optional
+    data={}, # optional
+    preferences={}, # optional
+    override={} # optional
+print(resp['messageId'])
+
+"""
+Example: send a message to a recipient with API V2
 """
 resp = client.send_message(
   message={
@@ -121,17 +181,34 @@ resp = client.send_message(
       "method": "single",
       "channels": ["email"],
     },
-    "channels": { # optional
-			"email": {
-				"providers": ["gmail"]
-			}
-		}
+    "channels": {
+      "email": {
+        "providers": ["gmail"]
+      }
+    }
   }
 )
 print(resp['messageId'])
 
 """
-Example: send a message to a list, pattern and user
+Example: send a message to a list, pattern and user  with API V1
+"""
+resp = client.send_message(
+    message={'template': 'my-template', 'to': [
+      {
+        "list_pattern": "<PATTERN>", #e.g. example.list.*
+      },
+      {
+        "list_id": "<LIST_ID>", #e.g. your Courier List Id
+      },
+      {
+        "email": "test@email.com"
+      }
+    ]
+print(resp['requestId'])
+
+"""
+Example: send a message to a list, pattern and user  with API V2
 """
 resp = client.send_message(
   message={
@@ -151,9 +228,21 @@ resp = client.send_message(
   }
 )
 print(resp['requestId'])
-"""
 
-Example: send a message to a list
+"""
+Example: send a message to a list with API V1
+"""
+resp = client.lists.send(
+  event="your-event-id",
+  list="your.list.id",
+  brand="your-brand-id", # optional
+  data={}, # optional
+  override={} # optional
+)
+print(resp['messageId'])
+
+"""
+Example: send a message to a list with API V2
 """
 resp = client.send_message(
   message={
@@ -169,7 +258,20 @@ resp = client.send_message(
 print(resp['messageId'])
 
 """
-Example: send a message to a list pattern
+Example: send a message to a list pattern with API V1
+"""
+resp = client.lists.send(
+  event="your-event-id",
+  pattern="your.list.*",
+  brand="your-brand-id", # optional
+  data={}, # optional
+  override={} # optional
+)
+print(resp['messageId'])
+
+
+"""
+Example: send a message to a list pattern with API V2
 """
 resp = client.send_message(
   message={
