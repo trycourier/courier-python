@@ -107,7 +107,7 @@ Example: send a message to a recipient
 resp = client.send_message(
   message={
     "to": {
-      "email": "shreya@courier.com",
+      "email": "example@example.com",
       "user_id": "user-12345",
     },
     "content": {
