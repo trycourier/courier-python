@@ -98,7 +98,26 @@ resp = client.send_message(
 print(resp['requestId'])
 """
 
-Example: send UTM metadata with message object
+Example: send UTM metadata with message object - V1
+"""
+resp = client.send_message(
+    message={
+        'template': 'my-template', 
+        'to': [
+            {
+                "email": "foo@bar.com"
+            }
+        ], 
+        'metadata': {
+            'utm': {
+                'source':'python'
+            }
+        }
+    }
+)
+"""
+
+Example: send UTM metadata with message object - V2
 """
 resp = client.send_message(
     message={
