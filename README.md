@@ -98,6 +98,43 @@ resp = client.send_message(
 print(resp['requestId'])
 """
 
+Example: send UTM metadata with message object - V2
+"""
+resp = client.send_message(
+    message={
+        'to': [
+            {
+                "email": "foo@bar.com"
+            }
+        ],
+        'content': {
+            'version': '2020-01-01',
+            'elements': [
+                {
+                    'type': 'action',
+                    'content': 'ELEMENTAL',
+                    'href': 'courier.com',
+                    'style': 'button',
+                    'align': 'center'
+                }
+            ]
+        },
+        'routing': {
+            'method': 'single',
+            'channels': [
+                'email'
+            ]
+        },
+        'metadata': {
+            'utm': {
+                'source': 'python'
+            }
+        }
+    }
+)
+print(resp['requestId'])
+"""
+
 Example: send a message to a list, pattern and user
 """
 resp = client.send_message(
