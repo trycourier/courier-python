@@ -449,7 +449,7 @@ Bulk Processing:
 """
 
 """
-Example: Create a bulk processing job
+Example: Create a bulk processing job (API v1 semantics)
 """
 resp = client.bulk.create_job(
     message={'event': 'foo'},
@@ -459,11 +459,32 @@ resp = client.bulk.create_job(
 print(resp['jobId'])
 
 """
-Example: Ingest users into a bulk processing job
+Example: Create a bulk processing job (API v2 semantics)
+"""
+resp = client.bulk.create_job(
+    message={'message': { 'template': 'RR4NDQ7NZ24A8TKPWVBEDGE15E9A' }},
+    idempotency_key='1234ABCD', # optional
+    idempotency_expiration='expiration-date' # optional
+)
+print(resp['jobId'])
+
+"""
+Example: Ingest users into a bulk processing job (API v1 semantics)
 """
 resp = client.bulk.ingest_users(
     job_id='12345',
     users=[{ 'profile': { 'email': 'foo@bar.com' } }],
+    idempotency_key='1234ABCD', # optional
+    idempotency_expiration='expiration-date' # optional
+)
+print(resp)
+
+"""
+Example: Ingest users into a bulk processing job (API v2 semantics)
+"""
+resp = client.bulk.ingest_users(
+    job_id='12345',
+    users=[{ 'to': { 'email': 'foo@bar.com' } }],
     idempotency_key='1234ABCD', # optional
     idempotency_expiration='expiration-date' # optional
 )
