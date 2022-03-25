@@ -12,7 +12,7 @@ class Audiences():
     def uri(self):
         return "%s/%s" % (self.base_url, self.key)
 
-    def put_audience(self, audience):
+    def put_audience(self, audience_id, audience):
         """
         Create a new Audiences messaging job
 
@@ -24,7 +24,7 @@ class Audiences():
         Returns:
             dict: Contains a audience definition
         """
-        url = "%s/%s" % (self.uri, audience['audience_id'])
+        url = "%s/%s" % (self.uri, audience_id)
         payload = {
             'name': audience.get('name'),
             'description': audience.get('description'),

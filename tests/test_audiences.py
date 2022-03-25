@@ -19,8 +19,8 @@ def test_success_put_audience():
     )
     c = Courier(auth_token='123456789ABCDF')
     r = c.audiences.put_audience(
+        'software-engineers-from-sf',
         audience={
-            'audience_id': 'software-engineers-from-sf',
             'name': '',
             'description': '',
             'filter': {
@@ -61,8 +61,8 @@ def test_fail_put_audience():
 
     with pytest.raises(CourierAPIException):
         c.audiences.put_audience(
+            'software-engineers-from-sf',
             audience={
-                'audience_id': 'software-engineers-from-sf',
                 'name': '',
                 'description': '',
                 'filter': {
