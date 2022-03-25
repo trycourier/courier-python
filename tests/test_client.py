@@ -166,6 +166,25 @@ def test_success_send_message():
 
 
 @responses.activate
+def test_success_send_message_with_timeout():
+    responses.add(
+        responses.POST,
+        'https://api.courier.com/send',
+        status=202,
+        content_type='application/json',
+        body='{"status": "accepted"}'
+    )
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.send_message(
+        message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}, 'timeout': {'message':'86400000'}}
+    )
+    request_params = json.loads(
+        responses.calls[0].request.body.decode('utf-8'))
+
+    assert r == {"status": "accepted"}
+    assert request_params["message"] == {'template': 'my-template', 'to': {'email': 'foo@bar.com'}, 'timeout': {'message':'86400000'}}
+
+@responses.activate
 def test_success_send_message_idempotent():
     responses.add(
         responses.POST,
