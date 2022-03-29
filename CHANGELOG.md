@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v4.3.0] - 2022-03-24
+
+Adds support for Audiences
+
 ## [v4.2.0] - 2022-01-31
 
 Adds support for enhanced features in Send API
