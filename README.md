@@ -170,6 +170,21 @@ resp = client.send_message(
 print(resp['requestId'])
 """
 
+Example: set tags with message object - V2
+"""
+resp = client.send_message(
+    message={
+        "to": {
+          "email": "foo@bar.com",
+        },
+        "template": "my-template",
+        "metadata": {
+          "tags": ["tag-1", "tag-2"]
+        }
+    })
+print(resp['requestId'])
+"""
+
 Example: send a message to a list, pattern and user
 """
 resp = client.send_message(
