@@ -135,6 +135,62 @@ resp = client.send_message(
 print(resp['requestId'])
 """
 
+Example: send granular UTM metadata with message object
+"""
+resp = client.send_message(
+    message={
+        'to': [
+            {
+                "email": "foo@bar.com"
+            }
+        ],
+        'content': {
+            'version': '2020-01-01',
+            'elements': [
+                {
+                    'type': 'action',
+                    'content': 'ELEMENTAL',
+                    'href': 'courier.com',
+                    'style': 'button',
+                    'align': 'center'
+                }
+            ]
+        },
+        'routing': {
+            'method': 'single',
+            'channels': [
+                'email'
+            ]
+        },
+        'metadata': {
+            'utm': {
+                'source': 'python'
+            }
+        },
+        'channels': {
+          'email': {
+            'metadata': {
+              'utm': {
+                'medium': 'email'
+              }
+            },
+            'providers':['sendgrid','sns']
+          }  
+        },
+        'providers': {
+          'sendgrid':{
+            'metadata': {
+                'utm': {
+                  'medium': 'email'
+                }
+              }
+            }
+        }
+    }
+)
+print(resp['requestId'])
+"""
+
 Example: set trace_id with message object - V2
 """
 resp = client.send_message(
