@@ -14,12 +14,14 @@ def test_init_base_url():
 
     assert c.base_url == 'http://someurl'
 
+
 def test_init_base_url_env():
     environ['COURIER_BASE_URL'] = 'http://someurl'
     c = Courier(auth_token='123456789ABCDF')
 
     environ['COURIER_BASE_URL'] = 'https://api.courier.com'
     assert c.base_url == 'http://someurl'
+
 
 def test_iniit_default_base_url():
     environ.pop('COURIER_BASE_URL')
@@ -28,10 +30,12 @@ def test_iniit_default_base_url():
     environ['COURIER_BASE_URL'] = 'https://api.courier.com'
     assert c.base_url == 'https://api.courier.com'
 
+
 def test_init_token_auth():
     c = Courier(auth_token='123456789ABCDF')
 
     assert 'Authorization' in c.session.headers
+
 
 def test_init_token_auth_env():
     environ['COURIER_AUTH_TOKEN'] = '123456789ABCDF'
@@ -39,12 +43,14 @@ def test_init_token_auth_env():
     c = Courier()
     assert 'Authorization' in c.session.headers
 
+
 def test_init_basic_auth():
     environ['COURIER_AUTH_TOKEN'] = "abcd"
     environ.pop('COURIER_AUTH_TOKEN')
     c = Courier(username='user', password='pass')
 
     assert 'Authorization' in c.session.headers
+
 
 @responses.activate
 def test_init_basic_auth_env():
@@ -145,6 +151,7 @@ def test_fail_send():
             recipient='4321'
         )
 
+
 @responses.activate
 def test_success_send_message():
     responses.add(
@@ -162,7 +169,8 @@ def test_success_send_message():
         responses.calls[0].request.body.decode('utf-8'))
 
     assert r == {"status": "accepted"}
-    assert request_params["message"] == {'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
+    assert request_params["message"] == {
+        'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
 
 
 @responses.activate
@@ -176,13 +184,16 @@ def test_success_send_message_with_timeout():
     )
     c = Courier(auth_token='123456789ABCDF')
     r = c.send_message(
-        message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}, 'timeout': {'message':'86400000'}}
+        message={'template': 'my-template', 'to': {'email': 'foo@bar.com'},
+                 'timeout': {'message': '86400000'}}
     )
     request_params = json.loads(
         responses.calls[0].request.body.decode('utf-8'))
 
     assert r == {"status": "accepted"}
-    assert request_params["message"] == {'template': 'my-template', 'to': {'email': 'foo@bar.com'}, 'timeout': {'message':'86400000'}}
+    assert request_params["message"] == {
+        'template': 'my-template', 'to': {'email': 'foo@bar.com'}, 'timeout': {'message': '86400000'}}
+
 
 @responses.activate
 def test_success_send_message_idempotent():
@@ -206,6 +217,104 @@ def test_success_send_message_idempotent():
     assert responses.calls[0].request.headers.get(
         'x-idempotency-expiration') == expiration_date
     assert r == {"status": "accepted"}
+
+
+@responses.activate
+def test_success_send_message_with_metadata():
+    responses.add(
+        responses.POST,
+        'https://api.courier.com/send',
+        status=202,
+        content_type='application/json',
+        body='{"status": "accepted"}'
+    )
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.send_message(
+        message={'template': 'my-template', 'to': {'email': 'foo@bar.com'},
+                 'metadata': {'utm': {'source': 'python'}}}
+    )
+    request_params = json.loads(
+        responses.calls[0].request.body.decode('utf-8'))
+
+    assert r == {"status": "accepted"}
+    assert request_params["message"] == {'template': 'my-template', 'to': {
+        'email': 'foo@bar.com'}, 'metadata': {'utm': {'source': 'python'}}}
+
+
+@responses.activate
+def test_success_send_message_with_granular_metadata():
+    responses.add(
+        responses.POST,
+        'https://api.courier.com/send',
+        status=202,
+        content_type='application/json',
+        body='{"requestId": "1-sdksdiwe-sdm3id9wojdksdlkssdsdfijkkd"}'
+    )
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.send_message(
+        message={
+            'template': 'my-template',
+            'to': {
+                'email': 'foo@bar.com'
+            },
+            'metadata': {
+                'utm': {
+                    'source': 'python'
+                }
+            },
+            'channels': {
+                'email': {
+                    'metadata': {
+                        'utm': {
+                            'medium': 'email'
+                        }
+                    }
+                }
+            },
+            'providers': {
+                'sendgrid': {
+                    'metadata': {
+                        'utm': {
+                            'campaign': 'sendgrid'
+                        }
+                    }
+                }
+            }
+        }
+    )
+    request_params = json.loads(
+        responses.calls[0].request.body.decode('utf-8'))
+
+    assert r == {"requestId": "1-sdksdiwe-sdm3id9wojdksdlkssdsdfijkkd"}
+    assert request_params["message"] == {
+        'template': 'my-template',
+        'to': {
+            'email': 'foo@bar.com'
+        },
+        'metadata': {
+            'utm': {
+                'source': 'python'
+            }
+        },
+        'channels': {
+            'email': {
+                'metadata': {
+                    'utm': {
+                        'medium': 'email'
+                    }
+                }
+            }
+        },
+        'providers': {
+            'sendgrid': {
+                'metadata': {
+                    'utm': {
+                        'campaign': 'sendgrid'
+                    }
+                }
+            }
+        }
+    }
 
 
 @responses.activate
