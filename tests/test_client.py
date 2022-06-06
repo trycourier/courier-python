@@ -185,14 +185,14 @@ def test_success_send_message_with_timeout():
     c = Courier(auth_token='123456789ABCDF')
     r = c.send_message(
         message={'template': 'my-template', 'to': {'email': 'foo@bar.com'},
-                 'timeout': {'message': '86400000'}}
+                 'timeout': {'message': 86400000, 'channel': {'email': 30000}, 'provider': {'sendgrid': 0}}}
     )
     request_params = json.loads(
         responses.calls[0].request.body.decode('utf-8'))
 
     assert r == {"status": "accepted"}
     assert request_params["message"] == {
-        'template': 'my-template', 'to': {'email': 'foo@bar.com'}, 'timeout': {'message': '86400000'}}
+        'template': 'my-template', 'to': {'email': 'foo@bar.com'}, 'timeout': {'message': 86400000, 'channel': {'email': 30000}, 'provider': {'sendgrid': 0}}}
 
 
 @responses.activate
