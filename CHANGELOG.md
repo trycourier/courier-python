@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v4.4.0] - 2022-07-26
+
+Adds support for Audit Events API
+
 ## [v4.3.0] - 2022-03-24
 
 Adds support for Audiences
@@ -187,7 +191,9 @@ Adds support for notification locales
 
 Initial release. Supports Python 3.5+. Supports Send API.
 
-[unreleased]: https://github.com/trycourier/courier-python/compare/v4.2.0...HEAD
+[unreleased]: https://github.com/trycourier/courier-python/compare/v4.4.0...HEAD
+[v4.4.0]: https://github.com/trycourier/courier-python/compare/v4.3.0...v4.4.0
+[v4.3.0]: https://github.com/trycourier/courier-python/compare/v4.2.0...v4.3.0
 [v4.2.0]: https://github.com/trycourier/courier-python/compare/v4.1.0...v4.2.0
 [v4.1.0]: https://github.com/trycourier/courier-python/compare/v4.0.0...v4.1.0
 [v4.0.0]: https://github.com/trycourier/courier-python/compare/v3.0.0...v4.0.0
