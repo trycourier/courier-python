@@ -14,7 +14,7 @@ def test_success_get_audit_event():
         'https://api.courier.com/audit-events/audit-event-001',
         status=200,
         content_type='application/json',
-        body='{"actor": {"email": "foo@bar.com", "id": "foo-user"}, "auditEventId": "ZX3xXUMNKL4y2NkiKgstl", "source": "courier.studio", "target": {}, "timestamp": "2022-07-22T22:33:59.552Z", "type": "notification:published", "workspaceId": "my-workspace"}'
+        body='{"actor": {"email": "foo@bar.com", "id": "foo-user"}, "auditEventId": "ZX3xXUMNKL4y2NkiKgstl", "source": "courier.studio", "target": {}, "timestamp": "2022-07-22T22:33:59.552Z", "type": "notification:published"}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
@@ -29,8 +29,7 @@ def test_success_get_audit_event():
       "source": "courier.studio",
       "target": {},
       "timestamp": "2022-07-22T22:33:59.552Z",
-      "type": "notification:published",
-      "workspaceId": "my-workspace"
+      "type": "notification:published"
     }
 
 @responses.activate
@@ -40,7 +39,7 @@ def test_success_list_audit_events():
         'https://api.courier.com/audit-events?cursor=abc',
         status=200,
         content_type='application/json',
-        body='{"paging": {"cursor": "def" }, "results": [{"actor": {"email": "foo@bar.com", "id": "foo-user"}, "auditEventId": "ZX3xXUMNKL4y2NkiKgstl", "source": "courier.studio", "target": {}, "timestamp": "2022-07-22T22:33:59.552Z", "type": "notification:published", "workspaceId": "my-workspace"}]}'
+        body='{"paging": {"cursor": "def" }, "results": [{"actor": {"email": "foo@bar.com", "id": "foo-user"}, "auditEventId": "ZX3xXUMNKL4y2NkiKgstl", "source": "courier.studio", "target": {}, "timestamp": "2022-07-22T22:33:59.552Z", "type": "notification:published"}]}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
@@ -54,8 +53,7 @@ def test_success_list_audit_events():
             "source": "courier.studio",
             "target": {},
             "timestamp": "2022-07-22T22:33:59.552Z",
-            "type": "notification:published",
-            "workspaceId": "my-workspace"
+            "type": "notification:published"
           }
         ],
         "paging": {
