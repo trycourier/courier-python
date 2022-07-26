@@ -17,7 +17,8 @@ class Audiences():
         Create a new Audiences messaging job
 
         Args:
-            message (dict): Audience Defintion: audience_id, name, description, filter
+            message (dict): Audience Defintion - audience_id, name,
+            description, filter
         Raises:
             CourierAPIException: Any error returned by the Courier API
 

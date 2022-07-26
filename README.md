@@ -175,7 +175,7 @@ resp = client.send_message(
               }
             },
             'providers':['sendgrid','sns']
-          }  
+          }
         },
         'providers': {
           'sendgrid':{
@@ -615,6 +615,18 @@ print(resp)
 Example: Get bulk processing job user details
 """
 resp = client.bulk.get_job_users('12345', cursor='abc') # cursor is optional
+print(resp)
+
+"""
+Example: Get audit event
+"""
+resp = client.audit_events.get_audit_event('12345')
+print(resp)
+
+"""
+Example: List audit events
+"""
+resp = client.audit_events.list_audit_events(cursor='abc') # cursor is optional
 print(resp)
 ```
 
