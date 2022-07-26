@@ -38,7 +38,7 @@ class AuditEvents():
         Lists audit events
 
         Args:
-            cursor: optional pointer to for fetching subsequent result pages
+            cursor: optional pointer to fetch subsequent result pages
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
