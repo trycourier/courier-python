@@ -112,3 +112,29 @@ class Messages():
             raise CourierAPIException(resp)
 
         return resp.json()
+
+    def cancel(self, message_id):
+        """
+        Cancel the message delivery.
+
+        Args:
+            message_id (str): A unique identifier associated with the message
+            you wish to retrieve (returned after each 'send()' call.
+            See
+            https://www.courier.com/docs/reference/send/message/#requestid-details
+            for details.)
+
+        Raises:
+            CourierAPIException: Any error returned by the Courier API
+
+        Returns:
+            dict: Contains message item
+        """
+        url = "%s/%s/cancel" % (self.uri, message_id)
+
+        resp = self.session.post(url)
+
+        if resp.status_code >= 400:
+            raise CourierAPIException(resp)
+
+        return resp.json()
