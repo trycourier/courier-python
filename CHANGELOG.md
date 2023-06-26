@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v4.5.0] - 2022-07-26
+
+Adds support for Cancel Message API
+
 ## [v4.4.0] - 2022-07-26
 
 Adds support for Audit Events API

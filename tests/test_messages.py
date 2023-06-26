@@ -4,6 +4,7 @@ import pytest
 from trycourier.client import Courier
 from trycourier.exceptions import CourierAPIException
 
+
 @responses.activate
 def test_success_messages_list():
     responses.add(
@@ -99,7 +100,8 @@ def test_success_messages_get_history():
     c = Courier(auth_token='123456789ABCDF')
     r = c.messages.get_history(message_id="my.message.id")
 
-    assert r == {'results':[]}
+    assert r == {'results': []}
+
 
 @responses.activate
 def test_success_messages_get_history_with_params():
@@ -114,7 +116,7 @@ def test_success_messages_get_history_with_params():
     c = Courier(auth_token='123456789ABCDF')
     r = c.messages.get_history(message_id="my.message.id", type="my.type")
 
-    assert r == {'results':[]}
+    assert r == {'results': []}
 
 
 @responses.activate
@@ -133,6 +135,17 @@ def test_fail_messages_get_history():
         c.messages.get_history("my.message.id")
 
 
+@responses.activate
+def test_messages_cancel():
+    responses.add(
+        responses.POST,
+        'https://api.courier.com/messages/id/cancel',
+        status=200,
+        content_type='application/json',
+        body='{}'
+    )
 
+    c = Courier(auth_token='123456789ABCDF')
+    r = c.messages.cancel(message_id="id")
 
-
+    assert r == {}
