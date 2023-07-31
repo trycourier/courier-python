@@ -33,13 +33,13 @@ class Accounts():
 
         return resp.json()
 
-    def get_accounts(self, limit=None, starting_after=None):
+    def get_accounts(self, limit=None, cursor=None):
         """
         Lists accounts
 
         Args:
             limit: The number of accounts to return (default 20, max 100)
-            starting_after: Value of next_page from previous response
+            cursor: Value of next_page from previous response
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
@@ -53,8 +53,8 @@ class Accounts():
         if limit:
             params['limit'] = limit
 
-        if starting_after:
-            params['starting_after'] = starting_after
+        if cursor:
+            params['cursor'] = cursor
 
         resp = self.session.get(self.uri, params=params)
 

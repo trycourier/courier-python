@@ -12,7 +12,7 @@ from .messages import Messages
 from .notifications import Notifications
 from .profiles import Profiles
 
-__version__ = '4.6.0'
+__version__ = '4.7.0'
 
 
 class Courier(object):
