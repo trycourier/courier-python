@@ -35,7 +35,7 @@ def test_success_get_accounts():
         'https://api.courier.com/accounts',
         status=200,
         content_type='application/json',
-        body='{"items":[{"id":"ACME", "name":"ACME Inc", "properties":{}, "default_preferences":{}, "user_profile":{}}], "has_more": false}'
+        body='{"items":[{"id":"ACME", "name":"ACME Inc", "properties":{}, "default_preferences":{}, "user_profile":{}}], "has_more": false, "next_url": null, "url": "/accounts"}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
@@ -49,7 +49,9 @@ def test_success_get_accounts():
         "default_preferences":{},
         "user_profile":{}
       }],
-      "has_more": False
+      "has_more": False,
+      "next_url": None,
+      "url": "/accounts",
     }
 
 @responses.activate
