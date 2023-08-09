@@ -1,8 +1,8 @@
 from .exceptions import CourierAPIException
 
 
-class Accounts():
-    key = "accounts"
+class Tenants():
+    key = "tenants"
 
     def __init__(self, base_url, session):
         self.base_url = base_url
@@ -12,20 +12,20 @@ class Accounts():
     def uri(self):
         return "%s/%s" % (self.base_url, self.key)
 
-    def get_account(self, account_id):
+    def get_tenant(self, tenant_id):
         """
-        Gets an account
+        Gets a tenant
 
         Args:
-            account_id: An account to get the details of
+            tenant_id: A tenant to get the details of
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains account object
+            dict: Contains tenant object
         """
-        url = "%s/%s" % (self.uri, account_id)
+        url = "%s/%s" % (self.uri, tenant_id)
         resp = self.session.get(url)
 
         if resp.status_code >= 400:
@@ -33,19 +33,19 @@ class Accounts():
 
         return resp.json()
 
-    def get_accounts(self, limit=None, cursor=None):
+    def get_tenants(self, limit=None, cursor=None):
         """
-        Lists accounts
+        Lists tenants
 
         Args:
-            limit: The number of accounts to return (default 20, max 100)
+            limit: The number of tenants to return (default 20, max 100)
             cursor: Value of next_page from previous response
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains accounts items and paging info
+            dict: Contains tenants items and paging info
         """
 
         params = {}
@@ -63,27 +63,27 @@ class Accounts():
 
         return resp.json()
 
-    def put_account(self, account_id, account):
+    def put_tenant(self, tenant_id, tenant):
         """
-        Create a new account
+        Create a new tenant
 
         Args:
-            account (dict): Account Defintion - name, parent_account_id,
+            tenant (dict): tenant Defintion - name, parent_tenant_id,
             default_preferences, properties, user_profile, brand_id
         Raises:
             CourierAPIException: Any error returned by the Courier API
 
         Returns:
-            dict: Contains an account definition
+            dict: Contains a tenant definition
         """
-        url = "%s/%s" % (self.uri, account_id)
+        url = "%s/%s" % (self.uri, tenant_id)
         payload = {
-            'name': account.get('name'),
-            'parent_account_id': account.get('parent_account_id'),
-            'default_preferences': account.get('default_preferences'),
-            'properties': account.get('properties'),
-            'user_profile': account.get('user_profile'),
-            'brand_id': account.get('brand_id')
+            'name': tenant.get('name'),
+            'parent_tenant_id': tenant.get('parent_tenant_id'),
+            'default_preferences': tenant.get('default_preferences'),
+            'properties': tenant.get('properties'),
+            'user_profile': tenant.get('user_profile'),
+            'brand_id': tenant.get('brand_id')
         }
 
         resp = self.session.put(url, json=payload)
@@ -93,17 +93,17 @@ class Accounts():
 
         return resp.json()
 
-    def delete_account(self, account_id):
+    def delete_tenant(self, tenant_id):
         """
-        Delete an account
+        Delete a tenant
 
         Args:
-            account_id (str): Account you want to delete
+            tenant_id (str): tenant you want to delete
 
         Raises:
             CourierAPIException: Any error returned by the Courier API
         """
-        url = "%s/%s" % (self.uri, account_id)
+        url = "%s/%s" % (self.uri, tenant_id)
 
         resp = self.session.delete(url)
 

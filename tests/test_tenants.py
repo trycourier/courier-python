@@ -8,17 +8,17 @@ from trycourier.client import Courier
 from trycourier.exceptions import CourierAPIException
 
 @responses.activate
-def test_success_get_account():
+def test_success_get_tenant():
     responses.add(
         responses.GET,
-        'https://api.courier.com/accounts/account-001',
+        'https://api.courier.com/tenants/tenant-001',
         status=200,
         content_type='application/json',
         body='{"id":"ACME", "name":"ACME Inc", "properties":{}, "default_preferences":{}, "user_profile":{}}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
-    r = c.accounts.get_account("account-001")
+    r = c.tenants.get_tenant("tenant-001")
 
     assert r == {
       "id":"ACME",
@@ -29,17 +29,17 @@ def test_success_get_account():
     }
 
 @responses.activate
-def test_success_get_accounts():
+def test_success_get_tenants():
     responses.add(
         responses.GET,
-        'https://api.courier.com/accounts',
+        'https://api.courier.com/tenants',
         status=200,
         content_type='application/json',
-        body='{"items":[{"id":"ACME", "name":"ACME Inc", "properties":{}, "default_preferences":{}, "user_profile":{}}], "has_more": false, "next_url": null, "url": "/accounts"}'
+        body='{"items":[{"id":"ACME", "name":"ACME Inc", "properties":{}, "default_preferences":{}, "user_profile":{}}], "has_more": false, "next_url": null, "url": "/tenants"}'
     )
 
     c = Courier(auth_token='123456789ABCDF')
-    r = c.accounts.get_accounts()
+    r = c.tenants.get_tenants()
 
     assert r == {
       "items": [{
@@ -51,22 +51,22 @@ def test_success_get_accounts():
       }],
       "has_more": False,
       "next_url": None,
-      "url": "/accounts",
+      "url": "/tenants",
     }
 
 @responses.activate
-def test_success_put_account():
+def test_success_put_tenant():
     responses.add(
         responses.PUT,
-        'https://api.courier.com/accounts/account-1',
+        'https://api.courier.com/tenants/tenant-1',
         status=200,
         content_type='application/json',
         body='{"id":"ACME", "name":"ACME Inc", "properties":{}, "default_preferences":{}, "user_profile":{}}'
     )
     c = Courier(auth_token='123456789ABCDF')
-    r = c.accounts.put_account(
-        'account-1',
-        account={
+    r = c.tenants.put_tenant(
+        'tenant-1',
+        tenant={
           "name":"ACME Inc",
           "properties":{},
           "default_preferences":{},
@@ -83,15 +83,15 @@ def test_success_put_account():
     }
 
 @responses.activate
-def test_success_delete_account():
+def test_success_delete_tenant():
     responses.add(
         responses.DELETE,
-        'https://api.courier.com/accounts/account-1',
+        'https://api.courier.com/tenants/tenant-1',
         status=204,
         content_type='application/json'
     )
 
     c = Courier(auth_token='123456789ABCDF')
-    c.accounts.delete_account("account-1")
+    c.tenants.delete_tenant("tenant-1")
 
     assert len(responses.calls) == 1
