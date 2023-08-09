@@ -1,7 +1,7 @@
 from .exceptions import CourierAPIException
 
 
-class tenants():
+class Tenants():
     key = "tenants"
 
     def __init__(self, base_url, session):

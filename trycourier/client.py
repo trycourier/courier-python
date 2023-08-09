@@ -1,6 +1,6 @@
 from os import environ
 
-from .tenants import tenants
+from .tenants import Tenants
 from .audiences import Audiences
 from .audit_events import AuditEvents
 from .automations import Automations
@@ -59,7 +59,7 @@ class Courier(object):
             password = environ.get('COURIER_AUTH_PASSWORD', None)
             self.session.init_basic_auth(username, password)
 
-        self.tenants = tenants(self.base_url, self.session)
+        self.tenants = Tenants(self.base_url, self.session)
         self.audiences = Audiences(self.base_url, self.session)
         self.audit_events = AuditEvents(self.base_url, self.session)
         self.automations = Automations(self.base_url, self.session)
