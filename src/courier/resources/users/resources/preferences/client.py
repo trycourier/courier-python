@@ -104,7 +104,7 @@ class PreferencesClient:
 
             - has_custom_routing: typing.Optional[bool].
         """
-        _request: typing.Dict[str, typing.Any] = {"status": status, "default_status": default_status}
+        _request: typing.Dict[str, typing.Any] = {"status": status.value, "default_status": default_status.value}
         if custom_routing is not OMIT:
             _request["custom_routing"] = custom_routing
         if has_custom_routing is not OMIT:
@@ -205,7 +205,7 @@ class AsyncPreferencesClient:
 
             - has_custom_routing: typing.Optional[bool].
         """
-        _request: typing.Dict[str, typing.Any] = {"status": status, "default_status": default_status}
+        _request: typing.Dict[str, typing.Any] = {"status": status.value, "default_status": default_status.value}
         if custom_routing is not OMIT:
             _request["custom_routing"] = custom_routing
         if has_custom_routing is not OMIT:

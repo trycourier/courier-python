@@ -121,17 +121,33 @@ class MessagesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def cancel(self, message_id: str) -> MessageDetails:
+    def cancel(
+        self,
+        message_id: str,
+        *,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> MessageDetails:
         """
         Cancel a message that is currently in the process of being delivered. A well-formatted API call to the cancel message API will return either `200` status code for a successful cancellation or `409` status code for an unsuccessful cancellation. Both cases will include the actual message record in the response body (see details below).
 
         Parameters:
             - message_id: str. A unique identifier representing the message ID
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"messages/{message_id}/cancel"),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -312,17 +328,33 @@ class AsyncMessagesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def cancel(self, message_id: str) -> MessageDetails:
+    async def cancel(
+        self,
+        message_id: str,
+        *,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> MessageDetails:
         """
         Cancel a message that is currently in the process of being delivered. A well-formatted API call to the cancel message API will return either `200` status code for a successful cancellation or `409` status code for an unsuccessful cancellation. Both cases will include the actual message record in the response body (see details below).
 
         Parameters:
             - message_id: str. A unique identifier representing the message ID
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"messages/{message_id}/cancel"),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:

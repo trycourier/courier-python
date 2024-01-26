@@ -9,6 +9,7 @@ import httpx
 from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .core.jsonable_encoder import jsonable_encoder
+from .core.remove_none_from_dict import remove_none_from_dict
 from .environment import CourierEnvironment
 from .resources.audiences.client import AsyncAudiencesClient, AudiencesClient
 from .resources.audit_events.client import AsyncAuditEventsClient, AuditEventsClient
@@ -66,18 +67,34 @@ class Courier:
         self.translations = TranslationsClient(client_wrapper=self._client_wrapper)
         self.users = UsersClient(client_wrapper=self._client_wrapper)
 
-    def send(self, *, message: Message) -> SendMessageResponse:
+    def send(
+        self,
+        *,
+        message: Message,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> SendMessageResponse:
         """
         Use the send API to send a message to one or more recipients.
 
         Parameters:
             - message: Message. Defines the message to be delivered
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "send"),
             json=jsonable_encoder({"message": message}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -119,18 +136,34 @@ class AsyncCourier:
         self.translations = AsyncTranslationsClient(client_wrapper=self._client_wrapper)
         self.users = AsyncUsersClient(client_wrapper=self._client_wrapper)
 
-    async def send(self, *, message: Message) -> SendMessageResponse:
+    async def send(
+        self,
+        *,
+        message: Message,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> SendMessageResponse:
         """
         Use the send API to send a message to one or more recipients.
 
         Parameters:
             - message: Message. Defines the message to be delivered
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "send"),
             json=jsonable_encoder({"message": message}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:

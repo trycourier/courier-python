@@ -204,7 +204,14 @@ class ListsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def add_subscribers(self, list_id: str, *, request: typing.List[PutSubscriptionsRecipient]) -> None:
+    def add_subscribers(
+        self,
+        list_id: str,
+        *,
+        request: typing.List[PutSubscriptionsRecipient],
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> None:
         """
         Subscribes additional users to the list, without modifying existing subscriptions. If the list does not exist, it will be automatically created.
 
@@ -212,12 +219,22 @@ class ListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request: typing.List[PutSubscriptionsRecipient].
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{list_id}/subscriptions"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -469,7 +486,14 @@ class AsyncListsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def add_subscribers(self, list_id: str, *, request: typing.List[PutSubscriptionsRecipient]) -> None:
+    async def add_subscribers(
+        self,
+        list_id: str,
+        *,
+        request: typing.List[PutSubscriptionsRecipient],
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> None:
         """
         Subscribes additional users to the list, without modifying existing subscriptions. If the list does not exist, it will be automatically created.
 
@@ -477,12 +501,22 @@ class AsyncListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request: typing.List[PutSubscriptionsRecipient].
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{list_id}/subscriptions"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:

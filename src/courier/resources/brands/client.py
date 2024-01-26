@@ -35,16 +35,32 @@ class BrandsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def create(self, *, request: BrandParameters) -> Brand:
+    def create(
+        self,
+        *,
+        request: BrandParameters,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> Brand:
         """
         Parameters:
             - request: BrandParameters.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -172,16 +188,32 @@ class AsyncBrandsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def create(self, *, request: BrandParameters) -> Brand:
+    async def create(
+        self,
+        *,
+        request: BrandParameters,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> Brand:
         """
         Parameters:
             - request: BrandParameters.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:

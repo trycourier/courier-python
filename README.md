@@ -10,7 +10,7 @@ The Courier Python Library provides convenient access to the Courier API from ap
 # Installation
 
 ```sh
-pip install --upgrade fern-courier
+pip install --upgrade trycourier
 ```
 <!-- End Installation  -->
 

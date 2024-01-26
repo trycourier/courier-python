@@ -7,6 +7,7 @@ from json.decoder import JSONDecodeError
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
+from ...core.remove_none_from_dict import remove_none_from_dict
 from ..commons.errors.bad_request_error import BadRequestError
 from ..commons.types.bad_request import BadRequest
 from .types.bulk_create_job_response import BulkCreateJobResponse
@@ -28,16 +29,32 @@ class BulkClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def create_job(self, *, message: InboundBulkMessage) -> BulkCreateJobResponse:
+    def create_job(
+        self,
+        *,
+        message: InboundBulkMessage,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> BulkCreateJobResponse:
         """
         Parameters:
             - message: InboundBulkMessage.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "bulk"),
             json=jsonable_encoder({"message": message}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -50,7 +67,14 @@ class BulkClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def ingest_users(self, job_id: str, *, request: BulkIngestUsersParams) -> None:
+    def ingest_users(
+        self,
+        job_id: str,
+        *,
+        request: BulkIngestUsersParams,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> None:
         """
         Ingest user data into a Bulk Job
 
@@ -58,12 +82,22 @@ class BulkClient:
             - job_id: str. A unique identifier representing the bulk job
 
             - request: BulkIngestUsersParams.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{job_id}"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -74,17 +108,33 @@ class BulkClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def run_job(self, job_id: str) -> None:
+    def run_job(
+        self,
+        job_id: str,
+        *,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> None:
         """
         Run a bulk job
 
         Parameters:
             - job_id: str. A unique identifier representing the bulk job
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{job_id}/run"),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -148,16 +198,32 @@ class AsyncBulkClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def create_job(self, *, message: InboundBulkMessage) -> BulkCreateJobResponse:
+    async def create_job(
+        self,
+        *,
+        message: InboundBulkMessage,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> BulkCreateJobResponse:
         """
         Parameters:
             - message: InboundBulkMessage.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "bulk"),
             json=jsonable_encoder({"message": message}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -170,7 +236,14 @@ class AsyncBulkClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def ingest_users(self, job_id: str, *, request: BulkIngestUsersParams) -> None:
+    async def ingest_users(
+        self,
+        job_id: str,
+        *,
+        request: BulkIngestUsersParams,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> None:
         """
         Ingest user data into a Bulk Job
 
@@ -178,12 +251,22 @@ class AsyncBulkClient:
             - job_id: str. A unique identifier representing the bulk job
 
             - request: BulkIngestUsersParams.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{job_id}"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -194,17 +277,33 @@ class AsyncBulkClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def run_job(self, job_id: str) -> None:
+    async def run_job(
+        self,
+        job_id: str,
+        *,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> None:
         """
         Run a bulk job
 
         Parameters:
             - job_id: str. A unique identifier representing the bulk job
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{job_id}/run"),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:

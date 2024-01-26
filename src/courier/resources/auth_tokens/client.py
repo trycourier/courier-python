@@ -7,6 +7,7 @@ from json.decoder import JSONDecodeError
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
+from ...core.remove_none_from_dict import remove_none_from_dict
 from .types.issue_token_response import IssueTokenResponse
 
 try:
@@ -22,7 +23,14 @@ class AuthTokensClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def issue_token(self, *, scope: str, expires_in: str) -> IssueTokenResponse:
+    def issue_token(
+        self,
+        *,
+        scope: str,
+        expires_in: str,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> IssueTokenResponse:
         """
         Returns a new access token.
 
@@ -30,12 +38,22 @@ class AuthTokensClient:
             - scope: str.
 
             - expires_in: str.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
             json=jsonable_encoder({"scope": scope, "expires_in": expires_in}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -51,7 +69,14 @@ class AsyncAuthTokensClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def issue_token(self, *, scope: str, expires_in: str) -> IssueTokenResponse:
+    async def issue_token(
+        self,
+        *,
+        scope: str,
+        expires_in: str,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> IssueTokenResponse:
         """
         Returns a new access token.
 
@@ -59,12 +84,22 @@ class AsyncAuthTokensClient:
             - scope: str.
 
             - expires_in: str.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
             json=jsonable_encoder({"scope": scope, "expires_in": expires_in}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:

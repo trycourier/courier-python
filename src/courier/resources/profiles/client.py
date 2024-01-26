@@ -54,7 +54,14 @@ class ProfilesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def create(self, user_id: str, *, profile: typing.Dict[str, typing.Any]) -> MergeProfileResponse:
+    def create(
+        self,
+        user_id: str,
+        *,
+        profile: typing.Dict[str, typing.Any],
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> MergeProfileResponse:
         """
         Merge the supplied values with an existing profile or create a new profile if one doesn't already exist.
 
@@ -62,12 +69,22 @@ class ProfilesClient:
             - user_id: str. A unique identifier representing the user associated with the requested profile.
 
             - profile: typing.Dict[str, typing.Any].
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{user_id}"),
             json=jsonable_encoder({"profile": profile}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -160,7 +177,14 @@ class ProfilesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def subscribe_to_lists(self, user_id: str, *, request: SubscribeToListsRequest) -> SubscribeToListsResponse:
+    def subscribe_to_lists(
+        self,
+        user_id: str,
+        *,
+        request: SubscribeToListsRequest,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> SubscribeToListsResponse:
         """
         Subscribes the given user to one or more lists. If the list does not exist, it will be created.
 
@@ -168,12 +192,22 @@ class ProfilesClient:
             - user_id: str. A unique identifier representing the user associated with the requested profile.
 
             - request: SubscribeToListsRequest.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{user_id}/lists"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -237,7 +271,14 @@ class AsyncProfilesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def create(self, user_id: str, *, profile: typing.Dict[str, typing.Any]) -> MergeProfileResponse:
+    async def create(
+        self,
+        user_id: str,
+        *,
+        profile: typing.Dict[str, typing.Any],
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> MergeProfileResponse:
         """
         Merge the supplied values with an existing profile or create a new profile if one doesn't already exist.
 
@@ -245,12 +286,22 @@ class AsyncProfilesClient:
             - user_id: str. A unique identifier representing the user associated with the requested profile.
 
             - profile: typing.Dict[str, typing.Any].
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{user_id}"),
             json=jsonable_encoder({"profile": profile}),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
@@ -343,7 +394,14 @@ class AsyncProfilesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def subscribe_to_lists(self, user_id: str, *, request: SubscribeToListsRequest) -> SubscribeToListsResponse:
+    async def subscribe_to_lists(
+        self,
+        user_id: str,
+        *,
+        request: SubscribeToListsRequest,
+        idempotency_key: typing.Optional[str] = None,
+        idempotency_expiry: typing.Optional[int] = None,
+    ) -> SubscribeToListsResponse:
         """
         Subscribes the given user to one or more lists. If the list does not exist, it will be created.
 
@@ -351,12 +409,22 @@ class AsyncProfilesClient:
             - user_id: str. A unique identifier representing the user associated with the requested profile.
 
             - request: SubscribeToListsRequest.
+
+            - idempotency_key: typing.Optional[str].
+
+            - idempotency_expiry: typing.Optional[int].
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
             urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{user_id}/lists"),
             json=jsonable_encoder(request),
-            headers=self._client_wrapper.get_headers(),
+            headers=remove_none_from_dict(
+                {
+                    **self._client_wrapper.get_headers(),
+                    "Idempotency-Key": idempotency_key,
+                    "X-Idempotency-Expiration": idempotency_expiry,
+                }
+            ),
             timeout=60,
         )
         if 200 <= _response.status_code < 300:
