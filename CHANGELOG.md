@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
-## [v5.0.0] - 2024-01-26
+## [v6.0.0] - 2024-01-26
 
 We now use :herb: [Fern](https://buildwithfern.com/) to generate our Python 
 Client. WHile this releasing has breaking changes, it comes with several 
