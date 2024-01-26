@@ -5,6 +5,39 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [v5.0.0] - 2024-01-26
+
+We now use :herb: [Fern](https://buildwithfern.com/) to generate our Python 
+Client. WHile this releasing has breaking changes, it comes with several 
+quality of life upgrades: 
+- **Endpoint coverage**: All endpoints that are supported in our Node SDK are 
+  now also supported in python. 
+- **Resource-scoped SDK methods**: Endpoints are scoped under their resource. For 
+  example, instead of `courier.deleteBrands` the SDK now reads `courier.brands.delete(...)`  
+- **Docs on Hover**: All endpoint and parameter level documentation that you see 
+  on our docs website are now embedded directly within the SDKs.
+- **MyPy**: All requests, responses and methods are annotated with mypy types. 
+  You should get autocomplete as you use the SDK. Note that request and response models 
+  are all Pydantic. 
+- **Async Client**: The SDK now exports an async python client in addition to a sync
+  client. Just use `AsyncCourier` : 
+
+  ```python 
+  from courier.client import AsyncCourier
+
+  client = AsyncCourier(authorization_token="..") # defaults to os.getenv("COURIER_AUTH_TOKEN")
+  ```
+- **Courier Module**: The SDK exports a `courier` module and all the types are nested
+  within this module. 
+  ```python
+  import courier
+
+  courier. # see all the types you have access to
+  ```
+- **HTTPX**: The Python SDK now uses httpx instead of requests for the underlying client. 
+  For advanced usecases such as proxies and transports, you can directly pass in your
+  own httpx client!
+
 ## [v5.0.0] - 2023-08-09
 
 Accounts -> Tenants

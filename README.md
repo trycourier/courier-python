@@ -1,671 +1,224 @@
-# `trycourier`
+[![Courier: Your Complete Communication Stack](https://marketing-assets-public.s3.us-west-1.amazonaws.com/github_nodejs.png)](https://courier.com)
 
-This Python Package helps you send notifications through [Courier](https://www.courier.com/), the smartest way to design &amp; deliver notifications. Design your notifications once using our drag &amp; drop editor, then deliver to any channel through one API. Email, mobile push, SMS, Slack &mdash; you name it!
+[![pypi](https://img.shields.io/pypi/v/trycourier.svg)](https://pypi.python.org/pypi/trycourier)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://buildwithfern.com/?utm_source=trycourier/courier-node/readme)
+
+This is the official Python package for sending notifications with the [Courier](https://courier.com) REST API.
 
 ## Installation
 
-Install from PyPI using [pip](http://www.pip-installer.org/en/latest/):
+Install from PyPI
 
 ```shell
-$ pip install trycourier
+pip install trycourier
+# or 
+poetry add trycourier
 ```
 
-Python 3.5 or later is required.
+Python 3.7 or later is required.
 
 ## Usage
-
-### Using Token Auth
-
-```python
-from trycourier import Courier
-
-client = Courier(auth_token="your-auth-token") #or set via COURIER_AUTH_TOKEN env var
-
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={
-        "email": "example@example.com",
-        "phone_number": "555-867-5309"
-    },
-    data={
-      "world": "Python!"
-    }
-)
-print(resp['messageId'])
-```
-
-### Using Basic Auth
+Use the `Courier` class to access all of our endpoints.
 
 ```python
-from trycourier import Courier
+import os
+import courier
 
-client = Courier(username="your-username", password="your-password")
+from courier.client import Courier
 
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={
-        "email": "example@example.com",
-        "phone_number": "555-867-5309"
-    },
-    data={
-      "world": "Python!"
-    }
+client = Courier(
+  authorization_token="YOUR_TOKENY" # Defaults to COURIER_AUTH_TOKEN
 )
-print(resp['messageId'])
-```
 
-### Timeouts
-
-As of v1.4.0, the timeout is defaulted to 5 seconds. This is configurable using the `timeout` parameter when creating a client. You can specify the time in seconds using a `float` value for both Connect and Read or use a tuple to set them for each individual one `(Connect, Read)`.
-
-```python
-client = Courier(auth_token="your-auth-token",
-                 timeout=3.5)
-
-client = Courier(auth_token="your-auth-token",
-                 timeout=(3.2, 3.3))
-```
-
-## Advanced Usage
-
-```python
-from trycourier import Courier
-
-client = Courier(auth_token="your-auth-token")
-
-"""
-Example: send a message to a recipient
-"""
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={}, # optional
-    brand="your-brand-id", # optional
-    data={}, # optional
-    preferences={}, # optional
-    override={} # optional
-)
-print(resp['messageId'])
-
-"""
-Example: send message using a message object that unlocks enhanced power features
-"""
-resp = client.send_message(
-    message={'template': 'my-template', 'to': {'email': 'foo@bar.com'}}
-)
-print(resp['requestId'])
-"""
-
-Example: send UTM metadata with message object - V2
-"""
-resp = client.send_message(
-    message={
-        'to': [
-            {
-                "email": "foo@bar.com"
-            }
-        ],
-        'content': {
-            'version': '2020-01-01',
-            'elements': [
-                {
-                    'type': 'action',
-                    'content': 'ELEMENTAL',
-                    'href': 'courier.com',
-                    'style': 'button',
-                    'align': 'center'
-                }
-            ]
-        },
-        'routing': {
-            'method': 'single',
-            'channels': [
-                'email'
-            ]
-        },
-        'metadata': {
-            'utm': {
-                'source': 'python'
-            }
-        }
-    }
-)
-print(resp['requestId'])
-"""
-
-Example: send granular UTM metadata with message object
-"""
-resp = client.send_message(
-    message={
-        'to': [
-            {
-                "email": "foo@bar.com"
-            }
-        ],
-        'content': {
-            'version': '2020-01-01',
-            'elements': [
-                {
-                    'type': 'action',
-                    'content': 'ELEMENTAL',
-                    'href': 'courier.com',
-                    'style': 'button',
-                    'align': 'center'
-                }
-            ]
-        },
-        'routing': {
-            'method': 'single',
-            'channels': [
-                'email'
-            ]
-        },
-        'metadata': {
-            'utm': {
-                'source': 'python'
-            }
-        },
-        'channels': {
-          'email': {
-            'metadata': {
-              'utm': {
-                'medium': 'email'
-              }
-            },
-            'providers':['sendgrid','sns']
-          }
-        },
-        'providers': {
-          'sendgrid':{
-            'metadata': {
-                'utm': {
-                  'medium': 'email'
-                }
-              }
-            }
-        }
-    }
-)
-print(resp['requestId'])
-"""
-
-Example: set trace_id with message object - V2
-"""
-resp = client.send_message(
-    message={
-        'to': [
-            {
-                "email": "foo@bar.com"
-            }
-        ],
-        'content': {
-            'version': '2020-01-01',
-            'elements': [
-                {
-                    'type': 'action',
-                    'content': 'ELEMENTAL',
-                    'href': 'courier.com',
-                    'style': 'button',
-                    'align': 'center'
-                }
-            ]
-        },
-        'routing': {
-            'method': 'single',
-            'channels': [
-                'email'
-            ]
-        },
-        'metadata': {
-            "trace_id": "feed-me-seemore",
-        }
-    }
-)
-print(resp['requestId'])
-"""
-
-Example: set tags with message object - V2
-"""
-resp = client.send_message(
-    message={
-        "to": {
-          "email": "foo@bar.com",
-        },
-        "template": "my-template",
-        "metadata": {
-          "tags": ["tag-1", "tag-2"]
-        }
-    })
-print(resp['requestId'])
-"""
-
-Example: send a message to a list, pattern and user
-"""
-resp = client.send_message(
-    message={'template': 'my-template', 'to': [
-      {
-        "list_pattern": "<PATTERN>", #e.g. example.list.*
-      },
-      {
-        "list_id": "<LIST_ID>", #e.g. your Courier List Id
-      },
-      {
-        "email": "test@email.com"
+response = client.send(
+  message=courier.ContentMessage(
+    to=courier.UserRecipient(
+      email="marty_mcfly@email.com",
+      data={
+        name: "Marty",
       }
-    ]
-  }
-)
-print(resp['requestId'])
-"""
-
-Example: send a message to a list
-"""
-resp = client.lists.send(
-  event="your-event-id",
-  list="your.list.id",
-  brand="your-brand-id", # optional
-  data={}, # optional
-  override={} # optional
-)
-print(resp['messageId'])
-
-"""
-Example: send a message to a list pattern
-"""
-resp = client.lists.send(
-  event="your-event-id",
-  pattern="your.list.*",
-  brand="your-brand-id", # optional
-  data={}, # optional
-  override={} # optional
-)
-print(resp['messageId'])
-
-"""
-Example: create a recipient's profile
-"""
-resp = client.profiles.add(
-  recipient_id,
-  {
-    "email":"example@example.com",
-    "name":"Example Name"
-  }
+    ),
+    content=courier.ElementalContentSugar(
+      title="Back to the Future",
+      body="Oh my {{name}}, we need 1.21 Gigawatts!",
+    ),
+    routing=courier.Routing(
+      method=courier.RoutingMethod.ALL,
+      channels=["email"]
+    )
+  )
 )
 
-"""
-Example: replace or create a recipient's profile
-"""
-resp = client.profiles.replace(
-  recipient_id,
-  {
-    "email": "example@example.com"
-  }
-)
-print(resp['status'])
-
-"""
-Example: merge or create a recipient's profile
-"""
-resp = client.profiles.merge(
-  recipient_id,
-  {
-    "phone_number": "+15555555555"
-  }
-)
-print(resp['status'])
-
-"""
-Example: get the subscribed lists of a recipient
-"""
-resp = client.profiles.get_subscriptions(
-  recipient_id,
-  cursor #optional
-)
-print(resp)
-
-"""
-Example: edit the contents of a recipient's profile with a patch operation
-(follows JSON Patch conventions: RFC 6902).
-"""
-resp = client.profiles.patch(
-  recipient_id,
-  [
-    {
-      "op": "add", #operation 1: add this email to profile
-      "path": "/parent",
-      "value": "example@example.com"
-    }
-    {
-      "op": "replace", #operation 2: update with new email
-      "path": "/parent",
-      "value": "jane@doe.com"
-    }
-    {
-      "op": "copy", #operation 3: copy that email to /emergency_contact
-      "from": "/parent",
-      "path": "/emergency_contact"
-    }
-    ...
-  ]
-)
-print(resp)
-
-
-"""
-Example: get a recipient's profile
-"""
-resp = client.profiles.get(recipient_id)
-print(resp)
-
-
-"""
-Example: fetch the statuses of messages you've previously sent.
-"""
-resp = client.messages.list(
-  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
-  event="your-event-id", # optional
-  list="your-list-id", #optional
-  message_id="your-message-id", #optional
-  notification=["message-status-1", "message-status-2",...], #optional
-  recipient="recipient-id" # optional
-)
-print(resp)
-
-"""
-Example: fetch the status of a message you've previously sent
-"""
-resp = client.messages.get(message_id)
-print(resp)
-
-"""
-Example: fetch the array of events of a message you've previously sent.
-"""
-resp = client.messages.get_history(
-message_id="your-message-id",
-type="list-type" #optional ("FILTERED", "RENDERED", "MAPPED", "PROFILE_LOADED")
-)
-print(resp)
-
-"""
-Example: fetch the list of events
-"""
-resp = client.get_events()
-print(resp)
-
-"""
-Example: fetch a specific event by event ID
-"""
-resp = client.get_event(event_id)
-print(resp)
-
-"""
-Example: create or replace an event
-"""
-resp = client.replace_event(
-  event_id,
-  notification_id="GRPVB5P0BHMEZSNY6TP2X7TQHEBF",
-  type="notificaton" ## optional, defaults to notification
-)
-print(resp)
-
-"""
-Example: get all brands
-"""
-resp = client.get_brands(
-  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
-)
-print(resp)
-
-"""
-Example: get a specific brand
-"""
-resp = client.get_brand(brand_id)
-print(resp)
-
-"""
-Example: create a brand
-"""
-resp = client.create_brand({
-  name="My Brand",
-  settings={
-    "color": {
-      "primary": "#0000FF",
-      "secondary": "#FF0000",
-      "tertiary": "#00FF00"
-    }
-  }
-})
-print resp
-
-"""
-Example: replace a brand
-"""
-resp = client.replace_brand(
-  brand_id,
-  name="My New Brand",
-  settings={
-    "color": {
-      "primary": "#FF0000",
-      "secondary": "#00FF00",
-      "tertiary": "#0000FF"
-    }
-  }
-)
-print resp
-
-"""
-Example: delete a brand
-"""
-client.delete_brand(brand_id)
-
-"""
-Example: get all lists
-"""
-resp = client.lists.list(
-  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
-)
-print resp
-
-"""
-Example: get a specific list
-"""
-resp = client.lists.get(list_id)
-print resp
-
-"""
-Example: create or replace a list
-"""
-client.lists.put(list_id, name="My List")
-
-"""
-Example: delete a list
-"""
-client.lists.delete(list_id)
-
-"""
-Example: restore a list
-"""
-client.lists.restore(list_id)
-
-"""
-Example: get a list's subscribptions
-"""
-resp = client.lists.get_subscriptions(list_id,
-  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
-)
-print resp
-
-"""
-Example: replace many recipients to a new or existing list
-"""
-client.lists.put_subscriptions(list_id, [
-  "RECIPIENT_ID_1",
-  "RECIPIENT_ID_2"
-])
-
-"""
-Example: Example: subscribe single recipient to a new or existing list
-"""
-client.lists.subscribe(list_id, recipient_id)
-
-"""
-Example: unsubscribe recipient from list
-"""
-client.lists.unsubscribe(list_id, recipient_id)
-
-"""
-Example: get a recipient's subscribed lists
-"""
-resp = client.lists.find_by_recipient_id(recipient_id,
-  cursor="MTU4OTQ5NTI1ODY4NywxLTVlYmRjNWRhLTEwODZlYWFjMWRmMjEwMTNjM2I0ZjVhMA", # optional
-)
-print resp
-
-"""
-Example: Invoke an ad-hoc automation
-"""
-
-resp = client.automations.invoke(
-    automation={'steps': [{ 'action': 'send' }]},
-    brand="your-brand-id", # optional
-    data={}, # optional
-    profile={}, # optional
-    recipient="your-recipient-id", # optional
-    template="your-notification-template-id" # optional
-)
-print(resp['runId'])
-
-"""
-Example: Invoke an automation template
-"""
-resp = client.automations.invoke_template(
-    template_id="your-automation-template-id",
-    brand="your-brand-id", # optional
-    data={}, # optional
-    profile={}, # optional
-    recipient="your-recipient-id", # optional
-    template="your-notification-template-id" # optional
-)
-print(resp['runId'])
-
-"""
-Bulk Processing:
-"""
-
-"""
-Example: Create a bulk processing job (API v1 semantics)
-"""
-resp = client.bulk.create_job(
-    message={'event': 'foo'},
-    idempotency_key='1234ABCD', # optional
-    idempotency_expiration='expiration-date' # optional
-)
-print(resp['jobId'])
-
-"""
-Example: Create a bulk processing job (API v2 semantics)
-"""
-resp = client.bulk.create_job(
-    message={'message': { 'template': 'RR4NDQ7NZ24A8TKPWVBEDGE15E9A' }},
-    idempotency_key='1234ABCD', # optional
-    idempotency_expiration='expiration-date' # optional
-)
-print(resp['jobId'])
-
-"""
-Example: Ingest users into a bulk processing job (API v1 semantics)
-"""
-resp = client.bulk.ingest_users(
-    job_id='12345',
-    users=[{ 'profile': { 'email': 'foo@bar.com' } }],
-    idempotency_key='1234ABCD', # optional
-    idempotency_expiration='expiration-date' # optional
-)
-print(resp)
-
-"""
-Example: Ingest users into a bulk processing job (API v2 semantics)
-"""
-resp = client.bulk.ingest_users(
-    job_id='12345',
-    users=[{ 'to': { 'email': 'foo@bar.com' } }],
-    idempotency_key='1234ABCD', # optional
-    idempotency_expiration='expiration-date' # optional
-)
-print(resp)
-
-"""
-Example: Run a bulk processing job
-"""
-client.bulk.run_job(
-    job_id='12345',
-    idempotency_key='1234ABCD', # optional
-    idempotency_expiration='expiration-date' # optional
-)
-
-"""
-Example: Get bulk processing job
-"""
-resp = client.bulk.get_job('12345')
-print(resp)
-
-"""
-Example: Get bulk processing job user details
-"""
-resp = client.bulk.get_job_users('12345', cursor='abc') # cursor is optional
-print(resp)
-
-"""
-Example: Get audit event
-"""
-resp = client.audit_events.get_audit_event('12345')
-print(resp)
-
-"""
-Example: List audit events
-"""
-resp = client.audit_events.list_audit_events(cursor='abc') # cursor is optional
-print(resp)
+print(response)
 ```
 
-### Idempotency
-
-For `POST` methods, you can supply an `idempotency_key` to ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key. By default, keys are eligible to be removed from the system after they're at least 24 hours old, and a new request is generated if a key is reused after the original has been removed.
-
-Also, the expiration of an idempotency key can be altered by setting a `idempotency_expiration` header value. The value of this header can be either epoch milliseconds or an ISO-8601 formatted date string. The minimum value that can be set is 24 hours. The maximum value that can be set is 1 year.
+## Async Client
+The SDK also exports an asynchronous client, `AsyncCourier`. 
 
 ```python
-import uuid
-from datetime import datetime, timedelta
-from trycourier import Courier
+import os
+import courier
+import asyncio
 
-client = Courier()
+from courier.client import AsyncCourier
 
-idempotency_key = uuid.uuid4()
-expiration = (datetime.now()+timedelta(days=7)).isoformat()
-
-resp = client.send(
-    event="your-event-id",
-    recipient="your-recipient-id",
-    profile={
-        "email": "example@example.com",
-        "phone_number": "555-867-5309"
-    },
-    data={
-      "world": "Python!"
-    },
-    idempotency_key=idempotency_key,
-    idempotency_expiration=expiration
+client = AsyncCourier(
+  authorization_token="YOUR_TOKENY" # Defaults to COURIER_AUTH_TOKEN
 )
-print(resp['messageId'])
+
+async def main() -> None: 
+  response = client.send(
+    message=courier.ContentMessage(
+      to=courier.UserRecipient(
+        email="marty_mcfly@email.com",
+        data={
+          name: "Marty",
+        }
+      ),
+      content=courier.ElementalContentSugar(
+        title="Back to the Future",
+        body="Oh my {{name}}, we need 1.21 Gigawatts!",
+      ),
+      routing=courier.Routing(
+        method=courier.RoutingMethod.ALL,
+        channels=["email"]
+      )
+    )
+  )
+
+asyncio.run(main())
+```
+
+## Timeouts
+By default, the client is configured to have a timeout of 60 seconds. 
+You can customize this value at client instantiation. 
+
+```python
+from courier.client import Courier
+
+client = Courier(
+  authorization_token="YOUR_TOKEN",
+  timeout=30
+)
+```
+
+## Handling Exceptions
+All exceptions thrown by the SDK will sublcass [courier.ApiError](./src/courier/core/api_error.py). 
+
+```python
+import courier
+
+from courier.core import ApiError
+
+try:
+  courier.send(...)
+except APIError as e:  
+  # handle any api related error
+```
+
+## Idempotency Keys
+
+For `POST` methods, you can supply an `idempotencyKey` in the config parameter to 
+ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key. 
+Keys are eligible to be removed from the system after they're at least 24 hours old, 
+and a new request is generated if a key is reused after the original has been removed. 
+For more info, see [Idempotent Requests](https://docs.courier.com/reference/idempotent-requests) 
+in the Courier documentation.
+
+```python
+import courier
+
+courier.send(
+  message={...}, 
+  idempotency_key"YOUR_KEY", 
+  idempotency_expiration="YOUR_EXPIRATION")
+```
+
+## Additional Usage Examples
+
+### Send Template Message
+
+```python
+import courier
+
+from courier import Courier
+
+client = Courier(
+  authorization_token="YOUR_AUTH_TOKEN")
+
+response = client.send(
+    message=courier.TemplateMessage(
+      template="my-template",
+      to=courier.UserRecipient(email="foo@bar.com")
+    )
+)
+print(response.message_id)
+```
+
+### UTM Metadata with Message
+
+```python
+import courier
+
+from courier import Courier
+
+client = Courier(
+  authorization_token="YOUR_AUTH_TOKEN")
+
+response = client.send(
+    message=courier.ContentMessage(
+      content=courier.ElementalContent(
+        version='2020-01-01',
+        elements=[
+          courier.ElementalNode_Action(
+            content="ELEMENTAL",
+            href="courier.com",
+            style="button",
+            align="center"
+          )
+        ]
+      ),
+      to=courier.UserRecipient(email="foo@bar.com"),
+      routing=courier.Routing(
+        method=courier.RoutingMethod.SINGLE,
+        channels=["email"]
+      ),
+      metadata=courier.MessageMetadata(
+        utm=courier.Utm(source="python")
+      )
+    )
+)
+print(response.request_id)
+```
+
+## Advanced
+
+### Overriding HTTP Client
+You can override the httpx client to customize it for your use case. Some common usecases 
+include support for proxies and transports.
+
+```python 
+import httpx
+from courier.client import Courier
+
+client = Courier(
+    http_client=httpx.Client(
+        proxies="http://my.test.proxy.example.com",
+        transport=httpx.HTTPTransport(local_address="0.0.0.0"),
+    ),
+)
 ```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/trycourier/courier-python. See [CONTRIBUTING.md](CONTRIBUTING.md) for more info.
+While we value open-source contributions to this SDK, this library is generated programmatically. Additions made directly to this library would have to be moved over to our generation code, otherwise they would be overwritten upon the next generated release. Feel free to open a PR as a proof of concept, but know that we will not be able to merge it as-is. We suggest opening an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!
 
 ## License
 
-The package is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+[MIT License](http://www.opensource.org/licenses/mit-license.php)
+
+## Author
+
+[Courier](https://github.com/trycourier) ([support@courier.com](mailto:support@courier.com))
