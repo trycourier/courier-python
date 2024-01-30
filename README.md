@@ -63,7 +63,7 @@ import asyncio
 from courier.client import AsyncCourier
 
 client = AsyncCourier(
-  authorization_token="YOUR_TOKENY" # Defaults to COURIER_AUTH_TOKEN
+  authorization_token="YOUR_TOKEN" # Defaults to COURIER_AUTH_TOKEN
 )
 
 async def main() -> None: 
@@ -144,7 +144,7 @@ import courier
 from courier import Courier
 
 client = Courier(
-  authorization_token="YOUR_AUTH_TOKEN")
+  authorization_token="YOUR_TOKEN")
 
 response = client.send(
     message=courier.TemplateMessage(
@@ -163,7 +163,7 @@ import courier
 from courier import Courier
 
 client = Courier(
-  authorization_token="YOUR_AUTH_TOKEN")
+  authorization_token="YOUR_TOKEN")
 
 response = client.send(
     message=courier.ContentMessage(
