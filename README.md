@@ -67,7 +67,7 @@ client = AsyncCourier(
 )
 
 async def main() -> None: 
-  response = client.send(
+  response = await client.send(
     message=courier.ContentMessage(
       to=courier.UserRecipient(
         email="marty_mcfly@email.com",
