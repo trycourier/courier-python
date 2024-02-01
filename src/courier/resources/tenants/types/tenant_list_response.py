@@ -16,14 +16,14 @@ except ImportError:
 
 class TenantListResponse(pydantic.BaseModel):
     cursor: typing.Optional[str] = pydantic.Field(
-        description="A pointer to the next page of results. Defined only whenhas_more is set to true."
+        description="A pointer to the next page of results. Defined only when has_more is set to true."
     )
     has_more: bool = pydantic.Field(description="Set to true when there are more pages that can be retrieved.")
     items: typing.List[Tenant] = pydantic.Field(description="An array of Tenants")
     next_url: typing.Optional[str] = pydantic.Field(
         description=(
             "A url that may be used to generate fetch the next set of results.\n"
-            "Defined only whenhas_more is set to true\n"
+            "Defined only when has_more is set to true\n"
         )
     )
     url: str = pydantic.Field(description="A url that may be used to generate these results.")

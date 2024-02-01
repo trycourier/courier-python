@@ -16,6 +16,7 @@ from .payment_required import PaymentRequired
 from .preference_status import PreferenceStatus
 from .recipient_preferences import RecipientPreferences
 from .rule import Rule
+from .user_tenant_association import UserTenantAssociation
 
 __all__ = [
     "AlreadyExists",
@@ -34,4 +35,5 @@ __all__ = [
     "PreferenceStatus",
     "RecipientPreferences",
     "Rule",
+    "UserTenantAssociation",
 ]

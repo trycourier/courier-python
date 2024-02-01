@@ -7,7 +7,7 @@ from .preferences import (
     UserPreferencesListResponse,
     UserPreferencesUpdateResponse,
 )
-from .tenants import AddUserToSingleTenantsParamsProfile, ListTenantsForUserResponse, UserTenantAssociation
+from .tenants import AddUserToSingleTenantsParamsProfile, ListTenantsForUserResponse
 from .tokens import (
     DeleteUserTokenOpts,
     Device,
@@ -49,7 +49,6 @@ __all__ = [
     "UserPreferencesGetResponse",
     "UserPreferencesListResponse",
     "UserPreferencesUpdateResponse",
-    "UserTenantAssociation",
     "UserToken",
     "preferences",
     "tenants",

@@ -2,6 +2,5 @@
 
 from .add_user_to_single_tenants_params_profile import AddUserToSingleTenantsParamsProfile
 from .list_tenants_for_user_response import ListTenantsForUserResponse
-from .user_tenant_association import UserTenantAssociation
 
-__all__ = ["AddUserToSingleTenantsParamsProfile", "ListTenantsForUserResponse", "UserTenantAssociation"]
+__all__ = ["AddUserToSingleTenantsParamsProfile", "ListTenantsForUserResponse"]

@@ -10,6 +10,7 @@ from .discord import Discord
 from .expo import Expo
 from .intercom import Intercom
 from .ms_teams import MsTeams
+from .slack import Slack
 
 try:
     import pydantic.v1 as pydantic  # type: ignore
@@ -49,6 +50,7 @@ class UserProfile(pydantic.BaseModel):
     facebook_psid: str = pydantic.Field(alias="facebookPSID")
     firebase_token: str = pydantic.Field(alias="firebaseToken")
     intercom: Intercom
+    slack: Slack
     ms_teams: MsTeams
 
     def json(self, **kwargs: typing.Any) -> str:
