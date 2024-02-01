@@ -4,17 +4,11 @@ import datetime as dt
 import typing
 
 from ....core.datetime_utils import serialize_datetime
-from .intercom_recipient import IntercomRecipient
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from .ms_teams_base_properties import MsTeamsBaseProperties
 
 
-class Intercom(pydantic.BaseModel):
-    from_: str = pydantic.Field(alias="from")
-    to: IntercomRecipient
+class SendToMsTeamsEmail(MsTeamsBaseProperties):
+    email: str
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

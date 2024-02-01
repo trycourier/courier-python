@@ -11,7 +11,7 @@ except ImportError:
     import pydantic  # type: ignore
 
 
-class IntercomeRecipient(pydantic.BaseModel):
+class IntercomRecipient(pydantic.BaseModel):
     id: str
 
     def json(self, **kwargs: typing.Any) -> str:

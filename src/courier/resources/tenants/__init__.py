@@ -2,6 +2,7 @@
 
 from .types import (
     DefaultPreferences,
+    ListUsersForTenantResponse,
     SubscriptionTopic,
     SubscriptionTopicStatus,
     TemplateProperty,
@@ -11,6 +12,7 @@ from .types import (
 
 __all__ = [
     "DefaultPreferences",
+    "ListUsersForTenantResponse",
     "SubscriptionTopic",
     "SubscriptionTopicStatus",
     "TemplateProperty",

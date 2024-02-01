@@ -8,9 +8,9 @@ from .....core.api_error import ApiError
 from .....core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .....core.jsonable_encoder import jsonable_encoder
 from .....core.remove_none_from_dict import remove_none_from_dict
+from ....commons.types.user_tenant_association import UserTenantAssociation
 from .types.add_user_to_single_tenants_params_profile import AddUserToSingleTenantsParamsProfile
 from .types.list_tenants_for_user_response import ListTenantsForUserResponse
-from .types.user_tenant_association import UserTenantAssociation
 
 try:
     import pydantic.v1 as pydantic  # type: ignore

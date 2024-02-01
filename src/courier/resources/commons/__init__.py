@@ -17,6 +17,7 @@ from .types import (
     PreferenceStatus,
     RecipientPreferences,
     Rule,
+    UserTenantAssociation,
 )
 from .errors import (
     AlreadyExistsError,
@@ -50,4 +51,5 @@ __all__ = [
     "PreferenceStatus",
     "RecipientPreferences",
     "Rule",
+    "UserTenantAssociation",
 ]

@@ -10,17 +10,26 @@ from .expo import Expo
 from .get_list_subscriptions_list import GetListSubscriptionsList
 from .get_list_subscriptions_response import GetListSubscriptionsResponse
 from .intercom import Intercom
-from .intercome_recipient import IntercomeRecipient
+from .intercom_recipient import IntercomRecipient
 from .merge_profile_response import MergeProfileResponse
 from .ms_teams import MsTeams
+from .ms_teams_base_properties import MsTeamsBaseProperties
 from .multiple_tokens import MultipleTokens
 from .profile_get_parameters import ProfileGetParameters
 from .profile_get_response import ProfileGetResponse
 from .replace_profile_response import ReplaceProfileResponse
 from .send_direct_message import SendDirectMessage
 from .send_to_channel import SendToChannel
-from .send_to_ms_teams_channel import SendToMsTeamsChannel
-from .send_to_ms_teams_user import SendToMsTeamsUser
+from .send_to_ms_teams_channel_id import SendToMsTeamsChannelId
+from .send_to_ms_teams_channel_name import SendToMsTeamsChannelName
+from .send_to_ms_teams_conversation_id import SendToMsTeamsConversationId
+from .send_to_ms_teams_email import SendToMsTeamsEmail
+from .send_to_ms_teams_user_id import SendToMsTeamsUserId
+from .send_to_slack_channel import SendToSlackChannel
+from .send_to_slack_email import SendToSlackEmail
+from .send_to_slack_user_id import SendToSlackUserId
+from .slack import Slack
+from .slack_base_properties import SlackBaseProperties
 from .snooze_rule import SnoozeRule
 from .snooze_rule_type import SnoozeRuleType
 from .subscribe_to_lists_request import SubscribeToListsRequest
@@ -40,17 +49,26 @@ __all__ = [
     "GetListSubscriptionsList",
     "GetListSubscriptionsResponse",
     "Intercom",
-    "IntercomeRecipient",
+    "IntercomRecipient",
     "MergeProfileResponse",
     "MsTeams",
+    "MsTeamsBaseProperties",
     "MultipleTokens",
     "ProfileGetParameters",
     "ProfileGetResponse",
     "ReplaceProfileResponse",
     "SendDirectMessage",
     "SendToChannel",
-    "SendToMsTeamsChannel",
-    "SendToMsTeamsUser",
+    "SendToMsTeamsChannelId",
+    "SendToMsTeamsChannelName",
+    "SendToMsTeamsConversationId",
+    "SendToMsTeamsEmail",
+    "SendToMsTeamsUserId",
+    "SendToSlackChannel",
+    "SendToSlackEmail",
+    "SendToSlackUserId",
+    "Slack",
+    "SlackBaseProperties",
     "SnoozeRule",
     "SnoozeRuleType",
     "SubscribeToListsRequest",

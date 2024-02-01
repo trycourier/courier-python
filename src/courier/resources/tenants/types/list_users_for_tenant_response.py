@@ -5,8 +5,8 @@ import typing
 
 import typing_extensions
 
-from ......core.datetime_utils import serialize_datetime
-from .....commons.types.user_tenant_association import UserTenantAssociation
+from ....core.datetime_utils import serialize_datetime
+from ...commons.types.user_tenant_association import UserTenantAssociation
 
 try:
     import pydantic.v1 as pydantic  # type: ignore
@@ -14,7 +14,7 @@ except ImportError:
     import pydantic  # type: ignore
 
 
-class ListTenantsForUserResponse(pydantic.BaseModel):
+class ListUsersForTenantResponse(pydantic.BaseModel):
     items: typing.Optional[UserTenantAssociation]
     has_more: bool = pydantic.Field(description="Set to true when there are more pages that can be retrieved.")
     url: str = pydantic.Field(description="A url that may be used to generate these results.")

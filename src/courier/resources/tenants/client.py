@@ -10,6 +10,7 @@ from ...core.jsonable_encoder import jsonable_encoder
 from ..commons.errors.bad_request_error import BadRequestError
 from ..commons.types.bad_request import BadRequest
 from .types.default_preferences import DefaultPreferences
+from .types.list_users_for_tenant_response import ListUsersForTenantResponse
 from .types.template_property import TemplateProperty
 from .types.tenant import Tenant
 from .types.tenant_list_response import TenantListResponse
@@ -137,6 +138,27 @@ class TenantsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def get_users_by_tenant(self, tenant_id: str) -> ListUsersForTenantResponse:
+        """
+        Parameters:
+            - tenant_id: str. Id of the tenant for user membership.
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "GET",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{tenant_id}/users"),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(ListUsersForTenantResponse, _response.json())  # type: ignore
+        if _response.status_code == 400:
+            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
 
 class AsyncTenantsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -246,6 +268,27 @@ class AsyncTenantsClient:
         )
         if 200 <= _response.status_code < 300:
             return
+        try:
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get_users_by_tenant(self, tenant_id: str) -> ListUsersForTenantResponse:
+        """
+        Parameters:
+            - tenant_id: str. Id of the tenant for user membership.
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            "GET",
+            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{tenant_id}/users"),
+            headers=self._client_wrapper.get_headers(),
+            timeout=60,
+        )
+        if 200 <= _response.status_code < 300:
+            return pydantic.parse_obj_as(ListUsersForTenantResponse, _response.json())  # type: ignore
+        if _response.status_code == 400:
+            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

@@ -2,9 +2,11 @@
 
 import typing
 
+from ...profiles.types.ms_teams import MsTeams
+from ...profiles.types.slack import Slack
 from .audience_recipient import AudienceRecipient
 from .list_pattern_recipient import ListPatternRecipient
 from .list_recipient import ListRecipient
 from .user_recipient import UserRecipient
 
-Recipient = typing.Union[AudienceRecipient, ListRecipient, ListPatternRecipient, UserRecipient]
+Recipient = typing.Union[AudienceRecipient, ListRecipient, ListPatternRecipient, UserRecipient, Slack, MsTeams]
