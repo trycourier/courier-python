@@ -12,16 +12,14 @@ except ImportError:
 
 
 class SendMessageResponse(pydantic.BaseModel):
-    request_id: str = pydantic.Field(
-        alias="requestId",
-        description=(
-            "A successful call to `POST /send` returns a `202` status code along with a `requestId` in the response body.\n"
-            "\n"
-            "For send requests that have a single recipient, the `requestId` is assigned to the derived message as its message_id. Therefore the `requestId` can be supplied to the Message's API for single recipient messages.\n"
-            "\n"
-            "For send requests that have multiple recipients (accounts, audiences, lists, etc.), Courier assigns a unique id to each derived message as its `message_id`. Therefore the `requestId` cannot be supplied to the Message's API for single-recipient messages.\n"
-        ),
-    )
+    request_id: str = pydantic.Field(alias="requestId")
+    """
+    A successful call to `POST /send` returns a `202` status code along with a `requestId` in the response body.
+    
+    For send requests that have a single recipient, the `requestId` is assigned to the derived message as its message_id. Therefore the `requestId` can be supplied to the Message's API for single recipient messages.
+    
+    For send requests that have multiple recipients (accounts, audiences, lists, etc.), Courier assigns a unique id to each derived message as its `message_id`. Therefore the `requestId` cannot be supplied to the Message's API for single-recipient messages.
+    """
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -35,4 +33,5 @@ class SendMessageResponse(pydantic.BaseModel):
         frozen = True
         smart_union = True
         allow_population_by_field_name = True
+        extra = pydantic.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
