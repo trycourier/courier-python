@@ -4,6 +4,8 @@ import typing
 
 import httpx
 
+from .http_client import AsyncHttpClient, HttpClient
+
 
 class BaseClientWrapper:
     def __init__(self, *, authorization_token: typing.Union[str, typing.Callable[[], str]], base_url: str):
@@ -14,7 +16,7 @@ class BaseClientWrapper:
         headers: typing.Dict[str, str] = {
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "trycourier",
-            "X-Fern-SDK-Version": "v6.0.0b1",
+            "X-Fern-SDK-Version": "0.0.91",
         }
         headers["Authorization"] = f"Bearer {self._get_authorization_token()}"
         return headers
@@ -38,7 +40,7 @@ class SyncClientWrapper(BaseClientWrapper):
         httpx_client: httpx.Client,
     ):
         super().__init__(authorization_token=authorization_token, base_url=base_url)
-        self.httpx_client = httpx_client
+        self.httpx_client = HttpClient(httpx_client=httpx_client)
 
 
 class AsyncClientWrapper(BaseClientWrapper):
@@ -50,4 +52,4 @@ class AsyncClientWrapper(BaseClientWrapper):
         httpx_client: httpx.AsyncClient,
     ):
         super().__init__(authorization_token=authorization_token, base_url=base_url)
-        self.httpx_client = httpx_client
+        self.httpx_client = AsyncHttpClient(httpx_client=httpx_client)
