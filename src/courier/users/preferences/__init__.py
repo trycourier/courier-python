@@ -2,6 +2,7 @@
 
 from .types import (
     TopicPreference,
+    TopicPreferenceUpdate,
     UserPreferencesGetResponse,
     UserPreferencesListResponse,
     UserPreferencesUpdateResponse,
@@ -9,6 +10,7 @@ from .types import (
 
 __all__ = [
     "TopicPreference",
+    "TopicPreferenceUpdate",
     "UserPreferencesGetResponse",
     "UserPreferencesListResponse",
     "UserPreferencesUpdateResponse",

@@ -12,6 +12,7 @@ from ..commons.types.recipient_preferences import RecipientPreferences
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import pydantic_v1
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
 from .types.list import List
@@ -19,11 +20,6 @@ from .types.list_get_all_response import ListGetAllResponse
 from .types.list_get_subscriptions_response import ListGetSubscriptionsResponse
 from .types.list_put_params import ListPutParams
 from .types.put_subscriptions_recipient import PutSubscriptionsRecipient
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -49,6 +45,16 @@ class ListsClient:
             - pattern: typing.Optional[str]. "A pattern used to filter the list items returned. Pattern types supported: exact match on `list_id` or a pattern of one or more pattern parts. you may replace a part with either: `*` to match all parts in that position, or `**` to signify a wildcard `endsWith` pattern match."
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.list(
+            cursor="string",
+            pattern="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -76,14 +82,14 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListGetAllResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListGetAllResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -98,6 +104,15 @@ class ListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.get(
+            list_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -115,14 +130,14 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(List, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -141,6 +156,59 @@ class ListsClient:
             - request: ListPutParams.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            ListPutParams,
+            NotificationPreferenceDetails,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.update(
+            list_id="string",
+            request=ListPutParams(
+                name="string",
+                preferences=RecipientPreferences(
+                    categories={
+                        "string": NotificationPreferenceDetails(
+                            status="OPTED_IN",
+                            rules=[
+                                Rule(
+                                    start="string",
+                                    until="string",
+                                )
+                            ],
+                            channel_preferences=[
+                                ChannelPreference(
+                                    channel="direct_message",
+                                )
+                            ],
+                        )
+                    },
+                    notifications={
+                        "string": NotificationPreferenceDetails(
+                            status="OPTED_IN",
+                            rules=[
+                                Rule(
+                                    start="string",
+                                    until="string",
+                                )
+                            ],
+                            channel_preferences=[
+                                ChannelPreference(
+                                    channel="direct_message",
+                                )
+                            ],
+                        )
+                    },
+                ),
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -164,12 +232,12 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(List, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -184,6 +252,15 @@ class ListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.delete(
+            list_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -201,7 +278,7 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -221,6 +298,15 @@ class ListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.restore(
+            list_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -243,7 +329,7 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -271,6 +357,16 @@ class ListsClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of list subscriptions
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.get_subscribers(
+            list_id="string",
+            cursor="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -299,14 +395,14 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListGetSubscriptionsResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListGetSubscriptionsResponse, _response.json())  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -329,6 +425,61 @@ class ListsClient:
             - request: typing.Sequence[PutSubscriptionsRecipient].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            NotificationPreferenceDetails,
+            PutSubscriptionsRecipient,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.update_subscribers(
+            list_id="string",
+            request=[
+                PutSubscriptionsRecipient(
+                    recipient_id="string",
+                    preferences=RecipientPreferences(
+                        categories={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                        notifications={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                    ),
+                )
+            ],
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -354,14 +505,14 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -390,6 +541,61 @@ class ListsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            NotificationPreferenceDetails,
+            PutSubscriptionsRecipient,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.add_subscribers(
+            list_id="string",
+            request=[
+                PutSubscriptionsRecipient(
+                    recipient_id="string",
+                    preferences=RecipientPreferences(
+                        categories={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                        notifications={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                    ),
+                )
+            ],
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
@@ -417,14 +623,14 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -450,6 +656,56 @@ class ListsClient:
             - preferences: typing.Optional[RecipientPreferences].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            NotificationPreferenceDetails,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.subscribe(
+            list_id="string",
+            user_id="string",
+            preferences=RecipientPreferences(
+                categories={
+                    "string": NotificationPreferenceDetails(
+                        status="OPTED_IN",
+                        rules=[
+                            Rule(
+                                start="string",
+                                until="string",
+                            )
+                        ],
+                        channel_preferences=[
+                            ChannelPreference(
+                                channel="direct_message",
+                            )
+                        ],
+                    )
+                },
+                notifications={
+                    "string": NotificationPreferenceDetails(
+                        status="OPTED_IN",
+                        rules=[
+                            Rule(
+                                start="string",
+                                until="string",
+                            )
+                        ],
+                        channel_preferences=[
+                            ChannelPreference(
+                                channel="direct_message",
+                            )
+                        ],
+                    )
+                },
+            ),
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if preferences is not OMIT:
@@ -479,7 +735,7 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -503,6 +759,16 @@ class ListsClient:
             - user_id: str. A unique identifier representing the recipient associated with the list
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.lists.unsubscribe(
+            list_id="string",
+            user_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -523,14 +789,14 @@ class ListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -558,6 +824,16 @@ class AsyncListsClient:
             - pattern: typing.Optional[str]. "A pattern used to filter the list items returned. Pattern types supported: exact match on `list_id` or a pattern of one or more pattern parts. you may replace a part with either: `*` to match all parts in that position, or `**` to signify a wildcard `endsWith` pattern match."
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.list(
+            cursor="string",
+            pattern="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -585,14 +861,14 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListGetAllResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListGetAllResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -607,6 +883,15 @@ class AsyncListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.get(
+            list_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -624,14 +909,14 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(List, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -650,6 +935,59 @@ class AsyncListsClient:
             - request: ListPutParams.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            ListPutParams,
+            NotificationPreferenceDetails,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.update(
+            list_id="string",
+            request=ListPutParams(
+                name="string",
+                preferences=RecipientPreferences(
+                    categories={
+                        "string": NotificationPreferenceDetails(
+                            status="OPTED_IN",
+                            rules=[
+                                Rule(
+                                    start="string",
+                                    until="string",
+                                )
+                            ],
+                            channel_preferences=[
+                                ChannelPreference(
+                                    channel="direct_message",
+                                )
+                            ],
+                        )
+                    },
+                    notifications={
+                        "string": NotificationPreferenceDetails(
+                            status="OPTED_IN",
+                            rules=[
+                                Rule(
+                                    start="string",
+                                    until="string",
+                                )
+                            ],
+                            channel_preferences=[
+                                ChannelPreference(
+                                    channel="direct_message",
+                                )
+                            ],
+                        )
+                    },
+                ),
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -673,12 +1011,12 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(List, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -693,6 +1031,15 @@ class AsyncListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.delete(
+            list_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -710,7 +1057,7 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -730,6 +1077,15 @@ class AsyncListsClient:
             - list_id: str. A unique identifier representing the list you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.restore(
+            list_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -752,7 +1108,7 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -780,6 +1136,16 @@ class AsyncListsClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of list subscriptions
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.get_subscribers(
+            list_id="string",
+            cursor="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -808,14 +1174,14 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListGetSubscriptionsResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListGetSubscriptionsResponse, _response.json())  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -838,6 +1204,61 @@ class AsyncListsClient:
             - request: typing.Sequence[PutSubscriptionsRecipient].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            NotificationPreferenceDetails,
+            PutSubscriptionsRecipient,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.update_subscribers(
+            list_id="string",
+            request=[
+                PutSubscriptionsRecipient(
+                    recipient_id="string",
+                    preferences=RecipientPreferences(
+                        categories={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                        notifications={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                    ),
+                )
+            ],
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -863,14 +1284,14 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -899,6 +1320,61 @@ class AsyncListsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            NotificationPreferenceDetails,
+            PutSubscriptionsRecipient,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.add_subscribers(
+            list_id="string",
+            request=[
+                PutSubscriptionsRecipient(
+                    recipient_id="string",
+                    preferences=RecipientPreferences(
+                        categories={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                        notifications={
+                            "string": NotificationPreferenceDetails(
+                                status="OPTED_IN",
+                                rules=[
+                                    Rule(
+                                        start="string",
+                                        until="string",
+                                    )
+                                ],
+                                channel_preferences=[
+                                    ChannelPreference(
+                                        channel="direct_message",
+                                    )
+                                ],
+                            )
+                        },
+                    ),
+                )
+            ],
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
@@ -926,14 +1402,14 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -959,6 +1435,56 @@ class AsyncListsClient:
             - preferences: typing.Optional[RecipientPreferences].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            ChannelPreference,
+            NotificationPreferenceDetails,
+            RecipientPreferences,
+            Rule,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.subscribe(
+            list_id="string",
+            user_id="string",
+            preferences=RecipientPreferences(
+                categories={
+                    "string": NotificationPreferenceDetails(
+                        status="OPTED_IN",
+                        rules=[
+                            Rule(
+                                start="string",
+                                until="string",
+                            )
+                        ],
+                        channel_preferences=[
+                            ChannelPreference(
+                                channel="direct_message",
+                            )
+                        ],
+                    )
+                },
+                notifications={
+                    "string": NotificationPreferenceDetails(
+                        status="OPTED_IN",
+                        rules=[
+                            Rule(
+                                start="string",
+                                until="string",
+                            )
+                        ],
+                        channel_preferences=[
+                            ChannelPreference(
+                                channel="direct_message",
+                            )
+                        ],
+                    )
+                },
+            ),
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if preferences is not OMIT:
@@ -988,7 +1514,7 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -1012,6 +1538,16 @@ class AsyncListsClient:
             - user_id: str. A unique identifier representing the recipient associated with the list
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.lists.unsubscribe(
+            list_id="string",
+            user_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -1032,14 +1568,14 @@ class AsyncListsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

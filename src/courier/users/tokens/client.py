@@ -9,17 +9,13 @@ from ...commons.types.bad_request import BadRequest
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
+from ...core.pydantic_utilities import pydantic_v1
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
 from .types.get_all_tokens_response import GetAllTokensResponse
 from .types.get_user_token_response import GetUserTokenResponse
 from .types.patch_user_token_opts import PatchUserTokenOpts
 from .types.user_token import UserToken
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -37,6 +33,15 @@ class TokensClient:
             - user_id: str. The user's ID. This can be any uniquely identifiable string.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tokens.add_multiple(
+            user_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -59,14 +64,14 @@ class TokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -87,6 +92,37 @@ class TokensClient:
             - request: UserToken.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+        from courier.users import Device, Tracking, UserToken
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tokens.add(
+            user_id="string",
+            token="string",
+            request=UserToken(
+                token="string",
+                provider_key="firebase-fcm",
+                expiry_date="string",
+                properties={"key": "value"},
+                device=Device(
+                    app_id="string",
+                    ad_id="string",
+                    device_id="string",
+                    platform="string",
+                    manufacturer="string",
+                    model="string",
+                ),
+                tracking=Tracking(
+                    os_version="string",
+                    ip="string",
+                    lat="string",
+                    long_="string",
+                ),
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -113,14 +149,14 @@ class TokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -146,6 +182,20 @@ class TokensClient:
             - request: PatchUserTokenOpts.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+        from courier.users import PatchOperation, PatchUserTokenOpts
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tokens.update(
+            user_id="string",
+            token="string",
+            request=PatchUserTokenOpts(
+                patch=[PatchOperation()],
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PATCH",
@@ -172,14 +222,14 @@ class TokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -198,6 +248,16 @@ class TokensClient:
             - token: str. The full token string.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tokens.get(
+            user_id="string",
+            token="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -218,14 +278,14 @@ class TokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(GetUserTokenResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(GetUserTokenResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -240,6 +300,15 @@ class TokensClient:
             - user_id: str. The user's ID. This can be any uniquely identifiable string.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tokens.list(
+            user_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -259,14 +328,14 @@ class TokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(GetAllTokensResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(GetAllTokensResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -286,6 +355,15 @@ class AsyncTokensClient:
             - user_id: str. The user's ID. This can be any uniquely identifiable string.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tokens.add_multiple(
+            user_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -308,14 +386,14 @@ class AsyncTokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -336,6 +414,37 @@ class AsyncTokensClient:
             - request: UserToken.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+        from courier.users import Device, Tracking, UserToken
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tokens.add(
+            user_id="string",
+            token="string",
+            request=UserToken(
+                token="string",
+                provider_key="firebase-fcm",
+                expiry_date="string",
+                properties={"key": "value"},
+                device=Device(
+                    app_id="string",
+                    ad_id="string",
+                    device_id="string",
+                    platform="string",
+                    manufacturer="string",
+                    model="string",
+                ),
+                tracking=Tracking(
+                    os_version="string",
+                    ip="string",
+                    lat="string",
+                    long_="string",
+                ),
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -362,14 +471,14 @@ class AsyncTokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -395,6 +504,20 @@ class AsyncTokensClient:
             - request: PatchUserTokenOpts.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+        from courier.users import PatchOperation, PatchUserTokenOpts
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tokens.update(
+            user_id="string",
+            token="string",
+            request=PatchUserTokenOpts(
+                patch=[PatchOperation()],
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PATCH",
@@ -421,14 +544,14 @@ class AsyncTokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -447,6 +570,16 @@ class AsyncTokensClient:
             - token: str. The full token string.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tokens.get(
+            user_id="string",
+            token="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -467,14 +600,14 @@ class AsyncTokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(GetUserTokenResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(GetUserTokenResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -491,6 +624,15 @@ class AsyncTokensClient:
             - user_id: str. The user's ID. This can be any uniquely identifiable string.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tokens.list(
+            user_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -510,14 +652,14 @@ class AsyncTokensClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(GetAllTokensResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(GetAllTokensResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

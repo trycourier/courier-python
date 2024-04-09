@@ -4,72 +4,68 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .message_status import MessageStatus
 from .reason import Reason
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class MessageDetails(pydantic.BaseModel):
-    id: str = pydantic.Field()
+class MessageDetails(pydantic_v1.BaseModel):
+    id: str = pydantic_v1.Field()
     """
     A unique identifier associated with the message you wish to retrieve (results from a send).
     """
 
-    status: MessageStatus = pydantic.Field()
+    status: MessageStatus = pydantic_v1.Field()
     """
     The current status of the message.
     """
 
-    enqueued: int = pydantic.Field()
+    enqueued: int = pydantic_v1.Field()
     """
     A UTC timestamp at which Courier received the message request. Stored as a millisecond representation of the Unix epoch.
     """
 
-    sent: int = pydantic.Field()
+    sent: int = pydantic_v1.Field()
     """
     A UTC timestamp at which Courier passed the message to the Integration provider. Stored as a millisecond representation of the Unix epoch.
     """
 
-    delivered: int = pydantic.Field()
+    delivered: int = pydantic_v1.Field()
     """
     A UTC timestamp at which the Integration provider delivered the message. Stored as a millisecond representation of the Unix epoch.
     """
 
-    opened: int = pydantic.Field()
+    opened: int = pydantic_v1.Field()
     """
     A UTC timestamp at which the recipient opened a message for the first time. Stored as a millisecond representation of the Unix epoch.
     """
 
-    clicked: int = pydantic.Field()
+    clicked: int = pydantic_v1.Field()
     """
     A UTC timestamp at which the recipient clicked on a tracked link for the first time. Stored as a millisecond representation of the Unix epoch.
     """
 
-    recipient: str = pydantic.Field()
+    recipient: str = pydantic_v1.Field()
     """
     A unique identifier associated with the recipient of the delivered message.
     """
 
-    event: str = pydantic.Field()
+    event: str = pydantic_v1.Field()
     """
     A unique identifier associated with the event of the delivered message.
     """
 
-    notification: str = pydantic.Field()
+    notification: str = pydantic_v1.Field()
     """
     A unique identifier associated with the notification of the delivered message.
     """
 
-    error: typing.Optional[str] = pydantic.Field(default=None)
+    error: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     A message describing the error that occurred.
     """
 
-    reason: typing.Optional[Reason] = pydantic.Field(default=None)
+    reason: typing.Optional[Reason] = pydantic_v1.Field(default=None)
     """
     The reason for the current status of the message.
     """
@@ -85,5 +81,5 @@ class MessageDetails(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

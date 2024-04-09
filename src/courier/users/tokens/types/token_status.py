@@ -2,4 +2,4 @@
 
 import typing
 
-TokenStatus = typing.Union[typing.AnyStr, typing.Literal["active", "unknown", "failed", "revoked"]]
+TokenStatus = typing.Union[typing.Literal["active", "unknown", "failed", "revoked"], typing.Any]

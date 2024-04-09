@@ -2,4 +2,4 @@
 
 import typing
 
-TextAlign = typing.Union[typing.AnyStr, typing.Literal["left", "center", "right"]]
+TextAlign = typing.Union[typing.Literal["left", "center", "right"], typing.Any]

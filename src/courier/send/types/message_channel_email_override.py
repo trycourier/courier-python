@@ -5,21 +5,17 @@ import typing
 
 from ...brands.types.brand import Brand
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .attachment import Attachment
 from .tracking_override import TrackingOverride
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class MessageChannelEmailOverride(pydantic.BaseModel):
+class MessageChannelEmailOverride(pydantic_v1.BaseModel):
     attachments: typing.Optional[typing.List[Attachment]] = None
     bcc: typing.Optional[str] = None
     brand: typing.Optional[Brand] = None
     cc: typing.Optional[str] = None
-    from_: typing.Optional[str] = pydantic.Field(alias="from", default=None)
+    from_: typing.Optional[str] = pydantic_v1.Field(alias="from", default=None)
     html: typing.Optional[str] = None
     reply_to: typing.Optional[str] = None
     subject: typing.Optional[str] = None
@@ -39,5 +35,5 @@ class MessageChannelEmailOverride(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

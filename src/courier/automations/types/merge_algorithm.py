@@ -2,4 +2,4 @@
 
 import typing
 
-MergeAlgorithm = typing.Union[typing.AnyStr, typing.Literal["replace", "none", "overwrite", "soft-merge"]]
+MergeAlgorithm = typing.Union[typing.Literal["replace", "none", "overwrite", "soft-merge"], typing.Any]

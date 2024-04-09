@@ -6,12 +6,8 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .elemental_base_node import ElementalBaseNode
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class ElementalChannelNode(ElementalBaseNode):
@@ -26,19 +22,19 @@ class ElementalChannelNode(ElementalBaseNode):
     [control flow docs](https://www.courier.com/docs/platform/content/elemental/control-flow/) for more details.
     """
 
-    channel: str = pydantic.Field()
+    channel: str = pydantic_v1.Field()
     """
     The channel the contents of this element should be applied to. Can be `email`,
     `push`, `direct_message`, `sms` or a provider such as slack
     """
 
-    elements: typing.Optional[typing.List[ElementalNode]] = pydantic.Field(default=None)
+    elements: typing.Optional[typing.List[ElementalNode]] = pydantic_v1.Field(default=None)
     """
     An array of elements to apply to the channel. If `raw` has not been
     specified, `elements` is `required`.
     """
 
-    raw: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    raw: typing.Optional[typing.Dict[str, typing.Any]] = pydantic_v1.Field(default=None)
     """
     Raw data to apply to the channel. If `elements` has not been
     specified, `raw` is `required`.
@@ -57,7 +53,7 @@ class ElementalChannelNode(ElementalBaseNode):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
 
 

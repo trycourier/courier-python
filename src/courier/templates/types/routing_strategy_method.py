@@ -2,4 +2,4 @@
 
 import typing
 
-RoutingStrategyMethod = typing.Union[typing.AnyStr, typing.Literal["all", "single"]]
+RoutingStrategyMethod = typing.Union[typing.Literal["all", "single"], typing.Any]

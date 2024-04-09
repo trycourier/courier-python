@@ -2,4 +2,4 @@
 
 import typing
 
-SubscriptionTopicStatus = typing.Union[typing.AnyStr, typing.Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"]]
+SubscriptionTopicStatus = typing.Union[typing.Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"], typing.Any]

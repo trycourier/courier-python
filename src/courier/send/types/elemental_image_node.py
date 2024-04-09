@@ -4,13 +4,9 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .elemental_base_node import ElementalBaseNode
 from .i_alignment import IAlignment
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class ElementalImageNode(ElementalBaseNode):
@@ -18,27 +14,27 @@ class ElementalImageNode(ElementalBaseNode):
     Used to embed an image into the notification.
     """
 
-    src: str = pydantic.Field()
+    src: str = pydantic_v1.Field()
     """
     The source of the image.
     """
 
-    href: typing.Optional[str] = pydantic.Field(default=None)
+    href: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     A URL to link to when the image is clicked.
     """
 
-    align: typing.Optional[IAlignment] = pydantic.Field(default=None)
+    align: typing.Optional[IAlignment] = pydantic_v1.Field(default=None)
     """
     The alignment of the image.
     """
 
-    alt_text: typing.Optional[str] = pydantic.Field(alias="altText", default=None)
+    alt_text: typing.Optional[str] = pydantic_v1.Field(alias="altText", default=None)
     """
     Alternate text for the image.
     """
 
-    width: typing.Optional[str] = pydantic.Field(default=None)
+    width: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     CSS width properties to apply to the image. For example, 50px
     """
@@ -56,5 +52,5 @@ class ElementalImageNode(ElementalBaseNode):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

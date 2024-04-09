@@ -4,31 +4,27 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .i_profile_preferences import IProfilePreferences
 from .message_context import MessageContext
 from .message_data import MessageData
 from .user_recipient_type import UserRecipientType
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
-
 
 class UserRecipient(UserRecipientType):
-    account_id: typing.Optional[str] = pydantic.Field(default=None)
+    account_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     Use `tenant_id` instad.
     """
 
-    context: typing.Optional[MessageContext] = pydantic.Field(default=None)
+    context: typing.Optional[MessageContext] = pydantic_v1.Field(default=None)
     """
     Context information such as tenant_id to send the notification with.
     """
 
     data: typing.Optional[MessageData] = None
     email: typing.Optional[str] = None
-    locale: typing.Optional[str] = pydantic.Field(default=None)
+    locale: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     The user's preferred ISO 639-1 language code.
     """
@@ -36,7 +32,7 @@ class UserRecipient(UserRecipientType):
     user_id: typing.Optional[str] = None
     phone_number: typing.Optional[str] = None
     preferences: typing.Optional[IProfilePreferences] = None
-    tenant_id: typing.Optional[str] = pydantic.Field(default=None)
+    tenant_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     An id of a tenant, [see tenants api docs](https://www.courier.com/docs/reference/tenants).
     Will load brand, default preferences and any other base context data associated with this tenant.
@@ -55,5 +51,5 @@ class UserRecipient(UserRecipientType):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

@@ -4,16 +4,12 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from ...send.types.base_message import BaseMessage
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class InboundBulkTemplateMessage(BaseMessage):
-    template: str = pydantic.Field()
+    template: str = pydantic_v1.Field()
     """
     The id of the notification template to be rendered and sent to the recipient(s).
     This field or the content field must be supplied.
@@ -32,5 +28,5 @@ class InboundBulkTemplateMessage(BaseMessage):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

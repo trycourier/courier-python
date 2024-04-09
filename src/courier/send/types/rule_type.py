@@ -2,4 +2,4 @@
 
 import typing
 
-RuleType = typing.Union[typing.AnyStr, typing.Literal["snooze", "channel_preferences", "status"]]
+RuleType = typing.Union[typing.Literal["snooze", "channel_preferences", "status"], typing.Any]

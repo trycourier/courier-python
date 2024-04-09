@@ -3,6 +3,5 @@
 import typing
 
 BlockType = typing.Union[
-    typing.AnyStr,
-    typing.Literal["action", "divider", "image", "jsonnet", "list", "markdown", "quote", "template", "text"],
+    typing.Literal["action", "divider", "image", "jsonnet", "list", "markdown", "quote", "template", "text"], typing.Any
 ]
