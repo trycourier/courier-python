@@ -3,6 +3,6 @@
 import typing
 
 Reason = typing.Union[
-    typing.AnyStr,
     typing.Literal["FILTERED", "NO_CHANNELS", "NO_PROVIDERS", "PROVIDER_ERROR", "UNPUBLISHED", "UNSUBSCRIBED"],
+    typing.Any,
 ]

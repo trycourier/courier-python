@@ -4,16 +4,12 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .notification_block import NotificationBlock
 from .notification_channel import NotificationChannel
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class NotificationGetContentResponse(pydantic.BaseModel):
+class NotificationGetContentResponse(pydantic_v1.BaseModel):
     blocks: typing.Optional[typing.List[NotificationBlock]] = None
     channels: typing.Optional[typing.List[NotificationChannel]] = None
     checksum: typing.Optional[str] = None
@@ -29,5 +25,5 @@ class NotificationGetContentResponse(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

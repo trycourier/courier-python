@@ -2,4 +2,4 @@
 
 import typing
 
-SnoozeRuleType = typing.Union[typing.AnyStr, typing.Literal["snooze"]]
+SnoozeRuleType = typing.Union[typing.Literal["snooze"], typing.Any]

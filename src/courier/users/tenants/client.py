@@ -8,15 +8,11 @@ from ...commons.types.user_tenant_association import UserTenantAssociation
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
+from ...core.pydantic_utilities import pydantic_v1
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
 from .types.add_user_to_single_tenants_params_profile import AddUserToSingleTenantsParamsProfile
 from .types.list_tenants_for_user_response import ListTenantsForUserResponse
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -46,6 +42,24 @@ class TenantsClient:
             - tenants: typing.Sequence[UserTenantAssociation].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import UserTenantAssociation
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tenants.add_multple(
+            user_id="string",
+            tenants=[
+                UserTenantAssociation(
+                    user_id="string",
+                    type="user",
+                    tenant_id="string",
+                    profile={"string": {"key": "value"}},
+                )
+            ],
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -71,7 +85,7 @@ class TenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -106,6 +120,24 @@ class TenantsClient:
             - profile: AddUserToSingleTenantsParamsProfile.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+        from courier.users import AddUserToSingleTenantsParamsProfile
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tenants.add(
+            user_id="string",
+            tenant_id="string",
+            profile=AddUserToSingleTenantsParamsProfile(
+                title="string",
+                email="string",
+                phone_number="string",
+                locale="string",
+                additional_fields={"string": {"key": "value"}},
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -132,7 +164,7 @@ class TenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -152,6 +184,15 @@ class TenantsClient:
             - user_id: str. Id of the user to be removed from the supplied tenant.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tenants.remove_all(
+            user_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -171,7 +212,7 @@ class TenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -193,6 +234,16 @@ class TenantsClient:
             - tenant_id: str. Id of the tenant the user should be removed from.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tenants.remove(
+            user_id="string",
+            tenant_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -213,7 +264,7 @@ class TenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -244,6 +295,17 @@ class TenantsClient:
             - cursor: typing.Optional[str]. Continue the pagination with the next cursor
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.tenants.list(
+            user_id="string",
+            limit=1,
+            cursor="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -273,12 +335,12 @@ class TenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListTenantsForUserResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListTenantsForUserResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -310,6 +372,24 @@ class AsyncTenantsClient:
             - tenants: typing.Sequence[UserTenantAssociation].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import UserTenantAssociation
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tenants.add_multple(
+            user_id="string",
+            tenants=[
+                UserTenantAssociation(
+                    user_id="string",
+                    type="user",
+                    tenant_id="string",
+                    profile={"string": {"key": "value"}},
+                )
+            ],
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -335,7 +415,7 @@ class AsyncTenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -370,6 +450,24 @@ class AsyncTenantsClient:
             - profile: AddUserToSingleTenantsParamsProfile.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+        from courier.users import AddUserToSingleTenantsParamsProfile
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tenants.add(
+            user_id="string",
+            tenant_id="string",
+            profile=AddUserToSingleTenantsParamsProfile(
+                title="string",
+                email="string",
+                phone_number="string",
+                locale="string",
+                additional_fields={"string": {"key": "value"}},
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -396,7 +494,7 @@ class AsyncTenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -416,6 +514,15 @@ class AsyncTenantsClient:
             - user_id: str. Id of the user to be removed from the supplied tenant.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tenants.remove_all(
+            user_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -435,7 +542,7 @@ class AsyncTenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -459,6 +566,16 @@ class AsyncTenantsClient:
             - tenant_id: str. Id of the tenant the user should be removed from.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tenants.remove(
+            user_id="string",
+            tenant_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -479,7 +596,7 @@ class AsyncTenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -510,6 +627,17 @@ class AsyncTenantsClient:
             - cursor: typing.Optional[str]. Continue the pagination with the next cursor
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.tenants.list(
+            user_id="string",
+            limit=1,
+            cursor="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -539,12 +667,12 @@ class AsyncTenantsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListTenantsForUserResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListTenantsForUserResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

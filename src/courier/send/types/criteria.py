@@ -2,4 +2,4 @@
 
 import typing
 
-Criteria = typing.Union[typing.AnyStr, typing.Literal["no-escalation", "delivered", "viewed", "engaged"]]
+Criteria = typing.Union[typing.Literal["no-escalation", "delivered", "viewed", "engaged"], typing.Any]

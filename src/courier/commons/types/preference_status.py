@@ -2,4 +2,4 @@
 
 import typing
 
-PreferenceStatus = typing.Union[typing.AnyStr, typing.Literal["OPTED_IN", "OPTED_OUT", "REQUIRED"]]
+PreferenceStatus = typing.Union[typing.Literal["OPTED_IN", "OPTED_OUT", "REQUIRED"], typing.Any]

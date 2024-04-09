@@ -4,21 +4,17 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ...core.pydantic_utilities import pydantic_v1
 
 
-class UserTenantAssociation(pydantic.BaseModel):
-    user_id: str = pydantic.Field()
+class UserTenantAssociation(pydantic_v1.BaseModel):
+    user_id: str = pydantic_v1.Field()
     """
     User ID for the assocation between tenant and user
     """
 
     type: typing.Literal["user"]
-    tenant_id: str = pydantic.Field()
+    tenant_id: str = pydantic_v1.Field()
     """
     Tenant ID for the assocation between tenant and user
     """
@@ -36,5 +32,5 @@ class UserTenantAssociation(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

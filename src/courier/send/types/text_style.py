@@ -2,4 +2,4 @@
 
 import typing
 
-TextStyle = typing.Union[typing.AnyStr, typing.Literal["text", "h1", "h2", "subtext"]]
+TextStyle = typing.Union[typing.Literal["text", "h1", "h2", "subtext"], typing.Any]

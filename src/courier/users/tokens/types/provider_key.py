@@ -2,4 +2,4 @@
 
 import typing
 
-ProviderKey = typing.Union[typing.AnyStr, typing.Literal["firebase-fcm", "apn", "expo", "onesignal"]]
+ProviderKey = typing.Union[typing.Literal["firebase-fcm", "apn", "expo", "onesignal"], typing.Any]

@@ -5,26 +5,22 @@ import typing
 
 from ...commons.types.recipient_preferences import RecipientPreferences
 from ...core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ...core.pydantic_utilities import pydantic_v1
 
 
-class GetListSubscriptionsList(pydantic.BaseModel):
+class GetListSubscriptionsList(pydantic_v1.BaseModel):
     id: str
-    name: str = pydantic.Field()
+    name: str = pydantic_v1.Field()
     """
     List name
     """
 
-    created: str = pydantic.Field()
+    created: str = pydantic_v1.Field()
     """
     The date/time of when the list was created. Represented as a string in ISO format.
     """
 
-    updated: str = pydantic.Field()
+    updated: str = pydantic_v1.Field()
     """
     The date/time of when the list was updated. Represented as a string in ISO format.
     """
@@ -42,5 +38,5 @@ class GetListSubscriptionsList(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
