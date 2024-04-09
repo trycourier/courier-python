@@ -4,18 +4,14 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .brand_template import BrandTemplate
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class BrandTemplateOverride(BrandTemplate):
     mjml: BrandTemplate
-    footer_background_color: typing.Optional[str] = pydantic.Field(alias="footerBackgroundColor", default=None)
-    footer_full_width: typing.Optional[bool] = pydantic.Field(alias="footerFullWidth", default=None)
+    footer_background_color: typing.Optional[str] = pydantic_v1.Field(alias="footerBackgroundColor", default=None)
+    footer_full_width: typing.Optional[bool] = pydantic_v1.Field(alias="footerFullWidth", default=None)
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -30,5 +26,5 @@ class BrandTemplateOverride(BrandTemplate):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

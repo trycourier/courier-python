@@ -4,38 +4,34 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .channel_metadata import ChannelMetadata
 from .override import Override
 from .routing_method import RoutingMethod
 from .timeouts import Timeouts
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class Channel(pydantic.BaseModel):
-    brand_id: typing.Optional[str] = pydantic.Field(default=None)
+class Channel(pydantic_v1.BaseModel):
+    brand_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     Id of the brand that should be used for rendering the message.
     If not specified, the brand configured as default brand will be used.
     """
 
-    providers: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    providers: typing.Optional[typing.List[str]] = pydantic_v1.Field(default=None)
     """
     A list of providers enabled for this channel. Courier will select
     one provider to send through unless routing_method is set to all.
     """
 
-    routing_method: typing.Optional[RoutingMethod] = pydantic.Field(default=None)
+    routing_method: typing.Optional[RoutingMethod] = pydantic_v1.Field(default=None)
     """
     The method for selecting the providers to send the message with.
     Single will send to one of the available providers for this channel,
     all will send the message through all channels. Defaults to `single`.
     """
 
-    if_: typing.Optional[str] = pydantic.Field(alias="if", default=None)
+    if_: typing.Optional[str] = pydantic_v1.Field(alias="if", default=None)
     """
     A JavaScript conditional expression to determine if the message should
     be sent through the channel. Has access to the data and profile object.
@@ -43,7 +39,7 @@ class Channel(pydantic.BaseModel):
     """
 
     timeouts: typing.Optional[Timeouts] = None
-    override: typing.Optional[Override] = pydantic.Field(default=None)
+    override: typing.Optional[Override] = pydantic_v1.Field(default=None)
     """
     Channel specific overrides.
     """
@@ -63,5 +59,5 @@ class Channel(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

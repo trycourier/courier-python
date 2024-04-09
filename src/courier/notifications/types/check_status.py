@@ -2,4 +2,4 @@
 
 import typing
 
-CheckStatus = typing.Union[typing.AnyStr, typing.Literal["RESOLVED", "FAILED", "PENDING"]]
+CheckStatus = typing.Union[typing.Literal["RESOLVED", "FAILED", "PENDING"], typing.Any]

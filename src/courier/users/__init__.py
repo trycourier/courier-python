@@ -3,6 +3,7 @@
 from . import preferences, tenants, tokens
 from .preferences import (
     TopicPreference,
+    TopicPreferenceUpdate,
     UserPreferencesGetResponse,
     UserPreferencesListResponse,
     UserPreferencesUpdateResponse,
@@ -45,6 +46,7 @@ __all__ = [
     "PutUserTokensOpts",
     "TokenStatus",
     "TopicPreference",
+    "TopicPreferenceUpdate",
     "Tracking",
     "UserPreferencesGetResponse",
     "UserPreferencesListResponse",

@@ -5,14 +5,10 @@ import typing
 
 from ...commons.types.recipient_preferences import RecipientPreferences
 from ...core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ...core.pydantic_utilities import pydantic_v1
 
 
-class ListPutParams(pydantic.BaseModel):
+class ListPutParams(pydantic_v1.BaseModel):
     name: str
     preferences: typing.Optional[RecipientPreferences] = None
 
@@ -27,5 +23,5 @@ class ListPutParams(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

@@ -4,16 +4,12 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .intercom_recipient import IntercomRecipient
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class Intercom(pydantic.BaseModel):
-    from_: str = pydantic.Field(alias="from")
+class Intercom(pydantic_v1.BaseModel):
+    from_: str = pydantic_v1.Field(alias="from")
     to: IntercomRecipient
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -29,5 +25,5 @@ class Intercom(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

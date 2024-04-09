@@ -2,4 +2,4 @@
 
 import typing
 
-BulkJobUserStatus = typing.Union[typing.AnyStr, typing.Literal["PENDING", "ENQUEUED", "ERROR"]]
+BulkJobUserStatus = typing.Union[typing.Literal["PENDING", "ENQUEUED", "ERROR"], typing.Any]

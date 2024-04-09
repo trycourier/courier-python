@@ -4,15 +4,11 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .elemental_base_node import ElementalBaseNode
 from .i_action_button_style import IActionButtonStyle
 from .i_alignment import IAlignment
 from .locales import Locales
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class ElementalActionNode(ElementalBaseNode):
@@ -20,37 +16,37 @@ class ElementalActionNode(ElementalBaseNode):
     Allows the user to execute an action. Can be a button or a link.
     """
 
-    content: str = pydantic.Field()
+    content: str = pydantic_v1.Field()
     """
     The text content of the action shown to the user.
     """
 
-    href: str = pydantic.Field()
+    href: str = pydantic_v1.Field()
     """
     The target URL of the action.
     """
 
-    action_id: typing.Optional[str] = pydantic.Field(default=None)
+    action_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     A unique id used to identify the action when it is executed.
     """
 
-    align: typing.Optional[IAlignment] = pydantic.Field(default=None)
+    align: typing.Optional[IAlignment] = pydantic_v1.Field(default=None)
     """
     The alignment of the action button. Defaults to "center".
     """
 
-    background_color: typing.Optional[str] = pydantic.Field(default=None)
+    background_color: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     The background color of the action button.
     """
 
-    style: typing.Optional[IActionButtonStyle] = pydantic.Field(default=None)
+    style: typing.Optional[IActionButtonStyle] = pydantic_v1.Field(default=None)
     """
     Defaults to `button`.
     """
 
-    locales: Locales = pydantic.Field()
+    locales: Locales = pydantic_v1.Field()
     """
     Region specific content. See [locales docs](https://www.courier.com/docs/platform/content/elemental/locales/) for more details.
     """
@@ -68,5 +64,5 @@ class ElementalActionNode(ElementalBaseNode):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

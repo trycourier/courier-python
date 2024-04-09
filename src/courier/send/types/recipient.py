@@ -6,9 +6,16 @@ from .audience_recipient import AudienceRecipient
 from .list_pattern_recipient import ListPatternRecipient
 from .list_recipient import ListRecipient
 from .ms_teams_recipient import MsTeamsRecipient
+from .recipient_data import RecipientData
 from .slack_recipient import SlackRecipient
 from .user_recipient import UserRecipient
 
 Recipient = typing.Union[
-    AudienceRecipient, ListRecipient, ListPatternRecipient, UserRecipient, SlackRecipient, MsTeamsRecipient
+    AudienceRecipient,
+    ListRecipient,
+    ListPatternRecipient,
+    UserRecipient,
+    SlackRecipient,
+    MsTeamsRecipient,
+    RecipientData,
 ]

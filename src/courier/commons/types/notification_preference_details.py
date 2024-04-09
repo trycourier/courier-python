@@ -4,17 +4,13 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .channel_preference import ChannelPreference
 from .preference_status import PreferenceStatus
 from .rule import Rule
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class NotificationPreferenceDetails(pydantic.BaseModel):
+class NotificationPreferenceDetails(pydantic_v1.BaseModel):
     status: PreferenceStatus
     rules: typing.Optional[typing.List[Rule]] = None
     channel_preferences: typing.Optional[typing.List[ChannelPreference]] = None
@@ -30,5 +26,5 @@ class NotificationPreferenceDetails(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

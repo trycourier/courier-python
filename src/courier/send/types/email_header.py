@@ -4,17 +4,13 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .logo import Logo
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class EmailHeader(pydantic.BaseModel):
-    inherit_default: typing.Optional[bool] = pydantic.Field(alias="inheritDefault", default=None)
-    bar_color: typing.Optional[str] = pydantic.Field(alias="barColor", default=None)
+class EmailHeader(pydantic_v1.BaseModel):
+    inherit_default: typing.Optional[bool] = pydantic_v1.Field(alias="inheritDefault", default=None)
+    bar_color: typing.Optional[str] = pydantic_v1.Field(alias="barColor", default=None)
     logo: Logo
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -30,5 +26,5 @@ class EmailHeader(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

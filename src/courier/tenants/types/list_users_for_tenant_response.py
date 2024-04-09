@@ -5,38 +5,34 @@ import typing
 
 from ...commons.types.user_tenant_association import UserTenantAssociation
 from ...core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ...core.pydantic_utilities import pydantic_v1
 
 
-class ListUsersForTenantResponse(pydantic.BaseModel):
+class ListUsersForTenantResponse(pydantic_v1.BaseModel):
     items: typing.Optional[typing.List[UserTenantAssociation]] = None
-    has_more: bool = pydantic.Field()
+    has_more: bool = pydantic_v1.Field()
     """
     Set to true when there are more pages that can be retrieved.
     """
 
-    url: str = pydantic.Field()
+    url: str = pydantic_v1.Field()
     """
     A url that may be used to generate these results.
     """
 
-    next_url: typing.Optional[str] = pydantic.Field(default=None)
+    next_url: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     A url that may be used to generate fetch the next set of results.
     Defined only when `has_more` is set to true
     """
 
-    cursor: typing.Optional[str] = pydantic.Field(default=None)
+    cursor: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     A pointer to the next page of results. Defined
     only when `has_more` is set to true
     """
 
-    type: typing.Literal["list"] = pydantic.Field()
+    type: typing.Literal["list"] = pydantic_v1.Field()
     """
     Always set to `list`. Represents the type of this object.
     """
@@ -52,5 +48,5 @@ class ListUsersForTenantResponse(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

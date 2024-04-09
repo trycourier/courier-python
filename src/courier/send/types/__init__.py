@@ -4,6 +4,7 @@ from .attachment import Attachment
 from .audience_filter import AudienceFilter
 from .audience_recipient import AudienceRecipient
 from .base_message import BaseMessage
+from .base_message_send_to import BaseMessageSendTo
 from .base_social_presence import BaseSocialPresence
 from .brand_settings_email import BrandSettingsEmail
 from .brand_settings_in_app import BrandSettingsInApp
@@ -76,6 +77,7 @@ from .override import Override
 from .preference import Preference
 from .preferences import Preferences
 from .recipient import Recipient
+from .recipient_data import RecipientData
 from .routing import Routing
 from .routing_channel import RoutingChannel
 from .routing_method import RoutingMethod
@@ -99,6 +101,7 @@ __all__ = [
     "AudienceFilter",
     "AudienceRecipient",
     "BaseMessage",
+    "BaseMessageSendTo",
     "BaseSocialPresence",
     "BrandSettingsEmail",
     "BrandSettingsInApp",
@@ -169,6 +172,7 @@ __all__ = [
     "Preference",
     "Preferences",
     "Recipient",
+    "RecipientData",
     "Routing",
     "RoutingChannel",
     "RoutingMethod",

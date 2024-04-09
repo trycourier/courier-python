@@ -4,19 +4,15 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .actor import Actor
 from .target import Target
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class AuditEvent(pydantic.BaseModel):
+class AuditEvent(pydantic_v1.BaseModel):
     actor: typing.Optional[Actor] = None
     target: typing.Optional[Target] = None
-    audit_event_id: str = pydantic.Field(alias="auditEventId")
+    audit_event_id: str = pydantic_v1.Field(alias="auditEventId")
     source: str
     timestamp: str
     type: str
@@ -34,5 +30,5 @@ class AuditEvent(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

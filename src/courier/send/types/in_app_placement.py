@@ -2,4 +2,4 @@
 
 import typing
 
-InAppPlacement = typing.Union[typing.AnyStr, typing.Literal["top", "bottom", "left", "right"]]
+InAppPlacement = typing.Union[typing.Literal["top", "bottom", "left", "right"], typing.Any]

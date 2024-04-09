@@ -4,26 +4,22 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .rendered_message_content import RenderedMessageContent
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class RenderOutput(pydantic.BaseModel):
-    channel: str = pydantic.Field()
+class RenderOutput(pydantic_v1.BaseModel):
+    channel: str = pydantic_v1.Field()
     """
     The channel used for rendering the message.
     """
 
-    channel_id: str = pydantic.Field()
+    channel_id: str = pydantic_v1.Field()
     """
     The ID of channel used for rendering the message.
     """
 
-    content: RenderedMessageContent = pydantic.Field()
+    content: RenderedMessageContent = pydantic_v1.Field()
     """
     Content details of the rendered message.
     """
@@ -39,5 +35,5 @@ class RenderOutput(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

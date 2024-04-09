@@ -5,15 +5,11 @@ import typing
 
 from ...commons.types.paging import Paging
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .audit_event import AuditEvent
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class ListAuditEventsResponse(pydantic.BaseModel):
+class ListAuditEventsResponse(pydantic_v1.BaseModel):
     paging: Paging
     results: typing.List[AuditEvent]
 
@@ -28,5 +24,5 @@ class ListAuditEventsResponse(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

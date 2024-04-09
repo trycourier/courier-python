@@ -4,12 +4,8 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .base_filter_config import BaseFilterConfig
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class SingleFilterConfig(BaseFilterConfig):
@@ -17,12 +13,12 @@ class SingleFilterConfig(BaseFilterConfig):
     A single filter to use for filtering
     """
 
-    value: str = pydantic.Field()
+    value: str = pydantic_v1.Field()
     """
     The value to use for filtering
     """
 
-    path: str = pydantic.Field()
+    path: str = pydantic_v1.Field()
     """
     The attribe name from profile whose value will be operated against the filter value
     """
@@ -40,5 +36,5 @@ class SingleFilterConfig(BaseFilterConfig):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

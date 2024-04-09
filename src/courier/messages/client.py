@@ -11,17 +11,13 @@ from ..commons.types.message_not_found import MessageNotFound
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import pydantic_v1
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
 from .types.list_messages_response import ListMessagesResponse
 from .types.message_details import MessageDetails
 from .types.message_history_response import MessageHistoryResponse
 from .types.render_output_response import RenderOutputResponse
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class MessagesClient:
@@ -34,13 +30,17 @@ class MessagesClient:
         archived: typing.Optional[bool] = None,
         cursor: typing.Optional[str] = None,
         event: typing.Optional[str] = None,
-        list: typing.Optional[str] = None,
+        list_: typing.Optional[str] = None,
         message_id: typing.Optional[str] = None,
         notification: typing.Optional[str] = None,
+        provider: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         recipient: typing.Optional[str] = None,
         status: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        tag: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         tags: typing.Optional[str] = None,
+        tenant_id: typing.Optional[str] = None,
         enqueued_after: typing.Optional[str] = None,
+        trace_id: typing.Optional[str] = None,
         trace_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListMessagesResponse:
@@ -50,27 +50,58 @@ class MessagesClient:
         Parameters:
             - archived: typing.Optional[bool]. A boolean value that indicates whether archived messages should be included in the response.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of message statuses.
+            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of messages.
 
             - event: typing.Optional[str]. A unique identifier representing the event that was used to send the event.
 
-            - list: typing.Optional[str]. A unique identifier representing the list the message was sent to.
+            - list_: typing.Optional[str]. A unique identifier representing the list the message was sent to.
 
             - message_id: typing.Optional[str]. A unique identifier representing the message_id returned from either /send or /send/list.
 
             - notification: typing.Optional[str]. A unique identifier representing the notification that was used to send the event.
 
+            - provider: typing.Optional[typing.Union[str, typing.Sequence[str]]]. The key assocated to the provider you want to filter on. E.g., sendgrid, inbox, twilio, slack, msteams, etc. Allows multiple values to be set in query parameters.
+
             - recipient: typing.Optional[str]. A unique identifier representing the recipient associated with the requested profile.
 
-            - status: typing.Optional[typing.Union[str, typing.Sequence[str]]]. An indicator of the current status of the message. Multiple status values can be passed in.
+            - status: typing.Optional[typing.Union[str, typing.Sequence[str]]]. An indicator of the current status of the message. Allows multiple values to be set in query parameters.
+
+            - tag: typing.Optional[typing.Union[str, typing.Sequence[str]]]. A tag placed in the metadata.tags during a notification send. Allows multiple values to be set in query parameters.
 
             - tags: typing.Optional[str]. A comma delimited list of 'tags'. Messages will be returned if they match any of the tags passed in.
+
+            - tenant_id: typing.Optional[str]. Messages sent with the context of a Tenant
 
             - enqueued_after: typing.Optional[str]. The enqueued datetime of a message to filter out messages received before.
 
             - trace_id: typing.Optional[str]. The unique identifier used to trace the requests
 
+            - trace_id: typing.Optional[str]. The unique identifier used to trace the requests
+
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.messages.list(
+            archived=True,
+            cursor="string",
+            event="string",
+            list_="string",
+            message_id="string",
+            notification="string",
+            provider="string",
+            recipient="string",
+            status="string",
+            tag="string",
+            tags="string",
+            tenant_id="string",
+            enqueued_after="string",
+            trace_id="string",
+            trace_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -81,13 +112,17 @@ class MessagesClient:
                         "archived": archived,
                         "cursor": cursor,
                         "event": event,
-                        "list": list,
+                        "list": list_,
                         "messageId": message_id,
                         "notification": notification,
+                        "provider": provider,
                         "recipient": recipient,
                         "status": status,
+                        "tag": tag,
                         "tags": tags,
+                        "tenant_id": tenant_id,
                         "enqueued_after": enqueued_after,
+                        "trace_id": trace_id,
                         "traceId": trace_id,
                         **(
                             request_options.get("additional_query_parameters", {})
@@ -107,12 +142,12 @@ class MessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListMessagesResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListMessagesResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -127,6 +162,15 @@ class MessagesClient:
             - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.messages.get(
+            message_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -144,16 +188,16 @@ class MessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -179,6 +223,15 @@ class MessagesClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.messages.cancel(
+            message_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
@@ -203,12 +256,12 @@ class MessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -231,6 +284,16 @@ class MessagesClient:
             - type: typing.Optional[str]. A supported Message History type that will filter the events returned.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.messages.get_history(
+            message_id="string",
+            type="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -259,16 +322,16 @@ class MessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(MessageHistoryResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(MessageHistoryResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -283,6 +346,15 @@ class MessagesClient:
             - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.messages.get_content(
+            message_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -302,16 +374,16 @@ class MessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(RenderOutputResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(RenderOutputResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -324,6 +396,15 @@ class MessagesClient:
             - request_id: str. A unique identifier representing the request ID
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.messages.archive(
+            request_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -346,7 +427,7 @@ class MessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -369,13 +450,17 @@ class AsyncMessagesClient:
         archived: typing.Optional[bool] = None,
         cursor: typing.Optional[str] = None,
         event: typing.Optional[str] = None,
-        list: typing.Optional[str] = None,
+        list_: typing.Optional[str] = None,
         message_id: typing.Optional[str] = None,
         notification: typing.Optional[str] = None,
+        provider: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         recipient: typing.Optional[str] = None,
         status: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
+        tag: typing.Optional[typing.Union[str, typing.Sequence[str]]] = None,
         tags: typing.Optional[str] = None,
+        tenant_id: typing.Optional[str] = None,
         enqueued_after: typing.Optional[str] = None,
+        trace_id: typing.Optional[str] = None,
         trace_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListMessagesResponse:
@@ -385,27 +470,58 @@ class AsyncMessagesClient:
         Parameters:
             - archived: typing.Optional[bool]. A boolean value that indicates whether archived messages should be included in the response.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of message statuses.
+            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of messages.
 
             - event: typing.Optional[str]. A unique identifier representing the event that was used to send the event.
 
-            - list: typing.Optional[str]. A unique identifier representing the list the message was sent to.
+            - list_: typing.Optional[str]. A unique identifier representing the list the message was sent to.
 
             - message_id: typing.Optional[str]. A unique identifier representing the message_id returned from either /send or /send/list.
 
             - notification: typing.Optional[str]. A unique identifier representing the notification that was used to send the event.
 
+            - provider: typing.Optional[typing.Union[str, typing.Sequence[str]]]. The key assocated to the provider you want to filter on. E.g., sendgrid, inbox, twilio, slack, msteams, etc. Allows multiple values to be set in query parameters.
+
             - recipient: typing.Optional[str]. A unique identifier representing the recipient associated with the requested profile.
 
-            - status: typing.Optional[typing.Union[str, typing.Sequence[str]]]. An indicator of the current status of the message. Multiple status values can be passed in.
+            - status: typing.Optional[typing.Union[str, typing.Sequence[str]]]. An indicator of the current status of the message. Allows multiple values to be set in query parameters.
+
+            - tag: typing.Optional[typing.Union[str, typing.Sequence[str]]]. A tag placed in the metadata.tags during a notification send. Allows multiple values to be set in query parameters.
 
             - tags: typing.Optional[str]. A comma delimited list of 'tags'. Messages will be returned if they match any of the tags passed in.
+
+            - tenant_id: typing.Optional[str]. Messages sent with the context of a Tenant
 
             - enqueued_after: typing.Optional[str]. The enqueued datetime of a message to filter out messages received before.
 
             - trace_id: typing.Optional[str]. The unique identifier used to trace the requests
 
+            - trace_id: typing.Optional[str]. The unique identifier used to trace the requests
+
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.messages.list(
+            archived=True,
+            cursor="string",
+            event="string",
+            list_="string",
+            message_id="string",
+            notification="string",
+            provider="string",
+            recipient="string",
+            status="string",
+            tag="string",
+            tags="string",
+            tenant_id="string",
+            enqueued_after="string",
+            trace_id="string",
+            trace_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -416,13 +532,17 @@ class AsyncMessagesClient:
                         "archived": archived,
                         "cursor": cursor,
                         "event": event,
-                        "list": list,
+                        "list": list_,
                         "messageId": message_id,
                         "notification": notification,
+                        "provider": provider,
                         "recipient": recipient,
                         "status": status,
+                        "tag": tag,
                         "tags": tags,
+                        "tenant_id": tenant_id,
                         "enqueued_after": enqueued_after,
+                        "trace_id": trace_id,
                         "traceId": trace_id,
                         **(
                             request_options.get("additional_query_parameters", {})
@@ -442,12 +562,12 @@ class AsyncMessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(ListMessagesResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(ListMessagesResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -462,6 +582,15 @@ class AsyncMessagesClient:
             - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.messages.get(
+            message_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -479,16 +608,16 @@ class AsyncMessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -514,6 +643,15 @@ class AsyncMessagesClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.messages.cancel(
+            message_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
@@ -538,12 +676,12 @@ class AsyncMessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -566,6 +704,16 @@ class AsyncMessagesClient:
             - type: typing.Optional[str]. A supported Message History type that will filter the events returned.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.messages.get_history(
+            message_id="string",
+            type="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -594,16 +742,16 @@ class AsyncMessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(MessageHistoryResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(MessageHistoryResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -618,6 +766,15 @@ class AsyncMessagesClient:
             - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.messages.get_content(
+            message_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -637,16 +794,16 @@ class AsyncMessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(RenderOutputResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(RenderOutputResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -659,6 +816,15 @@ class AsyncMessagesClient:
             - request_id: str. A unique identifier representing the request ID
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.messages.archive(
+            request_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -681,7 +847,7 @@ class AsyncMessagesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )

@@ -2,4 +2,4 @@
 
 import typing
 
-BulkJobStatus = typing.Union[typing.AnyStr, typing.Literal["CREATED", "PROCESSING", "COMPLETED", "ERROR"]]
+BulkJobStatus = typing.Union[typing.Literal["CREATED", "PROCESSING", "COMPLETED", "ERROR"], typing.Any]

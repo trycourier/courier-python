@@ -4,16 +4,12 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .base_social_presence import BaseSocialPresence
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class BrandSettingsSocialPresence(pydantic.BaseModel):
-    inherit_default: typing.Optional[bool] = pydantic.Field(alias="inheritDefault", default=None)
+class BrandSettingsSocialPresence(pydantic_v1.BaseModel):
+    inherit_default: typing.Optional[bool] = pydantic_v1.Field(alias="inheritDefault", default=None)
     facebook: typing.Optional[BaseSocialPresence] = None
     instagram: typing.Optional[BaseSocialPresence] = None
     linkedin: typing.Optional[BaseSocialPresence] = None
@@ -33,5 +29,5 @@ class BrandSettingsSocialPresence(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

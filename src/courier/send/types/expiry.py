@@ -4,21 +4,17 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .expires_in_type import ExpiresInType
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class Expiry(pydantic.BaseModel):
-    expires_at: typing.Optional[str] = pydantic.Field(default=None)
+class Expiry(pydantic_v1.BaseModel):
+    expires_at: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     An epoch timestamp or ISO8601 timestamp with timezone `(YYYY-MM-DDThh:mm:ss.sTZD)` that describes the time in which a message expires.
     """
 
-    expires_in: ExpiresInType = pydantic.Field()
+    expires_in: ExpiresInType = pydantic_v1.Field()
     """
     A duration in the form of milliseconds or an ISO8601 Duration format (i.e. P1DT4H).
     """
@@ -34,5 +30,5 @@ class Expiry(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

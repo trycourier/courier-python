@@ -4,21 +4,17 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .message_providers import MessageProviders
 from .routing_method import RoutingMethod
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class RoutingStrategyChannel(pydantic.BaseModel):
+class RoutingStrategyChannel(pydantic_v1.BaseModel):
     channel: str
     config: typing.Optional[typing.Dict[str, typing.Any]] = None
     method: typing.Optional[RoutingMethod] = None
     providers: typing.Optional[MessageProviders] = None
-    if_: typing.Optional[str] = pydantic.Field(alias="if", default=None)
+    if_: typing.Optional[str] = pydantic_v1.Field(alias="if", default=None)
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -33,5 +29,5 @@ class RoutingStrategyChannel(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

@@ -7,22 +7,17 @@ from json.decoder import JSONDecodeError
 from ...commons.errors.bad_request_error import BadRequestError
 from ...commons.errors.not_found_error import NotFoundError
 from ...commons.types.bad_request import BadRequest
-from ...commons.types.channel_classification import ChannelClassification
 from ...commons.types.not_found import NotFound
-from ...commons.types.preference_status import PreferenceStatus
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
+from ...core.pydantic_utilities import pydantic_v1
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
+from .types.topic_preference_update import TopicPreferenceUpdate
 from .types.user_preferences_get_response import UserPreferencesGetResponse
 from .types.user_preferences_list_response import UserPreferencesListResponse
 from .types.user_preferences_update_response import UserPreferencesUpdateResponse
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -42,6 +37,15 @@ class PreferencesClient:
             - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.preferences.list(
+            user_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -61,14 +65,14 @@ class PreferencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(UserPreferencesListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(UserPreferencesListResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -87,6 +91,16 @@ class PreferencesClient:
             - topic_id: str. A unique identifier associated with a subscription topic.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.preferences.get(
+            user_id="string",
+            topic_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -107,14 +121,14 @@ class PreferencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(UserPreferencesGetResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(UserPreferencesGetResponse, _response.json())  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -126,10 +140,7 @@ class PreferencesClient:
         user_id: str,
         topic_id: str,
         *,
-        status: PreferenceStatus,
-        custom_routing: typing.Optional[typing.Sequence[ChannelClassification]] = OMIT,
-        default_status: PreferenceStatus,
-        has_custom_routing: typing.Optional[bool] = OMIT,
+        topic: TopicPreferenceUpdate,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesUpdateResponse:
         """
@@ -140,21 +151,26 @@ class PreferencesClient:
 
             - topic_id: str. A unique identifier associated with a subscription topic.
 
-            - status: PreferenceStatus.
-
-            - custom_routing: typing.Optional[typing.Sequence[ChannelClassification]]. The Channels a user has chosen to receive notifications through for this topic
-
-            - default_status: PreferenceStatus.
-
-            - has_custom_routing: typing.Optional[bool].
+            - topic: TopicPreferenceUpdate.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+        from courier.users import TopicPreferenceUpdate
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.users.preferences.update(
+            user_id="abc-123",
+            topic_id="74Q4QGFBEX481DP6JRPMV751H4XT",
+            topic=TopicPreferenceUpdate(
+                status="OPTED_IN",
+                has_custom_routing=True,
+                custom_routing=["inbox", "email"],
+            ),
+        )
         """
-        _request: typing.Dict[str, typing.Any] = {"status": status, "default_status": default_status}
-        if custom_routing is not OMIT:
-            _request["custom_routing"] = custom_routing
-        if has_custom_routing is not OMIT:
-            _request["has_custom_routing"] = has_custom_routing
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
             urllib.parse.urljoin(
@@ -164,10 +180,10 @@ class PreferencesClient:
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
-            json=jsonable_encoder(_request)
+            json=jsonable_encoder({"topic": topic})
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder(_request),
+                **jsonable_encoder({"topic": topic}),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -180,14 +196,14 @@ class PreferencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(UserPreferencesUpdateResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(UserPreferencesUpdateResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -209,6 +225,15 @@ class AsyncPreferencesClient:
             - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.preferences.list(
+            user_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -228,14 +253,14 @@ class AsyncPreferencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(UserPreferencesListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(UserPreferencesListResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -254,6 +279,16 @@ class AsyncPreferencesClient:
             - topic_id: str. A unique identifier associated with a subscription topic.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.preferences.get(
+            user_id="string",
+            topic_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -274,14 +309,14 @@ class AsyncPreferencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(UserPreferencesGetResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(UserPreferencesGetResponse, _response.json())  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -293,10 +328,7 @@ class AsyncPreferencesClient:
         user_id: str,
         topic_id: str,
         *,
-        status: PreferenceStatus,
-        custom_routing: typing.Optional[typing.Sequence[ChannelClassification]] = OMIT,
-        default_status: PreferenceStatus,
-        has_custom_routing: typing.Optional[bool] = OMIT,
+        topic: TopicPreferenceUpdate,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesUpdateResponse:
         """
@@ -307,21 +339,26 @@ class AsyncPreferencesClient:
 
             - topic_id: str. A unique identifier associated with a subscription topic.
 
-            - status: PreferenceStatus.
-
-            - custom_routing: typing.Optional[typing.Sequence[ChannelClassification]]. The Channels a user has chosen to receive notifications through for this topic
-
-            - default_status: PreferenceStatus.
-
-            - has_custom_routing: typing.Optional[bool].
+            - topic: TopicPreferenceUpdate.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+        from courier.users import TopicPreferenceUpdate
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.users.preferences.update(
+            user_id="abc-123",
+            topic_id="74Q4QGFBEX481DP6JRPMV751H4XT",
+            topic=TopicPreferenceUpdate(
+                status="OPTED_IN",
+                has_custom_routing=True,
+                custom_routing=["inbox", "email"],
+            ),
+        )
         """
-        _request: typing.Dict[str, typing.Any] = {"status": status, "default_status": default_status}
-        if custom_routing is not OMIT:
-            _request["custom_routing"] = custom_routing
-        if has_custom_routing is not OMIT:
-            _request["has_custom_routing"] = has_custom_routing
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
             urllib.parse.urljoin(
@@ -331,10 +368,10 @@ class AsyncPreferencesClient:
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
-            json=jsonable_encoder(_request)
+            json=jsonable_encoder({"topic": topic})
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder(_request),
+                **jsonable_encoder({"topic": topic}),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -347,14 +384,14 @@ class AsyncPreferencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(UserPreferencesUpdateResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(UserPreferencesUpdateResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
