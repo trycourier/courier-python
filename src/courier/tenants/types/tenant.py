@@ -4,47 +4,43 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .default_preferences import DefaultPreferences
 from .template_property import TemplateProperty
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class Tenant(pydantic.BaseModel):
-    id: str = pydantic.Field()
+class Tenant(pydantic_v1.BaseModel):
+    id: str = pydantic_v1.Field()
     """
     Id of the tenant.
     """
 
-    name: str = pydantic.Field()
+    name: str = pydantic_v1.Field()
     """
     Name of the tenant.
     """
 
-    parent_tenant_id: typing.Optional[str] = pydantic.Field(default=None)
+    parent_tenant_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     Tenant's parent id (if any).
     """
 
-    default_preferences: typing.Optional[DefaultPreferences] = pydantic.Field(default=None)
+    default_preferences: typing.Optional[DefaultPreferences] = pydantic_v1.Field(default=None)
     """
     Defines the preferences used for the account when the user hasn't specified their own.
     """
 
-    properties: typing.Optional[TemplateProperty] = pydantic.Field(default=None)
+    properties: typing.Optional[TemplateProperty] = pydantic_v1.Field(default=None)
     """
     Arbitrary properties accessible to a template.
     """
 
-    user_profile: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    user_profile: typing.Optional[typing.Dict[str, typing.Any]] = pydantic_v1.Field(default=None)
     """
     A user profile object merged with user profile on send.
     """
 
-    brand_id: typing.Optional[str] = pydantic.Field(default=None)
+    brand_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     Brand to be used for the account when one is not specified by the send call.
     """
@@ -60,5 +56,5 @@ class Tenant(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

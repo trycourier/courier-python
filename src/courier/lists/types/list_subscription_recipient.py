@@ -5,15 +5,11 @@ import typing
 
 from ...commons.types.recipient_preferences import RecipientPreferences
 from ...core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ...core.pydantic_utilities import pydantic_v1
 
 
-class ListSubscriptionRecipient(pydantic.BaseModel):
-    recipient_id: str = pydantic.Field(alias="recipientId")
+class ListSubscriptionRecipient(pydantic_v1.BaseModel):
+    recipient_id: str = pydantic_v1.Field(alias="recipientId")
     created: typing.Optional[str] = None
     preferences: typing.Optional[RecipientPreferences] = None
 
@@ -30,5 +26,5 @@ class ListSubscriptionRecipient(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

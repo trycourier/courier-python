@@ -2,4 +2,4 @@
 
 import typing
 
-PatchOp = typing.Union[typing.AnyStr, typing.Literal["replace", "add", "remove", "copy", "move", "test"]]
+PatchOp = typing.Union[typing.Literal["replace", "add", "remove", "copy", "move", "test"], typing.Any]

@@ -7,16 +7,12 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import pydantic_v1
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
 from .types.automation_ad_hoc_invoke_params import AutomationAdHocInvokeParams
 from .types.automation_invoke_params import AutomationInvokeParams
 from .types.automation_invoke_response import AutomationInvokeResponse
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -48,6 +44,23 @@ class AutomationsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import AutomationInvokeParams
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.automations.invoke_automation_template(
+            template_id="string",
+            request=AutomationInvokeParams(
+                brand="string",
+                data={"string": {"key": "value"}},
+                profile={"key": "value"},
+                recipient="string",
+                template="string",
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
@@ -75,12 +88,12 @@ class AutomationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -106,6 +119,38 @@ class AutomationsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            Automation,
+            AutomationAdHocInvokeParams,
+            AutomationDelayStep,
+            AutomationSendStep,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.automations.invoke_ad_hoc_automation(
+            request=AutomationAdHocInvokeParams(
+                data={"name": "Foo"},
+                profile={"tenant_id": "abc-123"},
+                recipient="user-yes",
+                automation=Automation(
+                    cancelation_token="delay-send--user-yes--abc-123",
+                    steps=[
+                        AutomationDelayStep(
+                            action="delay",
+                            until="20240408T080910.123",
+                        ),
+                        AutomationSendStep(
+                            action="send",
+                            template="64TP5HKPFTM8VTK1Y75SJDQX9JK0",
+                        ),
+                    ],
+                ),
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
@@ -131,12 +176,12 @@ class AutomationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -170,6 +215,23 @@ class AsyncAutomationsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import AutomationInvokeParams
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.automations.invoke_automation_template(
+            template_id="string",
+            request=AutomationInvokeParams(
+                brand="string",
+                data={"string": {"key": "value"}},
+                profile={"key": "value"},
+                recipient="string",
+                template="string",
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
@@ -197,12 +259,12 @@ class AsyncAutomationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -228,6 +290,38 @@ class AsyncAutomationsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            Automation,
+            AutomationAdHocInvokeParams,
+            AutomationDelayStep,
+            AutomationSendStep,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.automations.invoke_ad_hoc_automation(
+            request=AutomationAdHocInvokeParams(
+                data={"name": "Foo"},
+                profile={"tenant_id": "abc-123"},
+                recipient="user-yes",
+                automation=Automation(
+                    cancelation_token="delay-send--user-yes--abc-123",
+                    steps=[
+                        AutomationDelayStep(
+                            action="delay",
+                            until="20240408T080910.123",
+                        ),
+                        AutomationSendStep(
+                            action="send",
+                            template="64TP5HKPFTM8VTK1Y75SJDQX9JK0",
+                        ),
+                    ],
+                ),
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
@@ -253,12 +347,12 @@ class AsyncAutomationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AutomationInvokeResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

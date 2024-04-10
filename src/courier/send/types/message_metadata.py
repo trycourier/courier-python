@@ -4,31 +4,27 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .utm import Utm
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class MessageMetadata(pydantic.BaseModel):
-    event: typing.Optional[str] = pydantic.Field(default=None)
+class MessageMetadata(pydantic_v1.BaseModel):
+    event: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     An arbitrary string to tracks the event that generated this request (e.g. 'signup').
     """
 
-    tags: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    tags: typing.Optional[typing.List[str]] = pydantic_v1.Field(default=None)
     """
     An array of up to 9 tags you wish to associate with this request (and corresponding messages) for later analysis. Individual tags cannot be more than 30 characters in length.
     """
 
-    utm: typing.Optional[Utm] = pydantic.Field(default=None)
+    utm: typing.Optional[Utm] = pydantic_v1.Field(default=None)
     """
     Identify the campaign that refers traffic to a specific website, and attributes the browser's website session.
     """
 
-    trace_id: typing.Optional[str] = pydantic.Field(default=None)
+    trace_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     A unique ID used to correlate this request to processing on your servers. Note: Courier does not verify the uniqueness of this ID.
     """
@@ -44,5 +40,5 @@ class MessageMetadata(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

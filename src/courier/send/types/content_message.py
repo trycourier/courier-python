@@ -4,31 +4,22 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .base_message import BaseMessage
+from .base_message_send_to import BaseMessageSendTo
 from .content import Content
-from .message_recipient import MessageRecipient
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
-class ContentMessage(BaseMessage):
+class ContentMessage(BaseMessage, BaseMessageSendTo):
     """
     The message property has the following primary top-level properties. They define the destination and content of the message.
     Additional advanced configuration fields [are defined below](https://www.courier.com/docs/reference/send/message/#other-message-properties).
     """
 
-    content: Content = pydantic.Field()
+    content: Content = pydantic_v1.Field()
     """
     Describes the content of the message in a way that will work for email, push,
     chat, or any channel. Either this or template must be specified.
-    """
-
-    to: MessageRecipient = pydantic.Field()
-    """
-    The recipient or a list of recipients of the message
     """
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -44,5 +35,5 @@ class ContentMessage(BaseMessage):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

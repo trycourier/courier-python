@@ -4,31 +4,27 @@ import datetime as dt
 import typing
 
 from ....core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ....core.pydantic_utilities import pydantic_v1
 
 
-class AddUserToSingleTenantsParamsProfile(pydantic.BaseModel):
+class AddUserToSingleTenantsParamsProfile(pydantic_v1.BaseModel):
     title: str
-    email: str = pydantic.Field()
+    email: str = pydantic_v1.Field()
     """
     Email Address
     """
 
-    phone_number: str = pydantic.Field()
+    phone_number: str = pydantic_v1.Field()
     """
     A valid phone number
     """
 
-    locale: str = pydantic.Field()
+    locale: str = pydantic_v1.Field()
     """
     The user's preferred ISO 639-1 language code.
     """
 
-    additional_fields: typing.Dict[str, typing.Any] = pydantic.Field()
+    additional_fields: typing.Dict[str, typing.Any] = pydantic_v1.Field()
     """
     Additional provider specific fields may be specified.
     """
@@ -44,5 +40,5 @@ class AddUserToSingleTenantsParamsProfile(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

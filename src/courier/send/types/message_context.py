@@ -4,15 +4,11 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ...core.pydantic_utilities import pydantic_v1
 
 
-class MessageContext(pydantic.BaseModel):
-    tenant_id: typing.Optional[str] = pydantic.Field(default=None)
+class MessageContext(pydantic_v1.BaseModel):
+    tenant_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     An id of a tenant, see [tenants api docs](https://www.courier.com/docs/reference/tenants/).
     Will load brand, default preferences and any other base context data associated with this tenant.
@@ -29,5 +25,5 @@ class MessageContext(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

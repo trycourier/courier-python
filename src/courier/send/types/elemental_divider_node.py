@@ -4,12 +4,8 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .elemental_base_node import ElementalBaseNode
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class ElementalDividerNode(ElementalBaseNode):
@@ -17,7 +13,7 @@ class ElementalDividerNode(ElementalBaseNode):
     Renders a dividing line between elements.
     """
 
-    color: typing.Optional[str] = pydantic.Field(default=None)
+    color: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     The CSS color to render the line with. For example, `#fff`
     """
@@ -35,5 +31,5 @@ class ElementalDividerNode(ElementalBaseNode):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

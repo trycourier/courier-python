@@ -3,7 +3,6 @@
 import typing
 
 MessageStatus = typing.Union[
-    typing.AnyStr,
     typing.Literal[
         "CLICKED",
         "DELIVERED",
@@ -16,4 +15,5 @@ MessageStatus = typing.Union[
         "UNMAPPED",
         "UNROUTABLE",
     ],
+    typing.Any,
 ]

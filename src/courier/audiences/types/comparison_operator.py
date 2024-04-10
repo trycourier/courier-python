@@ -3,7 +3,6 @@
 import typing
 
 ComparisonOperator = typing.Union[
-    typing.AnyStr,
     typing.Literal[
         "ENDS_WITH",
         "EQ",
@@ -19,4 +18,5 @@ ComparisonOperator = typing.Union[
         "OMIT",
         "STARTS_WITH",
     ],
+    typing.Any,
 ]

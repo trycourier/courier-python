@@ -2,17 +2,25 @@
 
 import typing
 
+from .automation_add_to_batch_step import AutomationAddToBatchStep
+from .automation_add_to_digest_step import AutomationAddToDigestStep
 from .automation_cancel_step import AutomationCancelStep
 from .automation_delay_step import AutomationDelayStep
+from .automation_fetch_data_step import AutomationFetchDataStep
 from .automation_invoke_step import AutomationInvokeStep
 from .automation_send_list_step import AutomationSendListStep
 from .automation_send_step import AutomationSendStep
+from .automation_throttle_step import AutomationThrottleStep
 from .automation_update_profile_step import AutomationUpdateProfileStep
 from .automation_v_2_send_step import AutomationV2SendStep
 
 AutomationStepOption = typing.Union[
+    AutomationAddToDigestStep,
+    AutomationAddToBatchStep,
+    AutomationThrottleStep,
     AutomationCancelStep,
     AutomationDelayStep,
+    AutomationFetchDataStep,
     AutomationInvokeStep,
     AutomationSendStep,
     AutomationV2SendStep,

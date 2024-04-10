@@ -5,15 +5,11 @@ import typing
 
 from ...commons.types.email import Email
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .brand_colors import BrandColors
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class BrandSettings(pydantic.BaseModel):
+class BrandSettings(pydantic_v1.BaseModel):
     colors: typing.Optional[BrandColors] = None
     inapp: typing.Optional[typing.Any] = None
     email: typing.Optional[Email] = None
@@ -29,5 +25,5 @@ class BrandSettings(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

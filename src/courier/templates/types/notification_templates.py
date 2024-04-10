@@ -4,42 +4,38 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .routing_strategy import RoutingStrategy
 from .tag import Tag
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class NotificationTemplates(pydantic.BaseModel):
-    created_at: int = pydantic.Field()
+class NotificationTemplates(pydantic_v1.BaseModel):
+    created_at: int = pydantic_v1.Field()
     """
     A UTC timestamp at which notification was created. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).
     """
 
-    id: str = pydantic.Field()
+    id: str = pydantic_v1.Field()
     """
     A unique identifier associated with the notification.
     """
 
-    routing: RoutingStrategy = pydantic.Field()
+    routing: RoutingStrategy = pydantic_v1.Field()
     """
     Routing strategy used by this notification.
     """
 
-    tags: typing.List[Tag] = pydantic.Field()
+    tags: typing.List[Tag] = pydantic_v1.Field()
     """
     A list of tags attached to the notification.
     """
 
-    title: str = pydantic.Field()
+    title: str = pydantic_v1.Field()
     """
     The title of the notification.
     """
 
-    updated_at: int = pydantic.Field()
+    updated_at: int = pydantic_v1.Field()
     """
     A UTC timestamp at which notification was updated. This is stored as a millisecond representation of the Unix epoch (the time passed since January 1, 1970).
     """
@@ -55,5 +51,5 @@ class NotificationTemplates(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
