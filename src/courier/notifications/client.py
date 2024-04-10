@@ -7,6 +7,7 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import pydantic_v1
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
 from .types.base_check import BaseCheck
@@ -16,11 +17,6 @@ from .types.notification_get_content_response import NotificationGetContentRespo
 from .types.notification_list_response import NotificationListResponse
 from .types.submission_checks_get_response import SubmissionChecksGetResponse
 from .types.submission_checks_replace_response import SubmissionChecksReplaceResponse
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -38,6 +34,15 @@ class NotificationsClient:
             - cursor: typing.Optional[str].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.list(
+            cursor="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -64,12 +69,12 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(NotificationListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(NotificationListResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -84,6 +89,15 @@ class NotificationsClient:
             - id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.get_content(
+            id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -103,12 +117,12 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -123,6 +137,15 @@ class NotificationsClient:
             - id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.get_draft_content(
+            id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -142,12 +165,12 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -171,6 +194,40 @@ class NotificationsClient:
             - channels: typing.Optional[typing.Sequence[NotificationChannel]].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            NotificationBlock,
+            NotificationChannel,
+            NotificationChannelContent,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.update_variations(
+            id="string",
+            blocks=[
+                NotificationBlock(
+                    alias="string",
+                    context="string",
+                    id="string",
+                    type="action",
+                    content="string",
+                    locales={"string": "string"},
+                    checksum="string",
+                )
+            ],
+            channels=[
+                NotificationChannel(
+                    id="string",
+                    type="string",
+                    content=NotificationChannelContent(),
+                    locales={"string": NotificationChannelContent()},
+                    checksum="string",
+                )
+            ],
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if blocks is not OMIT:
@@ -201,7 +258,7 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -230,6 +287,40 @@ class NotificationsClient:
             - channels: typing.Optional[typing.Sequence[NotificationChannel]].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            NotificationBlock,
+            NotificationChannel,
+            NotificationChannelContent,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.update_draft_variations(
+            id="string",
+            blocks=[
+                NotificationBlock(
+                    alias="string",
+                    context="string",
+                    id="string",
+                    type="action",
+                    content="string",
+                    locales={"string": "string"},
+                    checksum="string",
+                )
+            ],
+            channels=[
+                NotificationChannel(
+                    id="string",
+                    type="string",
+                    content=NotificationChannelContent(),
+                    locales={"string": NotificationChannelContent()},
+                    checksum="string",
+                )
+            ],
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if blocks is not OMIT:
@@ -260,7 +351,7 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -282,6 +373,16 @@ class NotificationsClient:
             - submission_id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.get_submission_checks(
+            id="string",
+            submission_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -302,12 +403,12 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(SubmissionChecksGetResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(SubmissionChecksGetResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -331,6 +432,24 @@ class NotificationsClient:
             - checks: typing.Sequence[BaseCheck].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import BaseCheck
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.replace_submission_checks(
+            id="string",
+            submission_id="string",
+            checks=[
+                BaseCheck(
+                    id="string",
+                    status="RESOLVED",
+                    type="custom",
+                )
+            ],
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
@@ -357,12 +476,12 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(SubmissionChecksReplaceResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(SubmissionChecksReplaceResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -379,6 +498,16 @@ class NotificationsClient:
             - submission_id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.notifications.cancel_submission(
+            id="string",
+            submission_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -399,7 +528,7 @@ class NotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -424,6 +553,15 @@ class AsyncNotificationsClient:
             - cursor: typing.Optional[str].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.list(
+            cursor="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -450,12 +588,12 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(NotificationListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(NotificationListResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -470,6 +608,15 @@ class AsyncNotificationsClient:
             - id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.get_content(
+            id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -489,12 +636,12 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -509,6 +656,15 @@ class AsyncNotificationsClient:
             - id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.get_draft_content(
+            id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -528,12 +684,12 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -557,6 +713,40 @@ class AsyncNotificationsClient:
             - channels: typing.Optional[typing.Sequence[NotificationChannel]].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            NotificationBlock,
+            NotificationChannel,
+            NotificationChannelContent,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.update_variations(
+            id="string",
+            blocks=[
+                NotificationBlock(
+                    alias="string",
+                    context="string",
+                    id="string",
+                    type="action",
+                    content="string",
+                    locales={"string": "string"},
+                    checksum="string",
+                )
+            ],
+            channels=[
+                NotificationChannel(
+                    id="string",
+                    type="string",
+                    content=NotificationChannelContent(),
+                    locales={"string": NotificationChannelContent()},
+                    checksum="string",
+                )
+            ],
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if blocks is not OMIT:
@@ -587,7 +777,7 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -616,6 +806,40 @@ class AsyncNotificationsClient:
             - channels: typing.Optional[typing.Sequence[NotificationChannel]].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            NotificationBlock,
+            NotificationChannel,
+            NotificationChannelContent,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.update_draft_variations(
+            id="string",
+            blocks=[
+                NotificationBlock(
+                    alias="string",
+                    context="string",
+                    id="string",
+                    type="action",
+                    content="string",
+                    locales={"string": "string"},
+                    checksum="string",
+                )
+            ],
+            channels=[
+                NotificationChannel(
+                    id="string",
+                    type="string",
+                    content=NotificationChannelContent(),
+                    locales={"string": NotificationChannelContent()},
+                    checksum="string",
+                )
+            ],
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if blocks is not OMIT:
@@ -646,7 +870,7 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -668,6 +892,16 @@ class AsyncNotificationsClient:
             - submission_id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.get_submission_checks(
+            id="string",
+            submission_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -688,12 +922,12 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(SubmissionChecksGetResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(SubmissionChecksGetResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -717,6 +951,24 @@ class AsyncNotificationsClient:
             - checks: typing.Sequence[BaseCheck].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import BaseCheck
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.replace_submission_checks(
+            id="string",
+            submission_id="string",
+            checks=[
+                BaseCheck(
+                    id="string",
+                    status="RESOLVED",
+                    type="custom",
+                )
+            ],
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
@@ -743,12 +995,12 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(SubmissionChecksReplaceResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(SubmissionChecksReplaceResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -765,6 +1017,16 @@ class AsyncNotificationsClient:
             - submission_id: str.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.notifications.cancel_submission(
+            id="string",
+            submission_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -785,7 +1047,7 @@ class AsyncNotificationsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )

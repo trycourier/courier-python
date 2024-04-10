@@ -4,16 +4,12 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .elemental_node import ElementalNode
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class ElementalContent(pydantic.BaseModel):
-    version: str = pydantic.Field()
+class ElementalContent(pydantic_v1.BaseModel):
+    version: str = pydantic_v1.Field()
     """
     For example, "2022-01-01"
     """
@@ -32,5 +28,5 @@ class ElementalContent(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

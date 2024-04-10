@@ -4,16 +4,12 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .airship_profile_audience import AirshipProfileAudience
 from .device_type import DeviceType
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class AirshipProfile(pydantic.BaseModel):
+class AirshipProfile(pydantic_v1.BaseModel):
     audience: AirshipProfileAudience
     device_types: typing.List[DeviceType]
 
@@ -28,5 +24,5 @@ class AirshipProfile(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

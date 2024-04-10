@@ -4,6 +4,7 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .address import Address
 from .airship_profile import AirshipProfile
 from .discord import Discord
@@ -12,13 +13,8 @@ from .intercom import Intercom
 from .ms_teams import MsTeams
 from .slack import Slack
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class UserProfile(pydantic.BaseModel):
+class UserProfile(pydantic_v1.BaseModel):
     address: Address
     birthdate: str
     email: str
@@ -39,7 +35,7 @@ class UserProfile(pydantic.BaseModel):
     updated_at: str
     website: str
     zoneinfo: str
-    custom: typing.Any = pydantic.Field()
+    custom: typing.Any = pydantic_v1.Field()
     """
     A free form object. Due to a limitation of the API Explorer, you can only enter string key/values below, but this API accepts more complex object structures.
     """
@@ -49,8 +45,8 @@ class UserProfile(pydantic.BaseModel):
     target_arn: str
     discord: Discord
     expo: Expo
-    facebook_psid: str = pydantic.Field(alias="facebookPSID")
-    firebase_token: str = pydantic.Field(alias="firebaseToken")
+    facebook_psid: str = pydantic_v1.Field(alias="facebookPSID")
+    firebase_token: str = pydantic_v1.Field(alias="firebaseToken")
     intercom: Intercom
     slack: Slack
     ms_teams: MsTeams
@@ -68,5 +64,5 @@ class UserProfile(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

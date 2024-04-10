@@ -5,21 +5,17 @@ import typing
 
 from ...commons.types.paging import Paging
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .message_details import MessageDetails
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class ListMessagesResponse(pydantic.BaseModel):
-    paging: Paging = pydantic.Field()
+class ListMessagesResponse(pydantic_v1.BaseModel):
+    paging: Paging = pydantic_v1.Field()
     """
     Paging information for the result set.
     """
 
-    results: typing.List[MessageDetails] = pydantic.Field()
+    results: typing.List[MessageDetails] = pydantic_v1.Field()
     """
     An array of messages with their details.
     """
@@ -35,5 +31,5 @@ class ListMessagesResponse(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

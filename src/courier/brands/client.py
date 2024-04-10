@@ -15,6 +15,7 @@ from ..commons.types.payment_required import PaymentRequired
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import pydantic_v1
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
 from .types.brand import Brand
@@ -22,11 +23,6 @@ from .types.brand_parameters import BrandParameters
 from .types.brand_settings import BrandSettings
 from .types.brand_snippets import BrandSnippets
 from .types.brands_response import BrandsResponse
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -53,6 +49,21 @@ class BrandsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import BrandParameters, BrandSettings, BrandSnippets
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.brands.create(
+            request=BrandParameters(
+                id="string",
+                name="string",
+                settings=BrandSettings(),
+                snippets=BrandSnippets(),
+            ),
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "POST",
@@ -78,18 +89,18 @@ class BrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Brand, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 402:
-            raise PaymentRequiredError(pydantic.parse_obj_as(PaymentRequired, _response.json()))  # type: ignore
+            raise PaymentRequiredError(pydantic_v1.parse_obj_as(PaymentRequired, _response.json()))  # type: ignore
         if _response.status_code == 409:
-            raise AlreadyExistsError(pydantic.parse_obj_as(AlreadyExists, _response.json()))  # type: ignore
+            raise AlreadyExistsError(pydantic_v1.parse_obj_as(AlreadyExists, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -104,6 +115,15 @@ class BrandsClient:
             - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.brands.get(
+            brand_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -121,12 +141,12 @@ class BrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Brand, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -143,6 +163,15 @@ class BrandsClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of brands.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.brands.list(
+            cursor="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -169,12 +198,12 @@ class BrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(BrandsResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(BrandsResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -189,6 +218,15 @@ class BrandsClient:
             - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.brands.delete(
+            brand_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -206,14 +244,14 @@ class BrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 409:
-            raise ConflictError(pydantic.parse_obj_as(Conflict, _response.json()))  # type: ignore
+            raise ConflictError(pydantic_v1.parse_obj_as(Conflict, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -242,6 +280,37 @@ class BrandsClient:
             - snippets: typing.Optional[BrandSnippets].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            BrandColors,
+            BrandSettings,
+            BrandSnippet,
+            BrandSnippets,
+            Email,
+        )
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.brands.replace(
+            brand_id="string",
+            name="string",
+            settings=BrandSettings(
+                colors=BrandColors(),
+                inapp={"key": "value"},
+                email=Email(),
+            ),
+            snippets=BrandSnippets(
+                items=[
+                    BrandSnippet(
+                        format="handlebars",
+                        name="string",
+                        value="string",
+                    )
+                ],
+            ),
+        )
         """
         _request: typing.Dict[str, typing.Any] = {"name": name}
         if settings is not OMIT:
@@ -270,12 +339,12 @@ class BrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Brand, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -304,6 +373,21 @@ class AsyncBrandsClient:
             - idempotency_expiry: typing.Optional[int].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import BrandParameters, BrandSettings, BrandSnippets
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.brands.create(
+            request=BrandParameters(
+                id="string",
+                name="string",
+                settings=BrandSettings(),
+                snippets=BrandSnippets(),
+            ),
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "POST",
@@ -329,18 +413,18 @@ class AsyncBrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Brand, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         if _response.status_code == 402:
-            raise PaymentRequiredError(pydantic.parse_obj_as(PaymentRequired, _response.json()))  # type: ignore
+            raise PaymentRequiredError(pydantic_v1.parse_obj_as(PaymentRequired, _response.json()))  # type: ignore
         if _response.status_code == 409:
-            raise AlreadyExistsError(pydantic.parse_obj_as(AlreadyExists, _response.json()))  # type: ignore
+            raise AlreadyExistsError(pydantic_v1.parse_obj_as(AlreadyExists, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -355,6 +439,15 @@ class AsyncBrandsClient:
             - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.brands.get(
+            brand_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -372,12 +465,12 @@ class AsyncBrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Brand, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -394,6 +487,15 @@ class AsyncBrandsClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of brands.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.brands.list(
+            cursor="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -420,12 +522,12 @@ class AsyncBrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(BrandsResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(BrandsResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -440,6 +542,15 @@ class AsyncBrandsClient:
             - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.brands.delete(
+            brand_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -457,14 +568,14 @@ class AsyncBrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 409:
-            raise ConflictError(pydantic.parse_obj_as(Conflict, _response.json()))  # type: ignore
+            raise ConflictError(pydantic_v1.parse_obj_as(Conflict, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -493,6 +604,37 @@ class AsyncBrandsClient:
             - snippets: typing.Optional[BrandSnippets].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import (
+            BrandColors,
+            BrandSettings,
+            BrandSnippet,
+            BrandSnippets,
+            Email,
+        )
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.brands.replace(
+            brand_id="string",
+            name="string",
+            settings=BrandSettings(
+                colors=BrandColors(),
+                inapp={"key": "value"},
+                email=Email(),
+            ),
+            snippets=BrandSnippets(
+                items=[
+                    BrandSnippet(
+                        format="handlebars",
+                        name="string",
+                        value="string",
+                    )
+                ],
+            ),
+        )
         """
         _request: typing.Dict[str, typing.Any] = {"name": name}
         if settings is not OMIT:
@@ -521,12 +663,12 @@ class AsyncBrandsClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Brand, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

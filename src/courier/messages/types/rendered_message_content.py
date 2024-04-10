@@ -4,41 +4,37 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .rendered_message_block import RenderedMessageBlock
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class RenderedMessageContent(pydantic.BaseModel):
-    html: str = pydantic.Field()
+class RenderedMessageContent(pydantic_v1.BaseModel):
+    html: str = pydantic_v1.Field()
     """
     The html content of the rendered message.
     """
 
-    title: str = pydantic.Field()
+    title: str = pydantic_v1.Field()
     """
     The title of the rendered message.
     """
 
-    body: str = pydantic.Field()
+    body: str = pydantic_v1.Field()
     """
     The body of the rendered message.
     """
 
-    subject: str = pydantic.Field()
+    subject: str = pydantic_v1.Field()
     """
     The subject of the rendered message.
     """
 
-    text: str = pydantic.Field()
+    text: str = pydantic_v1.Field()
     """
     The text of the rendered message.
     """
 
-    blocks: typing.List[RenderedMessageBlock] = pydantic.Field()
+    blocks: typing.List[RenderedMessageBlock] = pydantic_v1.Field()
     """
     The blocks of the rendered message.
     """
@@ -54,5 +50,5 @@ class RenderedMessageContent(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

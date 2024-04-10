@@ -6,12 +6,8 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .elemental_base_node import ElementalBaseNode
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class ElementalGroupNode(ElementalBaseNode):
@@ -19,7 +15,7 @@ class ElementalGroupNode(ElementalBaseNode):
     Allows you to group elements together. This can be useful when used in combination with "if" or "loop". See [control flow docs](https://www.courier.com/docs/platform/content/elemental/control-flow/) for more details.
     """
 
-    elements: typing.List[ElementalNode] = pydantic.Field()
+    elements: typing.List[ElementalNode] = pydantic_v1.Field()
     """
     Sub elements to render.
     """
@@ -37,7 +33,7 @@ class ElementalGroupNode(ElementalBaseNode):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
 
 

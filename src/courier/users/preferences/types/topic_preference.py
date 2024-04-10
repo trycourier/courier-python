@@ -6,15 +6,11 @@ import typing
 from ....commons.types.channel_classification import ChannelClassification
 from ....commons.types.preference_status import PreferenceStatus
 from ....core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ....core.pydantic_utilities import pydantic_v1
 
 
-class TopicPreference(pydantic.BaseModel):
-    custom_routing: typing.Optional[typing.List[ChannelClassification]] = pydantic.Field(default=None)
+class TopicPreference(pydantic_v1.BaseModel):
+    custom_routing: typing.Optional[typing.List[ChannelClassification]] = pydantic_v1.Field(default=None)
     """
     The Channels a user has chosen to receive notifications through for this topic
     """
@@ -36,5 +32,5 @@ class TopicPreference(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

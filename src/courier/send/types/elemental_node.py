@@ -13,7 +13,7 @@ from .elemental_text_node import ElementalTextNode
 
 
 class ElementalNode_Text(ElementalTextNode):
-    type: typing.Literal["text"]
+    type: typing.Literal["text"] = "text"
 
     class Config:
         frozen = True
@@ -23,7 +23,7 @@ class ElementalNode_Text(ElementalTextNode):
 
 
 class ElementalNode_Meta(ElementalMetaNode):
-    type: typing.Literal["meta"]
+    type: typing.Literal["meta"] = "meta"
 
     class Config:
         frozen = True
@@ -33,7 +33,7 @@ class ElementalNode_Meta(ElementalMetaNode):
 
 
 class ElementalNode_Channel(ElementalChannelNode):
-    type: typing.Literal["channel"]
+    type: typing.Literal["channel"] = "channel"
 
     class Config:
         frozen = True
@@ -43,7 +43,7 @@ class ElementalNode_Channel(ElementalChannelNode):
 
 
 class ElementalNode_Image(ElementalImageNode):
-    type: typing.Literal["image"]
+    type: typing.Literal["image"] = "image"
 
     class Config:
         frozen = True
@@ -53,7 +53,7 @@ class ElementalNode_Image(ElementalImageNode):
 
 
 class ElementalNode_Action(ElementalActionNode):
-    type: typing.Literal["action"]
+    type: typing.Literal["action"] = "action"
 
     class Config:
         frozen = True
@@ -63,7 +63,7 @@ class ElementalNode_Action(ElementalActionNode):
 
 
 class ElementalNode_Divider(ElementalDividerNode):
-    type: typing.Literal["divider"]
+    type: typing.Literal["divider"] = "divider"
 
     class Config:
         frozen = True
@@ -73,7 +73,7 @@ class ElementalNode_Divider(ElementalDividerNode):
 
 
 class ElementalNode_Group(ElementalGroupNode):
-    type: typing.Literal["group"]
+    type: typing.Literal["group"] = "group"
 
     class Config:
         frozen = True
@@ -83,7 +83,7 @@ class ElementalNode_Group(ElementalGroupNode):
 
 
 class ElementalNode_Quote(ElementalQuoteNode):
-    type: typing.Literal["quote"]
+    type: typing.Literal["quote"] = "quote"
 
     class Config:
         frozen = True

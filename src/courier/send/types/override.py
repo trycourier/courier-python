@@ -2,4 +2,4 @@
 
 import typing
 
-Override = typing.Union[typing.AnyStr, typing.Literal["MessageChannelEmailOverride", "MessageChannelPushOverride"]]
+Override = typing.Union[typing.Literal["MessageChannelEmailOverride", "MessageChannelPushOverride"], typing.Any]

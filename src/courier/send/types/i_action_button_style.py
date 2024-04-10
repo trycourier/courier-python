@@ -2,4 +2,4 @@
 
 import typing
 
-IActionButtonStyle = typing.Union[typing.AnyStr, typing.Literal["button", "link"]]
+IActionButtonStyle = typing.Union[typing.Literal["button", "link"], typing.Any]

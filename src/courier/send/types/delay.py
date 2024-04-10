@@ -4,15 +4,11 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ...core.pydantic_utilities import pydantic_v1
 
 
-class Delay(pydantic.BaseModel):
-    duration: int = pydantic.Field()
+class Delay(pydantic_v1.BaseModel):
+    duration: int = pydantic_v1.Field()
     """
     The duration of the delay in milliseconds.
     """
@@ -28,5 +24,5 @@ class Delay(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

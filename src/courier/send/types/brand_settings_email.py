@@ -4,19 +4,17 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .brand_template_override import BrandTemplateOverride
 from .email_footer import EmailFooter
 from .email_head import EmailHead
 from .email_header import EmailHeader
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class BrandSettingsEmail(pydantic.BaseModel):
-    template_override: typing.Optional[BrandTemplateOverride] = pydantic.Field(alias="templateOverride", default=None)
+class BrandSettingsEmail(pydantic_v1.BaseModel):
+    template_override: typing.Optional[BrandTemplateOverride] = pydantic_v1.Field(
+        alias="templateOverride", default=None
+    )
     head: typing.Optional[EmailHead] = None
     footer: typing.Optional[EmailFooter] = None
     header: typing.Optional[EmailHeader] = None
@@ -34,5 +32,5 @@ class BrandSettingsEmail(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

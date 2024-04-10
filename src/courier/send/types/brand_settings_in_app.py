@@ -5,23 +5,19 @@ import typing
 
 from ...brands.types.brand_colors import BrandColors
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .icons import Icons
 from .in_app_placement import InAppPlacement
 from .preferences import Preferences
 from .widget_background import WidgetBackground
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class BrandSettingsInApp(pydantic.BaseModel):
-    border_radius: typing.Optional[str] = pydantic.Field(alias="borderRadius", default=None)
-    disable_message_icon: typing.Optional[bool] = pydantic.Field(alias="disableMessageIcon", default=None)
-    font_family: typing.Optional[str] = pydantic.Field(alias="fontFamily", default=None)
+class BrandSettingsInApp(pydantic_v1.BaseModel):
+    border_radius: typing.Optional[str] = pydantic_v1.Field(alias="borderRadius", default=None)
+    disable_message_icon: typing.Optional[bool] = pydantic_v1.Field(alias="disableMessageIcon", default=None)
+    font_family: typing.Optional[str] = pydantic_v1.Field(alias="fontFamily", default=None)
     placement: typing.Optional[InAppPlacement] = None
-    widget_background: WidgetBackground = pydantic.Field(alias="widgetBackground")
+    widget_background: WidgetBackground = pydantic_v1.Field(alias="widgetBackground")
     colors: BrandColors
     icons: Icons
     preferences: Preferences
@@ -39,5 +35,5 @@ class BrandSettingsInApp(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

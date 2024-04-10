@@ -4,40 +4,36 @@ import datetime as dt
 import typing
 
 from ....core.datetime_utils import serialize_datetime
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
+from ....core.pydantic_utilities import pydantic_v1
 
 
-class Device(pydantic.BaseModel):
-    app_id: typing.Optional[str] = pydantic.Field(default=None)
+class Device(pydantic_v1.BaseModel):
+    app_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     Id of the application the token is used for
     """
 
-    ad_id: typing.Optional[str] = pydantic.Field(default=None)
+    ad_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     Id of the advertising identifier
     """
 
-    device_id: typing.Optional[str] = pydantic.Field(default=None)
+    device_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     Id of the device the token is associated with
     """
 
-    platform: typing.Optional[str] = pydantic.Field(default=None)
+    platform: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     The device platform i.e. android, ios, web
     """
 
-    manufacturer: typing.Optional[str] = pydantic.Field(default=None)
+    manufacturer: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     The device manufacturer
     """
 
-    model: typing.Optional[str] = pydantic.Field(default=None)
+    model: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     The device model
     """
@@ -53,5 +49,5 @@ class Device(pydantic.BaseModel):
     class Config:
         frozen = True
         smart_union = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

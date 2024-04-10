@@ -3,5 +3,5 @@
 import typing
 
 ChannelClassification = typing.Union[
-    typing.AnyStr, typing.Literal["direct_message", "email", "push", "sms", "webhook", "inbox"]
+    typing.Literal["direct_message", "email", "push", "sms", "webhook", "inbox"], typing.Any
 ]

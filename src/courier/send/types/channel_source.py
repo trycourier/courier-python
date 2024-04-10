@@ -2,4 +2,4 @@
 
 import typing
 
-ChannelSource = typing.Union[typing.AnyStr, typing.Literal["subscription", "list", "recipient"]]
+ChannelSource = typing.Union[typing.Literal["subscription", "list", "recipient"], typing.Any]

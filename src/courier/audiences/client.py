@@ -9,6 +9,7 @@ from ..commons.types.bad_request import BadRequest
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import pydantic_v1
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
 from .types.audience import Audience
@@ -16,11 +17,6 @@ from .types.audience_list_response import AudienceListResponse
 from .types.audience_member_list_response import AudienceMemberListResponse
 from .types.audience_update_response import AudienceUpdateResponse
 from .types.filter import Filter
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -38,6 +34,15 @@ class AudiencesClient:
             - audience_id: str. A unique identifier representing the audience_id
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.audiences.get(
+            audience_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -57,12 +62,12 @@ class AudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Audience, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Audience, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -91,6 +96,23 @@ class AudiencesClient:
             - filter: typing.Optional[Filter].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import SingleFilterConfig
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.audiences.update(
+            audience_id="string",
+            name="string",
+            description="string",
+            filter=SingleFilterConfig(
+                value="string",
+                path="string",
+                operator="ENDS_WITH",
+            ),
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if name is not OMIT:
@@ -123,12 +145,12 @@ class AudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AudienceUpdateResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AudienceUpdateResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -143,6 +165,15 @@ class AudiencesClient:
             - audience_id: str. A unique identifier representing the audience id
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.audiences.delete(
+            audience_id="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -162,7 +193,7 @@ class AudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -190,6 +221,16 @@ class AudiencesClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of members
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.audiences.list_members(
+            audience_id="string",
+            cursor="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -218,14 +259,14 @@ class AudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AudienceMemberListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AudienceMemberListResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -242,6 +283,15 @@ class AudiencesClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of audiences
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.audiences.list_audiences(
+            cursor="string",
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "GET",
@@ -268,14 +318,14 @@ class AudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AudienceListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AudienceListResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -295,6 +345,15 @@ class AsyncAudiencesClient:
             - audience_id: str. A unique identifier representing the audience_id
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.audiences.get(
+            audience_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -314,12 +373,12 @@ class AsyncAudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(Audience, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(Audience, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -348,6 +407,23 @@ class AsyncAudiencesClient:
             - filter: typing.Optional[Filter].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier import SingleFilterConfig
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.audiences.update(
+            audience_id="string",
+            name="string",
+            description="string",
+            filter=SingleFilterConfig(
+                value="string",
+                path="string",
+                operator="ENDS_WITH",
+            ),
+        )
         """
         _request: typing.Dict[str, typing.Any] = {}
         if name is not OMIT:
@@ -380,12 +456,12 @@ class AsyncAudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AudienceUpdateResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AudienceUpdateResponse, _response.json())  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -400,6 +476,15 @@ class AsyncAudiencesClient:
             - audience_id: str. A unique identifier representing the audience id
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.audiences.delete(
+            audience_id="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "DELETE",
@@ -419,7 +504,7 @@ class AsyncAudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
@@ -447,6 +532,16 @@ class AsyncAudiencesClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of members
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.audiences.list_members(
+            audience_id="string",
+            cursor="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -475,14 +570,14 @@ class AsyncAudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AudienceMemberListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AudienceMemberListResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -499,6 +594,15 @@ class AsyncAudiencesClient:
             - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of audiences
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
+        ---
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        await client.audiences.list_audiences(
+            cursor="string",
+        )
         """
         _response = await self._client_wrapper.httpx_client.request(
             "GET",
@@ -525,14 +629,14 @@ class AsyncAudiencesClient:
             ),
             timeout=request_options.get("timeout_in_seconds")
             if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else 60,
+            else self._client_wrapper.get_timeout(),
             retries=0,
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic.parse_obj_as(AudienceListResponse, _response.json())  # type: ignore
+            return pydantic_v1.parse_obj_as(AudienceListResponse, _response.json())  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

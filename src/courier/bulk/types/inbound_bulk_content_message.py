@@ -4,13 +4,9 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from ...send.types.base_message import BaseMessage
 from ...send.types.content import Content
-
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
 
 class InboundBulkContentMessage(BaseMessage):
@@ -19,7 +15,7 @@ class InboundBulkContentMessage(BaseMessage):
     Additional advanced configuration fields [are defined below](https://www.courier.com/docs/reference/send/message/#other-message-properties).
     """
 
-    content: Content = pydantic.Field()
+    content: Content = pydantic_v1.Field()
     """
     Describes the content of the message in a way that will work for email, push,
     chat, or any channel. Either this or template must be specified.
@@ -38,5 +34,5 @@ class InboundBulkContentMessage(BaseMessage):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

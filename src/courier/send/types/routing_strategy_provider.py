@@ -4,18 +4,14 @@ import datetime as dt
 import typing
 
 from ...core.datetime_utils import serialize_datetime
+from ...core.pydantic_utilities import pydantic_v1
 from .metadata import Metadata
 
-try:
-    import pydantic.v1 as pydantic  # type: ignore
-except ImportError:
-    import pydantic  # type: ignore
 
-
-class RoutingStrategyProvider(pydantic.BaseModel):
+class RoutingStrategyProvider(pydantic_v1.BaseModel):
     name: str
     config: typing.Optional[typing.Dict[str, typing.Any]] = None
-    if_: typing.Optional[str] = pydantic.Field(alias="if", default=None)
+    if_: typing.Optional[str] = pydantic_v1.Field(alias="if", default=None)
     metadata: Metadata
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -31,5 +27,5 @@ class RoutingStrategyProvider(pydantic.BaseModel):
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-        extra = pydantic.Extra.allow
+        extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
