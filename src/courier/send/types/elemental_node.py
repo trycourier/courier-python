@@ -4,110 +4,125 @@ from __future__ import annotations
 
 import typing
 
-from .elemental_action_node import ElementalActionNode
-from .elemental_divider_node import ElementalDividerNode
-from .elemental_image_node import ElementalImageNode
-from .elemental_meta_node import ElementalMetaNode
-from .elemental_quote_node import ElementalQuoteNode
-from .elemental_text_node import ElementalTextNode
+from ...core.pydantic_utilities import pydantic_v1
+from .elemental_channel_node import ElementalChannelNode
+from .elemental_group_node import ElementalGroupNode
+from .i_action_button_style import IActionButtonStyle
+from .i_alignment import IAlignment
+from .locales import Locales
+from .text_align import TextAlign
+from .text_style import TextStyle
 
 
-class ElementalNode_Text(ElementalTextNode):
+class ElementalNode_Text(pydantic_v1.BaseModel):
     type: typing.Literal["text"] = "text"
-
+    content: str
+    align: TextAlign
+    text_style: typing.Optional[TextStyle]
+    color: typing.Optional[str]
+    bold: typing.Optional[str]
+    italic: typing.Optional[str]
+    strikethrough: typing.Optional[str]
+    underline: typing.Optional[str]
+    locales: typing.Optional[Locales]
+    format: typing.Optional[typing.Literal["markdown"]]
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
-
-
-class ElementalNode_Meta(ElementalMetaNode):
+class ElementalNode_Meta(pydantic_v1.BaseModel):
     type: typing.Literal["meta"] = "meta"
-
+    title: typing.Optional[str]
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
-
-
-class ElementalNode_Channel(ElementalChannelNode):
+class ElementalNode_Channel(pydantic_v1.BaseModel):
     type: typing.Literal["channel"] = "channel"
-
+    channel: str
+    elements: typing.Optional[typing.List[ElementalNode]]
+    raw: typing.Optional[typing.Dict[str, typing.Any]]
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
-
-
-class ElementalNode_Image(ElementalImageNode):
+class ElementalNode_Image(pydantic_v1.BaseModel):
     type: typing.Literal["image"] = "image"
-
+    src: str
+    href: typing.Optional[str]
+    align: typing.Optional[IAlignment]
+    alt_text: typing.Optional[str] = pydantic_v1.Field(alias="altText")
+    width: typing.Optional[str]
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-
-
-class ElementalNode_Action(ElementalActionNode):
+class ElementalNode_Action(pydantic_v1.BaseModel):
     type: typing.Literal["action"] = "action"
-
+    content: str
+    href: str
+    action_id: typing.Optional[str]
+    align: typing.Optional[IAlignment]
+    background_color: typing.Optional[str]
+    style: typing.Optional[IActionButtonStyle]
+    locales: Locales
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
-
-
-class ElementalNode_Divider(ElementalDividerNode):
+class ElementalNode_Divider(pydantic_v1.BaseModel):
     type: typing.Literal["divider"] = "divider"
-
+    color: typing.Optional[str]
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
-
-
-class ElementalNode_Group(ElementalGroupNode):
+class ElementalNode_Group(pydantic_v1.BaseModel):
     type: typing.Literal["group"] = "group"
-
+    elements: typing.List[ElementalNode]
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
-
-
-class ElementalNode_Quote(ElementalQuoteNode):
+class ElementalNode_Quote(pydantic_v1.BaseModel):
     type: typing.Literal["quote"] = "quote"
-
+    content: str
+    align: typing.Optional[IAlignment]
+    border_color: typing.Optional[str] = pydantic_v1.Field(alias="borderColor")
+    text_style: TextStyle
+    locales: Locales
+    channels: typing.Optional[typing.List[str]]
+    ref: typing.Optional[str]
+    if: typing.Optional[str]
+    loop: typing.Optional[str]
     class Config:
         frozen = True
         smart_union = True
         allow_population_by_field_name = True
         populate_by_name = True
-
-
-ElementalNode = typing.Union[
-    ElementalNode_Text,
-    ElementalNode_Meta,
-    ElementalNode_Channel,
-    ElementalNode_Image,
-    ElementalNode_Action,
-    ElementalNode_Divider,
-    ElementalNode_Group,
-    ElementalNode_Quote,
-]
-from .elemental_channel_node import ElementalChannelNode  # noqa: E402
-from .elemental_group_node import ElementalGroupNode  # noqa: E402
-
-ElementalNode_Channel.update_forward_refs(
-    ElementalChannelNode=ElementalChannelNode, ElementalGroupNode=ElementalGroupNode, ElementalNode=ElementalNode
-)
-ElementalNode_Group.update_forward_refs(
-    ElementalChannelNode=ElementalChannelNode, ElementalGroupNode=ElementalGroupNode, ElementalNode=ElementalNode
-)
+ElementalNode = typing.Union[ElementalNode_Text, ElementalNode_Meta, ElementalNode_Channel, ElementalNode_Image, ElementalNode_Action, ElementalNode_Divider, ElementalNode_Group, ElementalNode_Quote]
+ElementalNode_Channel.update_forward_refs(ElementalChannelNode=ElementalChannelNode, ElementalGroupNode=ElementalGroupNode, ElementalNode=ElementalNode)
+ElementalNode_Group.update_forward_refs(ElementalChannelNode=ElementalChannelNode, ElementalGroupNode=ElementalGroupNode, ElementalNode=ElementalNode)
