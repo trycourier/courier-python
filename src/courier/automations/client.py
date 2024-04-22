@@ -28,7 +28,7 @@ class AutomationsClient:
         *,
         request: AutomationInvokeParams,
         idempotency_key: typing.Optional[str] = None,
-        idempotency_expiry: typing.Optional[int] = None,
+        idempotency_expiry: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AutomationInvokeResponse:
         """
@@ -41,7 +41,7 @@ class AutomationsClient:
 
             - idempotency_key: typing.Optional[str].
 
-            - idempotency_expiry: typing.Optional[int].
+            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
@@ -80,8 +80,8 @@ class AutomationsClient:
                 remove_none_from_dict(
                     {
                         **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key),
-                        "X-Idempotency-Expiration": str(idempotency_expiry),
+                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
                         **(request_options.get("additional_headers", {}) if request_options is not None else {}),
                     }
                 )
@@ -105,7 +105,7 @@ class AutomationsClient:
         *,
         request: AutomationAdHocInvokeParams,
         idempotency_key: typing.Optional[str] = None,
-        idempotency_expiry: typing.Optional[int] = None,
+        idempotency_expiry: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AutomationInvokeResponse:
         """
@@ -116,7 +116,7 @@ class AutomationsClient:
 
             - idempotency_key: typing.Optional[str].
 
-            - idempotency_expiry: typing.Optional[int].
+            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
@@ -168,8 +168,8 @@ class AutomationsClient:
                 remove_none_from_dict(
                     {
                         **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key),
-                        "X-Idempotency-Expiration": str(idempotency_expiry),
+                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
                         **(request_options.get("additional_headers", {}) if request_options is not None else {}),
                     }
                 )
@@ -199,7 +199,7 @@ class AsyncAutomationsClient:
         *,
         request: AutomationInvokeParams,
         idempotency_key: typing.Optional[str] = None,
-        idempotency_expiry: typing.Optional[int] = None,
+        idempotency_expiry: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AutomationInvokeResponse:
         """
@@ -212,7 +212,7 @@ class AsyncAutomationsClient:
 
             - idempotency_key: typing.Optional[str].
 
-            - idempotency_expiry: typing.Optional[int].
+            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
@@ -251,8 +251,8 @@ class AsyncAutomationsClient:
                 remove_none_from_dict(
                     {
                         **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key),
-                        "X-Idempotency-Expiration": str(idempotency_expiry),
+                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
                         **(request_options.get("additional_headers", {}) if request_options is not None else {}),
                     }
                 )
@@ -276,7 +276,7 @@ class AsyncAutomationsClient:
         *,
         request: AutomationAdHocInvokeParams,
         idempotency_key: typing.Optional[str] = None,
-        idempotency_expiry: typing.Optional[int] = None,
+        idempotency_expiry: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AutomationInvokeResponse:
         """
@@ -287,7 +287,7 @@ class AsyncAutomationsClient:
 
             - idempotency_key: typing.Optional[str].
 
-            - idempotency_expiry: typing.Optional[int].
+            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
@@ -339,8 +339,8 @@ class AsyncAutomationsClient:
                 remove_none_from_dict(
                     {
                         **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key),
-                        "X-Idempotency-Expiration": str(idempotency_expiry),
+                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
                         **(request_options.get("additional_headers", {}) if request_options is not None else {}),
                     }
                 )
