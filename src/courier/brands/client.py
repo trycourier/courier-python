@@ -81,8 +81,8 @@ class BrandsClient:
                 remove_none_from_dict(
                     {
                         **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key),
-                        "X-Idempotency-Expiration": str(idempotency_expiry),
+                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
                         **(request_options.get("additional_headers", {}) if request_options is not None else {}),
                     }
                 )
@@ -405,8 +405,8 @@ class AsyncBrandsClient:
                 remove_none_from_dict(
                     {
                         **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key),
-                        "X-Idempotency-Expiration": str(idempotency_expiry),
+                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
                         **(request_options.get("additional_headers", {}) if request_options is not None else {}),
                     }
                 )
