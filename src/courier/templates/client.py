@@ -23,11 +23,20 @@ class TemplatesClient:
         """
         Returns a list of notification templates
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of templates
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of templates
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTemplatesResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -38,8 +47,8 @@ class TemplatesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -85,11 +94,20 @@ class AsyncTemplatesClient:
         """
         Returns a list of notification templates
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of templates
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of templates
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTemplatesResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -100,8 +118,8 @@ class AsyncTemplatesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {

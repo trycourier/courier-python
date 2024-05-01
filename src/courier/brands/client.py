@@ -41,15 +41,24 @@ class BrandsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Brand:
         """
-        Parameters:
-            - request: BrandParameters.
+        Parameters
+        ----------
+        request : BrandParameters
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Brand
+
+        Examples
+        --------
         from courier import BrandParameters, BrandSettings, BrandSnippets
         from courier.client import Courier
 
@@ -66,8 +75,8 @@ class BrandsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -111,11 +120,20 @@ class BrandsClient:
         """
         Fetch a specific brand by brand ID.
 
-        Parameters:
-            - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
+        Parameters
+        ----------
+        brand_id : str
+            A unique identifier associated with the brand you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Brand
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -126,8 +144,8 @@ class BrandsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -159,11 +177,20 @@ class BrandsClient:
         """
         Get the list of brands.
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of brands.
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of brands.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BrandsResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -174,8 +201,8 @@ class BrandsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -214,11 +241,20 @@ class BrandsClient:
         """
         Delete a brand by brand ID.
 
-        Parameters:
-            - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
+        Parameters
+        ----------
+        brand_id : str
+            A unique identifier associated with the brand you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -229,8 +265,8 @@ class BrandsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -270,17 +306,27 @@ class BrandsClient:
         """
         Replace an existing brand with the supplied values.
 
-        Parameters:
-            - brand_id: str. A unique identifier associated with the brand you wish to update.
+        Parameters
+        ----------
+        brand_id : str
+            A unique identifier associated with the brand you wish to update.
 
-            - name: str. The name of the brand.
+        name : str
+            The name of the brand.
 
-            - settings: typing.Optional[BrandSettings].
+        settings : typing.Optional[BrandSettings]
 
-            - snippets: typing.Optional[BrandSnippets].
+        snippets : typing.Optional[BrandSnippets]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Brand
+
+        Examples
+        --------
         from courier import (
             BrandColors,
             BrandSettings,
@@ -318,8 +364,8 @@ class BrandsClient:
         if snippets is not OMIT:
             _request["snippets"] = snippets
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -365,15 +411,24 @@ class AsyncBrandsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Brand:
         """
-        Parameters:
-            - request: BrandParameters.
+        Parameters
+        ----------
+        request : BrandParameters
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Brand
+
+        Examples
+        --------
         from courier import BrandParameters, BrandSettings, BrandSnippets
         from courier.client import AsyncCourier
 
@@ -390,8 +445,8 @@ class AsyncBrandsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -435,11 +490,20 @@ class AsyncBrandsClient:
         """
         Fetch a specific brand by brand ID.
 
-        Parameters:
-            - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
+        Parameters
+        ----------
+        brand_id : str
+            A unique identifier associated with the brand you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Brand
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -450,8 +514,8 @@ class AsyncBrandsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -483,11 +547,20 @@ class AsyncBrandsClient:
         """
         Get the list of brands.
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of brands.
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of brands.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BrandsResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -498,8 +571,8 @@ class AsyncBrandsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -538,11 +611,20 @@ class AsyncBrandsClient:
         """
         Delete a brand by brand ID.
 
-        Parameters:
-            - brand_id: str. A unique identifier associated with the brand you wish to retrieve.
+        Parameters
+        ----------
+        brand_id : str
+            A unique identifier associated with the brand you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -553,8 +635,8 @@ class AsyncBrandsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -594,17 +676,27 @@ class AsyncBrandsClient:
         """
         Replace an existing brand with the supplied values.
 
-        Parameters:
-            - brand_id: str. A unique identifier associated with the brand you wish to update.
+        Parameters
+        ----------
+        brand_id : str
+            A unique identifier associated with the brand you wish to update.
 
-            - name: str. The name of the brand.
+        name : str
+            The name of the brand.
 
-            - settings: typing.Optional[BrandSettings].
+        settings : typing.Optional[BrandSettings]
 
-            - snippets: typing.Optional[BrandSnippets].
+        snippets : typing.Optional[BrandSnippets]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Brand
+
+        Examples
+        --------
         from courier import (
             BrandColors,
             BrandSettings,
@@ -642,8 +734,8 @@ class AsyncBrandsClient:
         if snippets is not OMIT:
             _request["snippets"] = snippets
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),

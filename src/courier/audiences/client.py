@@ -30,11 +30,20 @@ class AudiencesClient:
         """
         Returns the specified audience by id.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience_id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience_id
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Audience
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -45,8 +54,8 @@ class AudiencesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}"
             ),
             params=jsonable_encoder(
@@ -86,17 +95,28 @@ class AudiencesClient:
         """
         Creates or updates audience.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience id
 
-            - name: typing.Optional[str]. The name of the audience
+        name : typing.Optional[str]
+            The name of the audience
 
-            - description: typing.Optional[str]. A description of the audience
+        description : typing.Optional[str]
+            A description of the audience
 
-            - filter: typing.Optional[Filter].
+        filter : typing.Optional[Filter]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AudienceUpdateResponse
+
+        Examples
+        --------
         from courier import SingleFilterConfig
         from courier.client import Courier
 
@@ -122,8 +142,8 @@ class AudiencesClient:
         if filter is not OMIT:
             _request["filter"] = filter
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}"
             ),
             params=jsonable_encoder(
@@ -161,11 +181,20 @@ class AudiencesClient:
         """
         Deletes the specified audience.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience id
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -176,8 +205,8 @@ class AudiencesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}"
             ),
             params=jsonable_encoder(
@@ -215,13 +244,23 @@ class AudiencesClient:
         """
         Get list of members of an audience.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience id
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of members
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of members
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AudienceMemberListResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -233,8 +272,8 @@ class AudiencesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}/members"
             ),
             params=jsonable_encoder(
@@ -279,11 +318,20 @@ class AudiencesClient:
         """
         Get the audiences associated with the authorization token.
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of audiences
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of audiences
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AudienceListResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -294,8 +342,8 @@ class AudiencesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audiences"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audiences"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -341,11 +389,20 @@ class AsyncAudiencesClient:
         """
         Returns the specified audience by id.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience_id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience_id
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Audience
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -356,8 +413,8 @@ class AsyncAudiencesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}"
             ),
             params=jsonable_encoder(
@@ -397,17 +454,28 @@ class AsyncAudiencesClient:
         """
         Creates or updates audience.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience id
 
-            - name: typing.Optional[str]. The name of the audience
+        name : typing.Optional[str]
+            The name of the audience
 
-            - description: typing.Optional[str]. A description of the audience
+        description : typing.Optional[str]
+            A description of the audience
 
-            - filter: typing.Optional[Filter].
+        filter : typing.Optional[Filter]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AudienceUpdateResponse
+
+        Examples
+        --------
         from courier import SingleFilterConfig
         from courier.client import AsyncCourier
 
@@ -433,8 +501,8 @@ class AsyncAudiencesClient:
         if filter is not OMIT:
             _request["filter"] = filter
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}"
             ),
             params=jsonable_encoder(
@@ -472,11 +540,20 @@ class AsyncAudiencesClient:
         """
         Deletes the specified audience.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience id
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -487,8 +564,8 @@ class AsyncAudiencesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}"
             ),
             params=jsonable_encoder(
@@ -526,13 +603,23 @@ class AsyncAudiencesClient:
         """
         Get list of members of an audience.
 
-        Parameters:
-            - audience_id: str. A unique identifier representing the audience id
+        Parameters
+        ----------
+        audience_id : str
+            A unique identifier representing the audience id
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of members
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of members
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AudienceMemberListResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -544,8 +631,8 @@ class AsyncAudiencesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audiences/{jsonable_encoder(audience_id)}/members"
             ),
             params=jsonable_encoder(
@@ -590,11 +677,20 @@ class AsyncAudiencesClient:
         """
         Get the audiences associated with the authorization token.
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of audiences
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of audiences
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AudienceListResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -605,8 +701,8 @@ class AsyncAudiencesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audiences"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audiences"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {

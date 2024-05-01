@@ -12,6 +12,8 @@ from .merge_algorithm import MergeAlgorithm
 
 class AutomationFetchDataStep(AutomationStep):
     """
+    Examples
+    --------
     from courier import AutomationFetchDataStep, AutomationFetchDataWebhook
 
     AutomationFetchDataStep(

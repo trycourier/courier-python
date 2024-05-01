@@ -46,37 +46,59 @@ class MessagesClient:
         """
         Fetch the statuses of messages you've previously sent.
 
-        Parameters:
-            - archived: typing.Optional[bool]. A boolean value that indicates whether archived messages should be included in the response.
+        Parameters
+        ----------
+        archived : typing.Optional[bool]
+            A boolean value that indicates whether archived messages should be included in the response.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of messages.
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of messages.
 
-            - event: typing.Optional[str]. A unique identifier representing the event that was used to send the event.
+        event : typing.Optional[str]
+            A unique identifier representing the event that was used to send the event.
 
-            - list_: typing.Optional[str]. A unique identifier representing the list the message was sent to.
+        list_ : typing.Optional[str]
+            A unique identifier representing the list the message was sent to.
 
-            - message_id: typing.Optional[str]. A unique identifier representing the message_id returned from either /send or /send/list.
+        message_id : typing.Optional[str]
+            A unique identifier representing the message_id returned from either /send or /send/list.
 
-            - notification: typing.Optional[str]. A unique identifier representing the notification that was used to send the event.
+        notification : typing.Optional[str]
+            A unique identifier representing the notification that was used to send the event.
 
-            - provider: typing.Optional[typing.Union[str, typing.Sequence[str]]]. The key assocated to the provider you want to filter on. E.g., sendgrid, inbox, twilio, slack, msteams, etc. Allows multiple values to be set in query parameters.
+        provider : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            The key assocated to the provider you want to filter on. E.g., sendgrid, inbox, twilio, slack, msteams, etc. Allows multiple values to be set in query parameters.
 
-            - recipient: typing.Optional[str]. A unique identifier representing the recipient associated with the requested profile.
+        recipient : typing.Optional[str]
+            A unique identifier representing the recipient associated with the requested profile.
 
-            - status: typing.Optional[typing.Union[str, typing.Sequence[str]]]. An indicator of the current status of the message. Allows multiple values to be set in query parameters.
+        status : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            An indicator of the current status of the message. Allows multiple values to be set in query parameters.
 
-            - tag: typing.Optional[typing.Union[str, typing.Sequence[str]]]. A tag placed in the metadata.tags during a notification send. Allows multiple values to be set in query parameters.
+        tag : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            A tag placed in the metadata.tags during a notification send. Allows multiple values to be set in query parameters.
 
-            - tags: typing.Optional[str]. A comma delimited list of 'tags'. Messages will be returned if they match any of the tags passed in.
+        tags : typing.Optional[str]
+            A comma delimited list of 'tags'. Messages will be returned if they match any of the tags passed in.
 
-            - tenant_id: typing.Optional[str]. Messages sent with the context of a Tenant
+        tenant_id : typing.Optional[str]
+            Messages sent with the context of a Tenant
 
-            - enqueued_after: typing.Optional[str]. The enqueued datetime of a message to filter out messages received before.
+        enqueued_after : typing.Optional[str]
+            The enqueued datetime of a message to filter out messages received before.
 
-            - trace_id: typing.Optional[str]. The unique identifier used to trace the requests
+        trace_id : typing.Optional[str]
+            The unique identifier used to trace the requests
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListMessagesResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -100,8 +122,8 @@ class MessagesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "messages"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "messages"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -153,11 +175,20 @@ class MessagesClient:
         """
         Fetch the status of a message you've previously sent.
 
-        Parameters:
-            - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier associated with the message you wish to retrieve (results from a send).
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MessageDetails
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -168,8 +199,10 @@ class MessagesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -210,15 +243,25 @@ class MessagesClient:
         """
         Cancel a message that is currently in the process of being delivered. A well-formatted API call to the cancel message API will return either `200` status code for a successful cancellation or `409` status code for an unsuccessful cancellation. Both cases will include the actual message record in the response body (see details below).
 
-        Parameters:
-            - message_id: str. A unique identifier representing the message ID
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier representing the message ID
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MessageDetails
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -229,8 +272,8 @@ class MessagesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/cancel"
             ),
             params=jsonable_encoder(
@@ -273,13 +316,23 @@ class MessagesClient:
         """
         Fetch the array of events of a message you've previously sent.
 
-        Parameters:
-            - message_id: str. A unique identifier representing the message ID
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier representing the message ID
 
-            - type: typing.Optional[str]. A supported Message History type that will filter the events returned.
+        type : typing.Optional[str]
+            A supported Message History type that will filter the events returned.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MessageHistoryResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -291,8 +344,8 @@ class MessagesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/history"
             ),
             params=jsonable_encoder(
@@ -337,11 +390,20 @@ class MessagesClient:
         self, message_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> RenderOutputResponse:
         """
-        Parameters:
-            - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier associated with the message you wish to retrieve (results from a send).
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RenderOutputResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -352,8 +414,8 @@ class MessagesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/output"
             ),
             params=jsonable_encoder(
@@ -387,11 +449,20 @@ class MessagesClient:
 
     def archive(self, request_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
-        Parameters:
-            - request_id: str. A unique identifier representing the request ID
+        Parameters
+        ----------
+        request_id : str
+            A unique identifier representing the request ID
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -402,8 +473,8 @@ class MessagesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"requests/{jsonable_encoder(request_id)}/archive"
             ),
             params=jsonable_encoder(
@@ -461,37 +532,59 @@ class AsyncMessagesClient:
         """
         Fetch the statuses of messages you've previously sent.
 
-        Parameters:
-            - archived: typing.Optional[bool]. A boolean value that indicates whether archived messages should be included in the response.
+        Parameters
+        ----------
+        archived : typing.Optional[bool]
+            A boolean value that indicates whether archived messages should be included in the response.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of messages.
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of messages.
 
-            - event: typing.Optional[str]. A unique identifier representing the event that was used to send the event.
+        event : typing.Optional[str]
+            A unique identifier representing the event that was used to send the event.
 
-            - list_: typing.Optional[str]. A unique identifier representing the list the message was sent to.
+        list_ : typing.Optional[str]
+            A unique identifier representing the list the message was sent to.
 
-            - message_id: typing.Optional[str]. A unique identifier representing the message_id returned from either /send or /send/list.
+        message_id : typing.Optional[str]
+            A unique identifier representing the message_id returned from either /send or /send/list.
 
-            - notification: typing.Optional[str]. A unique identifier representing the notification that was used to send the event.
+        notification : typing.Optional[str]
+            A unique identifier representing the notification that was used to send the event.
 
-            - provider: typing.Optional[typing.Union[str, typing.Sequence[str]]]. The key assocated to the provider you want to filter on. E.g., sendgrid, inbox, twilio, slack, msteams, etc. Allows multiple values to be set in query parameters.
+        provider : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            The key assocated to the provider you want to filter on. E.g., sendgrid, inbox, twilio, slack, msteams, etc. Allows multiple values to be set in query parameters.
 
-            - recipient: typing.Optional[str]. A unique identifier representing the recipient associated with the requested profile.
+        recipient : typing.Optional[str]
+            A unique identifier representing the recipient associated with the requested profile.
 
-            - status: typing.Optional[typing.Union[str, typing.Sequence[str]]]. An indicator of the current status of the message. Allows multiple values to be set in query parameters.
+        status : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            An indicator of the current status of the message. Allows multiple values to be set in query parameters.
 
-            - tag: typing.Optional[typing.Union[str, typing.Sequence[str]]]. A tag placed in the metadata.tags during a notification send. Allows multiple values to be set in query parameters.
+        tag : typing.Optional[typing.Union[str, typing.Sequence[str]]]
+            A tag placed in the metadata.tags during a notification send. Allows multiple values to be set in query parameters.
 
-            - tags: typing.Optional[str]. A comma delimited list of 'tags'. Messages will be returned if they match any of the tags passed in.
+        tags : typing.Optional[str]
+            A comma delimited list of 'tags'. Messages will be returned if they match any of the tags passed in.
 
-            - tenant_id: typing.Optional[str]. Messages sent with the context of a Tenant
+        tenant_id : typing.Optional[str]
+            Messages sent with the context of a Tenant
 
-            - enqueued_after: typing.Optional[str]. The enqueued datetime of a message to filter out messages received before.
+        enqueued_after : typing.Optional[str]
+            The enqueued datetime of a message to filter out messages received before.
 
-            - trace_id: typing.Optional[str]. The unique identifier used to trace the requests
+        trace_id : typing.Optional[str]
+            The unique identifier used to trace the requests
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListMessagesResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -515,8 +608,8 @@ class AsyncMessagesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "messages"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "messages"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -568,11 +661,20 @@ class AsyncMessagesClient:
         """
         Fetch the status of a message you've previously sent.
 
-        Parameters:
-            - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier associated with the message you wish to retrieve (results from a send).
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MessageDetails
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -583,8 +685,10 @@ class AsyncMessagesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -625,15 +729,25 @@ class AsyncMessagesClient:
         """
         Cancel a message that is currently in the process of being delivered. A well-formatted API call to the cancel message API will return either `200` status code for a successful cancellation or `409` status code for an unsuccessful cancellation. Both cases will include the actual message record in the response body (see details below).
 
-        Parameters:
-            - message_id: str. A unique identifier representing the message ID
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier representing the message ID
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MessageDetails
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -644,8 +758,8 @@ class AsyncMessagesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/cancel"
             ),
             params=jsonable_encoder(
@@ -688,13 +802,23 @@ class AsyncMessagesClient:
         """
         Fetch the array of events of a message you've previously sent.
 
-        Parameters:
-            - message_id: str. A unique identifier representing the message ID
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier representing the message ID
 
-            - type: typing.Optional[str]. A supported Message History type that will filter the events returned.
+        type : typing.Optional[str]
+            A supported Message History type that will filter the events returned.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MessageHistoryResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -706,8 +830,8 @@ class AsyncMessagesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/history"
             ),
             params=jsonable_encoder(
@@ -752,11 +876,20 @@ class AsyncMessagesClient:
         self, message_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> RenderOutputResponse:
         """
-        Parameters:
-            - message_id: str. A unique identifier associated with the message you wish to retrieve (results from a send).
+        Parameters
+        ----------
+        message_id : str
+            A unique identifier associated with the message you wish to retrieve (results from a send).
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RenderOutputResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -767,8 +900,8 @@ class AsyncMessagesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/output"
             ),
             params=jsonable_encoder(
@@ -802,11 +935,20 @@ class AsyncMessagesClient:
 
     async def archive(self, request_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
-        Parameters:
-            - request_id: str. A unique identifier representing the request ID
+        Parameters
+        ----------
+        request_id : str
+            A unique identifier representing the request ID
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -817,8 +959,8 @@ class AsyncMessagesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"requests/{jsonable_encoder(request_id)}/archive"
             ),
             params=jsonable_encoder(

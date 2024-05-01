@@ -32,11 +32,20 @@ class ProfilesClient:
         """
         Returns the specified user profile.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ProfileGetResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -47,8 +56,10 @@ class ProfilesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -88,17 +99,27 @@ class ProfilesClient:
         """
         Merge the supplied values with an existing profile or create a new profile if one doesn't already exist.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - profile: typing.Dict[str, typing.Any].
+        profile : typing.Dict[str, typing.Any]
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MergeProfileResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -110,8 +131,10 @@ class ProfilesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="POST",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -160,13 +183,22 @@ class ProfilesClient:
         removed from the profile. Remember, a `PUT` update is a full replacement of the data. For partial updates,
         use the [Patch](https://www.courier.com/docs/reference/profiles/patch/) request.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - profile: typing.Dict[str, typing.Any].
+        profile : typing.Dict[str, typing.Any]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ReplaceProfileResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -178,8 +210,10 @@ class ProfilesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -217,11 +251,20 @@ class ProfilesClient:
         """
         Deletes the specified user profile.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -232,8 +275,10 @@ class ProfilesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -271,13 +316,23 @@ class ProfilesClient:
         """
         Returns the subscribed lists for a specified user.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of message statuses.
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of message statuses.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetListSubscriptionsResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -289,8 +344,8 @@ class ProfilesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}/lists"
             ),
             params=jsonable_encoder(
@@ -341,17 +396,27 @@ class ProfilesClient:
         """
         Subscribes the given user to one or more lists. If the list does not exist, it will be created.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request: SubscribeToListsRequest.
+        request : SubscribeToListsRequest
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscribeToListsResponse
+
+        Examples
+        --------
         from courier import SubscribeToListsRequest, SubscribeToListsRequestListObject
         from courier.client import Courier
 
@@ -366,8 +431,8 @@ class ProfilesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}/lists"
             ),
             params=jsonable_encoder(
@@ -411,11 +476,20 @@ class ProfilesClient:
         """
         Removes all list subscriptions for given user.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DeleteListSubscriptionResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -426,8 +500,8 @@ class ProfilesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}/lists"
             ),
             params=jsonable_encoder(
@@ -466,11 +540,20 @@ class AsyncProfilesClient:
         """
         Returns the specified user profile.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ProfileGetResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -481,8 +564,10 @@ class AsyncProfilesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -522,17 +607,27 @@ class AsyncProfilesClient:
         """
         Merge the supplied values with an existing profile or create a new profile if one doesn't already exist.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - profile: typing.Dict[str, typing.Any].
+        profile : typing.Dict[str, typing.Any]
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        MergeProfileResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -544,8 +639,10 @@ class AsyncProfilesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="POST",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -594,13 +691,22 @@ class AsyncProfilesClient:
         removed from the profile. Remember, a `PUT` update is a full replacement of the data. For partial updates,
         use the [Patch](https://www.courier.com/docs/reference/profiles/patch/) request.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - profile: typing.Dict[str, typing.Any].
+        profile : typing.Dict[str, typing.Any]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ReplaceProfileResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -612,8 +718,10 @@ class AsyncProfilesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -651,11 +759,20 @@ class AsyncProfilesClient:
         """
         Deletes the specified user profile.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -666,8 +783,10 @@ class AsyncProfilesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -705,13 +824,23 @@ class AsyncProfilesClient:
         """
         Returns the subscribed lists for a specified user.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of message statuses.
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of message statuses.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetListSubscriptionsResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -723,8 +852,8 @@ class AsyncProfilesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}/lists"
             ),
             params=jsonable_encoder(
@@ -775,17 +904,27 @@ class AsyncProfilesClient:
         """
         Subscribes the given user to one or more lists. If the list does not exist, it will be created.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request: SubscribeToListsRequest.
+        request : SubscribeToListsRequest
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscribeToListsResponse
+
+        Examples
+        --------
         from courier import SubscribeToListsRequest, SubscribeToListsRequestListObject
         from courier.client import AsyncCourier
 
@@ -800,8 +939,8 @@ class AsyncProfilesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}/lists"
             ),
             params=jsonable_encoder(
@@ -845,11 +984,20 @@ class AsyncProfilesClient:
         """
         Removes all list subscriptions for given user.
 
-        Parameters:
-            - user_id: str. A unique identifier representing the user associated with the requested profile.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DeleteListSubscriptionResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -860,8 +1008,8 @@ class AsyncProfilesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"profiles/{jsonable_encoder(user_id)}/lists"
             ),
             params=jsonable_encoder(

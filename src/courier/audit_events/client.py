@@ -24,11 +24,20 @@ class AuditEventsClient:
         """
         Fetch the list of audit events
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of audit events.
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of audit events.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListAuditEventsResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -39,8 +48,8 @@ class AuditEventsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audit-events"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audit-events"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -79,11 +88,20 @@ class AuditEventsClient:
         """
         Fetch a specific audit event by ID.
 
-        Parameters:
-            - audit_event_id: str. A unique identifier associated with the audit event you wish to retrieve
+        Parameters
+        ----------
+        audit_event_id : str
+            A unique identifier associated with the audit event you wish to retrieve
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AuditEvent
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -94,8 +112,8 @@ class AuditEventsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audit-events/{jsonable_encoder(audit_event_id)}"
             ),
             params=jsonable_encoder(
@@ -134,11 +152,20 @@ class AsyncAuditEventsClient:
         """
         Fetch the list of audit events
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of audit events.
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of audit events.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListAuditEventsResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -149,8 +176,8 @@ class AsyncAuditEventsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audit-events"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "audit-events"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -189,11 +216,20 @@ class AsyncAuditEventsClient:
         """
         Fetch a specific audit event by ID.
 
-        Parameters:
-            - audit_event_id: str. A unique identifier associated with the audit event you wish to retrieve
+        Parameters
+        ----------
+        audit_event_id : str
+            A unique identifier associated with the audit event you wish to retrieve
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AuditEvent
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -204,8 +240,8 @@ class AsyncAuditEventsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"audit-events/{jsonable_encoder(audit_event_id)}"
             ),
             params=jsonable_encoder(
