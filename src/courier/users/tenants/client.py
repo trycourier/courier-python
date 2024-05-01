@@ -11,7 +11,6 @@ from ...core.jsonable_encoder import jsonable_encoder
 from ...core.pydantic_utilities import pydantic_v1
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
-from .types.add_user_to_single_tenants_params_profile import AddUserToSingleTenantsParamsProfile
 from .types.list_tenants_for_user_response import ListTenantsForUserResponse
 
 # this is used as the default value for optional parameters
@@ -102,7 +101,7 @@ class TenantsClient:
         user_id: str,
         tenant_id: str,
         *,
-        profile: AddUserToSingleTenantsParamsProfile,
+        profile: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -117,12 +116,11 @@ class TenantsClient:
 
             - tenant_id: str. Id of the tenant the user should be added to.
 
-            - profile: AddUserToSingleTenantsParamsProfile.
+            - profile: typing.Optional[typing.Dict[str, typing.Any]].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
         from courier.client import Courier
-        from courier.users import AddUserToSingleTenantsParamsProfile
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -130,15 +128,12 @@ class TenantsClient:
         client.users.tenants.add(
             user_id="string",
             tenant_id="string",
-            profile=AddUserToSingleTenantsParamsProfile(
-                title="string",
-                email="string",
-                phone_number="string",
-                locale="string",
-                additional_fields={"string": {"key": "value"}},
-            ),
+            profile={"string": {"key": "value"}},
         )
         """
+        _request: typing.Dict[str, typing.Any] = {}
+        if profile is not OMIT:
+            _request["profile"] = profile
         _response = self._client_wrapper.httpx_client.request(
             "PUT",
             urllib.parse.urljoin(
@@ -148,10 +143,10 @@ class TenantsClient:
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
-            json=jsonable_encoder({"profile": profile})
+            json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder({"profile": profile}),
+                **jsonable_encoder(_request),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -432,7 +427,7 @@ class AsyncTenantsClient:
         user_id: str,
         tenant_id: str,
         *,
-        profile: AddUserToSingleTenantsParamsProfile,
+        profile: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -447,12 +442,11 @@ class AsyncTenantsClient:
 
             - tenant_id: str. Id of the tenant the user should be added to.
 
-            - profile: AddUserToSingleTenantsParamsProfile.
+            - profile: typing.Optional[typing.Dict[str, typing.Any]].
 
             - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
         ---
         from courier.client import AsyncCourier
-        from courier.users import AddUserToSingleTenantsParamsProfile
 
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -460,15 +454,12 @@ class AsyncTenantsClient:
         await client.users.tenants.add(
             user_id="string",
             tenant_id="string",
-            profile=AddUserToSingleTenantsParamsProfile(
-                title="string",
-                email="string",
-                phone_number="string",
-                locale="string",
-                additional_fields={"string": {"key": "value"}},
-            ),
+            profile={"string": {"key": "value"}},
         )
         """
+        _request: typing.Dict[str, typing.Any] = {}
+        if profile is not OMIT:
+            _request["profile"] = profile
         _response = await self._client_wrapper.httpx_client.request(
             "PUT",
             urllib.parse.urljoin(
@@ -478,10 +469,10 @@ class AsyncTenantsClient:
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
-            json=jsonable_encoder({"profile": profile})
+            json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder({"profile": profile}),
+                **jsonable_encoder(_request),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(

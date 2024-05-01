@@ -8,6 +8,10 @@ from ....core.pydantic_utilities import pydantic_v1
 
 
 class AddUserToSingleTenantsParamsProfile(pydantic_v1.BaseModel):
+    """
+    AddUserToSingleTenantsParamsProfile is no longer used for Add a User to a Single Tenant
+    """
+
     title: str
     email: str = pydantic_v1.Field()
     """
