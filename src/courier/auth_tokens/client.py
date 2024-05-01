@@ -32,17 +32,26 @@ class AuthTokensClient:
         """
         Returns a new access token.
 
-        Parameters:
-            - scope: str.
+        Parameters
+        ----------
+        scope : str
 
-            - expires_in: str.
+        expires_in : str
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        IssueTokenResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -54,8 +63,8 @@ class AuthTokensClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -106,17 +115,26 @@ class AsyncAuthTokensClient:
         """
         Returns a new access token.
 
-        Parameters:
-            - scope: str.
+        Parameters
+        ----------
+        scope : str
 
-            - expires_in: str.
+        expires_in : str
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        IssueTokenResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -128,8 +146,8 @@ class AsyncAuthTokensClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),

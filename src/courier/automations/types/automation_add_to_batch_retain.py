@@ -11,7 +11,9 @@ from .automation_add_to_batch_retain_type import AutomationAddToBatchRetainType
 class AutomationAddToBatchRetain(pydantic_v1.BaseModel):
     """
     Defines what items should be retained and passed along to the next steps when the batch is released
-    ---
+
+    Examples
+    --------
     from courier import AutomationAddToBatchRetain
 
     AutomationAddToBatchRetain(

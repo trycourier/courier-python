@@ -39,23 +39,38 @@ class TenantsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Tenant:
         """
-        Parameters:
-            - tenant_id: str. A unique identifier representing the tenant to be returned.
+        Parameters
+        ----------
+        tenant_id : str
+            A unique identifier representing the tenant to be returned.
 
-            - name: str. Name of the tenant.
+        name : str
+            Name of the tenant.
 
-            - parent_tenant_id: typing.Optional[str]. Tenant's parent id (if any).
+        parent_tenant_id : typing.Optional[str]
+            Tenant's parent id (if any).
 
-            - default_preferences: typing.Optional[DefaultPreferences]. Defines the preferences used for the tenant when the user hasn't specified their own.
+        default_preferences : typing.Optional[DefaultPreferences]
+            Defines the preferences used for the tenant when the user hasn't specified their own.
 
-            - properties: typing.Optional[typing.Sequence[TemplateProperty]]. Arbitrary properties accessible to a template.
+        properties : typing.Optional[typing.Sequence[TemplateProperty]]
+            Arbitrary properties accessible to a template.
 
-            - user_profile: typing.Optional[typing.Dict[str, typing.Any]]. A user profile object merged with user profile on send.
+        user_profile : typing.Optional[typing.Dict[str, typing.Any]]
+            A user profile object merged with user profile on send.
 
-            - brand_id: typing.Optional[str]. Brand to be used for the account when one is not specified by the send call.
+        brand_id : typing.Optional[str]
+            Brand to be used for the account when one is not specified by the send call.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Tenant
+
+        Examples
+        --------
         from courier import DefaultPreferences, SubscriptionTopic
         from courier.client import Courier
 
@@ -86,8 +101,10 @@ class TenantsClient:
         if brand_id is not OMIT:
             _request["brand_id"] = brand_id
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -123,11 +140,20 @@ class TenantsClient:
 
     def get(self, tenant_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Tenant:
         """
-        Parameters:
-            - tenant_id: str. A unique identifier representing the tenant to be returned.
+        Parameters
+        ----------
+        tenant_id : str
+            A unique identifier representing the tenant to be returned.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Tenant
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -138,8 +164,10 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -175,13 +203,24 @@ class TenantsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TenantListResponse:
         """
-        Parameters:
-            - limit: typing.Optional[int]. The number of accousnts to return
-                                           (defaults to 20, maximum value of 100)
-            - cursor: typing.Optional[str]. Continue the pagination with the next cursor
+        Parameters
+        ----------
+        limit : typing.Optional[int]
+            The number of accousnts to return
+            (defaults to 20, maximum value of 100)
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        TenantListResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -193,8 +232,8 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "tenants"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "tenants"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -232,11 +271,20 @@ class TenantsClient:
 
     def delete(self, tenant_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
-        Parameters:
-            - tenant_id: str. Id of the tenant to be deleted.
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant to be deleted.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -247,8 +295,10 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -283,15 +333,27 @@ class TenantsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListUsersForTenantResponse:
         """
-        Parameters:
-            - tenant_id: str. Id of the tenant for user membership.
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant for user membership.
 
-            - limit: typing.Optional[int]. The number of accounts to return
-                                           (defaults to 20, maximum value of 100)
-            - cursor: typing.Optional[str]. Continue the pagination with the next cursor
+        limit : typing.Optional[int]
+            The number of accounts to return
+            (defaults to 20, maximum value of 100)
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListUsersForTenantResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -304,8 +366,8 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}/users"
             ),
             params=jsonable_encoder(
@@ -363,23 +425,38 @@ class AsyncTenantsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Tenant:
         """
-        Parameters:
-            - tenant_id: str. A unique identifier representing the tenant to be returned.
+        Parameters
+        ----------
+        tenant_id : str
+            A unique identifier representing the tenant to be returned.
 
-            - name: str. Name of the tenant.
+        name : str
+            Name of the tenant.
 
-            - parent_tenant_id: typing.Optional[str]. Tenant's parent id (if any).
+        parent_tenant_id : typing.Optional[str]
+            Tenant's parent id (if any).
 
-            - default_preferences: typing.Optional[DefaultPreferences]. Defines the preferences used for the tenant when the user hasn't specified their own.
+        default_preferences : typing.Optional[DefaultPreferences]
+            Defines the preferences used for the tenant when the user hasn't specified their own.
 
-            - properties: typing.Optional[typing.Sequence[TemplateProperty]]. Arbitrary properties accessible to a template.
+        properties : typing.Optional[typing.Sequence[TemplateProperty]]
+            Arbitrary properties accessible to a template.
 
-            - user_profile: typing.Optional[typing.Dict[str, typing.Any]]. A user profile object merged with user profile on send.
+        user_profile : typing.Optional[typing.Dict[str, typing.Any]]
+            A user profile object merged with user profile on send.
 
-            - brand_id: typing.Optional[str]. Brand to be used for the account when one is not specified by the send call.
+        brand_id : typing.Optional[str]
+            Brand to be used for the account when one is not specified by the send call.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Tenant
+
+        Examples
+        --------
         from courier import DefaultPreferences, SubscriptionTopic
         from courier.client import AsyncCourier
 
@@ -410,8 +487,10 @@ class AsyncTenantsClient:
         if brand_id is not OMIT:
             _request["brand_id"] = brand_id
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -447,11 +526,20 @@ class AsyncTenantsClient:
 
     async def get(self, tenant_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> Tenant:
         """
-        Parameters:
-            - tenant_id: str. A unique identifier representing the tenant to be returned.
+        Parameters
+        ----------
+        tenant_id : str
+            A unique identifier representing the tenant to be returned.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Tenant
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -462,8 +550,10 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -499,13 +589,24 @@ class AsyncTenantsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> TenantListResponse:
         """
-        Parameters:
-            - limit: typing.Optional[int]. The number of accousnts to return
-                                           (defaults to 20, maximum value of 100)
-            - cursor: typing.Optional[str]. Continue the pagination with the next cursor
+        Parameters
+        ----------
+        limit : typing.Optional[int]
+            The number of accousnts to return
+            (defaults to 20, maximum value of 100)
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        TenantListResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -517,8 +618,8 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "tenants"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "tenants"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -556,11 +657,20 @@ class AsyncTenantsClient:
 
     async def delete(self, tenant_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
-        Parameters:
-            - tenant_id: str. Id of the tenant to be deleted.
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant to be deleted.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -571,8 +681,10 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -607,15 +719,27 @@ class AsyncTenantsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> ListUsersForTenantResponse:
         """
-        Parameters:
-            - tenant_id: str. Id of the tenant for user membership.
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant for user membership.
 
-            - limit: typing.Optional[int]. The number of accounts to return
-                                           (defaults to 20, maximum value of 100)
-            - cursor: typing.Optional[str]. Continue the pagination with the next cursor
+        limit : typing.Optional[int]
+            The number of accounts to return
+            (defaults to 20, maximum value of 100)
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListUsersForTenantResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -628,8 +752,8 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"tenants/{jsonable_encoder(tenant_id)}/users"
             ),
             params=jsonable_encoder(

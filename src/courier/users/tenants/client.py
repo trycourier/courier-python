@@ -11,7 +11,6 @@ from ...core.jsonable_encoder import jsonable_encoder
 from ...core.pydantic_utilities import pydantic_v1
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
-from .types.add_user_to_single_tenants_params_profile import AddUserToSingleTenantsParamsProfile
 from .types.list_tenants_for_user_response import ListTenantsForUserResponse
 
 # this is used as the default value for optional parameters
@@ -36,13 +35,22 @@ class TenantsClient:
         This profile will be merged with the user's main
         profile when sending to the user with that tenant.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - tenants: typing.Sequence[UserTenantAssociation].
+        tenants : typing.Sequence[UserTenantAssociation]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import UserTenantAssociation
         from courier.client import Courier
 
@@ -62,8 +70,8 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tenants"
             ),
             params=jsonable_encoder(
@@ -102,7 +110,7 @@ class TenantsClient:
         user_id: str,
         tenant_id: str,
         *,
-        profile: AddUserToSingleTenantsParamsProfile,
+        profile: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -112,17 +120,26 @@ class TenantsClient:
         This profile will be merged with the user's main profile
         when sending to the user with that tenant.
 
-        Parameters:
-            - user_id: str. Id of the user to be added to the supplied tenant.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to be added to the supplied tenant.
 
-            - tenant_id: str. Id of the tenant the user should be added to.
+        tenant_id : str
+            Id of the tenant the user should be added to.
 
-            - profile: AddUserToSingleTenantsParamsProfile.
+        profile : typing.Optional[typing.Dict[str, typing.Any]]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
-        from courier.users import AddUserToSingleTenantsParamsProfile
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -130,28 +147,25 @@ class TenantsClient:
         client.users.tenants.add(
             user_id="string",
             tenant_id="string",
-            profile=AddUserToSingleTenantsParamsProfile(
-                title="string",
-                email="string",
-                phone_number="string",
-                locale="string",
-                additional_fields={"string": {"key": "value"}},
-            ),
+            profile={"string": {"key": "value"}},
         )
         """
+        _request: typing.Dict[str, typing.Any] = {}
+        if profile is not OMIT:
+            _request["profile"] = profile
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tenants/{jsonable_encoder(tenant_id)}",
             ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
-            json=jsonable_encoder({"profile": profile})
+            json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder({"profile": profile}),
+                **jsonable_encoder(_request),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -180,11 +194,20 @@ class TenantsClient:
         """
         Removes a user from any tenants they may have been associated with.
 
-        Parameters:
-            - user_id: str. Id of the user to be removed from the supplied tenant.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to be removed from the supplied tenant.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -195,8 +218,8 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tenants"
             ),
             params=jsonable_encoder(
@@ -228,13 +251,23 @@ class TenantsClient:
         """
         Removes a user from the supplied tenant.
 
-        Parameters:
-            - user_id: str. Id of the user to be removed from the supplied tenant.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to be removed from the supplied tenant.
 
-            - tenant_id: str. Id of the tenant the user should be removed from.
+        tenant_id : str
+            Id of the tenant the user should be removed from.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -246,8 +279,8 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tenants/{jsonable_encoder(tenant_id)}",
             ),
@@ -287,15 +320,27 @@ class TenantsClient:
         """
         Returns a paginated list of user tenant associations.
 
-        Parameters:
-            - user_id: str. Id of the user to retrieve all associated tenants for.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to retrieve all associated tenants for.
 
-            - limit: typing.Optional[int]. The number of accounts to return
-                                           (defaults to 20, maximum value of 100)
-            - cursor: typing.Optional[str]. Continue the pagination with the next cursor
+        limit : typing.Optional[int]
+            The number of accounts to return
+            (defaults to 20, maximum value of 100)
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTenantsForUserResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -308,8 +353,8 @@ class TenantsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tenants"
             ),
             params=jsonable_encoder(
@@ -366,13 +411,22 @@ class AsyncTenantsClient:
         This profile will be merged with the user's main
         profile when sending to the user with that tenant.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - tenants: typing.Sequence[UserTenantAssociation].
+        tenants : typing.Sequence[UserTenantAssociation]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import UserTenantAssociation
         from courier.client import AsyncCourier
 
@@ -392,8 +446,8 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tenants"
             ),
             params=jsonable_encoder(
@@ -432,7 +486,7 @@ class AsyncTenantsClient:
         user_id: str,
         tenant_id: str,
         *,
-        profile: AddUserToSingleTenantsParamsProfile,
+        profile: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -442,17 +496,26 @@ class AsyncTenantsClient:
         This profile will be merged with the user's main profile
         when sending to the user with that tenant.
 
-        Parameters:
-            - user_id: str. Id of the user to be added to the supplied tenant.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to be added to the supplied tenant.
 
-            - tenant_id: str. Id of the tenant the user should be added to.
+        tenant_id : str
+            Id of the tenant the user should be added to.
 
-            - profile: AddUserToSingleTenantsParamsProfile.
+        profile : typing.Optional[typing.Dict[str, typing.Any]]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
-        from courier.users import AddUserToSingleTenantsParamsProfile
 
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -460,28 +523,25 @@ class AsyncTenantsClient:
         await client.users.tenants.add(
             user_id="string",
             tenant_id="string",
-            profile=AddUserToSingleTenantsParamsProfile(
-                title="string",
-                email="string",
-                phone_number="string",
-                locale="string",
-                additional_fields={"string": {"key": "value"}},
-            ),
+            profile={"string": {"key": "value"}},
         )
         """
+        _request: typing.Dict[str, typing.Any] = {}
+        if profile is not OMIT:
+            _request["profile"] = profile
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tenants/{jsonable_encoder(tenant_id)}",
             ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
-            json=jsonable_encoder({"profile": profile})
+            json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder({"profile": profile}),
+                **jsonable_encoder(_request),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -510,11 +570,20 @@ class AsyncTenantsClient:
         """
         Removes a user from any tenants they may have been associated with.
 
-        Parameters:
-            - user_id: str. Id of the user to be removed from the supplied tenant.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to be removed from the supplied tenant.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -525,8 +594,8 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tenants"
             ),
             params=jsonable_encoder(
@@ -560,13 +629,23 @@ class AsyncTenantsClient:
         """
         Removes a user from the supplied tenant.
 
-        Parameters:
-            - user_id: str. Id of the user to be removed from the supplied tenant.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to be removed from the supplied tenant.
 
-            - tenant_id: str. Id of the tenant the user should be removed from.
+        tenant_id : str
+            Id of the tenant the user should be removed from.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -578,8 +657,8 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tenants/{jsonable_encoder(tenant_id)}",
             ),
@@ -619,15 +698,27 @@ class AsyncTenantsClient:
         """
         Returns a paginated list of user tenant associations.
 
-        Parameters:
-            - user_id: str. Id of the user to retrieve all associated tenants for.
+        Parameters
+        ----------
+        user_id : str
+            Id of the user to retrieve all associated tenants for.
 
-            - limit: typing.Optional[int]. The number of accounts to return
-                                           (defaults to 20, maximum value of 100)
-            - cursor: typing.Optional[str]. Continue the pagination with the next cursor
+        limit : typing.Optional[int]
+            The number of accounts to return
+            (defaults to 20, maximum value of 100)
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTenantsForUserResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -640,8 +731,8 @@ class AsyncTenantsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tenants"
             ),
             params=jsonable_encoder(

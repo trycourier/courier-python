@@ -9,7 +9,7 @@ from .subscription_topic import SubscriptionTopic
 
 
 class DefaultPreferences(pydantic_v1.BaseModel):
-    items: typing.List[SubscriptionTopic]
+    items: typing.Optional[typing.List[SubscriptionTopic]] = None
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

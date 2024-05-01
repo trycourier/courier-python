@@ -13,6 +13,8 @@ from .automation_step import AutomationStep
 
 class AutomationAddToBatchStep(AutomationStep):
     """
+    Examples
+    --------
     from courier import AutomationAddToBatchRetain, AutomationAddToBatchStep
 
     AutomationAddToBatchStep(

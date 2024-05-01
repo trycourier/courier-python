@@ -25,13 +25,24 @@ class TranslationsClient:
         """
         Get translations by locale
 
-        Parameters:
-            - domain: str. The domain you want to retrieve translations for. Only `default` is supported at the moment
+        Parameters
+        ----------
+        domain : str
+            The domain you want to retrieve translations for. Only `default` is supported at the moment
 
-            - locale: str. The locale you want to retrieve the translations for
+        locale : str
+            The locale you want to retrieve the translations for
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        str
+            .po file translation content
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -43,8 +54,8 @@ class TranslationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),
@@ -81,15 +92,25 @@ class TranslationsClient:
         """
         Update a translation
 
-        Parameters:
-            - domain: str. The domain you want to retrieve translations for. Only `default` is supported at the moment
+        Parameters
+        ----------
+        domain : str
+            The domain you want to retrieve translations for. Only `default` is supported at the moment
 
-            - locale: str. The locale you want to retrieve the translations for
+        locale : str
+            The locale you want to retrieve the translations for
 
-            - request: str.
+        request : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -102,8 +123,8 @@ class TranslationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),
@@ -144,13 +165,24 @@ class AsyncTranslationsClient:
         """
         Get translations by locale
 
-        Parameters:
-            - domain: str. The domain you want to retrieve translations for. Only `default` is supported at the moment
+        Parameters
+        ----------
+        domain : str
+            The domain you want to retrieve translations for. Only `default` is supported at the moment
 
-            - locale: str. The locale you want to retrieve the translations for
+        locale : str
+            The locale you want to retrieve the translations for
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        str
+            .po file translation content
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -162,8 +194,8 @@ class AsyncTranslationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),
@@ -200,15 +232,25 @@ class AsyncTranslationsClient:
         """
         Update a translation
 
-        Parameters:
-            - domain: str. The domain you want to retrieve translations for. Only `default` is supported at the moment
+        Parameters
+        ----------
+        domain : str
+            The domain you want to retrieve translations for. Only `default` is supported at the moment
 
-            - locale: str. The locale you want to retrieve the translations for
+        locale : str
+            The locale you want to retrieve the translations for
 
-            - request: str.
+        request : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -221,8 +263,8 @@ class AsyncTranslationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),

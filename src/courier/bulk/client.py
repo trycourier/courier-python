@@ -35,15 +35,24 @@ class BulkClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> BulkCreateJobResponse:
         """
-        Parameters:
-            - message: InboundBulkMessage.
+        Parameters
+        ----------
+        message : InboundBulkMessage
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BulkCreateJobResponse
+
+        Examples
+        --------
         from courier import InboundBulkMessage, InboundBulkTemplateMessage
         from courier.client import Courier
 
@@ -62,8 +71,8 @@ class BulkClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "bulk"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "bulk"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -111,17 +120,27 @@ class BulkClient:
         """
         Ingest user data into a Bulk Job
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - request: BulkIngestUsersParams.
+        request : BulkIngestUsersParams
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             BulkIngestUsersParams,
             InboundBulkMessageUser,
@@ -149,8 +168,8 @@ class BulkClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -195,15 +214,25 @@ class BulkClient:
         """
         Run a bulk job
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -214,8 +243,8 @@ class BulkClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/run"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/run"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -252,11 +281,20 @@ class BulkClient:
         """
         Get a bulk job
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BulkGetJobResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -267,8 +305,8 @@ class BulkClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -302,11 +340,20 @@ class BulkClient:
         """
         Get Bulk Job Users
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BulkGetJobUsersResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -317,8 +364,10 @@ class BulkClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/users"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/users"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -360,15 +409,24 @@ class AsyncBulkClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> BulkCreateJobResponse:
         """
-        Parameters:
-            - message: InboundBulkMessage.
+        Parameters
+        ----------
+        message : InboundBulkMessage
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BulkCreateJobResponse
+
+        Examples
+        --------
         from courier import InboundBulkMessage, InboundBulkTemplateMessage
         from courier.client import AsyncCourier
 
@@ -387,8 +445,8 @@ class AsyncBulkClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "bulk"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "bulk"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -436,17 +494,27 @@ class AsyncBulkClient:
         """
         Ingest user data into a Bulk Job
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - request: BulkIngestUsersParams.
+        request : BulkIngestUsersParams
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             BulkIngestUsersParams,
             InboundBulkMessageUser,
@@ -474,8 +542,8 @@ class AsyncBulkClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -520,15 +588,25 @@ class AsyncBulkClient:
         """
         Run a bulk job
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -539,8 +617,8 @@ class AsyncBulkClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/run"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/run"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -579,11 +657,20 @@ class AsyncBulkClient:
         """
         Get a bulk job
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BulkGetJobResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -594,8 +681,8 @@ class AsyncBulkClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -629,11 +716,20 @@ class AsyncBulkClient:
         """
         Get Bulk Job Users
 
-        Parameters:
-            - job_id: str. A unique identifier representing the bulk job
+        Parameters
+        ----------
+        job_id : str
+            A unique identifier representing the bulk job
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        BulkGetJobUsersResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -644,8 +740,10 @@ class AsyncBulkClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/users"),
+            method="GET",
+            url=urllib.parse.urljoin(
+                f"{self._client_wrapper.get_base_url()}/", f"bulk/{jsonable_encoder(job_id)}/users"
+            ),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),

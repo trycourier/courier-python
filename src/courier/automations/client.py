@@ -34,17 +34,27 @@ class AutomationsClient:
         """
         Invoke an automation run from an automation template.
 
-        Parameters:
-            - template_id: str. A unique identifier representing the automation template to be invoked. This could be the Automation Template ID or the Automation Template Alias.
+        Parameters
+        ----------
+        template_id : str
+            A unique identifier representing the automation template to be invoked. This could be the Automation Template ID or the Automation Template Alias.
 
-            - request: AutomationInvokeParams.
+        request : AutomationInvokeParams
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AutomationInvokeResponse
+
+        Examples
+        --------
         from courier import AutomationInvokeParams
         from courier.client import Courier
 
@@ -63,8 +73,8 @@ class AutomationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"automations/{jsonable_encoder(template_id)}/invoke"
             ),
             params=jsonable_encoder(
@@ -111,15 +121,24 @@ class AutomationsClient:
         """
         Invoke an ad hoc automation run. This endpoint accepts a JSON payload with a series of automation steps. For information about what steps are available, checkout the ad hoc automation guide [here](https://www.courier.com/docs/automations/steps/).
 
-        Parameters:
-            - request: AutomationAdHocInvokeParams.
+        Parameters
+        ----------
+        request : AutomationAdHocInvokeParams
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AutomationInvokeResponse
+
+        Examples
+        --------
         from courier import (
             Automation,
             AutomationAdHocInvokeParams,
@@ -153,8 +172,8 @@ class AutomationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "automations/invoke"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "automations/invoke"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -205,17 +224,27 @@ class AsyncAutomationsClient:
         """
         Invoke an automation run from an automation template.
 
-        Parameters:
-            - template_id: str. A unique identifier representing the automation template to be invoked. This could be the Automation Template ID or the Automation Template Alias.
+        Parameters
+        ----------
+        template_id : str
+            A unique identifier representing the automation template to be invoked. This could be the Automation Template ID or the Automation Template Alias.
 
-            - request: AutomationInvokeParams.
+        request : AutomationInvokeParams
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AutomationInvokeResponse
+
+        Examples
+        --------
         from courier import AutomationInvokeParams
         from courier.client import AsyncCourier
 
@@ -234,8 +263,8 @@ class AsyncAutomationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"automations/{jsonable_encoder(template_id)}/invoke"
             ),
             params=jsonable_encoder(
@@ -282,15 +311,24 @@ class AsyncAutomationsClient:
         """
         Invoke an ad hoc automation run. This endpoint accepts a JSON payload with a series of automation steps. For information about what steps are available, checkout the ad hoc automation guide [here](https://www.courier.com/docs/automations/steps/).
 
-        Parameters:
-            - request: AutomationAdHocInvokeParams.
+        Parameters
+        ----------
+        request : AutomationAdHocInvokeParams
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AutomationInvokeResponse
+
+        Examples
+        --------
         from courier import (
             Automation,
             AutomationAdHocInvokeParams,
@@ -324,8 +362,8 @@ class AsyncAutomationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "automations/invoke"),
+            method="POST",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "automations/invoke"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),

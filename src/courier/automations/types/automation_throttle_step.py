@@ -12,6 +12,8 @@ from .automation_throttle_scope import AutomationThrottleScope
 
 class AutomationThrottleStep(AutomationStep):
     """
+    Examples
+    --------
     from courier import AutomationThrottleOnThrottle, AutomationThrottleStep
 
     AutomationThrottleStep(

@@ -29,11 +29,20 @@ class TokensClient:
         """
         Adds multiple tokens to a user and overwrites matching existing tokens.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -44,8 +53,8 @@ class TokensClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
             params=jsonable_encoder(
@@ -84,15 +93,25 @@ class TokensClient:
         """
         Adds a single token to a user and overwrites a matching existing token.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - token: str. The full token string.
+        token : str
+            The full token string.
 
-            - request: UserToken.
+        request : UserToken
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
         from courier.users import Device, Tracking, UserToken
 
@@ -125,8 +144,8 @@ class TokensClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
@@ -174,15 +193,25 @@ class TokensClient:
         """
         Apply a JSON Patch (RFC 6902) to the specified token.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - token: str. The full token string.
+        token : str
+            The full token string.
 
-            - request: PatchUserTokenOpts.
+        request : PatchUserTokenOpts
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
         from courier.users import PatchOperation, PatchUserTokenOpts
 
@@ -198,8 +227,8 @@ class TokensClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PATCH",
-            urllib.parse.urljoin(
+            method="PATCH",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
@@ -242,13 +271,23 @@ class TokensClient:
         """
         Get single token available for a `:token`
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - token: str. The full token string.
+        token : str
+            The full token string.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetUserTokenResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -260,8 +299,8 @@ class TokensClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
@@ -296,11 +335,20 @@ class TokensClient:
         """
         Gets all tokens available for a :user_id
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAllTokensResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -311,8 +359,8 @@ class TokensClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
             params=jsonable_encoder(
@@ -351,11 +399,20 @@ class AsyncTokensClient:
         """
         Adds multiple tokens to a user and overwrites matching existing tokens.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -366,8 +423,8 @@ class AsyncTokensClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
             params=jsonable_encoder(
@@ -406,15 +463,25 @@ class AsyncTokensClient:
         """
         Adds a single token to a user and overwrites a matching existing token.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - token: str. The full token string.
+        token : str
+            The full token string.
 
-            - request: UserToken.
+        request : UserToken
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
         from courier.users import Device, Tracking, UserToken
 
@@ -447,8 +514,8 @@ class AsyncTokensClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
@@ -496,15 +563,25 @@ class AsyncTokensClient:
         """
         Apply a JSON Patch (RFC 6902) to the specified token.
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - token: str. The full token string.
+        token : str
+            The full token string.
 
-            - request: PatchUserTokenOpts.
+        request : PatchUserTokenOpts
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
         from courier.users import PatchOperation, PatchUserTokenOpts
 
@@ -520,8 +597,8 @@ class AsyncTokensClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PATCH",
-            urllib.parse.urljoin(
+            method="PATCH",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
@@ -564,13 +641,23 @@ class AsyncTokensClient:
         """
         Get single token available for a `:token`
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - token: str. The full token string.
+        token : str
+            The full token string.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetUserTokenResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -582,8 +669,8 @@ class AsyncTokensClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
@@ -620,11 +707,20 @@ class AsyncTokensClient:
         """
         Gets all tokens available for a :user_id
 
-        Parameters:
-            - user_id: str. The user's ID. This can be any uniquely identifiable string.
+        Parameters
+        ----------
+        user_id : str
+            The user's ID. This can be any uniquely identifiable string.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetAllTokensResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -635,8 +731,8 @@ class AsyncTokensClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
             params=jsonable_encoder(

@@ -10,6 +10,8 @@ from .automation_step import AutomationStep
 
 class AutomationAddToDigestStep(AutomationStep):
     """
+    Examples
+    --------
     from courier import AutomationAddToDigestStep
 
     AutomationAddToDigestStep(

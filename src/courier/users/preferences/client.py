@@ -33,11 +33,20 @@ class PreferencesClient:
         """
         Fetch all user preferences.
 
-        Parameters:
-            - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier associated with the user whose preferences you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UserPreferencesListResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -48,8 +57,8 @@ class PreferencesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/preferences"
             ),
             params=jsonable_encoder(
@@ -85,13 +94,23 @@ class PreferencesClient:
         """
         Fetch user preferences for a specific subscription topic.
 
-        Parameters:
-            - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier associated with the user whose preferences you wish to retrieve.
 
-            - topic_id: str. A unique identifier associated with a subscription topic.
+        topic_id : str
+            A unique identifier associated with a subscription topic.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UserPreferencesGetResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -103,8 +122,8 @@ class PreferencesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),
@@ -146,15 +165,25 @@ class PreferencesClient:
         """
         Update or Create user preferences for a specific subscription topic.
 
-        Parameters:
-            - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier associated with the user whose preferences you wish to retrieve.
 
-            - topic_id: str. A unique identifier associated with a subscription topic.
+        topic_id : str
+            A unique identifier associated with a subscription topic.
 
-            - topic: TopicPreferenceUpdate.
+        topic : TopicPreferenceUpdate
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UserPreferencesUpdateResponse
+
+        Examples
+        --------
         from courier.client import Courier
         from courier.users import TopicPreferenceUpdate
 
@@ -172,8 +201,8 @@ class PreferencesClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),
@@ -221,11 +250,20 @@ class AsyncPreferencesClient:
         """
         Fetch all user preferences.
 
-        Parameters:
-            - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier associated with the user whose preferences you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UserPreferencesListResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -236,8 +274,8 @@ class AsyncPreferencesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/preferences"
             ),
             params=jsonable_encoder(
@@ -273,13 +311,23 @@ class AsyncPreferencesClient:
         """
         Fetch user preferences for a specific subscription topic.
 
-        Parameters:
-            - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier associated with the user whose preferences you wish to retrieve.
 
-            - topic_id: str. A unique identifier associated with a subscription topic.
+        topic_id : str
+            A unique identifier associated with a subscription topic.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UserPreferencesGetResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -291,8 +339,8 @@ class AsyncPreferencesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),
@@ -334,15 +382,25 @@ class AsyncPreferencesClient:
         """
         Update or Create user preferences for a specific subscription topic.
 
-        Parameters:
-            - user_id: str. A unique identifier associated with the user whose preferences you wish to retrieve.
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier associated with the user whose preferences you wish to retrieve.
 
-            - topic_id: str. A unique identifier associated with a subscription topic.
+        topic_id : str
+            A unique identifier associated with a subscription topic.
 
-            - topic: TopicPreferenceUpdate.
+        topic : TopicPreferenceUpdate
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        UserPreferencesUpdateResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
         from courier.users import TopicPreferenceUpdate
 
@@ -360,8 +418,8 @@ class AsyncPreferencesClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),

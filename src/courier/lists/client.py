@@ -39,13 +39,23 @@ class ListsClient:
         """
         Returns all of the lists, with the ability to filter based on a pattern.
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next page of lists.
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next page of lists.
 
-            - pattern: typing.Optional[str]. "A pattern used to filter the list items returned. Pattern types supported: exact match on `list_id` or a pattern of one or more pattern parts. you may replace a part with either: `*` to match all parts in that position, or `**` to signify a wildcard `endsWith` pattern match."
+        pattern : typing.Optional[str]
+            "A pattern used to filter the list items returned. Pattern types supported: exact match on `list_id` or a pattern of one or more pattern parts. you may replace a part with either: `*` to match all parts in that position, or `**` to signify a wildcard `endsWith` pattern match."
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListGetAllResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -57,8 +67,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "lists"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "lists"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -100,11 +110,20 @@ class ListsClient:
         """
         Returns a list based on the list ID provided.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        List
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -115,8 +134,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -150,13 +169,22 @@ class ListsClient:
         """
         Create or replace an existing list with the supplied values.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request: ListPutParams.
+        request : ListPutParams
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        List
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             ListPutParams,
@@ -211,8 +239,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -248,11 +276,20 @@ class ListsClient:
         """
         Delete a list by list ID.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -263,8 +300,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -294,11 +331,20 @@ class ListsClient:
         """
         Restore a previously deleted list.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -309,8 +355,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/restore"
             ),
             params=jsonable_encoder(
@@ -351,13 +397,23 @@ class ListsClient:
         """
         Get the list's subscriptions.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of list subscriptions
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of list subscriptions
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListGetSubscriptionsResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -369,8 +425,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
             params=jsonable_encoder(
@@ -419,13 +475,22 @@ class ListsClient:
         """
         Subscribes the users to the list, overwriting existing subscriptions. If the list does not exist, it will be automatically created.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request: typing.Sequence[PutSubscriptionsRecipient].
+        request : typing.Sequence[PutSubscriptionsRecipient]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             NotificationPreferenceDetails,
@@ -482,8 +547,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
             params=jsonable_encoder(
@@ -531,17 +596,27 @@ class ListsClient:
         """
         Subscribes additional users to the list, without modifying existing subscriptions. If the list does not exist, it will be automatically created.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request: typing.Sequence[PutSubscriptionsRecipient].
+        request : typing.Sequence[PutSubscriptionsRecipient]
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             NotificationPreferenceDetails,
@@ -598,8 +673,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
             params=jsonable_encoder(
@@ -648,15 +723,25 @@ class ListsClient:
         """
         Subscribe a user to an existing list (note: if the List does not exist, it will be automatically created).
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - user_id: str. A unique identifier representing the recipient associated with the list
+        user_id : str
+            A unique identifier representing the recipient associated with the list
 
-            - preferences: typing.Optional[RecipientPreferences].
+        preferences : typing.Optional[RecipientPreferences]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             NotificationPreferenceDetails,
@@ -711,8 +796,8 @@ class ListsClient:
         if preferences is not OMIT:
             _request["preferences"] = preferences
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),
@@ -753,13 +838,23 @@ class ListsClient:
         """
         Delete a subscription to a list by list ID and user ID.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - user_id: str. A unique identifier representing the recipient associated with the list
+        user_id : str
+            A unique identifier representing the recipient associated with the list
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -771,8 +866,8 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),
@@ -818,13 +913,23 @@ class AsyncListsClient:
         """
         Returns all of the lists, with the ability to filter based on a pattern.
 
-        Parameters:
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next page of lists.
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next page of lists.
 
-            - pattern: typing.Optional[str]. "A pattern used to filter the list items returned. Pattern types supported: exact match on `list_id` or a pattern of one or more pattern parts. you may replace a part with either: `*` to match all parts in that position, or `**` to signify a wildcard `endsWith` pattern match."
+        pattern : typing.Optional[str]
+            "A pattern used to filter the list items returned. Pattern types supported: exact match on `list_id` or a pattern of one or more pattern parts. you may replace a part with either: `*` to match all parts in that position, or `**` to signify a wildcard `endsWith` pattern match."
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListGetAllResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -836,8 +941,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "lists"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "lists"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -879,11 +984,20 @@ class AsyncListsClient:
         """
         Returns a list based on the list ID provided.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        List
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -894,8 +1008,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -929,13 +1043,22 @@ class AsyncListsClient:
         """
         Create or replace an existing list with the supplied values.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request: ListPutParams.
+        request : ListPutParams
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        List
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             ListPutParams,
@@ -990,8 +1113,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
+            method="PUT",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -1027,11 +1150,20 @@ class AsyncListsClient:
         """
         Delete a list by list ID.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -1042,8 +1174,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
+            method="DELETE",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
             params=jsonable_encoder(
                 request_options.get("additional_query_parameters") if request_options is not None else None
             ),
@@ -1073,11 +1205,20 @@ class AsyncListsClient:
         """
         Restore a previously deleted list.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -1088,8 +1229,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/restore"
             ),
             params=jsonable_encoder(
@@ -1130,13 +1271,23 @@ class AsyncListsClient:
         """
         Get the list's subscriptions.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - cursor: typing.Optional[str]. A unique identifier that allows for fetching the next set of list subscriptions
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of list subscriptions
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListGetSubscriptionsResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -1148,8 +1299,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
             params=jsonable_encoder(
@@ -1198,13 +1349,22 @@ class AsyncListsClient:
         """
         Subscribes the users to the list, overwriting existing subscriptions. If the list does not exist, it will be automatically created.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request: typing.Sequence[PutSubscriptionsRecipient].
+        request : typing.Sequence[PutSubscriptionsRecipient]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             NotificationPreferenceDetails,
@@ -1261,8 +1421,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
             params=jsonable_encoder(
@@ -1310,17 +1470,27 @@ class AsyncListsClient:
         """
         Subscribes additional users to the list, without modifying existing subscriptions. If the list does not exist, it will be automatically created.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - request: typing.Sequence[PutSubscriptionsRecipient].
+        request : typing.Sequence[PutSubscriptionsRecipient]
 
-            - idempotency_key: typing.Optional[str].
+        idempotency_key : typing.Optional[str]
 
-            - idempotency_expiry: typing.Optional[str]. The expiry can either be an ISO8601 datetime or a duration like "1 Day".
+        idempotency_expiry : typing.Optional[str]
+            The expiry can either be an ISO8601 datetime or a duration like "1 Day".
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             NotificationPreferenceDetails,
@@ -1377,8 +1547,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
             params=jsonable_encoder(
@@ -1427,15 +1597,25 @@ class AsyncListsClient:
         """
         Subscribe a user to an existing list (note: if the List does not exist, it will be automatically created).
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - user_id: str. A unique identifier representing the recipient associated with the list
+        user_id : str
+            A unique identifier representing the recipient associated with the list
 
-            - preferences: typing.Optional[RecipientPreferences].
+        preferences : typing.Optional[RecipientPreferences]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             ChannelPreference,
             NotificationPreferenceDetails,
@@ -1490,8 +1670,8 @@ class AsyncListsClient:
         if preferences is not OMIT:
             _request["preferences"] = preferences
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),
@@ -1532,13 +1712,23 @@ class AsyncListsClient:
         """
         Delete a subscription to a list by list ID and user ID.
 
-        Parameters:
-            - list_id: str. A unique identifier representing the list you wish to retrieve.
+        Parameters
+        ----------
+        list_id : str
+            A unique identifier representing the list you wish to retrieve.
 
-            - user_id: str. A unique identifier representing the recipient associated with the list
+        user_id : str
+            A unique identifier representing the recipient associated with the list
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -1550,8 +1740,8 @@ class AsyncListsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),

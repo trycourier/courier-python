@@ -30,11 +30,19 @@ class NotificationsClient:
         self, *, cursor: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationListResponse:
         """
-        Parameters:
-            - cursor: typing.Optional[str].
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        NotificationListResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -45,8 +53,8 @@ class NotificationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -85,11 +93,19 @@ class NotificationsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationGetContentResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        NotificationGetContentResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -100,8 +116,8 @@ class NotificationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/content"
             ),
             params=jsonable_encoder(
@@ -133,11 +149,19 @@ class NotificationsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationGetContentResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        NotificationGetContentResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -148,8 +172,8 @@ class NotificationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/content"
             ),
             params=jsonable_encoder(
@@ -186,15 +210,23 @@ class NotificationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - blocks: typing.Optional[typing.Sequence[NotificationBlock]].
+        blocks : typing.Optional[typing.Sequence[NotificationBlock]]
 
-            - channels: typing.Optional[typing.Sequence[NotificationChannel]].
+        channels : typing.Optional[typing.Sequence[NotificationChannel]]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             NotificationBlock,
             NotificationChannel,
@@ -235,8 +267,8 @@ class NotificationsClient:
         if channels is not OMIT:
             _request["channels"] = channels
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/variations"
             ),
             params=jsonable_encoder(
@@ -279,15 +311,23 @@ class NotificationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - blocks: typing.Optional[typing.Sequence[NotificationBlock]].
+        blocks : typing.Optional[typing.Sequence[NotificationBlock]]
 
-            - channels: typing.Optional[typing.Sequence[NotificationChannel]].
+        channels : typing.Optional[typing.Sequence[NotificationChannel]]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             NotificationBlock,
             NotificationChannel,
@@ -328,8 +368,8 @@ class NotificationsClient:
         if channels is not OMIT:
             _request["channels"] = channels
         _response = self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/variations"
             ),
             params=jsonable_encoder(
@@ -367,13 +407,21 @@ class NotificationsClient:
         self, id: str, submission_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SubmissionChecksGetResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - submission_id: str.
+        submission_id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubmissionChecksGetResponse
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -385,8 +433,8 @@ class NotificationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
@@ -424,15 +472,23 @@ class NotificationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SubmissionChecksReplaceResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - submission_id: str.
+        submission_id : str
 
-            - checks: typing.Sequence[BaseCheck].
+        checks : typing.Sequence[BaseCheck]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubmissionChecksReplaceResponse
+
+        Examples
+        --------
         from courier import BaseCheck
         from courier.client import Courier
 
@@ -452,8 +508,8 @@ class NotificationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
@@ -492,13 +548,21 @@ class NotificationsClient:
         self, id: str, submission_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - submission_id: str.
+        submission_id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import Courier
 
         client = Courier(
@@ -510,8 +574,8 @@ class NotificationsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
@@ -549,11 +613,19 @@ class AsyncNotificationsClient:
         self, *, cursor: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationListResponse:
         """
-        Parameters:
-            - cursor: typing.Optional[str].
+        Parameters
+        ----------
+        cursor : typing.Optional[str]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        NotificationListResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -564,8 +636,8 @@ class AsyncNotificationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
+            method="GET",
+            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
             params=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -604,11 +676,19 @@ class AsyncNotificationsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationGetContentResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        NotificationGetContentResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -619,8 +699,8 @@ class AsyncNotificationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/content"
             ),
             params=jsonable_encoder(
@@ -652,11 +732,19 @@ class AsyncNotificationsClient:
         self, id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationGetContentResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        NotificationGetContentResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -667,8 +755,8 @@ class AsyncNotificationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/content"
             ),
             params=jsonable_encoder(
@@ -705,15 +793,23 @@ class AsyncNotificationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - blocks: typing.Optional[typing.Sequence[NotificationBlock]].
+        blocks : typing.Optional[typing.Sequence[NotificationBlock]]
 
-            - channels: typing.Optional[typing.Sequence[NotificationChannel]].
+        channels : typing.Optional[typing.Sequence[NotificationChannel]]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             NotificationBlock,
             NotificationChannel,
@@ -754,8 +850,8 @@ class AsyncNotificationsClient:
         if channels is not OMIT:
             _request["channels"] = channels
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/variations"
             ),
             params=jsonable_encoder(
@@ -798,15 +894,23 @@ class AsyncNotificationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - blocks: typing.Optional[typing.Sequence[NotificationBlock]].
+        blocks : typing.Optional[typing.Sequence[NotificationBlock]]
 
-            - channels: typing.Optional[typing.Sequence[NotificationChannel]].
+        channels : typing.Optional[typing.Sequence[NotificationChannel]]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier import (
             NotificationBlock,
             NotificationChannel,
@@ -847,8 +951,8 @@ class AsyncNotificationsClient:
         if channels is not OMIT:
             _request["channels"] = channels
         _response = await self._client_wrapper.httpx_client.request(
-            "POST",
-            urllib.parse.urljoin(
+            method="POST",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/variations"
             ),
             params=jsonable_encoder(
@@ -886,13 +990,21 @@ class AsyncNotificationsClient:
         self, id: str, submission_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> SubmissionChecksGetResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - submission_id: str.
+        submission_id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubmissionChecksGetResponse
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -904,8 +1016,8 @@ class AsyncNotificationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "GET",
-            urllib.parse.urljoin(
+            method="GET",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
@@ -943,15 +1055,23 @@ class AsyncNotificationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SubmissionChecksReplaceResponse:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - submission_id: str.
+        submission_id : str
 
-            - checks: typing.Sequence[BaseCheck].
+        checks : typing.Sequence[BaseCheck]
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubmissionChecksReplaceResponse
+
+        Examples
+        --------
         from courier import BaseCheck
         from courier.client import AsyncCourier
 
@@ -971,8 +1091,8 @@ class AsyncNotificationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "PUT",
-            urllib.parse.urljoin(
+            method="PUT",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
@@ -1011,13 +1131,21 @@ class AsyncNotificationsClient:
         self, id: str, submission_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Parameters:
-            - id: str.
+        Parameters
+        ----------
+        id : str
 
-            - submission_id: str.
+        submission_id : str
 
-            - request_options: typing.Optional[RequestOptions]. Request-specific configuration.
-        ---
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -1029,8 +1157,8 @@ class AsyncNotificationsClient:
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            "DELETE",
-            urllib.parse.urljoin(
+            method="DELETE",
+            url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
