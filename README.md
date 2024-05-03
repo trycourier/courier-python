@@ -11,17 +11,17 @@ Install from PyPI
 
 ```shell
 pip install trycourier
-# or 
+# or
 poetry add trycourier
 ```
 
 Python 3.7 or later is required.
 
 ## Usage
+
 Use the `Courier` class to access all of our endpoints.
 
 ```python
-import os
 import courier
 
 from courier.client import Courier
@@ -35,17 +35,14 @@ response = client.send(
     to=courier.UserRecipient(
       email="marty_mcfly@email.com",
       data={
-        name: "Marty",
+        "name": "Marty",
       }
     ),
     content=courier.ElementalContentSugar(
       title="Back to the Future",
-      body="Oh my {{name}}, we need 1.21 Gigawatts!",
+      body="Oh my {name}, we need 1.21 Gigawatts!",
     ),
-    routing=courier.Routing(
-      method=courier.RoutingMethod.ALL,
-      channels=["email"]
-    )
+    routing=courier.Routing(method="all", channels=["inbox", "email"]),
   )
 )
 
@@ -53,7 +50,8 @@ print(response)
 ```
 
 ## Async Client
-The SDK also exports an asynchronous client, `AsyncCourier`. 
+
+The SDK also exports an asynchronous client, `AsyncCourier`.
 
 ```python
 import os
@@ -66,23 +64,20 @@ client = AsyncCourier(
   authorization_token="YOUR_TOKEN" # Defaults to COURIER_AUTH_TOKEN
 )
 
-async def main() -> None: 
+async def main() -> None:
   response = await client.send(
     message=courier.ContentMessage(
       to=courier.UserRecipient(
         email="marty_mcfly@email.com",
         data={
-          name: "Marty",
+          "name": "Marty",
         }
       ),
       content=courier.ElementalContentSugar(
         title="Back to the Future",
-        body="Oh my {{name}}, we need 1.21 Gigawatts!",
+        body="Oh my {name}, we need 1.21 Gigawatts!",
       ),
-      routing=courier.Routing(
-        method=courier.RoutingMethod.ALL,
-        channels=["email"]
-      )
+      routing=courier.Routing(method="all", channels=["email", "inbox"]),
     )
   )
 
@@ -90,8 +85,9 @@ asyncio.run(main())
 ```
 
 ## Timeouts
-By default, the client is configured to have a timeout of 60 seconds. 
-You can customize this value at client instantiation. 
+
+By default, the client is configured to have a timeout of 60 seconds.
+You can customize this value at client instantiation.
 
 ```python
 from courier.client import Courier
@@ -103,7 +99,8 @@ client = Courier(
 ```
 
 ## Handling Exceptions
-All exceptions thrown by the SDK will sublcass [courier.ApiError](./src/courier/core/api_error.py). 
+
+All exceptions thrown by the SDK will subclass [courier.ApiError](./src/courier/core/api_error.py).
 
 ```python
 import courier
@@ -112,25 +109,25 @@ from courier.core import ApiError
 
 try:
   courier.send(...)
-except APIError as e:  
+except APIError as e:
   # handle any api related error
 ```
 
 ## Idempotency Keys
 
-For `POST` methods, you can supply an `idempotencyKey` in the config parameter to 
-ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key. 
-Keys are eligible to be removed from the system after they're at least 24 hours old, 
-and a new request is generated if a key is reused after the original has been removed. 
-For more info, see [Idempotent Requests](https://docs.courier.com/reference/idempotent-requests) 
+For `POST` methods, you can supply an `idempotencyKey` in the config parameter to
+ensure the idempotency of the API Call. We recommend that you use a `V4 UUID` for the key.
+Keys are eligible to be removed from the system after they're at least 24 hours old,
+and a new request is generated if a key is reused after the original has been removed.
+For more info, see [Idempotent Requests](https://docs.courier.com/reference/idempotent-requests)
 in the Courier documentation.
 
 ```python
 import courier
 
 courier.send(
-  message={...}, 
-  idempotency_key"YOUR_KEY", 
+  message={...},
+  idempotency_key"YOUR_KEY",
   idempotency_expiration="YOUR_EXPIRATION")
 ```
 
@@ -140,8 +137,7 @@ courier.send(
 
 ```python
 import courier
-
-from courier import Courier
+from courier.client import Courier
 
 client = Courier(
   authorization_token="YOUR_TOKEN")
@@ -149,18 +145,17 @@ client = Courier(
 response = client.send(
     message=courier.TemplateMessage(
       template="my-template",
-      to=courier.UserRecipient(email="foo@bar.com")
+      to=courier.UserRecipient(user_id="abc-123")
     )
 )
-print(response.message_id)
+print(response.request_id)
 ```
 
 ### UTM Metadata with Message
 
 ```python
 import courier
-
-from courier import Courier
+from courier.client import Courier
 
 client = Courier(
   authorization_token="YOUR_TOKEN")
@@ -179,10 +174,7 @@ response = client.send(
         ]
       ),
       to=courier.UserRecipient(email="foo@bar.com"),
-      routing=courier.Routing(
-        method=courier.RoutingMethod.SINGLE,
-        channels=["email"]
-      ),
+      routing=courier.Routing(method="all", channels=["email"]),
       metadata=courier.MessageMetadata(
         utm=courier.Utm(source="python")
       )
@@ -194,10 +186,11 @@ print(response.request_id)
 ## Advanced
 
 ### Overriding HTTP Client
-You can override the httpx client to customize it for your use case. Some common usecases 
+
+You can override the httpx client to customize it for your use case. Some common usecases
 include support for proxies and transports.
 
-```python 
+```python
 import httpx
 from courier.client import Courier
 
