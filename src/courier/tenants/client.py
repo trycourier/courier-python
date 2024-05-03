@@ -14,7 +14,6 @@ from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
 from .types.default_preferences import DefaultPreferences
 from .types.list_users_for_tenant_response import ListUsersForTenantResponse
-from .types.template_property import TemplateProperty
 from .types.tenant import Tenant
 from .types.tenant_list_response import TenantListResponse
 
@@ -33,7 +32,7 @@ class TenantsClient:
         name: str,
         parent_tenant_id: typing.Optional[str] = OMIT,
         default_preferences: typing.Optional[DefaultPreferences] = OMIT,
-        properties: typing.Optional[typing.Sequence[TemplateProperty]] = OMIT,
+        properties: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         user_profile: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         brand_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -53,7 +52,7 @@ class TenantsClient:
         default_preferences : typing.Optional[DefaultPreferences]
             Defines the preferences used for the tenant when the user hasn't specified their own.
 
-        properties : typing.Optional[typing.Sequence[TemplateProperty]]
+        properties : typing.Optional[typing.Dict[str, typing.Any]]
             Arbitrary properties accessible to a template.
 
         user_profile : typing.Optional[typing.Dict[str, typing.Any]]
@@ -84,7 +83,7 @@ class TenantsClient:
             default_preferences=DefaultPreferences(
                 items=[SubscriptionTopic()],
             ),
-            properties=[{"key": "value"}],
+            properties={"string": {"key": "value"}},
             user_profile={"string": {"key": "value"}},
             brand_id="string",
         )
@@ -419,7 +418,7 @@ class AsyncTenantsClient:
         name: str,
         parent_tenant_id: typing.Optional[str] = OMIT,
         default_preferences: typing.Optional[DefaultPreferences] = OMIT,
-        properties: typing.Optional[typing.Sequence[TemplateProperty]] = OMIT,
+        properties: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         user_profile: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         brand_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -439,7 +438,7 @@ class AsyncTenantsClient:
         default_preferences : typing.Optional[DefaultPreferences]
             Defines the preferences used for the tenant when the user hasn't specified their own.
 
-        properties : typing.Optional[typing.Sequence[TemplateProperty]]
+        properties : typing.Optional[typing.Dict[str, typing.Any]]
             Arbitrary properties accessible to a template.
 
         user_profile : typing.Optional[typing.Dict[str, typing.Any]]
@@ -470,7 +469,7 @@ class AsyncTenantsClient:
             default_preferences=DefaultPreferences(
                 items=[SubscriptionTopic()],
             ),
-            properties=[{"key": "value"}],
+            properties={"string": {"key": "value"}},
             user_profile={"string": {"key": "value"}},
             brand_id="string",
         )
