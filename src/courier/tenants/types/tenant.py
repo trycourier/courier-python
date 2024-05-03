@@ -6,7 +6,6 @@ import typing
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import pydantic_v1
 from .default_preferences import DefaultPreferences
-from .template_property import TemplateProperty
 
 
 class Tenant(pydantic_v1.BaseModel):
@@ -30,7 +29,7 @@ class Tenant(pydantic_v1.BaseModel):
     Defines the preferences used for the account when the user hasn't specified their own.
     """
 
-    properties: typing.Optional[TemplateProperty] = pydantic_v1.Field(default=None)
+    properties: typing.Optional[typing.Dict[str, typing.Any]] = pydantic_v1.Field(default=None)
     """
     Arbitrary properties accessible to a template.
     """
