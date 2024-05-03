@@ -5,18 +5,11 @@ import typing
 
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import pydantic_v1
-from .message_routing import MessageRouting
-from .notification_tag import NotificationTag
 
 
-class Notification(pydantic_v1.BaseModel):
-    created_at: int
-    updated_at: int
+class NotificationTagData(pydantic_v1.BaseModel):
     id: str
-    routing: MessageRouting
-    tags: typing.Optional[NotificationTag] = None
-    title: typing.Optional[str] = None
-    topic_id: str
+    name: str
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

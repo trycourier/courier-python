@@ -16,6 +16,8 @@ from .types import (
     NotificationContentHierarchy,
     NotificationGetContentResponse,
     NotificationListResponse,
+    NotificationTag,
+    NotificationTagData,
     SubmissionChecksGetResponse,
     SubmissionChecksReplaceResponse,
 )
@@ -36,6 +38,8 @@ __all__ = [
     "NotificationContentHierarchy",
     "NotificationGetContentResponse",
     "NotificationListResponse",
+    "NotificationTag",
+    "NotificationTagData",
     "SubmissionChecksGetResponse",
     "SubmissionChecksReplaceResponse",
 ]

@@ -160,6 +160,8 @@ from .notifications import (
     NotificationContentHierarchy,
     NotificationGetContentResponse,
     NotificationListResponse,
+    NotificationTag,
+    NotificationTagData,
     SubmissionChecksGetResponse,
     SubmissionChecksReplaceResponse,
 )
@@ -522,6 +524,8 @@ __all__ = [
     "NotificationListResponse",
     "NotificationPreferenceDetails",
     "NotificationPreferences",
+    "NotificationTag",
+    "NotificationTagData",
     "NotificationTemplates",
     "Operator",
     "Override",

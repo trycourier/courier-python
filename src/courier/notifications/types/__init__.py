@@ -15,6 +15,8 @@ from .notification_content import NotificationContent
 from .notification_content_hierarchy import NotificationContentHierarchy
 from .notification_get_content_response import NotificationGetContentResponse
 from .notification_list_response import NotificationListResponse
+from .notification_tag import NotificationTag
+from .notification_tag_data import NotificationTagData
 from .submission_checks_get_response import SubmissionChecksGetResponse
 from .submission_checks_replace_response import SubmissionChecksReplaceResponse
 
@@ -34,6 +36,8 @@ __all__ = [
     "NotificationContentHierarchy",
     "NotificationGetContentResponse",
     "NotificationListResponse",
+    "NotificationTag",
+    "NotificationTagData",
     "SubmissionChecksGetResponse",
     "SubmissionChecksReplaceResponse",
 ]
