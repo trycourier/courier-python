@@ -3,18 +3,24 @@
 import datetime as dt
 import typing
 
+from ...commons.types.channel_classification import ChannelClassification
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 from ...core.unchecked_base_model import UncheckedBaseModel
-from .notification_channel_content import NotificationChannelContent
+from .subscription_topic_status import SubscriptionTopicStatus
 
 
-class NotificationChannel(UncheckedBaseModel):
-    id: str
-    type: typing.Optional[str] = None
-    content: typing.Optional[NotificationChannelContent] = None
-    locales: typing.Optional[typing.Dict[str, NotificationChannelContent]] = None
-    checksum: typing.Optional[str] = None
+class SubscriptionTopicNew(UncheckedBaseModel):
+    status: SubscriptionTopicStatus
+    has_custom_routing: typing.Optional[bool] = pydantic_v1.Field(default=None)
+    """
+    Override channel routing with custom preferences. This will override any template prefernces that are set, but a user can still customize their preferences
+    """
+
+    custom_routing: typing.Optional[typing.List[ChannelClassification]] = pydantic_v1.Field(default=None)
+    """
+    The default channels to send to this tenant when has_custom_routing is enabled
+    """
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

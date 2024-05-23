@@ -9,9 +9,10 @@ from ...commons.types.bad_request import BadRequest
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
-from ...core.pydantic_utilities import pydantic_v1
+from ...core.query_encoder import encode_query
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
+from ...core.unchecked_base_model import construct_type
 from .types.get_all_tokens_response import GetAllTokensResponse
 from .types.get_user_token_response import GetUserTokenResponse
 from .types.patch_user_token_opts import PatchUserTokenOpts
@@ -57,8 +58,10 @@ class TokensClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None
@@ -80,7 +83,9 @@ class TokensClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -149,8 +154,10 @@ class TokensClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -175,7 +182,9 @@ class TokensClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -232,8 +241,10 @@ class TokensClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -258,7 +269,9 @@ class TokensClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -304,8 +317,10 @@ class TokensClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -322,16 +337,18 @@ class TokensClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(GetUserTokenResponse, _response.json())  # type: ignore
+            return typing.cast(GetUserTokenResponse, construct_type(type_=GetUserTokenResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def list(self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> GetAllTokensResponse:
+    def list_(self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> GetAllTokensResponse:
         """
         Gets all tokens available for a :user_id
 
@@ -354,7 +371,7 @@ class TokensClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.users.tokens.list(
+        client.users.tokens.list_(
             user_id="string",
         )
         """
@@ -363,8 +380,10 @@ class TokensClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -381,9 +400,11 @@ class TokensClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(GetAllTokensResponse, _response.json())  # type: ignore
+            return typing.cast(GetAllTokensResponse, construct_type(type_=GetAllTokensResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -427,8 +448,10 @@ class AsyncTokensClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None
@@ -450,7 +473,9 @@ class AsyncTokensClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -519,8 +544,10 @@ class AsyncTokensClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -545,7 +572,9 @@ class AsyncTokensClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -602,8 +631,10 @@ class AsyncTokensClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -628,7 +659,9 @@ class AsyncTokensClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -674,8 +707,10 @@ class AsyncTokensClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/tokens/{jsonable_encoder(token)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -692,16 +727,18 @@ class AsyncTokensClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(GetUserTokenResponse, _response.json())  # type: ignore
+            return typing.cast(GetUserTokenResponse, construct_type(type_=GetUserTokenResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def list(
+    async def list_(
         self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> GetAllTokensResponse:
         """
@@ -726,7 +763,7 @@ class AsyncTokensClient:
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        await client.users.tokens.list(
+        await client.users.tokens.list_(
             user_id="string",
         )
         """
@@ -735,8 +772,10 @@ class AsyncTokensClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/tokens"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -753,9 +792,11 @@ class AsyncTokensClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(GetAllTokensResponse, _response.json())  # type: ignore
+            return typing.cast(GetAllTokensResponse, construct_type(type_=GetAllTokensResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:

@@ -11,9 +11,10 @@ from ...commons.types.not_found import NotFound
 from ...core.api_error import ApiError
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.jsonable_encoder import jsonable_encoder
-from ...core.pydantic_utilities import pydantic_v1
+from ...core.query_encoder import encode_query
 from ...core.remove_none_from_dict import remove_none_from_dict
 from ...core.request_options import RequestOptions
+from ...core.unchecked_base_model import construct_type
 from .types.topic_preference_update import TopicPreferenceUpdate
 from .types.user_preferences_get_response import UserPreferencesGetResponse
 from .types.user_preferences_list_response import UserPreferencesListResponse
@@ -27,7 +28,7 @@ class PreferencesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def list(
+    def list_(
         self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> UserPreferencesListResponse:
         """
@@ -52,7 +53,7 @@ class PreferencesClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.users.preferences.list(
+        client.users.preferences.list_(
             user_id="string",
         )
         """
@@ -61,8 +62,10 @@ class PreferencesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/preferences"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -79,9 +82,11 @@ class PreferencesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(UserPreferencesListResponse, _response.json())  # type: ignore
+            return typing.cast(UserPreferencesListResponse, construct_type(type_=UserPreferencesListResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -127,8 +132,10 @@ class PreferencesClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -145,9 +152,11 @@ class PreferencesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(UserPreferencesGetResponse, _response.json())  # type: ignore
+            return typing.cast(UserPreferencesGetResponse, construct_type(type_=UserPreferencesGetResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -206,8 +215,10 @@ class PreferencesClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"topic": topic})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -230,9 +241,11 @@ class PreferencesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(UserPreferencesUpdateResponse, _response.json())  # type: ignore
+            return typing.cast(UserPreferencesUpdateResponse, construct_type(type_=UserPreferencesUpdateResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -244,7 +257,7 @@ class AsyncPreferencesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def list(
+    async def list_(
         self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> UserPreferencesListResponse:
         """
@@ -269,7 +282,7 @@ class AsyncPreferencesClient:
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        await client.users.preferences.list(
+        await client.users.preferences.list_(
             user_id="string",
         )
         """
@@ -278,8 +291,10 @@ class AsyncPreferencesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"users/{jsonable_encoder(user_id)}/preferences"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -296,9 +311,11 @@ class AsyncPreferencesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(UserPreferencesListResponse, _response.json())  # type: ignore
+            return typing.cast(UserPreferencesListResponse, construct_type(type_=UserPreferencesListResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -344,8 +361,10 @@ class AsyncPreferencesClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -362,9 +381,11 @@ class AsyncPreferencesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(UserPreferencesGetResponse, _response.json())  # type: ignore
+            return typing.cast(UserPreferencesGetResponse, construct_type(type_=UserPreferencesGetResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -423,8 +444,10 @@ class AsyncPreferencesClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"topic": topic})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -447,9 +470,11 @@ class AsyncPreferencesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(UserPreferencesUpdateResponse, _response.json())  # type: ignore
+            return typing.cast(UserPreferencesUpdateResponse, construct_type(type_=UserPreferencesUpdateResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:

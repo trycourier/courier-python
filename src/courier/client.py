@@ -16,9 +16,10 @@ from .bulk.client import AsyncBulkClient, BulkClient
 from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .core.jsonable_encoder import jsonable_encoder
-from .core.pydantic_utilities import pydantic_v1
+from .core.query_encoder import encode_query
 from .core.remove_none_from_dict import remove_none_from_dict
 from .core.request_options import RequestOptions
+from .core.unchecked_base_model import construct_type
 from .environment import CourierEnvironment
 from .lists.client import AsyncListsClient, ListsClient
 from .messages.client import AsyncMessagesClient, MessagesClient
@@ -37,7 +38,7 @@ OMIT = typing.cast(typing.Any, ...)
 
 class Courier:
     """
-    Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propogate to these functions.
+    Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
     Parameters
     ----------
@@ -182,8 +183,10 @@ class Courier:
         _response = self._client_wrapper.httpx_client.request(
             method="POST",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "send"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"message": message})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -208,7 +211,7 @@ class Courier:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(SendMessageResponse, _response.json())  # type: ignore
+            return typing.cast(SendMessageResponse, construct_type(type_=SendMessageResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -218,7 +221,7 @@ class Courier:
 
 class AsyncCourier:
     """
-    Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propogate to these functions.
+    Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
 
     Parameters
     ----------
@@ -363,8 +366,10 @@ class AsyncCourier:
         _response = await self._client_wrapper.httpx_client.request(
             method="POST",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "send"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"message": message})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -389,7 +394,7 @@ class AsyncCourier:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(SendMessageResponse, _response.json())  # type: ignore
+            return typing.cast(SendMessageResponse, construct_type(type_=SendMessageResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

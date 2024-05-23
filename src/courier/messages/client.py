@@ -11,9 +11,10 @@ from ..commons.types.message_not_found import MessageNotFound
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import pydantic_v1
+from ..core.query_encoder import encode_query
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from .types.list_messages_response import ListMessagesResponse
 from .types.message_details import MessageDetails
 from .types.message_history_response import MessageHistoryResponse
@@ -24,7 +25,7 @@ class MessagesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def list(
+    def list_(
         self,
         *,
         archived: typing.Optional[bool] = None,
@@ -104,7 +105,7 @@ class MessagesClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.messages.list(
+        client.messages.list_(
             archived=True,
             cursor="string",
             event="string",
@@ -124,29 +125,31 @@ class MessagesClient:
         _response = self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "messages"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "archived": archived,
-                        "cursor": cursor,
-                        "event": event,
-                        "list": list_,
-                        "messageId": message_id,
-                        "notification": notification,
-                        "provider": provider,
-                        "recipient": recipient,
-                        "status": status,
-                        "tag": tag,
-                        "tags": tags,
-                        "tenant_id": tenant_id,
-                        "enqueued_after": enqueued_after,
-                        "traceId": trace_id,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "archived": archived,
+                            "cursor": cursor,
+                            "event": event,
+                            "list": list_,
+                            "messageId": message_id,
+                            "notification": notification,
+                            "provider": provider,
+                            "recipient": recipient,
+                            "status": status,
+                            "tag": tag,
+                            "tags": tags,
+                            "tenant_id": tenant_id,
+                            "enqueued_after": enqueued_after,
+                            "traceId": trace_id,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -164,7 +167,7 @@ class MessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(ListMessagesResponse, _response.json())  # type: ignore
+            return typing.cast(ListMessagesResponse, construct_type(type_=ListMessagesResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -203,8 +206,10 @@ class MessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -221,11 +226,15 @@ class MessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return typing.cast(MessageDetails, construct_type(type_=MessageDetails, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(
+                typing.cast(MessageNotFound, construct_type(type_=MessageNotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -276,8 +285,10 @@ class MessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/cancel"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None
@@ -299,7 +310,7 @@ class MessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return typing.cast(MessageDetails, construct_type(type_=MessageDetails, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -348,16 +359,18 @@ class MessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/history"
             ),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "type": type,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "type": type,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -375,11 +388,15 @@ class MessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(MessageHistoryResponse, _response.json())  # type: ignore
+            return typing.cast(MessageHistoryResponse, construct_type(type_=MessageHistoryResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(
+                typing.cast(MessageNotFound, construct_type(type_=MessageNotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -418,8 +435,10 @@ class MessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/output"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -436,11 +455,15 @@ class MessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(RenderOutputResponse, _response.json())  # type: ignore
+            return typing.cast(RenderOutputResponse, construct_type(type_=RenderOutputResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(
+                typing.cast(MessageNotFound, construct_type(type_=MessageNotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -477,8 +500,10 @@ class MessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"requests/{jsonable_encoder(request_id)}/archive"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None
@@ -510,7 +535,7 @@ class AsyncMessagesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def list(
+    async def list_(
         self,
         *,
         archived: typing.Optional[bool] = None,
@@ -590,7 +615,7 @@ class AsyncMessagesClient:
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        await client.messages.list(
+        await client.messages.list_(
             archived=True,
             cursor="string",
             event="string",
@@ -610,29 +635,31 @@ class AsyncMessagesClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "messages"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "archived": archived,
-                        "cursor": cursor,
-                        "event": event,
-                        "list": list_,
-                        "messageId": message_id,
-                        "notification": notification,
-                        "provider": provider,
-                        "recipient": recipient,
-                        "status": status,
-                        "tag": tag,
-                        "tags": tags,
-                        "tenant_id": tenant_id,
-                        "enqueued_after": enqueued_after,
-                        "traceId": trace_id,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "archived": archived,
+                            "cursor": cursor,
+                            "event": event,
+                            "list": list_,
+                            "messageId": message_id,
+                            "notification": notification,
+                            "provider": provider,
+                            "recipient": recipient,
+                            "status": status,
+                            "tag": tag,
+                            "tags": tags,
+                            "tenant_id": tenant_id,
+                            "enqueued_after": enqueued_after,
+                            "traceId": trace_id,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -650,7 +677,7 @@ class AsyncMessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(ListMessagesResponse, _response.json())  # type: ignore
+            return typing.cast(ListMessagesResponse, construct_type(type_=ListMessagesResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -689,8 +716,10 @@ class AsyncMessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -707,11 +736,15 @@ class AsyncMessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return typing.cast(MessageDetails, construct_type(type_=MessageDetails, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(
+                typing.cast(MessageNotFound, construct_type(type_=MessageNotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -762,8 +795,10 @@ class AsyncMessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/cancel"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None
@@ -785,7 +820,7 @@ class AsyncMessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(MessageDetails, _response.json())  # type: ignore
+            return typing.cast(MessageDetails, construct_type(type_=MessageDetails, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -834,16 +869,18 @@ class AsyncMessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/history"
             ),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "type": type,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "type": type,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -861,11 +898,15 @@ class AsyncMessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(MessageHistoryResponse, _response.json())  # type: ignore
+            return typing.cast(MessageHistoryResponse, construct_type(type_=MessageHistoryResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(
+                typing.cast(MessageNotFound, construct_type(type_=MessageNotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -904,8 +945,10 @@ class AsyncMessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"messages/{jsonable_encoder(message_id)}/output"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -922,11 +965,15 @@ class AsyncMessagesClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(RenderOutputResponse, _response.json())  # type: ignore
+            return typing.cast(RenderOutputResponse, construct_type(type_=RenderOutputResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 404:
-            raise MessageNotFoundError(pydantic_v1.parse_obj_as(MessageNotFound, _response.json()))  # type: ignore
+            raise MessageNotFoundError(
+                typing.cast(MessageNotFound, construct_type(type_=MessageNotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -963,8 +1010,10 @@ class AsyncMessagesClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"requests/{jsonable_encoder(request_id)}/archive"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None

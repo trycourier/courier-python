@@ -5,14 +5,15 @@ import typing
 
 from ...brands.types.brand_colors import BrandColors
 from ...core.datetime_utils import serialize_datetime
-from ...core.pydantic_utilities import pydantic_v1
+from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
+from ...core.unchecked_base_model import UncheckedBaseModel
 from .icons import Icons
 from .in_app_placement import InAppPlacement
 from .preferences import Preferences
 from .widget_background import WidgetBackground
 
 
-class BrandSettingsInApp(pydantic_v1.BaseModel):
+class BrandSettingsInApp(UncheckedBaseModel):
     border_radius: typing.Optional[str] = pydantic_v1.Field(alias="borderRadius", default=None)
     disable_message_icon: typing.Optional[bool] = pydantic_v1.Field(alias="disableMessageIcon", default=None)
     font_family: typing.Optional[str] = pydantic_v1.Field(alias="fontFamily", default=None)
@@ -27,8 +28,12 @@ class BrandSettingsInApp(pydantic_v1.BaseModel):
         return super().json(**kwargs_with_defaults)
 
     def dict(self, **kwargs: typing.Any) -> typing.Dict[str, typing.Any]:
-        kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
-        return super().dict(**kwargs_with_defaults)
+        kwargs_with_defaults_exclude_unset: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
+        kwargs_with_defaults_exclude_none: typing.Any = {"by_alias": True, "exclude_none": True, **kwargs}
+
+        return deep_union_pydantic_dicts(
+            super().dict(**kwargs_with_defaults_exclude_unset), super().dict(**kwargs_with_defaults_exclude_none)
+        )
 
     class Config:
         frozen = True

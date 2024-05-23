@@ -12,10 +12,11 @@ from ..commons.types.recipient_preferences import RecipientPreferences
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import pydantic_v1
+from ..core.query_encoder import encode_query
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
-from .types.list import List
+from ..core.unchecked_base_model import construct_type
+from .types.list_ import List
 from .types.list_get_all_response import ListGetAllResponse
 from .types.list_get_subscriptions_response import ListGetSubscriptionsResponse
 from .types.list_put_params import ListPutParams
@@ -29,7 +30,7 @@ class ListsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def list(
+    def list_(
         self,
         *,
         cursor: typing.Optional[str] = None,
@@ -61,7 +62,7 @@ class ListsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.lists.list(
+        client.lists.list_(
             cursor="string",
             pattern="string",
         )
@@ -69,17 +70,19 @@ class ListsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "lists"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        "pattern": pattern,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            "pattern": pattern,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -97,9 +100,11 @@ class ListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(ListGetAllResponse, _response.json())  # type: ignore
+            return typing.cast(ListGetAllResponse, construct_type(type_=ListGetAllResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -136,8 +141,10 @@ class ListsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -154,9 +161,11 @@ class ListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
+            return typing.cast(List, construct_type(type_=List, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -241,8 +250,10 @@ class ListsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="PUT",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -265,7 +276,7 @@ class ListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
+            return typing.cast(List, construct_type(type_=List, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -302,9 +313,14 @@ class ListsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="DELETE",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -359,8 +375,10 @@ class ListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/restore"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None
@@ -429,16 +447,18 @@ class ListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -456,9 +476,11 @@ class ListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(ListGetSubscriptionsResponse, _response.json())  # type: ignore
+            return typing.cast(ListGetSubscriptionsResponse, construct_type(type_=ListGetSubscriptionsResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -469,7 +491,7 @@ class ListsClient:
         self,
         list_id: str,
         *,
-        request: typing.Sequence[PutSubscriptionsRecipient],
+        recipients: typing.Sequence[PutSubscriptionsRecipient],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -480,7 +502,7 @@ class ListsClient:
         list_id : str
             A unique identifier representing the list you wish to retrieve.
 
-        request : typing.Sequence[PutSubscriptionsRecipient]
+        recipients : typing.Sequence[PutSubscriptionsRecipient]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -505,7 +527,7 @@ class ListsClient:
         )
         client.lists.update_subscribers(
             list_id="string",
-            request=[
+            recipients=[
                 PutSubscriptionsRecipient(
                     recipient_id="string",
                     preferences=RecipientPreferences(
@@ -551,13 +573,15 @@ class ListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
-            json=jsonable_encoder(request)
+            json=jsonable_encoder({"recipients": recipients})
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder(request),
+                **jsonable_encoder({"recipients": recipients}),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -577,7 +601,9 @@ class ListsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -588,7 +614,7 @@ class ListsClient:
         self,
         list_id: str,
         *,
-        request: typing.Sequence[PutSubscriptionsRecipient],
+        recipients: typing.Sequence[PutSubscriptionsRecipient],
         idempotency_key: typing.Optional[str] = None,
         idempotency_expiry: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -601,7 +627,7 @@ class ListsClient:
         list_id : str
             A unique identifier representing the list you wish to retrieve.
 
-        request : typing.Sequence[PutSubscriptionsRecipient]
+        recipients : typing.Sequence[PutSubscriptionsRecipient]
 
         idempotency_key : typing.Optional[str]
 
@@ -631,7 +657,7 @@ class ListsClient:
         )
         client.lists.add_subscribers(
             list_id="string",
-            request=[
+            recipients=[
                 PutSubscriptionsRecipient(
                     recipient_id="string",
                     preferences=RecipientPreferences(
@@ -677,13 +703,15 @@ class ListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
-            json=jsonable_encoder(request)
+            json=jsonable_encoder({"recipients": recipients})
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder(request),
+                **jsonable_encoder({"recipients": recipients}),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -705,7 +733,9 @@ class ListsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -801,8 +831,10 @@ class ListsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -871,9 +903,14 @@ class ListsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -891,7 +928,9 @@ class ListsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -903,7 +942,7 @@ class AsyncListsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def list(
+    async def list_(
         self,
         *,
         cursor: typing.Optional[str] = None,
@@ -935,7 +974,7 @@ class AsyncListsClient:
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        await client.lists.list(
+        await client.lists.list_(
             cursor="string",
             pattern="string",
         )
@@ -943,17 +982,19 @@ class AsyncListsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "lists"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        "pattern": pattern,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            "pattern": pattern,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -971,9 +1012,11 @@ class AsyncListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(ListGetAllResponse, _response.json())  # type: ignore
+            return typing.cast(ListGetAllResponse, construct_type(type_=ListGetAllResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1010,8 +1053,10 @@ class AsyncListsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -1028,9 +1073,11 @@ class AsyncListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
+            return typing.cast(List, construct_type(type_=List, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1115,8 +1162,10 @@ class AsyncListsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="PUT",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -1139,7 +1188,7 @@ class AsyncListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(List, _response.json())  # type: ignore
+            return typing.cast(List, construct_type(type_=List, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1176,9 +1225,14 @@ class AsyncListsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="DELETE",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -1233,8 +1287,10 @@ class AsyncListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/restore"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
             if request_options is not None
@@ -1303,16 +1359,18 @@ class AsyncListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -1330,9 +1388,11 @@ class AsyncListsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(ListGetSubscriptionsResponse, _response.json())  # type: ignore
+            return typing.cast(ListGetSubscriptionsResponse, construct_type(type_=ListGetSubscriptionsResponse, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1343,7 +1403,7 @@ class AsyncListsClient:
         self,
         list_id: str,
         *,
-        request: typing.Sequence[PutSubscriptionsRecipient],
+        recipients: typing.Sequence[PutSubscriptionsRecipient],
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
@@ -1354,7 +1414,7 @@ class AsyncListsClient:
         list_id : str
             A unique identifier representing the list you wish to retrieve.
 
-        request : typing.Sequence[PutSubscriptionsRecipient]
+        recipients : typing.Sequence[PutSubscriptionsRecipient]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1379,7 +1439,7 @@ class AsyncListsClient:
         )
         await client.lists.update_subscribers(
             list_id="string",
-            request=[
+            recipients=[
                 PutSubscriptionsRecipient(
                     recipient_id="string",
                     preferences=RecipientPreferences(
@@ -1425,13 +1485,15 @@ class AsyncListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
-            json=jsonable_encoder(request)
+            json=jsonable_encoder({"recipients": recipients})
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder(request),
+                **jsonable_encoder({"recipients": recipients}),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -1451,7 +1513,9 @@ class AsyncListsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1462,7 +1526,7 @@ class AsyncListsClient:
         self,
         list_id: str,
         *,
-        request: typing.Sequence[PutSubscriptionsRecipient],
+        recipients: typing.Sequence[PutSubscriptionsRecipient],
         idempotency_key: typing.Optional[str] = None,
         idempotency_expiry: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
@@ -1475,7 +1539,7 @@ class AsyncListsClient:
         list_id : str
             A unique identifier representing the list you wish to retrieve.
 
-        request : typing.Sequence[PutSubscriptionsRecipient]
+        recipients : typing.Sequence[PutSubscriptionsRecipient]
 
         idempotency_key : typing.Optional[str]
 
@@ -1505,7 +1569,7 @@ class AsyncListsClient:
         )
         await client.lists.add_subscribers(
             list_id="string",
-            request=[
+            recipients=[
                 PutSubscriptionsRecipient(
                     recipient_id="string",
                     preferences=RecipientPreferences(
@@ -1551,13 +1615,15 @@ class AsyncListsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"lists/{jsonable_encoder(list_id)}/subscriptions"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
-            json=jsonable_encoder(request)
+            json=jsonable_encoder({"recipients": recipients})
             if request_options is None or request_options.get("additional_body_parameters") is None
             else {
-                **jsonable_encoder(request),
+                **jsonable_encoder({"recipients": recipients}),
                 **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
             },
             headers=jsonable_encoder(
@@ -1579,7 +1645,9 @@ class AsyncListsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1675,8 +1743,10 @@ class AsyncListsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -1745,9 +1815,14 @@ class AsyncListsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"lists/{jsonable_encoder(list_id)}/subscriptions/{jsonable_encoder(user_id)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -1765,7 +1840,9 @@ class AsyncListsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:

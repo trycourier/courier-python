@@ -3,6 +3,7 @@
 from .default_preferences import DefaultPreferences
 from .list_users_for_tenant_response import ListUsersForTenantResponse
 from .subscription_topic import SubscriptionTopic
+from .subscription_topic_new import SubscriptionTopicNew
 from .subscription_topic_status import SubscriptionTopicStatus
 from .template_property import TemplateProperty
 from .tenant import Tenant
@@ -12,6 +13,7 @@ __all__ = [
     "DefaultPreferences",
     "ListUsersForTenantResponse",
     "SubscriptionTopic",
+    "SubscriptionTopicNew",
     "SubscriptionTopicStatus",
     "TemplateProperty",
     "Tenant",

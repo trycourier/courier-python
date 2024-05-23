@@ -9,9 +9,10 @@ from ..commons.types.not_found import NotFound
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import pydantic_v1
+from ..core.query_encoder import encode_query
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -59,8 +60,10 @@ class TranslationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -77,9 +80,11 @@ class TranslationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(str, _response.json())  # type: ignore
+            return typing.cast(str, construct_type(type_=str, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -128,8 +133,10 @@ class TranslationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request),
             headers=jsonable_encoder(
@@ -149,7 +156,9 @@ class TranslationsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -199,8 +208,10 @@ class AsyncTranslationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -217,9 +228,11 @@ class AsyncTranslationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(str, _response.json())  # type: ignore
+            return typing.cast(str, construct_type(type_=str, object_=_response.json()))  # type: ignore
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -268,8 +281,10 @@ class AsyncTranslationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"translations/{jsonable_encoder(domain)}/{jsonable_encoder(locale)}",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request),
             headers=jsonable_encoder(
@@ -289,7 +304,9 @@ class AsyncTranslationsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 404:
-            raise NotFoundError(pydantic_v1.parse_obj_as(NotFound, _response.json()))  # type: ignore
+            raise NotFoundError(
+                typing.cast(NotFound, construct_type(type_=NotFound, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
