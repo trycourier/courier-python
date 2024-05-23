@@ -20,27 +20,27 @@ class MessageDetails(pydantic_v1.BaseModel):
     The current status of the message.
     """
 
-    enqueued: int = pydantic_v1.Field()
+    enqueued: typing.Optional[int] = pydantic_v1.Field(default=None)
     """
     A UTC timestamp at which Courier received the message request. Stored as a millisecond representation of the Unix epoch.
     """
 
-    sent: int = pydantic_v1.Field()
+    sent: typing.Optional[int] = pydantic_v1.Field(default=None)
     """
     A UTC timestamp at which Courier passed the message to the Integration provider. Stored as a millisecond representation of the Unix epoch.
     """
 
-    delivered: int = pydantic_v1.Field()
+    delivered: typing.Optional[int] = pydantic_v1.Field(default=None)
     """
     A UTC timestamp at which the Integration provider delivered the message. Stored as a millisecond representation of the Unix epoch.
     """
 
-    opened: int = pydantic_v1.Field()
+    opened: typing.Optional[int] = pydantic_v1.Field(default=None)
     """
     A UTC timestamp at which the recipient opened a message for the first time. Stored as a millisecond representation of the Unix epoch.
     """
 
-    clicked: int = pydantic_v1.Field()
+    clicked: typing.Optional[int] = pydantic_v1.Field(default=None)
     """
     A UTC timestamp at which the recipient clicked on a tracked link for the first time. Stored as a millisecond representation of the Unix epoch.
     """
