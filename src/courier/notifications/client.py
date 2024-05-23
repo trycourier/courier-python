@@ -7,9 +7,10 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import pydantic_v1
+from ..core.query_encoder import encode_query
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from .types.base_check import BaseCheck
 from .types.notification_block import NotificationBlock
 from .types.notification_channel import NotificationChannel
@@ -26,7 +27,7 @@ class NotificationsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def list(
+    def list_(
         self, *, cursor: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationListResponse:
         """
@@ -48,23 +49,25 @@ class NotificationsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.notifications.list(
+        client.notifications.list_(
             cursor="string",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -82,7 +85,7 @@ class NotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(NotificationListResponse, _response.json())  # type: ignore
+            return typing.cast(NotificationListResponse, construct_type(type_=NotificationListResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -120,8 +123,10 @@ class NotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/content"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -138,7 +143,7 @@ class NotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return typing.cast(NotificationGetContentResponse, construct_type(type_=NotificationGetContentResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -176,8 +181,10 @@ class NotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/content"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -194,7 +201,7 @@ class NotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return typing.cast(NotificationGetContentResponse, construct_type(type_=NotificationGetContentResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -271,8 +278,10 @@ class NotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/variations"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -372,8 +381,10 @@ class NotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/variations"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -438,8 +449,10 @@ class NotificationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -456,7 +469,7 @@ class NotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(SubmissionChecksGetResponse, _response.json())  # type: ignore
+            return typing.cast(SubmissionChecksGetResponse, construct_type(type_=SubmissionChecksGetResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -513,8 +526,10 @@ class NotificationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"checks": checks})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -537,7 +552,7 @@ class NotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(SubmissionChecksReplaceResponse, _response.json())  # type: ignore
+            return typing.cast(SubmissionChecksReplaceResponse, construct_type(type_=SubmissionChecksReplaceResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -579,9 +594,14 @@ class NotificationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -609,7 +629,7 @@ class AsyncNotificationsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def list(
+    async def list_(
         self, *, cursor: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> NotificationListResponse:
         """
@@ -631,23 +651,25 @@ class AsyncNotificationsClient:
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        await client.notifications.list(
+        await client.notifications.list_(
             cursor="string",
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "notifications"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -665,7 +687,7 @@ class AsyncNotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(NotificationListResponse, _response.json())  # type: ignore
+            return typing.cast(NotificationListResponse, construct_type(type_=NotificationListResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -703,8 +725,10 @@ class AsyncNotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/content"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -721,7 +745,7 @@ class AsyncNotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return typing.cast(NotificationGetContentResponse, construct_type(type_=NotificationGetContentResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -759,8 +783,10 @@ class AsyncNotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/content"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -777,7 +803,7 @@ class AsyncNotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(NotificationGetContentResponse, _response.json())  # type: ignore
+            return typing.cast(NotificationGetContentResponse, construct_type(type_=NotificationGetContentResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -854,8 +880,10 @@ class AsyncNotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/variations"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -955,8 +983,10 @@ class AsyncNotificationsClient:
             url=urllib.parse.urljoin(
                 f"{self._client_wrapper.get_base_url()}/", f"notifications/{jsonable_encoder(id)}/draft/variations"
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -1021,8 +1051,10 @@ class AsyncNotificationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -1039,7 +1071,7 @@ class AsyncNotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(SubmissionChecksGetResponse, _response.json())  # type: ignore
+            return typing.cast(SubmissionChecksGetResponse, construct_type(type_=SubmissionChecksGetResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1096,8 +1128,10 @@ class AsyncNotificationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"checks": checks})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -1120,7 +1154,7 @@ class AsyncNotificationsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(SubmissionChecksReplaceResponse, _response.json())  # type: ignore
+            return typing.cast(SubmissionChecksReplaceResponse, construct_type(type_=SubmissionChecksReplaceResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -1162,9 +1196,14 @@ class AsyncNotificationsClient:
                 f"{self._client_wrapper.get_base_url()}/",
                 f"notifications/{jsonable_encoder(id)}/{jsonable_encoder(submission_id)}/checks",
             ),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {

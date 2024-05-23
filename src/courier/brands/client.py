@@ -15,9 +15,10 @@ from ..commons.types.payment_required import PaymentRequired
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import pydantic_v1
+from ..core.query_encoder import encode_query
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from .types.brand import Brand
 from .types.brand_parameters import BrandParameters
 from .types.brand_settings import BrandSettings
@@ -77,8 +78,10 @@ class BrandsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="POST",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -103,13 +106,19 @@ class BrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
+            return typing.cast(Brand, construct_type(type_=Brand, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 402:
-            raise PaymentRequiredError(pydantic_v1.parse_obj_as(PaymentRequired, _response.json()))  # type: ignore
+            raise PaymentRequiredError(
+                typing.cast(PaymentRequired, construct_type(type_=PaymentRequired, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 409:
-            raise AlreadyExistsError(pydantic_v1.parse_obj_as(AlreadyExists, _response.json()))  # type: ignore
+            raise AlreadyExistsError(
+                typing.cast(AlreadyExists, construct_type(type_=AlreadyExists, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -146,8 +155,10 @@ class BrandsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -164,14 +175,14 @@ class BrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
+            return typing.cast(Brand, construct_type(type_=Brand, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def list(
+    def list_(
         self, *, cursor: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> BrandsResponse:
         """
@@ -196,23 +207,25 @@ class BrandsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.brands.list(
+        client.brands.list_(
             cursor="string",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -230,7 +243,7 @@ class BrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(BrandsResponse, _response.json())  # type: ignore
+            return typing.cast(BrandsResponse, construct_type(type_=BrandsResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -267,9 +280,14 @@ class BrandsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="DELETE",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -287,7 +305,9 @@ class BrandsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 409:
-            raise ConflictError(pydantic_v1.parse_obj_as(Conflict, _response.json()))  # type: ignore
+            raise ConflictError(
+                typing.cast(Conflict, construct_type(type_=Conflict, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -366,8 +386,10 @@ class BrandsClient:
         _response = self._client_wrapper.httpx_client.request(
             method="PUT",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -390,7 +412,7 @@ class BrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
+            return typing.cast(Brand, construct_type(type_=Brand, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -447,8 +469,10 @@ class AsyncBrandsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="POST",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -473,13 +497,19 @@ class AsyncBrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
+            return typing.cast(Brand, construct_type(type_=Brand, object_=_response.json()))  # type: ignore
         if _response.status_code == 400:
-            raise BadRequestError(pydantic_v1.parse_obj_as(BadRequest, _response.json()))  # type: ignore
+            raise BadRequestError(
+                typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 402:
-            raise PaymentRequiredError(pydantic_v1.parse_obj_as(PaymentRequired, _response.json()))  # type: ignore
+            raise PaymentRequiredError(
+                typing.cast(PaymentRequired, construct_type(type_=PaymentRequired, object_=_response.json()))  # type: ignore
+            )
         if _response.status_code == 409:
-            raise AlreadyExistsError(pydantic_v1.parse_obj_as(AlreadyExists, _response.json()))  # type: ignore
+            raise AlreadyExistsError(
+                typing.cast(AlreadyExists, construct_type(type_=AlreadyExists, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -516,8 +546,10 @@ class AsyncBrandsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             headers=jsonable_encoder(
                 remove_none_from_dict(
@@ -534,14 +566,14 @@ class AsyncBrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
+            return typing.cast(Brand, construct_type(type_=Brand, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def list(
+    async def list_(
         self, *, cursor: typing.Optional[str] = None, request_options: typing.Optional[RequestOptions] = None
     ) -> BrandsResponse:
         """
@@ -566,23 +598,25 @@ class AsyncBrandsClient:
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        await client.brands.list(
+        await client.brands.list_(
             cursor="string",
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
             method="GET",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "brands"),
-            params=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        "cursor": cursor,
-                        **(
-                            request_options.get("additional_query_parameters", {})
-                            if request_options is not None
-                            else {}
-                        ),
-                    }
+            params=encode_query(
+                jsonable_encoder(
+                    remove_none_from_dict(
+                        {
+                            "cursor": cursor,
+                            **(
+                                request_options.get("additional_query_parameters", {})
+                                if request_options is not None
+                                else {}
+                            ),
+                        }
+                    )
                 )
             ),
             headers=jsonable_encoder(
@@ -600,7 +634,7 @@ class AsyncBrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(BrandsResponse, _response.json())  # type: ignore
+            return typing.cast(BrandsResponse, construct_type(type_=BrandsResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -637,9 +671,14 @@ class AsyncBrandsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="DELETE",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
+            json=jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))
+            if request_options is not None
+            else None,
             headers=jsonable_encoder(
                 remove_none_from_dict(
                     {
@@ -657,7 +696,9 @@ class AsyncBrandsClient:
         if 200 <= _response.status_code < 300:
             return
         if _response.status_code == 409:
-            raise ConflictError(pydantic_v1.parse_obj_as(Conflict, _response.json()))  # type: ignore
+            raise ConflictError(
+                typing.cast(Conflict, construct_type(type_=Conflict, object_=_response.json()))  # type: ignore
+            )
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -736,8 +777,10 @@ class AsyncBrandsClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="PUT",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", f"brands/{jsonable_encoder(brand_id)}"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder(_request)
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -760,7 +803,7 @@ class AsyncBrandsClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(Brand, _response.json())  # type: ignore
+            return typing.cast(Brand, construct_type(type_=Brand, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:

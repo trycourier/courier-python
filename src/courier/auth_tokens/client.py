@@ -7,9 +7,10 @@ from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
-from ..core.pydantic_utilities import pydantic_v1
+from ..core.query_encoder import encode_query
 from ..core.remove_none_from_dict import remove_none_from_dict
 from ..core.request_options import RequestOptions
+from ..core.unchecked_base_model import construct_type
 from .types.issue_token_response import IssueTokenResponse
 
 # this is used as the default value for optional parameters
@@ -65,8 +66,10 @@ class AuthTokensClient:
         _response = self._client_wrapper.httpx_client.request(
             method="POST",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"scope": scope, "expires_in": expires_in})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -91,7 +94,7 @@ class AuthTokensClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(IssueTokenResponse, _response.json())  # type: ignore
+            return typing.cast(IssueTokenResponse, construct_type(type_=IssueTokenResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
@@ -148,8 +151,10 @@ class AsyncAuthTokensClient:
         _response = await self._client_wrapper.httpx_client.request(
             method="POST",
             url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "auth/issue-token"),
-            params=jsonable_encoder(
-                request_options.get("additional_query_parameters") if request_options is not None else None
+            params=encode_query(
+                jsonable_encoder(
+                    request_options.get("additional_query_parameters") if request_options is not None else None
+                )
             ),
             json=jsonable_encoder({"scope": scope, "expires_in": expires_in})
             if request_options is None or request_options.get("additional_body_parameters") is None
@@ -174,7 +179,7 @@ class AsyncAuthTokensClient:
             max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
         )
         if 200 <= _response.status_code < 300:
-            return pydantic_v1.parse_obj_as(IssueTokenResponse, _response.json())  # type: ignore
+            return typing.cast(IssueTokenResponse, construct_type(type_=IssueTokenResponse, object_=_response.json()))  # type: ignore
         try:
             _response_json = _response.json()
         except JSONDecodeError:
