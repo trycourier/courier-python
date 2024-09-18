@@ -16,6 +16,7 @@ from .types import (
     MsTeams,
     MsTeamsBaseProperties,
     MultipleTokens,
+    Pagerduty,
     ProfileGetParameters,
     ProfileGetResponse,
     ReplaceProfileResponse,
@@ -38,6 +39,12 @@ from .types import (
     SubscribeToListsResponse,
     Token,
     UserProfile,
+    UserProfileFirebaseToken,
+    WebhookAuthMode,
+    WebhookAuthentication,
+    WebhookMethod,
+    WebhookProfile,
+    WebhookProfileType,
 )
 
 __all__ = [
@@ -56,6 +63,7 @@ __all__ = [
     "MsTeams",
     "MsTeamsBaseProperties",
     "MultipleTokens",
+    "Pagerduty",
     "ProfileGetParameters",
     "ProfileGetResponse",
     "ReplaceProfileResponse",
@@ -78,4 +86,10 @@ __all__ = [
     "SubscribeToListsResponse",
     "Token",
     "UserProfile",
+    "UserProfileFirebaseToken",
+    "WebhookAuthMode",
+    "WebhookAuthentication",
+    "WebhookMethod",
+    "WebhookProfile",
+    "WebhookProfileType",
 ]

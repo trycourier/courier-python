@@ -33,7 +33,7 @@ class ListTenantsForUserResponse(UncheckedBaseModel):
     only when `has_more` is set to true
     """
 
-    type: typing.Literal["list"] = pydantic_v1.Field()
+    type: typing.Literal["list"] = pydantic_v1.Field(default="list")
     """
     Always set to `list`. Represents the type of this object.
     """

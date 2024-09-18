@@ -17,19 +17,17 @@ class AutomationThrottleStep(AutomationStep):
     from courier import AutomationThrottleOnThrottle, AutomationThrottleStep
 
     AutomationThrottleStep(
-        action="throttle",
         max_allowed=1,
         period="PT5M",
         scope="dynamic",
         throttle_key="refs.data.throttle_key",
-        should_alert=False,
         on_throttle=AutomationThrottleOnThrottle(
             node_id="on-throttle-node-ref",
         ),
     )
     """
 
-    action: typing.Literal["throttle"]
+    action: typing.Literal["throttle"] = "throttle"
     max_allowed: int = pydantic_v1.Field()
     """
     Maximum number of allowed notifications in that timeframe
@@ -46,7 +44,7 @@ class AutomationThrottleStep(AutomationStep):
     If using scope=dynamic, provide the reference (e.g., refs.data.throttle_key) to the how the throttle should be identified
     """
 
-    should_alert: typing.Literal[False] = pydantic_v1.Field()
+    should_alert: typing.Literal[False] = pydantic_v1.Field(default=False)
     """
     Value must be true
     """

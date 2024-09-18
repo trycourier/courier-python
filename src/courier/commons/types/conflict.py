@@ -9,7 +9,7 @@ from .base_error import BaseError
 
 
 class Conflict(BaseError):
-    type: typing.Literal["invalid_request_error"]
+    type: typing.Literal["invalid_request_error"] = "invalid_request_error"
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

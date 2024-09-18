@@ -9,7 +9,7 @@ from .automation_step import AutomationStep
 
 
 class AutomationCancelStep(AutomationStep):
-    action: typing.Literal["cancel"]
+    action: typing.Literal["cancel"] = "cancel"
     cancelation_token: typing.Optional[str] = None
 
     def json(self, **kwargs: typing.Any) -> str:

@@ -11,7 +11,11 @@ from .topic_preference import TopicPreference
 
 
 class UserPreferencesListResponse(UncheckedBaseModel):
-    paging: Paging
+    paging: Paging = pydantic_v1.Field()
+    """
+    Deprecated - Paging not implemented on this endpoint
+    """
+
     items: typing.List[TopicPreference] = pydantic_v1.Field()
     """
     The Preferences associated with the user_id.

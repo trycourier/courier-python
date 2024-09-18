@@ -18,7 +18,6 @@ class AutomationAddToBatchStep(AutomationStep):
     from courier import AutomationAddToBatchRetain, AutomationAddToBatchStep
 
     AutomationAddToBatchStep(
-        action="add-to-batch",
         wait_period="PT5M",
         max_wait_period="PT1H",
         retain=AutomationAddToBatchRetain(
@@ -31,7 +30,7 @@ class AutomationAddToBatchStep(AutomationStep):
     )
     """
 
-    action: typing.Literal["add-to-batch"]
+    action: typing.Literal["add-to-batch"] = "add-to-batch"
     wait_period: str = pydantic_v1.Field()
     """
     Defines the period of inactivity before the batch is released. Specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations)

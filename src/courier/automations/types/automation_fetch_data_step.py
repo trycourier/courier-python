@@ -17,7 +17,6 @@ class AutomationFetchDataStep(AutomationStep):
     from courier import AutomationFetchDataStep, AutomationFetchDataWebhook
 
     AutomationFetchDataStep(
-        action="fetch-data",
         merge_strategy="none",
         webhook=AutomationFetchDataWebhook(
             body={"foo": "bar"},
@@ -29,7 +28,7 @@ class AutomationFetchDataStep(AutomationStep):
     )
     """
 
-    action: typing.Literal["fetch-data"]
+    action: typing.Literal["fetch-data"] = "fetch-data"
     webhook: AutomationFetchDataWebhook
     merge_strategy: MergeAlgorithm
     idempotency_expiry: typing.Optional[str] = None

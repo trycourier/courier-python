@@ -9,7 +9,7 @@ from .automation_step import AutomationStep
 
 
 class AutomationSendListStep(AutomationStep):
-    action: typing.Literal["send-list"]
+    action: typing.Literal["send-list"] = "send-list"
     brand: typing.Optional[str] = None
     data: typing.Optional[typing.Dict[str, typing.Any]] = None
     list_: str = pydantic_v1.Field(alias="list")

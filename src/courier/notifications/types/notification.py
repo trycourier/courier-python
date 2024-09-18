@@ -18,6 +18,7 @@ class Notification(UncheckedBaseModel):
     tags: typing.Optional[NotificationTag] = None
     title: typing.Optional[str] = None
     topic_id: str
+    note: str
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

@@ -13,6 +13,7 @@ from .expo import Expo
 from .intercom import Intercom
 from .ms_teams import MsTeams
 from .slack import Slack
+from .user_profile_firebase_token import UserProfileFirebaseToken
 
 
 class UserProfile(UncheckedBaseModel):
@@ -47,7 +48,7 @@ class UserProfile(UncheckedBaseModel):
     discord: Discord
     expo: Expo
     facebook_psid: str = pydantic_v1.Field(alias="facebookPSID")
-    firebase_token: str = pydantic_v1.Field(alias="firebaseToken")
+    firebase_token: UserProfileFirebaseToken = pydantic_v1.Field(alias="firebaseToken")
     intercom: Intercom
     slack: Slack
     ms_teams: MsTeams

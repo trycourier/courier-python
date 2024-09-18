@@ -2,7 +2,6 @@
 
 import os
 import typing
-import urllib.parse
 from json.decoder import JSONDecodeError
 
 import httpx
@@ -15,12 +14,10 @@ from .brands.client import AsyncBrandsClient, BrandsClient
 from .bulk.client import AsyncBulkClient, BulkClient
 from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
-from .core.jsonable_encoder import jsonable_encoder
-from .core.query_encoder import encode_query
-from .core.remove_none_from_dict import remove_none_from_dict
 from .core.request_options import RequestOptions
 from .core.unchecked_base_model import construct_type
 from .environment import CourierEnvironment
+from .inbound.client import AsyncInboundClient, InboundClient
 from .lists.client import AsyncListsClient, ListsClient
 from .messages.client import AsyncMessagesClient, MessagesClient
 from .notifications.client import AsyncNotificationsClient, NotificationsClient
@@ -56,7 +53,7 @@ class Courier:
 
     authorization_token : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
     timeout : typing.Optional[float]
-        The timeout to be used, in seconds, for requests by default the timeout is 60 seconds, unless a custom httpx client is used, in which case a default is not set.
+        The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
@@ -83,7 +80,7 @@ class Courier:
         ),
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
-        httpx_client: typing.Optional[httpx.Client] = None,
+        httpx_client: typing.Optional[httpx.Client] = None
     ):
         _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         if authorization_token is None:
@@ -106,6 +103,7 @@ class Courier:
         self.automations = AutomationsClient(client_wrapper=self._client_wrapper)
         self.brands = BrandsClient(client_wrapper=self._client_wrapper)
         self.bulk = BulkClient(client_wrapper=self._client_wrapper)
+        self.inbound = InboundClient(client_wrapper=self._client_wrapper)
         self.lists = ListsClient(client_wrapper=self._client_wrapper)
         self.messages = MessagesClient(client_wrapper=self._client_wrapper)
         self.notifications = NotificationsClient(client_wrapper=self._client_wrapper)
@@ -121,7 +119,7 @@ class Courier:
         message: Message,
         idempotency_key: typing.Optional[str] = None,
         idempotency_expiry: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
+        request_options: typing.Optional[RequestOptions] = None
     ) -> SendMessageResponse:
         """
         Use the send API to send a message to one or more recipients.
@@ -151,12 +149,16 @@ class Courier:
             ContentMessage,
             Delay,
             ElementalContent,
+            ElementalNode_Text,
             Expiry,
             MessageContext,
             MessageMetadata,
+            MessagePreferences,
             MessageProvidersType,
             Routing,
+            RoutingStrategyChannel,
             Timeout,
+            Utm,
         )
         from courier.client import Courier
 
@@ -165,54 +167,98 @@ class Courier:
         )
         client.send(
             message=ContentMessage(
-                content=ElementalContent(),
+                content=ElementalContent(
+                    version="string",
+                    brand={"key": "value"},
+                    elements=[ElementalNode_Text()],
+                ),
                 data={"string": {"key": "value"}},
                 brand_id="string",
-                channels={"string": Channel()},
-                context=MessageContext(),
-                metadata=MessageMetadata(),
-                providers={"string": MessageProvidersType()},
-                routing=Routing(),
-                timeout=Timeout(),
-                delay=Delay(),
-                expiry=Expiry(),
-                to=AudienceRecipient(),
+                channels={
+                    "string": Channel(
+                        brand_id={"key": "value"},
+                        providers={"key": "value"},
+                        routing_method={"key": "value"},
+                        if_={"key": "value"},
+                        timeouts={"key": "value"},
+                        override={"key": "value"},
+                        metadata={"key": "value"},
+                    )
+                },
+                context=MessageContext(
+                    tenant_id="string",
+                ),
+                metadata=MessageMetadata(
+                    event="string",
+                    tags=[{"key": "value"}],
+                    utm=Utm(
+                        source={"key": "value"},
+                        medium={"key": "value"},
+                        campaign={"key": "value"},
+                        term={"key": "value"},
+                        content={"key": "value"},
+                    ),
+                    trace_id="string",
+                ),
+                preferences=MessagePreferences(
+                    subscription_topic_id="string",
+                ),
+                providers={
+                    "string": MessageProvidersType(
+                        override={"key": "value"},
+                        if_={"key": "value"},
+                        timeouts={"key": "value"},
+                        metadata={"key": "value"},
+                    )
+                },
+                routing=Routing(
+                    method="all",
+                    channels=[
+                        RoutingStrategyChannel(
+                            channel="string",
+                            config={"key": "value"},
+                            method={"key": "value"},
+                            providers={"key": "value"},
+                            if_={"key": "value"},
+                        )
+                    ],
+                ),
+                timeout=Timeout(
+                    provider={"string": {"key": "value"}},
+                    channel={"string": {"key": "value"}},
+                    message=1,
+                    escalation=1,
+                    criteria="no-escalation",
+                ),
+                delay=Delay(
+                    duration=1,
+                ),
+                expiry=Expiry(
+                    expires_at="string",
+                    expires_in="string",
+                ),
+                to=AudienceRecipient(
+                    audience_id="string",
+                    data={"string": {"key": "value"}},
+                    filters=[{"key": "value"}],
+                ),
             ),
         )
         """
         _response = self._client_wrapper.httpx_client.request(
+            "send",
             method="POST",
-            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "send"),
-            params=encode_query(
-                jsonable_encoder(
-                    request_options.get("additional_query_parameters") if request_options is not None else None
-                )
-            ),
-            json=jsonable_encoder({"message": message})
-            if request_options is None or request_options.get("additional_body_parameters") is None
-            else {
-                **jsonable_encoder({"message": message}),
-                **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
+            json={"message": message},
+            headers={
+                "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
             },
-            headers=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
-                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
-                        **(request_options.get("additional_headers", {}) if request_options is not None else {}),
-                    }
-                )
-            ),
-            timeout=request_options.get("timeout_in_seconds")
-            if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else self._client_wrapper.get_timeout(),
-            retries=0,
-            max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
+            request_options=request_options,
+            omit=OMIT,
         )
-        if 200 <= _response.status_code < 300:
-            return typing.cast(SendMessageResponse, construct_type(type_=SendMessageResponse, object_=_response.json()))  # type: ignore
         try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(SendMessageResponse, construct_type(type_=SendMessageResponse, object_=_response.json()))  # type: ignore
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -239,7 +285,7 @@ class AsyncCourier:
 
     authorization_token : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
     timeout : typing.Optional[float]
-        The timeout to be used, in seconds, for requests by default the timeout is 60 seconds, unless a custom httpx client is used, in which case a default is not set.
+        The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
@@ -266,7 +312,7 @@ class AsyncCourier:
         ),
         timeout: typing.Optional[float] = None,
         follow_redirects: typing.Optional[bool] = True,
-        httpx_client: typing.Optional[httpx.AsyncClient] = None,
+        httpx_client: typing.Optional[httpx.AsyncClient] = None
     ):
         _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         if authorization_token is None:
@@ -289,6 +335,7 @@ class AsyncCourier:
         self.automations = AsyncAutomationsClient(client_wrapper=self._client_wrapper)
         self.brands = AsyncBrandsClient(client_wrapper=self._client_wrapper)
         self.bulk = AsyncBulkClient(client_wrapper=self._client_wrapper)
+        self.inbound = AsyncInboundClient(client_wrapper=self._client_wrapper)
         self.lists = AsyncListsClient(client_wrapper=self._client_wrapper)
         self.messages = AsyncMessagesClient(client_wrapper=self._client_wrapper)
         self.notifications = AsyncNotificationsClient(client_wrapper=self._client_wrapper)
@@ -304,7 +351,7 @@ class AsyncCourier:
         message: Message,
         idempotency_key: typing.Optional[str] = None,
         idempotency_expiry: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
+        request_options: typing.Optional[RequestOptions] = None
     ) -> SendMessageResponse:
         """
         Use the send API to send a message to one or more recipients.
@@ -328,74 +375,130 @@ class AsyncCourier:
 
         Examples
         --------
+        import asyncio
+
         from courier import (
             AudienceRecipient,
             Channel,
             ContentMessage,
             Delay,
             ElementalContent,
+            ElementalNode_Text,
             Expiry,
             MessageContext,
             MessageMetadata,
+            MessagePreferences,
             MessageProvidersType,
             Routing,
+            RoutingStrategyChannel,
             Timeout,
+            Utm,
         )
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        await client.send(
-            message=ContentMessage(
-                content=ElementalContent(),
-                data={"string": {"key": "value"}},
-                brand_id="string",
-                channels={"string": Channel()},
-                context=MessageContext(),
-                metadata=MessageMetadata(),
-                providers={"string": MessageProvidersType()},
-                routing=Routing(),
-                timeout=Timeout(),
-                delay=Delay(),
-                expiry=Expiry(),
-                to=AudienceRecipient(),
-            ),
-        )
+
+
+        async def main() -> None:
+            await client.send(
+                message=ContentMessage(
+                    content=ElementalContent(
+                        version="string",
+                        brand={"key": "value"},
+                        elements=[ElementalNode_Text()],
+                    ),
+                    data={"string": {"key": "value"}},
+                    brand_id="string",
+                    channels={
+                        "string": Channel(
+                            brand_id={"key": "value"},
+                            providers={"key": "value"},
+                            routing_method={"key": "value"},
+                            if_={"key": "value"},
+                            timeouts={"key": "value"},
+                            override={"key": "value"},
+                            metadata={"key": "value"},
+                        )
+                    },
+                    context=MessageContext(
+                        tenant_id="string",
+                    ),
+                    metadata=MessageMetadata(
+                        event="string",
+                        tags=[{"key": "value"}],
+                        utm=Utm(
+                            source={"key": "value"},
+                            medium={"key": "value"},
+                            campaign={"key": "value"},
+                            term={"key": "value"},
+                            content={"key": "value"},
+                        ),
+                        trace_id="string",
+                    ),
+                    preferences=MessagePreferences(
+                        subscription_topic_id="string",
+                    ),
+                    providers={
+                        "string": MessageProvidersType(
+                            override={"key": "value"},
+                            if_={"key": "value"},
+                            timeouts={"key": "value"},
+                            metadata={"key": "value"},
+                        )
+                    },
+                    routing=Routing(
+                        method="all",
+                        channels=[
+                            RoutingStrategyChannel(
+                                channel="string",
+                                config={"key": "value"},
+                                method={"key": "value"},
+                                providers={"key": "value"},
+                                if_={"key": "value"},
+                            )
+                        ],
+                    ),
+                    timeout=Timeout(
+                        provider={"string": {"key": "value"}},
+                        channel={"string": {"key": "value"}},
+                        message=1,
+                        escalation=1,
+                        criteria="no-escalation",
+                    ),
+                    delay=Delay(
+                        duration=1,
+                    ),
+                    expiry=Expiry(
+                        expires_at="string",
+                        expires_in="string",
+                    ),
+                    to=AudienceRecipient(
+                        audience_id="string",
+                        data={"string": {"key": "value"}},
+                        filters=[{"key": "value"}],
+                    ),
+                ),
+            )
+
+
+        asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
+            "send",
             method="POST",
-            url=urllib.parse.urljoin(f"{self._client_wrapper.get_base_url()}/", "send"),
-            params=encode_query(
-                jsonable_encoder(
-                    request_options.get("additional_query_parameters") if request_options is not None else None
-                )
-            ),
-            json=jsonable_encoder({"message": message})
-            if request_options is None or request_options.get("additional_body_parameters") is None
-            else {
-                **jsonable_encoder({"message": message}),
-                **(jsonable_encoder(remove_none_from_dict(request_options.get("additional_body_parameters", {})))),
+            json={"message": message},
+            headers={
+                "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+                "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
             },
-            headers=jsonable_encoder(
-                remove_none_from_dict(
-                    {
-                        **self._client_wrapper.get_headers(),
-                        "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
-                        "X-Idempotency-Expiration": str(idempotency_expiry) if idempotency_expiry is not None else None,
-                        **(request_options.get("additional_headers", {}) if request_options is not None else {}),
-                    }
-                )
-            ),
-            timeout=request_options.get("timeout_in_seconds")
-            if request_options is not None and request_options.get("timeout_in_seconds") is not None
-            else self._client_wrapper.get_timeout(),
-            retries=0,
-            max_retries=request_options.get("max_retries") if request_options is not None else 0,  # type: ignore
+            request_options=request_options,
+            omit=OMIT,
         )
-        if 200 <= _response.status_code < 300:
-            return typing.cast(SendMessageResponse, construct_type(type_=SendMessageResponse, object_=_response.json()))  # type: ignore
         try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(SendMessageResponse, construct_type(type_=SendMessageResponse, object_=_response.json()))  # type: ignore
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

@@ -9,7 +9,7 @@ from .automation_step import AutomationStep
 
 
 class AutomationInvokeStep(AutomationStep):
-    action: typing.Literal["invoke"]
+    action: typing.Literal["invoke"] = "invoke"
     template: str
 
     def json(self, **kwargs: typing.Any) -> str:

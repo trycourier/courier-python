@@ -36,7 +36,7 @@ class TenantListResponse(UncheckedBaseModel):
     A url that may be used to generate these results.
     """
 
-    type: typing.Literal["list"] = pydantic_v1.Field()
+    type: typing.Literal["list"] = pydantic_v1.Field(default="list")
     """
     Always set to "list". Represents the type of this object.
     """

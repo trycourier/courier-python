@@ -9,7 +9,7 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class BrandSnippet(UncheckedBaseModel):
-    format: typing.Literal["handlebars"]
+    format: typing.Literal["handlebars"] = "handlebars"
     name: str
     value: str
 

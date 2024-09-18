@@ -9,12 +9,12 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class AudienceFilter(UncheckedBaseModel):
-    operator: typing.Literal["MEMBER_OF"] = pydantic_v1.Field()
+    operator: typing.Literal["MEMBER_OF"] = pydantic_v1.Field(default="MEMBER_OF")
     """
     Send to users only if they are member of the account
     """
 
-    path: typing.Literal["account_id"]
+    path: typing.Literal["account_id"] = "account_id"
     value: str
 
     def json(self, **kwargs: typing.Any) -> str:

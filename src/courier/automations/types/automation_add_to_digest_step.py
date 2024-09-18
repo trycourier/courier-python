@@ -15,12 +15,11 @@ class AutomationAddToDigestStep(AutomationStep):
     from courier import AutomationAddToDigestStep
 
     AutomationAddToDigestStep(
-        action="add-to-digest",
         subscription_topic_id="RAJE97CMT04KDJJ88ZDS2TP1690S",
     )
     """
 
-    action: typing.Literal["add-to-digest"]
+    action: typing.Literal["add-to-digest"] = "add-to-digest"
     subscription_topic_id: str = pydantic_v1.Field()
     """
     The subscription topic that has digests enabled

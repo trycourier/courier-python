@@ -12,6 +12,7 @@ from .message_channels import MessageChannels
 from .message_context import MessageContext
 from .message_data import MessageData
 from .message_metadata import MessageMetadata
+from .message_preferences import MessagePreferences
 from .message_providers import MessageProviders
 from .routing import Routing
 from .timeout import Timeout
@@ -40,6 +41,7 @@ class BaseMessage(UncheckedBaseModel):
     Metadata such as utm tracking attached with the notification through this channel.
     """
 
+    preferences: typing.Optional[MessagePreferences] = None
     providers: typing.Optional[MessageProviders] = pydantic_v1.Field(default=None)
     """
     An object whose keys are valid provider identifiers which map to an object.

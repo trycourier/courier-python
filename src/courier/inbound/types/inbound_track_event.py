@@ -3,25 +3,28 @@
 import datetime as dt
 import typing
 
-from ...brands.types.brand import Brand
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 from ...core.unchecked_base_model import UncheckedBaseModel
-from .attachment import Attachment
-from .tracking_override import TrackingOverride
 
 
-class MessageChannelEmailOverride(UncheckedBaseModel):
-    attachments: typing.Optional[typing.List[Attachment]] = None
-    bcc: typing.Optional[str] = None
-    brand: typing.Optional[Brand] = None
-    cc: typing.Optional[str] = None
-    from_: typing.Optional[str] = pydantic_v1.Field(alias="from", default=None)
-    html: typing.Optional[str] = None
-    reply_to: typing.Optional[str] = None
-    subject: typing.Optional[str] = None
-    text: typing.Optional[str] = None
-    tracking: TrackingOverride
+class InboundTrackEvent(UncheckedBaseModel):
+    event: str = pydantic_v1.Field()
+    """
+    A descriptive name of the event. This name will appear as a trigger in the Courier Automation Trigger node.
+    """
+
+    message_id: str = pydantic_v1.Field(alias="messageId")
+    """
+    A required unique identifier that will be used to de-duplicate requests. If not unique, will respond with 409 Conflict status
+    """
+
+    properties: typing.Dict[str, typing.Any]
+    type: typing.Literal["track"] = "track"
+    user_id: typing.Optional[str] = pydantic_v1.Field(alias="userId", default=None)
+    """
+    The user id assocatiated with the track
+    """
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

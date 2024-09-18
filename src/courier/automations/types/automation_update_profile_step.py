@@ -11,7 +11,7 @@ from .profile import Profile
 
 
 class AutomationUpdateProfileStep(UncheckedBaseModel):
-    action: typing.Literal["update-profile"]
+    action: typing.Literal["update-profile"] = "update-profile"
     recipient_id: str
     profile: Profile
     merge: MergeAlgorithm

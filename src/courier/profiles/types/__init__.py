@@ -15,6 +15,7 @@ from .merge_profile_response import MergeProfileResponse
 from .ms_teams import MsTeams
 from .ms_teams_base_properties import MsTeamsBaseProperties
 from .multiple_tokens import MultipleTokens
+from .pagerduty import Pagerduty
 from .profile_get_parameters import ProfileGetParameters
 from .profile_get_response import ProfileGetResponse
 from .replace_profile_response import ReplaceProfileResponse
@@ -37,6 +38,12 @@ from .subscribe_to_lists_request_list_object import SubscribeToListsRequestListO
 from .subscribe_to_lists_response import SubscribeToListsResponse
 from .token import Token
 from .user_profile import UserProfile
+from .user_profile_firebase_token import UserProfileFirebaseToken
+from .webhook_auth_mode import WebhookAuthMode
+from .webhook_authentication import WebhookAuthentication
+from .webhook_method import WebhookMethod
+from .webhook_profile import WebhookProfile
+from .webhook_profile_type import WebhookProfileType
 
 __all__ = [
     "Address",
@@ -54,6 +61,7 @@ __all__ = [
     "MsTeams",
     "MsTeamsBaseProperties",
     "MultipleTokens",
+    "Pagerduty",
     "ProfileGetParameters",
     "ProfileGetResponse",
     "ReplaceProfileResponse",
@@ -76,4 +84,10 @@ __all__ = [
     "SubscribeToListsResponse",
     "Token",
     "UserProfile",
+    "UserProfileFirebaseToken",
+    "WebhookAuthMode",
+    "WebhookAuthentication",
+    "WebhookMethod",
+    "WebhookProfile",
+    "WebhookProfileType",
 ]

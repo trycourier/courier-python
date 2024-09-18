@@ -9,7 +9,7 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 
 
 class ReplaceProfileResponse(UncheckedBaseModel):
-    status: typing.Literal["SUCCESS"]
+    status: typing.Literal["SUCCESS"] = "SUCCESS"
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

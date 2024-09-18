@@ -63,17 +63,17 @@ from .locale import Locale
 from .locales import Locales
 from .logo import Logo
 from .message import Message
-from .message_channel_email_override import MessageChannelEmailOverride
 from .message_channels import MessageChannels
 from .message_context import MessageContext
 from .message_data import MessageData
 from .message_metadata import MessageMetadata
+from .message_preferences import MessagePreferences
 from .message_providers import MessageProviders
 from .message_providers_type import MessageProvidersType
 from .message_recipient import MessageRecipient
 from .metadata import Metadata
 from .ms_teams_recipient import MsTeamsRecipient
-from .override import Override
+from .pagerduty_recipient import PagerdutyRecipient
 from .preference import Preference
 from .preferences import Preferences
 from .recipient import Recipient
@@ -94,6 +94,7 @@ from .tracking_override import TrackingOverride
 from .user_recipient import UserRecipient
 from .user_recipient_type import UserRecipientType
 from .utm import Utm
+from .webhook_recipient import WebhookRecipient
 from .widget_background import WidgetBackground
 
 __all__ = [
@@ -158,17 +159,17 @@ __all__ = [
     "Locales",
     "Logo",
     "Message",
-    "MessageChannelEmailOverride",
     "MessageChannels",
     "MessageContext",
     "MessageData",
     "MessageMetadata",
+    "MessagePreferences",
     "MessageProviders",
     "MessageProvidersType",
     "MessageRecipient",
     "Metadata",
     "MsTeamsRecipient",
-    "Override",
+    "PagerdutyRecipient",
     "Preference",
     "Preferences",
     "Recipient",
@@ -189,5 +190,6 @@ __all__ = [
     "UserRecipient",
     "UserRecipientType",
     "Utm",
+    "WebhookRecipient",
     "WidgetBackground",
 ]

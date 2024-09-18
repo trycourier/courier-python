@@ -7,7 +7,6 @@ from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 from ...core.unchecked_base_model import UncheckedBaseModel
 from .channel_metadata import ChannelMetadata
-from .override import Override
 from .routing_method import RoutingMethod
 from .timeouts import Timeouts
 
@@ -40,7 +39,7 @@ class Channel(UncheckedBaseModel):
     """
 
     timeouts: typing.Optional[Timeouts] = None
-    override: typing.Optional[Override] = pydantic_v1.Field(default=None)
+    override: typing.Optional[typing.Dict[str, typing.Any]] = pydantic_v1.Field(default=None)
     """
     Channel specific overrides.
     """

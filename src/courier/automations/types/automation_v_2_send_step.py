@@ -10,7 +10,7 @@ from .automation_step import AutomationStep
 
 
 class AutomationV2SendStep(AutomationStep):
-    action: typing.Literal["send"]
+    action: typing.Literal["send"] = "send"
     message: Message
 
     def json(self, **kwargs: typing.Any) -> str:

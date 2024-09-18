@@ -9,7 +9,7 @@ from .automation_step import AutomationStep
 
 
 class AutomationDelayStep(AutomationStep):
-    action: typing.Literal["delay"]
+    action: typing.Literal["delay"] = "delay"
     duration: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
     The [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) string for how long to delay for

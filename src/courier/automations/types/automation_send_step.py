@@ -9,7 +9,7 @@ from .automation_step import AutomationStep
 
 
 class AutomationSendStep(AutomationStep):
-    action: typing.Literal["send"]
+    action: typing.Literal["send"] = "send"
     brand: typing.Optional[str] = None
     data: typing.Optional[typing.Dict[str, typing.Any]] = None
     override: typing.Optional[typing.Dict[str, typing.Any]] = None

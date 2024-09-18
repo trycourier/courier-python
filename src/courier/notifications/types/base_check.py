@@ -12,7 +12,7 @@ from .check_status import CheckStatus
 class BaseCheck(UncheckedBaseModel):
     id: str
     status: CheckStatus
-    type: typing.Literal["custom"]
+    type: typing.Literal["custom"] = "custom"
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

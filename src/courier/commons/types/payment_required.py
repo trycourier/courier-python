@@ -9,7 +9,7 @@ from .base_error import BaseError
 
 
 class PaymentRequired(BaseError):
-    type: typing.Literal["authorization_error"]
+    type: typing.Literal["authorization_error"] = "authorization_error"
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
