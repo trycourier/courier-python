@@ -143,23 +143,7 @@ class Courier:
 
         Examples
         --------
-        from courier import (
-            AudienceRecipient,
-            Channel,
-            ContentMessage,
-            Delay,
-            ElementalContent,
-            ElementalNode_Text,
-            Expiry,
-            MessageContext,
-            MessageMetadata,
-            MessagePreferences,
-            MessageProvidersType,
-            Routing,
-            RoutingStrategyChannel,
-            Timeout,
-            Utm,
-        )
+        from courier import ContentMessage, ElementalContent, ElementalNode_Text
         from courier.client import Courier
 
         client = Courier(
@@ -168,79 +152,17 @@ class Courier:
         client.send(
             message=ContentMessage(
                 content=ElementalContent(
-                    version="string",
-                    brand={"key": "value"},
-                    elements=[ElementalNode_Text()],
-                ),
-                data={"string": {"key": "value"}},
-                brand_id="string",
-                channels={
-                    "string": Channel(
-                        brand_id={"key": "value"},
-                        providers={"key": "value"},
-                        routing_method={"key": "value"},
-                        if_={"key": "value"},
-                        timeouts={"key": "value"},
-                        override={"key": "value"},
-                        metadata={"key": "value"},
-                    )
-                },
-                context=MessageContext(
-                    tenant_id="string",
-                ),
-                metadata=MessageMetadata(
-                    event="string",
-                    tags=[{"key": "value"}],
-                    utm=Utm(
-                        source={"key": "value"},
-                        medium={"key": "value"},
-                        campaign={"key": "value"},
-                        term={"key": "value"},
-                        content={"key": "value"},
-                    ),
-                    trace_id="string",
-                ),
-                preferences=MessagePreferences(
-                    subscription_topic_id="string",
-                ),
-                providers={
-                    "string": MessageProvidersType(
-                        override={"key": "value"},
-                        if_={"key": "value"},
-                        timeouts={"key": "value"},
-                        metadata={"key": "value"},
-                    )
-                },
-                routing=Routing(
-                    method="all",
-                    channels=[
-                        RoutingStrategyChannel(
-                            channel="string",
-                            config={"key": "value"},
-                            method={"key": "value"},
-                            providers={"key": "value"},
-                            if_={"key": "value"},
-                        )
+                    version="version",
+                    elements=[
+                        ElementalNode_Text(
+                            content="content",
+                            align="left",
+                        ),
+                        ElementalNode_Text(
+                            content="content",
+                            align="left",
+                        ),
                     ],
-                ),
-                timeout=Timeout(
-                    provider={"string": {"key": "value"}},
-                    channel={"string": {"key": "value"}},
-                    message=1,
-                    escalation=1,
-                    criteria="no-escalation",
-                ),
-                delay=Delay(
-                    duration=1,
-                ),
-                expiry=Expiry(
-                    expires_at="string",
-                    expires_in="string",
-                ),
-                to=AudienceRecipient(
-                    audience_id="string",
-                    data={"string": {"key": "value"}},
-                    filters=[{"key": "value"}],
                 ),
             ),
         )
@@ -377,23 +299,7 @@ class AsyncCourier:
         --------
         import asyncio
 
-        from courier import (
-            AudienceRecipient,
-            Channel,
-            ContentMessage,
-            Delay,
-            ElementalContent,
-            ElementalNode_Text,
-            Expiry,
-            MessageContext,
-            MessageMetadata,
-            MessagePreferences,
-            MessageProvidersType,
-            Routing,
-            RoutingStrategyChannel,
-            Timeout,
-            Utm,
-        )
+        from courier import ContentMessage, ElementalContent, ElementalNode_Text
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -405,79 +311,17 @@ class AsyncCourier:
             await client.send(
                 message=ContentMessage(
                     content=ElementalContent(
-                        version="string",
-                        brand={"key": "value"},
-                        elements=[ElementalNode_Text()],
-                    ),
-                    data={"string": {"key": "value"}},
-                    brand_id="string",
-                    channels={
-                        "string": Channel(
-                            brand_id={"key": "value"},
-                            providers={"key": "value"},
-                            routing_method={"key": "value"},
-                            if_={"key": "value"},
-                            timeouts={"key": "value"},
-                            override={"key": "value"},
-                            metadata={"key": "value"},
-                        )
-                    },
-                    context=MessageContext(
-                        tenant_id="string",
-                    ),
-                    metadata=MessageMetadata(
-                        event="string",
-                        tags=[{"key": "value"}],
-                        utm=Utm(
-                            source={"key": "value"},
-                            medium={"key": "value"},
-                            campaign={"key": "value"},
-                            term={"key": "value"},
-                            content={"key": "value"},
-                        ),
-                        trace_id="string",
-                    ),
-                    preferences=MessagePreferences(
-                        subscription_topic_id="string",
-                    ),
-                    providers={
-                        "string": MessageProvidersType(
-                            override={"key": "value"},
-                            if_={"key": "value"},
-                            timeouts={"key": "value"},
-                            metadata={"key": "value"},
-                        )
-                    },
-                    routing=Routing(
-                        method="all",
-                        channels=[
-                            RoutingStrategyChannel(
-                                channel="string",
-                                config={"key": "value"},
-                                method={"key": "value"},
-                                providers={"key": "value"},
-                                if_={"key": "value"},
-                            )
+                        version="version",
+                        elements=[
+                            ElementalNode_Text(
+                                content="content",
+                                align="left",
+                            ),
+                            ElementalNode_Text(
+                                content="content",
+                                align="left",
+                            ),
                         ],
-                    ),
-                    timeout=Timeout(
-                        provider={"string": {"key": "value"}},
-                        channel={"string": {"key": "value"}},
-                        message=1,
-                        escalation=1,
-                        criteria="no-escalation",
-                    ),
-                    delay=Delay(
-                        duration=1,
-                    ),
-                    expiry=Expiry(
-                        expires_at="string",
-                        expires_in="string",
-                    ),
-                    to=AudienceRecipient(
-                        audience_id="string",
-                        data={"string": {"key": "value"}},
-                        filters=[{"key": "value"}],
                     ),
                 ),
             )

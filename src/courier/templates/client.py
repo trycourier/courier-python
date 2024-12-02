@@ -39,9 +39,7 @@ class TemplatesClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.templates.list(
-            cursor="string",
-        )
+        client.templates.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "notifications", method="GET", params={"cursor": cursor}, request_options=request_options
@@ -89,9 +87,7 @@ class AsyncTemplatesClient:
 
 
         async def main() -> None:
-            await client.templates.list(
-                cursor="string",
-            )
+            await client.templates.list()
 
 
         asyncio.run(main())

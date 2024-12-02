@@ -39,6 +39,7 @@ from .subscribe_to_lists_response import SubscribeToListsResponse
 from .token import Token
 from .user_profile import UserProfile
 from .user_profile_firebase_token import UserProfileFirebaseToken
+from .user_profile_patch import UserProfilePatch
 from .webhook_auth_mode import WebhookAuthMode
 from .webhook_authentication import WebhookAuthentication
 from .webhook_method import WebhookMethod
@@ -85,6 +86,7 @@ __all__ = [
     "Token",
     "UserProfile",
     "UserProfileFirebaseToken",
+    "UserProfilePatch",
     "WebhookAuthMode",
     "WebhookAuthentication",
     "WebhookMethod",

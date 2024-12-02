@@ -26,23 +26,7 @@ Use the send API to send a message to one or more recipients.
 <dd>
 
 ```python
-from courier import (
-    AudienceRecipient,
-    Channel,
-    ContentMessage,
-    Delay,
-    ElementalContent,
-    ElementalNode_Text,
-    Expiry,
-    MessageContext,
-    MessageMetadata,
-    MessagePreferences,
-    MessageProvidersType,
-    Routing,
-    RoutingStrategyChannel,
-    Timeout,
-    Utm,
-)
+from courier import ContentMessage, ElementalContent, ElementalNode_Text
 from courier.client import Courier
 
 client = Courier(
@@ -51,79 +35,17 @@ client = Courier(
 client.send(
     message=ContentMessage(
         content=ElementalContent(
-            version="string",
-            brand={"key": "value"},
-            elements=[ElementalNode_Text()],
-        ),
-        data={"string": {"key": "value"}},
-        brand_id="string",
-        channels={
-            "string": Channel(
-                brand_id={"key": "value"},
-                providers={"key": "value"},
-                routing_method={"key": "value"},
-                if_={"key": "value"},
-                timeouts={"key": "value"},
-                override={"key": "value"},
-                metadata={"key": "value"},
-            )
-        },
-        context=MessageContext(
-            tenant_id="string",
-        ),
-        metadata=MessageMetadata(
-            event="string",
-            tags=[{"key": "value"}],
-            utm=Utm(
-                source={"key": "value"},
-                medium={"key": "value"},
-                campaign={"key": "value"},
-                term={"key": "value"},
-                content={"key": "value"},
-            ),
-            trace_id="string",
-        ),
-        preferences=MessagePreferences(
-            subscription_topic_id="string",
-        ),
-        providers={
-            "string": MessageProvidersType(
-                override={"key": "value"},
-                if_={"key": "value"},
-                timeouts={"key": "value"},
-                metadata={"key": "value"},
-            )
-        },
-        routing=Routing(
-            method="all",
-            channels=[
-                RoutingStrategyChannel(
-                    channel="string",
-                    config={"key": "value"},
-                    method={"key": "value"},
-                    providers={"key": "value"},
-                    if_={"key": "value"},
-                )
+            version="version",
+            elements=[
+                ElementalNode_Text(
+                    content="content",
+                    align="left",
+                ),
+                ElementalNode_Text(
+                    content="content",
+                    align="left",
+                ),
             ],
-        ),
-        timeout=Timeout(
-            provider={"string": {"key": "value"}},
-            channel={"string": {"key": "value"}},
-            message=1,
-            escalation=1,
-            criteria="no-escalation",
-        ),
-        delay=Delay(
-            duration=1,
-        ),
-        expiry=Expiry(
-            expires_at="string",
-            expires_in="string",
-        ),
-        to=AudienceRecipient(
-            audience_id="string",
-            data={"string": {"key": "value"}},
-            filters=[{"key": "value"}],
         ),
     ),
 )
@@ -212,7 +134,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.audiences.get(
-    audience_id="string",
+    audience_id="audience_id",
 )
 
 ```
@@ -276,21 +198,13 @@ Creates or updates audience.
 <dd>
 
 ```python
-from courier import SingleFilterConfig
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.audiences.update(
-    audience_id="string",
-    name="string",
-    description="string",
-    filter=SingleFilterConfig(
-        value="string",
-        path="string",
-        operator="ENDS_WITH",
-    ),
+    audience_id="audience_id",
 )
 
 ```
@@ -384,7 +298,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.audiences.delete(
-    audience_id="string",
+    audience_id="audience_id",
 )
 
 ```
@@ -454,8 +368,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.audiences.list_members(
-    audience_id="string",
-    cursor="string",
+    audience_id="audience_id",
 )
 
 ```
@@ -532,9 +445,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.audiences.list_audiences(
-    cursor="string",
-)
+client.audiences.list_audiences()
 
 ```
 </dd>
@@ -603,9 +514,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.audit_events.list(
-    cursor="string",
-)
+client.audit_events.list()
 
 ```
 </dd>
@@ -674,7 +583,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.audit_events.get(
-    audit_event_id="string",
+    audit_event_id="audit-event-id",
 )
 
 ```
@@ -745,8 +654,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.auth_tokens.issue_token(
-    scope="string",
-    expires_in="string",
+    scope="scope",
+    expires_in="expires_in",
 )
 
 ```
@@ -842,14 +751,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.automations.invoke_automation_template(
-    template_id="string",
-    request=AutomationInvokeParams(
-        brand="string",
-        data={"string": {"key": "value"}},
-        profile={"key": "value"},
-        recipient="string",
-        template="string",
-    ),
+    template_id="templateId",
+    request=AutomationInvokeParams(),
 )
 
 ```
@@ -1031,14 +934,7 @@ client.automations.invoke_ad_hoc_automation(
 <dd>
 
 ```python
-from courier import (
-    BrandColors,
-    BrandParameters,
-    BrandSettings,
-    BrandSnippet,
-    BrandSnippets,
-    Email,
-)
+from courier import BrandParameters, BrandSettings
 from courier.client import Courier
 
 client = Courier(
@@ -1046,28 +942,8 @@ client = Courier(
 )
 client.brands.create(
     request=BrandParameters(
-        id="string",
-        name="string",
-        settings=BrandSettings(
-            colors=BrandColors(
-                primary="string",
-                secondary="string",
-                tertiary="string",
-            ),
-            inapp={"key": "value"},
-            email=Email(
-                footer={"key": "value"},
-                header={"key": "value"},
-            ),
-        ),
-        snippets=BrandSnippets(
-            items=[
-                BrandSnippet(
-                    name="string",
-                    value="string",
-                )
-            ],
-        ),
+        name="name",
+        settings=BrandSettings(),
     ),
 )
 
@@ -1154,7 +1030,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.brands.get(
-    brand_id="string",
+    brand_id="brand_id",
 )
 
 ```
@@ -1223,9 +1099,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.brands.list(
-    cursor="string",
-)
+client.brands.list()
 
 ```
 </dd>
@@ -1294,7 +1168,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.brands.delete(
-    brand_id="string",
+    brand_id="brand_id",
 )
 
 ```
@@ -1358,41 +1232,14 @@ Replace an existing brand with the supplied values.
 <dd>
 
 ```python
-from courier import (
-    BrandColors,
-    BrandSettings,
-    BrandSnippet,
-    BrandSnippets,
-    Email,
-)
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.brands.replace(
-    brand_id="string",
-    name="string",
-    settings=BrandSettings(
-        colors=BrandColors(
-            primary="string",
-            secondary="string",
-            tertiary="string",
-        ),
-        inapp={"key": "value"},
-        email=Email(
-            footer={"key": "value"},
-            header={"key": "value"},
-        ),
-    ),
-    snippets=BrandSnippets(
-        items=[
-            BrandSnippet(
-                name="string",
-                value="string",
-            )
-        ],
-    ),
+    brand_id="brand_id",
+    name="name",
 )
 
 ```
@@ -1467,102 +1314,14 @@ client.brands.replace(
 <dd>
 
 ```python
-from courier import (
-    Channel,
-    Delay,
-    Expiry,
-    InboundBulkMessage,
-    InboundBulkTemplateMessage,
-    MessageContext,
-    MessageMetadata,
-    MessagePreferences,
-    MessageProvidersType,
-    Routing,
-    RoutingStrategyChannel,
-    Timeout,
-    Utm,
-)
+from courier import InboundBulkMessage
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.bulk.create_job(
-    message=InboundBulkMessage(
-        message=InboundBulkTemplateMessage(
-            template="string",
-            data={"string": {"key": "value"}},
-            brand_id="string",
-            channels={
-                "string": Channel(
-                    brand_id={"key": "value"},
-                    providers={"key": "value"},
-                    routing_method={"key": "value"},
-                    if_={"key": "value"},
-                    timeouts={"key": "value"},
-                    override={"key": "value"},
-                    metadata={"key": "value"},
-                )
-            },
-            context=MessageContext(
-                tenant_id="string",
-            ),
-            metadata=MessageMetadata(
-                event="string",
-                tags=[{"key": "value"}],
-                utm=Utm(
-                    source={"key": "value"},
-                    medium={"key": "value"},
-                    campaign={"key": "value"},
-                    term={"key": "value"},
-                    content={"key": "value"},
-                ),
-                trace_id="string",
-            ),
-            preferences=MessagePreferences(
-                subscription_topic_id="string",
-            ),
-            providers={
-                "string": MessageProvidersType(
-                    override={"key": "value"},
-                    if_={"key": "value"},
-                    timeouts={"key": "value"},
-                    metadata={"key": "value"},
-                )
-            },
-            routing=Routing(
-                method="all",
-                channels=[
-                    RoutingStrategyChannel(
-                        channel="string",
-                        config={"key": "value"},
-                        method={"key": "value"},
-                        providers={"key": "value"},
-                        if_={"key": "value"},
-                    )
-                ],
-            ),
-            timeout=Timeout(
-                provider={"string": {"key": "value"}},
-                channel={"string": {"key": "value"}},
-                message=1,
-                escalation=1,
-                criteria="no-escalation",
-            ),
-            delay=Delay(
-                duration=1,
-            ),
-            expiry=Expiry(
-                expires_at="string",
-                expires_in="string",
-            ),
-        ),
-        brand="string",
-        data={"string": {"key": "value"}},
-        event="string",
-        locale={"string": {"key": "value"}},
-        override={"key": "value"},
-    ),
+    message=InboundBulkMessage(),
 )
 
 ```
@@ -1642,50 +1401,16 @@ Ingest user data into a Bulk Job
 <dd>
 
 ```python
-from courier import (
-    BulkIngestUsersParams,
-    InboundBulkMessageUser,
-    IProfilePreferences,
-    MessageContext,
-    RecipientPreferences,
-    UserRecipient,
-)
+from courier import BulkIngestUsersParams, InboundBulkMessageUser
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.bulk.ingest_users(
-    job_id="string",
+    job_id="job_id",
     request=BulkIngestUsersParams(
-        users=[
-            InboundBulkMessageUser(
-                preferences=RecipientPreferences(
-                    categories={"string": {"key": "value"}},
-                    notifications={"string": {"key": "value"}},
-                ),
-                profile={"key": "value"},
-                recipient="string",
-                data={"key": "value"},
-                to=UserRecipient(
-                    account_id="string",
-                    context=MessageContext(
-                        tenant_id="string",
-                    ),
-                    data={"string": {"key": "value"}},
-                    email="string",
-                    locale="string",
-                    user_id="string",
-                    phone_number="string",
-                    preferences=IProfilePreferences(
-                        categories={"key": "value"},
-                        notifications={"string": {"key": "value"}},
-                        template_id={"key": "value"},
-                    ),
-                    tenant_id="string",
-                ),
-            )
-        ],
+        users=[InboundBulkMessageUser(), InboundBulkMessageUser()],
     ),
 )
 
@@ -1780,7 +1505,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.bulk.run_job(
-    job_id="string",
+    job_id="job_id",
 )
 
 ```
@@ -1866,7 +1591,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.bulk.get_job(
-    job_id="string",
+    job_id="job_id",
 )
 
 ```
@@ -1936,7 +1661,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.bulk.get_users(
-    job_id="string",
+    job_id="job_id",
 )
 
 ```
@@ -1954,6 +1679,14 @@ client.bulk.get_users(
 <dd>
 
 **job_id:** `str` — A unique identifier representing the bulk job
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `typing.Optional[str]` — A unique identifier that allows for fetching the next set of users added to the bulk job
     
 </dd>
 </dl>
@@ -2069,10 +1802,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.lists.list(
-    cursor="string",
-    pattern="string",
-)
+client.lists.list()
 
 ```
 </dd>
@@ -2149,7 +1879,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.get(
-    list_id="string",
+    list_id="list_id",
 )
 
 ```
@@ -2213,20 +1943,16 @@ Create or replace an existing list with the supplied values.
 <dd>
 
 ```python
-from courier import ListPutParams, RecipientPreferences
+from courier import ListPutParams
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.update(
-    list_id="string",
+    list_id="list_id",
     request=ListPutParams(
-        name="string",
-        preferences=RecipientPreferences(
-            categories={"string": {"key": "value"}},
-            notifications={"string": {"key": "value"}},
-        ),
+        name="name",
     ),
 )
 
@@ -2305,7 +2031,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.delete(
-    list_id="string",
+    list_id="list_id",
 )
 
 ```
@@ -2375,7 +2101,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.restore(
-    list_id="string",
+    list_id="list_id",
 )
 
 ```
@@ -2445,8 +2171,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.get_subscribers(
-    list_id="string",
-    cursor="string",
+    list_id="list_id",
 )
 
 ```
@@ -2518,22 +2243,21 @@ Subscribes the users to the list, overwriting existing subscriptions. If the lis
 <dd>
 
 ```python
-from courier import PutSubscriptionsRecipient, RecipientPreferences
+from courier import PutSubscriptionsRecipient
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.update_subscribers(
-    list_id="string",
+    list_id="list_id",
     recipients=[
         PutSubscriptionsRecipient(
-            recipient_id="string",
-            preferences=RecipientPreferences(
-                categories={"string": {"key": "value"}},
-                notifications={"string": {"key": "value"}},
-            ),
-        )
+            recipient_id="recipientId",
+        ),
+        PutSubscriptionsRecipient(
+            recipient_id="recipientId",
+        ),
     ],
 )
 
@@ -2606,22 +2330,21 @@ Subscribes additional users to the list, without modifying existing subscription
 <dd>
 
 ```python
-from courier import PutSubscriptionsRecipient, RecipientPreferences
+from courier import PutSubscriptionsRecipient
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.add_subscribers(
-    list_id="string",
+    list_id="list_id",
     recipients=[
         PutSubscriptionsRecipient(
-            recipient_id="string",
-            preferences=RecipientPreferences(
-                categories={"string": {"key": "value"}},
-                notifications={"string": {"key": "value"}},
-            ),
-        )
+            recipient_id="recipientId",
+        ),
+        PutSubscriptionsRecipient(
+            recipient_id="recipientId",
+        ),
     ],
 )
 
@@ -2710,19 +2433,14 @@ Subscribe a user to an existing list (note: if the List does not exist, it will 
 <dd>
 
 ```python
-from courier import RecipientPreferences
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.subscribe(
-    list_id="string",
-    user_id="string",
-    preferences=RecipientPreferences(
-        categories={"string": {"key": "value"}},
-        notifications={"string": {"key": "value"}},
-    ),
+    list_id="list_id",
+    user_id="user_id",
 )
 
 ```
@@ -2808,8 +2526,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.lists.unsubscribe(
-    list_id="string",
-    user_id="string",
+    list_id="list_id",
+    user_id="user_id",
 )
 
 ```
@@ -2887,22 +2605,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.messages.list(
-    archived=True,
-    cursor="string",
-    event="string",
-    list_="string",
-    message_id="string",
-    notification="string",
-    provider="string",
-    recipient="string",
-    status="string",
-    tag="string",
-    tags="string",
-    tenant_id="string",
-    enqueued_after="string",
-    trace_id="string",
-)
+client.messages.list()
 
 ```
 </dd>
@@ -3075,7 +2778,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.messages.get(
-    message_id="string",
+    message_id="message_id",
 )
 
 ```
@@ -3145,7 +2848,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.messages.cancel(
-    message_id="string",
+    message_id="message_id",
 )
 
 ```
@@ -3231,8 +2934,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.messages.get_history(
-    message_id="string",
-    type="string",
+    message_id="message_id",
 )
 
 ```
@@ -3296,7 +2998,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.messages.get_content(
-    message_id="string",
+    message_id="message_id",
 )
 
 ```
@@ -3352,7 +3054,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.messages.archive(
-    request_id="string",
+    request_id="request_id",
 )
 
 ```
@@ -3408,10 +3110,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.notifications.list(
-    cursor="string",
-    notes=True,
-)
+client.notifications.list()
 
 ```
 </dd>
@@ -3474,7 +3173,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.notifications.get_content(
-    id="string",
+    id="id",
 )
 
 ```
@@ -3530,7 +3229,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.notifications.get_draft_content(
-    id="string",
+    id="id",
 )
 
 ```
@@ -3586,8 +3285,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.notifications.get_submission_checks(
-    id="string",
-    submission_id="string",
+    id="id",
+    submission_id="submissionId",
 )
 
 ```
@@ -3652,13 +3351,17 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.notifications.replace_submission_checks(
-    id="string",
-    submission_id="string",
+    id="id",
+    submission_id="submissionId",
     checks=[
         BaseCheck(
-            id="string",
+            id="id",
             status="RESOLVED",
-        )
+        ),
+        BaseCheck(
+            id="id",
+            status="RESOLVED",
+        ),
     ],
 )
 
@@ -3731,8 +3434,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.notifications.cancel_submission(
-    id="string",
-    submission_id="string",
+    id="id",
+    submission_id="submissionId",
 )
 
 ```
@@ -3811,7 +3514,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.profiles.get(
-    user_id="string",
+    user_id="user_id",
 )
 
 ```
@@ -3881,8 +3584,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.profiles.create(
-    user_id="string",
-    profile={"string": {"key": "value"}},
+    user_id="user_id",
+    profile={"profile": {"key": "value"}},
 )
 
 ```
@@ -3979,8 +3682,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.profiles.replace(
-    user_id="string",
-    profile={"string": {"key": "value"}},
+    user_id="user_id",
+    profile={"profile": {"key": "value"}},
 )
 
 ```
@@ -4006,6 +3709,83 @@ client.profiles.replace(
 <dd>
 
 **profile:** `typing.Dict[str, typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.profiles.<a href="src/courier/profiles/client.py">merge_profile</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from courier import UserProfilePatch
+from courier.client import Courier
+
+client = Courier(
+    authorization_token="YOUR_AUTHORIZATION_TOKEN",
+)
+client.profiles.merge_profile(
+    user_id="user_id",
+    request=[
+        UserProfilePatch(
+            op="op",
+            path="path",
+            value="value",
+        ),
+        UserProfilePatch(
+            op="op",
+            path="path",
+            value="value",
+        ),
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**user_id:** `str` — A unique identifier representing the user associated with the requested profile.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `typing.Sequence[UserProfilePatch]` 
     
 </dd>
 </dl>
@@ -4058,7 +3838,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.profiles.delete(
-    user_id="string",
+    user_id="user_id",
 )
 
 ```
@@ -4128,8 +3908,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.profiles.get_list_subscriptions(
-    user_id="string",
-    cursor="string",
+    user_id="user_id",
 )
 
 ```
@@ -4201,27 +3980,22 @@ Subscribes the given user to one or more lists. If the list does not exist, it w
 <dd>
 
 ```python
-from courier import (
-    RecipientPreferences,
-    SubscribeToListsRequest,
-    SubscribeToListsRequestListObject,
-)
+from courier import SubscribeToListsRequest, SubscribeToListsRequestListObject
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.profiles.subscribe_to_lists(
-    user_id="string",
+    user_id="user_id",
     request=SubscribeToListsRequest(
         lists=[
             SubscribeToListsRequestListObject(
-                list_id="string",
-                preferences=RecipientPreferences(
-                    categories={"string": {"key": "value"}},
-                    notifications={"string": {"key": "value"}},
-                ),
-            )
+                list_id="listId",
+            ),
+            SubscribeToListsRequestListObject(
+                list_id="listId",
+            ),
         ],
     ),
 )
@@ -4317,7 +4091,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.profiles.delete_list_subscription(
-    user_id="string",
+    user_id="user_id",
 )
 
 ```
@@ -4387,9 +4161,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.templates.list(
-    cursor="string",
-)
+client.templates.list()
 
 ```
 </dd>
@@ -4439,29 +4211,14 @@ client.templates.list(
 <dd>
 
 ```python
-from courier import DefaultPreferences, SubscriptionTopic
 from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.tenants.create_or_replace(
-    tenant_id="string",
-    name="string",
-    parent_tenant_id="string",
-    default_preferences=DefaultPreferences(
-        items=[
-            SubscriptionTopic(
-                id="string",
-                status="OPTED_OUT",
-                has_custom_routing={"key": "value"},
-                custom_routing={"key": "value"},
-            )
-        ],
-    ),
-    properties={"string": {"key": "value"}},
-    user_profile={"string": {"key": "value"}},
-    brand_id="string",
+    tenant_id="tenant_id",
+    name="name",
 )
 
 ```
@@ -4565,7 +4322,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.tenants.get(
-    tenant_id="string",
+    tenant_id="tenant_id",
 )
 
 ```
@@ -4620,11 +4377,7 @@ from courier.client import Courier
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
-client.tenants.list(
-    parent_tenant_id="string",
-    limit=1,
-    cursor="string",
-)
+client.tenants.list()
 
 ```
 </dd>
@@ -4698,7 +4451,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.tenants.delete(
-    tenant_id="string",
+    tenant_id="tenant_id",
 )
 
 ```
@@ -4754,9 +4507,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.tenants.get_users_by_tenant(
-    tenant_id="string",
-    limit=1,
-    cursor="string",
+    tenant_id="tenant_id",
 )
 
 ```
@@ -4910,8 +4661,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.tenants.remove_default_preferences_for_topic(
-    tenant_id="string",
-    topic_id="string",
+    tenant_id="tenant_id",
+    topic_id="topic_id",
 )
 
 ```
@@ -4990,8 +4741,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.translations.get(
-    domain="string",
-    locale="string",
+    domain="domain",
+    locale="locale",
 )
 
 ```
@@ -5069,8 +4820,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.translations.update(
-    domain="string",
-    locale="string",
+    domain="domain",
+    locale="locale",
     request="string",
 )
 
@@ -5158,7 +4909,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.preferences.list(
-    user_id="string",
+    user_id="user_id",
 )
 
 ```
@@ -5176,6 +4927,14 @@ client.users.preferences.list(
 <dd>
 
 **user_id:** `str` — A unique identifier associated with the user whose preferences you wish to retrieve.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Query the preferences of a user for this specific tenant context.
     
 </dd>
 </dl>
@@ -5228,8 +4987,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.preferences.get(
-    user_id="string",
-    topic_id="string",
+    user_id="user_id",
+    topic_id="topic_id",
 )
 
 ```
@@ -5255,6 +5014,14 @@ client.users.preferences.get(
 <dd>
 
 **topic_id:** `str` — A unique identifier associated with a subscription topic.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Query the preferences of a user for this specific tenant context.
     
 </dd>
 </dl>
@@ -5355,6 +5122,14 @@ client.users.preferences.update(
 <dl>
 <dd>
 
+**tenant_id:** `typing.Optional[str]` — Update the preferences of a user for this specific tenant context.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -5406,13 +5181,14 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tenants.add_multple(
-    user_id="string",
+    user_id="user_id",
     tenants=[
         UserTenantAssociation(
-            user_id="string",
-            tenant_id="string",
-            profile={"string": {"key": "value"}},
-        )
+            tenant_id="tenant_id",
+        ),
+        UserTenantAssociation(
+            tenant_id="tenant_id",
+        ),
     ],
 )
 
@@ -5495,9 +5271,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tenants.add(
-    user_id="string",
-    tenant_id="string",
-    profile={"string": {"key": "value"}},
+    user_id="user_id",
+    tenant_id="tenant_id",
 )
 
 ```
@@ -5583,7 +5358,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tenants.remove_all(
-    user_id="string",
+    user_id="user_id",
 )
 
 ```
@@ -5653,8 +5428,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tenants.remove(
-    user_id="string",
-    tenant_id="string",
+    user_id="user_id",
+    tenant_id="tenant_id",
 )
 
 ```
@@ -5732,9 +5507,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tenants.list(
-    user_id="string",
-    limit=1,
-    cursor="string",
+    user_id="user_id",
 )
 
 ```
@@ -5824,7 +5597,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tokens.add_multiple(
-    user_id="string",
+    user_id="user_id",
 )
 
 ```
@@ -5889,33 +5662,16 @@ Adds a single token to a user and overwrites a matching existing token.
 
 ```python
 from courier.client import Courier
-from courier.users import Device, Tracking, UserToken
+from courier.users import UserToken
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tokens.add(
-    user_id="string",
-    token="string",
+    user_id="user_id",
+    token="token",
     request=UserToken(
-        token="string",
         provider_key="firebase-fcm",
-        expiry_date="string",
-        properties={"key": "value"},
-        device=Device(
-            app_id="string",
-            ad_id="string",
-            device_id="string",
-            platform="string",
-            manufacturer="string",
-            model="string",
-        ),
-        tracking=Tracking(
-            os_version="string",
-            ip="string",
-            lat="string",
-            long_="string",
-        ),
     ),
 )
 
@@ -6003,15 +5759,18 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tokens.update(
-    user_id="string",
-    token="string",
+    user_id="user_id",
+    token="token",
     request=PatchUserTokenOpts(
         patch=[
             PatchOperation(
-                op="string",
-                path="string",
-                value="string",
-            )
+                op="op",
+                path="path",
+            ),
+            PatchOperation(
+                op="op",
+                path="path",
+            ),
         ],
     ),
 )
@@ -6099,8 +5858,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tokens.get(
-    user_id="string",
-    token="string",
+    user_id="user_id",
+    token="token",
 )
 
 ```
@@ -6178,7 +5937,7 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tokens.list(
-    user_id="string",
+    user_id="user_id",
 )
 
 ```
@@ -6234,8 +5993,8 @@ client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
 )
 client.users.tokens.delete(
-    user_id="string",
-    token="string",
+    user_id="user_id",
+    token="token",
 )
 
 ```

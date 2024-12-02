@@ -47,7 +47,7 @@ class TokensClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tokens.add_multiple(
-            user_id="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -91,33 +91,16 @@ class TokensClient:
         Examples
         --------
         from courier.client import Courier
-        from courier.users import Device, Tracking, UserToken
+        from courier.users import UserToken
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tokens.add(
-            user_id="string",
-            token="string",
+            user_id="user_id",
+            token="token",
             request=UserToken(
-                token="string",
                 provider_key="firebase-fcm",
-                expiry_date="string",
-                properties={"key": "value"},
-                device=Device(
-                    app_id="string",
-                    ad_id="string",
-                    device_id="string",
-                    platform="string",
-                    manufacturer="string",
-                    model="string",
-                ),
-                tracking=Tracking(
-                    os_version="string",
-                    ip="string",
-                    lat="string",
-                    long_="string",
-                ),
             ),
         )
         """
@@ -177,15 +160,18 @@ class TokensClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tokens.update(
-            user_id="string",
-            token="string",
+            user_id="user_id",
+            token="token",
             request=PatchUserTokenOpts(
                 patch=[
                     PatchOperation(
-                        op="string",
-                        path="string",
-                        value="string",
-                    )
+                        op="op",
+                        path="path",
+                    ),
+                    PatchOperation(
+                        op="op",
+                        path="path",
+                    ),
                 ],
             ),
         )
@@ -238,8 +224,8 @@ class TokensClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tokens.get(
-            user_id="string",
-            token="string",
+            user_id="user_id",
+            token="token",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -283,7 +269,7 @@ class TokensClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tokens.list(
-            user_id="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -326,8 +312,8 @@ class TokensClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tokens.delete(
-            user_id="string",
-            token="string",
+            user_id="user_id",
+            token="token",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -377,7 +363,7 @@ class AsyncTokensClient:
 
         async def main() -> None:
             await client.users.tokens.add_multiple(
-                user_id="string",
+                user_id="user_id",
             )
 
 
@@ -426,7 +412,7 @@ class AsyncTokensClient:
         import asyncio
 
         from courier.client import AsyncCourier
-        from courier.users import Device, Tracking, UserToken
+        from courier.users import UserToken
 
         client = AsyncCourier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -435,27 +421,10 @@ class AsyncTokensClient:
 
         async def main() -> None:
             await client.users.tokens.add(
-                user_id="string",
-                token="string",
+                user_id="user_id",
+                token="token",
                 request=UserToken(
-                    token="string",
                     provider_key="firebase-fcm",
-                    expiry_date="string",
-                    properties={"key": "value"},
-                    device=Device(
-                        app_id="string",
-                        ad_id="string",
-                        device_id="string",
-                        platform="string",
-                        manufacturer="string",
-                        model="string",
-                    ),
-                    tracking=Tracking(
-                        os_version="string",
-                        ip="string",
-                        lat="string",
-                        long_="string",
-                    ),
                 ),
             )
 
@@ -523,15 +492,18 @@ class AsyncTokensClient:
 
         async def main() -> None:
             await client.users.tokens.update(
-                user_id="string",
-                token="string",
+                user_id="user_id",
+                token="token",
                 request=PatchUserTokenOpts(
                     patch=[
                         PatchOperation(
-                            op="string",
-                            path="string",
-                            value="string",
-                        )
+                            op="op",
+                            path="path",
+                        ),
+                        PatchOperation(
+                            op="op",
+                            path="path",
+                        ),
                     ],
                 ),
             )
@@ -592,8 +564,8 @@ class AsyncTokensClient:
 
         async def main() -> None:
             await client.users.tokens.get(
-                user_id="string",
-                token="string",
+                user_id="user_id",
+                token="token",
             )
 
 
@@ -647,7 +619,7 @@ class AsyncTokensClient:
 
         async def main() -> None:
             await client.users.tokens.list(
-                user_id="string",
+                user_id="user_id",
             )
 
 
@@ -700,8 +672,8 @@ class AsyncTokensClient:
 
         async def main() -> None:
             await client.users.tokens.delete(
-                user_id="string",
-                token="string",
+                user_id="user_id",
+                token="token",
             )
 
 

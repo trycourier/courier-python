@@ -59,10 +59,7 @@ class ListsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.lists.list(
-            cursor="string",
-            pattern="string",
-        )
+        client.lists.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "lists", method="GET", params={"cursor": cursor, "pattern": pattern}, request_options=request_options
@@ -103,7 +100,7 @@ class ListsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.get(
-            list_id="string",
+            list_id="list_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -143,20 +140,16 @@ class ListsClient:
 
         Examples
         --------
-        from courier import ListPutParams, RecipientPreferences
+        from courier import ListPutParams
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.update(
-            list_id="string",
+            list_id="list_id",
             request=ListPutParams(
-                name="string",
-                preferences=RecipientPreferences(
-                    categories={"string": {"key": "value"}},
-                    notifications={"string": {"key": "value"}},
-                ),
+                name="name",
             ),
         )
         """
@@ -195,7 +188,7 @@ class ListsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.delete(
-            list_id="string",
+            list_id="list_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -233,7 +226,7 @@ class ListsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.restore(
-            list_id="string",
+            list_id="list_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -280,8 +273,7 @@ class ListsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.get_subscribers(
-            list_id="string",
-            cursor="string",
+            list_id="list_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -328,22 +320,21 @@ class ListsClient:
 
         Examples
         --------
-        from courier import PutSubscriptionsRecipient, RecipientPreferences
+        from courier import PutSubscriptionsRecipient
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.update_subscribers(
-            list_id="string",
+            list_id="list_id",
             recipients=[
                 PutSubscriptionsRecipient(
-                    recipient_id="string",
-                    preferences=RecipientPreferences(
-                        categories={"string": {"key": "value"}},
-                        notifications={"string": {"key": "value"}},
-                    ),
-                )
+                    recipient_id="recipientId",
+                ),
+                PutSubscriptionsRecipient(
+                    recipient_id="recipientId",
+                ),
             ],
         )
         """
@@ -399,22 +390,21 @@ class ListsClient:
 
         Examples
         --------
-        from courier import PutSubscriptionsRecipient, RecipientPreferences
+        from courier import PutSubscriptionsRecipient
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.add_subscribers(
-            list_id="string",
+            list_id="list_id",
             recipients=[
                 PutSubscriptionsRecipient(
-                    recipient_id="string",
-                    preferences=RecipientPreferences(
-                        categories={"string": {"key": "value"}},
-                        notifications={"string": {"key": "value"}},
-                    ),
-                )
+                    recipient_id="recipientId",
+                ),
+                PutSubscriptionsRecipient(
+                    recipient_id="recipientId",
+                ),
             ],
         )
         """
@@ -471,19 +461,14 @@ class ListsClient:
 
         Examples
         --------
-        from courier import RecipientPreferences
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.subscribe(
-            list_id="string",
-            user_id="string",
-            preferences=RecipientPreferences(
-                categories={"string": {"key": "value"}},
-                notifications={"string": {"key": "value"}},
-            ),
+            list_id="list_id",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -530,8 +515,8 @@ class ListsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.lists.unsubscribe(
-            list_id="string",
-            user_id="string",
+            list_id="list_id",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -593,10 +578,7 @@ class AsyncListsClient:
 
 
         async def main() -> None:
-            await client.lists.list(
-                cursor="string",
-                pattern="string",
-            )
+            await client.lists.list()
 
 
         asyncio.run(main())
@@ -645,7 +627,7 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.get(
-                list_id="string",
+                list_id="list_id",
             )
 
 
@@ -690,7 +672,7 @@ class AsyncListsClient:
         --------
         import asyncio
 
-        from courier import ListPutParams, RecipientPreferences
+        from courier import ListPutParams
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -700,13 +682,9 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.update(
-                list_id="string",
+                list_id="list_id",
                 request=ListPutParams(
-                    name="string",
-                    preferences=RecipientPreferences(
-                        categories={"string": {"key": "value"}},
-                        notifications={"string": {"key": "value"}},
-                    ),
+                    name="name",
                 ),
             )
 
@@ -753,7 +731,7 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.delete(
-                list_id="string",
+                list_id="list_id",
             )
 
 
@@ -799,7 +777,7 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.restore(
-                list_id="string",
+                list_id="list_id",
             )
 
 
@@ -854,8 +832,7 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.get_subscribers(
-                list_id="string",
-                cursor="string",
+                list_id="list_id",
             )
 
 
@@ -907,7 +884,7 @@ class AsyncListsClient:
         --------
         import asyncio
 
-        from courier import PutSubscriptionsRecipient, RecipientPreferences
+        from courier import PutSubscriptionsRecipient
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -917,15 +894,14 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.update_subscribers(
-                list_id="string",
+                list_id="list_id",
                 recipients=[
                     PutSubscriptionsRecipient(
-                        recipient_id="string",
-                        preferences=RecipientPreferences(
-                            categories={"string": {"key": "value"}},
-                            notifications={"string": {"key": "value"}},
-                        ),
-                    )
+                        recipient_id="recipientId",
+                    ),
+                    PutSubscriptionsRecipient(
+                        recipient_id="recipientId",
+                    ),
                 ],
             )
 
@@ -986,7 +962,7 @@ class AsyncListsClient:
         --------
         import asyncio
 
-        from courier import PutSubscriptionsRecipient, RecipientPreferences
+        from courier import PutSubscriptionsRecipient
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -996,15 +972,14 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.add_subscribers(
-                list_id="string",
+                list_id="list_id",
                 recipients=[
                     PutSubscriptionsRecipient(
-                        recipient_id="string",
-                        preferences=RecipientPreferences(
-                            categories={"string": {"key": "value"}},
-                            notifications={"string": {"key": "value"}},
-                        ),
-                    )
+                        recipient_id="recipientId",
+                    ),
+                    PutSubscriptionsRecipient(
+                        recipient_id="recipientId",
+                    ),
                 ],
             )
 
@@ -1066,7 +1041,6 @@ class AsyncListsClient:
         --------
         import asyncio
 
-        from courier import RecipientPreferences
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -1076,12 +1050,8 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.subscribe(
-                list_id="string",
-                user_id="string",
-                preferences=RecipientPreferences(
-                    categories={"string": {"key": "value"}},
-                    notifications={"string": {"key": "value"}},
-                ),
+                list_id="list_id",
+                user_id="user_id",
             )
 
 
@@ -1136,8 +1106,8 @@ class AsyncListsClient:
 
         async def main() -> None:
             await client.lists.unsubscribe(
-                list_id="string",
-                user_id="string",
+                list_id="list_id",
+                user_id="user_id",
             )
 
 

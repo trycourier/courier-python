@@ -55,8 +55,8 @@ class AuthTokensClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.auth_tokens.issue_token(
-            scope="string",
-            expires_in="string",
+            scope="scope",
+            expires_in="expires_in",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -126,8 +126,8 @@ class AsyncAuthTokensClient:
 
         async def main() -> None:
             await client.auth_tokens.issue_token(
-                scope="string",
-                expires_in="string",
+                scope="scope",
+                expires_in="expires_in",
             )
 
 

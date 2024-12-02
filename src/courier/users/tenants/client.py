@@ -56,13 +56,14 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tenants.add_multple(
-            user_id="string",
+            user_id="user_id",
             tenants=[
                 UserTenantAssociation(
-                    user_id="string",
-                    tenant_id="string",
-                    profile={"string": {"key": "value"}},
-                )
+                    tenant_id="tenant_id",
+                ),
+                UserTenantAssociation(
+                    tenant_id="tenant_id",
+                ),
             ],
         )
         """
@@ -121,9 +122,8 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tenants.add(
-            user_id="string",
-            tenant_id="string",
-            profile={"string": {"key": "value"}},
+            user_id="user_id",
+            tenant_id="tenant_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -165,7 +165,7 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tenants.remove_all(
-            user_id="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -206,8 +206,8 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tenants.remove(
-            user_id="string",
-            tenant_id="string",
+            user_id="user_id",
+            tenant_id="tenant_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -261,9 +261,7 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.tenants.list(
-            user_id="string",
-            limit=1,
-            cursor="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -327,13 +325,14 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.users.tenants.add_multple(
-                user_id="string",
+                user_id="user_id",
                 tenants=[
                     UserTenantAssociation(
-                        user_id="string",
-                        tenant_id="string",
-                        profile={"string": {"key": "value"}},
-                    )
+                        tenant_id="tenant_id",
+                    ),
+                    UserTenantAssociation(
+                        tenant_id="tenant_id",
+                    ),
                 ],
             )
 
@@ -400,9 +399,8 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.users.tenants.add(
-                user_id="string",
-                tenant_id="string",
-                profile={"string": {"key": "value"}},
+                user_id="user_id",
+                tenant_id="tenant_id",
             )
 
 
@@ -452,7 +450,7 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.users.tenants.remove_all(
-                user_id="string",
+                user_id="user_id",
             )
 
 
@@ -503,8 +501,8 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.users.tenants.remove(
-                user_id="string",
-                tenant_id="string",
+                user_id="user_id",
+                tenant_id="tenant_id",
             )
 
 
@@ -566,9 +564,7 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.users.tenants.list(
-                user_id="string",
-                limit=1,
-                cursor="string",
+                user_id="user_id",
             )
 
 

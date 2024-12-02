@@ -26,7 +26,11 @@ class PreferencesClient:
         self._client_wrapper = client_wrapper
 
     def list(
-        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        user_id: str,
+        *,
+        tenant_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesListResponse:
         """
         Fetch all user preferences.
@@ -35,6 +39,9 @@ class PreferencesClient:
         ----------
         user_id : str
             A unique identifier associated with the user whose preferences you wish to retrieve.
+
+        tenant_id : typing.Optional[str]
+            Query the preferences of a user for this specific tenant context.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -51,11 +58,14 @@ class PreferencesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.preferences.list(
-            user_id="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"users/{jsonable_encoder(user_id)}/preferences", method="GET", request_options=request_options
+            f"users/{jsonable_encoder(user_id)}/preferences",
+            method="GET",
+            params={"tenant_id": tenant_id},
+            request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -70,7 +80,12 @@ class PreferencesClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def get(
-        self, user_id: str, topic_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        user_id: str,
+        topic_id: str,
+        *,
+        tenant_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesGetResponse:
         """
         Fetch user preferences for a specific subscription topic.
@@ -82,6 +97,9 @@ class PreferencesClient:
 
         topic_id : str
             A unique identifier associated with a subscription topic.
+
+        tenant_id : typing.Optional[str]
+            Query the preferences of a user for this specific tenant context.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -98,13 +116,14 @@ class PreferencesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.users.preferences.get(
-            user_id="string",
-            topic_id="string",
+            user_id="user_id",
+            topic_id="topic_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
             f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             method="GET",
+            params={"tenant_id": tenant_id},
             request_options=request_options,
         )
         try:
@@ -125,6 +144,7 @@ class PreferencesClient:
         topic_id: str,
         *,
         topic: TopicPreferenceUpdate,
+        tenant_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesUpdateResponse:
         """
@@ -139,6 +159,9 @@ class PreferencesClient:
             A unique identifier associated with a subscription topic.
 
         topic : TopicPreferenceUpdate
+
+        tenant_id : typing.Optional[str]
+            Update the preferences of a user for this specific tenant context.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -168,6 +191,7 @@ class PreferencesClient:
         _response = self._client_wrapper.httpx_client.request(
             f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             method="PUT",
+            params={"tenant_id": tenant_id},
             json={"topic": topic},
             request_options=request_options,
             omit=OMIT,
@@ -190,7 +214,11 @@ class AsyncPreferencesClient:
         self._client_wrapper = client_wrapper
 
     async def list(
-        self, user_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        user_id: str,
+        *,
+        tenant_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesListResponse:
         """
         Fetch all user preferences.
@@ -199,6 +227,9 @@ class AsyncPreferencesClient:
         ----------
         user_id : str
             A unique identifier associated with the user whose preferences you wish to retrieve.
+
+        tenant_id : typing.Optional[str]
+            Query the preferences of a user for this specific tenant context.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -220,14 +251,17 @@ class AsyncPreferencesClient:
 
         async def main() -> None:
             await client.users.preferences.list(
-                user_id="string",
+                user_id="user_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"users/{jsonable_encoder(user_id)}/preferences", method="GET", request_options=request_options
+            f"users/{jsonable_encoder(user_id)}/preferences",
+            method="GET",
+            params={"tenant_id": tenant_id},
+            request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -242,7 +276,12 @@ class AsyncPreferencesClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def get(
-        self, user_id: str, topic_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        user_id: str,
+        topic_id: str,
+        *,
+        tenant_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesGetResponse:
         """
         Fetch user preferences for a specific subscription topic.
@@ -254,6 +293,9 @@ class AsyncPreferencesClient:
 
         topic_id : str
             A unique identifier associated with a subscription topic.
+
+        tenant_id : typing.Optional[str]
+            Query the preferences of a user for this specific tenant context.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -275,8 +317,8 @@ class AsyncPreferencesClient:
 
         async def main() -> None:
             await client.users.preferences.get(
-                user_id="string",
-                topic_id="string",
+                user_id="user_id",
+                topic_id="topic_id",
             )
 
 
@@ -285,6 +327,7 @@ class AsyncPreferencesClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             method="GET",
+            params={"tenant_id": tenant_id},
             request_options=request_options,
         )
         try:
@@ -305,6 +348,7 @@ class AsyncPreferencesClient:
         topic_id: str,
         *,
         topic: TopicPreferenceUpdate,
+        tenant_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> UserPreferencesUpdateResponse:
         """
@@ -319,6 +363,9 @@ class AsyncPreferencesClient:
             A unique identifier associated with a subscription topic.
 
         topic : TopicPreferenceUpdate
+
+        tenant_id : typing.Optional[str]
+            Update the preferences of a user for this specific tenant context.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -356,6 +403,7 @@ class AsyncPreferencesClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"users/{jsonable_encoder(user_id)}/preferences/{jsonable_encoder(topic_id)}",
             method="PUT",
+            params={"tenant_id": tenant_id},
             json={"topic": topic},
             request_options=request_options,
             omit=OMIT,

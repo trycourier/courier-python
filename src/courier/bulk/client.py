@@ -51,102 +51,14 @@ class BulkClient:
 
         Examples
         --------
-        from courier import (
-            Channel,
-            Delay,
-            Expiry,
-            InboundBulkMessage,
-            InboundBulkTemplateMessage,
-            MessageContext,
-            MessageMetadata,
-            MessagePreferences,
-            MessageProvidersType,
-            Routing,
-            RoutingStrategyChannel,
-            Timeout,
-            Utm,
-        )
+        from courier import InboundBulkMessage
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.bulk.create_job(
-            message=InboundBulkMessage(
-                message=InboundBulkTemplateMessage(
-                    template="string",
-                    data={"string": {"key": "value"}},
-                    brand_id="string",
-                    channels={
-                        "string": Channel(
-                            brand_id={"key": "value"},
-                            providers={"key": "value"},
-                            routing_method={"key": "value"},
-                            if_={"key": "value"},
-                            timeouts={"key": "value"},
-                            override={"key": "value"},
-                            metadata={"key": "value"},
-                        )
-                    },
-                    context=MessageContext(
-                        tenant_id="string",
-                    ),
-                    metadata=MessageMetadata(
-                        event="string",
-                        tags=[{"key": "value"}],
-                        utm=Utm(
-                            source={"key": "value"},
-                            medium={"key": "value"},
-                            campaign={"key": "value"},
-                            term={"key": "value"},
-                            content={"key": "value"},
-                        ),
-                        trace_id="string",
-                    ),
-                    preferences=MessagePreferences(
-                        subscription_topic_id="string",
-                    ),
-                    providers={
-                        "string": MessageProvidersType(
-                            override={"key": "value"},
-                            if_={"key": "value"},
-                            timeouts={"key": "value"},
-                            metadata={"key": "value"},
-                        )
-                    },
-                    routing=Routing(
-                        method="all",
-                        channels=[
-                            RoutingStrategyChannel(
-                                channel="string",
-                                config={"key": "value"},
-                                method={"key": "value"},
-                                providers={"key": "value"},
-                                if_={"key": "value"},
-                            )
-                        ],
-                    ),
-                    timeout=Timeout(
-                        provider={"string": {"key": "value"}},
-                        channel={"string": {"key": "value"}},
-                        message=1,
-                        escalation=1,
-                        criteria="no-escalation",
-                    ),
-                    delay=Delay(
-                        duration=1,
-                    ),
-                    expiry=Expiry(
-                        expires_at="string",
-                        expires_in="string",
-                    ),
-                ),
-                brand="string",
-                data={"string": {"key": "value"}},
-                event="string",
-                locale={"string": {"key": "value"}},
-                override={"key": "value"},
-            ),
+            message=InboundBulkMessage(),
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -205,50 +117,16 @@ class BulkClient:
 
         Examples
         --------
-        from courier import (
-            BulkIngestUsersParams,
-            InboundBulkMessageUser,
-            IProfilePreferences,
-            MessageContext,
-            RecipientPreferences,
-            UserRecipient,
-        )
+        from courier import BulkIngestUsersParams, InboundBulkMessageUser
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.bulk.ingest_users(
-            job_id="string",
+            job_id="job_id",
             request=BulkIngestUsersParams(
-                users=[
-                    InboundBulkMessageUser(
-                        preferences=RecipientPreferences(
-                            categories={"string": {"key": "value"}},
-                            notifications={"string": {"key": "value"}},
-                        ),
-                        profile={"key": "value"},
-                        recipient="string",
-                        data={"key": "value"},
-                        to=UserRecipient(
-                            account_id="string",
-                            context=MessageContext(
-                                tenant_id="string",
-                            ),
-                            data={"string": {"key": "value"}},
-                            email="string",
-                            locale="string",
-                            user_id="string",
-                            phone_number="string",
-                            preferences=IProfilePreferences(
-                                categories={"key": "value"},
-                                notifications={"string": {"key": "value"}},
-                                template_id={"key": "value"},
-                            ),
-                            tenant_id="string",
-                        ),
-                    )
-                ],
+                users=[InboundBulkMessageUser(), InboundBulkMessageUser()],
             ),
         )
         """
@@ -307,7 +185,7 @@ class BulkClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.bulk.run_job(
-            job_id="string",
+            job_id="job_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -355,7 +233,7 @@ class BulkClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.bulk.get_job(
-            job_id="string",
+            job_id="job_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -374,7 +252,11 @@ class BulkClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def get_users(
-        self, job_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        job_id: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> BulkGetJobUsersResponse:
         """
         Get Bulk Job Users
@@ -383,6 +265,9 @@ class BulkClient:
         ----------
         job_id : str
             A unique identifier representing the bulk job
+
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of users added to the bulk job
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -399,11 +284,14 @@ class BulkClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.bulk.get_users(
-            job_id="string",
+            job_id="job_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"bulk/{jsonable_encoder(job_id)}/users", method="GET", request_options=request_options
+            f"bulk/{jsonable_encoder(job_id)}/users",
+            method="GET",
+            params={"cursor": cursor},
+            request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -451,21 +339,7 @@ class AsyncBulkClient:
         --------
         import asyncio
 
-        from courier import (
-            Channel,
-            Delay,
-            Expiry,
-            InboundBulkMessage,
-            InboundBulkTemplateMessage,
-            MessageContext,
-            MessageMetadata,
-            MessagePreferences,
-            MessageProvidersType,
-            Routing,
-            RoutingStrategyChannel,
-            Timeout,
-            Utm,
-        )
+        from courier import InboundBulkMessage
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -475,81 +349,7 @@ class AsyncBulkClient:
 
         async def main() -> None:
             await client.bulk.create_job(
-                message=InboundBulkMessage(
-                    message=InboundBulkTemplateMessage(
-                        template="string",
-                        data={"string": {"key": "value"}},
-                        brand_id="string",
-                        channels={
-                            "string": Channel(
-                                brand_id={"key": "value"},
-                                providers={"key": "value"},
-                                routing_method={"key": "value"},
-                                if_={"key": "value"},
-                                timeouts={"key": "value"},
-                                override={"key": "value"},
-                                metadata={"key": "value"},
-                            )
-                        },
-                        context=MessageContext(
-                            tenant_id="string",
-                        ),
-                        metadata=MessageMetadata(
-                            event="string",
-                            tags=[{"key": "value"}],
-                            utm=Utm(
-                                source={"key": "value"},
-                                medium={"key": "value"},
-                                campaign={"key": "value"},
-                                term={"key": "value"},
-                                content={"key": "value"},
-                            ),
-                            trace_id="string",
-                        ),
-                        preferences=MessagePreferences(
-                            subscription_topic_id="string",
-                        ),
-                        providers={
-                            "string": MessageProvidersType(
-                                override={"key": "value"},
-                                if_={"key": "value"},
-                                timeouts={"key": "value"},
-                                metadata={"key": "value"},
-                            )
-                        },
-                        routing=Routing(
-                            method="all",
-                            channels=[
-                                RoutingStrategyChannel(
-                                    channel="string",
-                                    config={"key": "value"},
-                                    method={"key": "value"},
-                                    providers={"key": "value"},
-                                    if_={"key": "value"},
-                                )
-                            ],
-                        ),
-                        timeout=Timeout(
-                            provider={"string": {"key": "value"}},
-                            channel={"string": {"key": "value"}},
-                            message=1,
-                            escalation=1,
-                            criteria="no-escalation",
-                        ),
-                        delay=Delay(
-                            duration=1,
-                        ),
-                        expiry=Expiry(
-                            expires_at="string",
-                            expires_in="string",
-                        ),
-                    ),
-                    brand="string",
-                    data={"string": {"key": "value"}},
-                    event="string",
-                    locale={"string": {"key": "value"}},
-                    override={"key": "value"},
-                ),
+                message=InboundBulkMessage(),
             )
 
 
@@ -613,14 +413,7 @@ class AsyncBulkClient:
         --------
         import asyncio
 
-        from courier import (
-            BulkIngestUsersParams,
-            InboundBulkMessageUser,
-            IProfilePreferences,
-            MessageContext,
-            RecipientPreferences,
-            UserRecipient,
-        )
+        from courier import BulkIngestUsersParams, InboundBulkMessageUser
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -630,36 +423,9 @@ class AsyncBulkClient:
 
         async def main() -> None:
             await client.bulk.ingest_users(
-                job_id="string",
+                job_id="job_id",
                 request=BulkIngestUsersParams(
-                    users=[
-                        InboundBulkMessageUser(
-                            preferences=RecipientPreferences(
-                                categories={"string": {"key": "value"}},
-                                notifications={"string": {"key": "value"}},
-                            ),
-                            profile={"key": "value"},
-                            recipient="string",
-                            data={"key": "value"},
-                            to=UserRecipient(
-                                account_id="string",
-                                context=MessageContext(
-                                    tenant_id="string",
-                                ),
-                                data={"string": {"key": "value"}},
-                                email="string",
-                                locale="string",
-                                user_id="string",
-                                phone_number="string",
-                                preferences=IProfilePreferences(
-                                    categories={"key": "value"},
-                                    notifications={"string": {"key": "value"}},
-                                    template_id={"key": "value"},
-                                ),
-                                tenant_id="string",
-                            ),
-                        )
-                    ],
+                    users=[InboundBulkMessageUser(), InboundBulkMessageUser()],
                 ),
             )
 
@@ -726,7 +492,7 @@ class AsyncBulkClient:
 
         async def main() -> None:
             await client.bulk.run_job(
-                job_id="string",
+                job_id="job_id",
             )
 
 
@@ -784,7 +550,7 @@ class AsyncBulkClient:
 
         async def main() -> None:
             await client.bulk.get_job(
-                job_id="string",
+                job_id="job_id",
             )
 
 
@@ -806,7 +572,11 @@ class AsyncBulkClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def get_users(
-        self, job_id: str, *, request_options: typing.Optional[RequestOptions] = None
+        self,
+        job_id: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> BulkGetJobUsersResponse:
         """
         Get Bulk Job Users
@@ -815,6 +585,9 @@ class AsyncBulkClient:
         ----------
         job_id : str
             A unique identifier representing the bulk job
+
+        cursor : typing.Optional[str]
+            A unique identifier that allows for fetching the next set of users added to the bulk job
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -836,14 +609,17 @@ class AsyncBulkClient:
 
         async def main() -> None:
             await client.bulk.get_users(
-                job_id="string",
+                job_id="job_id",
             )
 
 
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"bulk/{jsonable_encoder(job_id)}/users", method="GET", request_options=request_options
+            f"bulk/{jsonable_encoder(job_id)}/users",
+            method="GET",
+            params={"cursor": cursor},
+            request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:

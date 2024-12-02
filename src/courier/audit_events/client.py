@@ -41,9 +41,7 @@ class AuditEventsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.audit_events.list(
-            cursor="string",
-        )
+        client.audit_events.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "audit-events", method="GET", params={"cursor": cursor}, request_options=request_options
@@ -80,7 +78,7 @@ class AuditEventsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.audit_events.get(
-            audit_event_id="string",
+            audit_event_id="audit-event-id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -129,9 +127,7 @@ class AsyncAuditEventsClient:
 
 
         async def main() -> None:
-            await client.audit_events.list(
-                cursor="string",
-            )
+            await client.audit_events.list()
 
 
         asyncio.run(main())
@@ -176,7 +172,7 @@ class AsyncAuditEventsClient:
 
         async def main() -> None:
             await client.audit_events.get(
-                audit_event_id="string",
+                audit_event_id="audit-event-id",
             )
 
 

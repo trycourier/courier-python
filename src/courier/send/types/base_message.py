@@ -55,7 +55,7 @@ class BaseMessage(UncheckedBaseModel):
 
     delay: typing.Optional[Delay] = pydantic_v1.Field(default=None)
     """
-    Defines the time to wait before delivering the message.
+    Defines the time to wait before delivering the message. You can specify one of the following options. Duration with the number of milliseconds to delay. Until with an ISO 8601 timestamp that specifies when it should be delivered. Until with an OpenStreetMap opening_hours-like format that specifies the [Delivery Window](https://www.courier.com/docs/platform/sending/failover/#delivery-window) (e.g., 'Mo-Fr 08:00-18:00pm')
     """
 
     expiry: typing.Optional[Expiry] = pydantic_v1.Field(default=None)

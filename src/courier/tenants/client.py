@@ -69,29 +69,14 @@ class TenantsClient:
 
         Examples
         --------
-        from courier import DefaultPreferences, SubscriptionTopic
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.tenants.create_or_replace(
-            tenant_id="string",
-            name="string",
-            parent_tenant_id="string",
-            default_preferences=DefaultPreferences(
-                items=[
-                    SubscriptionTopic(
-                        id="string",
-                        status="OPTED_OUT",
-                        has_custom_routing={"key": "value"},
-                        custom_routing={"key": "value"},
-                    )
-                ],
-            ),
-            properties={"string": {"key": "value"}},
-            user_profile={"string": {"key": "value"}},
-            brand_id="string",
+            tenant_id="tenant_id",
+            name="name",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -142,7 +127,7 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.tenants.get(
-            tenant_id="string",
+            tenant_id="tenant_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -195,11 +180,7 @@ class TenantsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.tenants.list(
-            parent_tenant_id="string",
-            limit=1,
-            cursor="string",
-        )
+        client.tenants.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "tenants",
@@ -237,7 +218,7 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.tenants.delete(
-            tenant_id="string",
+            tenant_id="tenant_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -287,9 +268,7 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.tenants.get_users_by_tenant(
-            tenant_id="string",
-            limit=1,
-            cursor="string",
+            tenant_id="tenant_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -396,8 +375,8 @@ class TenantsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.tenants.remove_default_preferences_for_topic(
-            tenant_id="string",
-            topic_id="string",
+            tenant_id="tenant_id",
+            topic_id="topic_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -465,7 +444,6 @@ class AsyncTenantsClient:
         --------
         import asyncio
 
-        from courier import DefaultPreferences, SubscriptionTopic
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -475,22 +453,8 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.tenants.create_or_replace(
-                tenant_id="string",
-                name="string",
-                parent_tenant_id="string",
-                default_preferences=DefaultPreferences(
-                    items=[
-                        SubscriptionTopic(
-                            id="string",
-                            status="OPTED_OUT",
-                            has_custom_routing={"key": "value"},
-                            custom_routing={"key": "value"},
-                        )
-                    ],
-                ),
-                properties={"string": {"key": "value"}},
-                user_profile={"string": {"key": "value"}},
-                brand_id="string",
+                tenant_id="tenant_id",
+                name="name",
             )
 
 
@@ -549,7 +513,7 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.tenants.get(
-                tenant_id="string",
+                tenant_id="tenant_id",
             )
 
 
@@ -610,11 +574,7 @@ class AsyncTenantsClient:
 
 
         async def main() -> None:
-            await client.tenants.list(
-                parent_tenant_id="string",
-                limit=1,
-                cursor="string",
-            )
+            await client.tenants.list()
 
 
         asyncio.run(main())
@@ -660,7 +620,7 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.tenants.delete(
-                tenant_id="string",
+                tenant_id="tenant_id",
             )
 
 
@@ -718,9 +678,7 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.tenants.get_users_by_tenant(
-                tenant_id="string",
-                limit=1,
-                cursor="string",
+                tenant_id="tenant_id",
             )
 
 
@@ -843,8 +801,8 @@ class AsyncTenantsClient:
 
         async def main() -> None:
             await client.tenants.remove_default_preferences_for_topic(
-                tenant_id="string",
-                topic_id="string",
+                tenant_id="tenant_id",
+                topic_id="topic_id",
             )
 
 

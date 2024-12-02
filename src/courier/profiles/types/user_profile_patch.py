@@ -8,15 +8,20 @@ from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class Delay(UncheckedBaseModel):
-    duration: typing.Optional[int] = pydantic_v1.Field(default=None)
+class UserProfilePatch(UncheckedBaseModel):
+    op: str = pydantic_v1.Field()
     """
-    The duration of the delay in milliseconds.
+    The operation to perform.
     """
 
-    until: typing.Optional[str] = pydantic_v1.Field(default=None)
+    path: str = pydantic_v1.Field()
     """
-    An ISO 8601 timestamp that specifies when it should be delivered or an OpenStreetMap opening_hours-like format that specifies the [Delivery Window](https://www.courier.com/docs/platform/sending/failover/#delivery-window) (e.g., 'Mo-Fr 08:00-18:00pm')
+    The JSON path specifying the part of the profile to operate on.
+    """
+
+    value: str = pydantic_v1.Field()
+    """
+    The value for the operation.
     """
 
     def json(self, **kwargs: typing.Any) -> str:

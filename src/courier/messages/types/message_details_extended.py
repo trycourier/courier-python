@@ -5,19 +5,11 @@ import typing
 
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-from ...core.unchecked_base_model import UncheckedBaseModel
+from .message_details import MessageDetails
 
 
-class Delay(UncheckedBaseModel):
-    duration: typing.Optional[int] = pydantic_v1.Field(default=None)
-    """
-    The duration of the delay in milliseconds.
-    """
-
-    until: typing.Optional[str] = pydantic_v1.Field(default=None)
-    """
-    An ISO 8601 timestamp that specifies when it should be delivered or an OpenStreetMap opening_hours-like format that specifies the [Delivery Window](https://www.courier.com/docs/platform/sending/failover/#delivery-window) (e.g., 'Mo-Fr 08:00-18:00pm')
-    """
+class MessageDetailsExtended(MessageDetails):
+    providers: typing.Optional[typing.List[typing.Dict[str, typing.Any]]] = None
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -34,5 +26,7 @@ class Delay(UncheckedBaseModel):
     class Config:
         frozen = True
         smart_union = True
+        allow_population_by_field_name = True
+        populate_by_name = True
         extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

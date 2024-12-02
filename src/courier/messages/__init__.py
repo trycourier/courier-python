@@ -3,6 +3,7 @@
 from .types import (
     ListMessagesResponse,
     MessageDetails,
+    MessageDetailsExtended,
     MessageHistoryResponse,
     MessageStatus,
     Reason,
@@ -15,6 +16,7 @@ from .types import (
 __all__ = [
     "ListMessagesResponse",
     "MessageDetails",
+    "MessageDetailsExtended",
     "MessageHistoryResponse",
     "MessageStatus",
     "Reason",

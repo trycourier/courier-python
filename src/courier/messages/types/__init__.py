@@ -2,6 +2,7 @@
 
 from .list_messages_response import ListMessagesResponse
 from .message_details import MessageDetails
+from .message_details_extended import MessageDetailsExtended
 from .message_history_response import MessageHistoryResponse
 from .message_status import MessageStatus
 from .reason import Reason
@@ -13,6 +14,7 @@ from .rendered_message_content import RenderedMessageContent
 __all__ = [
     "ListMessagesResponse",
     "MessageDetails",
+    "MessageDetailsExtended",
     "MessageHistoryResponse",
     "MessageStatus",
     "Reason",

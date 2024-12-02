@@ -14,6 +14,7 @@ from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
 from .types.list_messages_response import ListMessagesResponse
 from .types.message_details import MessageDetails
+from .types.message_details_extended import MessageDetailsExtended
 from .types.message_history_response import MessageHistoryResponse
 from .types.render_output_response import RenderOutputResponse
 
@@ -102,22 +103,7 @@ class MessagesClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.messages.list(
-            archived=True,
-            cursor="string",
-            event="string",
-            list_="string",
-            message_id="string",
-            notification="string",
-            provider="string",
-            recipient="string",
-            status="string",
-            tag="string",
-            tags="string",
-            tenant_id="string",
-            enqueued_after="string",
-            trace_id="string",
-        )
+        client.messages.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "messages",
@@ -148,7 +134,9 @@ class MessagesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def get(self, message_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> MessageDetails:
+    def get(
+        self, message_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> MessageDetailsExtended:
         """
         Fetch the status of a message you've previously sent.
 
@@ -162,7 +150,7 @@ class MessagesClient:
 
         Returns
         -------
-        MessageDetails
+        MessageDetailsExtended
 
         Examples
         --------
@@ -172,7 +160,7 @@ class MessagesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.messages.get(
-            message_id="string",
+            message_id="message_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -180,7 +168,7 @@ class MessagesClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(MessageDetails, construct_type(type_=MessageDetails, object_=_response.json()))  # type: ignore
+                return typing.cast(MessageDetailsExtended, construct_type(type_=MessageDetailsExtended, object_=_response.json()))  # type: ignore
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
@@ -230,7 +218,7 @@ class MessagesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.messages.cancel(
-            message_id="string",
+            message_id="message_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -283,8 +271,7 @@ class MessagesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.messages.get_history(
-            message_id="string",
-            type="string",
+            message_id="message_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -333,7 +320,7 @@ class MessagesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.messages.get_content(
-            message_id="string",
+            message_id="message_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -377,7 +364,7 @@ class MessagesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.messages.archive(
-            request_id="string",
+            request_id="request_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -481,22 +468,7 @@ class AsyncMessagesClient:
 
 
         async def main() -> None:
-            await client.messages.list(
-                archived=True,
-                cursor="string",
-                event="string",
-                list_="string",
-                message_id="string",
-                notification="string",
-                provider="string",
-                recipient="string",
-                status="string",
-                tag="string",
-                tags="string",
-                tenant_id="string",
-                enqueued_after="string",
-                trace_id="string",
-            )
+            await client.messages.list()
 
 
         asyncio.run(main())
@@ -530,7 +502,9 @@ class AsyncMessagesClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def get(self, message_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> MessageDetails:
+    async def get(
+        self, message_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> MessageDetailsExtended:
         """
         Fetch the status of a message you've previously sent.
 
@@ -544,7 +518,7 @@ class AsyncMessagesClient:
 
         Returns
         -------
-        MessageDetails
+        MessageDetailsExtended
 
         Examples
         --------
@@ -559,7 +533,7 @@ class AsyncMessagesClient:
 
         async def main() -> None:
             await client.messages.get(
-                message_id="string",
+                message_id="message_id",
             )
 
 
@@ -570,7 +544,7 @@ class AsyncMessagesClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(MessageDetails, construct_type(type_=MessageDetails, object_=_response.json()))  # type: ignore
+                return typing.cast(MessageDetailsExtended, construct_type(type_=MessageDetailsExtended, object_=_response.json()))  # type: ignore
             if _response.status_code == 400:
                 raise BadRequestError(
                     typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
@@ -625,7 +599,7 @@ class AsyncMessagesClient:
 
         async def main() -> None:
             await client.messages.cancel(
-                message_id="string",
+                message_id="message_id",
             )
 
 
@@ -686,8 +660,7 @@ class AsyncMessagesClient:
 
         async def main() -> None:
             await client.messages.get_history(
-                message_id="string",
-                type="string",
+                message_id="message_id",
             )
 
 
@@ -744,7 +717,7 @@ class AsyncMessagesClient:
 
         async def main() -> None:
             await client.messages.get_content(
-                message_id="string",
+                message_id="message_id",
             )
 
 
@@ -796,7 +769,7 @@ class AsyncMessagesClient:
 
         async def main() -> None:
             await client.messages.archive(
-                request_id="string",
+                request_id="request_id",
             )
 
 

@@ -57,14 +57,7 @@ class BrandsClient:
 
         Examples
         --------
-        from courier import (
-            BrandColors,
-            BrandParameters,
-            BrandSettings,
-            BrandSnippet,
-            BrandSnippets,
-            Email,
-        )
+        from courier import BrandParameters, BrandSettings
         from courier.client import Courier
 
         client = Courier(
@@ -72,28 +65,8 @@ class BrandsClient:
         )
         client.brands.create(
             request=BrandParameters(
-                id="string",
-                name="string",
-                settings=BrandSettings(
-                    colors=BrandColors(
-                        primary="string",
-                        secondary="string",
-                        tertiary="string",
-                    ),
-                    inapp={"key": "value"},
-                    email=Email(
-                        footer={"key": "value"},
-                        header={"key": "value"},
-                    ),
-                ),
-                snippets=BrandSnippets(
-                    items=[
-                        BrandSnippet(
-                            name="string",
-                            value="string",
-                        )
-                    ],
-                ),
+                name="name",
+                settings=BrandSettings(),
             ),
         )
         """
@@ -152,7 +125,7 @@ class BrandsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.brands.get(
-            brand_id="string",
+            brand_id="brand_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -191,9 +164,7 @@ class BrandsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.brands.list(
-            cursor="string",
-        )
+        client.brands.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "brands", method="GET", params={"cursor": cursor}, request_options=request_options
@@ -230,7 +201,7 @@ class BrandsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.brands.delete(
-            brand_id="string",
+            brand_id="brand_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -281,41 +252,14 @@ class BrandsClient:
 
         Examples
         --------
-        from courier import (
-            BrandColors,
-            BrandSettings,
-            BrandSnippet,
-            BrandSnippets,
-            Email,
-        )
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.brands.replace(
-            brand_id="string",
-            name="string",
-            settings=BrandSettings(
-                colors=BrandColors(
-                    primary="string",
-                    secondary="string",
-                    tertiary="string",
-                ),
-                inapp={"key": "value"},
-                email=Email(
-                    footer={"key": "value"},
-                    header={"key": "value"},
-                ),
-            ),
-            snippets=BrandSnippets(
-                items=[
-                    BrandSnippet(
-                        name="string",
-                        value="string",
-                    )
-                ],
-            ),
+            brand_id="brand_id",
+            name="name",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -367,14 +311,7 @@ class AsyncBrandsClient:
         --------
         import asyncio
 
-        from courier import (
-            BrandColors,
-            BrandParameters,
-            BrandSettings,
-            BrandSnippet,
-            BrandSnippets,
-            Email,
-        )
+        from courier import BrandParameters, BrandSettings
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -385,28 +322,8 @@ class AsyncBrandsClient:
         async def main() -> None:
             await client.brands.create(
                 request=BrandParameters(
-                    id="string",
-                    name="string",
-                    settings=BrandSettings(
-                        colors=BrandColors(
-                            primary="string",
-                            secondary="string",
-                            tertiary="string",
-                        ),
-                        inapp={"key": "value"},
-                        email=Email(
-                            footer={"key": "value"},
-                            header={"key": "value"},
-                        ),
-                    ),
-                    snippets=BrandSnippets(
-                        items=[
-                            BrandSnippet(
-                                name="string",
-                                value="string",
-                            )
-                        ],
-                    ),
+                    name="name",
+                    settings=BrandSettings(),
                 ),
             )
 
@@ -473,7 +390,7 @@ class AsyncBrandsClient:
 
         async def main() -> None:
             await client.brands.get(
-                brand_id="string",
+                brand_id="brand_id",
             )
 
 
@@ -520,9 +437,7 @@ class AsyncBrandsClient:
 
 
         async def main() -> None:
-            await client.brands.list(
-                cursor="string",
-            )
+            await client.brands.list()
 
 
         asyncio.run(main())
@@ -567,7 +482,7 @@ class AsyncBrandsClient:
 
         async def main() -> None:
             await client.brands.delete(
-                brand_id="string",
+                brand_id="brand_id",
             )
 
 
@@ -623,13 +538,6 @@ class AsyncBrandsClient:
         --------
         import asyncio
 
-        from courier import (
-            BrandColors,
-            BrandSettings,
-            BrandSnippet,
-            BrandSnippets,
-            Email,
-        )
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -639,28 +547,8 @@ class AsyncBrandsClient:
 
         async def main() -> None:
             await client.brands.replace(
-                brand_id="string",
-                name="string",
-                settings=BrandSettings(
-                    colors=BrandColors(
-                        primary="string",
-                        secondary="string",
-                        tertiary="string",
-                    ),
-                    inapp={"key": "value"},
-                    email=Email(
-                        footer={"key": "value"},
-                        header={"key": "value"},
-                    ),
-                ),
-                snippets=BrandSnippets(
-                    items=[
-                        BrandSnippet(
-                            name="string",
-                            value="string",
-                        )
-                    ],
-                ),
+                brand_id="brand_id",
+                name="name",
             )
 
 

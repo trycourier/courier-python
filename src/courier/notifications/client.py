@@ -51,10 +51,7 @@ class NotificationsClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.notifications.list(
-            cursor="string",
-            notes=True,
-        )
+        client.notifications.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "notifications", method="GET", params={"cursor": cursor, "notes": notes}, request_options=request_options
@@ -90,7 +87,7 @@ class NotificationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.notifications.get_content(
-            id="string",
+            id="id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -127,7 +124,7 @@ class NotificationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.notifications.get_draft_content(
-            id="string",
+            id="id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -166,8 +163,8 @@ class NotificationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.notifications.get_submission_checks(
-            id="string",
-            submission_id="string",
+            id="id",
+            submission_id="submissionId",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -216,13 +213,17 @@ class NotificationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.notifications.replace_submission_checks(
-            id="string",
-            submission_id="string",
+            id="id",
+            submission_id="submissionId",
             checks=[
                 BaseCheck(
-                    id="string",
+                    id="id",
                     status="RESOLVED",
-                )
+                ),
+                BaseCheck(
+                    id="id",
+                    status="RESOLVED",
+                ),
             ],
         )
         """
@@ -266,8 +267,8 @@ class NotificationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.notifications.cancel_submission(
-            id="string",
-            submission_id="string",
+            id="id",
+            submission_id="submissionId",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -322,10 +323,7 @@ class AsyncNotificationsClient:
 
 
         async def main() -> None:
-            await client.notifications.list(
-                cursor="string",
-                notes=True,
-            )
+            await client.notifications.list()
 
 
         asyncio.run(main())
@@ -369,7 +367,7 @@ class AsyncNotificationsClient:
 
         async def main() -> None:
             await client.notifications.get_content(
-                id="string",
+                id="id",
             )
 
 
@@ -414,7 +412,7 @@ class AsyncNotificationsClient:
 
         async def main() -> None:
             await client.notifications.get_draft_content(
-                id="string",
+                id="id",
             )
 
 
@@ -461,8 +459,8 @@ class AsyncNotificationsClient:
 
         async def main() -> None:
             await client.notifications.get_submission_checks(
-                id="string",
-                submission_id="string",
+                id="id",
+                submission_id="submissionId",
             )
 
 
@@ -519,13 +517,17 @@ class AsyncNotificationsClient:
 
         async def main() -> None:
             await client.notifications.replace_submission_checks(
-                id="string",
-                submission_id="string",
+                id="id",
+                submission_id="submissionId",
                 checks=[
                     BaseCheck(
-                        id="string",
+                        id="id",
                         status="RESOLVED",
-                    )
+                    ),
+                    BaseCheck(
+                        id="id",
+                        status="RESOLVED",
+                    ),
                 ],
             )
 
@@ -577,8 +579,8 @@ class AsyncNotificationsClient:
 
         async def main() -> None:
             await client.notifications.cancel_submission(
-                id="string",
-                submission_id="string",
+                id="id",
+                submission_id="submissionId",
             )
 
 

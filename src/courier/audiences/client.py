@@ -48,7 +48,7 @@ class AudiencesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.audiences.get(
-            audience_id="string",
+            audience_id="audience_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -96,21 +96,13 @@ class AudiencesClient:
 
         Examples
         --------
-        from courier import SingleFilterConfig
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.audiences.update(
-            audience_id="string",
-            name="string",
-            description="string",
-            filter=SingleFilterConfig(
-                value="string",
-                path="string",
-                operator="ENDS_WITH",
-            ),
+            audience_id="audience_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -152,7 +144,7 @@ class AudiencesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.audiences.delete(
-            audience_id="string",
+            audience_id="audience_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -199,8 +191,7 @@ class AudiencesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.audiences.list_members(
-            audience_id="string",
-            cursor="string",
+            audience_id="audience_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -246,9 +237,7 @@ class AudiencesClient:
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
-        client.audiences.list_audiences(
-            cursor="string",
-        )
+        client.audiences.list_audiences()
         """
         _response = self._client_wrapper.httpx_client.request(
             "audiences", method="GET", params={"cursor": cursor}, request_options=request_options
@@ -299,7 +288,7 @@ class AsyncAudiencesClient:
 
         async def main() -> None:
             await client.audiences.get(
-                audience_id="string",
+                audience_id="audience_id",
             )
 
 
@@ -352,7 +341,6 @@ class AsyncAudiencesClient:
         --------
         import asyncio
 
-        from courier import SingleFilterConfig
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -362,14 +350,7 @@ class AsyncAudiencesClient:
 
         async def main() -> None:
             await client.audiences.update(
-                audience_id="string",
-                name="string",
-                description="string",
-                filter=SingleFilterConfig(
-                    value="string",
-                    path="string",
-                    operator="ENDS_WITH",
-                ),
+                audience_id="audience_id",
             )
 
 
@@ -419,7 +400,7 @@ class AsyncAudiencesClient:
 
         async def main() -> None:
             await client.audiences.delete(
-                audience_id="string",
+                audience_id="audience_id",
             )
 
 
@@ -474,8 +455,7 @@ class AsyncAudiencesClient:
 
         async def main() -> None:
             await client.audiences.list_members(
-                audience_id="string",
-                cursor="string",
+                audience_id="audience_id",
             )
 
 
@@ -529,9 +509,7 @@ class AsyncAudiencesClient:
 
 
         async def main() -> None:
-            await client.audiences.list_audiences(
-                cursor="string",
-            )
+            await client.audiences.list_audiences()
 
 
         asyncio.run(main())

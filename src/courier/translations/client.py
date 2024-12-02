@@ -47,8 +47,8 @@ class TranslationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.translations.get(
-            domain="string",
-            locale="string",
+            domain="domain",
+            locale="locale",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -99,8 +99,8 @@ class TranslationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.translations.update(
-            domain="string",
-            locale="string",
+            domain="domain",
+            locale="locale",
             request="string",
         )
         """
@@ -161,8 +161,8 @@ class AsyncTranslationsClient:
 
         async def main() -> None:
             await client.translations.get(
-                domain="string",
-                locale="string",
+                domain="domain",
+                locale="locale",
             )
 
 
@@ -221,8 +221,8 @@ class AsyncTranslationsClient:
 
         async def main() -> None:
             await client.translations.update(
-                domain="string",
-                locale="string",
+                domain="domain",
+                locale="locale",
                 request="string",
             )
 

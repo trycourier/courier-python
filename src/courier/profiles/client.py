@@ -17,6 +17,7 @@ from .types.profile_get_response import ProfileGetResponse
 from .types.replace_profile_response import ReplaceProfileResponse
 from .types.subscribe_to_lists_request import SubscribeToListsRequest
 from .types.subscribe_to_lists_response import SubscribeToListsResponse
+from .types.user_profile_patch import UserProfilePatch
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -50,7 +51,7 @@ class ProfilesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.profiles.get(
-            user_id="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -107,8 +108,8 @@ class ProfilesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.profiles.create(
-            user_id="string",
-            profile={"string": {"key": "value"}},
+            user_id="user_id",
+            profile={"profile": {"key": "value"}},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -169,8 +170,8 @@ class ProfilesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.profiles.replace(
-            user_id="string",
-            profile={"string": {"key": "value"}},
+            user_id="user_id",
+            profile={"profile": {"key": "value"}},
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -187,6 +188,67 @@ class ProfilesClient:
                 raise BadRequestError(
                     typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
                 )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def merge_profile(
+        self,
+        user_id: str,
+        *,
+        request: typing.Sequence[UserProfilePatch],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> None:
+        """
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
+
+        request : typing.Sequence[UserProfilePatch]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from courier import UserProfilePatch
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.profiles.merge_profile(
+            user_id="user_id",
+            request=[
+                UserProfilePatch(
+                    op="op",
+                    path="path",
+                    value="value",
+                ),
+                UserProfilePatch(
+                    op="op",
+                    path="path",
+                    value="value",
+                ),
+            ],
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"profiles/{jsonable_encoder(user_id)}",
+            method="PATCH",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -216,7 +278,7 @@ class ProfilesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.profiles.delete(
-            user_id="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -267,8 +329,7 @@ class ProfilesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.profiles.get_list_subscriptions(
-            user_id="string",
-            cursor="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -322,27 +383,22 @@ class ProfilesClient:
 
         Examples
         --------
-        from courier import (
-            RecipientPreferences,
-            SubscribeToListsRequest,
-            SubscribeToListsRequestListObject,
-        )
+        from courier import SubscribeToListsRequest, SubscribeToListsRequestListObject
         from courier.client import Courier
 
         client = Courier(
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.profiles.subscribe_to_lists(
-            user_id="string",
+            user_id="user_id",
             request=SubscribeToListsRequest(
                 lists=[
                     SubscribeToListsRequestListObject(
-                        list_id="string",
-                        preferences=RecipientPreferences(
-                            categories={"string": {"key": "value"}},
-                            notifications={"string": {"key": "value"}},
-                        ),
-                    )
+                        list_id="listId",
+                    ),
+                    SubscribeToListsRequestListObject(
+                        list_id="listId",
+                    ),
                 ],
             ),
         )
@@ -396,7 +452,7 @@ class ProfilesClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.profiles.delete_list_subscription(
-            user_id="string",
+            user_id="user_id",
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -448,7 +504,7 @@ class AsyncProfilesClient:
 
         async def main() -> None:
             await client.profiles.get(
-                user_id="string",
+                user_id="user_id",
             )
 
 
@@ -513,8 +569,8 @@ class AsyncProfilesClient:
 
         async def main() -> None:
             await client.profiles.create(
-                user_id="string",
-                profile={"string": {"key": "value"}},
+                user_id="user_id",
+                profile={"profile": {"key": "value"}},
             )
 
 
@@ -583,8 +639,8 @@ class AsyncProfilesClient:
 
         async def main() -> None:
             await client.profiles.replace(
-                user_id="string",
-                profile={"string": {"key": "value"}},
+                user_id="user_id",
+                profile={"profile": {"key": "value"}},
             )
 
 
@@ -604,6 +660,75 @@ class AsyncProfilesClient:
                 raise BadRequestError(
                     typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
                 )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def merge_profile(
+        self,
+        user_id: str,
+        *,
+        request: typing.Sequence[UserProfilePatch],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> None:
+        """
+        Parameters
+        ----------
+        user_id : str
+            A unique identifier representing the user associated with the requested profile.
+
+        request : typing.Sequence[UserProfilePatch]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from courier import UserProfilePatch
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+
+
+        async def main() -> None:
+            await client.profiles.merge_profile(
+                user_id="user_id",
+                request=[
+                    UserProfilePatch(
+                        op="op",
+                        path="path",
+                        value="value",
+                    ),
+                    UserProfilePatch(
+                        op="op",
+                        path="path",
+                        value="value",
+                    ),
+                ],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"profiles/{jsonable_encoder(user_id)}",
+            method="PATCH",
+            json=request,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -638,7 +763,7 @@ class AsyncProfilesClient:
 
         async def main() -> None:
             await client.profiles.delete(
-                user_id="string",
+                user_id="user_id",
             )
 
 
@@ -697,8 +822,7 @@ class AsyncProfilesClient:
 
         async def main() -> None:
             await client.profiles.get_list_subscriptions(
-                user_id="string",
-                cursor="string",
+                user_id="user_id",
             )
 
 
@@ -757,11 +881,7 @@ class AsyncProfilesClient:
         --------
         import asyncio
 
-        from courier import (
-            RecipientPreferences,
-            SubscribeToListsRequest,
-            SubscribeToListsRequestListObject,
-        )
+        from courier import SubscribeToListsRequest, SubscribeToListsRequestListObject
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -771,16 +891,15 @@ class AsyncProfilesClient:
 
         async def main() -> None:
             await client.profiles.subscribe_to_lists(
-                user_id="string",
+                user_id="user_id",
                 request=SubscribeToListsRequest(
                     lists=[
                         SubscribeToListsRequestListObject(
-                            list_id="string",
-                            preferences=RecipientPreferences(
-                                categories={"string": {"key": "value"}},
-                                notifications={"string": {"key": "value"}},
-                            ),
-                        )
+                            list_id="listId",
+                        ),
+                        SubscribeToListsRequestListObject(
+                            list_id="listId",
+                        ),
                     ],
                 ),
             )
@@ -842,7 +961,7 @@ class AsyncProfilesClient:
 
         async def main() -> None:
             await client.profiles.delete_list_subscription(
-                user_id="string",
+                user_id="user_id",
             )
 
 

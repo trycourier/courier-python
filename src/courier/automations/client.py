@@ -60,14 +60,8 @@ class AutomationsClient:
             authorization_token="YOUR_AUTHORIZATION_TOKEN",
         )
         client.automations.invoke_automation_template(
-            template_id="string",
-            request=AutomationInvokeParams(
-                brand="string",
-                data={"string": {"key": "value"}},
-                profile={"key": "value"},
-                recipient="string",
-                template="string",
-            ),
+            template_id="templateId",
+            request=AutomationInvokeParams(),
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -217,14 +211,8 @@ class AsyncAutomationsClient:
 
         async def main() -> None:
             await client.automations.invoke_automation_template(
-                template_id="string",
-                request=AutomationInvokeParams(
-                    brand="string",
-                    data={"string": {"key": "value"}},
-                    profile={"key": "value"},
-                    recipient="string",
-                    template="string",
-                ),
+                template_id="templateId",
+                request=AutomationInvokeParams(),
             )
 
 
