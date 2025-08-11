@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trycourier"
-version = "v6.2.1"
+version = "6.3.0"
 description = ""
 readme = "README.md"
 authors = []

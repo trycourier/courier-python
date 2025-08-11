@@ -60,7 +60,7 @@ class BaseMessage(UncheckedBaseModel):
 
     expiry: typing.Optional[Expiry] = pydantic_v1.Field(default=None)
     """
-    "Expiry allows you to set an absolute or relative time in which a message expires.
+    "Expiry allows you to set an absolute or relative time in which a message expires. 
     Note: This is only valid for the Courier Inbox channel as of 12-08-2022."
     """
 

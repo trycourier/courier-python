@@ -143,7 +143,12 @@ class Courier:
 
         Examples
         --------
-        from courier import ContentMessage, ElementalContent, ElementalNode_Text
+        from courier import (
+            ContentMessage,
+            ElementalContentSugar,
+            Routing,
+            UserRecipient,
+        )
         from courier.client import Courier
 
         client = Courier(
@@ -151,18 +156,17 @@ class Courier:
         )
         client.send(
             message=ContentMessage(
-                content=ElementalContent(
-                    version="version",
-                    elements=[
-                        ElementalNode_Text(
-                            content="content",
-                            align="left",
-                        ),
-                        ElementalNode_Text(
-                            content="content",
-                            align="left",
-                        ),
-                    ],
+                to=UserRecipient(
+                    email="email@example.com",
+                ),
+                content=ElementalContentSugar(
+                    title="Welcome!",
+                    body="Thanks for signing up, {{name}}",
+                ),
+                data={"name": "Peter Parker"},
+                routing=Routing(
+                    method="single",
+                    channels=["email"],
                 ),
             ),
         )
@@ -299,7 +303,12 @@ class AsyncCourier:
         --------
         import asyncio
 
-        from courier import ContentMessage, ElementalContent, ElementalNode_Text
+        from courier import (
+            ContentMessage,
+            ElementalContentSugar,
+            Routing,
+            UserRecipient,
+        )
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -310,18 +319,17 @@ class AsyncCourier:
         async def main() -> None:
             await client.send(
                 message=ContentMessage(
-                    content=ElementalContent(
-                        version="version",
-                        elements=[
-                            ElementalNode_Text(
-                                content="content",
-                                align="left",
-                            ),
-                            ElementalNode_Text(
-                                content="content",
-                                align="left",
-                            ),
-                        ],
+                    to=UserRecipient(
+                        email="email@example.com",
+                    ),
+                    content=ElementalContentSugar(
+                        title="Welcome!",
+                        body="Thanks for signing up, {{name}}",
+                    ),
+                    data={"name": "Peter Parker"},
+                    routing=Routing(
+                        method="single",
+                        channels=["email"],
                     ),
                 ),
             )

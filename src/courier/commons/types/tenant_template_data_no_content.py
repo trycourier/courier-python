@@ -5,15 +5,16 @@ import typing
 
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-from ...send.types.base_message import BaseMessage
+from ...core.unchecked_base_model import UncheckedBaseModel
+from ...notifications.types.message_routing import MessageRouting
 
 
-class InboundBulkTemplateMessage(BaseMessage):
-    template: str = pydantic_v1.Field()
+class TenantTemplateDataNoContent(UncheckedBaseModel):
     """
-    The id of the notification template to be rendered and sent to the recipient(s). 
-    This field or the content field must be supplied.
+    The template's data containing it's routing configs
     """
+
+    routing: MessageRouting
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
@@ -30,7 +31,5 @@ class InboundBulkTemplateMessage(BaseMessage):
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
         extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

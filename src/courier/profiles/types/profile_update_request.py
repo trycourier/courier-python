@@ -5,14 +5,14 @@ import typing
 
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-from ...send.types.base_message import BaseMessage
+from ...core.unchecked_base_model import UncheckedBaseModel
+from .user_profile_patch import UserProfilePatch
 
 
-class InboundBulkTemplateMessage(BaseMessage):
-    template: str = pydantic_v1.Field()
+class ProfileUpdateRequest(UncheckedBaseModel):
+    patch: typing.List[UserProfilePatch] = pydantic_v1.Field()
     """
-    The id of the notification template to be rendered and sent to the recipient(s). 
-    This field or the content field must be supplied.
+    List of patch operations to apply to the profile.
     """
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -30,7 +30,5 @@ class InboundBulkTemplateMessage(BaseMessage):
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
         extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

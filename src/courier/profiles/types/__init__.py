@@ -18,6 +18,7 @@ from .multiple_tokens import MultipleTokens
 from .pagerduty import Pagerduty
 from .profile_get_parameters import ProfileGetParameters
 from .profile_get_response import ProfileGetResponse
+from .profile_update_request import ProfileUpdateRequest
 from .replace_profile_response import ReplaceProfileResponse
 from .send_direct_message import SendDirectMessage
 from .send_to_channel import SendToChannel
@@ -65,6 +66,7 @@ __all__ = [
     "Pagerduty",
     "ProfileGetParameters",
     "ProfileGetResponse",
+    "ProfileUpdateRequest",
     "ReplaceProfileResponse",
     "SendDirectMessage",
     "SendToChannel",

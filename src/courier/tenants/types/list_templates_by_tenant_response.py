@@ -3,16 +3,39 @@
 import datetime as dt
 import typing
 
+from ...commons.types.list_template_tenant_association import ListTemplateTenantAssociation
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-from ...send.types.base_message import BaseMessage
+from ...core.unchecked_base_model import UncheckedBaseModel
 
 
-class InboundBulkTemplateMessage(BaseMessage):
-    template: str = pydantic_v1.Field()
+class ListTemplatesByTenantResponse(UncheckedBaseModel):
+    items: typing.Optional[typing.List[ListTemplateTenantAssociation]] = None
+    has_more: bool = pydantic_v1.Field()
     """
-    The id of the notification template to be rendered and sent to the recipient(s). 
-    This field or the content field must be supplied.
+    Set to true when there are more pages that can be retrieved.
+    """
+
+    url: str = pydantic_v1.Field()
+    """
+    A url that may be used to generate these results.
+    """
+
+    next_url: typing.Optional[str] = pydantic_v1.Field(default=None)
+    """
+    A url that may be used to generate fetch the next set of results. 
+    Defined only when `has_more` is set to true
+    """
+
+    cursor: typing.Optional[str] = pydantic_v1.Field(default=None)
+    """
+    A pointer to the next page of results. Defined 
+    only when `has_more` is set to true
+    """
+
+    type: typing.Literal["list"] = pydantic_v1.Field(default="list")
+    """
+    Always set to `list`. Represents the type of this object.
     """
 
     def json(self, **kwargs: typing.Any) -> str:
@@ -30,7 +53,5 @@ class InboundBulkTemplateMessage(BaseMessage):
     class Config:
         frozen = True
         smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
         extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}

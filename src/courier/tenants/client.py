@@ -11,6 +11,8 @@ from ..core.jsonable_encoder import jsonable_encoder
 from ..core.request_options import RequestOptions
 from ..core.unchecked_base_model import construct_type
 from .types.default_preferences import DefaultPreferences
+from .types.get_template_by_tenant_response import GetTemplateByTenantResponse
+from .types.list_templates_by_tenant_response import ListTemplatesByTenantResponse
 from .types.list_users_for_tenant_response import ListUsersForTenantResponse
 from .types.subscription_topic_new import SubscriptionTopicNew
 from .types.tenant import Tenant
@@ -387,6 +389,110 @@ class TenantsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get_template_by_tenant(
+        self, tenant_id: str, template_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetTemplateByTenantResponse:
+        """
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant for which to retrieve the template.
+
+        template_id : str
+            Id of the template to be retrieved.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetTemplateByTenantResponse
+
+        Examples
+        --------
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.tenants.get_template_by_tenant(
+            tenant_id="tenant_id",
+            template_id="template_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"tenants/{jsonable_encoder(tenant_id)}/templates/{jsonable_encoder(template_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(GetTemplateByTenantResponse, construct_type(type_=GetTemplateByTenantResponse, object_=_response.json()))  # type: ignore
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def get_template_list_by_tenant(
+        self,
+        tenant_id: str,
+        *,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ListTemplatesByTenantResponse:
+        """
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant for which to retrieve the templates.
+
+        limit : typing.Optional[int]
+            The number of templates to return (defaults to 20, maximum value of 100)
+
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTemplatesByTenantResponse
+
+        Examples
+        --------
+        from courier.client import Courier
+
+        client = Courier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+        client.tenants.get_template_list_by_tenant(
+            tenant_id="tenant_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"tenants/{jsonable_encoder(tenant_id)}/templates",
+            method="GET",
+            params={"limit": limit, "cursor": cursor},
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(ListTemplatesByTenantResponse, construct_type(type_=ListTemplatesByTenantResponse, object_=_response.json()))  # type: ignore
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -816,6 +922,126 @@ class AsyncTenantsClient:
         try:
             if 200 <= _response.status_code < 300:
                 return
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get_template_by_tenant(
+        self, tenant_id: str, template_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> GetTemplateByTenantResponse:
+        """
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant for which to retrieve the template.
+
+        template_id : str
+            Id of the template to be retrieved.
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        GetTemplateByTenantResponse
+
+        Examples
+        --------
+        import asyncio
+
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+
+
+        async def main() -> None:
+            await client.tenants.get_template_by_tenant(
+                tenant_id="tenant_id",
+                template_id="template_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"tenants/{jsonable_encoder(tenant_id)}/templates/{jsonable_encoder(template_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(GetTemplateByTenantResponse, construct_type(type_=GetTemplateByTenantResponse, object_=_response.json()))  # type: ignore
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def get_template_list_by_tenant(
+        self,
+        tenant_id: str,
+        *,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ListTemplatesByTenantResponse:
+        """
+        Parameters
+        ----------
+        tenant_id : str
+            Id of the tenant for which to retrieve the templates.
+
+        limit : typing.Optional[int]
+            The number of templates to return (defaults to 20, maximum value of 100)
+
+        cursor : typing.Optional[str]
+            Continue the pagination with the next cursor
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ListTemplatesByTenantResponse
+
+        Examples
+        --------
+        import asyncio
+
+        from courier.client import AsyncCourier
+
+        client = AsyncCourier(
+            authorization_token="YOUR_AUTHORIZATION_TOKEN",
+        )
+
+
+        async def main() -> None:
+            await client.tenants.get_template_list_by_tenant(
+                tenant_id="tenant_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"tenants/{jsonable_encoder(tenant_id)}/templates",
+            method="GET",
+            params={"limit": limit, "cursor": cursor},
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return typing.cast(ListTemplatesByTenantResponse, construct_type(type_=ListTemplatesByTenantResponse, object_=_response.json()))  # type: ignore
+            if _response.status_code == 400:
+                raise BadRequestError(
+                    typing.cast(BadRequest, construct_type(type_=BadRequest, object_=_response.json()))  # type: ignore
+                )
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

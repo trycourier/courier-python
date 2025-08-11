@@ -11,8 +11,8 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 class List(UncheckedBaseModel):
     id: str
     name: str
-    created: typing.Optional[int] = None
-    updated: typing.Optional[int] = None
+    created: typing.Optional[str] = None
+    updated: typing.Optional[str] = None
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

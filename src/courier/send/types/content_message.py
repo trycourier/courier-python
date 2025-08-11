@@ -18,7 +18,7 @@ class ContentMessage(BaseMessage, BaseMessageSendTo):
 
     content: Content = pydantic_v1.Field()
     """
-    Describes the content of the message in a way that will work for email, push,
+    Describes the content of the message in a way that will work for email, push, 
     chat, or any channel. Either this or template must be specified.
     """
 

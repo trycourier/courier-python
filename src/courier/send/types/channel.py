@@ -14,27 +14,27 @@ from .timeouts import Timeouts
 class Channel(UncheckedBaseModel):
     brand_id: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
-    Id of the brand that should be used for rendering the message.
+    Id of the brand that should be used for rendering the message. 
     If not specified, the brand configured as default brand will be used.
     """
 
     providers: typing.Optional[typing.List[str]] = pydantic_v1.Field(default=None)
     """
-    A list of providers enabled for this channel. Courier will select
+    A list of providers enabled for this channel. Courier will select 
     one provider to send through unless routing_method is set to all.
     """
 
     routing_method: typing.Optional[RoutingMethod] = pydantic_v1.Field(default=None)
     """
-    The method for selecting the providers to send the message with.
-    Single will send to one of the available providers for this channel,
+    The method for selecting the providers to send the message with. 
+    Single will send to one of the available providers for this channel, 
     all will send the message through all channels. Defaults to `single`.
     """
 
     if_: typing.Optional[str] = pydantic_v1.Field(alias="if", default=None)
     """
-    A JavaScript conditional expression to determine if the message should
-    be sent through the channel. Has access to the data and profile object.
+    A JavaScript conditional expression to determine if the message should 
+    be sent through the channel. Has access to the data and profile object. 
     For example, `data.name === profile.name`
     """
 

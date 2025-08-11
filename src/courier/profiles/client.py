@@ -14,10 +14,10 @@ from .types.delete_list_subscription_response import DeleteListSubscriptionRespo
 from .types.get_list_subscriptions_response import GetListSubscriptionsResponse
 from .types.merge_profile_response import MergeProfileResponse
 from .types.profile_get_response import ProfileGetResponse
+from .types.profile_update_request import ProfileUpdateRequest
 from .types.replace_profile_response import ReplaceProfileResponse
 from .types.subscribe_to_lists_request import SubscribeToListsRequest
 from .types.subscribe_to_lists_response import SubscribeToListsResponse
-from .types.user_profile_patch import UserProfilePatch
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -194,11 +194,7 @@ class ProfilesClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def merge_profile(
-        self,
-        user_id: str,
-        *,
-        request: typing.Sequence[UserProfilePatch],
-        request_options: typing.Optional[RequestOptions] = None,
+        self, user_id: str, *, request: ProfileUpdateRequest, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
         Parameters
@@ -206,7 +202,7 @@ class ProfilesClient:
         user_id : str
             A unique identifier representing the user associated with the requested profile.
 
-        request : typing.Sequence[UserProfilePatch]
+        request : ProfileUpdateRequest
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -217,7 +213,7 @@ class ProfilesClient:
 
         Examples
         --------
-        from courier import UserProfilePatch
+        from courier import ProfileUpdateRequest, UserProfilePatch
         from courier.client import Courier
 
         client = Courier(
@@ -225,18 +221,20 @@ class ProfilesClient:
         )
         client.profiles.merge_profile(
             user_id="user_id",
-            request=[
-                UserProfilePatch(
-                    op="op",
-                    path="path",
-                    value="value",
-                ),
-                UserProfilePatch(
-                    op="op",
-                    path="path",
-                    value="value",
-                ),
-            ],
+            request=ProfileUpdateRequest(
+                patch=[
+                    UserProfilePatch(
+                        op="op",
+                        path="path",
+                        value="value",
+                    ),
+                    UserProfilePatch(
+                        op="op",
+                        path="path",
+                        value="value",
+                    ),
+                ],
+            ),
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -666,11 +664,7 @@ class AsyncProfilesClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     async def merge_profile(
-        self,
-        user_id: str,
-        *,
-        request: typing.Sequence[UserProfilePatch],
-        request_options: typing.Optional[RequestOptions] = None,
+        self, user_id: str, *, request: ProfileUpdateRequest, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
         Parameters
@@ -678,7 +672,7 @@ class AsyncProfilesClient:
         user_id : str
             A unique identifier representing the user associated with the requested profile.
 
-        request : typing.Sequence[UserProfilePatch]
+        request : ProfileUpdateRequest
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -691,7 +685,7 @@ class AsyncProfilesClient:
         --------
         import asyncio
 
-        from courier import UserProfilePatch
+        from courier import ProfileUpdateRequest, UserProfilePatch
         from courier.client import AsyncCourier
 
         client = AsyncCourier(
@@ -702,18 +696,20 @@ class AsyncProfilesClient:
         async def main() -> None:
             await client.profiles.merge_profile(
                 user_id="user_id",
-                request=[
-                    UserProfilePatch(
-                        op="op",
-                        path="path",
-                        value="value",
-                    ),
-                    UserProfilePatch(
-                        op="op",
-                        path="path",
-                        value="value",
-                    ),
-                ],
+                request=ProfileUpdateRequest(
+                    patch=[
+                        UserProfilePatch(
+                            op="op",
+                            path="path",
+                            value="value",
+                        ),
+                        UserProfilePatch(
+                            op="op",
+                            path="path",
+                            value="value",
+                        ),
+                    ],
+                ),
             )
 
 

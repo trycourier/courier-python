@@ -23,7 +23,7 @@ class BaseClientWrapper:
         headers: typing.Dict[str, str] = {
             "X-Fern-Language": "Python",
             "X-Fern-SDK-Name": "trycourier",
-            "X-Fern-SDK-Version": "v6.2.1",
+            "X-Fern-SDK-Version": "6.3.0",
         }
         headers["Authorization"] = f"Bearer {self._get_authorization_token()}"
         return headers

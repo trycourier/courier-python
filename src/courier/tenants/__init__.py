@@ -2,6 +2,8 @@
 
 from .types import (
     DefaultPreferences,
+    GetTemplateByTenantResponse,
+    ListTemplatesByTenantResponse,
     ListUsersForTenantResponse,
     SubscriptionTopic,
     SubscriptionTopicNew,
@@ -13,6 +15,8 @@ from .types import (
 
 __all__ = [
     "DefaultPreferences",
+    "GetTemplateByTenantResponse",
+    "ListTemplatesByTenantResponse",
     "ListUsersForTenantResponse",
     "SubscriptionTopic",
     "SubscriptionTopicNew",

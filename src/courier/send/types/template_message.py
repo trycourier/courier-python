@@ -12,7 +12,7 @@ from .base_message_send_to import BaseMessageSendTo
 class TemplateMessage(BaseMessage, BaseMessageSendTo):
     template: str = pydantic_v1.Field()
     """
-    The id of the notification template to be rendered and sent to the recipient(s).
+    The id of the notification template to be rendered and sent to the recipient(s). 
     This field or the content field must be supplied.
     """
 

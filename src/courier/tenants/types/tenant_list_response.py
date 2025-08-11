@@ -27,7 +27,7 @@ class TenantListResponse(UncheckedBaseModel):
 
     next_url: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
-    A url that may be used to generate fetch the next set of results.
+    A url that may be used to generate fetch the next set of results. 
     Defined only when has_more is set to true
     """
 

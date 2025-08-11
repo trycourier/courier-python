@@ -20,8 +20,8 @@ class Routing(UncheckedBaseModel):
     method: RoutingMethod
     channels: typing.List[RoutingChannel] = pydantic_v1.Field()
     """
-    A list of channels or providers to send the message through. Can also recursively define
-    sub-routing methods, which can be useful for defining advanced push notification
+    A list of channels or providers to send the message through. Can also recursively define 
+    sub-routing methods, which can be useful for defining advanced push notification 
     delivery strategies.
     """
 

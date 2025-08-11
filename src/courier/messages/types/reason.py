@@ -3,6 +3,16 @@
 import typing
 
 Reason = typing.Union[
-    typing.Literal["FILTERED", "NO_CHANNELS", "NO_PROVIDERS", "PROVIDER_ERROR", "UNPUBLISHED", "UNSUBSCRIBED"],
+    typing.Literal[
+        "BOUNCED",
+        "FAILED",
+        "FILTERED",
+        "NO_CHANNELS",
+        "NO_PROVIDERS",
+        "OPT_IN_REQUIRED",
+        "PROVIDER_ERROR",
+        "UNPUBLISHED",
+        "UNSUBSCRIBED",
+    ],
     typing.Any,
 ]

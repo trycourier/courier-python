@@ -30,7 +30,7 @@ class ElementalChannelNode(ElementalBaseNode):
 
     elements: typing.Optional[typing.List[ElementalNode]] = pydantic_v1.Field(default=None)
     """
-    An array of elements to apply to the channel. If `raw` has not been
+    An array of elements to apply to the channel. If `raw` has not been 
     specified, `elements` is `required`.
     """
 

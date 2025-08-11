@@ -26,7 +26,12 @@ Use the send API to send a message to one or more recipients.
 <dd>
 
 ```python
-from courier import ContentMessage, ElementalContent, ElementalNode_Text
+from courier import (
+    ContentMessage,
+    ElementalContentSugar,
+    Routing,
+    UserRecipient,
+)
 from courier.client import Courier
 
 client = Courier(
@@ -34,18 +39,17 @@ client = Courier(
 )
 client.send(
     message=ContentMessage(
-        content=ElementalContent(
-            version="version",
-            elements=[
-                ElementalNode_Text(
-                    content="content",
-                    align="left",
-                ),
-                ElementalNode_Text(
-                    content="content",
-                    align="left",
-                ),
-            ],
+        to=UserRecipient(
+            email="email@example.com",
+        ),
+        content=ElementalContentSugar(
+            title="Welcome!",
+            body="Thanks for signing up, {{name}}",
+        ),
+        data={"name": "Peter Parker"},
+        routing=Routing(
+            method="single",
+            channels=["email"],
         ),
     ),
 )
@@ -3658,9 +3662,9 @@ client.profiles.create(
 <dl>
 <dd>
 
-When using `PUT`, be sure to include all the key-value pairs required by the recipient's profile.
-Any key-value pairs that exist in the profile but fail to be included in the `PUT` request will be
-removed from the profile. Remember, a `PUT` update is a full replacement of the data. For partial updates,
+When using `PUT`, be sure to include all the key-value pairs required by the recipient's profile. 
+Any key-value pairs that exist in the profile but fail to be included in the `PUT` request will be 
+removed from the profile. Remember, a `PUT` update is a full replacement of the data. For partial updates, 
 use the [Patch](https://www.courier.com/docs/reference/profiles/patch/) request.
 </dd>
 </dl>
@@ -3741,7 +3745,7 @@ client.profiles.replace(
 <dd>
 
 ```python
-from courier import UserProfilePatch
+from courier import ProfileUpdateRequest, UserProfilePatch
 from courier.client import Courier
 
 client = Courier(
@@ -3749,18 +3753,20 @@ client = Courier(
 )
 client.profiles.merge_profile(
     user_id="user_id",
-    request=[
-        UserProfilePatch(
-            op="op",
-            path="path",
-            value="value",
-        ),
-        UserProfilePatch(
-            op="op",
-            path="path",
-            value="value",
-        ),
-    ],
+    request=ProfileUpdateRequest(
+        patch=[
+            UserProfilePatch(
+                op="op",
+                path="path",
+                value="value",
+            ),
+            UserProfilePatch(
+                op="op",
+                path="path",
+                value="value",
+            ),
+        ],
+    ),
 )
 
 ```
@@ -3785,7 +3791,7 @@ client.profiles.merge_profile(
 <dl>
 <dd>
 
-**request:** `typing.Sequence[UserProfilePatch]` 
+**request:** `ProfileUpdateRequest` 
     
 </dd>
 </dl>
@@ -4403,7 +4409,7 @@ client.tenants.list()
 
 **limit:** `typing.Optional[int]` 
 
-The number of tenants to return
+The number of tenants to return 
 (defaults to 20, maximum value of 100)
     
 </dd>
@@ -4534,7 +4540,7 @@ client.tenants.get_users_by_tenant(
 
 **limit:** `typing.Optional[int]` 
 
-The number of accounts to return
+The number of accounts to return 
 (defaults to 20, maximum value of 100)
     
 </dd>
@@ -4688,6 +4694,143 @@ client.tenants.remove_default_preferences_for_topic(
 <dd>
 
 **topic_id:** `str` — Id fo the susbcription topic you want to have a default preference for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tenants.<a href="src/courier/tenants/client.py">get_template_by_tenant</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from courier.client import Courier
+
+client = Courier(
+    authorization_token="YOUR_AUTHORIZATION_TOKEN",
+)
+client.tenants.get_template_by_tenant(
+    tenant_id="tenant_id",
+    template_id="template_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tenant_id:** `str` — Id of the tenant for which to retrieve the template.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**template_id:** `str` — Id of the template to be retrieved.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tenants.<a href="src/courier/tenants/client.py">get_template_list_by_tenant</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from courier.client import Courier
+
+client = Courier(
+    authorization_token="YOUR_AUTHORIZATION_TOKEN",
+)
+client.tenants.get_template_list_by_tenant(
+    tenant_id="tenant_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**tenant_id:** `str` — Id of the tenant for which to retrieve the templates.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` — The number of templates to return (defaults to 20, maximum value of 100)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `typing.Optional[str]` — Continue the pagination with the next cursor
     
 </dd>
 </dl>
@@ -5157,8 +5300,8 @@ client.users.preferences.update(
 
 This endpoint is used to add a user to
 multiple tenants in one call.
-A custom profile can also be supplied for each tenant.
-This profile will be merged with the user's main
+A custom profile can also be supplied for each tenant. 
+This profile will be merged with the user's main 
 profile when sending to the user with that tenant.
 </dd>
 </dl>
@@ -5248,8 +5391,8 @@ client.users.tenants.add_multple(
 
 This endpoint is used to add a single tenant.
 
-A custom profile can also be supplied with the tenant.
-This profile will be merged with the user's main profile
+A custom profile can also be supplied with the tenant. 
+This profile will be merged with the user's main profile 
 when sending to the user with that tenant.
 </dd>
 </dl>
@@ -5534,7 +5677,7 @@ client.users.tenants.list(
 
 **limit:** `typing.Optional[int]` 
 
-The number of accounts to return
+The number of accounts to return 
 (defaults to 20, maximum value of 100)
     
 </dd>

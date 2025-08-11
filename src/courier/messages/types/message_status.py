@@ -4,12 +4,17 @@ import typing
 
 MessageStatus = typing.Union[
     typing.Literal[
-        "CLICKED",
-        "DELIVERED",
-        "ENQUEUED",
-        "OPENED",
         "CANCELED",
+        "CLICKED",
+        "DELAYED",
+        "DELIVERED",
+        "DIGESTED",
+        "ENQUEUED",
+        "FILTERED",
+        "OPENED",
+        "ROUTED",
         "SENT",
+        "SIMULATED",
         "THROTTLED",
         "UNDELIVERABLE",
         "UNMAPPED",

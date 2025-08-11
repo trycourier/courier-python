@@ -3,10 +3,12 @@
 from .already_exists import AlreadyExists
 from .bad_request import BadRequest
 from .base_error import BaseError
+from .base_template_tenant_association import BaseTemplateTenantAssociation
 from .channel_classification import ChannelClassification
 from .channel_preference import ChannelPreference
 from .conflict import Conflict
 from .email import Email
+from .list_template_tenant_association import ListTemplateTenantAssociation
 from .message_not_found import MessageNotFound
 from .not_found import NotFound
 from .notification_preference_details import NotificationPreferenceDetails
@@ -16,16 +18,21 @@ from .payment_required import PaymentRequired
 from .preference_status import PreferenceStatus
 from .recipient_preferences import RecipientPreferences
 from .rule import Rule
+from .single_template_tenant_association import SingleTemplateTenantAssociation
+from .tenant_template_data import TenantTemplateData
+from .tenant_template_data_no_content import TenantTemplateDataNoContent
 from .user_tenant_association import UserTenantAssociation
 
 __all__ = [
     "AlreadyExists",
     "BadRequest",
     "BaseError",
+    "BaseTemplateTenantAssociation",
     "ChannelClassification",
     "ChannelPreference",
     "Conflict",
     "Email",
+    "ListTemplateTenantAssociation",
     "MessageNotFound",
     "NotFound",
     "NotificationPreferenceDetails",
@@ -35,5 +42,8 @@ __all__ = [
     "PreferenceStatus",
     "RecipientPreferences",
     "Rule",
+    "SingleTemplateTenantAssociation",
+    "TenantTemplateData",
+    "TenantTemplateDataNoContent",
     "UserTenantAssociation",
 ]

@@ -5,15 +5,12 @@ import typing
 
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-from ...send.types.base_message import BaseMessage
+from .base_template_tenant_association import BaseTemplateTenantAssociation
+from .tenant_template_data import TenantTemplateData
 
 
-class InboundBulkTemplateMessage(BaseMessage):
-    template: str = pydantic_v1.Field()
-    """
-    The id of the notification template to be rendered and sent to the recipient(s). 
-    This field or the content field must be supplied.
-    """
+class SingleTemplateTenantAssociation(BaseTemplateTenantAssociation):
+    data: TenantTemplateData
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}

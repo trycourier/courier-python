@@ -11,13 +11,13 @@ from ...core.unchecked_base_model import UncheckedBaseModel
 class InboundBulkMessageV1(UncheckedBaseModel):
     brand: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
-    A unique identifier that represents the brand that should be used
+    A unique identifier that represents the brand that should be used 
     for rendering the notification.
     """
 
     data: typing.Optional[typing.Dict[str, typing.Any]] = pydantic_v1.Field(default=None)
     """
-    JSON that includes any data you want to pass to a message template.
+    JSON that includes any data you want to pass to a message template. 
     The data will populate the corresponding template variables.
     """
 
@@ -25,8 +25,8 @@ class InboundBulkMessageV1(UncheckedBaseModel):
     locale: typing.Optional[typing.Dict[str, typing.Any]] = None
     override: typing.Optional[typing.Any] = pydantic_v1.Field(default=None)
     """
-    JSON that is merged into the request sent by Courier to the provider
-    to override properties or to gain access to features in the provider
+    JSON that is merged into the request sent by Courier to the provider 
+    to override properties or to gain access to features in the provider 
     API that are not natively supported by Courier.
     """
 

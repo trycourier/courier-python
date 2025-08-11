@@ -120,7 +120,7 @@ class ListsClient:
 
     def update(
         self, list_id: str, *, request: ListPutParams, request_options: typing.Optional[RequestOptions] = None
-    ) -> List:
+    ) -> None:
         """
         Create or replace an existing list with the supplied values.
 
@@ -136,7 +136,7 @@ class ListsClient:
 
         Returns
         -------
-        List
+        None
 
         Examples
         --------
@@ -158,7 +158,7 @@ class ListsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(List, construct_type(type_=List, object_=_response.json()))  # type: ignore
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -230,7 +230,11 @@ class ListsClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"lists/{jsonable_encoder(list_id)}/restore", method="PUT", request_options=request_options
+            f"lists/{jsonable_encoder(list_id)}/restore",
+            method="PUT",
+            json={},
+            request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -650,7 +654,7 @@ class AsyncListsClient:
 
     async def update(
         self, list_id: str, *, request: ListPutParams, request_options: typing.Optional[RequestOptions] = None
-    ) -> List:
+    ) -> None:
         """
         Create or replace an existing list with the supplied values.
 
@@ -666,7 +670,7 @@ class AsyncListsClient:
 
         Returns
         -------
-        List
+        None
 
         Examples
         --------
@@ -696,7 +700,7 @@ class AsyncListsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return typing.cast(List, construct_type(type_=List, object_=_response.json()))  # type: ignore
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -784,7 +788,11 @@ class AsyncListsClient:
         asyncio.run(main())
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"lists/{jsonable_encoder(list_id)}/restore", method="PUT", request_options=request_options
+            f"lists/{jsonable_encoder(list_id)}/restore",
+            method="PUT",
+            json={},
+            request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
