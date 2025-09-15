@@ -17,9 +17,10 @@ class MessageProvidersType(UncheckedBaseModel):
 
     if_: typing.Optional[str] = pydantic_v1.Field(alias="if", default=None)
     """
-    A JavaScript conditional expression to determine if the message should be sent 
-    through the channel. Has access to the data and profile object. For example, 
-    `data.name === profile.name`
+    A JavaScript conditional expression to determine if the message should
+    be sent through the provider. Has access to the data and profile object.
+    Only applies when a custom routing strategy is defined.
+    For example, `data.name === profile.name`
     """
 
     timeouts: typing.Optional[int] = None

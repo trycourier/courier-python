@@ -6,7 +6,7 @@ import typing
 from ...core.datetime_utils import serialize_datetime
 from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 from ...core.unchecked_base_model import UncheckedBaseModel
-from .routing_channel import RoutingChannel
+from ...notifications.types.message_routing_channel import MessageRoutingChannel
 from .routing_method import RoutingMethod
 
 
@@ -18,7 +18,7 @@ class Routing(UncheckedBaseModel):
     """
 
     method: RoutingMethod
-    channels: typing.List[RoutingChannel] = pydantic_v1.Field()
+    channels: typing.List[MessageRoutingChannel] = pydantic_v1.Field()
     """
     A list of channels or providers to send the message through. Can also recursively define 
     sub-routing methods, which can be useful for defining advanced push notification 

@@ -34,7 +34,8 @@ class Channel(UncheckedBaseModel):
     if_: typing.Optional[str] = pydantic_v1.Field(alias="if", default=None)
     """
     A JavaScript conditional expression to determine if the message should 
-    be sent through the channel. Has access to the data and profile object. 
+    be sent through the channel. Has access to the data and profile object.
+    Only applies when a custom routing strategy is defined.
     For example, `data.name === profile.name`
     """
 

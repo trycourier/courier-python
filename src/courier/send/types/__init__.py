@@ -79,10 +79,7 @@ from .preferences import Preferences
 from .recipient import Recipient
 from .recipient_data import RecipientData
 from .routing import Routing
-from .routing_channel import RoutingChannel
 from .routing_method import RoutingMethod
-from .routing_strategy_channel import RoutingStrategyChannel
-from .routing_strategy_provider import RoutingStrategyProvider
 from .rule_type import RuleType
 from .slack_recipient import SlackRecipient
 from .template_message import TemplateMessage
@@ -175,10 +172,7 @@ __all__ = [
     "Recipient",
     "RecipientData",
     "Routing",
-    "RoutingChannel",
     "RoutingMethod",
-    "RoutingStrategyChannel",
-    "RoutingStrategyProvider",
     "RuleType",
     "SlackRecipient",
     "TemplateMessage",
