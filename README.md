@@ -32,7 +32,7 @@ import os
 from courier import Courier
 
 client = Courier(
-    api_key=os.environ.get("COURIER_DOCS_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("COURIER_API_KEY"),  # This is the default and can be omitted
 )
 
 response = client.send.send_message(
@@ -48,7 +48,7 @@ print(response.request_id)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `COURIER_DOCS_API_KEY="My API Key"` to your `.env` file
+to add `COURIER_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -61,7 +61,7 @@ import asyncio
 from courier import AsyncCourier
 
 client = AsyncCourier(
-    api_key=os.environ.get("COURIER_DOCS_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("COURIER_API_KEY"),  # This is the default and can be omitted
 )
 
 
