@@ -8,7 +8,7 @@ from datetime import date, datetime, timezone, timedelta
 
 import pytest
 
-from courier_docs._utils import parse_date, parse_datetime
+from courier._utils import parse_date, parse_datetime
 
 
 def create_tz(minutes: int) -> timezone:

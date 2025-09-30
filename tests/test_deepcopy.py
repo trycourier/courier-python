@@ -1,4 +1,4 @@
-from courier_docs._utils import deepcopy_minimal
+from courier._utils import deepcopy_minimal
 
 
 def assert_different_identities(obj1: object, obj2: object) -> None:

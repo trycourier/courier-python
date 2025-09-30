@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types.users import (
+from courier.types.users import (
     TenantListResponse,
 )
 
@@ -21,7 +21,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list(self, client: CourierDocs) -> None:
+    def test_method_list(self, client: Courier) -> None:
         tenant = client.users.tenants.list(
             user_id="user_id",
         )
@@ -29,7 +29,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_list_with_all_params(self, client: Courier) -> None:
         tenant = client.users.tenants.list(
             user_id="user_id",
             cursor="cursor",
@@ -39,7 +39,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: CourierDocs) -> None:
+    def test_raw_response_list(self, client: Courier) -> None:
         response = client.users.tenants.with_raw_response.list(
             user_id="user_id",
         )
@@ -51,7 +51,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: CourierDocs) -> None:
+    def test_streaming_response_list(self, client: Courier) -> None:
         with client.users.tenants.with_streaming_response.list(
             user_id="user_id",
         ) as response:
@@ -65,7 +65,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_list(self, client: CourierDocs) -> None:
+    def test_path_params_list(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.tenants.with_raw_response.list(
                 user_id="",
@@ -73,7 +73,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_add_multiple(self, client: CourierDocs) -> None:
+    def test_method_add_multiple(self, client: Courier) -> None:
         tenant = client.users.tenants.add_multiple(
             user_id="user_id",
             tenants=[{"tenant_id": "tenant_id"}],
@@ -82,7 +82,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_add_multiple(self, client: CourierDocs) -> None:
+    def test_raw_response_add_multiple(self, client: Courier) -> None:
         response = client.users.tenants.with_raw_response.add_multiple(
             user_id="user_id",
             tenants=[{"tenant_id": "tenant_id"}],
@@ -95,7 +95,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_add_multiple(self, client: CourierDocs) -> None:
+    def test_streaming_response_add_multiple(self, client: Courier) -> None:
         with client.users.tenants.with_streaming_response.add_multiple(
             user_id="user_id",
             tenants=[{"tenant_id": "tenant_id"}],
@@ -110,7 +110,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_add_multiple(self, client: CourierDocs) -> None:
+    def test_path_params_add_multiple(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.tenants.with_raw_response.add_multiple(
                 user_id="",
@@ -119,7 +119,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_add_single(self, client: CourierDocs) -> None:
+    def test_method_add_single(self, client: Courier) -> None:
         tenant = client.users.tenants.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -128,7 +128,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_add_single_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_add_single_with_all_params(self, client: Courier) -> None:
         tenant = client.users.tenants.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -138,7 +138,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_add_single(self, client: CourierDocs) -> None:
+    def test_raw_response_add_single(self, client: Courier) -> None:
         response = client.users.tenants.with_raw_response.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -151,7 +151,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_add_single(self, client: CourierDocs) -> None:
+    def test_streaming_response_add_single(self, client: Courier) -> None:
         with client.users.tenants.with_streaming_response.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -166,7 +166,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_add_single(self, client: CourierDocs) -> None:
+    def test_path_params_add_single(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.tenants.with_raw_response.add_single(
                 tenant_id="tenant_id",
@@ -181,7 +181,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_remove_all(self, client: CourierDocs) -> None:
+    def test_method_remove_all(self, client: Courier) -> None:
         tenant = client.users.tenants.remove_all(
             "user_id",
         )
@@ -189,7 +189,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_remove_all(self, client: CourierDocs) -> None:
+    def test_raw_response_remove_all(self, client: Courier) -> None:
         response = client.users.tenants.with_raw_response.remove_all(
             "user_id",
         )
@@ -201,7 +201,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_remove_all(self, client: CourierDocs) -> None:
+    def test_streaming_response_remove_all(self, client: Courier) -> None:
         with client.users.tenants.with_streaming_response.remove_all(
             "user_id",
         ) as response:
@@ -215,7 +215,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_remove_all(self, client: CourierDocs) -> None:
+    def test_path_params_remove_all(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.tenants.with_raw_response.remove_all(
                 "",
@@ -223,7 +223,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_remove_single(self, client: CourierDocs) -> None:
+    def test_method_remove_single(self, client: Courier) -> None:
         tenant = client.users.tenants.remove_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -232,7 +232,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_remove_single(self, client: CourierDocs) -> None:
+    def test_raw_response_remove_single(self, client: Courier) -> None:
         response = client.users.tenants.with_raw_response.remove_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -245,7 +245,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_remove_single(self, client: CourierDocs) -> None:
+    def test_streaming_response_remove_single(self, client: Courier) -> None:
         with client.users.tenants.with_streaming_response.remove_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -260,7 +260,7 @@ class TestTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_remove_single(self, client: CourierDocs) -> None:
+    def test_path_params_remove_single(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.tenants.with_raw_response.remove_single(
                 tenant_id="tenant_id",
@@ -281,7 +281,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.list(
             user_id="user_id",
         )
@@ -289,7 +289,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.list(
             user_id="user_id",
             cursor="cursor",
@@ -299,7 +299,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_list(self, async_client: AsyncCourier) -> None:
         response = await async_client.users.tenants.with_raw_response.list(
             user_id="user_id",
         )
@@ -311,7 +311,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncCourier) -> None:
         async with async_client.users.tenants.with_streaming_response.list(
             user_id="user_id",
         ) as response:
@@ -325,7 +325,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_list(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.tenants.with_raw_response.list(
                 user_id="",
@@ -333,7 +333,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_add_multiple(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_add_multiple(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.add_multiple(
             user_id="user_id",
             tenants=[{"tenant_id": "tenant_id"}],
@@ -342,7 +342,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_add_multiple(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_add_multiple(self, async_client: AsyncCourier) -> None:
         response = await async_client.users.tenants.with_raw_response.add_multiple(
             user_id="user_id",
             tenants=[{"tenant_id": "tenant_id"}],
@@ -355,7 +355,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_add_multiple(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_add_multiple(self, async_client: AsyncCourier) -> None:
         async with async_client.users.tenants.with_streaming_response.add_multiple(
             user_id="user_id",
             tenants=[{"tenant_id": "tenant_id"}],
@@ -370,7 +370,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_add_multiple(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_add_multiple(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.tenants.with_raw_response.add_multiple(
                 user_id="",
@@ -379,7 +379,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_add_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_add_single(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -388,7 +388,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_add_single_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_add_single_with_all_params(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -398,7 +398,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_add_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_add_single(self, async_client: AsyncCourier) -> None:
         response = await async_client.users.tenants.with_raw_response.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -411,7 +411,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_add_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_add_single(self, async_client: AsyncCourier) -> None:
         async with async_client.users.tenants.with_streaming_response.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -426,7 +426,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_add_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_add_single(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.tenants.with_raw_response.add_single(
                 tenant_id="tenant_id",
@@ -441,7 +441,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_remove_all(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_remove_all(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.remove_all(
             "user_id",
         )
@@ -449,7 +449,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_remove_all(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_remove_all(self, async_client: AsyncCourier) -> None:
         response = await async_client.users.tenants.with_raw_response.remove_all(
             "user_id",
         )
@@ -461,7 +461,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_remove_all(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_remove_all(self, async_client: AsyncCourier) -> None:
         async with async_client.users.tenants.with_streaming_response.remove_all(
             "user_id",
         ) as response:
@@ -475,7 +475,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_remove_all(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_remove_all(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.tenants.with_raw_response.remove_all(
                 "",
@@ -483,7 +483,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_remove_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_remove_single(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.remove_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -492,7 +492,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_remove_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_remove_single(self, async_client: AsyncCourier) -> None:
         response = await async_client.users.tenants.with_raw_response.remove_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -505,7 +505,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_remove_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_remove_single(self, async_client: AsyncCourier) -> None:
         async with async_client.users.tenants.with_streaming_response.remove_single(
             tenant_id="tenant_id",
             user_id="user_id",
@@ -520,7 +520,7 @@ class TestAsyncTenants:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_remove_single(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_remove_single(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.tenants.with_raw_response.remove_single(
                 tenant_id="tenant_id",

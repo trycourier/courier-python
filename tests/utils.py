@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, Sequence, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from courier_docs._types import Omit, NoneType
-from courier_docs._utils import (
+from courier._types import Omit, NoneType
+from courier._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -19,8 +19,8 @@ from courier_docs._utils import (
     is_annotated_type,
     is_type_alias_type,
 )
-from courier_docs._compat import PYDANTIC_V1, field_outer_type, get_model_fields
-from courier_docs._models import BaseModel
+from courier._compat import PYDANTIC_V1, field_outer_type, get_model_fields
+from courier._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

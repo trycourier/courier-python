@@ -7,9 +7,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from courier_docs._utils import PropertyInfo
-from courier_docs._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
-from courier_docs._models import BaseModel, construct_type
+from courier._utils import PropertyInfo
+from courier._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
+from courier._models import BaseModel, construct_type
 
 
 class BasicModel(BaseModel):

@@ -4,8 +4,8 @@ from typing import Sequence
 
 import pytest
 
-from courier_docs._types import FileTypes
-from courier_docs._utils import extract_files
+from courier._types import FileTypes
+from courier._utils import extract_files
 
 
 def test_removes_files_from_input() -> None:

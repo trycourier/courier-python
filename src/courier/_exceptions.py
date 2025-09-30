@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class CourierDocsError(Exception):
+class CourierError(Exception):
     pass
 
 
-class APIError(CourierDocsError):
+class APIError(CourierError):
     message: str
     request: httpx.Request
 

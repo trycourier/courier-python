@@ -4,7 +4,7 @@ from urllib.parse import unquote
 
 import pytest
 
-from courier_docs._qs import Querystring, stringify
+from courier._qs import Querystring, stringify
 
 
 def test_empty() -> None:

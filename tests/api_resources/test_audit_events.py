@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types import AuditEvent, AuditEventListResponse
+from courier.types import AuditEvent, AuditEventListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: CourierDocs) -> None:
+    def test_method_retrieve(self, client: Courier) -> None:
         audit_event = client.audit_events.retrieve(
             "audit-event-id",
         )
@@ -27,7 +27,7 @@ class TestAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: CourierDocs) -> None:
+    def test_raw_response_retrieve(self, client: Courier) -> None:
         response = client.audit_events.with_raw_response.retrieve(
             "audit-event-id",
         )
@@ -39,7 +39,7 @@ class TestAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: CourierDocs) -> None:
+    def test_streaming_response_retrieve(self, client: Courier) -> None:
         with client.audit_events.with_streaming_response.retrieve(
             "audit-event-id",
         ) as response:
@@ -53,7 +53,7 @@ class TestAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: CourierDocs) -> None:
+    def test_path_params_retrieve(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audit_event_id` but received ''"):
             client.audit_events.with_raw_response.retrieve(
                 "",
@@ -61,13 +61,13 @@ class TestAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list(self, client: CourierDocs) -> None:
+    def test_method_list(self, client: Courier) -> None:
         audit_event = client.audit_events.list()
         assert_matches_type(AuditEventListResponse, audit_event, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_list_with_all_params(self, client: Courier) -> None:
         audit_event = client.audit_events.list(
             cursor="cursor",
         )
@@ -75,7 +75,7 @@ class TestAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: CourierDocs) -> None:
+    def test_raw_response_list(self, client: Courier) -> None:
         response = client.audit_events.with_raw_response.list()
 
         assert response.is_closed is True
@@ -85,7 +85,7 @@ class TestAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: CourierDocs) -> None:
+    def test_streaming_response_list(self, client: Courier) -> None:
         with client.audit_events.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -103,7 +103,7 @@ class TestAsyncAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_retrieve(self, async_client: AsyncCourier) -> None:
         audit_event = await async_client.audit_events.retrieve(
             "audit-event-id",
         )
@@ -111,7 +111,7 @@ class TestAsyncAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncCourier) -> None:
         response = await async_client.audit_events.with_raw_response.retrieve(
             "audit-event-id",
         )
@@ -123,7 +123,7 @@ class TestAsyncAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncCourier) -> None:
         async with async_client.audit_events.with_streaming_response.retrieve(
             "audit-event-id",
         ) as response:
@@ -137,7 +137,7 @@ class TestAsyncAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audit_event_id` but received ''"):
             await async_client.audit_events.with_raw_response.retrieve(
                 "",
@@ -145,13 +145,13 @@ class TestAsyncAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list(self, async_client: AsyncCourier) -> None:
         audit_event = await async_client.audit_events.list()
         assert_matches_type(AuditEventListResponse, audit_event, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncCourier) -> None:
         audit_event = await async_client.audit_events.list(
             cursor="cursor",
         )
@@ -159,7 +159,7 @@ class TestAsyncAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_list(self, async_client: AsyncCourier) -> None:
         response = await async_client.audit_events.with_raw_response.list()
 
         assert response.is_closed is True
@@ -169,7 +169,7 @@ class TestAsyncAuditEvents:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncCourier) -> None:
         async with async_client.audit_events.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

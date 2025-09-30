@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types import (
+from courier.types import (
     BulkCreateJobResponse,
     BulkListUsersResponse,
     BulkRetrieveJobResponse,
@@ -23,7 +23,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_add_users(self, client: CourierDocs) -> None:
+    def test_method_add_users(self, client: Courier) -> None:
         bulk = client.bulk.add_users(
             job_id="job_id",
             users=[{}],
@@ -32,7 +32,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_add_users(self, client: CourierDocs) -> None:
+    def test_raw_response_add_users(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.add_users(
             job_id="job_id",
             users=[{}],
@@ -45,7 +45,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_add_users(self, client: CourierDocs) -> None:
+    def test_streaming_response_add_users(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.add_users(
             job_id="job_id",
             users=[{}],
@@ -60,7 +60,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_add_users(self, client: CourierDocs) -> None:
+    def test_path_params_add_users(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             client.bulk.with_raw_response.add_users(
                 job_id="",
@@ -69,7 +69,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_job(self, client: CourierDocs) -> None:
+    def test_method_create_job(self, client: Courier) -> None:
         bulk = client.bulk.create_job(
             message={},
         )
@@ -77,7 +77,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create_job_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_create_job_with_all_params(self, client: Courier) -> None:
         bulk = client.bulk.create_job(
             message={
                 "brand": "brand",
@@ -190,7 +190,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create_job(self, client: CourierDocs) -> None:
+    def test_raw_response_create_job(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.create_job(
             message={},
         )
@@ -202,7 +202,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create_job(self, client: CourierDocs) -> None:
+    def test_streaming_response_create_job(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.create_job(
             message={},
         ) as response:
@@ -216,7 +216,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list_users(self, client: CourierDocs) -> None:
+    def test_method_list_users(self, client: Courier) -> None:
         bulk = client.bulk.list_users(
             job_id="job_id",
         )
@@ -224,7 +224,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list_users_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_list_users_with_all_params(self, client: Courier) -> None:
         bulk = client.bulk.list_users(
             job_id="job_id",
             cursor="cursor",
@@ -233,7 +233,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_list_users(self, client: CourierDocs) -> None:
+    def test_raw_response_list_users(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.list_users(
             job_id="job_id",
         )
@@ -245,7 +245,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_list_users(self, client: CourierDocs) -> None:
+    def test_streaming_response_list_users(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.list_users(
             job_id="job_id",
         ) as response:
@@ -259,7 +259,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_list_users(self, client: CourierDocs) -> None:
+    def test_path_params_list_users(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             client.bulk.with_raw_response.list_users(
                 job_id="",
@@ -267,7 +267,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_job(self, client: CourierDocs) -> None:
+    def test_method_retrieve_job(self, client: Courier) -> None:
         bulk = client.bulk.retrieve_job(
             "job_id",
         )
@@ -275,7 +275,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_job(self, client: CourierDocs) -> None:
+    def test_raw_response_retrieve_job(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.retrieve_job(
             "job_id",
         )
@@ -287,7 +287,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_job(self, client: CourierDocs) -> None:
+    def test_streaming_response_retrieve_job(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.retrieve_job(
             "job_id",
         ) as response:
@@ -301,7 +301,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve_job(self, client: CourierDocs) -> None:
+    def test_path_params_retrieve_job(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             client.bulk.with_raw_response.retrieve_job(
                 "",
@@ -309,7 +309,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_run_job(self, client: CourierDocs) -> None:
+    def test_method_run_job(self, client: Courier) -> None:
         bulk = client.bulk.run_job(
             "job_id",
         )
@@ -317,7 +317,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_run_job(self, client: CourierDocs) -> None:
+    def test_raw_response_run_job(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.run_job(
             "job_id",
         )
@@ -329,7 +329,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_run_job(self, client: CourierDocs) -> None:
+    def test_streaming_response_run_job(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.run_job(
             "job_id",
         ) as response:
@@ -343,7 +343,7 @@ class TestBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_run_job(self, client: CourierDocs) -> None:
+    def test_path_params_run_job(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             client.bulk.with_raw_response.run_job(
                 "",
@@ -357,7 +357,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_add_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_add_users(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.add_users(
             job_id="job_id",
             users=[{}],
@@ -366,7 +366,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_add_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_add_users(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.add_users(
             job_id="job_id",
             users=[{}],
@@ -379,7 +379,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_add_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_add_users(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.add_users(
             job_id="job_id",
             users=[{}],
@@ -394,7 +394,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_add_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_add_users(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             await async_client.bulk.with_raw_response.add_users(
                 job_id="",
@@ -403,7 +403,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_create_job(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.create_job(
             message={},
         )
@@ -411,7 +411,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create_job_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_create_job_with_all_params(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.create_job(
             message={
                 "brand": "brand",
@@ -524,7 +524,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_create_job(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.create_job(
             message={},
         )
@@ -536,7 +536,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_create_job(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.create_job(
             message={},
         ) as response:
@@ -550,7 +550,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list_users(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.list_users(
             job_id="job_id",
         )
@@ -558,7 +558,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list_users_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list_users_with_all_params(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.list_users(
             job_id="job_id",
             cursor="cursor",
@@ -567,7 +567,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_list_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_list_users(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.list_users(
             job_id="job_id",
         )
@@ -579,7 +579,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_list_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_list_users(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.list_users(
             job_id="job_id",
         ) as response:
@@ -593,7 +593,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_list_users(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_list_users(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             await async_client.bulk.with_raw_response.list_users(
                 job_id="",
@@ -601,7 +601,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_retrieve_job(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.retrieve_job(
             "job_id",
         )
@@ -609,7 +609,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_retrieve_job(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.retrieve_job(
             "job_id",
         )
@@ -621,7 +621,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_retrieve_job(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.retrieve_job(
             "job_id",
         ) as response:
@@ -635,7 +635,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_retrieve_job(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             await async_client.bulk.with_raw_response.retrieve_job(
                 "",
@@ -643,7 +643,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_run_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_run_job(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.run_job(
             "job_id",
         )
@@ -651,7 +651,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_run_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_run_job(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.run_job(
             "job_id",
         )
@@ -663,7 +663,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_run_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_run_job(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.run_job(
             "job_id",
         ) as response:
@@ -677,7 +677,7 @@ class TestAsyncBulk:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_run_job(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_run_job(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
             await async_client.bulk.with_raw_response.run_job(
                 "",
