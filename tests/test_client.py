@@ -340,7 +340,7 @@ class TestCourier:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(CourierError):
-            with update_env(**{"COURIER_DOCS_API_KEY": Omit()}):
+            with update_env(**{"COURIER_API_KEY": Omit()}):
                 client2 = Courier(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1178,7 +1178,7 @@ class TestAsyncCourier:
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(CourierError):
-            with update_env(**{"COURIER_DOCS_API_KEY": Omit()}):
+            with update_env(**{"COURIER_API_KEY": Omit()}):
                 client2 = AsyncCourier(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
