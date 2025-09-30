@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types import SendSendMessageResponse
+from courier.types import SendSendMessageResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_send_message(self, client: CourierDocs) -> None:
+    def test_method_send_message(self, client: Courier) -> None:
         send = client.send.send_message(
             message={
                 "content": {
@@ -32,7 +32,7 @@ class TestSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_send_message(self, client: CourierDocs) -> None:
+    def test_raw_response_send_message(self, client: Courier) -> None:
         response = client.send.with_raw_response.send_message(
             message={
                 "content": {
@@ -49,7 +49,7 @@ class TestSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_send_message(self, client: CourierDocs) -> None:
+    def test_streaming_response_send_message(self, client: Courier) -> None:
         with client.send.with_streaming_response.send_message(
             message={
                 "content": {
@@ -74,7 +74,7 @@ class TestAsyncSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_send_message(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_send_message(self, async_client: AsyncCourier) -> None:
         send = await async_client.send.send_message(
             message={
                 "content": {
@@ -87,7 +87,7 @@ class TestAsyncSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_send_message(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_send_message(self, async_client: AsyncCourier) -> None:
         response = await async_client.send.with_raw_response.send_message(
             message={
                 "content": {
@@ -104,7 +104,7 @@ class TestAsyncSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_send_message(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_send_message(self, async_client: AsyncCourier) -> None:
         async with async_client.send.with_streaming_response.send_message(
             message={
                 "content": {

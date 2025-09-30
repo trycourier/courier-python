@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from courier_docs._types import Base64FileInput, omit, not_given
-from courier_docs._utils import (
+from courier._types import Base64FileInput, omit, not_given
+from courier._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from courier_docs._compat import PYDANTIC_V1
-from courier_docs._models import BaseModel
+from courier._compat import PYDANTIC_V1
+from courier._models import BaseModel
 
 _T = TypeVar("_T")
 

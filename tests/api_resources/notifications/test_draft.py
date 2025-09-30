@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types import NotificationGetContent
+from courier.types import NotificationGetContent
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_content(self, client: CourierDocs) -> None:
+    def test_method_retrieve_content(self, client: Courier) -> None:
         draft = client.notifications.draft.retrieve_content(
             "id",
         )
@@ -27,7 +27,7 @@ class TestDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve_content(self, client: CourierDocs) -> None:
+    def test_raw_response_retrieve_content(self, client: Courier) -> None:
         response = client.notifications.draft.with_raw_response.retrieve_content(
             "id",
         )
@@ -39,7 +39,7 @@ class TestDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve_content(self, client: CourierDocs) -> None:
+    def test_streaming_response_retrieve_content(self, client: Courier) -> None:
         with client.notifications.draft.with_streaming_response.retrieve_content(
             "id",
         ) as response:
@@ -53,7 +53,7 @@ class TestDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve_content(self, client: CourierDocs) -> None:
+    def test_path_params_retrieve_content(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.notifications.draft.with_raw_response.retrieve_content(
                 "",
@@ -67,7 +67,7 @@ class TestAsyncDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_retrieve_content(self, async_client: AsyncCourier) -> None:
         draft = await async_client.notifications.draft.retrieve_content(
             "id",
         )
@@ -75,7 +75,7 @@ class TestAsyncDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_retrieve_content(self, async_client: AsyncCourier) -> None:
         response = await async_client.notifications.draft.with_raw_response.retrieve_content(
             "id",
         )
@@ -87,7 +87,7 @@ class TestAsyncDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_retrieve_content(self, async_client: AsyncCourier) -> None:
         async with async_client.notifications.draft.with_streaming_response.retrieve_content(
             "id",
         ) as response:
@@ -101,7 +101,7 @@ class TestAsyncDraft:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_retrieve_content(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.notifications.draft.with_raw_response.retrieve_content(
                 "",

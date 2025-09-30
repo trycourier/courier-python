@@ -23,7 +23,7 @@ from ._utils import is_given, get_async_library
 from ._version import __version__
 from .resources import auth, bulk, send, brands, inbound, messages, requests, audiences, audit_events, translations
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError, CourierDocsError
+from ._exceptions import CourierError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -36,19 +36,10 @@ from .resources.profiles import profiles
 from .resources.automations import automations
 from .resources.notifications import notifications
 
-__all__ = [
-    "Timeout",
-    "Transport",
-    "ProxiesTypes",
-    "RequestOptions",
-    "CourierDocs",
-    "AsyncCourierDocs",
-    "Client",
-    "AsyncClient",
-]
+__all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Courier", "AsyncCourier", "Client", "AsyncClient"]
 
 
-class CourierDocs(SyncAPIClient):
+class Courier(SyncAPIClient):
     send: send.SendResource
     audiences: audiences.AudiencesResource
     audit_events: audit_events.AuditEventsResource
@@ -65,8 +56,8 @@ class CourierDocs(SyncAPIClient):
     tenants: tenants.TenantsResource
     translations: translations.TranslationsResource
     users: users.UsersResource
-    with_raw_response: CourierDocsWithRawResponse
-    with_streaming_response: CourierDocsWithStreamedResponse
+    with_raw_response: CourierWithRawResponse
+    with_streaming_response: CourierWithStreamedResponse
 
     # client options
     api_key: str
@@ -94,20 +85,20 @@ class CourierDocs(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous CourierDocs client instance.
+        """Construct a new synchronous Courier client instance.
 
         This automatically infers the `api_key` argument from the `COURIER_DOCS_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("COURIER_DOCS_API_KEY")
         if api_key is None:
-            raise CourierDocsError(
+            raise CourierError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the COURIER_DOCS_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("COURIER_DOCS_BASE_URL")
+            base_url = os.environ.get("COURIER_BASE_URL")
         if base_url is None:
             base_url = f"https://api.courier.com"
 
@@ -138,8 +129,8 @@ class CourierDocs(SyncAPIClient):
         self.tenants = tenants.TenantsResource(self)
         self.translations = translations.TranslationsResource(self)
         self.users = users.UsersResource(self)
-        self.with_raw_response = CourierDocsWithRawResponse(self)
-        self.with_streaming_response = CourierDocsWithStreamedResponse(self)
+        self.with_raw_response = CourierWithRawResponse(self)
+        self.with_streaming_response = CourierWithStreamedResponse(self)
 
     @property
     @override
@@ -246,7 +237,7 @@ class CourierDocs(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncCourierDocs(AsyncAPIClient):
+class AsyncCourier(AsyncAPIClient):
     send: send.AsyncSendResource
     audiences: audiences.AsyncAudiencesResource
     audit_events: audit_events.AsyncAuditEventsResource
@@ -263,8 +254,8 @@ class AsyncCourierDocs(AsyncAPIClient):
     tenants: tenants.AsyncTenantsResource
     translations: translations.AsyncTranslationsResource
     users: users.AsyncUsersResource
-    with_raw_response: AsyncCourierDocsWithRawResponse
-    with_streaming_response: AsyncCourierDocsWithStreamedResponse
+    with_raw_response: AsyncCourierWithRawResponse
+    with_streaming_response: AsyncCourierWithStreamedResponse
 
     # client options
     api_key: str
@@ -292,20 +283,20 @@ class AsyncCourierDocs(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncCourierDocs client instance.
+        """Construct a new async AsyncCourier client instance.
 
         This automatically infers the `api_key` argument from the `COURIER_DOCS_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("COURIER_DOCS_API_KEY")
         if api_key is None:
-            raise CourierDocsError(
+            raise CourierError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the COURIER_DOCS_API_KEY environment variable"
             )
         self.api_key = api_key
 
         if base_url is None:
-            base_url = os.environ.get("COURIER_DOCS_BASE_URL")
+            base_url = os.environ.get("COURIER_BASE_URL")
         if base_url is None:
             base_url = f"https://api.courier.com"
 
@@ -336,8 +327,8 @@ class AsyncCourierDocs(AsyncAPIClient):
         self.tenants = tenants.AsyncTenantsResource(self)
         self.translations = translations.AsyncTranslationsResource(self)
         self.users = users.AsyncUsersResource(self)
-        self.with_raw_response = AsyncCourierDocsWithRawResponse(self)
-        self.with_streaming_response = AsyncCourierDocsWithStreamedResponse(self)
+        self.with_raw_response = AsyncCourierWithRawResponse(self)
+        self.with_streaming_response = AsyncCourierWithStreamedResponse(self)
 
     @property
     @override
@@ -444,8 +435,8 @@ class AsyncCourierDocs(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class CourierDocsWithRawResponse:
-    def __init__(self, client: CourierDocs) -> None:
+class CourierWithRawResponse:
+    def __init__(self, client: Courier) -> None:
         self.send = send.SendResourceWithRawResponse(client.send)
         self.audiences = audiences.AudiencesResourceWithRawResponse(client.audiences)
         self.audit_events = audit_events.AuditEventsResourceWithRawResponse(client.audit_events)
@@ -464,8 +455,8 @@ class CourierDocsWithRawResponse:
         self.users = users.UsersResourceWithRawResponse(client.users)
 
 
-class AsyncCourierDocsWithRawResponse:
-    def __init__(self, client: AsyncCourierDocs) -> None:
+class AsyncCourierWithRawResponse:
+    def __init__(self, client: AsyncCourier) -> None:
         self.send = send.AsyncSendResourceWithRawResponse(client.send)
         self.audiences = audiences.AsyncAudiencesResourceWithRawResponse(client.audiences)
         self.audit_events = audit_events.AsyncAuditEventsResourceWithRawResponse(client.audit_events)
@@ -484,8 +475,8 @@ class AsyncCourierDocsWithRawResponse:
         self.users = users.AsyncUsersResourceWithRawResponse(client.users)
 
 
-class CourierDocsWithStreamedResponse:
-    def __init__(self, client: CourierDocs) -> None:
+class CourierWithStreamedResponse:
+    def __init__(self, client: Courier) -> None:
         self.send = send.SendResourceWithStreamingResponse(client.send)
         self.audiences = audiences.AudiencesResourceWithStreamingResponse(client.audiences)
         self.audit_events = audit_events.AuditEventsResourceWithStreamingResponse(client.audit_events)
@@ -504,8 +495,8 @@ class CourierDocsWithStreamedResponse:
         self.users = users.UsersResourceWithStreamingResponse(client.users)
 
 
-class AsyncCourierDocsWithStreamedResponse:
-    def __init__(self, client: AsyncCourierDocs) -> None:
+class AsyncCourierWithStreamedResponse:
+    def __init__(self, client: AsyncCourier) -> None:
         self.send = send.AsyncSendResourceWithStreamingResponse(client.send)
         self.audiences = audiences.AsyncAudiencesResourceWithStreamingResponse(client.audiences)
         self.audit_events = audit_events.AsyncAuditEventsResourceWithStreamingResponse(client.audit_events)
@@ -524,6 +515,6 @@ class AsyncCourierDocsWithStreamedResponse:
         self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
 
 
-Client = CourierDocs
+Client = Courier
 
-AsyncClient = AsyncCourierDocs
+AsyncClient = AsyncCourier

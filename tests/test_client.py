@@ -18,12 +18,12 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from courier_docs import CourierDocs, AsyncCourierDocs, APIResponseValidationError
-from courier_docs._types import Omit
-from courier_docs._utils import asyncify
-from courier_docs._models import BaseModel, FinalRequestOptions
-from courier_docs._exceptions import APIStatusError, APITimeoutError, CourierDocsError, APIResponseValidationError
-from courier_docs._base_client import (
+from courier import Courier, AsyncCourier, APIResponseValidationError
+from courier._types import Omit
+from courier._utils import asyncify
+from courier._models import BaseModel, FinalRequestOptions
+from courier._exceptions import CourierError, APIStatusError, APITimeoutError, APIResponseValidationError
+from courier._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
@@ -50,7 +50,7 @@ def _low_retry_timeout(*_args: Any, **_kwargs: Any) -> float:
     return 0.1
 
 
-def _get_open_connections(client: CourierDocs | AsyncCourierDocs) -> int:
+def _get_open_connections(client: Courier | AsyncCourier) -> int:
     transport = client._client._transport
     assert isinstance(transport, httpx.HTTPTransport) or isinstance(transport, httpx.AsyncHTTPTransport)
 
@@ -58,8 +58,8 @@ def _get_open_connections(client: CourierDocs | AsyncCourierDocs) -> int:
     return len(pool._requests)
 
 
-class TestCourierDocs:
-    client = CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestCourier:
+    client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -106,7 +106,7 @@ class TestCourierDocs:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = CourierDocs(
+        client = Courier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -140,7 +140,7 @@ class TestCourierDocs:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = CourierDocs(
+        client = Courier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -232,10 +232,10 @@ class TestCourierDocs:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "courier_docs/_legacy_response.py",
-                        "courier_docs/_response.py",
+                        "courier/_legacy_response.py",
+                        "courier/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "courier_docs/_compat.py",
+                        "courier/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -266,9 +266,7 @@ class TestCourierDocs:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = CourierDocs(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
-        )
+        client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0))
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -277,7 +275,7 @@ class TestCourierDocs:
     def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
-            client = CourierDocs(
+            client = Courier(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -287,7 +285,7 @@ class TestCourierDocs:
 
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
-            client = CourierDocs(
+            client = Courier(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -297,7 +295,7 @@ class TestCourierDocs:
 
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = CourierDocs(
+            client = Courier(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -308,7 +306,7 @@ class TestCourierDocs:
     async def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             async with httpx.AsyncClient() as http_client:
-                CourierDocs(
+                Courier(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -316,14 +314,14 @@ class TestCourierDocs:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = CourierDocs(
+        client = Courier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = CourierDocs(
+        client2 = Courier(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -337,17 +335,17 @@ class TestCourierDocs:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(CourierDocsError):
+        with pytest.raises(CourierError):
             with update_env(**{"COURIER_DOCS_API_KEY": Omit()}):
-                client2 = CourierDocs(base_url=base_url, api_key=None, _strict_response_validation=True)
+                client2 = Courier(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = CourierDocs(
+        client = Courier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -461,7 +459,7 @@ class TestCourierDocs:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, client: CourierDocs) -> None:
+    def test_multipart_repeating_array(self, client: Courier) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
                 method="post",
@@ -548,9 +546,7 @@ class TestCourierDocs:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = CourierDocs(
-            base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
-        )
+        client = Courier(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -558,17 +554,15 @@ class TestCourierDocs:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(COURIER_DOCS_BASE_URL="http://localhost:5000/from/env"):
-            client = CourierDocs(api_key=api_key, _strict_response_validation=True)
+        with update_env(COURIER_BASE_URL="http://localhost:5000/from/env"):
+            client = Courier(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            CourierDocs(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
-            ),
-            CourierDocs(
+            Courier(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            Courier(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -577,7 +571,7 @@ class TestCourierDocs:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: CourierDocs) -> None:
+    def test_base_url_trailing_slash(self, client: Courier) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -590,10 +584,8 @@ class TestCourierDocs:
     @pytest.mark.parametrize(
         "client",
         [
-            CourierDocs(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
-            ),
-            CourierDocs(
+            Courier(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            Courier(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -602,7 +594,7 @@ class TestCourierDocs:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: CourierDocs) -> None:
+    def test_base_url_no_trailing_slash(self, client: Courier) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -615,10 +607,8 @@ class TestCourierDocs:
     @pytest.mark.parametrize(
         "client",
         [
-            CourierDocs(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
-            ),
-            CourierDocs(
+            Courier(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
+            Courier(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -627,7 +617,7 @@ class TestCourierDocs:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: CourierDocs) -> None:
+    def test_absolute_request_url(self, client: Courier) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -638,7 +628,7 @@ class TestCourierDocs:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -649,7 +639,7 @@ class TestCourierDocs:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -670,9 +660,7 @@ class TestCourierDocs:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            CourierDocs(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
-            )
+            Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None))
 
     @pytest.mark.respx(base_url=base_url)
     def test_received_text_for_expected_json(self, respx_mock: MockRouter) -> None:
@@ -681,12 +669,12 @@ class TestCourierDocs:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -714,16 +702,16 @@ class TestCourierDocs:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Courier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: CourierDocs) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Courier) -> None:
         respx_mock.post("/send").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
@@ -738,9 +726,9 @@ class TestCourierDocs:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: CourierDocs) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Courier) -> None:
         respx_mock.post("/send").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
@@ -755,12 +743,12 @@ class TestCourierDocs:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
         self,
-        client: CourierDocs,
+        client: Courier,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -793,10 +781,10 @@ class TestCourierDocs:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
-        self, client: CourierDocs, failures_before_success: int, respx_mock: MockRouter
+        self, client: Courier, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -824,10 +812,10 @@ class TestCourierDocs:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
-        self, client: CourierDocs, failures_before_success: int, respx_mock: MockRouter
+        self, client: Courier, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -904,8 +892,8 @@ class TestCourierDocs:
         assert exc_info.value.response.headers["Location"] == f"{base_url}/redirected"
 
 
-class TestAsyncCourierDocs:
-    client = AsyncCourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestAsyncCourier:
+    client = AsyncCourier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -954,7 +942,7 @@ class TestAsyncCourierDocs:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = AsyncCourierDocs(
+        client = AsyncCourier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -988,7 +976,7 @@ class TestAsyncCourierDocs:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = AsyncCourierDocs(
+        client = AsyncCourier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -1080,10 +1068,10 @@ class TestAsyncCourierDocs:
                         # to_raw_response_wrapper leaks through the @functools.wraps() decorator.
                         #
                         # removing the decorator fixes the leak for reasons we don't understand.
-                        "courier_docs/_legacy_response.py",
-                        "courier_docs/_response.py",
+                        "courier/_legacy_response.py",
+                        "courier/_response.py",
                         # pydantic.BaseModel.model_dump || pydantic.BaseModel.dict leak memory for some reason.
-                        "courier_docs/_compat.py",
+                        "courier/_compat.py",
                         # Standard library leaks we don't care about.
                         "/logging/__init__.py",
                     ]
@@ -1114,7 +1102,7 @@ class TestAsyncCourierDocs:
         assert timeout == httpx.Timeout(100.0)
 
     async def test_client_timeout_option(self) -> None:
-        client = AsyncCourierDocs(
+        client = AsyncCourier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
@@ -1125,7 +1113,7 @@ class TestAsyncCourierDocs:
     async def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
-            client = AsyncCourierDocs(
+            client = AsyncCourier(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1135,7 +1123,7 @@ class TestAsyncCourierDocs:
 
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
-            client = AsyncCourierDocs(
+            client = AsyncCourier(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1145,7 +1133,7 @@ class TestAsyncCourierDocs:
 
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = AsyncCourierDocs(
+            client = AsyncCourier(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1156,7 +1144,7 @@ class TestAsyncCourierDocs:
     def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             with httpx.Client() as http_client:
-                AsyncCourierDocs(
+                AsyncCourier(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -1164,14 +1152,14 @@ class TestAsyncCourierDocs:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = AsyncCourierDocs(
+        client = AsyncCourier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = AsyncCourierDocs(
+        client2 = AsyncCourier(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -1185,17 +1173,17 @@ class TestAsyncCourierDocs:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = AsyncCourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncCourier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(CourierDocsError):
+        with pytest.raises(CourierError):
             with update_env(**{"COURIER_DOCS_API_KEY": Omit()}):
-                client2 = AsyncCourierDocs(base_url=base_url, api_key=None, _strict_response_validation=True)
+                client2 = AsyncCourier(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = AsyncCourierDocs(
+        client = AsyncCourier(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1309,7 +1297,7 @@ class TestAsyncCourierDocs:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, async_client: AsyncCourierDocs) -> None:
+    def test_multipart_repeating_array(self, async_client: AsyncCourier) -> None:
         request = async_client._build_request(
             FinalRequestOptions.construct(
                 method="post",
@@ -1396,7 +1384,7 @@ class TestAsyncCourierDocs:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = AsyncCourierDocs(
+        client = AsyncCourier(
             base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -1406,17 +1394,17 @@ class TestAsyncCourierDocs:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(COURIER_DOCS_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncCourierDocs(api_key=api_key, _strict_response_validation=True)
+        with update_env(COURIER_BASE_URL="http://localhost:5000/from/env"):
+            client = AsyncCourier(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncCourierDocs(
+            AsyncCourier(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncCourierDocs(
+            AsyncCourier(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1425,7 +1413,7 @@ class TestAsyncCourierDocs:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: AsyncCourierDocs) -> None:
+    def test_base_url_trailing_slash(self, client: AsyncCourier) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1438,10 +1426,10 @@ class TestAsyncCourierDocs:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncCourierDocs(
+            AsyncCourier(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncCourierDocs(
+            AsyncCourier(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1450,7 +1438,7 @@ class TestAsyncCourierDocs:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: AsyncCourierDocs) -> None:
+    def test_base_url_no_trailing_slash(self, client: AsyncCourier) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1463,10 +1451,10 @@ class TestAsyncCourierDocs:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncCourierDocs(
+            AsyncCourier(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncCourierDocs(
+            AsyncCourier(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1475,7 +1463,7 @@ class TestAsyncCourierDocs:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: AsyncCourierDocs) -> None:
+    def test_absolute_request_url(self, client: AsyncCourier) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1486,7 +1474,7 @@ class TestAsyncCourierDocs:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncCourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncCourier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1498,7 +1486,7 @@ class TestAsyncCourierDocs:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncCourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncCourier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1520,7 +1508,7 @@ class TestAsyncCourierDocs:
 
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            AsyncCourierDocs(
+            AsyncCourier(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
@@ -1532,12 +1520,12 @@ class TestAsyncCourierDocs:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncCourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = AsyncCourier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncCourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = AsyncCourier(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1566,17 +1554,17 @@ class TestAsyncCourierDocs:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncCourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncCourier(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
         calculated = client._calculate_retry_timeout(remaining_retries, options, headers)
         assert calculated == pytest.approx(timeout, 0.5 * 0.875)  # pyright: ignore[reportUnknownMemberType]
 
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(
-        self, respx_mock: MockRouter, async_client: AsyncCourierDocs
+        self, respx_mock: MockRouter, async_client: AsyncCourier
     ) -> None:
         respx_mock.post("/send").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
@@ -1592,11 +1580,9 @@ class TestAsyncCourierDocs:
 
         assert _get_open_connections(self.client) == 0
 
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(
-        self, respx_mock: MockRouter, async_client: AsyncCourierDocs
-    ) -> None:
+    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncCourier) -> None:
         respx_mock.post("/send").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
@@ -1611,13 +1597,13 @@ class TestAsyncCourierDocs:
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
         self,
-        async_client: AsyncCourierDocs,
+        async_client: AsyncCourier,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -1650,11 +1636,11 @@ class TestAsyncCourierDocs:
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
-        self, async_client: AsyncCourierDocs, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncCourier, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1682,11 +1668,11 @@ class TestAsyncCourierDocs:
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
-    @mock.patch("courier_docs._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
-        self, async_client: AsyncCourierDocs, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncCourier, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 

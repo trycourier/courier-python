@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types.profiles import (
+from courier.types.profiles import (
     ListDeleteResponse,
     ListRetrieveResponse,
     ListSubscribeResponse,
@@ -23,7 +23,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: CourierDocs) -> None:
+    def test_method_retrieve(self, client: Courier) -> None:
         list_ = client.profiles.lists.retrieve(
             user_id="user_id",
         )
@@ -31,7 +31,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_retrieve_with_all_params(self, client: Courier) -> None:
         list_ = client.profiles.lists.retrieve(
             user_id="user_id",
             cursor="cursor",
@@ -40,7 +40,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: CourierDocs) -> None:
+    def test_raw_response_retrieve(self, client: Courier) -> None:
         response = client.profiles.lists.with_raw_response.retrieve(
             user_id="user_id",
         )
@@ -52,7 +52,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: CourierDocs) -> None:
+    def test_streaming_response_retrieve(self, client: Courier) -> None:
         with client.profiles.lists.with_streaming_response.retrieve(
             user_id="user_id",
         ) as response:
@@ -66,7 +66,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: CourierDocs) -> None:
+    def test_path_params_retrieve(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.lists.with_raw_response.retrieve(
                 user_id="",
@@ -74,7 +74,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_delete(self, client: CourierDocs) -> None:
+    def test_method_delete(self, client: Courier) -> None:
         list_ = client.profiles.lists.delete(
             "user_id",
         )
@@ -82,7 +82,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_delete(self, client: CourierDocs) -> None:
+    def test_raw_response_delete(self, client: Courier) -> None:
         response = client.profiles.lists.with_raw_response.delete(
             "user_id",
         )
@@ -94,7 +94,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_delete(self, client: CourierDocs) -> None:
+    def test_streaming_response_delete(self, client: Courier) -> None:
         with client.profiles.lists.with_streaming_response.delete(
             "user_id",
         ) as response:
@@ -108,7 +108,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_delete(self, client: CourierDocs) -> None:
+    def test_path_params_delete(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.lists.with_raw_response.delete(
                 "",
@@ -116,7 +116,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_subscribe(self, client: CourierDocs) -> None:
+    def test_method_subscribe(self, client: Courier) -> None:
         list_ = client.profiles.lists.subscribe(
             user_id="user_id",
             lists=[{"list_id": "listId"}],
@@ -125,7 +125,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_subscribe(self, client: CourierDocs) -> None:
+    def test_raw_response_subscribe(self, client: Courier) -> None:
         response = client.profiles.lists.with_raw_response.subscribe(
             user_id="user_id",
             lists=[{"list_id": "listId"}],
@@ -138,7 +138,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_subscribe(self, client: CourierDocs) -> None:
+    def test_streaming_response_subscribe(self, client: Courier) -> None:
         with client.profiles.lists.with_streaming_response.subscribe(
             user_id="user_id",
             lists=[{"list_id": "listId"}],
@@ -153,7 +153,7 @@ class TestLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_subscribe(self, client: CourierDocs) -> None:
+    def test_path_params_subscribe(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.lists.with_raw_response.subscribe(
                 user_id="",
@@ -168,7 +168,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_retrieve(self, async_client: AsyncCourier) -> None:
         list_ = await async_client.profiles.lists.retrieve(
             user_id="user_id",
         )
@@ -176,7 +176,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncCourier) -> None:
         list_ = await async_client.profiles.lists.retrieve(
             user_id="user_id",
             cursor="cursor",
@@ -185,7 +185,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.lists.with_raw_response.retrieve(
             user_id="user_id",
         )
@@ -197,7 +197,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.lists.with_streaming_response.retrieve(
             user_id="user_id",
         ) as response:
@@ -211,7 +211,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.lists.with_raw_response.retrieve(
                 user_id="",
@@ -219,7 +219,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_delete(self, async_client: AsyncCourier) -> None:
         list_ = await async_client.profiles.lists.delete(
             "user_id",
         )
@@ -227,7 +227,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_delete(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.lists.with_raw_response.delete(
             "user_id",
         )
@@ -239,7 +239,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_delete(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.lists.with_streaming_response.delete(
             "user_id",
         ) as response:
@@ -253,7 +253,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_delete(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.lists.with_raw_response.delete(
                 "",
@@ -261,7 +261,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_subscribe(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_subscribe(self, async_client: AsyncCourier) -> None:
         list_ = await async_client.profiles.lists.subscribe(
             user_id="user_id",
             lists=[{"list_id": "listId"}],
@@ -270,7 +270,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_subscribe(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_subscribe(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.lists.with_raw_response.subscribe(
             user_id="user_id",
             lists=[{"list_id": "listId"}],
@@ -283,7 +283,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_subscribe(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_subscribe(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.lists.with_streaming_response.subscribe(
             user_id="user_id",
             lists=[{"list_id": "listId"}],
@@ -298,7 +298,7 @@ class TestAsyncLists:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_subscribe(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_subscribe(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.lists.with_raw_response.subscribe(
                 user_id="",

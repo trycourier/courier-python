@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types import (
+from courier.types import (
     ProfileCreateResponse,
     ProfileReplaceResponse,
     ProfileRetrieveResponse,
@@ -23,7 +23,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_create(self, client: CourierDocs) -> None:
+    def test_method_create(self, client: Courier) -> None:
         profile = client.profiles.create(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -32,7 +32,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_create(self, client: CourierDocs) -> None:
+    def test_raw_response_create(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.create(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -45,7 +45,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_create(self, client: CourierDocs) -> None:
+    def test_streaming_response_create(self, client: Courier) -> None:
         with client.profiles.with_streaming_response.create(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -60,7 +60,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_create(self, client: CourierDocs) -> None:
+    def test_path_params_create(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.with_raw_response.create(
                 user_id="",
@@ -69,7 +69,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: CourierDocs) -> None:
+    def test_method_retrieve(self, client: Courier) -> None:
         profile = client.profiles.retrieve(
             "user_id",
         )
@@ -77,7 +77,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: CourierDocs) -> None:
+    def test_raw_response_retrieve(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.retrieve(
             "user_id",
         )
@@ -89,7 +89,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: CourierDocs) -> None:
+    def test_streaming_response_retrieve(self, client: Courier) -> None:
         with client.profiles.with_streaming_response.retrieve(
             "user_id",
         ) as response:
@@ -103,7 +103,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: CourierDocs) -> None:
+    def test_path_params_retrieve(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.with_raw_response.retrieve(
                 "",
@@ -111,7 +111,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update(self, client: CourierDocs) -> None:
+    def test_method_update(self, client: Courier) -> None:
         profile = client.profiles.update(
             user_id="user_id",
             patch=[
@@ -126,7 +126,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: CourierDocs) -> None:
+    def test_raw_response_update(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.update(
             user_id="user_id",
             patch=[
@@ -145,7 +145,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: CourierDocs) -> None:
+    def test_streaming_response_update(self, client: Courier) -> None:
         with client.profiles.with_streaming_response.update(
             user_id="user_id",
             patch=[
@@ -166,7 +166,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: CourierDocs) -> None:
+    def test_path_params_update(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.with_raw_response.update(
                 user_id="",
@@ -181,7 +181,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_delete(self, client: CourierDocs) -> None:
+    def test_method_delete(self, client: Courier) -> None:
         profile = client.profiles.delete(
             "user_id",
         )
@@ -189,7 +189,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_delete(self, client: CourierDocs) -> None:
+    def test_raw_response_delete(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.delete(
             "user_id",
         )
@@ -201,7 +201,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_delete(self, client: CourierDocs) -> None:
+    def test_streaming_response_delete(self, client: Courier) -> None:
         with client.profiles.with_streaming_response.delete(
             "user_id",
         ) as response:
@@ -215,7 +215,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_delete(self, client: CourierDocs) -> None:
+    def test_path_params_delete(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.with_raw_response.delete(
                 "",
@@ -223,7 +223,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_replace(self, client: CourierDocs) -> None:
+    def test_method_replace(self, client: Courier) -> None:
         profile = client.profiles.replace(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -232,7 +232,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_replace(self, client: CourierDocs) -> None:
+    def test_raw_response_replace(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.replace(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -245,7 +245,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_replace(self, client: CourierDocs) -> None:
+    def test_streaming_response_replace(self, client: Courier) -> None:
         with client.profiles.with_streaming_response.replace(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -260,7 +260,7 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_replace(self, client: CourierDocs) -> None:
+    def test_path_params_replace(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.with_raw_response.replace(
                 user_id="",
@@ -275,7 +275,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_create(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_create(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.create(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -284,7 +284,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_create(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.with_raw_response.create(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -297,7 +297,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_create(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.with_streaming_response.create(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -312,7 +312,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_create(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_create(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.with_raw_response.create(
                 user_id="",
@@ -321,7 +321,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_retrieve(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.retrieve(
             "user_id",
         )
@@ -329,7 +329,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.with_raw_response.retrieve(
             "user_id",
         )
@@ -341,7 +341,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.with_streaming_response.retrieve(
             "user_id",
         ) as response:
@@ -355,7 +355,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.with_raw_response.retrieve(
                 "",
@@ -363,7 +363,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_update(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.update(
             user_id="user_id",
             patch=[
@@ -378,7 +378,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.with_raw_response.update(
             user_id="user_id",
             patch=[
@@ -397,7 +397,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.with_streaming_response.update(
             user_id="user_id",
             patch=[
@@ -418,7 +418,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_update(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.with_raw_response.update(
                 user_id="",
@@ -433,7 +433,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_delete(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.delete(
             "user_id",
         )
@@ -441,7 +441,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_delete(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.with_raw_response.delete(
             "user_id",
         )
@@ -453,7 +453,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_delete(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.with_streaming_response.delete(
             "user_id",
         ) as response:
@@ -467,7 +467,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_delete(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.with_raw_response.delete(
                 "",
@@ -475,7 +475,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_replace(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_replace(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.replace(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -484,7 +484,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_replace(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_replace(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.with_raw_response.replace(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -497,7 +497,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_replace(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_replace(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.with_streaming_response.replace(
             user_id="user_id",
             profile={"foo": "bar"},
@@ -512,7 +512,7 @@ class TestAsyncProfiles:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_replace(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_replace(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.with_raw_response.replace(
                 user_id="",

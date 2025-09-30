@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types import AuthIssueTokenResponse
+from courier.types import AuthIssueTokenResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +19,7 @@ class TestAuth:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_issue_token(self, client: CourierDocs) -> None:
+    def test_method_issue_token(self, client: Courier) -> None:
         auth = client.auth.issue_token(
             expires_in="expires_in",
             scope="read:preferences",
@@ -28,7 +28,7 @@ class TestAuth:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_issue_token(self, client: CourierDocs) -> None:
+    def test_raw_response_issue_token(self, client: Courier) -> None:
         response = client.auth.with_raw_response.issue_token(
             expires_in="expires_in",
             scope="read:preferences",
@@ -41,7 +41,7 @@ class TestAuth:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_issue_token(self, client: CourierDocs) -> None:
+    def test_streaming_response_issue_token(self, client: Courier) -> None:
         with client.auth.with_streaming_response.issue_token(
             expires_in="expires_in",
             scope="read:preferences",
@@ -62,7 +62,7 @@ class TestAsyncAuth:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_issue_token(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_issue_token(self, async_client: AsyncCourier) -> None:
         auth = await async_client.auth.issue_token(
             expires_in="expires_in",
             scope="read:preferences",
@@ -71,7 +71,7 @@ class TestAsyncAuth:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_issue_token(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_issue_token(self, async_client: AsyncCourier) -> None:
         response = await async_client.auth.with_raw_response.issue_token(
             expires_in="expires_in",
             scope="read:preferences",
@@ -84,7 +84,7 @@ class TestAsyncAuth:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_issue_token(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_issue_token(self, async_client: AsyncCourier) -> None:
         async with async_client.auth.with_streaming_response.issue_token(
             expires_in="expires_in",
             scope="read:preferences",

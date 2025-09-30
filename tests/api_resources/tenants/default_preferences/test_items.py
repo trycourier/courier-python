@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from courier_docs import CourierDocs, AsyncCourierDocs
+from courier import Courier, AsyncCourier
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -17,7 +17,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update(self, client: CourierDocs) -> None:
+    def test_method_update(self, client: Courier) -> None:
         item = client.tenants.default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -27,7 +27,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_update_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_update_with_all_params(self, client: Courier) -> None:
         item = client.tenants.default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -39,7 +39,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_update(self, client: CourierDocs) -> None:
+    def test_raw_response_update(self, client: Courier) -> None:
         response = client.tenants.default_preferences.items.with_raw_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -53,7 +53,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_update(self, client: CourierDocs) -> None:
+    def test_streaming_response_update(self, client: Courier) -> None:
         with client.tenants.default_preferences.items.with_streaming_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -69,7 +69,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_update(self, client: CourierDocs) -> None:
+    def test_path_params_update(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
             client.tenants.default_preferences.items.with_raw_response.update(
                 topic_id="topic_id",
@@ -86,7 +86,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_delete(self, client: CourierDocs) -> None:
+    def test_method_delete(self, client: Courier) -> None:
         item = client.tenants.default_preferences.items.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -95,7 +95,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_delete(self, client: CourierDocs) -> None:
+    def test_raw_response_delete(self, client: Courier) -> None:
         response = client.tenants.default_preferences.items.with_raw_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -108,7 +108,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_delete(self, client: CourierDocs) -> None:
+    def test_streaming_response_delete(self, client: Courier) -> None:
         with client.tenants.default_preferences.items.with_streaming_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -123,7 +123,7 @@ class TestItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_delete(self, client: CourierDocs) -> None:
+    def test_path_params_delete(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
             client.tenants.default_preferences.items.with_raw_response.delete(
                 topic_id="topic_id",
@@ -144,7 +144,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_update(self, async_client: AsyncCourier) -> None:
         item = await async_client.tenants.default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -154,7 +154,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
         item = await async_client.tenants.default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -166,7 +166,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
         response = await async_client.tenants.default_preferences.items.with_raw_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -180,7 +180,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
         async with async_client.tenants.default_preferences.items.with_streaming_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -196,7 +196,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_update(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_update(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
             await async_client.tenants.default_preferences.items.with_raw_response.update(
                 topic_id="topic_id",
@@ -213,7 +213,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_delete(self, async_client: AsyncCourier) -> None:
         item = await async_client.tenants.default_preferences.items.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -222,7 +222,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_delete(self, async_client: AsyncCourier) -> None:
         response = await async_client.tenants.default_preferences.items.with_raw_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -235,7 +235,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_delete(self, async_client: AsyncCourier) -> None:
         async with async_client.tenants.default_preferences.items.with_streaming_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
@@ -250,7 +250,7 @@ class TestAsyncItems:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_delete(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_delete(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
             await async_client.tenants.default_preferences.items.with_raw_response.delete(
                 topic_id="topic_id",

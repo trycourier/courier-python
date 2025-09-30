@@ -7,7 +7,7 @@ from typing import Any, cast
 
 import pytest
 
-from courier_docs import CourierDocs, AsyncCourierDocs
+from courier import Courier, AsyncCourier
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -17,7 +17,7 @@ class TestRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_archive(self, client: CourierDocs) -> None:
+    def test_method_archive(self, client: Courier) -> None:
         request = client.requests.archive(
             "request_id",
         )
@@ -25,7 +25,7 @@ class TestRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_archive(self, client: CourierDocs) -> None:
+    def test_raw_response_archive(self, client: Courier) -> None:
         response = client.requests.with_raw_response.archive(
             "request_id",
         )
@@ -37,7 +37,7 @@ class TestRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_archive(self, client: CourierDocs) -> None:
+    def test_streaming_response_archive(self, client: Courier) -> None:
         with client.requests.with_streaming_response.archive(
             "request_id",
         ) as response:
@@ -51,7 +51,7 @@ class TestRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_archive(self, client: CourierDocs) -> None:
+    def test_path_params_archive(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `request_id` but received ''"):
             client.requests.with_raw_response.archive(
                 "",
@@ -65,7 +65,7 @@ class TestAsyncRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_archive(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_archive(self, async_client: AsyncCourier) -> None:
         request = await async_client.requests.archive(
             "request_id",
         )
@@ -73,7 +73,7 @@ class TestAsyncRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_archive(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_archive(self, async_client: AsyncCourier) -> None:
         response = await async_client.requests.with_raw_response.archive(
             "request_id",
         )
@@ -85,7 +85,7 @@ class TestAsyncRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_archive(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_archive(self, async_client: AsyncCourier) -> None:
         async with async_client.requests.with_streaming_response.archive(
             "request_id",
         ) as response:
@@ -99,7 +99,7 @@ class TestAsyncRequests:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_archive(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_archive(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `request_id` but received ''"):
             await async_client.requests.with_raw_response.archive(
                 "",

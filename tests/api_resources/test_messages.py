@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier_docs import CourierDocs, AsyncCourierDocs
-from courier_docs.types import (
+from courier.types import (
     MessageDetails,
     MessageListResponse,
     MessageHistoryResponse,
@@ -25,7 +25,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_retrieve(self, client: CourierDocs) -> None:
+    def test_method_retrieve(self, client: Courier) -> None:
         message = client.messages.retrieve(
             "message_id",
         )
@@ -33,7 +33,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_retrieve(self, client: CourierDocs) -> None:
+    def test_raw_response_retrieve(self, client: Courier) -> None:
         response = client.messages.with_raw_response.retrieve(
             "message_id",
         )
@@ -45,7 +45,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_retrieve(self, client: CourierDocs) -> None:
+    def test_streaming_response_retrieve(self, client: Courier) -> None:
         with client.messages.with_streaming_response.retrieve(
             "message_id",
         ) as response:
@@ -59,7 +59,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_retrieve(self, client: CourierDocs) -> None:
+    def test_path_params_retrieve(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             client.messages.with_raw_response.retrieve(
                 "",
@@ -67,13 +67,13 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list(self, client: CourierDocs) -> None:
+    def test_method_list(self, client: Courier) -> None:
         message = client.messages.list()
         assert_matches_type(MessageListResponse, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_list_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_list_with_all_params(self, client: Courier) -> None:
         message = client.messages.list(
             archived=True,
             cursor="cursor",
@@ -94,7 +94,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_list(self, client: CourierDocs) -> None:
+    def test_raw_response_list(self, client: Courier) -> None:
         response = client.messages.with_raw_response.list()
 
         assert response.is_closed is True
@@ -104,7 +104,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_list(self, client: CourierDocs) -> None:
+    def test_streaming_response_list(self, client: Courier) -> None:
         with client.messages.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -116,7 +116,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_cancel(self, client: CourierDocs) -> None:
+    def test_method_cancel(self, client: Courier) -> None:
         message = client.messages.cancel(
             "message_id",
         )
@@ -124,7 +124,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_cancel(self, client: CourierDocs) -> None:
+    def test_raw_response_cancel(self, client: Courier) -> None:
         response = client.messages.with_raw_response.cancel(
             "message_id",
         )
@@ -136,7 +136,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_cancel(self, client: CourierDocs) -> None:
+    def test_streaming_response_cancel(self, client: Courier) -> None:
         with client.messages.with_streaming_response.cancel(
             "message_id",
         ) as response:
@@ -150,7 +150,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_cancel(self, client: CourierDocs) -> None:
+    def test_path_params_cancel(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             client.messages.with_raw_response.cancel(
                 "",
@@ -158,7 +158,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_get_content(self, client: CourierDocs) -> None:
+    def test_method_get_content(self, client: Courier) -> None:
         message = client.messages.get_content(
             "message_id",
         )
@@ -166,7 +166,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_get_content(self, client: CourierDocs) -> None:
+    def test_raw_response_get_content(self, client: Courier) -> None:
         response = client.messages.with_raw_response.get_content(
             "message_id",
         )
@@ -178,7 +178,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_get_content(self, client: CourierDocs) -> None:
+    def test_streaming_response_get_content(self, client: Courier) -> None:
         with client.messages.with_streaming_response.get_content(
             "message_id",
         ) as response:
@@ -192,7 +192,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_get_content(self, client: CourierDocs) -> None:
+    def test_path_params_get_content(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             client.messages.with_raw_response.get_content(
                 "",
@@ -200,7 +200,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_history(self, client: CourierDocs) -> None:
+    def test_method_history(self, client: Courier) -> None:
         message = client.messages.history(
             message_id="message_id",
         )
@@ -208,7 +208,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_history_with_all_params(self, client: CourierDocs) -> None:
+    def test_method_history_with_all_params(self, client: Courier) -> None:
         message = client.messages.history(
             message_id="message_id",
             type="type",
@@ -217,7 +217,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_history(self, client: CourierDocs) -> None:
+    def test_raw_response_history(self, client: Courier) -> None:
         response = client.messages.with_raw_response.history(
             message_id="message_id",
         )
@@ -229,7 +229,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_history(self, client: CourierDocs) -> None:
+    def test_streaming_response_history(self, client: Courier) -> None:
         with client.messages.with_streaming_response.history(
             message_id="message_id",
         ) as response:
@@ -243,7 +243,7 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_history(self, client: CourierDocs) -> None:
+    def test_path_params_history(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             client.messages.with_raw_response.history(
                 message_id="",
@@ -257,7 +257,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_retrieve(self, async_client: AsyncCourier) -> None:
         message = await async_client.messages.retrieve(
             "message_id",
         )
@@ -265,7 +265,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncCourier) -> None:
         response = await async_client.messages.with_raw_response.retrieve(
             "message_id",
         )
@@ -277,7 +277,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncCourier) -> None:
         async with async_client.messages.with_streaming_response.retrieve(
             "message_id",
         ) as response:
@@ -291,7 +291,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             await async_client.messages.with_raw_response.retrieve(
                 "",
@@ -299,13 +299,13 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list(self, async_client: AsyncCourier) -> None:
         message = await async_client.messages.list()
         assert_matches_type(MessageListResponse, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncCourier) -> None:
         message = await async_client.messages.list(
             archived=True,
             cursor="cursor",
@@ -326,7 +326,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_list(self, async_client: AsyncCourier) -> None:
         response = await async_client.messages.with_raw_response.list()
 
         assert response.is_closed is True
@@ -336,7 +336,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncCourier) -> None:
         async with async_client.messages.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -348,7 +348,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_cancel(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_cancel(self, async_client: AsyncCourier) -> None:
         message = await async_client.messages.cancel(
             "message_id",
         )
@@ -356,7 +356,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_cancel(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_cancel(self, async_client: AsyncCourier) -> None:
         response = await async_client.messages.with_raw_response.cancel(
             "message_id",
         )
@@ -368,7 +368,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_cancel(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_cancel(self, async_client: AsyncCourier) -> None:
         async with async_client.messages.with_streaming_response.cancel(
             "message_id",
         ) as response:
@@ -382,7 +382,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_cancel(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_cancel(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             await async_client.messages.with_raw_response.cancel(
                 "",
@@ -390,7 +390,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_get_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_get_content(self, async_client: AsyncCourier) -> None:
         message = await async_client.messages.get_content(
             "message_id",
         )
@@ -398,7 +398,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_get_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_get_content(self, async_client: AsyncCourier) -> None:
         response = await async_client.messages.with_raw_response.get_content(
             "message_id",
         )
@@ -410,7 +410,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_get_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_get_content(self, async_client: AsyncCourier) -> None:
         async with async_client.messages.with_streaming_response.get_content(
             "message_id",
         ) as response:
@@ -424,7 +424,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_get_content(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_get_content(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             await async_client.messages.with_raw_response.get_content(
                 "",
@@ -432,7 +432,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_history(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_history(self, async_client: AsyncCourier) -> None:
         message = await async_client.messages.history(
             message_id="message_id",
         )
@@ -440,7 +440,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_history_with_all_params(self, async_client: AsyncCourierDocs) -> None:
+    async def test_method_history_with_all_params(self, async_client: AsyncCourier) -> None:
         message = await async_client.messages.history(
             message_id="message_id",
             type="type",
@@ -449,7 +449,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_history(self, async_client: AsyncCourierDocs) -> None:
+    async def test_raw_response_history(self, async_client: AsyncCourier) -> None:
         response = await async_client.messages.with_raw_response.history(
             message_id="message_id",
         )
@@ -461,7 +461,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_history(self, async_client: AsyncCourierDocs) -> None:
+    async def test_streaming_response_history(self, async_client: AsyncCourier) -> None:
         async with async_client.messages.with_streaming_response.history(
             message_id="message_id",
         ) as response:
@@ -475,7 +475,7 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_history(self, async_client: AsyncCourierDocs) -> None:
+    async def test_path_params_history(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             await async_client.messages.with_raw_response.history(
                 message_id="",

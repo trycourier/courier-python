@@ -10,15 +10,15 @@ import httpx
 import pytest
 from pytest_asyncio import is_async_test
 
-from courier_docs import CourierDocs, AsyncCourierDocs, DefaultAioHttpClient
-from courier_docs._utils import is_dict
+from courier import Courier, AsyncCourier, DefaultAioHttpClient
+from courier._utils import is_dict
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest  # pyright: ignore[reportPrivateImportUsage]
 
 pytest.register_assert_rewrite("tests.utils")
 
-logging.getLogger("courier_docs").setLevel(logging.DEBUG)
+logging.getLogger("courier").setLevel(logging.DEBUG)
 
 
 # automatically add `pytest.mark.asyncio()` to all of our async tests
@@ -49,17 +49,17 @@ api_key = "My API Key"
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[CourierDocs]:
+def client(request: FixtureRequest) -> Iterator[Courier]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with CourierDocs(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with Courier(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncCourierDocs]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncCourier]:
     param = getattr(request, "param", True)
 
     # defaults
@@ -78,7 +78,7 @@ async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncCourierDoc
     else:
         raise TypeError(f"Unexpected fixture parameter type {type(param)}, expected bool or dict")
 
-    async with AsyncCourierDocs(
+    async with AsyncCourier(
         base_url=base_url, api_key=api_key, _strict_response_validation=strict, http_client=http_client
     ) as client:
         yield client
