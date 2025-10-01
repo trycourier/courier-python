@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import send_send_message_params
+from ..types import send_message_params
 from .._types import Body, Query, Headers, NotGiven, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -17,7 +17,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.message_param import MessageParam
-from ..types.send_send_message_response import SendSendMessageResponse
+from ..types.send_message_response import SendMessageResponse
 
 __all__ = ["SendResource", "AsyncSendResource"]
 
@@ -42,7 +42,7 @@ class SendResource(SyncAPIResource):
         """
         return SendResourceWithStreamingResponse(self)
 
-    def send_message(
+    def message(
         self,
         *,
         message: MessageParam,
@@ -52,7 +52,7 @@ class SendResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SendSendMessageResponse:
+    ) -> SendMessageResponse:
         """
         Use the send API to send a message to one or more recipients.
 
@@ -69,11 +69,11 @@ class SendResource(SyncAPIResource):
         """
         return self._post(
             "/send",
-            body=maybe_transform({"message": message}, send_send_message_params.SendSendMessageParams),
+            body=maybe_transform({"message": message}, send_message_params.SendMessageParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SendSendMessageResponse,
+            cast_to=SendMessageResponse,
         )
 
 
@@ -97,7 +97,7 @@ class AsyncSendResource(AsyncAPIResource):
         """
         return AsyncSendResourceWithStreamingResponse(self)
 
-    async def send_message(
+    async def message(
         self,
         *,
         message: MessageParam,
@@ -107,7 +107,7 @@ class AsyncSendResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SendSendMessageResponse:
+    ) -> SendMessageResponse:
         """
         Use the send API to send a message to one or more recipients.
 
@@ -124,11 +124,11 @@ class AsyncSendResource(AsyncAPIResource):
         """
         return await self._post(
             "/send",
-            body=await async_maybe_transform({"message": message}, send_send_message_params.SendSendMessageParams),
+            body=await async_maybe_transform({"message": message}, send_message_params.SendMessageParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SendSendMessageResponse,
+            cast_to=SendMessageResponse,
         )
 
 
@@ -136,8 +136,8 @@ class SendResourceWithRawResponse:
     def __init__(self, send: SendResource) -> None:
         self._send = send
 
-        self.send_message = to_raw_response_wrapper(
-            send.send_message,
+        self.message = to_raw_response_wrapper(
+            send.message,
         )
 
 
@@ -145,8 +145,8 @@ class AsyncSendResourceWithRawResponse:
     def __init__(self, send: AsyncSendResource) -> None:
         self._send = send
 
-        self.send_message = async_to_raw_response_wrapper(
-            send.send_message,
+        self.message = async_to_raw_response_wrapper(
+            send.message,
         )
 
 
@@ -154,8 +154,8 @@ class SendResourceWithStreamingResponse:
     def __init__(self, send: SendResource) -> None:
         self._send = send
 
-        self.send_message = to_streamed_response_wrapper(
-            send.send_message,
+        self.message = to_streamed_response_wrapper(
+            send.message,
         )
 
 
@@ -163,6 +163,6 @@ class AsyncSendResourceWithStreamingResponse:
     def __init__(self, send: AsyncSendResource) -> None:
         self._send = send
 
-        self.send_message = async_to_streamed_response_wrapper(
-            send.send_message,
+        self.message = async_to_streamed_response_wrapper(
+            send.message,
         )

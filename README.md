@@ -35,7 +35,7 @@ client = Courier(
     api_key=os.environ.get("COURIER_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.send.send_message(
+response = client.send.message(
     message={
         "content": {
             "elements": [{}],
@@ -66,7 +66,7 @@ client = AsyncCourier(
 
 
 async def main() -> None:
-    response = await client.send.send_message(
+    response = await client.send.message(
         message={
             "content": {
                 "elements": [{}],
@@ -106,7 +106,7 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.send.send_message(
+        response = await client.send.message(
             message={
                 "content": {
                     "elements": [{}],
@@ -167,7 +167,7 @@ from courier import Courier
 client = Courier()
 
 try:
-    client.send.send_message(
+    client.send.message(
         message={
             "content": {
                 "elements": [{}],
@@ -217,7 +217,7 @@ client = Courier(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).send.send_message(
+client.with_options(max_retries=5).send.message(
     message={
         "content": {
             "elements": [{}],
@@ -247,7 +247,7 @@ client = Courier(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).send.send_message(
+client.with_options(timeout=5.0).send.message(
     message={
         "content": {
             "elements": [{}],
@@ -295,7 +295,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from courier import Courier
 
 client = Courier()
-response = client.send.with_raw_response.send_message(
+response = client.send.with_raw_response.message(
     message={
         "content": {
             "elements": [{}],
@@ -305,7 +305,7 @@ response = client.send.with_raw_response.send_message(
 )
 print(response.headers.get('X-My-Header'))
 
-send = response.parse()  # get the object that `send.send_message()` would have returned
+send = response.parse()  # get the object that `send.message()` would have returned
 print(send.request_id)
 ```
 
@@ -320,7 +320,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.send.with_streaming_response.send_message(
+with client.send.with_streaming_response.message(
     message={
         "content": {
             "elements": [{}],
