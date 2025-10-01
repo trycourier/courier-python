@@ -51,6 +51,7 @@ from .brand_update_params import BrandUpdateParams as BrandUpdateParams
 from .default_preferences import DefaultPreferences as DefaultPreferences
 from .filter_config_param import FilterConfigParam as FilterConfigParam
 from .message_list_params import MessageListParams as MessageListParams
+from .send_message_params import SendMessageParams as SendMessageParams
 from .audience_list_params import AudienceListParams as AudienceListParams
 from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
@@ -66,6 +67,7 @@ from .message_context_param import MessageContextParam as MessageContextParam
 from .message_list_response import MessageListResponse as MessageListResponse
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
+from .send_message_response import SendMessageResponse as SendMessageResponse
 from .audience_list_response import AudienceListResponse as AudienceListResponse
 from .audience_update_params import AudienceUpdateParams as AudienceUpdateParams
 from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
@@ -84,7 +86,6 @@ from .message_history_response import MessageHistoryResponse as MessageHistoryRe
 from .notification_get_content import NotificationGetContent as NotificationGetContent
 from .notification_list_params import NotificationListParams as NotificationListParams
 from .profile_replace_response import ProfileReplaceResponse as ProfileReplaceResponse
-from .send_send_message_params import SendSendMessageParams as SendSendMessageParams
 from .tenant_list_users_params import TenantListUsersParams as TenantListUsersParams
 from .audit_event_list_response import AuditEventListResponse as AuditEventListResponse
 from .auth_issue_token_response import AuthIssueTokenResponse as AuthIssueTokenResponse
@@ -100,7 +101,6 @@ from .inbound_bulk_message_param import InboundBulkMessageParam as InboundBulkMe
 from .inbound_track_event_params import InboundTrackEventParams as InboundTrackEventParams
 from .nested_filter_config_param import NestedFilterConfigParam as NestedFilterConfigParam
 from .notification_list_response import NotificationListResponse as NotificationListResponse
-from .send_send_message_response import SendSendMessageResponse as SendSendMessageResponse
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
 from .slack_base_properties_param import SlackBasePropertiesParam as SlackBasePropertiesParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
