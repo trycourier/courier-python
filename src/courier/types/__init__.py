@@ -9,7 +9,6 @@ from . import (
     inbound_bulk_message,
     nested_filter_config,
     audience_list_response,
-    elemental_channel_node,
     audience_update_response,
     bulk_retrieve_job_response,
     notification_list_response,
@@ -72,7 +71,6 @@ from .audience_list_response import AudienceListResponse as AudienceListResponse
 from .audience_update_params import AudienceUpdateParams as AudienceUpdateParams
 from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
 from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
-from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode
 from .message_history_params import MessageHistoryParams as MessageHistoryParams
 from .profile_replace_params import ProfileReplaceParams as ProfileReplaceParams
 from .audit_event_list_params import AuditEventListParams as AuditEventListParams
@@ -104,7 +102,6 @@ from .notification_list_response import NotificationListResponse as Notification
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
 from .slack_base_properties_param import SlackBasePropertiesParam as SlackBasePropertiesParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
-from .elemental_channel_node_param import ElementalChannelNodeParam as ElementalChannelNodeParam
 from .inbound_track_event_response import InboundTrackEventResponse as InboundTrackEventResponse
 from .message_get_content_response import MessageGetContentResponse as MessageGetContentResponse
 from .translation_retrieve_response import TranslationRetrieveResponse as TranslationRetrieveResponse
@@ -119,7 +116,6 @@ from .automation_invoke_by_template_params import AutomationInvokeByTemplatePara
 # Pydantic can resolve the necessary references.
 # See: https://github.com/pydantic/pydantic/issues/11250 for more context.
 if _compat.PYDANTIC_V1:
-    elemental_channel_node.ElementalChannelNode.update_forward_refs()  # type: ignore
     elemental_group_node.ElementalGroupNode.update_forward_refs()  # type: ignore
     audience.Audience.update_forward_refs()  # type: ignore
     nested_filter_config.NestedFilterConfig.update_forward_refs()  # type: ignore
@@ -130,7 +126,6 @@ if _compat.PYDANTIC_V1:
     message_routing.MessageRouting.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
 else:
-    elemental_channel_node.ElementalChannelNode.model_rebuild(_parent_namespace_depth=0)
     elemental_group_node.ElementalGroupNode.model_rebuild(_parent_namespace_depth=0)
     audience.Audience.model_rebuild(_parent_namespace_depth=0)
     nested_filter_config.NestedFilterConfig.model_rebuild(_parent_namespace_depth=0)
