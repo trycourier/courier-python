@@ -19,7 +19,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.tenants import template_list_params
 from ...types.tenants.template_list_response import TemplateListResponse
-from ...types.tenants.template_retrieve_response import TemplateRetrieveResponse
+from ...types.tenants.base_template_tenant_association import BaseTemplateTenantAssociation
 
 __all__ = ["TemplatesResource", "AsyncTemplatesResource"]
 
@@ -55,7 +55,7 @@ class TemplatesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TemplateRetrieveResponse:
+    ) -> BaseTemplateTenantAssociation:
         """
         Get a Template in Tenant
 
@@ -77,7 +77,7 @@ class TemplatesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TemplateRetrieveResponse,
+            cast_to=BaseTemplateTenantAssociation,
         )
 
     def list(
@@ -161,7 +161,7 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TemplateRetrieveResponse:
+    ) -> BaseTemplateTenantAssociation:
         """
         Get a Template in Tenant
 
@@ -183,7 +183,7 @@ class AsyncTemplatesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=TemplateRetrieveResponse,
+            cast_to=BaseTemplateTenantAssociation,
         )
 
     async def list(

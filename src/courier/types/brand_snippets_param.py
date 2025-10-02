@@ -3,18 +3,12 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
 
-__all__ = ["BrandSnippetsParam", "Item"]
+from .brand_snippet_param import BrandSnippetParam
 
-
-class Item(TypedDict, total=False):
-    format: Required[Literal["handlebars"]]
-
-    name: Required[str]
-
-    value: Required[str]
+__all__ = ["BrandSnippetsParam"]
 
 
 class BrandSnippetsParam(TypedDict, total=False):
-    items: Required[Iterable[Item]]
+    items: Required[Iterable[BrandSnippetParam]]

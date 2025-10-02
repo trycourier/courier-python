@@ -6,41 +6,27 @@ from typing import Dict, Union, Optional
 from typing_extensions import Literal, Required, TypedDict
 
 from .._types import SequenceNotStr
+from .utm_param import UtmParam
 from .message_context_param import MessageContextParam
 
 __all__ = [
     "BaseMessageParam",
     "Channels",
     "ChannelsMetadata",
-    "ChannelsMetadataUtm",
     "ChannelsTimeouts",
     "Delay",
     "Expiry",
     "Metadata",
-    "MetadataUtm",
     "Preferences",
     "Providers",
     "ProvidersMetadata",
-    "ProvidersMetadataUtm",
     "Routing",
     "Timeout",
 ]
 
 
-class ChannelsMetadataUtm(TypedDict, total=False):
-    campaign: Optional[str]
-
-    content: Optional[str]
-
-    medium: Optional[str]
-
-    source: Optional[str]
-
-    term: Optional[str]
-
-
 class ChannelsMetadata(TypedDict, total=False):
-    utm: Optional[ChannelsMetadataUtm]
+    utm: Optional[UtmParam]
 
 
 class ChannelsTimeouts(TypedDict, total=False):
@@ -114,18 +100,6 @@ class Expiry(TypedDict, total=False):
     """
 
 
-class MetadataUtm(TypedDict, total=False):
-    campaign: Optional[str]
-
-    content: Optional[str]
-
-    medium: Optional[str]
-
-    source: Optional[str]
-
-    term: Optional[str]
-
-
 class Metadata(TypedDict, total=False):
     event: Optional[str]
     """An arbitrary string to tracks the event that generated this request (e.g.
@@ -146,7 +120,7 @@ class Metadata(TypedDict, total=False):
     Note: Courier does not verify the uniqueness of this ID.
     """
 
-    utm: Optional[MetadataUtm]
+    utm: Optional[UtmParam]
     """
     Identify the campaign that refers traffic to a specific website, and attributes
     the browser's website session.
@@ -162,20 +136,8 @@ class Preferences(TypedDict, total=False):
     """
 
 
-class ProvidersMetadataUtm(TypedDict, total=False):
-    campaign: Optional[str]
-
-    content: Optional[str]
-
-    medium: Optional[str]
-
-    source: Optional[str]
-
-    term: Optional[str]
-
-
 class ProvidersMetadata(TypedDict, total=False):
-    utm: Optional[ProvidersMetadataUtm]
+    utm: Optional[UtmParam]
 
 
 _ProvidersReservedKeywords = TypedDict(

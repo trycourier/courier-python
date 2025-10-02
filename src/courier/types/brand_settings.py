@@ -2,27 +2,15 @@
 
 from typing import Optional
 
+from .email import Email
 from .._models import BaseModel
+from .brand_colors import BrandColors
 
-__all__ = ["BrandSettings", "Colors", "Email"]
-
-
-class Colors(BaseModel):
-    primary: Optional[str] = None
-
-    secondary: Optional[str] = None
-
-    tertiary: Optional[str] = None
-
-
-class Email(BaseModel):
-    footer: object
-
-    header: object
+__all__ = ["BrandSettings"]
 
 
 class BrandSettings(BaseModel):
-    colors: Optional[Colors] = None
+    colors: Optional[BrandColors] = None
 
     email: Optional[Email] = None
 

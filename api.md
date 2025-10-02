@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from courier.types import ChannelPreference, Rule
+```
+
 # Send
 
 Types:
@@ -12,6 +18,7 @@ from courier.types import (
     MsTeamsBaseProperties,
     Recipient,
     SlackBaseProperties,
+    Utm,
     SendMessageResponse,
 )
 ```
@@ -95,7 +102,15 @@ Methods:
 Types:
 
 ```python
-from courier.types import Brand, BrandSettings, BrandSnippets, BrandListResponse
+from courier.types import (
+    Brand,
+    BrandColors,
+    BrandSettings,
+    BrandSnippet,
+    BrandSnippets,
+    Email,
+    BrandListResponse,
+)
 ```
 
 Methods:
@@ -163,6 +178,7 @@ Types:
 
 ```python
 from courier.types.lists import (
+    NotificationPreferenceDetails,
     PutSubscriptionsRecipient,
     RecipientPreferences,
     SubscriptionListResponse,
@@ -309,12 +325,19 @@ Methods:
 Types:
 
 ```python
-from courier.types.tenants import TemplateRetrieveResponse, TemplateListResponse
+from courier.types.tenants import (
+    BaseTemplateTenantAssociation,
+    ElementalChannelNode,
+    ElementalContent,
+    ElementalGroupNode,
+    ElementalNode,
+    TemplateListResponse,
+)
 ```
 
 Methods:
 
-- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/tenants/template_retrieve_response.py">TemplateRetrieveResponse</a></code>
+- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/tenants/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
 - <code title="get /tenants/{tenant_id}/templates">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">list</a>(tenant_id, \*\*<a href="src/courier/types/tenants/template_list_params.py">params</a>) -> <a href="./src/courier/types/tenants/template_list_response.py">TemplateListResponse</a></code>
 
 # Translations

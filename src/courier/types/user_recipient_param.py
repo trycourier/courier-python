@@ -6,58 +6,30 @@ from typing import Dict, Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .shared_params.rule import Rule
 from .message_context_param import MessageContextParam
 from .users.preference_status import PreferenceStatus
-from .tenants.default_preferences.channel_classification import ChannelClassification
+from .shared_params.channel_preference import ChannelPreference
 
-__all__ = [
-    "UserRecipientParam",
-    "Preferences",
-    "PreferencesNotifications",
-    "PreferencesNotificationsChannelPreference",
-    "PreferencesNotificationsRule",
-    "PreferencesCategories",
-    "PreferencesCategoriesChannelPreference",
-    "PreferencesCategoriesRule",
-]
-
-
-class PreferencesNotificationsChannelPreference(TypedDict, total=False):
-    channel: Required[ChannelClassification]
-
-
-class PreferencesNotificationsRule(TypedDict, total=False):
-    until: Required[str]
-
-    start: Optional[str]
+__all__ = ["UserRecipientParam", "Preferences", "PreferencesNotifications", "PreferencesCategories"]
 
 
 class PreferencesNotifications(TypedDict, total=False):
     status: Required[PreferenceStatus]
 
-    channel_preferences: Optional[Iterable[PreferencesNotificationsChannelPreference]]
+    channel_preferences: Optional[Iterable[ChannelPreference]]
 
-    rules: Optional[Iterable[PreferencesNotificationsRule]]
+    rules: Optional[Iterable[Rule]]
 
     source: Optional[Literal["subscription", "list", "recipient"]]
-
-
-class PreferencesCategoriesChannelPreference(TypedDict, total=False):
-    channel: Required[ChannelClassification]
-
-
-class PreferencesCategoriesRule(TypedDict, total=False):
-    until: Required[str]
-
-    start: Optional[str]
 
 
 class PreferencesCategories(TypedDict, total=False):
     status: Required[PreferenceStatus]
 
-    channel_preferences: Optional[Iterable[PreferencesCategoriesChannelPreference]]
+    channel_preferences: Optional[Iterable[ChannelPreference]]
 
-    rules: Optional[Iterable[PreferencesCategoriesRule]]
+    rules: Optional[Iterable[Rule]]
 
     source: Optional[Literal["subscription", "list", "recipient"]]
 
