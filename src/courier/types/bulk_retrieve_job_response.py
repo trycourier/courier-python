@@ -1,16 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
-
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .inbound_bulk_message import InboundBulkMessage
 
 __all__ = ["BulkRetrieveJobResponse", "Job"]
 
 
 class Job(BaseModel):
-    definition: "InboundBulkMessage"
+    definition: InboundBulkMessage
 
     enqueued: int
 
@@ -23,6 +22,3 @@ class Job(BaseModel):
 
 class BulkRetrieveJobResponse(BaseModel):
     job: Job
-
-
-from .inbound_bulk_message import InboundBulkMessage

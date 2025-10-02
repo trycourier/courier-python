@@ -6,6 +6,7 @@ from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
+from .message_param import MessageParam
 from .automations.merge_algorithm import MergeAlgorithm
 from .automations.automation_step_param import AutomationStepParam
 
@@ -222,7 +223,7 @@ class AutomationStepAutomationSendStep(AutomationStepParam, total=False):
 class AutomationStepAutomationV2SendStep(AutomationStepParam, total=False):
     action: Required[Literal["send"]]
 
-    message: Required["MessageParam"]
+    message: Required[MessageParam]
     """
     Describes the content of the message in a way that will work for email, push,
     chat, or any channel.
@@ -272,6 +273,3 @@ class Automation(TypedDict, total=False):
     steps: Required[Iterable[AutomationStep]]
 
     cancelation_token: Optional[str]
-
-
-from .message_param import MessageParam
