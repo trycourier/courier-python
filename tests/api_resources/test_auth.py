@@ -22,7 +22,7 @@ class TestAuth:
     def test_method_issue_token(self, client: Courier) -> None:
         auth = client.auth.issue_token(
             expires_in="expires_in",
-            scope="read:preferences",
+            scope="scope",
         )
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
@@ -31,7 +31,7 @@ class TestAuth:
     def test_raw_response_issue_token(self, client: Courier) -> None:
         response = client.auth.with_raw_response.issue_token(
             expires_in="expires_in",
-            scope="read:preferences",
+            scope="scope",
         )
 
         assert response.is_closed is True
@@ -44,7 +44,7 @@ class TestAuth:
     def test_streaming_response_issue_token(self, client: Courier) -> None:
         with client.auth.with_streaming_response.issue_token(
             expires_in="expires_in",
-            scope="read:preferences",
+            scope="scope",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -65,7 +65,7 @@ class TestAsyncAuth:
     async def test_method_issue_token(self, async_client: AsyncCourier) -> None:
         auth = await async_client.auth.issue_token(
             expires_in="expires_in",
-            scope="read:preferences",
+            scope="scope",
         )
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
@@ -74,7 +74,7 @@ class TestAsyncAuth:
     async def test_raw_response_issue_token(self, async_client: AsyncCourier) -> None:
         response = await async_client.auth.with_raw_response.issue_token(
             expires_in="expires_in",
-            scope="read:preferences",
+            scope="scope",
         )
 
         assert response.is_closed is True
@@ -87,7 +87,7 @@ class TestAsyncAuth:
     async def test_streaming_response_issue_token(self, async_client: AsyncCourier) -> None:
         async with async_client.auth.with_streaming_response.issue_token(
             expires_in="expires_in",
-            scope="read:preferences",
+            scope="scope",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

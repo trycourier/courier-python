@@ -20,7 +20,7 @@ from ..._response import (
 from ...types.users import token_update_params, token_add_single_params
 from ..._base_client import make_request_options
 from ...types.users.token_list_response import TokenListResponse
-from ...types.users.token_retrieve_single_response import TokenRetrieveSingleResponse
+from ...types.users.token_retrieve_response import TokenRetrieveResponse
 
 __all__ = ["TokensResource", "AsyncTokensResource"]
 
@@ -44,6 +44,42 @@ class TokensResource(SyncAPIResource):
         For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
         """
         return TokensResourceWithStreamingResponse(self)
+
+    def retrieve(
+        self,
+        token: str,
+        *,
+        user_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenRetrieveResponse:
+        """
+        Get single token available for a `:token`
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        if not token:
+            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
+        return self._get(
+            f"/users/{user_id}/tokens/{token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenRetrieveResponse,
+        )
 
     def update(
         self,
@@ -253,42 +289,6 @@ class TokensResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
-    def retrieve_single(
-        self,
-        token: str,
-        *,
-        user_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenRetrieveSingleResponse:
-        """
-        Get single token available for a `:token`
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not user_id:
-            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
-        if not token:
-            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
-        return self._get(
-            f"/users/{user_id}/tokens/{token}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=TokenRetrieveSingleResponse,
-        )
-
 
 class AsyncTokensResource(AsyncAPIResource):
     @cached_property
@@ -309,6 +309,42 @@ class AsyncTokensResource(AsyncAPIResource):
         For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
         """
         return AsyncTokensResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        token: str,
+        *,
+        user_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> TokenRetrieveResponse:
+        """
+        Get single token available for a `:token`
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        if not token:
+            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
+        return await self._get(
+            f"/users/{user_id}/tokens/{token}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TokenRetrieveResponse,
+        )
 
     async def update(
         self,
@@ -518,47 +554,14 @@ class AsyncTokensResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    async def retrieve_single(
-        self,
-        token: str,
-        *,
-        user_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> TokenRetrieveSingleResponse:
-        """
-        Get single token available for a `:token`
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not user_id:
-            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
-        if not token:
-            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
-        return await self._get(
-            f"/users/{user_id}/tokens/{token}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=TokenRetrieveSingleResponse,
-        )
-
 
 class TokensResourceWithRawResponse:
     def __init__(self, tokens: TokensResource) -> None:
         self._tokens = tokens
 
+        self.retrieve = to_raw_response_wrapper(
+            tokens.retrieve,
+        )
         self.update = to_raw_response_wrapper(
             tokens.update,
         )
@@ -574,15 +577,15 @@ class TokensResourceWithRawResponse:
         self.add_single = to_raw_response_wrapper(
             tokens.add_single,
         )
-        self.retrieve_single = to_raw_response_wrapper(
-            tokens.retrieve_single,
-        )
 
 
 class AsyncTokensResourceWithRawResponse:
     def __init__(self, tokens: AsyncTokensResource) -> None:
         self._tokens = tokens
 
+        self.retrieve = async_to_raw_response_wrapper(
+            tokens.retrieve,
+        )
         self.update = async_to_raw_response_wrapper(
             tokens.update,
         )
@@ -598,15 +601,15 @@ class AsyncTokensResourceWithRawResponse:
         self.add_single = async_to_raw_response_wrapper(
             tokens.add_single,
         )
-        self.retrieve_single = async_to_raw_response_wrapper(
-            tokens.retrieve_single,
-        )
 
 
 class TokensResourceWithStreamingResponse:
     def __init__(self, tokens: TokensResource) -> None:
         self._tokens = tokens
 
+        self.retrieve = to_streamed_response_wrapper(
+            tokens.retrieve,
+        )
         self.update = to_streamed_response_wrapper(
             tokens.update,
         )
@@ -622,15 +625,15 @@ class TokensResourceWithStreamingResponse:
         self.add_single = to_streamed_response_wrapper(
             tokens.add_single,
         )
-        self.retrieve_single = to_streamed_response_wrapper(
-            tokens.retrieve_single,
-        )
 
 
 class AsyncTokensResourceWithStreamingResponse:
     def __init__(self, tokens: AsyncTokensResource) -> None:
         self._tokens = tokens
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            tokens.retrieve,
+        )
         self.update = async_to_streamed_response_wrapper(
             tokens.update,
         )
@@ -645,7 +648,4 @@ class AsyncTokensResourceWithStreamingResponse:
         )
         self.add_single = async_to_streamed_response_wrapper(
             tokens.add_single,
-        )
-        self.retrieve_single = async_to_streamed_response_wrapper(
-            tokens.retrieve_single,
         )

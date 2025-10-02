@@ -132,7 +132,7 @@ from courier import Courier
 
 client = Courier()
 
-automation_invoke_response = client.automations.invoke_ad_hoc(
+automation_invoke_response = client.automations.invoke.invoke_ad_hoc(
     automation={
         "steps": [
             {

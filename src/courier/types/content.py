@@ -2,21 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import Union
 from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 
-__all__ = ["Content", "ElementalContent", "ElementalContentSugar"]
-
-
-class ElementalContent(BaseModel):
-    elements: List["ElementalNode"]
-
-    version: str
-    """For example, "2022-01-01" """
-
-    brand: Optional[object] = None
+__all__ = ["Content", "ElementalContentSugar"]
 
 
 class ElementalContentSugar(BaseModel):
@@ -27,6 +18,6 @@ class ElementalContentSugar(BaseModel):
     """The title to be displayed by supported channels i.e. push, email (as subject)"""
 
 
-Content: TypeAlias = Union[ElementalContent, ElementalContentSugar]
+Content: TypeAlias = Union["ElementalContent", ElementalContentSugar]
 
-from .elemental_node import ElementalNode
+from .tenants.elemental_content import ElementalContent

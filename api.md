@@ -7,16 +7,11 @@ from courier.types import (
     BaseMessage,
     BaseMessageSendTo,
     Content,
-    ElementalChannelNode,
-    ElementalGroupNode,
-    ElementalNode,
     Message,
     MessageContext,
     MsTeamsBaseProperties,
     Recipient,
-    RoutingMethod,
     SlackBaseProperties,
-    Utm,
     SendMessageResponse,
 )
 ```
@@ -77,11 +72,6 @@ Methods:
 
 # Automations
 
-Methods:
-
-- <code title="post /automations/invoke">client.automations.<a href="./src/courier/resources/automations/automations.py">invoke_ad_hoc</a>(\*\*<a href="src/courier/types/automation_invoke_ad_hoc_params.py">params</a>) -> <a href="./src/courier/types/automations/automation_invoke_response.py">AutomationInvokeResponse</a></code>
-- <code title="post /automations/{templateId}/invoke">client.automations.<a href="./src/courier/resources/automations/automations.py">invoke_by_template</a>(template_id, \*\*<a href="src/courier/types/automation_invoke_by_template_params.py">params</a>) -> <a href="./src/courier/types/automations/automation_invoke_response.py">AutomationInvokeResponse</a></code>
-
 ## Invoke
 
 Types:
@@ -94,6 +84,11 @@ from courier.types.automations import (
     MergeAlgorithm,
 )
 ```
+
+Methods:
+
+- <code title="post /automations/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_ad_hoc</a>(\*\*<a href="src/courier/types/automations/invoke_invoke_ad_hoc_params.py">params</a>) -> <a href="./src/courier/types/automations/automation_invoke_response.py">AutomationInvokeResponse</a></code>
+- <code title="post /automations/{templateId}/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_by_template</a>(template_id, \*\*<a href="src/courier/types/automations/invoke_invoke_by_template_params.py">params</a>) -> <a href="./src/courier/types/automations/automation_invoke_response.py">AutomationInvokeResponse</a></code>
 
 # Brands
 
@@ -157,7 +152,7 @@ from courier.types import List, ListListResponse
 Methods:
 
 - <code title="get /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">retrieve</a>(list_id) -> <a href="./src/courier/types/list.py">List</a></code>
-- <code title="put /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">update</a>(list_id, \*\*<a href="src/courier/types/list_update_params.py">params</a>) -> <a href="./src/courier/types/list.py">List</a></code>
+- <code title="put /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">update</a>(list_id, \*\*<a href="src/courier/types/list_update_params.py">params</a>) -> None</code>
 - <code title="get /lists">client.lists.<a href="./src/courier/resources/lists/lists.py">list</a>(\*\*<a href="src/courier/types/list_list_params.py">params</a>) -> <a href="./src/courier/types/list_list_response.py">ListListResponse</a></code>
 - <code title="delete /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">delete</a>(list_id) -> None</code>
 - <code title="put /lists/{list_id}/restore">client.lists.<a href="./src/courier/resources/lists/lists.py">restore</a>(list_id) -> None</code>
@@ -191,7 +186,7 @@ from courier.types import (
     MessageDetails,
     MessageRetrieveResponse,
     MessageListResponse,
-    MessageGetContentResponse,
+    MessageContentResponse,
     MessageHistoryResponse,
 )
 ```
@@ -201,7 +196,7 @@ Methods:
 - <code title="get /messages/{message_id}">client.messages.<a href="./src/courier/resources/messages.py">retrieve</a>(message_id) -> <a href="./src/courier/types/message_retrieve_response.py">MessageRetrieveResponse</a></code>
 - <code title="get /messages">client.messages.<a href="./src/courier/resources/messages.py">list</a>(\*\*<a href="src/courier/types/message_list_params.py">params</a>) -> <a href="./src/courier/types/message_list_response.py">MessageListResponse</a></code>
 - <code title="post /messages/{message_id}/cancel">client.messages.<a href="./src/courier/resources/messages.py">cancel</a>(message_id) -> <a href="./src/courier/types/message_details.py">MessageDetails</a></code>
-- <code title="get /messages/{message_id}/output">client.messages.<a href="./src/courier/resources/messages.py">get_content</a>(message_id) -> <a href="./src/courier/types/message_get_content_response.py">MessageGetContentResponse</a></code>
+- <code title="get /messages/{message_id}/output">client.messages.<a href="./src/courier/resources/messages.py">content</a>(message_id) -> <a href="./src/courier/types/message_content_response.py">MessageContentResponse</a></code>
 - <code title="get /messages/{message_id}/history">client.messages.<a href="./src/courier/resources/messages.py">history</a>(message_id, \*\*<a href="src/courier/types/message_history_params.py">params</a>) -> <a href="./src/courier/types/message_history_response.py">MessageHistoryResponse</a></code>
 
 # Requests
@@ -309,6 +304,26 @@ Methods:
 - <code title="put /tenants/{tenant_id}/default_preferences/items/{topic_id}">client.tenants.default_preferences.items.<a href="./src/courier/resources/tenants/default_preferences/items.py">update</a>(topic_id, \*, tenant_id, \*\*<a href="src/courier/types/tenants/default_preferences/item_update_params.py">params</a>) -> None</code>
 - <code title="delete /tenants/{tenant_id}/default_preferences/items/{topic_id}">client.tenants.default_preferences.items.<a href="./src/courier/resources/tenants/default_preferences/items.py">delete</a>(topic_id, \*, tenant_id) -> None</code>
 
+## Templates
+
+Types:
+
+```python
+from courier.types.tenants import (
+    BaseTemplateTenantAssociation,
+    ElementalChannelNode,
+    ElementalContent,
+    ElementalGroupNode,
+    ElementalNode,
+    TemplateListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/tenants/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
+- <code title="get /tenants/{tenant_id}/templates">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">list</a>(tenant_id, \*\*<a href="src/courier/types/tenants/template_list_params.py">params</a>) -> <a href="./src/courier/types/tenants/template_list_response.py">TemplateListResponse</a></code>
+
 # Translations
 
 Types:
@@ -365,14 +380,14 @@ Methods:
 Types:
 
 ```python
-from courier.types.users import UserToken, TokenListResponse, TokenRetrieveSingleResponse
+from courier.types.users import UserToken, TokenRetrieveResponse, TokenListResponse
 ```
 
 Methods:
 
+- <code title="get /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">retrieve</a>(token, \*, user_id) -> <a href="./src/courier/types/users/token_retrieve_response.py">TokenRetrieveResponse</a></code>
 - <code title="patch /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">update</a>(token, \*, user_id, \*\*<a href="src/courier/types/users/token_update_params.py">params</a>) -> None</code>
 - <code title="get /users/{user_id}/tokens">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">list</a>(user_id) -> <a href="./src/courier/types/users/token_list_response.py">TokenListResponse</a></code>
 - <code title="delete /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">delete</a>(token, \*, user_id) -> None</code>
 - <code title="put /users/{user_id}/tokens">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_multiple</a>(user_id) -> None</code>
 - <code title="put /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_single</a>(path_token, \*, user_id, \*\*<a href="src/courier/types/users/token_add_single_params.py">params</a>) -> None</code>
-- <code title="get /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">retrieve_single</a>(token, \*, user_id) -> <a href="./src/courier/types/users/token_retrieve_single_response.py">TokenRetrieveSingleResponse</a></code>

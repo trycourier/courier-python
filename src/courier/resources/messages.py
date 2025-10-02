@@ -20,9 +20,9 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.message_details import MessageDetails
 from ..types.message_list_response import MessageListResponse
+from ..types.message_content_response import MessageContentResponse
 from ..types.message_history_response import MessageHistoryResponse
 from ..types.message_retrieve_response import MessageRetrieveResponse
-from ..types.message_get_content_response import MessageGetContentResponse
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
 
@@ -221,7 +221,7 @@ class MessagesResource(SyncAPIResource):
             cast_to=MessageDetails,
         )
 
-    def get_content(
+    def content(
         self,
         message_id: str,
         *,
@@ -231,7 +231,7 @@ class MessagesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageGetContentResponse:
+    ) -> MessageContentResponse:
         """
         Get message content
 
@@ -251,7 +251,7 @@ class MessagesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MessageGetContentResponse,
+            cast_to=MessageContentResponse,
         )
 
     def history(
@@ -489,7 +489,7 @@ class AsyncMessagesResource(AsyncAPIResource):
             cast_to=MessageDetails,
         )
 
-    async def get_content(
+    async def content(
         self,
         message_id: str,
         *,
@@ -499,7 +499,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageGetContentResponse:
+    ) -> MessageContentResponse:
         """
         Get message content
 
@@ -519,7 +519,7 @@ class AsyncMessagesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MessageGetContentResponse,
+            cast_to=MessageContentResponse,
         )
 
     async def history(
@@ -576,8 +576,8 @@ class MessagesResourceWithRawResponse:
         self.cancel = to_raw_response_wrapper(
             messages.cancel,
         )
-        self.get_content = to_raw_response_wrapper(
-            messages.get_content,
+        self.content = to_raw_response_wrapper(
+            messages.content,
         )
         self.history = to_raw_response_wrapper(
             messages.history,
@@ -597,8 +597,8 @@ class AsyncMessagesResourceWithRawResponse:
         self.cancel = async_to_raw_response_wrapper(
             messages.cancel,
         )
-        self.get_content = async_to_raw_response_wrapper(
-            messages.get_content,
+        self.content = async_to_raw_response_wrapper(
+            messages.content,
         )
         self.history = async_to_raw_response_wrapper(
             messages.history,
@@ -618,8 +618,8 @@ class MessagesResourceWithStreamingResponse:
         self.cancel = to_streamed_response_wrapper(
             messages.cancel,
         )
-        self.get_content = to_streamed_response_wrapper(
-            messages.get_content,
+        self.content = to_streamed_response_wrapper(
+            messages.content,
         )
         self.history = to_streamed_response_wrapper(
             messages.history,
@@ -639,8 +639,8 @@ class AsyncMessagesResourceWithStreamingResponse:
         self.cancel = async_to_streamed_response_wrapper(
             messages.cancel,
         )
-        self.get_content = async_to_streamed_response_wrapper(
-            messages.get_content,
+        self.content = async_to_streamed_response_wrapper(
+            messages.content,
         )
         self.history = async_to_streamed_response_wrapper(
             messages.history,

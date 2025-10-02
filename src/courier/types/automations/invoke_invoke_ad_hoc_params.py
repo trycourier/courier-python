@@ -5,12 +5,12 @@ from __future__ import annotations
 from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._utils import PropertyInfo
-from .automations.merge_algorithm import MergeAlgorithm
-from .automations.automation_step_param import AutomationStepParam
+from ..._utils import PropertyInfo
+from .merge_algorithm import MergeAlgorithm
+from .automation_step_param import AutomationStepParam
 
 __all__ = [
-    "AutomationInvokeAdHocParams",
+    "InvokeInvokeAdHocParams",
     "Automation",
     "AutomationStep",
     "AutomationStepAutomationAddToDigestStep",
@@ -30,7 +30,7 @@ __all__ = [
 ]
 
 
-class AutomationInvokeAdHocParams(TypedDict, total=False):
+class InvokeInvokeAdHocParams(TypedDict, total=False):
     automation: Required[Automation]
 
     brand: Optional[str]
@@ -274,4 +274,4 @@ class Automation(TypedDict, total=False):
     cancelation_token: Optional[str]
 
 
-from .message_param import MessageParam
+from ..message_param import MessageParam

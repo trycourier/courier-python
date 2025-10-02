@@ -3,37 +3,44 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
 from .._types import SequenceNotStr
-from .utm_param import UtmParam
-from .routing_method import RoutingMethod
 from .message_context_param import MessageContextParam
 
 __all__ = [
     "BaseMessageParam",
     "Channels",
     "ChannelsMetadata",
+    "ChannelsMetadataUtm",
     "ChannelsTimeouts",
     "Delay",
     "Expiry",
     "Metadata",
+    "MetadataUtm",
     "Preferences",
     "Providers",
     "ProvidersMetadata",
+    "ProvidersMetadataUtm",
     "Routing",
-    "RoutingChannel",
-    "RoutingChannelRoutingStrategyChannel",
-    "RoutingChannelRoutingStrategyChannelProviders",
-    "RoutingChannelRoutingStrategyChannelProvidersMetadata",
-    "RoutingChannelRoutingStrategyProvider",
-    "RoutingChannelRoutingStrategyProviderMetadata",
     "Timeout",
 ]
 
 
+class ChannelsMetadataUtm(TypedDict, total=False):
+    campaign: Optional[str]
+
+    content: Optional[str]
+
+    medium: Optional[str]
+
+    source: Optional[str]
+
+    term: Optional[str]
+
+
 class ChannelsMetadata(TypedDict, total=False):
-    utm: Optional[UtmParam]
+    utm: Optional[ChannelsMetadataUtm]
 
 
 class ChannelsTimeouts(TypedDict, total=False):
@@ -70,7 +77,7 @@ class Channels(_ChannelsReservedKeywords, total=False):
     all.
     """
 
-    routing_method: Optional[RoutingMethod]
+    routing_method: Optional[Literal["all", "single"]]
     """The method for selecting the providers to send the message with.
 
     Single will send to one of the available providers for this channel, all will
@@ -107,6 +114,18 @@ class Expiry(TypedDict, total=False):
     """
 
 
+class MetadataUtm(TypedDict, total=False):
+    campaign: Optional[str]
+
+    content: Optional[str]
+
+    medium: Optional[str]
+
+    source: Optional[str]
+
+    term: Optional[str]
+
+
 class Metadata(TypedDict, total=False):
     event: Optional[str]
     """An arbitrary string to tracks the event that generated this request (e.g.
@@ -127,7 +146,7 @@ class Metadata(TypedDict, total=False):
     Note: Courier does not verify the uniqueness of this ID.
     """
 
-    utm: Optional[UtmParam]
+    utm: Optional[MetadataUtm]
     """
     Identify the campaign that refers traffic to a specific website, and attributes
     the browser's website session.
@@ -143,8 +162,20 @@ class Preferences(TypedDict, total=False):
     """
 
 
+class ProvidersMetadataUtm(TypedDict, total=False):
+    campaign: Optional[str]
+
+    content: Optional[str]
+
+    medium: Optional[str]
+
+    source: Optional[str]
+
+    term: Optional[str]
+
+
 class ProvidersMetadata(TypedDict, total=False):
-    utm: Optional[UtmParam]
+    utm: Optional[ProvidersMetadataUtm]
 
 
 _ProvidersReservedKeywords = TypedDict(
@@ -165,82 +196,15 @@ class Providers(_ProvidersReservedKeywords, total=False):
     timeouts: Optional[int]
 
 
-class RoutingChannelRoutingStrategyChannelProvidersMetadata(TypedDict, total=False):
-    utm: Optional[UtmParam]
-
-
-_RoutingChannelRoutingStrategyChannelProvidersReservedKeywords = TypedDict(
-    "_RoutingChannelRoutingStrategyChannelProvidersReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class RoutingChannelRoutingStrategyChannelProviders(
-    _RoutingChannelRoutingStrategyChannelProvidersReservedKeywords, total=False
-):
-    metadata: Optional[RoutingChannelRoutingStrategyChannelProvidersMetadata]
-
-    override: Optional[Dict[str, object]]
-    """Provider specific overrides."""
-
-    timeouts: Optional[int]
-
-
-_RoutingChannelRoutingStrategyChannelReservedKeywords = TypedDict(
-    "_RoutingChannelRoutingStrategyChannelReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class RoutingChannelRoutingStrategyChannel(_RoutingChannelRoutingStrategyChannelReservedKeywords, total=False):
-    channel: Required[str]
-
-    config: Optional[Dict[str, object]]
-
-    method: Optional[RoutingMethod]
-
-    providers: Optional[Dict[str, RoutingChannelRoutingStrategyChannelProviders]]
-
-
-class RoutingChannelRoutingStrategyProviderMetadata(TypedDict, total=False):
-    utm: Optional[UtmParam]
-
-
-_RoutingChannelRoutingStrategyProviderReservedKeywords = TypedDict(
-    "_RoutingChannelRoutingStrategyProviderReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class RoutingChannelRoutingStrategyProvider(_RoutingChannelRoutingStrategyProviderReservedKeywords, total=False):
-    metadata: Required[RoutingChannelRoutingStrategyProviderMetadata]
-
-    name: Required[str]
-
-    config: Optional[Dict[str, object]]
-
-
-RoutingChannel: TypeAlias = Union[RoutingChannelRoutingStrategyChannel, RoutingChannelRoutingStrategyProvider, str]
-
-
 class Routing(TypedDict, total=False):
-    channels: Required[SequenceNotStr[RoutingChannel]]
+    channels: Required[SequenceNotStr["MessageRoutingChannelParam"]]
     """A list of channels or providers to send the message through.
 
     Can also recursively define sub-routing methods, which can be useful for
     defining advanced push notification delivery strategies.
     """
 
-    method: Required[RoutingMethod]
+    method: Required[Literal["all", "single"]]
 
 
 class Timeout(TypedDict, total=False):
@@ -319,3 +283,6 @@ class BaseMessageParam(TypedDict, total=False):
     Time in ms to attempt the channel before failing over to the next available
     channel.
     """
+
+
+from .message_routing_channel_param import MessageRoutingChannelParam
