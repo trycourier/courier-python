@@ -7,8 +7,6 @@ from courier.types import (
     BaseMessage,
     BaseMessageSendTo,
     Content,
-    ElementalGroupNode,
-    ElementalNode,
     Message,
     MessageContext,
     MsTeamsBaseProperties,

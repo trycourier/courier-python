@@ -5,12 +5,9 @@ from __future__ import annotations
 from . import (
     audience,
     message_routing,
-    elemental_group_node,
-    inbound_bulk_message,
     nested_filter_config,
     audience_list_response,
     audience_update_response,
-    bulk_retrieve_job_response,
     notification_list_response,
 )
 from .. import _compat
@@ -31,7 +28,6 @@ from .filter_config import FilterConfig as FilterConfig
 from .message_param import MessageParam as MessageParam
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
-from .elemental_node import ElementalNode as ElementalNode
 from .routing_method import RoutingMethod as RoutingMethod
 from .user_recipient import UserRecipient as UserRecipient
 from .message_context import MessageContext as MessageContext
@@ -54,8 +50,6 @@ from .send_message_params import SendMessageParams as SendMessageParams
 from .audience_list_params import AudienceListParams as AudienceListParams
 from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
-from .elemental_group_node import ElementalGroupNode as ElementalGroupNode
-from .elemental_node_param import ElementalNodeParam as ElementalNodeParam
 from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
 from .nested_filter_config import NestedFilterConfig as NestedFilterConfig
 from .tenant_list_response import TenantListResponse as TenantListResponse
@@ -94,7 +88,6 @@ from .profile_retrieve_response import ProfileRetrieveResponse as ProfileRetriev
 from .translation_update_params import TranslationUpdateParams as TranslationUpdateParams
 from .base_message_send_to_param import BaseMessageSendToParam as BaseMessageSendToParam
 from .bulk_retrieve_job_response import BulkRetrieveJobResponse as BulkRetrieveJobResponse
-from .elemental_group_node_param import ElementalGroupNodeParam as ElementalGroupNodeParam
 from .inbound_bulk_message_param import InboundBulkMessageParam as InboundBulkMessageParam
 from .inbound_track_event_params import InboundTrackEventParams as InboundTrackEventParams
 from .nested_filter_config_param import NestedFilterConfigParam as NestedFilterConfigParam
@@ -116,22 +109,16 @@ from .automation_invoke_by_template_params import AutomationInvokeByTemplatePara
 # Pydantic can resolve the necessary references.
 # See: https://github.com/pydantic/pydantic/issues/11250 for more context.
 if _compat.PYDANTIC_V1:
-    elemental_group_node.ElementalGroupNode.update_forward_refs()  # type: ignore
     audience.Audience.update_forward_refs()  # type: ignore
     nested_filter_config.NestedFilterConfig.update_forward_refs()  # type: ignore
     audience_update_response.AudienceUpdateResponse.update_forward_refs()  # type: ignore
     audience_list_response.AudienceListResponse.update_forward_refs()  # type: ignore
-    inbound_bulk_message.InboundBulkMessage.update_forward_refs()  # type: ignore
-    bulk_retrieve_job_response.BulkRetrieveJobResponse.update_forward_refs()  # type: ignore
     message_routing.MessageRouting.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
 else:
-    elemental_group_node.ElementalGroupNode.model_rebuild(_parent_namespace_depth=0)
     audience.Audience.model_rebuild(_parent_namespace_depth=0)
     nested_filter_config.NestedFilterConfig.model_rebuild(_parent_namespace_depth=0)
     audience_update_response.AudienceUpdateResponse.model_rebuild(_parent_namespace_depth=0)
     audience_list_response.AudienceListResponse.model_rebuild(_parent_namespace_depth=0)
-    inbound_bulk_message.InboundBulkMessage.model_rebuild(_parent_namespace_depth=0)
-    bulk_retrieve_job_response.BulkRetrieveJobResponse.model_rebuild(_parent_namespace_depth=0)
     message_routing.MessageRouting.model_rebuild(_parent_namespace_depth=0)
     notification_list_response.NotificationListResponse.model_rebuild(_parent_namespace_depth=0)
