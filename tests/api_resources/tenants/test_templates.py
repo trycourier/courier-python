@@ -9,7 +9,7 @@ import pytest
 
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier.types.tenants import TemplateListResponse, BaseTemplateTenantAssociation
+from courier.types.tenants import TemplateListResponse, TemplateRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -24,7 +24,7 @@ class TestTemplates:
             template_id="template_id",
             tenant_id="tenant_id",
         )
-        assert_matches_type(BaseTemplateTenantAssociation, template, path=["response"])
+        assert_matches_type(TemplateRetrieveResponse, template, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -37,7 +37,7 @@ class TestTemplates:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         template = response.parse()
-        assert_matches_type(BaseTemplateTenantAssociation, template, path=["response"])
+        assert_matches_type(TemplateRetrieveResponse, template, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -50,7 +50,7 @@ class TestTemplates:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             template = response.parse()
-            assert_matches_type(BaseTemplateTenantAssociation, template, path=["response"])
+            assert_matches_type(TemplateRetrieveResponse, template, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -134,7 +134,7 @@ class TestAsyncTemplates:
             template_id="template_id",
             tenant_id="tenant_id",
         )
-        assert_matches_type(BaseTemplateTenantAssociation, template, path=["response"])
+        assert_matches_type(TemplateRetrieveResponse, template, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -147,7 +147,7 @@ class TestAsyncTemplates:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         template = await response.parse()
-        assert_matches_type(BaseTemplateTenantAssociation, template, path=["response"])
+        assert_matches_type(TemplateRetrieveResponse, template, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -160,7 +160,7 @@ class TestAsyncTemplates:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             template = await response.parse()
-            assert_matches_type(BaseTemplateTenantAssociation, template, path=["response"])
+            assert_matches_type(TemplateRetrieveResponse, template, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -119,9 +119,6 @@ if _compat.PYDANTIC_V1:
     bulk_retrieve_job_response.BulkRetrieveJobResponse.update_forward_refs()  # type: ignore
     message_routing.MessageRouting.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
-    tenants.elemental_channel_node.ElementalChannelNode.update_forward_refs()  # type: ignore
-    tenants.elemental_content.ElementalContent.update_forward_refs()  # type: ignore
-    tenants.elemental_group_node.ElementalGroupNode.update_forward_refs()  # type: ignore
     tenants.template_list_response.TemplateListResponse.update_forward_refs()  # type: ignore
 else:
     base_message.BaseMessage.model_rebuild(_parent_namespace_depth=0)
@@ -133,7 +130,4 @@ else:
     bulk_retrieve_job_response.BulkRetrieveJobResponse.model_rebuild(_parent_namespace_depth=0)
     message_routing.MessageRouting.model_rebuild(_parent_namespace_depth=0)
     notification_list_response.NotificationListResponse.model_rebuild(_parent_namespace_depth=0)
-    tenants.elemental_channel_node.ElementalChannelNode.model_rebuild(_parent_namespace_depth=0)
-    tenants.elemental_content.ElementalContent.model_rebuild(_parent_namespace_depth=0)
-    tenants.elemental_group_node.ElementalGroupNode.model_rebuild(_parent_namespace_depth=0)
     tenants.template_list_response.TemplateListResponse.model_rebuild(_parent_namespace_depth=0)

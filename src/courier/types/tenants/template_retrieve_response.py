@@ -2,10 +2,10 @@
 
 from ..._models import BaseModel
 
-__all__ = ["BaseTemplateTenantAssociation"]
+__all__ = ["TemplateRetrieveResponse"]
 
 
-class BaseTemplateTenantAssociation(BaseModel):
+class TemplateRetrieveResponse(BaseModel):
     id: str
     """The template's id"""
 
