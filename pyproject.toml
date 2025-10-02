@@ -1,6 +1,6 @@
 [project]
 name = "trycourier"
-version = "6.4.0-alpha2"
+version = "6.4.0-alpha3"
 description = "The official Python library for the courier API"
 dynamic = ["readme"]
 license = "Apache-2.0"

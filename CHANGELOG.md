@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.4.0-alpha3 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha2...v6.4.0-alpha3](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha2...v6.4.0-alpha3)
+
+### Features
+
+* **api:** manual updates ([75fba38](https://github.com/trycourier/courier-python/commit/75fba382fb63386480b3b12b3d48ee329244e85d))
+
 ## 6.4.0-alpha2 (2025-10-02)
 
 Full Changelog: [v6.4.0-alpha1...v6.4.0-alpha2](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha1...v6.4.0-alpha2)
