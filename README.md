@@ -1,7 +1,7 @@
 # Courier Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/courier.svg?label=pypi%20(stable))](https://pypi.org/project/courier/)
+[![PyPI version](https://img.shields.io/pypi/v/trycourier.svg?label=pypi%20(stable))](https://pypi.org/project/trycourier/)
 
 The Courier Python library provides convenient access to the Courier REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -17,7 +17,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```sh
 # install from PyPI
-pip install --pre courier
+pip install --pre trycourier
 ```
 
 ## Usage
@@ -85,7 +85,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre courier[aiohttp]
+pip install --pre trycourier[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
