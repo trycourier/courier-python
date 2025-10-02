@@ -2,4 +2,4 @@
 
 import typing
 
-DeviceType = typing.Any
+DeviceType = typing.Optional[typing.Any]

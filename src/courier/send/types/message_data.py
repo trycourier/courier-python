@@ -2,4 +2,4 @@
 
 import typing
 
-MessageData = typing.Dict[str, typing.Any]
+MessageData = typing.Dict[str, typing.Optional[typing.Any]]
