@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Dict, Optional
 from typing_extensions import TypedDict
 
-__all__ = ["AutomationInvokeByTemplateParams"]
+__all__ = ["InvokeInvokeByTemplateParams"]
 
 
-class AutomationInvokeByTemplateParams(TypedDict, total=False):
+class InvokeInvokeByTemplateParams(TypedDict, total=False):
     brand: Optional[str]
 
     data: Optional[Dict[str, object]]

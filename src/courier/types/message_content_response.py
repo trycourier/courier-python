@@ -4,7 +4,7 @@ from typing import List
 
 from .._models import BaseModel
 
-__all__ = ["MessageGetContentResponse", "Result", "ResultContent", "ResultContentBlock"]
+__all__ = ["MessageContentResponse", "Result", "ResultContent", "ResultContentBlock"]
 
 
 class ResultContentBlock(BaseModel):
@@ -46,6 +46,6 @@ class Result(BaseModel):
     """Content details of the rendered message."""
 
 
-class MessageGetContentResponse(BaseModel):
+class MessageContentResponse(BaseModel):
     results: List[Result]
     """An array of render output of a previously sent message."""

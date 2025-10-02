@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Union, Optional
 from typing_extensions import Literal, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
+from ..._types import SequenceNotStr
 from .elemental_group_node_param import ElementalGroupNodeParam
 from .elemental_channel_node_param import ElementalChannelNodeParam
 

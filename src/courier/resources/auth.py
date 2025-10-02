@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ..types import auth_issue_token_params
@@ -47,22 +45,7 @@ class AuthResource(SyncAPIResource):
         self,
         *,
         expires_in: str,
-        scope: Literal[
-            "read:preferences",
-            "write:preferences",
-            "read:user-tokens",
-            "write:user-tokens",
-            "read:brands",
-            "write:brands",
-            "read:brands{:id}",
-            "write:brands{:id}",
-            "write:track",
-            "inbox:read:messages",
-            "inbox:write:messages",
-            "inbox:write:event",
-            "inbox:write:events",
-            "user_id:$YOUR_USER_ID",
-        ],
+        scope: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -122,22 +105,7 @@ class AsyncAuthResource(AsyncAPIResource):
         self,
         *,
         expires_in: str,
-        scope: Literal[
-            "read:preferences",
-            "write:preferences",
-            "read:user-tokens",
-            "write:user-tokens",
-            "read:brands",
-            "write:brands",
-            "read:brands{:id}",
-            "write:brands{:id}",
-            "write:track",
-            "inbox:read:messages",
-            "inbox:write:messages",
-            "inbox:write:event",
-            "inbox:write:events",
-            "user_id:$YOUR_USER_ID",
-        ],
+        scope: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

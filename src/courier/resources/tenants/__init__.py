@@ -8,6 +8,14 @@ from .tenants import (
     TenantsResourceWithStreamingResponse,
     AsyncTenantsResourceWithStreamingResponse,
 )
+from .templates import (
+    TemplatesResource,
+    AsyncTemplatesResource,
+    TemplatesResourceWithRawResponse,
+    AsyncTemplatesResourceWithRawResponse,
+    TemplatesResourceWithStreamingResponse,
+    AsyncTemplatesResourceWithStreamingResponse,
+)
 from .default_preferences import (
     DefaultPreferencesResource,
     AsyncDefaultPreferencesResource,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncDefaultPreferencesResourceWithRawResponse",
     "DefaultPreferencesResourceWithStreamingResponse",
     "AsyncDefaultPreferencesResourceWithStreamingResponse",
+    "TemplatesResource",
+    "AsyncTemplatesResource",
+    "TemplatesResourceWithRawResponse",
+    "AsyncTemplatesResourceWithRawResponse",
+    "TemplatesResourceWithStreamingResponse",
+    "AsyncTemplatesResourceWithStreamingResponse",
     "TenantsResource",
     "AsyncTenantsResource",
     "TenantsResourceWithRawResponse",

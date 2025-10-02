@@ -102,7 +102,7 @@ class ListsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> List:
+    ) -> None:
         """
         Create or replace an existing list with the supplied values.
 
@@ -117,6 +117,7 @@ class ListsResource(SyncAPIResource):
         """
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
             f"/lists/{list_id}",
             body=maybe_transform(
@@ -129,7 +130,7 @@ class ListsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=List,
+            cast_to=NoneType,
         )
 
     def list(
@@ -320,7 +321,7 @@ class AsyncListsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> List:
+    ) -> None:
         """
         Create or replace an existing list with the supplied values.
 
@@ -335,6 +336,7 @@ class AsyncListsResource(AsyncAPIResource):
         """
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
             f"/lists/{list_id}",
             body=await async_maybe_transform(
@@ -347,7 +349,7 @@ class AsyncListsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=List,
+            cast_to=NoneType,
         )
 
     async def list(
