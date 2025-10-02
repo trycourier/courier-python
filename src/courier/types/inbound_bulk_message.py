@@ -1,8 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from __future__ import annotations
+
 from typing import Dict, Union, Optional
 
-from .content import Content
 from .._models import BaseModel
 from .base_message import BaseMessage
 
@@ -18,7 +19,7 @@ class MessageInboundBulkTemplateMessage(BaseMessage):
 
 
 class MessageInboundBulkContentMessage(BaseMessage):
-    content: Content
+    content: "Content"
     """
     Describes the content of the message in a way that will work for email, push,
     chat, or any channel. Either this or template must be specified.
@@ -54,3 +55,6 @@ class InboundBulkMessage(BaseModel):
     properties or to gain access to features in the provider API that are not
     natively supported by Courier.
     """
+
+
+from .content import Content
