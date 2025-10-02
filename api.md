@@ -309,19 +309,12 @@ Methods:
 Types:
 
 ```python
-from courier.types.tenants import (
-    BaseTemplateTenantAssociation,
-    ElementalChannelNode,
-    ElementalContent,
-    ElementalGroupNode,
-    ElementalNode,
-    TemplateListResponse,
-)
+from courier.types.tenants import TemplateRetrieveResponse, TemplateListResponse
 ```
 
 Methods:
 
-- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/tenants/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
+- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/tenants/template_retrieve_response.py">TemplateRetrieveResponse</a></code>
 - <code title="get /tenants/{tenant_id}/templates">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">list</a>(tenant_id, \*\*<a href="src/courier/types/tenants/template_list_params.py">params</a>) -> <a href="./src/courier/types/tenants/template_list_response.py">TemplateListResponse</a></code>
 
 # Translations

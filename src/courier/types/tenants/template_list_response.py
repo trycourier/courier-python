@@ -6,7 +6,6 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from .base_template_tenant_association import BaseTemplateTenantAssociation
 
 __all__ = ["TemplateListResponse", "Item", "ItemData"]
 
@@ -15,9 +14,24 @@ class ItemData(BaseModel):
     routing: "MessageRouting"
 
 
-class Item(BaseTemplateTenantAssociation):
+class Item(BaseModel):
+    id: str
+    """The template's id"""
+
+    created_at: str
+    """The timestamp at which the template was created"""
+
     data: ItemData
     """The template's data containing it's routing configs"""
+
+    published_at: str
+    """The timestamp at which the template was published"""
+
+    updated_at: str
+    """The timestamp at which the template was last updated"""
+
+    version: str
+    """The version of the template"""
 
 
 class TemplateListResponse(BaseModel):

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, Union, Optional
 from typing_extensions import Required, TypedDict
 
+from .content_param import ContentParam
 from .base_message_param import BaseMessageParam
 
 __all__ = ["InboundBulkMessageParam", "MessageInboundBulkTemplateMessage", "MessageInboundBulkContentMessage"]
@@ -19,7 +20,7 @@ class MessageInboundBulkTemplateMessage(BaseMessageParam, total=False):
 
 
 class MessageInboundBulkContentMessage(BaseMessageParam, total=False):
-    content: Required["ContentParam"]
+    content: Required[ContentParam]
     """
     Describes the content of the message in a way that will work for email, push,
     chat, or any channel. Either this or template must be specified.
@@ -55,6 +56,3 @@ class InboundBulkMessageParam(TypedDict, total=False):
     properties or to gain access to features in the provider API that are not
     natively supported by Courier.
     """
-
-
-from .content_param import ContentParam
