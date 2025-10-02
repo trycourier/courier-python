@@ -3,17 +3,16 @@
 from __future__ import annotations
 
 from typing import Union, Optional
-from typing_extensions import Literal, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .elemental_group_node_param import ElementalGroupNodeParam
-from .elemental_channel_node_param import ElementalChannelNodeParam
 
 __all__ = [
     "ElementalNodeParam",
     "UnionMember0",
     "UnionMember1",
-    "UnionMember2",
+    "Type",
     "UnionMember3",
     "UnionMember4",
     "UnionMember5",
@@ -59,8 +58,8 @@ class UnionMember1(_UnionMember1ReservedKeywords, total=False):
     type: Literal["meta"]
 
 
-class UnionMember2(ElementalChannelNodeParam, total=False):
-    type: Literal["channel"]
+class Type(TypedDict, total=False):
+    type: Required[Literal["channel"]]
 
 
 _UnionMember3ReservedKeywords = TypedDict(
@@ -144,5 +143,5 @@ class UnionMember7(_UnionMember7ReservedKeywords, total=False):
 
 
 ElementalNodeParam: TypeAlias = Union[
-    UnionMember0, UnionMember1, UnionMember2, UnionMember3, UnionMember4, UnionMember5, UnionMember6, UnionMember7
+    UnionMember0, UnionMember1, Type, UnionMember3, UnionMember4, UnionMember5, UnionMember6, UnionMember7
 ]

@@ -9,13 +9,12 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .elemental_group_node import ElementalGroupNode
-from .elemental_channel_node import ElementalChannelNode
 
 __all__ = [
     "ElementalNode",
     "UnionMember0",
     "UnionMember1",
-    "UnionMember2",
+    "Type",
     "UnionMember3",
     "UnionMember4",
     "UnionMember5",
@@ -48,8 +47,8 @@ class UnionMember1(BaseModel):
     type: Optional[Literal["meta"]] = None
 
 
-class UnionMember2(ElementalChannelNode):
-    type: Optional[Literal["channel"]] = None
+class Type(BaseModel):
+    type: Literal["channel"]
 
 
 class UnionMember3(BaseModel):
@@ -105,5 +104,5 @@ class UnionMember7(BaseModel):
 
 
 ElementalNode: TypeAlias = Union[
-    UnionMember0, UnionMember1, UnionMember2, UnionMember3, UnionMember4, UnionMember5, UnionMember6, UnionMember7
+    UnionMember0, UnionMember1, Type, UnionMember3, UnionMember4, UnionMember5, UnionMember6, UnionMember7
 ]

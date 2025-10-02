@@ -7,7 +7,6 @@ from courier.types import (
     BaseMessage,
     BaseMessageSendTo,
     Content,
-    ElementalChannelNode,
     ElementalGroupNode,
     ElementalNode,
     Message,
