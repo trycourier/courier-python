@@ -77,6 +77,16 @@ class MessageDetails(BaseModel):
     """A message describing the error that occurred."""
 
     reason: Optional[
-        Literal["FILTERED", "NO_CHANNELS", "NO_PROVIDERS", "PROVIDER_ERROR", "UNPUBLISHED", "UNSUBSCRIBED"]
+        Literal[
+            "BOUNCED",
+            "FAILED",
+            "FILTERED",
+            "NO_CHANNELS",
+            "NO_PROVIDERS",
+            "OPT_IN_REQUIRED",
+            "PROVIDER_ERROR",
+            "UNPUBLISHED",
+            "UNSUBSCRIBED",
+        ]
     ] = None
     """The reason for the current status of the message."""

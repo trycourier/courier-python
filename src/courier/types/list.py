@@ -12,6 +12,6 @@ class List(BaseModel):
 
     name: str
 
-    created: Optional[int] = None
+    created: Optional[str] = None
 
-    updated: Optional[int] = None
+    updated: Optional[str] = None

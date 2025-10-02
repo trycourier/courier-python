@@ -12,9 +12,9 @@ from tests.utils import assert_matches_type
 from courier.types import (
     MessageDetails,
     MessageListResponse,
+    MessageContentResponse,
     MessageHistoryResponse,
     MessageRetrieveResponse,
-    MessageGetContentResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -158,43 +158,43 @@ class TestMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_get_content(self, client: Courier) -> None:
-        message = client.messages.get_content(
+    def test_method_content(self, client: Courier) -> None:
+        message = client.messages.content(
             "message_id",
         )
-        assert_matches_type(MessageGetContentResponse, message, path=["response"])
+        assert_matches_type(MessageContentResponse, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_get_content(self, client: Courier) -> None:
-        response = client.messages.with_raw_response.get_content(
+    def test_raw_response_content(self, client: Courier) -> None:
+        response = client.messages.with_raw_response.content(
             "message_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = response.parse()
-        assert_matches_type(MessageGetContentResponse, message, path=["response"])
+        assert_matches_type(MessageContentResponse, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_get_content(self, client: Courier) -> None:
-        with client.messages.with_streaming_response.get_content(
+    def test_streaming_response_content(self, client: Courier) -> None:
+        with client.messages.with_streaming_response.content(
             "message_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = response.parse()
-            assert_matches_type(MessageGetContentResponse, message, path=["response"])
+            assert_matches_type(MessageContentResponse, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_path_params_get_content(self, client: Courier) -> None:
+    def test_path_params_content(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
-            client.messages.with_raw_response.get_content(
+            client.messages.with_raw_response.content(
                 "",
             )
 
@@ -390,43 +390,43 @@ class TestAsyncMessages:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_get_content(self, async_client: AsyncCourier) -> None:
-        message = await async_client.messages.get_content(
+    async def test_method_content(self, async_client: AsyncCourier) -> None:
+        message = await async_client.messages.content(
             "message_id",
         )
-        assert_matches_type(MessageGetContentResponse, message, path=["response"])
+        assert_matches_type(MessageContentResponse, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_get_content(self, async_client: AsyncCourier) -> None:
-        response = await async_client.messages.with_raw_response.get_content(
+    async def test_raw_response_content(self, async_client: AsyncCourier) -> None:
+        response = await async_client.messages.with_raw_response.content(
             "message_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         message = await response.parse()
-        assert_matches_type(MessageGetContentResponse, message, path=["response"])
+        assert_matches_type(MessageContentResponse, message, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_get_content(self, async_client: AsyncCourier) -> None:
-        async with async_client.messages.with_streaming_response.get_content(
+    async def test_streaming_response_content(self, async_client: AsyncCourier) -> None:
+        async with async_client.messages.with_streaming_response.content(
             "message_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             message = await response.parse()
-            assert_matches_type(MessageGetContentResponse, message, path=["response"])
+            assert_matches_type(MessageContentResponse, message, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_path_params_get_content(self, async_client: AsyncCourier) -> None:
+    async def test_path_params_content(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
-            await async_client.messages.with_raw_response.get_content(
+            await async_client.messages.with_raw_response.content(
                 "",
             )
 

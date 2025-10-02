@@ -23,8 +23,8 @@ class TestSend:
         send = client.send.message(
             message={
                 "content": {
-                    "elements": [{}],
-                    "version": "version",
+                    "body": "Thanks for signing up, {{name}}",
+                    "title": "Welcome!",
                 }
             },
         )
@@ -36,8 +36,8 @@ class TestSend:
         response = client.send.with_raw_response.message(
             message={
                 "content": {
-                    "elements": [{}],
-                    "version": "version",
+                    "body": "Thanks for signing up, {{name}}",
+                    "title": "Welcome!",
                 }
             },
         )
@@ -53,8 +53,8 @@ class TestSend:
         with client.send.with_streaming_response.message(
             message={
                 "content": {
-                    "elements": [{}],
-                    "version": "version",
+                    "body": "Thanks for signing up, {{name}}",
+                    "title": "Welcome!",
                 }
             },
         ) as response:
@@ -78,8 +78,8 @@ class TestAsyncSend:
         send = await async_client.send.message(
             message={
                 "content": {
-                    "elements": [{}],
-                    "version": "version",
+                    "body": "Thanks for signing up, {{name}}",
+                    "title": "Welcome!",
                 }
             },
         )
@@ -91,8 +91,8 @@ class TestAsyncSend:
         response = await async_client.send.with_raw_response.message(
             message={
                 "content": {
-                    "elements": [{}],
-                    "version": "version",
+                    "body": "Thanks for signing up, {{name}}",
+                    "title": "Welcome!",
                 }
             },
         )
@@ -108,8 +108,8 @@ class TestAsyncSend:
         async with async_client.send.with_streaming_response.message(
             message={
                 "content": {
-                    "elements": [{}],
-                    "version": "version",
+                    "body": "Thanks for signing up, {{name}}",
+                    "title": "Welcome!",
                 }
             },
         ) as response:

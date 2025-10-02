@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Dict, Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-from .._types import SequenceNotStr
+from ..._types import SequenceNotStr
 
 __all__ = ["ElementalChannelNodeParam"]
 

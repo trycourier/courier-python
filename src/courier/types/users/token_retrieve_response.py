@@ -5,10 +5,10 @@ from typing_extensions import Literal
 
 from .user_token import UserToken
 
-__all__ = ["TokenRetrieveSingleResponse"]
+__all__ = ["TokenRetrieveResponse"]
 
 
-class TokenRetrieveSingleResponse(UserToken):
+class TokenRetrieveResponse(UserToken):
     status: Optional[Literal["active", "unknown", "failed", "revoked"]] = None
 
     status_reason: Optional[str] = None

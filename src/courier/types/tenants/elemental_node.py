@@ -7,7 +7,7 @@ from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
-from .._models import BaseModel
+from ..._models import BaseModel
 from .elemental_group_node import ElementalGroupNode
 from .elemental_channel_node import ElementalChannelNode
 

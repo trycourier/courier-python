@@ -10,6 +10,14 @@ from ...types import tenant_list_params, tenant_update_params, tenant_list_users
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
+from .templates import (
+    TemplatesResource,
+    AsyncTemplatesResource,
+    TemplatesResourceWithRawResponse,
+    AsyncTemplatesResourceWithRawResponse,
+    TemplatesResourceWithStreamingResponse,
+    AsyncTemplatesResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -38,6 +46,10 @@ class TenantsResource(SyncAPIResource):
     @cached_property
     def default_preferences(self) -> DefaultPreferencesResource:
         return DefaultPreferencesResource(self._client)
+
+    @cached_property
+    def templates(self) -> TemplatesResource:
+        return TemplatesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> TenantsResourceWithRawResponse:
@@ -292,6 +304,10 @@ class AsyncTenantsResource(AsyncAPIResource):
     @cached_property
     def default_preferences(self) -> AsyncDefaultPreferencesResource:
         return AsyncDefaultPreferencesResource(self._client)
+
+    @cached_property
+    def templates(self) -> AsyncTemplatesResource:
+        return AsyncTemplatesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncTenantsResourceWithRawResponse:
@@ -566,6 +582,10 @@ class TenantsResourceWithRawResponse:
     def default_preferences(self) -> DefaultPreferencesResourceWithRawResponse:
         return DefaultPreferencesResourceWithRawResponse(self._tenants.default_preferences)
 
+    @cached_property
+    def templates(self) -> TemplatesResourceWithRawResponse:
+        return TemplatesResourceWithRawResponse(self._tenants.templates)
+
 
 class AsyncTenantsResourceWithRawResponse:
     def __init__(self, tenants: AsyncTenantsResource) -> None:
@@ -590,6 +610,10 @@ class AsyncTenantsResourceWithRawResponse:
     @cached_property
     def default_preferences(self) -> AsyncDefaultPreferencesResourceWithRawResponse:
         return AsyncDefaultPreferencesResourceWithRawResponse(self._tenants.default_preferences)
+
+    @cached_property
+    def templates(self) -> AsyncTemplatesResourceWithRawResponse:
+        return AsyncTemplatesResourceWithRawResponse(self._tenants.templates)
 
 
 class TenantsResourceWithStreamingResponse:
@@ -616,6 +640,10 @@ class TenantsResourceWithStreamingResponse:
     def default_preferences(self) -> DefaultPreferencesResourceWithStreamingResponse:
         return DefaultPreferencesResourceWithStreamingResponse(self._tenants.default_preferences)
 
+    @cached_property
+    def templates(self) -> TemplatesResourceWithStreamingResponse:
+        return TemplatesResourceWithStreamingResponse(self._tenants.templates)
+
 
 class AsyncTenantsResourceWithStreamingResponse:
     def __init__(self, tenants: AsyncTenantsResource) -> None:
@@ -640,3 +668,7 @@ class AsyncTenantsResourceWithStreamingResponse:
     @cached_property
     def default_preferences(self) -> AsyncDefaultPreferencesResourceWithStreamingResponse:
         return AsyncDefaultPreferencesResourceWithStreamingResponse(self._tenants.default_preferences)
+
+    @cached_property
+    def templates(self) -> AsyncTemplatesResourceWithStreamingResponse:
+        return AsyncTemplatesResourceWithStreamingResponse(self._tenants.templates)

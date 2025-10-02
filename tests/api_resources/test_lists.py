@@ -66,7 +66,7 @@ class TestLists:
             list_id="list_id",
             name="name",
         )
-        assert_matches_type(List, list_, path=["response"])
+        assert list_ is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -101,7 +101,7 @@ class TestLists:
                 },
             },
         )
-        assert_matches_type(List, list_, path=["response"])
+        assert list_ is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -114,7 +114,7 @@ class TestLists:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         list_ = response.parse()
-        assert_matches_type(List, list_, path=["response"])
+        assert list_ is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -127,7 +127,7 @@ class TestLists:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             list_ = response.parse()
-            assert_matches_type(List, list_, path=["response"])
+            assert list_ is None
 
         assert cast(Any, response.is_closed) is True
 
@@ -316,7 +316,7 @@ class TestAsyncLists:
             list_id="list_id",
             name="name",
         )
-        assert_matches_type(List, list_, path=["response"])
+        assert list_ is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -351,7 +351,7 @@ class TestAsyncLists:
                 },
             },
         )
-        assert_matches_type(List, list_, path=["response"])
+        assert list_ is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -364,7 +364,7 @@ class TestAsyncLists:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         list_ = await response.parse()
-        assert_matches_type(List, list_, path=["response"])
+        assert list_ is None
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -377,7 +377,7 @@ class TestAsyncLists:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             list_ = await response.parse()
-            assert_matches_type(List, list_, path=["response"])
+            assert list_ is None
 
         assert cast(Any, response.is_closed) is True
 
