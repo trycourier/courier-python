@@ -37,10 +37,9 @@ client = Courier(
 
 response = client.send.message(
     message={
-        "content": {
-            "elements": [{}],
-            "version": "version",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 )
 print(response.request_id)
@@ -68,10 +67,9 @@ client = AsyncCourier(
 async def main() -> None:
     response = await client.send.message(
         message={
-            "content": {
-                "elements": [{}],
-                "version": "version",
-            }
+            "to": {"user_id": "your_user_id"},
+            "template": "your_template",
+            "data": {"foo": "bar"},
         },
     )
     print(response.request_id)
@@ -108,10 +106,9 @@ async def main() -> None:
     ) as client:
         response = await client.send.message(
             message={
-                "content": {
-                    "elements": [{}],
-                    "version": "version",
-                }
+                "to": {"user_id": "your_user_id"},
+                "template": "your_template",
+                "data": {"foo": "bar"},
             },
         )
         print(response.request_id)
@@ -169,10 +166,9 @@ client = Courier()
 try:
     client.send.message(
         message={
-            "content": {
-                "elements": [{}],
-                "version": "version",
-            }
+            "to": {"user_id": "your_user_id"},
+            "template": "your_template",
+            "data": {"foo": "bar"},
         },
     )
 except courier.APIConnectionError as e:
@@ -219,10 +215,9 @@ client = Courier(
 # Or, configure per-request:
 client.with_options(max_retries=5).send.message(
     message={
-        "content": {
-            "elements": [{}],
-            "version": "version",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 )
 ```
@@ -249,10 +244,9 @@ client = Courier(
 # Override per-request:
 client.with_options(timeout=5.0).send.message(
     message={
-        "content": {
-            "elements": [{}],
-            "version": "version",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 )
 ```
@@ -297,10 +291,13 @@ from courier import Courier
 client = Courier()
 response = client.send.with_raw_response.message(
     message={
-        "content": {
-            "elements": [{}],
-            "version": "version",
-        }
+        "to": {
+            "user_id": "your_user_id"
+        },
+        "template": "your_template",
+        "data": {
+            "foo": "bar"
+        },
     },
 )
 print(response.headers.get('X-My-Header'))
@@ -322,10 +319,9 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.send.with_streaming_response.message(
     message={
-        "content": {
-            "elements": [{}],
-            "version": "version",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 ) as response:
     print(response.headers.get("X-My-Header"))
