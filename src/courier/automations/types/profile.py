@@ -2,4 +2,4 @@
 
 import typing
 
-Profile = typing.Any
+Profile = typing.Optional[typing.Any]

@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import datetime as dt
 import typing
 
-from ...core.datetime_utils import serialize_datetime
-from ...core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
+import pydantic
+from ...core.pydantic_utilities import IS_PYDANTIC_V2, update_forward_refs
 from .elemental_base_node import ElementalBaseNode
 
 
@@ -15,32 +14,22 @@ class ElementalGroupNode(ElementalBaseNode):
     Allows you to group elements together. This can be useful when used in combination with "if" or "loop". See [control flow docs](https://www.courier.com/docs/platform/content/elemental/control-flow/) for more details.
     """
 
-    elements: typing.List[ElementalNode] = pydantic_v1.Field()
+    elements: typing.List["ElementalNode"] = pydantic.Field()
     """
     Sub elements to render.
     """
 
-    def json(self, **kwargs: typing.Any) -> str:
-        kwargs_with_defaults: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
-        return super().json(**kwargs_with_defaults)
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
 
-    def dict(self, **kwargs: typing.Any) -> typing.Dict[str, typing.Any]:
-        kwargs_with_defaults_exclude_unset: typing.Any = {"by_alias": True, "exclude_unset": True, **kwargs}
-        kwargs_with_defaults_exclude_none: typing.Any = {"by_alias": True, "exclude_none": True, **kwargs}
-
-        return deep_union_pydantic_dicts(
-            super().dict(**kwargs_with_defaults_exclude_unset), super().dict(**kwargs_with_defaults_exclude_none)
-        )
-
-    class Config:
-        frozen = True
-        smart_union = True
-        allow_population_by_field_name = True
-        populate_by_name = True
-        extra = pydantic_v1.Extra.allow
-        json_encoders = {dt.datetime: serialize_datetime}
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow
 
 
-from .elemental_node import ElementalNode  # noqa: E402
+from .elemental_channel_node import ElementalChannelNode  # noqa: E402, F401, I001
+from .elemental_node import ElementalNode  # noqa: E402, F401, I001
 
-ElementalGroupNode.update_forward_refs()
+update_forward_refs(ElementalGroupNode)

@@ -26,13 +26,13 @@ Use the send API to send a message to one or more recipients.
 <dd>
 
 ```python
-from courier import (
+from courier import Courier
+from courier.send import (
     ContentMessage,
     ElementalContentSugar,
     Routing,
     UserRecipient,
 )
-from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -132,7 +132,7 @@ Returns the specified audience by id.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -202,7 +202,7 @@ Creates or updates audience.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -296,7 +296,7 @@ Deletes the specified audience.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -366,7 +366,7 @@ Get list of members of an audience.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -444,7 +444,7 @@ Get the audiences associated with the authorization token.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -513,7 +513,7 @@ Fetch the list of audit events
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -581,7 +581,7 @@ Fetch a specific audit event by ID.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -652,7 +652,7 @@ Returns a new access token.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -748,8 +748,8 @@ Invoke an automation run from an automation template.
 <dd>
 
 ```python
-from courier import AutomationInvokeParams
-from courier.client import Courier
+from courier import Courier
+from courier.automations import AutomationInvokeParams
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -844,13 +844,13 @@ Invoke an ad hoc automation run. This endpoint accepts a JSON payload with a ser
 <dd>
 
 ```python
-from courier import (
+from courier import Courier
+from courier.automations import (
     Automation,
     AutomationAdHocInvokeParams,
     AutomationDelayStep,
     AutomationSendStep,
 )
-from courier.client import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -938,8 +938,8 @@ client.automations.invoke_ad_hoc_automation(
 <dd>
 
 ```python
-from courier import BrandParameters, BrandSettings
-from courier.client import Courier
+from courier import Courier
+from courier.brands import BrandParameters, BrandSettings
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1028,7 +1028,7 @@ Fetch a specific brand by brand ID.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1098,7 +1098,7 @@ Get the list of brands.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1166,7 +1166,7 @@ Delete a brand by brand ID.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1236,7 +1236,7 @@ Replace an existing brand with the supplied values.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1318,8 +1318,8 @@ client.brands.replace(
 <dd>
 
 ```python
-from courier import InboundBulkMessage
-from courier.client import Courier
+from courier import Courier
+from courier.bulk import InboundBulkMessage
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1405,8 +1405,8 @@ Ingest user data into a Bulk Job
 <dd>
 
 ```python
-from courier import BulkIngestUsersParams, InboundBulkMessageUser
-from courier.client import Courier
+from courier import Courier
+from courier.bulk import BulkIngestUsersParams, InboundBulkMessageUser
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1503,7 +1503,7 @@ Run a bulk job
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1589,7 +1589,7 @@ Get a bulk job
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1659,7 +1659,7 @@ Get Bulk Job Users
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1724,8 +1724,8 @@ client.bulk.get_users(
 <dd>
 
 ```python
-from courier import InboundTrackEvent
-from courier.client import Courier
+from courier import Courier
+from courier.inbound import InboundTrackEvent
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1801,7 +1801,7 @@ Returns all of the lists, with the ability to filter based on a pattern.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1877,7 +1877,7 @@ Returns a list based on the list ID provided.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -1947,8 +1947,8 @@ Create or replace an existing list with the supplied values.
 <dd>
 
 ```python
-from courier import ListPutParams
-from courier.client import Courier
+from courier import Courier
+from courier.lists import ListPutParams
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2029,7 +2029,7 @@ Delete a list by list ID.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2099,7 +2099,7 @@ Restore a previously deleted list.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2169,7 +2169,7 @@ Get the list's subscriptions.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2247,8 +2247,8 @@ Subscribes the users to the list, overwriting existing subscriptions. If the lis
 <dd>
 
 ```python
-from courier import PutSubscriptionsRecipient
-from courier.client import Courier
+from courier import Courier
+from courier.lists import PutSubscriptionsRecipient
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2334,8 +2334,8 @@ Subscribes additional users to the list, without modifying existing subscription
 <dd>
 
 ```python
-from courier import PutSubscriptionsRecipient
-from courier.client import Courier
+from courier import Courier
+from courier.lists import PutSubscriptionsRecipient
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2437,7 +2437,7 @@ Subscribe a user to an existing list (note: if the List does not exist, it will 
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2524,7 +2524,7 @@ Delete a subscription to a list by list ID and user ID.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2604,7 +2604,7 @@ Fetch the statuses of messages you've previously sent.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2776,7 +2776,7 @@ Fetch the status of a message you've previously sent.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2846,7 +2846,7 @@ Cancel a message that is currently in the process of being delivered. A well-for
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2932,7 +2932,7 @@ Fetch the array of events of a message you've previously sent.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -2996,7 +2996,7 @@ client.messages.get_history(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3052,7 +3052,7 @@ client.messages.get_content(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3109,7 +3109,7 @@ client.messages.archive(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3171,7 +3171,7 @@ client.notifications.list()
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3227,7 +3227,7 @@ client.notifications.get_content(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3283,7 +3283,7 @@ client.notifications.get_draft_content(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3348,8 +3348,8 @@ client.notifications.get_submission_checks(
 <dd>
 
 ```python
-from courier import BaseCheck
-from courier.client import Courier
+from courier import Courier
+from courier.notifications import BaseCheck
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3432,7 +3432,7 @@ client.notifications.replace_submission_checks(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3512,7 +3512,7 @@ Returns the specified user profile.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3582,7 +3582,7 @@ Merge the supplied values with an existing profile or create a new profile if on
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3614,7 +3614,7 @@ client.profiles.create(
 <dl>
 <dd>
 
-**profile:** `typing.Dict[str, typing.Any]` 
+**profile:** `typing.Dict[str, typing.Optional[typing.Any]]` 
     
 </dd>
 </dl>
@@ -3680,7 +3680,7 @@ use the [Patch](https://www.courier.com/docs/reference/profiles/patch/) request.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3712,7 +3712,7 @@ client.profiles.replace(
 <dl>
 <dd>
 
-**profile:** `typing.Dict[str, typing.Any]` 
+**profile:** `typing.Dict[str, typing.Optional[typing.Any]]` 
     
 </dd>
 </dl>
@@ -3745,8 +3745,8 @@ client.profiles.replace(
 <dd>
 
 ```python
-from courier import ProfileUpdateRequest, UserProfilePatch
-from courier.client import Courier
+from courier import Courier
+from courier.profiles import ProfileUpdateRequest, UserProfilePatch
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3838,7 +3838,7 @@ Deletes the specified user profile.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3908,7 +3908,7 @@ Returns the subscribed lists for a specified user.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -3986,8 +3986,11 @@ Subscribes the given user to one or more lists. If the list does not exist, it w
 <dd>
 
 ```python
-from courier import SubscribeToListsRequest, SubscribeToListsRequestListObject
-from courier.client import Courier
+from courier import Courier
+from courier.profiles import (
+    SubscribeToListsRequest,
+    SubscribeToListsRequestListObject,
+)
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4091,7 +4094,7 @@ Removes all list subscriptions for given user.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4162,7 +4165,7 @@ Returns a list of notification templates
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4217,7 +4220,7 @@ client.templates.list()
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4273,7 +4276,7 @@ client.tenants.create_or_replace(
 <dl>
 <dd>
 
-**properties:** `typing.Optional[typing.Dict[str, typing.Any]]` — Arbitrary properties accessible to a template.
+**properties:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — Arbitrary properties accessible to a template.
     
 </dd>
 </dl>
@@ -4281,7 +4284,7 @@ client.tenants.create_or_replace(
 <dl>
 <dd>
 
-**user_profile:** `typing.Optional[typing.Dict[str, typing.Any]]` — A user profile object merged with user profile on send.
+**user_profile:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` — A user profile object merged with user profile on send.
     
 </dd>
 </dl>
@@ -4322,7 +4325,7 @@ client.tenants.create_or_replace(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4378,7 +4381,7 @@ client.tenants.get(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4451,7 +4454,7 @@ The number of tenants to return
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4507,7 +4510,7 @@ client.tenants.delete(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4582,8 +4585,8 @@ The number of accounts to return
 <dd>
 
 ```python
-from courier import SubscriptionTopicNew
-from courier.client import Courier
+from courier import Courier
+from courier.tenants import SubscriptionTopicNew
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4661,7 +4664,7 @@ client.tenants.create_or_replace_default_preferences_for_topic(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4726,7 +4729,7 @@ client.tenants.remove_default_preferences_for_topic(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4791,7 +4794,7 @@ client.tenants.get_template_by_tenant(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4878,7 +4881,7 @@ Get translations by locale
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -4957,7 +4960,7 @@ Update a translation
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5046,7 +5049,7 @@ Fetch all user preferences.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5124,7 +5127,7 @@ Fetch user preferences for a specific subscription topic.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5211,8 +5214,8 @@ Update or Create user preferences for a specific subscription topic.
 <dd>
 
 ```python
-from courier.client import Courier
-from courier.users import TopicPreferenceUpdate
+from courier import Courier
+from courier.users.preferences import TopicPreferenceUpdate
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5317,8 +5320,8 @@ profile when sending to the user with that tenant.
 <dd>
 
 ```python
-from courier import UserTenantAssociation
-from courier.client import Courier
+from courier import Courier
+from courier.commons import UserTenantAssociation
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5408,7 +5411,7 @@ when sending to the user with that tenant.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5448,7 +5451,7 @@ client.users.tenants.add(
 <dl>
 <dd>
 
-**profile:** `typing.Optional[typing.Dict[str, typing.Any]]` 
+**profile:** `typing.Optional[typing.Dict[str, typing.Optional[typing.Any]]]` 
     
 </dd>
 </dl>
@@ -5495,7 +5498,7 @@ Removes a user from any tenants they may have been associated with.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5565,7 +5568,7 @@ Removes a user from the supplied tenant.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5644,7 +5647,7 @@ Returns a paginated list of user tenant associations.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5734,7 +5737,7 @@ Adds multiple tokens to a user and overwrites matching existing tokens.
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5804,8 +5807,8 @@ Adds a single token to a user and overwrites a matching existing token.
 <dd>
 
 ```python
-from courier.client import Courier
-from courier.users import UserToken
+from courier import Courier
+from courier.users.tokens import UserToken
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5895,8 +5898,8 @@ Apply a JSON Patch (RFC 6902) to the specified token.
 <dd>
 
 ```python
-from courier.client import Courier
-from courier.users import PatchOperation, PatchUserTokenOpts
+from courier import Courier
+from courier.users.tokens import PatchOperation, PatchUserTokenOpts
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -5995,7 +5998,7 @@ Get single token available for a `:token`
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -6074,7 +6077,7 @@ Gets all tokens available for a :user_id
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",
@@ -6130,7 +6133,7 @@ client.users.tokens.list(
 <dd>
 
 ```python
-from courier.client import Courier
+from courier import Courier
 
 client = Courier(
     authorization_token="YOUR_AUTHORIZATION_TOKEN",

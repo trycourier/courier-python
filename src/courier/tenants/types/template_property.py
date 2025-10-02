@@ -2,4 +2,4 @@
 
 import typing
 
-TemplateProperty = typing.Any
+TemplateProperty = typing.Optional[typing.Any]
