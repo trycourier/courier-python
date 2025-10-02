@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.4.0-alpha1 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha0...v6.4.0-alpha1](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha0...v6.4.0-alpha1)
+
+### Chores
+
+* update SDK settings ([6c392ae](https://github.com/trycourier/courier-python/commit/6c392ae4d5e6a1d41eb3b175964978d79a783f58))
+
 ## 6.4.0-alpha0 (2025-10-02)
 
 Full Changelog: [v0.0.1...v6.4.0-alpha0](https://github.com/trycourier/courier-python/compare/v0.0.1...v6.4.0-alpha0)
