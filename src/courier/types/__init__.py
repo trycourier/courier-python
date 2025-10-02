@@ -15,16 +15,23 @@ from . import (
     notification_list_response,
 )
 from .. import _compat
+from .utm import Utm as Utm
 from .list import List as List
 from .brand import Brand as Brand
+from .email import Email as Email
 from .filter import Filter as Filter
 from .paging import Paging as Paging
+from .shared import Rule as Rule, ChannelPreference as ChannelPreference
 from .tenant import Tenant as Tenant
 from .content import Content as Content
 from .audience import Audience as Audience
+from .utm_param import UtmParam as UtmParam
 from .audit_event import AuditEvent as AuditEvent
+from .email_param import EmailParam as EmailParam
 from .base_message import BaseMessage as BaseMessage
+from .brand_colors import BrandColors as BrandColors
 from .filter_param import FilterParam as FilterParam
+from .brand_snippet import BrandSnippet as BrandSnippet
 from .content_param import ContentParam as ContentParam
 from .filter_config import FilterConfig as FilterConfig
 from .message_param import MessageParam as MessageParam
@@ -38,11 +45,13 @@ from .recipient_param import RecipientParam as RecipientParam
 from .list_list_params import ListListParams as ListListParams
 from .brand_list_params import BrandListParams as BrandListParams
 from .base_message_param import BaseMessageParam as BaseMessageParam
+from .brand_colors_param import BrandColorsParam as BrandColorsParam
 from .list_list_response import ListListResponse as ListListResponse
 from .list_update_params import ListUpdateParams as ListUpdateParams
 from .tenant_list_params import TenantListParams as TenantListParams
 from .brand_create_params import BrandCreateParams as BrandCreateParams
 from .brand_list_response import BrandListResponse as BrandListResponse
+from .brand_snippet_param import BrandSnippetParam as BrandSnippetParam
 from .brand_update_params import BrandUpdateParams as BrandUpdateParams
 from .default_preferences import DefaultPreferences as DefaultPreferences
 from .filter_config_param import FilterConfigParam as FilterConfigParam

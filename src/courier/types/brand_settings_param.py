@@ -3,28 +3,17 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
-__all__ = ["BrandSettingsParam", "Colors", "Email"]
+from .email_param import EmailParam
+from .brand_colors_param import BrandColorsParam
 
-
-class Colors(TypedDict, total=False):
-    primary: Optional[str]
-
-    secondary: Optional[str]
-
-    tertiary: Optional[str]
-
-
-class Email(TypedDict, total=False):
-    footer: Required[object]
-
-    header: Required[object]
+__all__ = ["BrandSettingsParam"]
 
 
 class BrandSettingsParam(TypedDict, total=False):
-    colors: Optional[Colors]
+    colors: Optional[BrandColorsParam]
 
-    email: Optional[Email]
+    email: Optional[EmailParam]
 
     inapp: object

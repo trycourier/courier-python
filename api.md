@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from courier.types import ChannelPreference, Rule
+```
+
 # Send
 
 Types:
@@ -12,6 +18,7 @@ from courier.types import (
     MsTeamsBaseProperties,
     Recipient,
     SlackBaseProperties,
+    Utm,
     SendMessageResponse,
 )
 ```
@@ -95,7 +102,15 @@ Methods:
 Types:
 
 ```python
-from courier.types import Brand, BrandSettings, BrandSnippets, BrandListResponse
+from courier.types import (
+    Brand,
+    BrandColors,
+    BrandSettings,
+    BrandSnippet,
+    BrandSnippets,
+    Email,
+    BrandListResponse,
+)
 ```
 
 Methods:
@@ -163,6 +178,7 @@ Types:
 
 ```python
 from courier.types.lists import (
+    NotificationPreferenceDetails,
     PutSubscriptionsRecipient,
     RecipientPreferences,
     SubscriptionListResponse,

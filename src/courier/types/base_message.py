@@ -7,6 +7,7 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
+from .utm import Utm
 from .._models import BaseModel
 from .message_context import MessageContext
 
@@ -14,35 +15,20 @@ __all__ = [
     "BaseMessage",
     "Channels",
     "ChannelsMetadata",
-    "ChannelsMetadataUtm",
     "ChannelsTimeouts",
     "Delay",
     "Expiry",
     "Metadata",
-    "MetadataUtm",
     "Preferences",
     "Providers",
     "ProvidersMetadata",
-    "ProvidersMetadataUtm",
     "Routing",
     "Timeout",
 ]
 
 
-class ChannelsMetadataUtm(BaseModel):
-    campaign: Optional[str] = None
-
-    content: Optional[str] = None
-
-    medium: Optional[str] = None
-
-    source: Optional[str] = None
-
-    term: Optional[str] = None
-
-
 class ChannelsMetadata(BaseModel):
-    utm: Optional[ChannelsMetadataUtm] = None
+    utm: Optional[Utm] = None
 
 
 class ChannelsTimeouts(BaseModel):
@@ -115,18 +101,6 @@ class Expiry(BaseModel):
     """
 
 
-class MetadataUtm(BaseModel):
-    campaign: Optional[str] = None
-
-    content: Optional[str] = None
-
-    medium: Optional[str] = None
-
-    source: Optional[str] = None
-
-    term: Optional[str] = None
-
-
 class Metadata(BaseModel):
     event: Optional[str] = None
     """An arbitrary string to tracks the event that generated this request (e.g.
@@ -147,7 +121,7 @@ class Metadata(BaseModel):
     Note: Courier does not verify the uniqueness of this ID.
     """
 
-    utm: Optional[MetadataUtm] = None
+    utm: Optional[Utm] = None
     """
     Identify the campaign that refers traffic to a specific website, and attributes
     the browser's website session.
@@ -163,20 +137,8 @@ class Preferences(BaseModel):
     """
 
 
-class ProvidersMetadataUtm(BaseModel):
-    campaign: Optional[str] = None
-
-    content: Optional[str] = None
-
-    medium: Optional[str] = None
-
-    source: Optional[str] = None
-
-    term: Optional[str] = None
-
-
 class ProvidersMetadata(BaseModel):
-    utm: Optional[ProvidersMetadataUtm] = None
+    utm: Optional[Utm] = None
 
 
 class Providers(BaseModel):
