@@ -715,7 +715,7 @@ class TestCourier:
         respx_mock.post("/send").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.send.with_streaming_response.send_message(
+            client.send.with_streaming_response.message(
                 message={
                     "content": {
                         "elements": [{}],
@@ -732,7 +732,7 @@ class TestCourier:
         respx_mock.post("/send").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.send.with_streaming_response.send_message(
+            client.send.with_streaming_response.message(
                 message={
                     "content": {
                         "elements": [{}],
@@ -768,7 +768,7 @@ class TestCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = client.send.with_raw_response.send_message(
+        response = client.send.with_raw_response.message(
             message={
                 "content": {
                     "elements": [{}],
@@ -799,7 +799,7 @@ class TestCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = client.send.with_raw_response.send_message(
+        response = client.send.with_raw_response.message(
             message={
                 "content": {
                     "elements": [{}],
@@ -830,7 +830,7 @@ class TestCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = client.send.with_raw_response.send_message(
+        response = client.send.with_raw_response.message(
             message={
                 "content": {
                     "elements": [{}],
@@ -1569,7 +1569,7 @@ class TestAsyncCourier:
         respx_mock.post("/send").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.send.with_streaming_response.send_message(
+            await async_client.send.with_streaming_response.message(
                 message={
                     "content": {
                         "elements": [{}],
@@ -1586,7 +1586,7 @@ class TestAsyncCourier:
         respx_mock.post("/send").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.send.with_streaming_response.send_message(
+            await async_client.send.with_streaming_response.message(
                 message={
                     "content": {
                         "elements": [{}],
@@ -1623,7 +1623,7 @@ class TestAsyncCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = await client.send.with_raw_response.send_message(
+        response = await client.send.with_raw_response.message(
             message={
                 "content": {
                     "elements": [{}],
@@ -1655,7 +1655,7 @@ class TestAsyncCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = await client.send.with_raw_response.send_message(
+        response = await client.send.with_raw_response.message(
             message={
                 "content": {
                     "elements": [{}],
@@ -1687,7 +1687,7 @@ class TestAsyncCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = await client.send.with_raw_response.send_message(
+        response = await client.send.with_raw_response.message(
             message={
                 "content": {
                     "elements": [{}],
