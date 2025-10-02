@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .message_param import MessageParam
-
 __all__ = ["SendMessageParams"]
 
 
 class SendMessageParams(TypedDict, total=False):
-    message: Required[MessageParam]
+    message: Required["MessageParam"]
     """Defines the message to be delivered"""
+
+
+from .message_param import MessageParam

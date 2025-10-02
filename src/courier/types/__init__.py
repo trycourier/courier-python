@@ -5,9 +5,13 @@ from __future__ import annotations
 from . import (
     audience,
     message_routing,
+    elemental_group_node,
+    inbound_bulk_message,
     nested_filter_config,
     audience_list_response,
+    elemental_channel_node,
     audience_update_response,
+    bulk_retrieve_job_response,
     notification_list_response,
 )
 from .. import _compat
@@ -28,6 +32,7 @@ from .filter_config import FilterConfig as FilterConfig
 from .message_param import MessageParam as MessageParam
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
+from .elemental_node import ElementalNode as ElementalNode
 from .routing_method import RoutingMethod as RoutingMethod
 from .user_recipient import UserRecipient as UserRecipient
 from .message_context import MessageContext as MessageContext
@@ -50,6 +55,8 @@ from .send_message_params import SendMessageParams as SendMessageParams
 from .audience_list_params import AudienceListParams as AudienceListParams
 from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
+from .elemental_group_node import ElementalGroupNode as ElementalGroupNode
+from .elemental_node_param import ElementalNodeParam as ElementalNodeParam
 from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
 from .nested_filter_config import NestedFilterConfig as NestedFilterConfig
 from .tenant_list_response import TenantListResponse as TenantListResponse
@@ -65,6 +72,7 @@ from .audience_list_response import AudienceListResponse as AudienceListResponse
 from .audience_update_params import AudienceUpdateParams as AudienceUpdateParams
 from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
 from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
+from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode
 from .message_history_params import MessageHistoryParams as MessageHistoryParams
 from .profile_replace_params import ProfileReplaceParams as ProfileReplaceParams
 from .audit_event_list_params import AuditEventListParams as AuditEventListParams
@@ -88,6 +96,7 @@ from .profile_retrieve_response import ProfileRetrieveResponse as ProfileRetriev
 from .translation_update_params import TranslationUpdateParams as TranslationUpdateParams
 from .base_message_send_to_param import BaseMessageSendToParam as BaseMessageSendToParam
 from .bulk_retrieve_job_response import BulkRetrieveJobResponse as BulkRetrieveJobResponse
+from .elemental_group_node_param import ElementalGroupNodeParam as ElementalGroupNodeParam
 from .inbound_bulk_message_param import InboundBulkMessageParam as InboundBulkMessageParam
 from .inbound_track_event_params import InboundTrackEventParams as InboundTrackEventParams
 from .nested_filter_config_param import NestedFilterConfigParam as NestedFilterConfigParam
@@ -95,6 +104,7 @@ from .notification_list_response import NotificationListResponse as Notification
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
 from .slack_base_properties_param import SlackBasePropertiesParam as SlackBasePropertiesParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
+from .elemental_channel_node_param import ElementalChannelNodeParam as ElementalChannelNodeParam
 from .inbound_track_event_response import InboundTrackEventResponse as InboundTrackEventResponse
 from .message_get_content_response import MessageGetContentResponse as MessageGetContentResponse
 from .translation_retrieve_response import TranslationRetrieveResponse as TranslationRetrieveResponse
@@ -109,16 +119,24 @@ from .automation_invoke_by_template_params import AutomationInvokeByTemplatePara
 # Pydantic can resolve the necessary references.
 # See: https://github.com/pydantic/pydantic/issues/11250 for more context.
 if _compat.PYDANTIC_V1:
+    elemental_channel_node.ElementalChannelNode.update_forward_refs()  # type: ignore
+    elemental_group_node.ElementalGroupNode.update_forward_refs()  # type: ignore
     audience.Audience.update_forward_refs()  # type: ignore
     nested_filter_config.NestedFilterConfig.update_forward_refs()  # type: ignore
     audience_update_response.AudienceUpdateResponse.update_forward_refs()  # type: ignore
     audience_list_response.AudienceListResponse.update_forward_refs()  # type: ignore
+    inbound_bulk_message.InboundBulkMessage.update_forward_refs()  # type: ignore
+    bulk_retrieve_job_response.BulkRetrieveJobResponse.update_forward_refs()  # type: ignore
     message_routing.MessageRouting.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
 else:
+    elemental_channel_node.ElementalChannelNode.model_rebuild(_parent_namespace_depth=0)
+    elemental_group_node.ElementalGroupNode.model_rebuild(_parent_namespace_depth=0)
     audience.Audience.model_rebuild(_parent_namespace_depth=0)
     nested_filter_config.NestedFilterConfig.model_rebuild(_parent_namespace_depth=0)
     audience_update_response.AudienceUpdateResponse.model_rebuild(_parent_namespace_depth=0)
     audience_list_response.AudienceListResponse.model_rebuild(_parent_namespace_depth=0)
+    inbound_bulk_message.InboundBulkMessage.model_rebuild(_parent_namespace_depth=0)
+    bulk_retrieve_job_response.BulkRetrieveJobResponse.model_rebuild(_parent_namespace_depth=0)
     message_routing.MessageRouting.model_rebuild(_parent_namespace_depth=0)
     notification_list_response.NotificationListResponse.model_rebuild(_parent_namespace_depth=0)
