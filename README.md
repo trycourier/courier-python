@@ -17,7 +17,7 @@ The full API of this library can be found in [api.md](api.md).
 
 ```sh
 # install from PyPI
-pip install courier
+pip install --pre courier
 ```
 
 ## Usage
@@ -85,7 +85,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install courier[aiohttp]
+pip install --pre courier[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
