@@ -6,58 +6,30 @@ from typing_extensions import Literal
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .shared.rule import Rule
 from .message_context import MessageContext
 from .users.preference_status import PreferenceStatus
-from .tenants.default_preferences.channel_classification import ChannelClassification
+from .shared.channel_preference import ChannelPreference
 
-__all__ = [
-    "UserRecipient",
-    "Preferences",
-    "PreferencesNotifications",
-    "PreferencesNotificationsChannelPreference",
-    "PreferencesNotificationsRule",
-    "PreferencesCategories",
-    "PreferencesCategoriesChannelPreference",
-    "PreferencesCategoriesRule",
-]
-
-
-class PreferencesNotificationsChannelPreference(BaseModel):
-    channel: ChannelClassification
-
-
-class PreferencesNotificationsRule(BaseModel):
-    until: str
-
-    start: Optional[str] = None
+__all__ = ["UserRecipient", "Preferences", "PreferencesNotifications", "PreferencesCategories"]
 
 
 class PreferencesNotifications(BaseModel):
     status: PreferenceStatus
 
-    channel_preferences: Optional[List[PreferencesNotificationsChannelPreference]] = None
+    channel_preferences: Optional[List[ChannelPreference]] = None
 
-    rules: Optional[List[PreferencesNotificationsRule]] = None
+    rules: Optional[List[Rule]] = None
 
     source: Optional[Literal["subscription", "list", "recipient"]] = None
-
-
-class PreferencesCategoriesChannelPreference(BaseModel):
-    channel: ChannelClassification
-
-
-class PreferencesCategoriesRule(BaseModel):
-    until: str
-
-    start: Optional[str] = None
 
 
 class PreferencesCategories(BaseModel):
     status: PreferenceStatus
 
-    channel_preferences: Optional[List[PreferencesCategoriesChannelPreference]] = None
+    channel_preferences: Optional[List[ChannelPreference]] = None
 
-    rules: Optional[List[PreferencesCategoriesRule]] = None
+    rules: Optional[List[Rule]] = None
 
     source: Optional[Literal["subscription", "list", "recipient"]] = None
 
