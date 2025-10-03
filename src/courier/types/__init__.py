@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 from .recipient_param import RecipientParam as RecipientParam
+from .send_message_params import SendMessageParams as SendMessageParams
 from .message_context_param import MessageContextParam as MessageContextParam
 from .message_routing_param import MessageRoutingParam as MessageRoutingParam
-from .send_send_message_params import SendSendMessageParams as SendSendMessageParams
-from .send_send_message_response import SendSendMessageResponse as SendSendMessageResponse
+from .send_message_response import SendMessageResponse as SendMessageResponse
 from .message_routing_channel_param import MessageRoutingChannelParam as MessageRoutingChannelParam
