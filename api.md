@@ -7,7 +7,9 @@ from courier.types import (
     MessageContext,
     MessageRouting,
     MessageRoutingChannel,
+    Preference,
     Recipient,
+    Utm,
     SendMessageResponse,
 )
 ```
