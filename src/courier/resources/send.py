@@ -16,7 +16,6 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.message_param import MessageParam
 from ..types.send_message_response import SendMessageResponse
 
 __all__ = ["SendResource", "AsyncSendResource"]
@@ -45,7 +44,7 @@ class SendResource(SyncAPIResource):
     def message(
         self,
         *,
-        message: MessageParam,
+        message: send_message_params.Message,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -57,7 +56,8 @@ class SendResource(SyncAPIResource):
         Use the send API to send a message to one or more recipients.
 
         Args:
-          message: Defines the message to be delivered
+          message: The message property has the following primary top-level properties. They define
+              the destination and content of the message.
 
           extra_headers: Send extra headers
 
@@ -100,7 +100,7 @@ class AsyncSendResource(AsyncAPIResource):
     async def message(
         self,
         *,
-        message: MessageParam,
+        message: send_message_params.Message,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -112,7 +112,8 @@ class AsyncSendResource(AsyncAPIResource):
         Use the send API to send a message to one or more recipients.
 
         Args:
-          message: Defines the message to be delivered
+          message: The message property has the following primary top-level properties. They define
+              the destination and content of the message.
 
           extra_headers: Send extra headers
 

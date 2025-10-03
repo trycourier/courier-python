@@ -34,9 +34,10 @@ client = Courier(
 
 response = client.send.message(
     message={
-        "to": {"user_id": "your_user_id"},
-        "template": "your_template",
-        "data": {"foo": "bar"},
+        "content": {
+            "body": "body",
+            "title": "title",
+        }
     },
 )
 print(response.request_id)
@@ -64,9 +65,10 @@ client = AsyncCourier(
 async def main() -> None:
     response = await client.send.message(
         message={
-            "to": {"user_id": "your_user_id"},
-            "template": "your_template",
-            "data": {"foo": "bar"},
+            "content": {
+                "body": "body",
+                "title": "title",
+            }
         },
     )
     print(response.request_id)
@@ -103,9 +105,10 @@ async def main() -> None:
     ) as client:
         response = await client.send.message(
             message={
-                "to": {"user_id": "your_user_id"},
-                "template": "your_template",
-                "data": {"foo": "bar"},
+                "content": {
+                    "body": "body",
+                    "title": "title",
+                }
             },
         )
         print(response.request_id)
@@ -132,17 +135,21 @@ from courier import Courier
 
 client = Courier()
 
-automation_invoke_response = client.automations.invoke.invoke_ad_hoc(
-    automation={
-        "steps": [
-            {
-                "action": "add-to-digest",
-                "subscription_topic_id": "RAJE97CMT04KDJJ88ZDS2TP1690S",
-            }
-        ]
+response = client.send.message(
+    message={
+        "content": {
+            "body": "Thanks for signing up, {{name}}",
+            "title": "Welcome!",
+        },
+        "data": {"name": "bar"},
+        "routing": {
+            "channels": ["email"],
+            "method": "single",
+        },
+        "to": {"email": "email@example.com"},
     },
 )
-print(automation_invoke_response.automation)
+print(response.message)
 ```
 
 ## Handling errors
@@ -163,9 +170,10 @@ client = Courier()
 try:
     client.send.message(
         message={
-            "to": {"user_id": "your_user_id"},
-            "template": "your_template",
-            "data": {"foo": "bar"},
+            "content": {
+                "body": "body",
+                "title": "title",
+            }
         },
     )
 except courier.APIConnectionError as e:
@@ -212,9 +220,10 @@ client = Courier(
 # Or, configure per-request:
 client.with_options(max_retries=5).send.message(
     message={
-        "to": {"user_id": "your_user_id"},
-        "template": "your_template",
-        "data": {"foo": "bar"},
+        "content": {
+            "body": "body",
+            "title": "title",
+        }
     },
 )
 ```
@@ -241,9 +250,10 @@ client = Courier(
 # Override per-request:
 client.with_options(timeout=5.0).send.message(
     message={
-        "to": {"user_id": "your_user_id"},
-        "template": "your_template",
-        "data": {"foo": "bar"},
+        "content": {
+            "body": "body",
+            "title": "title",
+        }
     },
 )
 ```
@@ -288,13 +298,10 @@ from courier import Courier
 client = Courier()
 response = client.send.with_raw_response.message(
     message={
-        "to": {
-            "user_id": "your_user_id"
-        },
-        "template": "your_template",
-        "data": {
-            "foo": "bar"
-        },
+        "content": {
+            "body": "body",
+            "title": "title",
+        }
     },
 )
 print(response.headers.get('X-My-Header'))
@@ -316,9 +323,10 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 ```python
 with client.send.with_streaming_response.message(
     message={
-        "to": {"user_id": "your_user_id"},
-        "template": "your_template",
-        "data": {"foo": "bar"},
+        "content": {
+            "body": "body",
+            "title": "title",
+        }
     },
 ) as response:
     print(response.headers.get("X-My-Header"))

@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import auth, bulk, send, brands, inbound, messages, requests, audiences, audit_events, translations
+from .resources import send
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import CourierError, APIStatusError
 from ._base_client import (
@@ -29,33 +29,12 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.lists import lists
-from .resources.users import users
-from .resources.tenants import tenants
-from .resources.profiles import profiles
-from .resources.automations import automations
-from .resources.notifications import notifications
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Courier", "AsyncCourier", "Client", "AsyncClient"]
 
 
 class Courier(SyncAPIClient):
     send: send.SendResource
-    audiences: audiences.AudiencesResource
-    audit_events: audit_events.AuditEventsResource
-    auth: auth.AuthResource
-    automations: automations.AutomationsResource
-    brands: brands.BrandsResource
-    bulk: bulk.BulkResource
-    inbound: inbound.InboundResource
-    lists: lists.ListsResource
-    messages: messages.MessagesResource
-    requests: requests.RequestsResource
-    notifications: notifications.NotificationsResource
-    profiles: profiles.ProfilesResource
-    tenants: tenants.TenantsResource
-    translations: translations.TranslationsResource
-    users: users.UsersResource
     with_raw_response: CourierWithRawResponse
     with_streaming_response: CourierWithStreamedResponse
 
@@ -114,21 +93,6 @@ class Courier(SyncAPIClient):
         )
 
         self.send = send.SendResource(self)
-        self.audiences = audiences.AudiencesResource(self)
-        self.audit_events = audit_events.AuditEventsResource(self)
-        self.auth = auth.AuthResource(self)
-        self.automations = automations.AutomationsResource(self)
-        self.brands = brands.BrandsResource(self)
-        self.bulk = bulk.BulkResource(self)
-        self.inbound = inbound.InboundResource(self)
-        self.lists = lists.ListsResource(self)
-        self.messages = messages.MessagesResource(self)
-        self.requests = requests.RequestsResource(self)
-        self.notifications = notifications.NotificationsResource(self)
-        self.profiles = profiles.ProfilesResource(self)
-        self.tenants = tenants.TenantsResource(self)
-        self.translations = translations.TranslationsResource(self)
-        self.users = users.UsersResource(self)
         self.with_raw_response = CourierWithRawResponse(self)
         self.with_streaming_response = CourierWithStreamedResponse(self)
 
@@ -239,21 +203,6 @@ class Courier(SyncAPIClient):
 
 class AsyncCourier(AsyncAPIClient):
     send: send.AsyncSendResource
-    audiences: audiences.AsyncAudiencesResource
-    audit_events: audit_events.AsyncAuditEventsResource
-    auth: auth.AsyncAuthResource
-    automations: automations.AsyncAutomationsResource
-    brands: brands.AsyncBrandsResource
-    bulk: bulk.AsyncBulkResource
-    inbound: inbound.AsyncInboundResource
-    lists: lists.AsyncListsResource
-    messages: messages.AsyncMessagesResource
-    requests: requests.AsyncRequestsResource
-    notifications: notifications.AsyncNotificationsResource
-    profiles: profiles.AsyncProfilesResource
-    tenants: tenants.AsyncTenantsResource
-    translations: translations.AsyncTranslationsResource
-    users: users.AsyncUsersResource
     with_raw_response: AsyncCourierWithRawResponse
     with_streaming_response: AsyncCourierWithStreamedResponse
 
@@ -312,21 +261,6 @@ class AsyncCourier(AsyncAPIClient):
         )
 
         self.send = send.AsyncSendResource(self)
-        self.audiences = audiences.AsyncAudiencesResource(self)
-        self.audit_events = audit_events.AsyncAuditEventsResource(self)
-        self.auth = auth.AsyncAuthResource(self)
-        self.automations = automations.AsyncAutomationsResource(self)
-        self.brands = brands.AsyncBrandsResource(self)
-        self.bulk = bulk.AsyncBulkResource(self)
-        self.inbound = inbound.AsyncInboundResource(self)
-        self.lists = lists.AsyncListsResource(self)
-        self.messages = messages.AsyncMessagesResource(self)
-        self.requests = requests.AsyncRequestsResource(self)
-        self.notifications = notifications.AsyncNotificationsResource(self)
-        self.profiles = profiles.AsyncProfilesResource(self)
-        self.tenants = tenants.AsyncTenantsResource(self)
-        self.translations = translations.AsyncTranslationsResource(self)
-        self.users = users.AsyncUsersResource(self)
         self.with_raw_response = AsyncCourierWithRawResponse(self)
         self.with_streaming_response = AsyncCourierWithStreamedResponse(self)
 
@@ -438,81 +372,21 @@ class AsyncCourier(AsyncAPIClient):
 class CourierWithRawResponse:
     def __init__(self, client: Courier) -> None:
         self.send = send.SendResourceWithRawResponse(client.send)
-        self.audiences = audiences.AudiencesResourceWithRawResponse(client.audiences)
-        self.audit_events = audit_events.AuditEventsResourceWithRawResponse(client.audit_events)
-        self.auth = auth.AuthResourceWithRawResponse(client.auth)
-        self.automations = automations.AutomationsResourceWithRawResponse(client.automations)
-        self.brands = brands.BrandsResourceWithRawResponse(client.brands)
-        self.bulk = bulk.BulkResourceWithRawResponse(client.bulk)
-        self.inbound = inbound.InboundResourceWithRawResponse(client.inbound)
-        self.lists = lists.ListsResourceWithRawResponse(client.lists)
-        self.messages = messages.MessagesResourceWithRawResponse(client.messages)
-        self.requests = requests.RequestsResourceWithRawResponse(client.requests)
-        self.notifications = notifications.NotificationsResourceWithRawResponse(client.notifications)
-        self.profiles = profiles.ProfilesResourceWithRawResponse(client.profiles)
-        self.tenants = tenants.TenantsResourceWithRawResponse(client.tenants)
-        self.translations = translations.TranslationsResourceWithRawResponse(client.translations)
-        self.users = users.UsersResourceWithRawResponse(client.users)
 
 
 class AsyncCourierWithRawResponse:
     def __init__(self, client: AsyncCourier) -> None:
         self.send = send.AsyncSendResourceWithRawResponse(client.send)
-        self.audiences = audiences.AsyncAudiencesResourceWithRawResponse(client.audiences)
-        self.audit_events = audit_events.AsyncAuditEventsResourceWithRawResponse(client.audit_events)
-        self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
-        self.automations = automations.AsyncAutomationsResourceWithRawResponse(client.automations)
-        self.brands = brands.AsyncBrandsResourceWithRawResponse(client.brands)
-        self.bulk = bulk.AsyncBulkResourceWithRawResponse(client.bulk)
-        self.inbound = inbound.AsyncInboundResourceWithRawResponse(client.inbound)
-        self.lists = lists.AsyncListsResourceWithRawResponse(client.lists)
-        self.messages = messages.AsyncMessagesResourceWithRawResponse(client.messages)
-        self.requests = requests.AsyncRequestsResourceWithRawResponse(client.requests)
-        self.notifications = notifications.AsyncNotificationsResourceWithRawResponse(client.notifications)
-        self.profiles = profiles.AsyncProfilesResourceWithRawResponse(client.profiles)
-        self.tenants = tenants.AsyncTenantsResourceWithRawResponse(client.tenants)
-        self.translations = translations.AsyncTranslationsResourceWithRawResponse(client.translations)
-        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
 
 
 class CourierWithStreamedResponse:
     def __init__(self, client: Courier) -> None:
         self.send = send.SendResourceWithStreamingResponse(client.send)
-        self.audiences = audiences.AudiencesResourceWithStreamingResponse(client.audiences)
-        self.audit_events = audit_events.AuditEventsResourceWithStreamingResponse(client.audit_events)
-        self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
-        self.automations = automations.AutomationsResourceWithStreamingResponse(client.automations)
-        self.brands = brands.BrandsResourceWithStreamingResponse(client.brands)
-        self.bulk = bulk.BulkResourceWithStreamingResponse(client.bulk)
-        self.inbound = inbound.InboundResourceWithStreamingResponse(client.inbound)
-        self.lists = lists.ListsResourceWithStreamingResponse(client.lists)
-        self.messages = messages.MessagesResourceWithStreamingResponse(client.messages)
-        self.requests = requests.RequestsResourceWithStreamingResponse(client.requests)
-        self.notifications = notifications.NotificationsResourceWithStreamingResponse(client.notifications)
-        self.profiles = profiles.ProfilesResourceWithStreamingResponse(client.profiles)
-        self.tenants = tenants.TenantsResourceWithStreamingResponse(client.tenants)
-        self.translations = translations.TranslationsResourceWithStreamingResponse(client.translations)
-        self.users = users.UsersResourceWithStreamingResponse(client.users)
 
 
 class AsyncCourierWithStreamedResponse:
     def __init__(self, client: AsyncCourier) -> None:
         self.send = send.AsyncSendResourceWithStreamingResponse(client.send)
-        self.audiences = audiences.AsyncAudiencesResourceWithStreamingResponse(client.audiences)
-        self.audit_events = audit_events.AsyncAuditEventsResourceWithStreamingResponse(client.audit_events)
-        self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
-        self.automations = automations.AsyncAutomationsResourceWithStreamingResponse(client.automations)
-        self.brands = brands.AsyncBrandsResourceWithStreamingResponse(client.brands)
-        self.bulk = bulk.AsyncBulkResourceWithStreamingResponse(client.bulk)
-        self.inbound = inbound.AsyncInboundResourceWithStreamingResponse(client.inbound)
-        self.lists = lists.AsyncListsResourceWithStreamingResponse(client.lists)
-        self.messages = messages.AsyncMessagesResourceWithStreamingResponse(client.messages)
-        self.requests = requests.AsyncRequestsResourceWithStreamingResponse(client.requests)
-        self.notifications = notifications.AsyncNotificationsResourceWithStreamingResponse(client.notifications)
-        self.profiles = profiles.AsyncProfilesResourceWithStreamingResponse(client.profiles)
-        self.tenants = tenants.AsyncTenantsResourceWithStreamingResponse(client.tenants)
-        self.translations = translations.AsyncTranslationsResourceWithStreamingResponse(client.translations)
-        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
 
 
 Client = Courier
