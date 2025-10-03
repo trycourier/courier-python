@@ -11,7 +11,7 @@ from .recipient_param import RecipientParam
 from .message_context_param import MessageContextParam
 
 __all__ = [
-    "SendSendMessageParams",
+    "SendMessageParams",
     "Message",
     "MessageContent",
     "MessageChannels",
@@ -40,7 +40,7 @@ __all__ = [
 ]
 
 
-class SendSendMessageParams(TypedDict, total=False):
+class SendMessageParams(TypedDict, total=False):
     message: Required[Message]
     """The message property has the following primary top-level properties.
 
