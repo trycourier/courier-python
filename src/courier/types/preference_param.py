@@ -5,21 +5,15 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["PreferenceParam", "ChannelPreference", "Rule"]
+from .shared_params.rule import Rule
+from .users.preference_status import PreferenceStatus
+from .shared_params.channel_preference import ChannelPreference
 
-
-class ChannelPreference(TypedDict, total=False):
-    channel: Required[Literal["direct_message", "email", "push", "sms", "webhook", "inbox"]]
-
-
-class Rule(TypedDict, total=False):
-    until: Required[str]
-
-    start: Optional[str]
+__all__ = ["PreferenceParam"]
 
 
 class PreferenceParam(TypedDict, total=False):
-    status: Required[Literal["OPTED_IN", "OPTED_OUT", "REQUIRED"]]
+    status: Required[PreferenceStatus]
 
     channel_preferences: Optional[Iterable[ChannelPreference]]
 

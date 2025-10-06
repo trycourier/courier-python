@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Iterable, Optional
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
-from .._utils import PropertyInfo
 from .utm_param import UtmParam
+from .content_param import ContentParam
 from .recipient_param import RecipientParam
-from .preference_param import PreferenceParam
-from .elemental_node_param import ElementalNodeParam
+from .user_recipient_param import UserRecipientParam
 from .message_context_param import MessageContextParam
 
 __all__ = [
@@ -19,9 +18,6 @@ __all__ = [
     "MessageChannels",
     "MessageChannelsMetadata",
     "MessageChannelsTimeouts",
-    "MessageContent",
-    "MessageContentElementalContentSugar",
-    "MessageContentElementalContent",
     "MessageDelay",
     "MessageExpiry",
     "MessageMetadata",
@@ -31,8 +27,6 @@ __all__ = [
     "MessageRouting",
     "MessageTimeout",
     "MessageTo",
-    "MessageToUnionMember0",
-    "MessageToUnionMember0Preferences",
 ]
 
 
@@ -79,26 +73,6 @@ class MessageChannels(_MessageChannelsReservedKeywords, total=False):
     """Defaults to `single`."""
 
     timeouts: Optional[MessageChannelsTimeouts]
-
-
-class MessageContentElementalContentSugar(TypedDict, total=False):
-    body: Required[str]
-    """The text content displayed in the notification."""
-
-    title: Required[str]
-    """Title/subject displayed by supported channels."""
-
-
-class MessageContentElementalContent(TypedDict, total=False):
-    elements: Required[Iterable[ElementalNodeParam]]
-
-    version: Required[str]
-    """For example, "2022-01-01" """
-
-    brand: Optional[str]
-
-
-MessageContent: TypeAlias = Union[MessageContentElementalContentSugar, MessageContentElementalContent]
 
 
 class MessageDelay(TypedDict, total=False):
@@ -173,39 +147,7 @@ class MessageTimeout(TypedDict, total=False):
     provider: Optional[Dict[str, int]]
 
 
-class MessageToUnionMember0Preferences(TypedDict, total=False):
-    notifications: Required[Dict[str, PreferenceParam]]
-
-    categories: Optional[Dict[str, PreferenceParam]]
-
-    template_id: Annotated[Optional[str], PropertyInfo(alias="templateId")]
-
-
-class MessageToUnionMember0(TypedDict, total=False):
-    account_id: Optional[str]
-    """Use `tenant_id` instead."""
-
-    context: Optional[MessageContextParam]
-    """Context such as tenant_id to send the notification with."""
-
-    data: Optional[Dict[str, object]]
-
-    email: Optional[str]
-
-    locale: Optional[str]
-    """The user's preferred ISO 639-1 language code."""
-
-    phone_number: Optional[str]
-
-    preferences: Optional[MessageToUnionMember0Preferences]
-
-    tenant_id: Optional[str]
-    """Tenant id. Will load brand, default preferences and base context data."""
-
-    user_id: Optional[str]
-
-
-MessageTo: TypeAlias = Union[MessageToUnionMember0, Iterable[RecipientParam]]
+MessageTo: TypeAlias = Union[UserRecipientParam, Iterable[RecipientParam]]
 
 
 class Message(TypedDict, total=False):
@@ -217,7 +159,7 @@ class Message(TypedDict, total=False):
     Valid ChannelId's: email, sms, push, inbox, direct_message, banner, webhook.
     """
 
-    content: MessageContent
+    content: ContentParam
     """
     Describes content that will work for email, inbox, push, chat, or any channel
     id.
