@@ -10,6 +10,5 @@ from .elemental_node_param import ElementalNodeParam as ElementalNodeParam
 from .message_context_param import MessageContextParam as MessageContextParam
 from .message_routing_param import MessageRoutingParam as MessageRoutingParam
 from .send_message_response import SendMessageResponse as SendMessageResponse
-from .elemental_group_node_param import ElementalGroupNodeParam as ElementalGroupNodeParam
 from .elemental_channel_node_param import ElementalChannelNodeParam as ElementalChannelNodeParam
 from .message_routing_channel_param import MessageRoutingChannelParam as MessageRoutingChannelParam
