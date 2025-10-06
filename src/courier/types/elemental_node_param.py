@@ -6,7 +6,6 @@ from typing import Dict, Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
-from .elemental_group_node_param import ElementalGroupNodeParam
 from .elemental_channel_node_param import ElementalChannelNodeParam
 
 __all__ = [
@@ -19,7 +18,6 @@ __all__ = [
     "UnionMember4Locales",
     "UnionMember5",
     "UnionMember6",
-    "UnionMember7",
 ]
 
 _UnionMember0ReservedKeywords = TypedDict(
@@ -136,12 +134,8 @@ class UnionMember5(_UnionMember5ReservedKeywords, total=False):
     type: Literal["divider"]
 
 
-class UnionMember6(ElementalGroupNodeParam, total=False):
-    type: Literal["group"]
-
-
-_UnionMember7ReservedKeywords = TypedDict(
-    "_UnionMember7ReservedKeywords",
+_UnionMember6ReservedKeywords = TypedDict(
+    "_UnionMember6ReservedKeywords",
     {
         "if": Optional[str],
     },
@@ -149,7 +143,7 @@ _UnionMember7ReservedKeywords = TypedDict(
 )
 
 
-class UnionMember7(_UnionMember7ReservedKeywords, total=False):
+class UnionMember6(_UnionMember6ReservedKeywords, total=False):
     channels: Optional[SequenceNotStr[str]]
 
     loop: Optional[str]
@@ -160,5 +154,5 @@ class UnionMember7(_UnionMember7ReservedKeywords, total=False):
 
 
 ElementalNodeParam: TypeAlias = Union[
-    UnionMember0, UnionMember1, UnionMember2, UnionMember3, UnionMember4, UnionMember5, UnionMember6, UnionMember7
+    UnionMember0, UnionMember1, UnionMember2, UnionMember3, UnionMember4, UnionMember5, UnionMember6
 ]
