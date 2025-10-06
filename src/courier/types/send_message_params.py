@@ -10,7 +10,6 @@ from .._utils import PropertyInfo
 from .utm_param import UtmParam
 from .recipient_param import RecipientParam
 from .preference_param import PreferenceParam
-from .elemental_node_param import ElementalNodeParam
 from .message_context_param import MessageContextParam
 
 __all__ = [
@@ -53,7 +52,7 @@ class MessageContentElementalContentSugar(TypedDict, total=False):
 
 
 class MessageContentElementalContent(TypedDict, total=False):
-    elements: Required[Iterable[ElementalNodeParam]]
+    elements: Required[Iterable["ElementalNodeParam"]]
 
     version: Required[str]
     """For example, "2022-01-01" """
@@ -246,4 +245,5 @@ class Message(TypedDict, total=False):
     """The recipient or a list of recipients of the message"""
 
 
+from .elemental_node_param import ElementalNodeParam
 from .message_routing_channel_param import MessageRoutingChannelParam

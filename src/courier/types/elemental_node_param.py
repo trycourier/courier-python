@@ -6,6 +6,8 @@ from typing import Dict, Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
+from .elemental_group_node_param import ElementalGroupNodeParam
+from .elemental_channel_node_param import ElementalChannelNodeParam
 
 __all__ = [
     "ElementalNodeParam",
@@ -58,22 +60,7 @@ class UnionMember1(_UnionMember1ReservedKeywords, total=False):
     type: Literal["meta"]
 
 
-_UnionMember2ReservedKeywords = TypedDict(
-    "_UnionMember2ReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class UnionMember2(_UnionMember2ReservedKeywords, total=False):
-    channels: Optional[SequenceNotStr[str]]
-
-    loop: Optional[str]
-
-    ref: Optional[str]
-
+class UnionMember2(ElementalChannelNodeParam, total=False):
     type: Literal["channel"]
 
 
@@ -149,22 +136,7 @@ class UnionMember5(_UnionMember5ReservedKeywords, total=False):
     type: Literal["divider"]
 
 
-_UnionMember6ReservedKeywords = TypedDict(
-    "_UnionMember6ReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class UnionMember6(_UnionMember6ReservedKeywords, total=False):
-    channels: Optional[SequenceNotStr[str]]
-
-    loop: Optional[str]
-
-    ref: Optional[str]
-
+class UnionMember6(ElementalGroupNodeParam, total=False):
     type: Literal["group"]
 
 

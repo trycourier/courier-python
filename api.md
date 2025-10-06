@@ -4,6 +4,8 @@ Types:
 
 ```python
 from courier.types import (
+    ElementalChannelNode,
+    ElementalGroupNode,
     ElementalNode,
     MessageContext,
     MessageRouting,
