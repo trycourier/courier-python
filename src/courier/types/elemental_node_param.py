@@ -5,7 +5,8 @@ from __future__ import annotations
 from typing import Dict, Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
+from .alignment import Alignment
+from .elemental_base_node_param import ElementalBaseNodeParam
 from .elemental_channel_node_param import ElementalChannelNodeParam
 
 __all__ = [
@@ -20,41 +21,12 @@ __all__ = [
     "UnionMember6",
 ]
 
-_UnionMember0ReservedKeywords = TypedDict(
-    "_UnionMember0ReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
 
-
-class UnionMember0(_UnionMember0ReservedKeywords, total=False):
-    channels: Optional[SequenceNotStr[str]]
-
-    loop: Optional[str]
-
-    ref: Optional[str]
-
+class UnionMember0(ElementalBaseNodeParam, total=False):
     type: Literal["text"]
 
 
-_UnionMember1ReservedKeywords = TypedDict(
-    "_UnionMember1ReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class UnionMember1(_UnionMember1ReservedKeywords, total=False):
-    channels: Optional[SequenceNotStr[str]]
-
-    loop: Optional[str]
-
-    ref: Optional[str]
-
+class UnionMember1(ElementalBaseNodeParam, total=False):
     type: Literal["meta"]
 
 
@@ -62,22 +34,7 @@ class UnionMember2(ElementalChannelNodeParam, total=False):
     type: Literal["channel"]
 
 
-_UnionMember3ReservedKeywords = TypedDict(
-    "_UnionMember3ReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class UnionMember3(_UnionMember3ReservedKeywords, total=False):
-    channels: Optional[SequenceNotStr[str]]
-
-    loop: Optional[str]
-
-    ref: Optional[str]
-
+class UnionMember3(ElementalBaseNodeParam, total=False):
     type: Literal["image"]
 
 
@@ -89,7 +46,7 @@ class UnionMember4(TypedDict, total=False):
     action_id: Optional[str]
     """A unique id used to identify the action when it is executed."""
 
-    align: Optional[Literal["center", "left", "right", "full"]]
+    align: Optional[Alignment]
     """The alignment of the action button. Defaults to "center"."""
 
     background_color: Optional[str]
@@ -115,41 +72,11 @@ class UnionMember4(TypedDict, total=False):
     type: Literal["action"]
 
 
-_UnionMember5ReservedKeywords = TypedDict(
-    "_UnionMember5ReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class UnionMember5(_UnionMember5ReservedKeywords, total=False):
-    channels: Optional[SequenceNotStr[str]]
-
-    loop: Optional[str]
-
-    ref: Optional[str]
-
+class UnionMember5(ElementalBaseNodeParam, total=False):
     type: Literal["divider"]
 
 
-_UnionMember6ReservedKeywords = TypedDict(
-    "_UnionMember6ReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class UnionMember6(_UnionMember6ReservedKeywords, total=False):
-    channels: Optional[SequenceNotStr[str]]
-
-    loop: Optional[str]
-
-    ref: Optional[str]
-
+class UnionMember6(ElementalBaseNodeParam, total=False):
     type: Literal["quote"]
 
 
