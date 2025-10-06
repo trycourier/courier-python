@@ -58,7 +58,7 @@ class MessageContentElementalContent(TypedDict, total=False):
     version: Required[str]
     """For example, "2022-01-01" """
 
-    brand: object
+    brand: Optional[str]
 
 
 MessageContent: TypeAlias = Union[MessageContentElementalContentSugar, MessageContentElementalContent]
