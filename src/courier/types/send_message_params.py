@@ -10,12 +10,15 @@ from .._utils import PropertyInfo
 from .utm_param import UtmParam
 from .recipient_param import RecipientParam
 from .preference_param import PreferenceParam
+from .elemental_node_param import ElementalNodeParam
 from .message_context_param import MessageContextParam
 
 __all__ = [
     "SendMessageParams",
     "Message",
     "MessageContent",
+    "MessageContentElementalContentSugar",
+    "MessageContentElementalContent",
     "MessageChannels",
     "MessageChannelsMetadata",
     "MessageChannelsTimeouts",
@@ -41,12 +44,24 @@ class SendMessageParams(TypedDict, total=False):
     """
 
 
-class MessageContent(TypedDict, total=False):
+class MessageContentElementalContentSugar(TypedDict, total=False):
     body: Required[str]
     """The text content displayed in the notification."""
 
     title: Required[str]
     """Title/subject displayed by supported channels."""
+
+
+class MessageContentElementalContent(TypedDict, total=False):
+    elements: Required[Iterable[ElementalNodeParam]]
+
+    version: Required[str]
+    """For example, "2022-01-01" """
+
+    brand: object
+
+
+MessageContent: TypeAlias = Union[MessageContentElementalContentSugar, MessageContentElementalContent]
 
 
 class MessageChannelsMetadata(TypedDict, total=False):
@@ -195,7 +210,10 @@ MessageTo: TypeAlias = Union[MessageToUnionMember0, Iterable[RecipientParam]]
 
 class Message(TypedDict, total=False):
     content: Required[MessageContent]
-    """Syntactic sugar to provide a fast shorthand for Courier Elemental Blocks."""
+    """
+    Describes content that will work for email, inbox, push, chat, or any channel
+    id.
+    """
 
     brand_id: Optional[str]
 
