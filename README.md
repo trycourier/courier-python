@@ -37,7 +37,9 @@ response = client.send.message(
         "content": {
             "body": "body",
             "title": "title",
-        }
+        },
+        "data": {"foo": "bar"},
+        "to": {"user_id": "your_user_id"},
     },
 )
 print(response.request_id)
@@ -68,7 +70,9 @@ async def main() -> None:
             "content": {
                 "body": "body",
                 "title": "title",
-            }
+            },
+            "data": {"foo": "bar"},
+            "to": {"user_id": "your_user_id"},
         },
     )
     print(response.request_id)
@@ -108,7 +112,9 @@ async def main() -> None:
                 "content": {
                     "body": "body",
                     "title": "title",
-                }
+                },
+                "data": {"foo": "bar"},
+                "to": {"user_id": "your_user_id"},
             },
         )
         print(response.request_id)
@@ -173,7 +179,9 @@ try:
             "content": {
                 "body": "body",
                 "title": "title",
-            }
+            },
+            "data": {"foo": "bar"},
+            "to": {"user_id": "your_user_id"},
         },
     )
 except courier.APIConnectionError as e:
@@ -223,7 +231,9 @@ client.with_options(max_retries=5).send.message(
         "content": {
             "body": "body",
             "title": "title",
-        }
+        },
+        "data": {"foo": "bar"},
+        "to": {"user_id": "your_user_id"},
     },
 )
 ```
@@ -253,7 +263,9 @@ client.with_options(timeout=5.0).send.message(
         "content": {
             "body": "body",
             "title": "title",
-        }
+        },
+        "data": {"foo": "bar"},
+        "to": {"user_id": "your_user_id"},
     },
 )
 ```
@@ -301,7 +313,13 @@ response = client.send.with_raw_response.message(
         "content": {
             "body": "body",
             "title": "title",
-        }
+        },
+        "data": {
+            "foo": "bar"
+        },
+        "to": {
+            "user_id": "your_user_id"
+        },
     },
 )
 print(response.headers.get('X-My-Header'))
@@ -326,7 +344,9 @@ with client.send.with_streaming_response.message(
         "content": {
             "body": "body",
             "title": "title",
-        }
+        },
+        "data": {"foo": "bar"},
+        "to": {"user_id": "your_user_id"},
     },
 ) as response:
     print(response.headers.get("X-My-Header"))
