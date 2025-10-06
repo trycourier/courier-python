@@ -4,12 +4,16 @@ Types:
 
 ```python
 from courier.types import (
+    Alignment,
+    ElementalBaseNode,
+    ElementalChannelNode,
     ElementalNode,
     MessageContext,
     MessageRouting,
     MessageRoutingChannel,
     Preference,
     Recipient,
+    TextStyle,
     Utm,
     SendMessageResponse,
 )
