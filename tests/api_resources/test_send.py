@@ -21,12 +21,7 @@ class TestSend:
     @parametrize
     def test_method_message(self, client: Courier) -> None:
         send = client.send.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
+            message={},
         )
         assert_matches_type(SendMessageResponse, send, path=["response"])
 
@@ -35,10 +30,6 @@ class TestSend:
     def test_method_message_with_all_params(self, client: Courier) -> None:
         send = client.send.message(
             message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                },
                 "brand_id": "brand_id",
                 "channels": {
                     "foo": {
@@ -61,6 +52,10 @@ class TestSend:
                             "provider": 0,
                         },
                     }
+                },
+                "content": {
+                    "body": "body",
+                    "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
                 "data": {"name": "bar"},
@@ -159,12 +154,7 @@ class TestSend:
     @parametrize
     def test_raw_response_message(self, client: Courier) -> None:
         response = client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
+            message={},
         )
 
         assert response.is_closed is True
@@ -176,12 +166,7 @@ class TestSend:
     @parametrize
     def test_streaming_response_message(self, client: Courier) -> None:
         with client.send.with_streaming_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
+            message={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -201,12 +186,7 @@ class TestAsyncSend:
     @parametrize
     async def test_method_message(self, async_client: AsyncCourier) -> None:
         send = await async_client.send.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
+            message={},
         )
         assert_matches_type(SendMessageResponse, send, path=["response"])
 
@@ -215,10 +195,6 @@ class TestAsyncSend:
     async def test_method_message_with_all_params(self, async_client: AsyncCourier) -> None:
         send = await async_client.send.message(
             message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                },
                 "brand_id": "brand_id",
                 "channels": {
                     "foo": {
@@ -241,6 +217,10 @@ class TestAsyncSend:
                             "provider": 0,
                         },
                     }
+                },
+                "content": {
+                    "body": "body",
+                    "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
                 "data": {"name": "bar"},
@@ -339,12 +319,7 @@ class TestAsyncSend:
     @parametrize
     async def test_raw_response_message(self, async_client: AsyncCourier) -> None:
         response = await async_client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
+            message={},
         )
 
         assert response.is_closed is True
@@ -356,12 +331,7 @@ class TestAsyncSend:
     @parametrize
     async def test_streaming_response_message(self, async_client: AsyncCourier) -> None:
         async with async_client.send.with_streaming_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
+            message={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

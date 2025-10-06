@@ -16,12 +16,12 @@ from .message_context_param import MessageContextParam
 __all__ = [
     "SendMessageParams",
     "Message",
-    "MessageContent",
-    "MessageContentElementalContentSugar",
-    "MessageContentElementalContent",
     "MessageChannels",
     "MessageChannelsMetadata",
     "MessageChannelsTimeouts",
+    "MessageContent",
+    "MessageContentElementalContentSugar",
+    "MessageContentElementalContent",
     "MessageDelay",
     "MessageExpiry",
     "MessageMetadata",
@@ -42,26 +42,6 @@ class SendMessageParams(TypedDict, total=False):
 
     They define the destination and content of the message.
     """
-
-
-class MessageContentElementalContentSugar(TypedDict, total=False):
-    body: Required[str]
-    """The text content displayed in the notification."""
-
-    title: Required[str]
-    """Title/subject displayed by supported channels."""
-
-
-class MessageContentElementalContent(TypedDict, total=False):
-    elements: Required[Iterable[ElementalNodeParam]]
-
-    version: Required[str]
-    """For example, "2022-01-01" """
-
-    brand: Optional[str]
-
-
-MessageContent: TypeAlias = Union[MessageContentElementalContentSugar, MessageContentElementalContent]
 
 
 class MessageChannelsMetadata(TypedDict, total=False):
@@ -99,6 +79,26 @@ class MessageChannels(_MessageChannelsReservedKeywords, total=False):
     """Defaults to `single`."""
 
     timeouts: Optional[MessageChannelsTimeouts]
+
+
+class MessageContentElementalContentSugar(TypedDict, total=False):
+    body: Required[str]
+    """The text content displayed in the notification."""
+
+    title: Required[str]
+    """Title/subject displayed by supported channels."""
+
+
+class MessageContentElementalContent(TypedDict, total=False):
+    elements: Required[Iterable[ElementalNodeParam]]
+
+    version: Required[str]
+    """For example, "2022-01-01" """
+
+    brand: Optional[str]
+
+
+MessageContent: TypeAlias = Union[MessageContentElementalContentSugar, MessageContentElementalContent]
 
 
 class MessageDelay(TypedDict, total=False):
@@ -209,18 +209,18 @@ MessageTo: TypeAlias = Union[MessageToUnionMember0, Iterable[RecipientParam]]
 
 
 class Message(TypedDict, total=False):
-    content: Required[MessageContent]
-    """
-    Describes content that will work for email, inbox, push, chat, or any channel
-    id.
-    """
-
     brand_id: Optional[str]
 
     channels: Optional[Dict[str, MessageChannels]]
     """Define run-time configuration for channels.
 
     Valid ChannelId's: email, sms, push, inbox, direct_message, banner, webhook.
+    """
+
+    content: MessageContent
+    """
+    Describes content that will work for email, inbox, push, chat, or any channel
+    id.
     """
 
     context: Optional[MessageContextParam]
