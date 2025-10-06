@@ -715,14 +715,7 @@ class TestCourier:
         respx_mock.post("/send").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.send.with_streaming_response.message(
-                message={
-                    "content": {
-                        "body": "body",
-                        "title": "title",
-                    }
-                }
-            ).__enter__()
+            client.send.with_streaming_response.message(message={}).__enter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -732,14 +725,7 @@ class TestCourier:
         respx_mock.post("/send").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.send.with_streaming_response.message(
-                message={
-                    "content": {
-                        "body": "body",
-                        "title": "title",
-                    }
-                }
-            ).__enter__()
+            client.send.with_streaming_response.message(message={}).__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -768,14 +754,7 @@ class TestCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            }
-        )
+        response = client.send.with_raw_response.message(message={})
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -799,15 +778,7 @@ class TestCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
-            extra_headers={"x-stainless-retry-count": Omit()},
-        )
+        response = client.send.with_raw_response.message(message={}, extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -830,15 +801,7 @@ class TestCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
-            extra_headers={"x-stainless-retry-count": "42"},
-        )
+        response = client.send.with_raw_response.message(message={}, extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1569,14 +1532,7 @@ class TestAsyncCourier:
         respx_mock.post("/send").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.send.with_streaming_response.message(
-                message={
-                    "content": {
-                        "body": "body",
-                        "title": "title",
-                    }
-                }
-            ).__aenter__()
+            await async_client.send.with_streaming_response.message(message={}).__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -1586,14 +1542,7 @@ class TestAsyncCourier:
         respx_mock.post("/send").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.send.with_streaming_response.message(
-                message={
-                    "content": {
-                        "body": "body",
-                        "title": "title",
-                    }
-                }
-            ).__aenter__()
+            await async_client.send.with_streaming_response.message(message={}).__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1623,14 +1572,7 @@ class TestAsyncCourier:
 
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
-        response = await client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            }
-        )
+        response = await client.send.with_raw_response.message(message={})
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1656,13 +1598,7 @@ class TestAsyncCourier:
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
         response = await client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
-            extra_headers={"x-stainless-retry-count": Omit()},
+            message={}, extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1688,13 +1624,7 @@ class TestAsyncCourier:
         respx_mock.post("/send").mock(side_effect=retry_handler)
 
         response = await client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
-            },
-            extra_headers={"x-stainless-retry-count": "42"},
+            message={}, extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
