@@ -144,15 +144,11 @@ client = Courier()
 response = client.send.message(
     message={
         "content": {
-            "body": "Thanks for signing up, {{name}}",
-            "title": "Welcome!",
+            "body": "body",
+            "title": "title",
         },
         "data": {"name": "bar"},
-        "routing": {
-            "channels": ["email"],
-            "method": "single",
-        },
-        "to": {"email": "email@example.com"},
+        "to": {"user_id": "example_user"},
     },
 )
 print(response.message)

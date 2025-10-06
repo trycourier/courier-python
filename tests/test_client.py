@@ -718,8 +718,8 @@ class TestCourier:
             client.send.with_streaming_response.message(
                 message={
                     "content": {
-                        "body": "Thanks for signing up, {{name}}",
-                        "title": "Welcome!",
+                        "body": "body",
+                        "title": "title",
                     }
                 }
             ).__enter__()
@@ -735,8 +735,8 @@ class TestCourier:
             client.send.with_streaming_response.message(
                 message={
                     "content": {
-                        "body": "Thanks for signing up, {{name}}",
-                        "title": "Welcome!",
+                        "body": "body",
+                        "title": "title",
                     }
                 }
             ).__enter__()
@@ -771,8 +771,8 @@ class TestCourier:
         response = client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             }
         )
@@ -802,8 +802,8 @@ class TestCourier:
         response = client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
             extra_headers={"x-stainless-retry-count": Omit()},
@@ -833,8 +833,8 @@ class TestCourier:
         response = client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
             extra_headers={"x-stainless-retry-count": "42"},
@@ -1572,8 +1572,8 @@ class TestAsyncCourier:
             await async_client.send.with_streaming_response.message(
                 message={
                     "content": {
-                        "body": "Thanks for signing up, {{name}}",
-                        "title": "Welcome!",
+                        "body": "body",
+                        "title": "title",
                     }
                 }
             ).__aenter__()
@@ -1589,8 +1589,8 @@ class TestAsyncCourier:
             await async_client.send.with_streaming_response.message(
                 message={
                     "content": {
-                        "body": "Thanks for signing up, {{name}}",
-                        "title": "Welcome!",
+                        "body": "body",
+                        "title": "title",
                     }
                 }
             ).__aenter__()
@@ -1626,8 +1626,8 @@ class TestAsyncCourier:
         response = await client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             }
         )
@@ -1658,8 +1658,8 @@ class TestAsyncCourier:
         response = await client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
             extra_headers={"x-stainless-retry-count": Omit()},
@@ -1690,8 +1690,8 @@ class TestAsyncCourier:
         response = await client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
             extra_headers={"x-stainless-retry-count": "42"},

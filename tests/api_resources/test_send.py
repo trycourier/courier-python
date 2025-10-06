@@ -23,8 +23,8 @@ class TestSend:
         send = client.send.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
         )
@@ -36,8 +36,8 @@ class TestSend:
         send = client.send.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 },
                 "brand_id": "brand_id",
                 "channels": {
@@ -102,8 +102,8 @@ class TestSend:
                     }
                 },
                 "routing": {
-                    "channels": ["email"],
-                    "method": "single",
+                    "channels": ["string"],
+                    "method": "all",
                 },
                 "timeout": {
                     "channel": {"foo": 0},
@@ -116,7 +116,7 @@ class TestSend:
                     "account_id": "account_id",
                     "context": {"tenant_id": "tenant_id"},
                     "data": {"foo": "bar"},
-                    "email": "email@example.com",
+                    "email": "email",
                     "locale": "locale",
                     "phone_number": "phone_number",
                     "preferences": {
@@ -149,7 +149,7 @@ class TestSend:
                         "template_id": "templateId",
                     },
                     "tenant_id": "tenant_id",
-                    "user_id": "user_id",
+                    "user_id": "example_user",
                 },
             },
         )
@@ -161,8 +161,8 @@ class TestSend:
         response = client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
         )
@@ -178,8 +178,8 @@ class TestSend:
         with client.send.with_streaming_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
         ) as response:
@@ -203,8 +203,8 @@ class TestAsyncSend:
         send = await async_client.send.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
         )
@@ -216,8 +216,8 @@ class TestAsyncSend:
         send = await async_client.send.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 },
                 "brand_id": "brand_id",
                 "channels": {
@@ -282,8 +282,8 @@ class TestAsyncSend:
                     }
                 },
                 "routing": {
-                    "channels": ["email"],
-                    "method": "single",
+                    "channels": ["string"],
+                    "method": "all",
                 },
                 "timeout": {
                     "channel": {"foo": 0},
@@ -296,7 +296,7 @@ class TestAsyncSend:
                     "account_id": "account_id",
                     "context": {"tenant_id": "tenant_id"},
                     "data": {"foo": "bar"},
-                    "email": "email@example.com",
+                    "email": "email",
                     "locale": "locale",
                     "phone_number": "phone_number",
                     "preferences": {
@@ -329,7 +329,7 @@ class TestAsyncSend:
                         "template_id": "templateId",
                     },
                     "tenant_id": "tenant_id",
-                    "user_id": "user_id",
+                    "user_id": "example_user",
                 },
             },
         )
@@ -341,8 +341,8 @@ class TestAsyncSend:
         response = await async_client.send.with_raw_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
         )
@@ -358,8 +358,8 @@ class TestAsyncSend:
         async with async_client.send.with_streaming_response.message(
             message={
                 "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
+                    "body": "body",
+                    "title": "title",
                 }
             },
         ) as response:
