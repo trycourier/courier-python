@@ -10,6 +10,6 @@ __all__ = ["EmailFooter"]
 
 
 class EmailFooter(BaseModel):
-    content: Optional[object] = None
+    content: Optional[str] = None
 
     inherit_default: Optional[bool] = FieldInfo(alias="inheritDefault", default=None)
