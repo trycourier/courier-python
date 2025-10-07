@@ -4,9 +4,9 @@ from typing import Dict, Optional
 
 from pydantic import Field as FieldInfo
 
-from .._models import BaseModel
-from .message_context import MessageContext
-from .shared.preference import Preference
+from ..._models import BaseModel
+from .preference import Preference
+from ..message_context import MessageContext
 
 __all__ = ["UserRecipient", "Preferences"]
 

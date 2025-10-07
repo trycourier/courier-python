@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .._models import BaseModel
-from .user_recipient import UserRecipient
+from .shared.user_recipient import UserRecipient
 from .lists.recipient_preferences import RecipientPreferences
 
 __all__ = ["InboundBulkMessageUser"]

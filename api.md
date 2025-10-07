@@ -6,11 +6,13 @@ from courier.types import (
     ChannelPreference,
     ElementalBaseNode,
     ElementalContentSugar,
+    ListRecipient,
     MessageRouting,
     MessageRoutingChannel,
     Preference,
     Rule,
     TextStyle,
+    UserRecipient,
 )
 ```
 
@@ -137,7 +139,6 @@ Types:
 from courier.types import (
     InboundBulkMessage,
     InboundBulkMessageUser,
-    UserRecipient,
     BulkCreateJobResponse,
     BulkListUsersResponse,
     BulkRetrieveJobResponse,
