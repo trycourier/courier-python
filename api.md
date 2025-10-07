@@ -5,6 +5,7 @@ from courier.types import (
     Alignment,
     ChannelPreference,
     ElementalBaseNode,
+    ElementalContentSugar,
     MessageRouting,
     MessageRoutingChannel,
     Preference,

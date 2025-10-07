@@ -7,4 +7,5 @@ from .text_style import TextStyle as TextStyle
 from .message_routing import MessageRouting as MessageRouting
 from .channel_preference import ChannelPreference as ChannelPreference
 from .elemental_base_node import ElementalBaseNode as ElementalBaseNode
+from .elemental_content_sugar import ElementalContentSugar as ElementalContentSugar
 from .message_routing_channel import MessageRoutingChannel as MessageRoutingChannel

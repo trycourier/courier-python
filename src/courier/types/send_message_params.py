@@ -11,6 +11,7 @@ from .recipient_param import RecipientParam
 from .user_recipient_param import UserRecipientParam
 from .message_context_param import MessageContextParam
 from .tenants.elemental_content_param import ElementalContentParam
+from .shared_params.elemental_content_sugar import ElementalContentSugar
 
 __all__ = [
     "SendMessageParams",
@@ -19,7 +20,6 @@ __all__ = [
     "MessageChannelsMetadata",
     "MessageChannelsTimeouts",
     "MessageContent",
-    "MessageContentElementalContentSugar",
     "MessageDelay",
     "MessageExpiry",
     "MessageMetadata",
@@ -77,15 +77,7 @@ class MessageChannels(_MessageChannelsReservedKeywords, total=False):
     timeouts: Optional[MessageChannelsTimeouts]
 
 
-class MessageContentElementalContentSugar(TypedDict, total=False):
-    body: Required[str]
-    """The text content displayed in the notification."""
-
-    title: Required[str]
-    """Title/subject displayed by supported channels."""
-
-
-MessageContent: TypeAlias = Union[MessageContentElementalContentSugar, ElementalContentParam]
+MessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContentParam]
 
 
 class MessageDelay(TypedDict, total=False):

@@ -5,13 +5,13 @@ from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 from .tenants.elemental_content import ElementalContent
+from .shared.elemental_content_sugar import ElementalContentSugar
 
 __all__ = [
     "InboundBulkMessage",
     "InboundBulkTemplateMessage",
     "InboundBulkContentMessage",
     "InboundBulkContentMessageContent",
-    "InboundBulkContentMessageContentElementalContentSugar",
 ]
 
 
@@ -29,17 +29,7 @@ class InboundBulkTemplateMessage(BaseModel):
     override: Optional[Dict[str, object]] = None
 
 
-class InboundBulkContentMessageContentElementalContentSugar(BaseModel):
-    body: str
-    """The text content displayed in the notification."""
-
-    title: str
-    """Title/subject displayed by supported channels."""
-
-
-InboundBulkContentMessageContent: TypeAlias = Union[
-    InboundBulkContentMessageContentElementalContentSugar, ElementalContent
-]
+InboundBulkContentMessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContent]
 
 
 class InboundBulkContentMessage(BaseModel):
