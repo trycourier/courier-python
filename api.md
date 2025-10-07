@@ -1,9 +1,15 @@
+# Shared Types
+
+```python
+from courier.types import ChannelPreference, Preference, Rule
+```
+
 # Send
 
 Types:
 
 ```python
-from courier.types import Content, MessageContext, Recipient, SendSendMessageResponse
+from courier.types import Content, MessageContext, Recipient, Utm, SendSendMessageResponse
 ```
 
 Methods:
@@ -80,7 +86,23 @@ Methods:
 Types:
 
 ```python
-from courier.types import Brand, BrandSettings, BrandSnippets, BrandTemplate, BrandListResponse
+from courier.types import (
+    Brand,
+    BrandColors,
+    BrandSettings,
+    BrandSettingsEmail,
+    BrandSettingsInApp,
+    BrandSnippet,
+    BrandSnippets,
+    BrandTemplate,
+    EmailFooter,
+    EmailHead,
+    EmailHeader,
+    Icons,
+    Logo,
+    WidgetBackground,
+    BrandListResponse,
+)
 ```
 
 Methods:
@@ -148,6 +170,7 @@ Types:
 
 ```python
 from courier.types.lists import (
+    NotificationPreferenceDetails,
     PutSubscriptionsRecipient,
     RecipientPreferences,
     SubscriptionListResponse,
