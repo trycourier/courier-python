@@ -6,6 +6,7 @@ from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
+from .utm_param import UtmParam
 from .content_param import ContentParam
 from .recipient_param import RecipientParam
 from .user_recipient_param import UserRecipientParam
@@ -16,16 +17,13 @@ __all__ = [
     "Message",
     "MessageChannels",
     "MessageChannelsMetadata",
-    "MessageChannelsMetadataUtm",
     "MessageChannelsTimeouts",
     "MessageDelay",
     "MessageExpiry",
     "MessageMetadata",
-    "MessageMetadataUtm",
     "MessagePreferences",
     "MessageProviders",
     "MessageProvidersMetadata",
-    "MessageProvidersMetadataUtm",
     "MessageRouting",
     "MessageTimeout",
     "MessageTo",
@@ -40,20 +38,8 @@ class SendSendMessageParams(TypedDict, total=False):
     """
 
 
-class MessageChannelsMetadataUtm(TypedDict, total=False):
-    campaign: Optional[str]
-
-    content: Optional[str]
-
-    medium: Optional[str]
-
-    source: Optional[str]
-
-    term: Optional[str]
-
-
 class MessageChannelsMetadata(TypedDict, total=False):
-    utm: Optional[MessageChannelsMetadataUtm]
+    utm: Optional[UtmParam]
 
 
 class MessageChannelsTimeouts(TypedDict, total=False):
@@ -105,18 +91,6 @@ class MessageExpiry(TypedDict, total=False):
     """Epoch or ISO8601 timestamp with timezone."""
 
 
-class MessageMetadataUtm(TypedDict, total=False):
-    campaign: Optional[str]
-
-    content: Optional[str]
-
-    medium: Optional[str]
-
-    source: Optional[str]
-
-    term: Optional[str]
-
-
 class MessageMetadata(TypedDict, total=False):
     event: Optional[str]
 
@@ -124,7 +98,7 @@ class MessageMetadata(TypedDict, total=False):
 
     trace_id: Optional[str]
 
-    utm: Optional[MessageMetadataUtm]
+    utm: Optional[UtmParam]
 
 
 class MessagePreferences(TypedDict, total=False):
@@ -132,20 +106,8 @@ class MessagePreferences(TypedDict, total=False):
     """The subscription topic to apply to the message."""
 
 
-class MessageProvidersMetadataUtm(TypedDict, total=False):
-    campaign: Optional[str]
-
-    content: Optional[str]
-
-    medium: Optional[str]
-
-    source: Optional[str]
-
-    term: Optional[str]
-
-
 class MessageProvidersMetadata(TypedDict, total=False):
-    utm: Optional[MessageProvidersMetadataUtm]
+    utm: Optional[UtmParam]
 
 
 _MessageProvidersReservedKeywords = TypedDict(
