@@ -6,16 +6,16 @@ from typing import Dict, Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
-from .preference_param import PreferenceParam
 from .message_context_param import MessageContextParam
+from .shared_params.preference import Preference
 
 __all__ = ["RecipientParam", "Preferences"]
 
 
 class Preferences(TypedDict, total=False):
-    notifications: Required[Dict[str, PreferenceParam]]
+    notifications: Required[Dict[str, Preference]]
 
-    categories: Optional[Dict[str, PreferenceParam]]
+    categories: Optional[Dict[str, Preference]]
 
     template_id: Annotated[Optional[str], PropertyInfo(alias="templateId")]
 

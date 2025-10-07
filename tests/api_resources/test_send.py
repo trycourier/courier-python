@@ -9,7 +9,7 @@ import pytest
 
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier.types import SendMessageResponse
+from courier.types import SendSendMessageResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,26 +19,17 @@ class TestSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_message(self, client: Courier) -> None:
-        send = client.send.message(
-            message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                }
-            },
+    def test_method_send_message(self, client: Courier) -> None:
+        send = client.send.send_message(
+            message={},
         )
-        assert_matches_type(SendMessageResponse, send, path=["response"])
+        assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_method_message_with_all_params(self, client: Courier) -> None:
-        send = client.send.message(
+    def test_method_send_message_with_all_params(self, client: Courier) -> None:
+        send = client.send.send_message(
             message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                },
                 "brand_id": "brand_id",
                 "channels": {
                     "foo": {
@@ -61,6 +52,10 @@ class TestSend:
                             "provider": 0,
                         },
                     }
+                },
+                "content": {
+                    "body": "body",
+                    "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
                 "data": {"name": "bar"},
@@ -102,8 +97,8 @@ class TestSend:
                     }
                 },
                 "routing": {
-                    "channels": ["email"],
-                    "method": "single",
+                    "channels": ["string"],
+                    "method": "all",
                 },
                 "timeout": {
                     "channel": {"foo": 0},
@@ -116,7 +111,7 @@ class TestSend:
                     "account_id": "account_id",
                     "context": {"tenant_id": "tenant_id"},
                     "data": {"foo": "bar"},
-                    "email": "email@example.com",
+                    "email": "email",
                     "locale": "locale",
                     "phone_number": "phone_number",
                     "preferences": {
@@ -149,45 +144,35 @@ class TestSend:
                         "template_id": "templateId",
                     },
                     "tenant_id": "tenant_id",
-                    "user_id": "user_id",
+                    "user_id": "example_user",
                 },
             },
         )
-        assert_matches_type(SendMessageResponse, send, path=["response"])
+        assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_raw_response_message(self, client: Courier) -> None:
-        response = client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                }
-            },
+    def test_raw_response_send_message(self, client: Courier) -> None:
+        response = client.send.with_raw_response.send_message(
+            message={},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         send = response.parse()
-        assert_matches_type(SendMessageResponse, send, path=["response"])
+        assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    def test_streaming_response_message(self, client: Courier) -> None:
-        with client.send.with_streaming_response.message(
-            message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                }
-            },
+    def test_streaming_response_send_message(self, client: Courier) -> None:
+        with client.send.with_streaming_response.send_message(
+            message={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             send = response.parse()
-            assert_matches_type(SendMessageResponse, send, path=["response"])
+            assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -199,26 +184,17 @@ class TestAsyncSend:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_message(self, async_client: AsyncCourier) -> None:
-        send = await async_client.send.message(
-            message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                }
-            },
+    async def test_method_send_message(self, async_client: AsyncCourier) -> None:
+        send = await async_client.send.send_message(
+            message={},
         )
-        assert_matches_type(SendMessageResponse, send, path=["response"])
+        assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_method_message_with_all_params(self, async_client: AsyncCourier) -> None:
-        send = await async_client.send.message(
+    async def test_method_send_message_with_all_params(self, async_client: AsyncCourier) -> None:
+        send = await async_client.send.send_message(
             message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                },
                 "brand_id": "brand_id",
                 "channels": {
                     "foo": {
@@ -241,6 +217,10 @@ class TestAsyncSend:
                             "provider": 0,
                         },
                     }
+                },
+                "content": {
+                    "body": "body",
+                    "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
                 "data": {"name": "bar"},
@@ -282,8 +262,8 @@ class TestAsyncSend:
                     }
                 },
                 "routing": {
-                    "channels": ["email"],
-                    "method": "single",
+                    "channels": ["string"],
+                    "method": "all",
                 },
                 "timeout": {
                     "channel": {"foo": 0},
@@ -296,7 +276,7 @@ class TestAsyncSend:
                     "account_id": "account_id",
                     "context": {"tenant_id": "tenant_id"},
                     "data": {"foo": "bar"},
-                    "email": "email@example.com",
+                    "email": "email",
                     "locale": "locale",
                     "phone_number": "phone_number",
                     "preferences": {
@@ -329,44 +309,34 @@ class TestAsyncSend:
                         "template_id": "templateId",
                     },
                     "tenant_id": "tenant_id",
-                    "user_id": "user_id",
+                    "user_id": "example_user",
                 },
             },
         )
-        assert_matches_type(SendMessageResponse, send, path=["response"])
+        assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_raw_response_message(self, async_client: AsyncCourier) -> None:
-        response = await async_client.send.with_raw_response.message(
-            message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                }
-            },
+    async def test_raw_response_send_message(self, async_client: AsyncCourier) -> None:
+        response = await async_client.send.with_raw_response.send_message(
+            message={},
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         send = await response.parse()
-        assert_matches_type(SendMessageResponse, send, path=["response"])
+        assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
-    async def test_streaming_response_message(self, async_client: AsyncCourier) -> None:
-        async with async_client.send.with_streaming_response.message(
-            message={
-                "content": {
-                    "body": "Thanks for signing up, {{name}}",
-                    "title": "Welcome!",
-                }
-            },
+    async def test_streaming_response_send_message(self, async_client: AsyncCourier) -> None:
+        async with async_client.send.with_streaming_response.send_message(
+            message={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             send = await response.parse()
-            assert_matches_type(SendMessageResponse, send, path=["response"])
+            assert_matches_type(SendSendMessageResponse, send, path=["response"])
 
         assert cast(Any, response.is_closed) is True

@@ -32,12 +32,11 @@ client = Courier(
     api_key=os.environ.get("COURIER_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.send.message(
+response = client.send.send_message(
     message={
-        "content": {
-            "body": "body",
-            "title": "title",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 )
 print(response.request_id)
@@ -63,12 +62,11 @@ client = AsyncCourier(
 
 
 async def main() -> None:
-    response = await client.send.message(
+    response = await client.send.send_message(
         message={
-            "content": {
-                "body": "body",
-                "title": "title",
-            }
+            "to": {"user_id": "your_user_id"},
+            "template": "your_template",
+            "data": {"foo": "bar"},
         },
     )
     print(response.request_id)
@@ -103,12 +101,11 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.send.message(
+        response = await client.send.send_message(
             message={
-                "content": {
-                    "body": "body",
-                    "title": "title",
-                }
+                "to": {"user_id": "your_user_id"},
+                "template": "your_template",
+                "data": {"foo": "bar"},
             },
         )
         print(response.request_id)
@@ -135,18 +132,10 @@ from courier import Courier
 
 client = Courier()
 
-response = client.send.message(
+response = client.send.send_message(
     message={
-        "content": {
-            "body": "Thanks for signing up, {{name}}",
-            "title": "Welcome!",
-        },
         "data": {"name": "bar"},
-        "routing": {
-            "channels": ["email"],
-            "method": "single",
-        },
-        "to": {"email": "email@example.com"},
+        "to": {"user_id": "example_user"},
     },
 )
 print(response.message)
@@ -168,12 +157,11 @@ from courier import Courier
 client = Courier()
 
 try:
-    client.send.message(
+    client.send.send_message(
         message={
-            "content": {
-                "body": "body",
-                "title": "title",
-            }
+            "to": {"user_id": "your_user_id"},
+            "template": "your_template",
+            "data": {"foo": "bar"},
         },
     )
 except courier.APIConnectionError as e:
@@ -218,12 +206,11 @@ client = Courier(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).send.message(
+client.with_options(max_retries=5).send.send_message(
     message={
-        "content": {
-            "body": "body",
-            "title": "title",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 )
 ```
@@ -248,12 +235,11 @@ client = Courier(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).send.message(
+client.with_options(timeout=5.0).send.send_message(
     message={
-        "content": {
-            "body": "body",
-            "title": "title",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 )
 ```
@@ -296,17 +282,20 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from courier import Courier
 
 client = Courier()
-response = client.send.with_raw_response.message(
+response = client.send.with_raw_response.send_message(
     message={
-        "content": {
-            "body": "body",
-            "title": "title",
-        }
+        "to": {
+            "user_id": "your_user_id"
+        },
+        "template": "your_template",
+        "data": {
+            "foo": "bar"
+        },
     },
 )
 print(response.headers.get('X-My-Header'))
 
-send = response.parse()  # get the object that `send.message()` would have returned
+send = response.parse()  # get the object that `send.send_message()` would have returned
 print(send.request_id)
 ```
 
@@ -321,12 +310,11 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.send.with_streaming_response.message(
+with client.send.with_streaming_response.send_message(
     message={
-        "content": {
-            "body": "body",
-            "title": "title",
-        }
+        "to": {"user_id": "your_user_id"},
+        "template": "your_template",
+        "data": {"foo": "bar"},
     },
 ) as response:
     print(response.headers.get("X-My-Header"))
