@@ -7,17 +7,19 @@ from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .utm_param import UtmParam
-from .content_param import ContentParam
 from .recipient_param import RecipientParam
 from .user_recipient_param import UserRecipientParam
 from .message_context_param import MessageContextParam
+from .tenants.elemental_content_param import ElementalContentParam
 
 __all__ = [
-    "SendSendMessageParams",
+    "SendMessageParams",
     "Message",
     "MessageChannels",
     "MessageChannelsMetadata",
     "MessageChannelsTimeouts",
+    "MessageContent",
+    "MessageContentElementalContentSugar",
     "MessageDelay",
     "MessageExpiry",
     "MessageMetadata",
@@ -30,7 +32,7 @@ __all__ = [
 ]
 
 
-class SendSendMessageParams(TypedDict, total=False):
+class SendMessageParams(TypedDict, total=False):
     message: Required[Message]
     """The message property has the following primary top-level properties.
 
@@ -73,6 +75,17 @@ class MessageChannels(_MessageChannelsReservedKeywords, total=False):
     """Defaults to `single`."""
 
     timeouts: Optional[MessageChannelsTimeouts]
+
+
+class MessageContentElementalContentSugar(TypedDict, total=False):
+    body: Required[str]
+    """The text content displayed in the notification."""
+
+    title: Required[str]
+    """Title/subject displayed by supported channels."""
+
+
+MessageContent: TypeAlias = Union[MessageContentElementalContentSugar, ElementalContentParam]
 
 
 class MessageDelay(TypedDict, total=False):
@@ -129,7 +142,7 @@ class MessageProviders(_MessageProvidersReservedKeywords, total=False):
 
 
 class MessageRouting(TypedDict, total=False):
-    channels: Required[SequenceNotStr["MessageRoutingChannelParam"]]
+    channels: Required[SequenceNotStr["MessageRoutingChannel"]]
     """A list of channels or providers (or nested routing rules)."""
 
     method: Required[Literal["all", "single"]]
@@ -159,7 +172,7 @@ class Message(TypedDict, total=False):
     Valid ChannelId's: email, sms, push, inbox, direct_message, banner, webhook.
     """
 
-    content: ContentParam
+    content: MessageContent
     """
     Describes content that will work for email, inbox, push, chat, or any channel
     id.
@@ -188,4 +201,4 @@ class Message(TypedDict, total=False):
     """The recipient or a list of recipients of the message"""
 
 
-from .message_routing_channel_param import MessageRoutingChannelParam
+from .shared_params.message_routing_channel import MessageRoutingChannel

@@ -7,10 +7,10 @@ from typing_extensions import TypedDict
 
 from ..._types import SequenceNotStr
 
-__all__ = ["ElementalBaseNodeParam"]
+__all__ = ["ElementalBaseNode"]
 
-_ElementalBaseNodeParamReservedKeywords = TypedDict(
-    "_ElementalBaseNodeParamReservedKeywords",
+_ElementalBaseNodeReservedKeywords = TypedDict(
+    "_ElementalBaseNodeReservedKeywords",
     {
         "if": Optional[str],
     },
@@ -18,7 +18,7 @@ _ElementalBaseNodeParamReservedKeywords = TypedDict(
 )
 
 
-class ElementalBaseNodeParam(_ElementalBaseNodeParamReservedKeywords, total=False):
+class ElementalBaseNode(_ElementalBaseNodeReservedKeywords, total=False):
     channels: Optional[SequenceNotStr[str]]
 
     loop: Optional[str]

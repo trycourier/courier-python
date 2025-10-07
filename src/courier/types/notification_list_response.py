@@ -44,4 +44,4 @@ class NotificationListResponse(BaseModel):
     results: List[Result]
 
 
-from .message_routing import MessageRouting
+from .shared.message_routing import MessageRouting

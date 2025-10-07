@@ -1,7 +1,16 @@
 # Shared Types
 
 ```python
-from courier.types import ChannelPreference, Preference, Rule
+from courier.types import (
+    Alignment,
+    ChannelPreference,
+    ElementalBaseNode,
+    MessageRouting,
+    MessageRoutingChannel,
+    Preference,
+    Rule,
+    TextStyle,
+)
 ```
 
 # Send
@@ -9,12 +18,19 @@ from courier.types import ChannelPreference, Preference, Rule
 Types:
 
 ```python
-from courier.types import Content, MessageContext, Recipient, Utm, SendSendMessageResponse
+from courier.types import (
+    ElementalChannelNode,
+    ElementalNode,
+    MessageContext,
+    Recipient,
+    Utm,
+    SendMessageResponse,
+)
 ```
 
 Methods:
 
-- <code title="post /send">client.send.<a href="./src/courier/resources/send.py">send_message</a>(\*\*<a href="src/courier/types/send_send_message_params.py">params</a>) -> <a href="./src/courier/types/send_send_message_response.py">SendSendMessageResponse</a></code>
+- <code title="post /send">client.send.<a href="./src/courier/resources/send.py">message</a>(\*\*<a href="src/courier/types/send_message_params.py">params</a>) -> <a href="./src/courier/types/send_message_response.py">SendMessageResponse</a></code>
 
 # Audiences
 
@@ -217,12 +233,7 @@ Methods:
 Types:
 
 ```python
-from courier.types import (
-    MessageRouting,
-    MessageRoutingChannel,
-    NotificationGetContent,
-    NotificationListResponse,
-)
+from courier.types import NotificationGetContent, NotificationListResponse
 ```
 
 Methods:
@@ -317,11 +328,8 @@ Types:
 
 ```python
 from courier.types.tenants import (
-    Alignment,
     BaseTemplateTenantAssociation,
-    ElementalBaseNode,
     ElementalContent,
-    TextStyle,
     TemplateListResponse,
 )
 ```
