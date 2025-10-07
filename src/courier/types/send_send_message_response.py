@@ -4,10 +4,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["SendMessageResponse"]
+__all__ = ["SendSendMessageResponse"]
 
 
-class SendMessageResponse(BaseModel):
+class SendSendMessageResponse(BaseModel):
     request_id: str = FieldInfo(alias="requestId")
     """
     A successful call to `POST /send` returns a `202` status code along with a

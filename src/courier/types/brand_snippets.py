@@ -3,10 +3,15 @@
 from typing import List, Optional
 
 from .._models import BaseModel
-from .brand_snippet import BrandSnippet
 
-__all__ = ["BrandSnippets"]
+__all__ = ["BrandSnippets", "Item"]
+
+
+class Item(BaseModel):
+    name: str
+
+    value: str
 
 
 class BrandSnippets(BaseModel):
-    items: Optional[List[BrandSnippet]] = None
+    items: Optional[List[Item]] = None
