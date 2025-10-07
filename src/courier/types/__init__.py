@@ -18,6 +18,7 @@ from .shared import (
     MessageRouting as MessageRouting,
     ChannelPreference as ChannelPreference,
     ElementalBaseNode as ElementalBaseNode,
+    ElementalContentSugar as ElementalContentSugar,
     MessageRoutingChannel as MessageRoutingChannel,
 )
 from .tenant import Tenant as Tenant
