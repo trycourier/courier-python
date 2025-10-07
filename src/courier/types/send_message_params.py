@@ -188,6 +188,7 @@ class Message(TypedDict, total=False):
     """Customize which channels/providers Courier may deliver the message through."""
 
     template: Optional[str]
+    """The id of the template you want to send"""
 
     timeout: Optional[MessageTimeout]
 
