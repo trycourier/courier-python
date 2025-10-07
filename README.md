@@ -135,6 +135,7 @@ client = Courier()
 response = client.send.message(
     message={
         "data": {"name": "bar"},
+        "template": "template_id",
         "to": {"user_id": "example_user"},
     },
 )
