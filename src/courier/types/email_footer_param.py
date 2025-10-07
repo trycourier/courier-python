@@ -11,6 +11,6 @@ __all__ = ["EmailFooterParam"]
 
 
 class EmailFooterParam(TypedDict, total=False):
-    content: object
+    content: Optional[str]
 
     inherit_default: Annotated[Optional[bool], PropertyInfo(alias="inheritDefault")]

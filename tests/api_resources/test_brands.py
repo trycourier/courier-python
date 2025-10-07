@@ -41,7 +41,7 @@ class TestBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": {},
+                        "content": "content",
                         "inherit_default": True,
                     },
                     "head": {
@@ -197,7 +197,7 @@ class TestBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": {},
+                        "content": "content",
                         "inherit_default": True,
                     },
                     "head": {
@@ -405,7 +405,7 @@ class TestAsyncBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": {},
+                        "content": "content",
                         "inherit_default": True,
                     },
                     "head": {
@@ -561,7 +561,7 @@ class TestAsyncBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": {},
+                        "content": "content",
                         "inherit_default": True,
                     },
                     "head": {
