@@ -8,8 +8,9 @@ from typing_extensions import Literal, Required, TypeAlias, TypedDict
 from .._types import SequenceNotStr
 from .utm_param import UtmParam
 from .recipient_param import RecipientParam
-from .user_recipient_param import UserRecipientParam
 from .message_context_param import MessageContextParam
+from .shared_params.list_recipient import ListRecipient
+from .shared_params.user_recipient import UserRecipient
 from .tenants.elemental_content_param import ElementalContentParam
 from .shared_params.elemental_content_sugar import ElementalContentSugar
 
@@ -152,7 +153,7 @@ class MessageTimeout(TypedDict, total=False):
     provider: Optional[Dict[str, int]]
 
 
-MessageTo: TypeAlias = Union[UserRecipientParam, Iterable[RecipientParam]]
+MessageTo: TypeAlias = Union[UserRecipient, ListRecipient, Iterable[RecipientParam]]
 
 
 class Message(TypedDict, total=False):
