@@ -2,15 +2,7 @@
 
 from __future__ import annotations
 
-from . import (
-    tenants,
-    audience,
-    message_routing,
-    nested_filter_config,
-    audience_list_response,
-    audience_update_response,
-    notification_list_response,
-)
+from . import tenants, message_routing, notification_list_response
 from .. import _compat
 from .list import List as List
 from .logo import Logo as Logo
@@ -33,7 +25,6 @@ from .email_header import EmailHeader as EmailHeader
 from .filter_param import FilterParam as FilterParam
 from .brand_snippet import BrandSnippet as BrandSnippet
 from .content_param import ContentParam as ContentParam
-from .filter_config import FilterConfig as FilterConfig
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
 from .brand_template import BrandTemplate as BrandTemplate
@@ -57,7 +48,6 @@ from .brand_list_response import BrandListResponse as BrandListResponse
 from .brand_snippet_param import BrandSnippetParam as BrandSnippetParam
 from .brand_update_params import BrandUpdateParams as BrandUpdateParams
 from .default_preferences import DefaultPreferences as DefaultPreferences
-from .filter_config_param import FilterConfigParam as FilterConfigParam
 from .message_list_params import MessageListParams as MessageListParams
 from .audience_list_params import AudienceListParams as AudienceListParams
 from .brand_settings_email import BrandSettingsEmail as BrandSettingsEmail
@@ -65,7 +55,6 @@ from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
 from .brand_template_param import BrandTemplateParam as BrandTemplateParam
 from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
-from .nested_filter_config import NestedFilterConfig as NestedFilterConfig
 from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .user_recipient_param import UserRecipientParam as UserRecipientParam
@@ -108,7 +97,6 @@ from .brand_settings_email_param import BrandSettingsEmailParam as BrandSettings
 from .bulk_retrieve_job_response import BulkRetrieveJobResponse as BulkRetrieveJobResponse
 from .inbound_bulk_message_param import InboundBulkMessageParam as InboundBulkMessageParam
 from .inbound_track_event_params import InboundTrackEventParams as InboundTrackEventParams
-from .nested_filter_config_param import NestedFilterConfigParam as NestedFilterConfigParam
 from .notification_list_response import NotificationListResponse as NotificationListResponse
 from .send_send_message_response import SendSendMessageResponse as SendSendMessageResponse
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
@@ -125,18 +113,10 @@ from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as Inbo
 # Pydantic can resolve the necessary references.
 # See: https://github.com/pydantic/pydantic/issues/11250 for more context.
 if _compat.PYDANTIC_V1:
-    audience.Audience.update_forward_refs()  # type: ignore
-    nested_filter_config.NestedFilterConfig.update_forward_refs()  # type: ignore
-    audience_update_response.AudienceUpdateResponse.update_forward_refs()  # type: ignore
-    audience_list_response.AudienceListResponse.update_forward_refs()  # type: ignore
     message_routing.MessageRouting.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
     tenants.template_list_response.TemplateListResponse.update_forward_refs()  # type: ignore
 else:
-    audience.Audience.model_rebuild(_parent_namespace_depth=0)
-    nested_filter_config.NestedFilterConfig.model_rebuild(_parent_namespace_depth=0)
-    audience_update_response.AudienceUpdateResponse.model_rebuild(_parent_namespace_depth=0)
-    audience_list_response.AudienceListResponse.model_rebuild(_parent_namespace_depth=0)
     message_routing.MessageRouting.model_rebuild(_parent_namespace_depth=0)
     notification_list_response.NotificationListResponse.model_rebuild(_parent_namespace_depth=0)
     tenants.template_list_response.TemplateListResponse.model_rebuild(_parent_namespace_depth=0)

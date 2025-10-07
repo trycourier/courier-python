@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["FilterParam", "UnionMember0"]
+__all__ = ["FilterParam"]
 
 
-class UnionMember0(TypedDict, total=False):
+class FilterParam(TypedDict, total=False):
     operator: Required[
         Literal[
             "ENDS_WITH",
@@ -38,8 +37,3 @@ class UnionMember0(TypedDict, total=False):
 
     value: Required[str]
     """The value to use for filtering"""
-
-
-FilterParam: TypeAlias = Union[UnionMember0, "NestedFilterConfigParam"]
-
-from .nested_filter_config_param import NestedFilterConfigParam
