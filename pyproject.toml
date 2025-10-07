@@ -1,5 +1,5 @@
 [project]
-name = "courier"
+name = "trycourier"
 version = "6.4.0-alpha9"
 description = "The official Python library for the courier API"
 dynamic = ["readme"]
