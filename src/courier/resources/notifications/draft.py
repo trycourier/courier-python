@@ -14,7 +14,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.notification_content import NotificationContent
+from ...types.notification_get_content import NotificationGetContent
 
 __all__ = ["DraftResource", "AsyncDraftResource"]
 
@@ -26,7 +26,7 @@ class DraftResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/courier-python#accessing-raw-response-data-eg-headers
         """
         return DraftResourceWithRawResponse(self)
 
@@ -35,7 +35,7 @@ class DraftResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/courier-python#with_streaming_response
         """
         return DraftResourceWithStreamingResponse(self)
 
@@ -49,7 +49,7 @@ class DraftResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationContent:
+    ) -> NotificationGetContent:
         """
         Args:
           extra_headers: Send extra headers
@@ -67,7 +67,7 @@ class DraftResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationContent,
+            cast_to=NotificationGetContent,
         )
 
 
@@ -78,7 +78,7 @@ class AsyncDraftResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/courier-python#accessing-raw-response-data-eg-headers
         """
         return AsyncDraftResourceWithRawResponse(self)
 
@@ -87,7 +87,7 @@ class AsyncDraftResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/courier-python#with_streaming_response
         """
         return AsyncDraftResourceWithStreamingResponse(self)
 
@@ -101,7 +101,7 @@ class AsyncDraftResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationContent:
+    ) -> NotificationGetContent:
         """
         Args:
           extra_headers: Send extra headers
@@ -119,7 +119,7 @@ class AsyncDraftResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationContent,
+            cast_to=NotificationGetContent,
         )
 
 

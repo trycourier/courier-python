@@ -34,7 +34,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.notification_content import NotificationContent
+from ...types.notification_get_content import NotificationGetContent
 from ...types.notification_list_response import NotificationListResponse
 
 __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
@@ -42,12 +42,12 @@ __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
 
 class NotificationsResource(SyncAPIResource):
     @cached_property
-    def checks(self) -> ChecksResource:
-        return ChecksResource(self._client)
-
-    @cached_property
     def draft(self) -> DraftResource:
         return DraftResource(self._client)
+
+    @cached_property
+    def checks(self) -> ChecksResource:
+        return ChecksResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> NotificationsResourceWithRawResponse:
@@ -55,7 +55,7 @@ class NotificationsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/courier-python#accessing-raw-response-data-eg-headers
         """
         return NotificationsResourceWithRawResponse(self)
 
@@ -64,7 +64,7 @@ class NotificationsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/courier-python#with_streaming_response
         """
         return NotificationsResourceWithStreamingResponse(self)
 
@@ -120,7 +120,7 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationContent:
+    ) -> NotificationGetContent:
         """
         Args:
           extra_headers: Send extra headers
@@ -138,18 +138,18 @@ class NotificationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationContent,
+            cast_to=NotificationGetContent,
         )
 
 
 class AsyncNotificationsResource(AsyncAPIResource):
     @cached_property
-    def checks(self) -> AsyncChecksResource:
-        return AsyncChecksResource(self._client)
-
-    @cached_property
     def draft(self) -> AsyncDraftResource:
         return AsyncDraftResource(self._client)
+
+    @cached_property
+    def checks(self) -> AsyncChecksResource:
+        return AsyncChecksResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncNotificationsResourceWithRawResponse:
@@ -157,7 +157,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/courier-python#accessing-raw-response-data-eg-headers
         """
         return AsyncNotificationsResourceWithRawResponse(self)
 
@@ -166,7 +166,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/courier-python#with_streaming_response
         """
         return AsyncNotificationsResourceWithStreamingResponse(self)
 
@@ -222,7 +222,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationContent:
+    ) -> NotificationGetContent:
         """
         Args:
           extra_headers: Send extra headers
@@ -240,7 +240,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationContent,
+            cast_to=NotificationGetContent,
         )
 
 
@@ -256,12 +256,12 @@ class NotificationsResourceWithRawResponse:
         )
 
     @cached_property
-    def checks(self) -> ChecksResourceWithRawResponse:
-        return ChecksResourceWithRawResponse(self._notifications.checks)
-
-    @cached_property
     def draft(self) -> DraftResourceWithRawResponse:
         return DraftResourceWithRawResponse(self._notifications.draft)
+
+    @cached_property
+    def checks(self) -> ChecksResourceWithRawResponse:
+        return ChecksResourceWithRawResponse(self._notifications.checks)
 
 
 class AsyncNotificationsResourceWithRawResponse:
@@ -276,12 +276,12 @@ class AsyncNotificationsResourceWithRawResponse:
         )
 
     @cached_property
-    def checks(self) -> AsyncChecksResourceWithRawResponse:
-        return AsyncChecksResourceWithRawResponse(self._notifications.checks)
-
-    @cached_property
     def draft(self) -> AsyncDraftResourceWithRawResponse:
         return AsyncDraftResourceWithRawResponse(self._notifications.draft)
+
+    @cached_property
+    def checks(self) -> AsyncChecksResourceWithRawResponse:
+        return AsyncChecksResourceWithRawResponse(self._notifications.checks)
 
 
 class NotificationsResourceWithStreamingResponse:
@@ -296,12 +296,12 @@ class NotificationsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def checks(self) -> ChecksResourceWithStreamingResponse:
-        return ChecksResourceWithStreamingResponse(self._notifications.checks)
-
-    @cached_property
     def draft(self) -> DraftResourceWithStreamingResponse:
         return DraftResourceWithStreamingResponse(self._notifications.draft)
+
+    @cached_property
+    def checks(self) -> ChecksResourceWithStreamingResponse:
+        return ChecksResourceWithStreamingResponse(self._notifications.checks)
 
 
 class AsyncNotificationsResourceWithStreamingResponse:
@@ -316,9 +316,9 @@ class AsyncNotificationsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def checks(self) -> AsyncChecksResourceWithStreamingResponse:
-        return AsyncChecksResourceWithStreamingResponse(self._notifications.checks)
-
-    @cached_property
     def draft(self) -> AsyncDraftResourceWithStreamingResponse:
         return AsyncDraftResourceWithStreamingResponse(self._notifications.draft)
+
+    @cached_property
+    def checks(self) -> AsyncChecksResourceWithStreamingResponse:
+        return AsyncChecksResourceWithStreamingResponse(self._notifications.checks)

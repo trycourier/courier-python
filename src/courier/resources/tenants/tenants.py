@@ -44,12 +44,12 @@ __all__ = ["TenantsResource", "AsyncTenantsResource"]
 
 class TenantsResource(SyncAPIResource):
     @cached_property
-    def templates(self) -> TemplatesResource:
-        return TemplatesResource(self._client)
-
-    @cached_property
     def default_preferences(self) -> DefaultPreferencesResource:
         return DefaultPreferencesResource(self._client)
+
+    @cached_property
+    def templates(self) -> TemplatesResource:
+        return TemplatesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> TenantsResourceWithRawResponse:
@@ -57,7 +57,7 @@ class TenantsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/courier-python#accessing-raw-response-data-eg-headers
         """
         return TenantsResourceWithRawResponse(self)
 
@@ -66,7 +66,7 @@ class TenantsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/courier-python#with_streaming_response
         """
         return TenantsResourceWithStreamingResponse(self)
 
@@ -302,12 +302,12 @@ class TenantsResource(SyncAPIResource):
 
 class AsyncTenantsResource(AsyncAPIResource):
     @cached_property
-    def templates(self) -> AsyncTemplatesResource:
-        return AsyncTemplatesResource(self._client)
-
-    @cached_property
     def default_preferences(self) -> AsyncDefaultPreferencesResource:
         return AsyncDefaultPreferencesResource(self._client)
+
+    @cached_property
+    def templates(self) -> AsyncTemplatesResource:
+        return AsyncTemplatesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncTenantsResourceWithRawResponse:
@@ -315,7 +315,7 @@ class AsyncTenantsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/stainless-sdks/courier-python#accessing-raw-response-data-eg-headers
         """
         return AsyncTenantsResourceWithRawResponse(self)
 
@@ -324,7 +324,7 @@ class AsyncTenantsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
+        For more information, see https://www.github.com/stainless-sdks/courier-python#with_streaming_response
         """
         return AsyncTenantsResourceWithStreamingResponse(self)
 
@@ -579,12 +579,12 @@ class TenantsResourceWithRawResponse:
         )
 
     @cached_property
-    def templates(self) -> TemplatesResourceWithRawResponse:
-        return TemplatesResourceWithRawResponse(self._tenants.templates)
-
-    @cached_property
     def default_preferences(self) -> DefaultPreferencesResourceWithRawResponse:
         return DefaultPreferencesResourceWithRawResponse(self._tenants.default_preferences)
+
+    @cached_property
+    def templates(self) -> TemplatesResourceWithRawResponse:
+        return TemplatesResourceWithRawResponse(self._tenants.templates)
 
 
 class AsyncTenantsResourceWithRawResponse:
@@ -608,12 +608,12 @@ class AsyncTenantsResourceWithRawResponse:
         )
 
     @cached_property
-    def templates(self) -> AsyncTemplatesResourceWithRawResponse:
-        return AsyncTemplatesResourceWithRawResponse(self._tenants.templates)
-
-    @cached_property
     def default_preferences(self) -> AsyncDefaultPreferencesResourceWithRawResponse:
         return AsyncDefaultPreferencesResourceWithRawResponse(self._tenants.default_preferences)
+
+    @cached_property
+    def templates(self) -> AsyncTemplatesResourceWithRawResponse:
+        return AsyncTemplatesResourceWithRawResponse(self._tenants.templates)
 
 
 class TenantsResourceWithStreamingResponse:
@@ -637,12 +637,12 @@ class TenantsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def templates(self) -> TemplatesResourceWithStreamingResponse:
-        return TemplatesResourceWithStreamingResponse(self._tenants.templates)
-
-    @cached_property
     def default_preferences(self) -> DefaultPreferencesResourceWithStreamingResponse:
         return DefaultPreferencesResourceWithStreamingResponse(self._tenants.default_preferences)
+
+    @cached_property
+    def templates(self) -> TemplatesResourceWithStreamingResponse:
+        return TemplatesResourceWithStreamingResponse(self._tenants.templates)
 
 
 class AsyncTenantsResourceWithStreamingResponse:
@@ -666,9 +666,9 @@ class AsyncTenantsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def templates(self) -> AsyncTemplatesResourceWithStreamingResponse:
-        return AsyncTemplatesResourceWithStreamingResponse(self._tenants.templates)
-
-    @cached_property
     def default_preferences(self) -> AsyncDefaultPreferencesResourceWithStreamingResponse:
         return AsyncDefaultPreferencesResourceWithStreamingResponse(self._tenants.default_preferences)
+
+    @cached_property
+    def templates(self) -> AsyncTemplatesResourceWithStreamingResponse:
+        return AsyncTemplatesResourceWithStreamingResponse(self._tenants.templates)

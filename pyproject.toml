@@ -1,5 +1,5 @@
 [project]
-name = "trycourier"
+name = "courier"
 version = "6.4.0-alpha9"
 description = "The official Python library for the courier API"
 dynamic = ["readme"]
@@ -35,8 +35,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/trycourier/courier-python"
-Repository = "https://github.com/trycourier/courier-python"
+Homepage = "https://github.com/stainless-sdks/courier-python"
+Repository = "https://github.com/stainless-sdks/courier-python"
 
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
@@ -124,7 +124,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # replace relative links with absolute links
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/trycourier/courier-python/tree/main/\g<2>)'
+replacement = '[\1](https://github.com/stainless-sdks/courier-python/tree/main/\g<2>)'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

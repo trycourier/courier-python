@@ -9,7 +9,7 @@ import pytest
 
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier.types import NotificationContent
+from courier.types import NotificationGetContent
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +23,7 @@ class TestDraft:
         draft = client.notifications.draft.retrieve_content(
             "id",
         )
-        assert_matches_type(NotificationContent, draft, path=["response"])
+        assert_matches_type(NotificationGetContent, draft, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -35,7 +35,7 @@ class TestDraft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         draft = response.parse()
-        assert_matches_type(NotificationContent, draft, path=["response"])
+        assert_matches_type(NotificationGetContent, draft, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -47,7 +47,7 @@ class TestDraft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             draft = response.parse()
-            assert_matches_type(NotificationContent, draft, path=["response"])
+            assert_matches_type(NotificationGetContent, draft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -71,7 +71,7 @@ class TestAsyncDraft:
         draft = await async_client.notifications.draft.retrieve_content(
             "id",
         )
-        assert_matches_type(NotificationContent, draft, path=["response"])
+        assert_matches_type(NotificationGetContent, draft, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -83,7 +83,7 @@ class TestAsyncDraft:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         draft = await response.parse()
-        assert_matches_type(NotificationContent, draft, path=["response"])
+        assert_matches_type(NotificationGetContent, draft, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -95,7 +95,7 @@ class TestAsyncDraft:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             draft = await response.parse()
-            assert_matches_type(NotificationContent, draft, path=["response"])
+            assert_matches_type(NotificationGetContent, draft, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

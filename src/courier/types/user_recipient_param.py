@@ -2,20 +2,70 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Dict, Iterable, Optional
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
-from .preference_param import PreferenceParam
 from .message_context_param import MessageContextParam
+from .users.preference_status import PreferenceStatus
+from .tenants.default_preferences.channel_classification import ChannelClassification
 
-__all__ = ["UserRecipientParam", "Preferences"]
+__all__ = [
+    "UserRecipientParam",
+    "Preferences",
+    "PreferencesNotifications",
+    "PreferencesNotificationsChannelPreference",
+    "PreferencesNotificationsRule",
+    "PreferencesCategories",
+    "PreferencesCategoriesChannelPreference",
+    "PreferencesCategoriesRule",
+]
+
+
+class PreferencesNotificationsChannelPreference(TypedDict, total=False):
+    channel: Required[ChannelClassification]
+
+
+class PreferencesNotificationsRule(TypedDict, total=False):
+    until: Required[str]
+
+    start: Optional[str]
+
+
+class PreferencesNotifications(TypedDict, total=False):
+    status: Required[PreferenceStatus]
+
+    channel_preferences: Optional[Iterable[PreferencesNotificationsChannelPreference]]
+
+    rules: Optional[Iterable[PreferencesNotificationsRule]]
+
+    source: Optional[Literal["subscription", "list", "recipient"]]
+
+
+class PreferencesCategoriesChannelPreference(TypedDict, total=False):
+    channel: Required[ChannelClassification]
+
+
+class PreferencesCategoriesRule(TypedDict, total=False):
+    until: Required[str]
+
+    start: Optional[str]
+
+
+class PreferencesCategories(TypedDict, total=False):
+    status: Required[PreferenceStatus]
+
+    channel_preferences: Optional[Iterable[PreferencesCategoriesChannelPreference]]
+
+    rules: Optional[Iterable[PreferencesCategoriesRule]]
+
+    source: Optional[Literal["subscription", "list", "recipient"]]
 
 
 class Preferences(TypedDict, total=False):
-    notifications: Required[Dict[str, PreferenceParam]]
+    notifications: Required[Dict[str, PreferencesNotifications]]
 
-    categories: Optional[Dict[str, PreferenceParam]]
+    categories: Optional[Dict[str, PreferencesCategories]]
 
     template_id: Annotated[Optional[str], PropertyInfo(alias="templateId")]
 

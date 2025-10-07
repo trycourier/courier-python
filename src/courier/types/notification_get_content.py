@@ -6,7 +6,7 @@ from typing_extensions import Literal, TypeAlias
 from .._models import BaseModel
 
 __all__ = [
-    "NotificationContent",
+    "NotificationGetContent",
     "Block",
     "BlockContent",
     "BlockContentNotificationContentHierarchy",
@@ -76,7 +76,7 @@ class Channel(BaseModel):
     type: Optional[str] = None
 
 
-class NotificationContent(BaseModel):
+class NotificationGetContent(BaseModel):
     blocks: Optional[List[Block]] = None
 
     channels: Optional[List[Channel]] = None
