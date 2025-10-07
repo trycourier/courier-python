@@ -5,9 +5,15 @@ from __future__ import annotations
 from typing import Dict, Union, Optional
 from typing_extensions import Required, TypeAlias, TypedDict
 
-from .content_param import ContentParam
+from .tenants.elemental_content_param import ElementalContentParam
+from .shared_params.elemental_content_sugar import ElementalContentSugar
 
-__all__ = ["InboundBulkMessageParam", "InboundBulkTemplateMessage", "InboundBulkContentMessage"]
+__all__ = [
+    "InboundBulkMessageParam",
+    "InboundBulkTemplateMessage",
+    "InboundBulkContentMessage",
+    "InboundBulkContentMessageContent",
+]
 
 
 class InboundBulkTemplateMessage(TypedDict, total=False):
@@ -24,8 +30,11 @@ class InboundBulkTemplateMessage(TypedDict, total=False):
     override: Optional[Dict[str, object]]
 
 
+InboundBulkContentMessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContentParam]
+
+
 class InboundBulkContentMessage(TypedDict, total=False):
-    content: Required[ContentParam]
+    content: Required[InboundBulkContentMessageContent]
     """Syntactic sugar to provide a fast shorthand for Courier Elemental Blocks."""
 
     brand: Optional[str]

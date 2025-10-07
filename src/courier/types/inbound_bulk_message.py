@@ -3,10 +3,16 @@
 from typing import Dict, Union, Optional
 from typing_extensions import TypeAlias
 
-from .content import Content
 from .._models import BaseModel
+from .tenants.elemental_content import ElementalContent
+from .shared.elemental_content_sugar import ElementalContentSugar
 
-__all__ = ["InboundBulkMessage", "InboundBulkTemplateMessage", "InboundBulkContentMessage"]
+__all__ = [
+    "InboundBulkMessage",
+    "InboundBulkTemplateMessage",
+    "InboundBulkContentMessage",
+    "InboundBulkContentMessageContent",
+]
 
 
 class InboundBulkTemplateMessage(BaseModel):
@@ -23,8 +29,11 @@ class InboundBulkTemplateMessage(BaseModel):
     override: Optional[Dict[str, object]] = None
 
 
+InboundBulkContentMessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContent]
+
+
 class InboundBulkContentMessage(BaseModel):
-    content: Content
+    content: InboundBulkContentMessageContent
     """Syntactic sugar to provide a fast shorthand for Courier Elemental Blocks."""
 
     brand: Optional[str] = None

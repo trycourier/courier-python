@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, TypeAlias, TypedDict
+from typing_extensions import Required, TypedDict
 
-from .tenants.elemental_content_param import ElementalContentParam
-
-__all__ = ["ContentParam", "ElementalContentSugar"]
+__all__ = ["ElementalContentSugar"]
 
 
 class ElementalContentSugar(TypedDict, total=False):
@@ -16,6 +13,3 @@ class ElementalContentSugar(TypedDict, total=False):
 
     title: Required[str]
     """Title/subject displayed by supported channels."""
-
-
-ContentParam: TypeAlias = Union[ElementalContentSugar, ElementalContentParam]

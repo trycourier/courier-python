@@ -45,4 +45,4 @@ class TemplateListResponse(BaseModel):
     """
 
 
-from ..message_routing import MessageRouting
+from ..shared.message_routing import MessageRouting
