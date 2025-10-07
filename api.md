@@ -25,7 +25,6 @@ from courier.types import (
     Audience,
     Filter,
     FilterConfig,
-    NestedFilterConfig,
     Paging,
     AudienceUpdateResponse,
     AudienceListResponse,

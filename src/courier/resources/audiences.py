@@ -100,7 +100,7 @@ class AudiencesResource(SyncAPIResource):
         Args:
           description: A description of the audience
 
-          filter: The operator to use for filtering
+          filter: A single filter to use for filtering
 
           name: The name of the audience
 
@@ -315,7 +315,7 @@ class AsyncAudiencesResource(AsyncAPIResource):
         Args:
           description: A description of the audience
 
-          filter: The operator to use for filtering
+          filter: A single filter to use for filtering
 
           name: The name of the audience
 
