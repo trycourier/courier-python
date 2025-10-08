@@ -100,7 +100,6 @@ class TestSend:
                     "channels": ["string"],
                     "method": "all",
                 },
-                "template": "template_id",
                 "timeout": {
                     "channel": {"foo": 0},
                     "criteria": "no-escalation",
@@ -266,7 +265,6 @@ class TestAsyncSend:
                     "channels": ["string"],
                     "method": "all",
                 },
-                "template": "template_id",
                 "timeout": {
                     "channel": {"foo": 0},
                     "criteria": "no-escalation",

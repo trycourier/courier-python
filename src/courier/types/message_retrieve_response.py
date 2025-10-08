@@ -2,7 +2,7 @@
 
 from typing import Dict, List, Optional
 
-from .message_details import MessageDetails
+from .shared.message_details import MessageDetails
 
 __all__ = ["MessageRetrieveResponse"]
 

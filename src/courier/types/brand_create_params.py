@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Required, TypedDict
 
-from .brand_settings_param import BrandSettingsParam
-from .brand_snippets_param import BrandSnippetsParam
+from .shared_params.brand_settings import BrandSettings
+from .shared_params.brand_snippets import BrandSnippets
 
 __all__ = ["BrandCreateParams"]
 
@@ -16,6 +16,6 @@ class BrandCreateParams(TypedDict, total=False):
 
     id: Optional[str]
 
-    settings: Optional[BrandSettingsParam]
+    settings: Optional[BrandSettings]
 
-    snippets: Optional[BrandSnippetsParam]
+    snippets: Optional[BrandSnippets]

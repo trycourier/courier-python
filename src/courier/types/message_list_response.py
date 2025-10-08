@@ -2,9 +2,9 @@
 
 from typing import List
 
-from .paging import Paging
 from .._models import BaseModel
-from .message_details import MessageDetails
+from .shared.paging import Paging
+from .shared.message_details import MessageDetails
 
 __all__ = ["MessageListResponse"]
 
