@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .rule import Rule as Rule
-from .alignment import Alignment as Alignment
 from .preference import Preference as Preference
 from .list_recipient import ListRecipient as ListRecipient
 from .user_recipient import UserRecipient as UserRecipient
