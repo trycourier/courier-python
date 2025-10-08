@@ -15,8 +15,6 @@ from .shared import (
     Alignment as Alignment,
     TextStyle as TextStyle,
     Preference as Preference,
-    ListRecipient as ListRecipient,
-    UserRecipient as UserRecipient,
     MessageRouting as MessageRouting,
     ChannelPreference as ChannelPreference,
     ElementalBaseNode as ElementalBaseNode,
@@ -39,6 +37,7 @@ from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
 from .brand_template import BrandTemplate as BrandTemplate
 from .elemental_node import ElementalNode as ElementalNode
+from .user_recipient import UserRecipient as UserRecipient
 from .message_context import MessageContext as MessageContext
 from .message_details import MessageDetails as MessageDetails
 from .recipient_param import RecipientParam as RecipientParam
@@ -68,6 +67,7 @@ from .elemental_node_param import ElementalNodeParam as ElementalNodeParam
 from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
 from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
+from .user_recipient_param import UserRecipientParam as UserRecipientParam
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
 from .bulk_add_users_params import BulkAddUsersParams as BulkAddUsersParams
 from .message_context_param import MessageContextParam as MessageContextParam

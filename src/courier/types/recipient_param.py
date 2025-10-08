@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import TypeAlias
+from typing import Dict, Union, Optional
+from typing_extensions import TypeAlias, TypedDict
 
-from .shared_params.list_recipient import ListRecipient
-from .shared_params.user_recipient import UserRecipient
+from .user_recipient_param import UserRecipientParam
 
-__all__ = ["RecipientParam"]
+__all__ = ["RecipientParam", "ListRecipient"]
 
-RecipientParam: TypeAlias = Union[UserRecipient, ListRecipient]
+
+class ListRecipient(TypedDict, total=False):
+    data: Optional[Dict[str, object]]
+
+    list_id: Optional[str]
+
+
+RecipientParam: TypeAlias = Union[UserRecipientParam, ListRecipient]
