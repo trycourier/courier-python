@@ -58,7 +58,7 @@ class TestSend:
                     "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
-                "data": {"name": "bar"},
+                "data": {"foo": "bar"},
                 "delay": {
                     "duration": 0,
                     "until": "until",
@@ -224,7 +224,7 @@ class TestAsyncSend:
                     "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
-                "data": {"name": "bar"},
+                "data": {"foo": "bar"},
                 "delay": {
                     "duration": 0,
                     "until": "until",
