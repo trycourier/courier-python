@@ -5,11 +5,11 @@ from __future__ import annotations
 from typing import Dict, Optional
 from typing_extensions import Required, Annotated, TypedDict
 
-from ..._utils import PropertyInfo
-from .preference import Preference
-from ..message_context_param import MessageContextParam
+from .._utils import PropertyInfo
+from .message_context_param import MessageContextParam
+from .shared_params.preference import Preference
 
-__all__ = ["UserRecipient", "Preferences"]
+__all__ = ["UserRecipientParam", "Preferences"]
 
 
 class Preferences(TypedDict, total=False):
@@ -20,7 +20,7 @@ class Preferences(TypedDict, total=False):
     template_id: Annotated[Optional[str], PropertyInfo(alias="templateId")]
 
 
-class UserRecipient(TypedDict, total=False):
+class UserRecipientParam(TypedDict, total=False):
     account_id: Optional[str]
     """Use `tenant_id` instead."""
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import TypedDict
 
-from .shared_params.user_recipient import UserRecipient
+from .user_recipient_param import UserRecipientParam
 from .lists.recipient_preferences_param import RecipientPreferencesParam
 
 __all__ = ["InboundBulkMessageUserParam"]
@@ -20,4 +20,4 @@ class InboundBulkMessageUserParam(TypedDict, total=False):
 
     recipient: Optional[str]
 
-    to: Optional[UserRecipient]
+    to: Optional[UserRecipientParam]
