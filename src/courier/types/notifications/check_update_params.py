@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-from .base_check_param import BaseCheckParam
+from ..shared_params.base_check import BaseCheck
 
 __all__ = ["CheckUpdateParams"]
 
@@ -13,4 +13,4 @@ __all__ = ["CheckUpdateParams"]
 class CheckUpdateParams(TypedDict, total=False):
     id: Required[str]
 
-    checks: Required[Iterable[BaseCheckParam]]
+    checks: Required[Iterable[BaseCheck]]

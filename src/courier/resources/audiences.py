@@ -18,8 +18,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.audience import Audience
-from ..types.filter_param import FilterParam
+from ..types.shared.audience import Audience
+from ..types.shared_params.filter import Filter
 from ..types.audience_list_response import AudienceListResponse
 from ..types.audience_update_response import AudienceUpdateResponse
 from ..types.audience_list_members_response import AudienceListMembersResponse
@@ -85,7 +85,7 @@ class AudiencesResource(SyncAPIResource):
         audience_id: str,
         *,
         description: Optional[str] | Omit = omit,
-        filter: Optional[FilterParam] | Omit = omit,
+        filter: Optional[Filter] | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -300,7 +300,7 @@ class AsyncAudiencesResource(AsyncAPIResource):
         audience_id: str,
         *,
         description: Optional[str] | Omit = omit,
-        filter: Optional[FilterParam] | Omit = omit,
+        filter: Optional[Filter] | Omit = omit,
         name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

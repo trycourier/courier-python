@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, TypedDict
 
 from .rule import Rule
 from .channel_preference import ChannelPreference
-from ..users.preference_status import PreferenceStatus
+from ..shared.preference_status import PreferenceStatus
 
 __all__ = ["Preference"]
 

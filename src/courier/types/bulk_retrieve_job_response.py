@@ -3,7 +3,7 @@
 from typing_extensions import Literal
 
 from .._models import BaseModel
-from .inbound_bulk_message import InboundBulkMessage
+from .shared.inbound_bulk_message import InboundBulkMessage
 
 __all__ = ["BulkRetrieveJobResponse", "Job"]
 

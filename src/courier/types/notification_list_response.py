@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from .paging import Paging
 from .._models import BaseModel
+from .shared.paging import Paging
 
 __all__ = ["NotificationListResponse", "Result", "ResultTags", "ResultTagsData"]
 

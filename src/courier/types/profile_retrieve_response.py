@@ -3,7 +3,7 @@
 from typing import Dict, Optional
 
 from .._models import BaseModel
-from .lists.recipient_preferences import RecipientPreferences
+from .shared.recipient_preferences import RecipientPreferences
 
 __all__ = ["ProfileRetrieveResponse"]
 

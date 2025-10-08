@@ -5,9 +5,9 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from .paging import Paging
 from .._models import BaseModel
-from .inbound_bulk_message_user import InboundBulkMessageUser
+from .shared.paging import Paging
+from .shared.inbound_bulk_message_user import InboundBulkMessageUser
 
 __all__ = ["BulkListUsersResponse", "Item"]
 
