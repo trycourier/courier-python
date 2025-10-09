@@ -20,11 +20,18 @@ from courier.types import (
     ChannelPreference,
     Check,
     DefaultPreferences,
+    ElementalActionNodeWithType,
     ElementalBaseNode,
     ElementalChannelNode,
+    ElementalChannelNodeWithType,
     ElementalContent,
     ElementalContentSugar,
+    ElementalDividerNodeWithType,
+    ElementalImageNodeWithType,
+    ElementalMetaNodeWithType,
     ElementalNode,
+    ElementalQuoteNodeWithType,
+    ElementalTextNodeWithType,
     EmailFooter,
     EmailHead,
     EmailHeader,
@@ -33,7 +40,6 @@ from courier.types import (
     Icons,
     InboundBulkMessage,
     InboundBulkMessageUser,
-    List,
     Logo,
     MessageContext,
     MessageDetails,
@@ -53,6 +59,7 @@ from courier.types import (
     TenantAssociation,
     TextStyle,
     TopicPreference,
+    UserList,
     UserRecipient,
     UserToken,
     Utm,
@@ -176,7 +183,7 @@ from courier.types import ListListResponse
 
 Methods:
 
-- <code title="get /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">retrieve</a>(list_id) -> <a href="./src/courier/types/shared/list.py">List</a></code>
+- <code title="get /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">retrieve</a>(list_id) -> <a href="./src/courier/types/shared/user_list.py">UserList</a></code>
 - <code title="put /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">update</a>(list_id, \*\*<a href="src/courier/types/list_update_params.py">params</a>) -> None</code>
 - <code title="get /lists">client.lists.<a href="./src/courier/resources/lists/lists.py">list</a>(\*\*<a href="src/courier/types/list_list_params.py">params</a>) -> <a href="./src/courier/types/list_list_response.py">ListListResponse</a></code>
 - <code title="delete /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">delete</a>(list_id) -> None</code>

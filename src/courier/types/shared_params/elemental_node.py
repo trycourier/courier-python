@@ -3,51 +3,24 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import TypeAlias
 
-from .elemental_base_node import ElementalBaseNode
-from .elemental_channel_node import ElementalChannelNode
+from .elemental_meta_node_with_type import ElementalMetaNodeWithType
+from .elemental_text_node_with_type import ElementalTextNodeWithType
+from .elemental_image_node_with_type import ElementalImageNodeWithType
+from .elemental_quote_node_with_type import ElementalQuoteNodeWithType
+from .elemental_action_node_with_type import ElementalActionNodeWithType
+from .elemental_channel_node_with_type import ElementalChannelNodeWithType
+from .elemental_divider_node_with_type import ElementalDividerNodeWithType
 
-__all__ = [
-    "ElementalNode",
-    "UnionMember0",
-    "UnionMember1",
-    "UnionMember2",
-    "UnionMember3",
-    "UnionMember4",
-    "UnionMember5",
-    "UnionMember6",
-]
-
-
-class UnionMember0(ElementalBaseNode, total=False):
-    type: Literal["text"]
-
-
-class UnionMember1(ElementalBaseNode, total=False):
-    type: Literal["meta"]
-
-
-class UnionMember2(ElementalChannelNode, total=False):
-    type: Literal["channel"]
-
-
-class UnionMember3(ElementalBaseNode, total=False):
-    type: Literal["image"]
-
-
-class UnionMember4(ElementalBaseNode, total=False):
-    type: Literal["action"]
-
-
-class UnionMember5(ElementalBaseNode, total=False):
-    type: Literal["divider"]
-
-
-class UnionMember6(ElementalBaseNode, total=False):
-    type: Literal["quote"]
-
+__all__ = ["ElementalNode"]
 
 ElementalNode: TypeAlias = Union[
-    UnionMember0, UnionMember1, UnionMember2, UnionMember3, UnionMember4, UnionMember5, UnionMember6
+    ElementalTextNodeWithType,
+    ElementalMetaNodeWithType,
+    ElementalChannelNodeWithType,
+    ElementalImageNodeWithType,
+    ElementalActionNodeWithType,
+    ElementalDividerNodeWithType,
+    ElementalQuoteNodeWithType,
 ]

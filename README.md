@@ -35,7 +35,7 @@ client = Courier(
 response = client.send.message(
     message={
         "to": {"user_id": "your_user_id"},
-        "template": "your_template_id",
+        "template": "your_template",
         "data": {"foo": "bar"},
     },
 )
@@ -65,7 +65,7 @@ async def main() -> None:
     response = await client.send.message(
         message={
             "to": {"user_id": "your_user_id"},
-            "template": "your_template_id",
+            "template": "your_template",
             "data": {"foo": "bar"},
         },
     )
@@ -104,7 +104,7 @@ async def main() -> None:
         response = await client.send.message(
             message={
                 "to": {"user_id": "your_user_id"},
-                "template": "your_template_id",
+                "template": "your_template",
                 "data": {"foo": "bar"},
             },
         )
@@ -160,7 +160,7 @@ try:
     client.send.message(
         message={
             "to": {"user_id": "your_user_id"},
-            "template": "your_template_id",
+            "template": "your_template",
             "data": {"foo": "bar"},
         },
     )
@@ -209,7 +209,7 @@ client = Courier(
 client.with_options(max_retries=5).send.message(
     message={
         "to": {"user_id": "your_user_id"},
-        "template": "your_template_id",
+        "template": "your_template",
         "data": {"foo": "bar"},
     },
 )
@@ -238,7 +238,7 @@ client = Courier(
 client.with_options(timeout=5.0).send.message(
     message={
         "to": {"user_id": "your_user_id"},
-        "template": "your_template_id",
+        "template": "your_template",
         "data": {"foo": "bar"},
     },
 )
@@ -287,7 +287,7 @@ response = client.send.with_raw_response.message(
         "to": {
             "user_id": "your_user_id"
         },
-        "template": "your_template_id",
+        "template": "your_template",
         "data": {
             "foo": "bar"
         },
@@ -313,7 +313,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 with client.send.with_streaming_response.message(
     message={
         "to": {"user_id": "your_user_id"},
-        "template": "your_template_id",
+        "template": "your_template",
         "data": {"foo": "bar"},
     },
 ) as response:

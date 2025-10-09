@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .utm import Utm as Utm
-from .list import List as List
 from .logo import Logo as Logo
 from .rule import Rule as Rule
 from .brand import Brand as Brand
@@ -13,6 +12,7 @@ from .tenant import Tenant as Tenant
 from .audience import Audience as Audience
 from .alignment import Alignment as Alignment
 from .recipient import Recipient as Recipient
+from .user_list import UserList as UserList
 from .base_check import BaseCheck as BaseCheck
 from .email_head import EmailHead as EmailHead
 from .preference import Preference as Preference
@@ -53,5 +53,12 @@ from .notification_get_content import NotificationGetContent as NotificationGetC
 from .inbound_bulk_message_user import InboundBulkMessageUser as InboundBulkMessageUser
 from .automation_invoke_response import AutomationInvokeResponse as AutomationInvokeResponse
 from .put_subscriptions_recipient import PutSubscriptionsRecipient as PutSubscriptionsRecipient
+from .elemental_meta_node_with_type import ElementalMetaNodeWithType as ElementalMetaNodeWithType
+from .elemental_text_node_with_type import ElementalTextNodeWithType as ElementalTextNodeWithType
+from .elemental_image_node_with_type import ElementalImageNodeWithType as ElementalImageNodeWithType
+from .elemental_quote_node_with_type import ElementalQuoteNodeWithType as ElementalQuoteNodeWithType
+from .elemental_action_node_with_type import ElementalActionNodeWithType as ElementalActionNodeWithType
 from .notification_preference_details import NotificationPreferenceDetails as NotificationPreferenceDetails
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
+from .elemental_channel_node_with_type import ElementalChannelNodeWithType as ElementalChannelNodeWithType
+from .elemental_divider_node_with_type import ElementalDividerNodeWithType as ElementalDividerNodeWithType
