@@ -6,7 +6,6 @@ from . import shared, tenants, notification_list_response
 from .. import _compat
 from .shared import (
     Utm as Utm,
-    List as List,
     Logo as Logo,
     Rule as Rule,
     Brand as Brand,
@@ -16,6 +15,7 @@ from .shared import (
     Paging as Paging,
     Tenant as Tenant,
     Audience as Audience,
+    UserList as UserList,
     Alignment as Alignment,
     BaseCheck as BaseCheck,
     EmailHead as EmailHead,
@@ -57,7 +57,14 @@ from .shared import (
     InboundBulkMessageUser as InboundBulkMessageUser,
     NotificationGetContent as NotificationGetContent,
     AutomationInvokeResponse as AutomationInvokeResponse,
+    ElementalMetaNodeWithType as ElementalMetaNodeWithType,
+    ElementalTextNodeWithType as ElementalTextNodeWithType,
     PutSubscriptionsRecipient as PutSubscriptionsRecipient,
+    ElementalImageNodeWithType as ElementalImageNodeWithType,
+    ElementalQuoteNodeWithType as ElementalQuoteNodeWithType,
+    ElementalActionNodeWithType as ElementalActionNodeWithType,
+    ElementalChannelNodeWithType as ElementalChannelNodeWithType,
+    ElementalDividerNodeWithType as ElementalDividerNodeWithType,
     BaseTemplateTenantAssociation as BaseTemplateTenantAssociation,
     NotificationPreferenceDetails as NotificationPreferenceDetails,
 )

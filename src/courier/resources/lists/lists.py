@@ -26,7 +26,7 @@ from .subscriptions import (
     AsyncSubscriptionsResourceWithStreamingResponse,
 )
 from ..._base_client import make_request_options
-from ...types.shared.list import List
+from ...types.shared.user_list import UserList
 from ...types.list_list_response import ListListResponse
 from ...types.shared_params.recipient_preferences import RecipientPreferences
 
@@ -67,7 +67,7 @@ class ListsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> List:
+    ) -> UserList:
         """
         Returns a list based on the list ID provided.
 
@@ -87,7 +87,7 @@ class ListsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=List,
+            cast_to=UserList,
         )
 
     def update(
@@ -286,7 +286,7 @@ class AsyncListsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> List:
+    ) -> UserList:
         """
         Returns a list based on the list ID provided.
 
@@ -306,7 +306,7 @@ class AsyncListsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=List,
+            cast_to=UserList,
         )
 
     async def update(
