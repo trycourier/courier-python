@@ -187,6 +187,8 @@ class Message(TypedDict, total=False):
     routing: Optional[MessageRouting]
     """Customize which channels/providers Courier may deliver the message through."""
 
+    template: Optional[str]
+
     timeout: Optional[MessageTimeout]
 
     to: Optional[MessageTo]
