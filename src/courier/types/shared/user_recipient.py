@@ -29,15 +29,21 @@ class UserRecipient(BaseModel):
     data: Optional[Dict[str, object]] = None
 
     email: Optional[str] = None
+    """The user's email address."""
 
     locale: Optional[str] = None
     """The user's preferred ISO 639-1 language code."""
 
     phone_number: Optional[str] = None
+    """The user's phone number."""
 
     preferences: Optional[Preferences] = None
 
     tenant_id: Optional[str] = None
-    """Tenant id. Will load brand, default preferences and base context data."""
+    """The id of the tenant the user is associated with."""
 
     user_id: Optional[str] = None
+    """The user's unique identifier.
+
+    Typically, this will match the user id of a user in your system.
+    """

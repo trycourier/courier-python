@@ -30,15 +30,21 @@ class UserRecipient(TypedDict, total=False):
     data: Optional[Dict[str, object]]
 
     email: Optional[str]
+    """The user's email address."""
 
     locale: Optional[str]
     """The user's preferred ISO 639-1 language code."""
 
     phone_number: Optional[str]
+    """The user's phone number."""
 
     preferences: Optional[Preferences]
 
     tenant_id: Optional[str]
-    """Tenant id. Will load brand, default preferences and base context data."""
+    """The id of the tenant the user is associated with."""
 
     user_id: Optional[str]
+    """The user's unique identifier.
+
+    Typically, this will match the user id of a user in your system.
+    """

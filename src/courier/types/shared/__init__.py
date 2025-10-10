@@ -12,7 +12,6 @@ from .tenant import Tenant as Tenant
 from .audience import Audience as Audience
 from .alignment import Alignment as Alignment
 from .recipient import Recipient as Recipient
-from .user_list import UserList as UserList
 from .base_check import BaseCheck as BaseCheck
 from .email_head import EmailHead as EmailHead
 from .preference import Preference as Preference
@@ -35,6 +34,7 @@ from .message_routing import MessageRouting as MessageRouting
 from .topic_preference import TopicPreference as TopicPreference
 from .elemental_content import ElementalContent as ElementalContent
 from .preference_status import PreferenceStatus as PreferenceStatus
+from .subscription_list import SubscriptionList as SubscriptionList
 from .widget_background import WidgetBackground as WidgetBackground
 from .channel_preference import ChannelPreference as ChannelPreference
 from .tenant_association import TenantAssociation as TenantAssociation
