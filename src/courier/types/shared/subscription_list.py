@@ -4,10 +4,10 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["UserList"]
+__all__ = ["SubscriptionList"]
 
 
-class UserList(BaseModel):
+class SubscriptionList(BaseModel):
     id: str
 
     name: str
