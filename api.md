@@ -3,14 +3,67 @@
 ```python
 from courier.types import (
     Alignment,
+    Audience,
+    AuditEvent,
+    AutomationInvokeResponse,
+    BaseCheck,
+    BaseTemplateTenantAssociation,
+    Brand,
+    BrandColors,
+    BrandSettings,
+    BrandSettingsEmail,
+    BrandSettingsInApp,
+    BrandSnippet,
+    BrandSnippets,
+    BrandTemplate,
+    ChannelClassification,
     ChannelPreference,
+    Check,
+    DefaultPreferences,
+    ElementalActionNodeWithType,
     ElementalBaseNode,
+    ElementalChannelNode,
+    ElementalChannelNodeWithType,
+    ElementalContent,
     ElementalContentSugar,
+    ElementalDividerNodeWithType,
+    ElementalImageNodeWithType,
+    ElementalMetaNodeWithType,
+    ElementalNode,
+    ElementalQuoteNodeWithType,
+    ElementalTextNodeWithType,
+    EmailFooter,
+    EmailHead,
+    EmailHeader,
+    Filter,
+    FilterConfig,
+    Icons,
+    InboundBulkMessage,
+    InboundBulkMessageUser,
+    Logo,
+    MessageContext,
+    MessageDetails,
     MessageRouting,
     MessageRoutingChannel,
+    NotificationGetContent,
+    NotificationPreferenceDetails,
+    Paging,
     Preference,
+    PreferenceStatus,
+    PutSubscriptionsRecipient,
+    Recipient,
+    RecipientPreferences,
     Rule,
+    SubscriptionList,
+    SubscriptionTopicNew,
+    Tenant,
+    TenantAssociation,
     TextStyle,
+    TopicPreference,
+    UserRecipient,
+    UserToken,
+    Utm,
+    WidgetBackground,
 )
 ```
 
@@ -19,14 +72,7 @@ from courier.types import (
 Types:
 
 ```python
-from courier.types import (
-    ElementalChannelNode,
-    ElementalNode,
-    MessageContext,
-    Recipient,
-    Utm,
-    SendMessageResponse,
-)
+from courier.types import SendMessageResponse
 ```
 
 Methods:
@@ -38,20 +84,12 @@ Methods:
 Types:
 
 ```python
-from courier.types import (
-    Audience,
-    Filter,
-    FilterConfig,
-    Paging,
-    AudienceUpdateResponse,
-    AudienceListResponse,
-    AudienceListMembersResponse,
-)
+from courier.types import AudienceUpdateResponse, AudienceListResponse, AudienceListMembersResponse
 ```
 
 Methods:
 
-- <code title="get /audiences/{audience_id}">client.audiences.<a href="./src/courier/resources/audiences.py">retrieve</a>(audience_id) -> <a href="./src/courier/types/audience.py">Audience</a></code>
+- <code title="get /audiences/{audience_id}">client.audiences.<a href="./src/courier/resources/audiences.py">retrieve</a>(audience_id) -> <a href="./src/courier/types/shared/audience.py">Audience</a></code>
 - <code title="put /audiences/{audience_id}">client.audiences.<a href="./src/courier/resources/audiences.py">update</a>(audience_id, \*\*<a href="src/courier/types/audience_update_params.py">params</a>) -> <a href="./src/courier/types/audience_update_response.py">AudienceUpdateResponse</a></code>
 - <code title="get /audiences">client.audiences.<a href="./src/courier/resources/audiences.py">list</a>(\*\*<a href="src/courier/types/audience_list_params.py">params</a>) -> <a href="./src/courier/types/audience_list_response.py">AudienceListResponse</a></code>
 - <code title="delete /audiences/{audience_id}">client.audiences.<a href="./src/courier/resources/audiences.py">delete</a>(audience_id) -> None</code>
@@ -62,12 +100,12 @@ Methods:
 Types:
 
 ```python
-from courier.types import AuditEvent, AuditEventListResponse
+from courier.types import AuditEventListResponse
 ```
 
 Methods:
 
-- <code title="get /audit-events/{audit-event-id}">client.audit_events.<a href="./src/courier/resources/audit_events.py">retrieve</a>(audit_event_id) -> <a href="./src/courier/types/audit_event.py">AuditEvent</a></code>
+- <code title="get /audit-events/{audit-event-id}">client.audit_events.<a href="./src/courier/resources/audit_events.py">retrieve</a>(audit_event_id) -> <a href="./src/courier/types/shared/audit_event.py">AuditEvent</a></code>
 - <code title="get /audit-events">client.audit_events.<a href="./src/courier/resources/audit_events.py">list</a>(\*\*<a href="src/courier/types/audit_event_list_params.py">params</a>) -> <a href="./src/courier/types/audit_event_list_response.py">AuditEventListResponse</a></code>
 
 # Auth
@@ -86,46 +124,24 @@ Methods:
 
 ## Invoke
 
-Types:
-
-```python
-from courier.types.automations import AutomationInvokeResponse
-```
-
 Methods:
 
-- <code title="post /automations/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_ad_hoc</a>(\*\*<a href="src/courier/types/automations/invoke_invoke_ad_hoc_params.py">params</a>) -> <a href="./src/courier/types/automations/automation_invoke_response.py">AutomationInvokeResponse</a></code>
-- <code title="post /automations/{templateId}/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_by_template</a>(template_id, \*\*<a href="src/courier/types/automations/invoke_invoke_by_template_params.py">params</a>) -> <a href="./src/courier/types/automations/automation_invoke_response.py">AutomationInvokeResponse</a></code>
+- <code title="post /automations/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_ad_hoc</a>(\*\*<a href="src/courier/types/automations/invoke_invoke_ad_hoc_params.py">params</a>) -> <a href="./src/courier/types/shared/automation_invoke_response.py">AutomationInvokeResponse</a></code>
+- <code title="post /automations/{templateId}/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_by_template</a>(template_id, \*\*<a href="src/courier/types/automations/invoke_invoke_by_template_params.py">params</a>) -> <a href="./src/courier/types/shared/automation_invoke_response.py">AutomationInvokeResponse</a></code>
 
 # Brands
 
 Types:
 
 ```python
-from courier.types import (
-    Brand,
-    BrandColors,
-    BrandSettings,
-    BrandSettingsEmail,
-    BrandSettingsInApp,
-    BrandSnippet,
-    BrandSnippets,
-    BrandTemplate,
-    EmailFooter,
-    EmailHead,
-    EmailHeader,
-    Icons,
-    Logo,
-    WidgetBackground,
-    BrandListResponse,
-)
+from courier.types import BrandListResponse
 ```
 
 Methods:
 
-- <code title="post /brands">client.brands.<a href="./src/courier/resources/brands.py">create</a>(\*\*<a href="src/courier/types/brand_create_params.py">params</a>) -> <a href="./src/courier/types/brand.py">Brand</a></code>
-- <code title="get /brands/{brand_id}">client.brands.<a href="./src/courier/resources/brands.py">retrieve</a>(brand_id) -> <a href="./src/courier/types/brand.py">Brand</a></code>
-- <code title="put /brands/{brand_id}">client.brands.<a href="./src/courier/resources/brands.py">update</a>(brand_id, \*\*<a href="src/courier/types/brand_update_params.py">params</a>) -> <a href="./src/courier/types/brand.py">Brand</a></code>
+- <code title="post /brands">client.brands.<a href="./src/courier/resources/brands.py">create</a>(\*\*<a href="src/courier/types/brand_create_params.py">params</a>) -> <a href="./src/courier/types/shared/brand.py">Brand</a></code>
+- <code title="get /brands/{brand_id}">client.brands.<a href="./src/courier/resources/brands.py">retrieve</a>(brand_id) -> <a href="./src/courier/types/shared/brand.py">Brand</a></code>
+- <code title="put /brands/{brand_id}">client.brands.<a href="./src/courier/resources/brands.py">update</a>(brand_id, \*\*<a href="src/courier/types/brand_update_params.py">params</a>) -> <a href="./src/courier/types/shared/brand.py">Brand</a></code>
 - <code title="get /brands">client.brands.<a href="./src/courier/resources/brands.py">list</a>(\*\*<a href="src/courier/types/brand_list_params.py">params</a>) -> <a href="./src/courier/types/brand_list_response.py">BrandListResponse</a></code>
 - <code title="delete /brands/{brand_id}">client.brands.<a href="./src/courier/resources/brands.py">delete</a>(brand_id) -> None</code>
 
@@ -134,14 +150,7 @@ Methods:
 Types:
 
 ```python
-from courier.types import (
-    InboundBulkMessage,
-    InboundBulkMessageUser,
-    UserRecipient,
-    BulkCreateJobResponse,
-    BulkListUsersResponse,
-    BulkRetrieveJobResponse,
-)
+from courier.types import BulkCreateJobResponse, BulkListUsersResponse, BulkRetrieveJobResponse
 ```
 
 Methods:
@@ -169,12 +178,12 @@ Methods:
 Types:
 
 ```python
-from courier.types import List, ListListResponse
+from courier.types import ListListResponse
 ```
 
 Methods:
 
-- <code title="get /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">retrieve</a>(list_id) -> <a href="./src/courier/types/list.py">List</a></code>
+- <code title="get /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">retrieve</a>(list_id) -> <a href="./src/courier/types/shared/subscription_list.py">SubscriptionList</a></code>
 - <code title="put /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">update</a>(list_id, \*\*<a href="src/courier/types/list_update_params.py">params</a>) -> None</code>
 - <code title="get /lists">client.lists.<a href="./src/courier/resources/lists/lists.py">list</a>(\*\*<a href="src/courier/types/list_list_params.py">params</a>) -> <a href="./src/courier/types/list_list_response.py">ListListResponse</a></code>
 - <code title="delete /lists/{list_id}">client.lists.<a href="./src/courier/resources/lists/lists.py">delete</a>(list_id) -> None</code>
@@ -185,12 +194,7 @@ Methods:
 Types:
 
 ```python
-from courier.types.lists import (
-    NotificationPreferenceDetails,
-    PutSubscriptionsRecipient,
-    RecipientPreferences,
-    SubscriptionListResponse,
-)
+from courier.types.lists import SubscriptionListResponse
 ```
 
 Methods:
@@ -207,7 +211,6 @@ Types:
 
 ```python
 from courier.types import (
-    MessageDetails,
     MessageRetrieveResponse,
     MessageListResponse,
     MessageContentResponse,
@@ -219,7 +222,7 @@ Methods:
 
 - <code title="get /messages/{message_id}">client.messages.<a href="./src/courier/resources/messages.py">retrieve</a>(message_id) -> <a href="./src/courier/types/message_retrieve_response.py">MessageRetrieveResponse</a></code>
 - <code title="get /messages">client.messages.<a href="./src/courier/resources/messages.py">list</a>(\*\*<a href="src/courier/types/message_list_params.py">params</a>) -> <a href="./src/courier/types/message_list_response.py">MessageListResponse</a></code>
-- <code title="post /messages/{message_id}/cancel">client.messages.<a href="./src/courier/resources/messages.py">cancel</a>(message_id) -> <a href="./src/courier/types/message_details.py">MessageDetails</a></code>
+- <code title="post /messages/{message_id}/cancel">client.messages.<a href="./src/courier/resources/messages.py">cancel</a>(message_id) -> <a href="./src/courier/types/shared/message_details.py">MessageDetails</a></code>
 - <code title="get /messages/{message_id}/output">client.messages.<a href="./src/courier/resources/messages.py">content</a>(message_id) -> <a href="./src/courier/types/message_content_response.py">MessageContentResponse</a></code>
 - <code title="get /messages/{message_id}/history">client.messages.<a href="./src/courier/resources/messages.py">history</a>(message_id, \*\*<a href="src/courier/types/message_history_params.py">params</a>) -> <a href="./src/courier/types/message_history_response.py">MessageHistoryResponse</a></code>
 
@@ -234,26 +237,26 @@ Methods:
 Types:
 
 ```python
-from courier.types import NotificationGetContent, NotificationListResponse
+from courier.types import NotificationListResponse
 ```
 
 Methods:
 
 - <code title="get /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">list</a>(\*\*<a href="src/courier/types/notification_list_params.py">params</a>) -> <a href="./src/courier/types/notification_list_response.py">NotificationListResponse</a></code>
-- <code title="get /notifications/{id}/content">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve_content</a>(id) -> <a href="./src/courier/types/notification_get_content.py">NotificationGetContent</a></code>
+- <code title="get /notifications/{id}/content">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve_content</a>(id) -> <a href="./src/courier/types/shared/notification_get_content.py">NotificationGetContent</a></code>
 
 ## Draft
 
 Methods:
 
-- <code title="get /notifications/{id}/draft/content">client.notifications.draft.<a href="./src/courier/resources/notifications/draft.py">retrieve_content</a>(id) -> <a href="./src/courier/types/notification_get_content.py">NotificationGetContent</a></code>
+- <code title="get /notifications/{id}/draft/content">client.notifications.draft.<a href="./src/courier/resources/notifications/draft.py">retrieve_content</a>(id) -> <a href="./src/courier/types/shared/notification_get_content.py">NotificationGetContent</a></code>
 
 ## Checks
 
 Types:
 
 ```python
-from courier.types.notifications import BaseCheck, Check, CheckUpdateResponse, CheckListResponse
+from courier.types.notifications import CheckUpdateResponse, CheckListResponse
 ```
 
 Methods:
@@ -297,13 +300,13 @@ Methods:
 Types:
 
 ```python
-from courier.types import DefaultPreferences, Tenant, TenantListResponse, TenantListUsersResponse
+from courier.types import TenantListResponse, TenantListUsersResponse
 ```
 
 Methods:
 
-- <code title="get /tenants/{tenant_id}">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">retrieve</a>(tenant_id) -> <a href="./src/courier/types/tenant.py">Tenant</a></code>
-- <code title="put /tenants/{tenant_id}">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">update</a>(tenant_id, \*\*<a href="src/courier/types/tenant_update_params.py">params</a>) -> <a href="./src/courier/types/tenant.py">Tenant</a></code>
+- <code title="get /tenants/{tenant_id}">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">retrieve</a>(tenant_id) -> <a href="./src/courier/types/shared/tenant.py">Tenant</a></code>
+- <code title="put /tenants/{tenant_id}">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">update</a>(tenant_id, \*\*<a href="src/courier/types/tenant_update_params.py">params</a>) -> <a href="./src/courier/types/shared/tenant.py">Tenant</a></code>
 - <code title="get /tenants">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">list</a>(\*\*<a href="src/courier/types/tenant_list_params.py">params</a>) -> <a href="./src/courier/types/tenant_list_response.py">TenantListResponse</a></code>
 - <code title="delete /tenants/{tenant_id}">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">delete</a>(tenant_id) -> None</code>
 - <code title="get /tenants/{tenant_id}/users">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">list_users</a>(tenant_id, \*\*<a href="src/courier/types/tenant_list_users_params.py">params</a>) -> <a href="./src/courier/types/tenant_list_users_response.py">TenantListUsersResponse</a></code>
@@ -311,12 +314,6 @@ Methods:
 ## DefaultPreferences
 
 ### Items
-
-Types:
-
-```python
-from courier.types.tenants.default_preferences import ChannelClassification, SubscriptionTopicNew
-```
 
 Methods:
 
@@ -328,16 +325,12 @@ Methods:
 Types:
 
 ```python
-from courier.types.tenants import (
-    BaseTemplateTenantAssociation,
-    ElementalContent,
-    TemplateListResponse,
-)
+from courier.types.tenants import TemplateListResponse
 ```
 
 Methods:
 
-- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/tenants/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
+- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/shared/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
 - <code title="get /tenants/{tenant_id}/templates">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">list</a>(tenant_id, \*\*<a href="src/courier/types/tenants/template_list_params.py">params</a>) -> <a href="./src/courier/types/tenants/template_list_response.py">TemplateListResponse</a></code>
 
 # Translations
@@ -361,8 +354,6 @@ Types:
 
 ```python
 from courier.types.users import (
-    PreferenceStatus,
-    TopicPreference,
     PreferenceRetrieveResponse,
     PreferenceRetrieveTopicResponse,
     PreferenceUpdateOrCreateTopicResponse,
@@ -380,7 +371,7 @@ Methods:
 Types:
 
 ```python
-from courier.types.users import TenantAssociation, TenantListResponse
+from courier.types.users import TenantListResponse
 ```
 
 Methods:
@@ -396,7 +387,7 @@ Methods:
 Types:
 
 ```python
-from courier.types.users import UserToken, TokenRetrieveResponse, TokenListResponse
+from courier.types.users import TokenRetrieveResponse, TokenListResponse
 ```
 
 Methods:

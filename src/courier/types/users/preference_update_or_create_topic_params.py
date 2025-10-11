@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import List, Optional
 from typing_extensions import Required, TypedDict
 
-from .preference_status import PreferenceStatus
-from ..tenants.default_preferences.channel_classification import ChannelClassification
+from ..shared.preference_status import PreferenceStatus
+from ..shared.channel_classification import ChannelClassification
 
 __all__ = ["PreferenceUpdateOrCreateTopicParams", "Topic"]
 

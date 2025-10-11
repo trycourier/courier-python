@@ -3,7 +3,7 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .user_token import UserToken
+from ..shared.user_token import UserToken
 
 __all__ = ["TokenRetrieveResponse"]
 

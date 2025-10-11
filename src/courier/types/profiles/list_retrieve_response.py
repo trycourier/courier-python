@@ -2,9 +2,9 @@
 
 from typing import List, Optional
 
-from ..paging import Paging
 from ..._models import BaseModel
-from ..lists.recipient_preferences import RecipientPreferences
+from ..shared.paging import Paging
+from ..shared.recipient_preferences import RecipientPreferences
 
 __all__ = ["ListRetrieveResponse", "Result"]
 

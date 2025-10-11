@@ -18,7 +18,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.audit_event import AuditEvent
+from ..types.shared.audit_event import AuditEvent
 from ..types.audit_event_list_response import AuditEventListResponse
 
 __all__ = ["AuditEventsResource", "AsyncAuditEventsResource"]

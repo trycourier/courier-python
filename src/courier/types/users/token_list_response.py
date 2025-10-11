@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .user_token import UserToken
+from ..shared.user_token import UserToken
 
 __all__ = ["TokenListResponse"]
 

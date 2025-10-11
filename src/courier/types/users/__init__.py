@@ -2,10 +2,6 @@
 
 from __future__ import annotations
 
-from .user_token import UserToken as UserToken
-from .topic_preference import TopicPreference as TopicPreference
-from .preference_status import PreferenceStatus as PreferenceStatus
-from .tenant_association import TenantAssociation as TenantAssociation
 from .tenant_list_params import TenantListParams as TenantListParams
 from .token_list_response import TokenListResponse as TokenListResponse
 from .token_update_params import TokenUpdateParams as TokenUpdateParams
@@ -13,7 +9,6 @@ from .tenant_list_response import TenantListResponse as TenantListResponse
 from .token_add_single_params import TokenAddSingleParams as TokenAddSingleParams
 from .token_retrieve_response import TokenRetrieveResponse as TokenRetrieveResponse
 from .tenant_add_single_params import TenantAddSingleParams as TenantAddSingleParams
-from .tenant_association_param import TenantAssociationParam as TenantAssociationParam
 from .preference_retrieve_params import PreferenceRetrieveParams as PreferenceRetrieveParams
 from .tenant_add_multiple_params import TenantAddMultipleParams as TenantAddMultipleParams
 from .preference_retrieve_response import PreferenceRetrieveResponse as PreferenceRetrieveResponse

@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import List, Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from .channel_classification import ChannelClassification
+from ...shared.channel_classification import ChannelClassification
 
 __all__ = ["ItemUpdateParams"]
 

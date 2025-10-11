@@ -5,8 +5,8 @@ from typing_extensions import Literal
 
 from .rule import Rule
 from ..._models import BaseModel
+from .preference_status import PreferenceStatus
 from .channel_preference import ChannelPreference
-from ..users.preference_status import PreferenceStatus
 
 __all__ = ["Preference"]
 

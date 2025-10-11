@@ -19,7 +19,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.tenants.default_preferences import item_update_params
-from ....types.tenants.default_preferences.channel_classification import ChannelClassification
+from ....types.shared.channel_classification import ChannelClassification
 
 __all__ = ["ItemsResource", "AsyncItemsResource"]
 

@@ -9,7 +9,8 @@ import pytest
 
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier.types.tenants import TemplateListResponse, BaseTemplateTenantAssociation
+from courier.types.shared import BaseTemplateTenantAssociation
+from courier.types.tenants import TemplateListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
