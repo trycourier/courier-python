@@ -1,15 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List as TypingList
+from typing import List
 
-from .list import List as ListList
-from .paging import Paging
 from .._models import BaseModel
+from .shared.paging import Paging
+from .shared.subscription_list import SubscriptionList
 
 __all__ = ["ListListResponse"]
 
 
 class ListListResponse(BaseModel):
-    items: TypingList[ListList]
+    items: List[SubscriptionList]
 
     paging: Paging

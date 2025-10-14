@@ -6,11 +6,11 @@ from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
-from .utm_param import UtmParam
-from .recipient_param import RecipientParam
-from .user_recipient_param import UserRecipientParam
-from .message_context_param import MessageContextParam
-from .tenants.elemental_content_param import ElementalContentParam
+from .shared_params.utm import Utm
+from .shared_params.recipient import Recipient
+from .shared_params.user_recipient import UserRecipient
+from .shared_params.message_context import MessageContext
+from .shared_params.elemental_content import ElementalContent
 from .shared_params.elemental_content_sugar import ElementalContentSugar
 
 __all__ = [
@@ -41,7 +41,7 @@ class SendMessageParams(TypedDict, total=False):
 
 
 class MessageChannelsMetadata(TypedDict, total=False):
-    utm: Optional[UtmParam]
+    utm: Optional[Utm]
 
 
 class MessageChannelsTimeouts(TypedDict, total=False):
@@ -77,7 +77,7 @@ class MessageChannels(_MessageChannelsReservedKeywords, total=False):
     timeouts: Optional[MessageChannelsTimeouts]
 
 
-MessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContentParam]
+MessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContent]
 
 
 class MessageDelay(TypedDict, total=False):
@@ -103,7 +103,7 @@ class MessageMetadata(TypedDict, total=False):
 
     trace_id: Optional[str]
 
-    utm: Optional[UtmParam]
+    utm: Optional[Utm]
 
 
 class MessagePreferences(TypedDict, total=False):
@@ -112,7 +112,7 @@ class MessagePreferences(TypedDict, total=False):
 
 
 class MessageProvidersMetadata(TypedDict, total=False):
-    utm: Optional[UtmParam]
+    utm: Optional[Utm]
 
 
 _MessageProvidersReservedKeywords = TypedDict(
@@ -152,7 +152,7 @@ class MessageTimeout(TypedDict, total=False):
     provider: Optional[Dict[str, int]]
 
 
-MessageTo: TypeAlias = Union[UserRecipientParam, Iterable[RecipientParam]]
+MessageTo: TypeAlias = Union[UserRecipient, Iterable[Recipient]]
 
 
 class Message(TypedDict, total=False):
@@ -170,7 +170,7 @@ class Message(TypedDict, total=False):
     id.
     """
 
-    context: Optional[MessageContextParam]
+    context: Optional[MessageContext]
 
     data: Optional[Dict[str, object]]
 
@@ -186,6 +186,8 @@ class Message(TypedDict, total=False):
 
     routing: Optional[MessageRouting]
     """Customize which channels/providers Courier may deliver the message through."""
+
+    template: Optional[str]
 
     timeout: Optional[MessageTimeout]
 

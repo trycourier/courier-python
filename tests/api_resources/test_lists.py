@@ -9,7 +9,8 @@ import pytest
 
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier.types import List, ListListResponse
+from courier.types import ListListResponse
+from courier.types.shared import SubscriptionList
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -23,7 +24,7 @@ class TestLists:
         list_ = client.lists.retrieve(
             "list_id",
         )
-        assert_matches_type(List, list_, path=["response"])
+        assert_matches_type(SubscriptionList, list_, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -35,7 +36,7 @@ class TestLists:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         list_ = response.parse()
-        assert_matches_type(List, list_, path=["response"])
+        assert_matches_type(SubscriptionList, list_, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -47,7 +48,7 @@ class TestLists:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             list_ = response.parse()
-            assert_matches_type(List, list_, path=["response"])
+            assert_matches_type(SubscriptionList, list_, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -273,7 +274,7 @@ class TestAsyncLists:
         list_ = await async_client.lists.retrieve(
             "list_id",
         )
-        assert_matches_type(List, list_, path=["response"])
+        assert_matches_type(SubscriptionList, list_, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -285,7 +286,7 @@ class TestAsyncLists:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         list_ = await response.parse()
-        assert_matches_type(List, list_, path=["response"])
+        assert_matches_type(SubscriptionList, list_, path=["response"])
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
@@ -297,7 +298,7 @@ class TestAsyncLists:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             list_ = await response.parse()
-            assert_matches_type(List, list_, path=["response"])
+            assert_matches_type(SubscriptionList, list_, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -17,7 +17,6 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...types.list import List
 from .subscriptions import (
     SubscriptionsResource,
     AsyncSubscriptionsResource,
@@ -28,7 +27,8 @@ from .subscriptions import (
 )
 from ..._base_client import make_request_options
 from ...types.list_list_response import ListListResponse
-from ...types.lists.recipient_preferences_param import RecipientPreferencesParam
+from ...types.shared.subscription_list import SubscriptionList
+from ...types.shared_params.recipient_preferences import RecipientPreferences
 
 __all__ = ["ListsResource", "AsyncListsResource"]
 
@@ -67,7 +67,7 @@ class ListsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> List:
+    ) -> SubscriptionList:
         """
         Returns a list based on the list ID provided.
 
@@ -87,7 +87,7 @@ class ListsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=List,
+            cast_to=SubscriptionList,
         )
 
     def update(
@@ -95,7 +95,7 @@ class ListsResource(SyncAPIResource):
         list_id: str,
         *,
         name: str,
-        preferences: Optional[RecipientPreferencesParam] | Omit = omit,
+        preferences: Optional[RecipientPreferences] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -286,7 +286,7 @@ class AsyncListsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> List:
+    ) -> SubscriptionList:
         """
         Returns a list based on the list ID provided.
 
@@ -306,7 +306,7 @@ class AsyncListsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=List,
+            cast_to=SubscriptionList,
         )
 
     async def update(
@@ -314,7 +314,7 @@ class AsyncListsResource(AsyncAPIResource):
         list_id: str,
         *,
         name: str,
-        preferences: Optional[RecipientPreferencesParam] | Omit = omit,
+        preferences: Optional[RecipientPreferences] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

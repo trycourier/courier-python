@@ -26,9 +26,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.tenant import Tenant
+from ...types.shared.tenant import Tenant
 from ...types.tenant_list_response import TenantListResponse
-from ...types.default_preferences_param import DefaultPreferencesParam
 from ...types.tenant_list_users_response import TenantListUsersResponse
 from .default_preferences.default_preferences import (
     DefaultPreferencesResource,
@@ -38,6 +37,7 @@ from .default_preferences.default_preferences import (
     DefaultPreferencesResourceWithStreamingResponse,
     AsyncDefaultPreferencesResourceWithStreamingResponse,
 )
+from ...types.shared_params.default_preferences import DefaultPreferences
 
 __all__ = ["TenantsResource", "AsyncTenantsResource"]
 
@@ -109,7 +109,7 @@ class TenantsResource(SyncAPIResource):
         *,
         name: str,
         brand_id: Optional[str] | Omit = omit,
-        default_preferences: Optional[DefaultPreferencesParam] | Omit = omit,
+        default_preferences: Optional[DefaultPreferences] | Omit = omit,
         parent_tenant_id: Optional[str] | Omit = omit,
         properties: Optional[Dict[str, object]] | Omit = omit,
         user_profile: Optional[Dict[str, object]] | Omit = omit,
@@ -367,7 +367,7 @@ class AsyncTenantsResource(AsyncAPIResource):
         *,
         name: str,
         brand_id: Optional[str] | Omit = omit,
-        default_preferences: Optional[DefaultPreferencesParam] | Omit = omit,
+        default_preferences: Optional[DefaultPreferences] | Omit = omit,
         parent_tenant_id: Optional[str] | Omit = omit,
         properties: Optional[Dict[str, object]] | Omit = omit,
         user_profile: Optional[Dict[str, object]] | Omit = omit,

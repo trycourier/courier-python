@@ -58,7 +58,7 @@ class TestSend:
                     "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
-                "data": {"name": "bar"},
+                "data": {"foo": "bar"},
                 "delay": {
                     "duration": 0,
                     "until": "until",
@@ -100,6 +100,7 @@ class TestSend:
                     "channels": ["string"],
                     "method": "all",
                 },
+                "template": "template_id",
                 "timeout": {
                     "channel": {"foo": 0},
                     "criteria": "no-escalation",
@@ -223,7 +224,7 @@ class TestAsyncSend:
                     "title": "title",
                 },
                 "context": {"tenant_id": "tenant_id"},
-                "data": {"name": "bar"},
+                "data": {"foo": "bar"},
                 "delay": {
                     "duration": 0,
                     "until": "until",
@@ -265,6 +266,7 @@ class TestAsyncSend:
                     "channels": ["string"],
                     "method": "all",
                 },
+                "template": "template_id",
                 "timeout": {
                     "channel": {"foo": 0},
                     "criteria": "no-escalation",

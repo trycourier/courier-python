@@ -19,7 +19,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.tenants import template_list_params
 from ...types.tenants.template_list_response import TemplateListResponse
-from ...types.tenants.base_template_tenant_association import BaseTemplateTenantAssociation
+from ...types.shared.base_template_tenant_association import BaseTemplateTenantAssociation
 
 __all__ = ["TemplatesResource", "AsyncTemplatesResource"]
 

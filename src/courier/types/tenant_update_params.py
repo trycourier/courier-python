@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Dict, Optional
 from typing_extensions import Required, TypedDict
 
-from .default_preferences_param import DefaultPreferencesParam
+from .shared_params.default_preferences import DefaultPreferences
 
 __all__ = ["TenantUpdateParams"]
 
@@ -17,7 +17,7 @@ class TenantUpdateParams(TypedDict, total=False):
     brand_id: Optional[str]
     """Brand to be used for the account when one is not specified by the send call."""
 
-    default_preferences: Optional[DefaultPreferencesParam]
+    default_preferences: Optional[DefaultPreferences]
     """
     Defines the preferences used for the tenant when the user hasn't specified their
     own.

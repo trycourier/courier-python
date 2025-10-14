@@ -2,9 +2,9 @@
 
 from typing import List
 
-from .paging import Paging
 from .._models import BaseModel
-from .audit_event import AuditEvent
+from .shared.paging import Paging
+from .shared.audit_event import AuditEvent
 
 __all__ = ["AuditEventListResponse"]
 
