@@ -18,7 +18,7 @@ class TestItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Courier) -> None:
-        item = client.tenants.default_preferences.items.update(
+        item = client.tenants.tenant_default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -28,7 +28,7 @@ class TestItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Courier) -> None:
-        item = client.tenants.default_preferences.items.update(
+        item = client.tenants.tenant_default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -40,7 +40,7 @@ class TestItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Courier) -> None:
-        response = client.tenants.default_preferences.items.with_raw_response.update(
+        response = client.tenants.tenant_default_preferences.items.with_raw_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -54,7 +54,7 @@ class TestItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Courier) -> None:
-        with client.tenants.default_preferences.items.with_streaming_response.update(
+        with client.tenants.tenant_default_preferences.items.with_streaming_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -71,14 +71,14 @@ class TestItems:
     @parametrize
     def test_path_params_update(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
-            client.tenants.default_preferences.items.with_raw_response.update(
+            client.tenants.tenant_default_preferences.items.with_raw_response.update(
                 topic_id="topic_id",
                 tenant_id="",
                 status="OPTED_IN",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            client.tenants.default_preferences.items.with_raw_response.update(
+            client.tenants.tenant_default_preferences.items.with_raw_response.update(
                 topic_id="",
                 tenant_id="tenant_id",
                 status="OPTED_IN",
@@ -87,7 +87,7 @@ class TestItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Courier) -> None:
-        item = client.tenants.default_preferences.items.delete(
+        item = client.tenants.tenant_default_preferences.items.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
         )
@@ -96,7 +96,7 @@ class TestItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Courier) -> None:
-        response = client.tenants.default_preferences.items.with_raw_response.delete(
+        response = client.tenants.tenant_default_preferences.items.with_raw_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
         )
@@ -109,7 +109,7 @@ class TestItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Courier) -> None:
-        with client.tenants.default_preferences.items.with_streaming_response.delete(
+        with client.tenants.tenant_default_preferences.items.with_streaming_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
         ) as response:
@@ -125,13 +125,13 @@ class TestItems:
     @parametrize
     def test_path_params_delete(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
-            client.tenants.default_preferences.items.with_raw_response.delete(
+            client.tenants.tenant_default_preferences.items.with_raw_response.delete(
                 topic_id="topic_id",
                 tenant_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            client.tenants.default_preferences.items.with_raw_response.delete(
+            client.tenants.tenant_default_preferences.items.with_raw_response.delete(
                 topic_id="",
                 tenant_id="tenant_id",
             )
@@ -145,7 +145,7 @@ class TestAsyncItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncCourier) -> None:
-        item = await async_client.tenants.default_preferences.items.update(
+        item = await async_client.tenants.tenant_default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -155,7 +155,7 @@ class TestAsyncItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
-        item = await async_client.tenants.default_preferences.items.update(
+        item = await async_client.tenants.tenant_default_preferences.items.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -167,7 +167,7 @@ class TestAsyncItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
-        response = await async_client.tenants.default_preferences.items.with_raw_response.update(
+        response = await async_client.tenants.tenant_default_preferences.items.with_raw_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -181,7 +181,7 @@ class TestAsyncItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
-        async with async_client.tenants.default_preferences.items.with_streaming_response.update(
+        async with async_client.tenants.tenant_default_preferences.items.with_streaming_response.update(
             topic_id="topic_id",
             tenant_id="tenant_id",
             status="OPTED_IN",
@@ -198,14 +198,14 @@ class TestAsyncItems:
     @parametrize
     async def test_path_params_update(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
-            await async_client.tenants.default_preferences.items.with_raw_response.update(
+            await async_client.tenants.tenant_default_preferences.items.with_raw_response.update(
                 topic_id="topic_id",
                 tenant_id="",
                 status="OPTED_IN",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            await async_client.tenants.default_preferences.items.with_raw_response.update(
+            await async_client.tenants.tenant_default_preferences.items.with_raw_response.update(
                 topic_id="",
                 tenant_id="tenant_id",
                 status="OPTED_IN",
@@ -214,7 +214,7 @@ class TestAsyncItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncCourier) -> None:
-        item = await async_client.tenants.default_preferences.items.delete(
+        item = await async_client.tenants.tenant_default_preferences.items.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
         )
@@ -223,7 +223,7 @@ class TestAsyncItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncCourier) -> None:
-        response = await async_client.tenants.default_preferences.items.with_raw_response.delete(
+        response = await async_client.tenants.tenant_default_preferences.items.with_raw_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
         )
@@ -236,7 +236,7 @@ class TestAsyncItems:
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncCourier) -> None:
-        async with async_client.tenants.default_preferences.items.with_streaming_response.delete(
+        async with async_client.tenants.tenant_default_preferences.items.with_streaming_response.delete(
             topic_id="topic_id",
             tenant_id="tenant_id",
         ) as response:
@@ -252,13 +252,13 @@ class TestAsyncItems:
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
-            await async_client.tenants.default_preferences.items.with_raw_response.delete(
+            await async_client.tenants.tenant_default_preferences.items.with_raw_response.delete(
                 topic_id="topic_id",
                 tenant_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            await async_client.tenants.default_preferences.items.with_raw_response.delete(
+            await async_client.tenants.tenant_default_preferences.items.with_raw_response.delete(
                 topic_id="",
                 tenant_id="tenant_id",
             )

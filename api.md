@@ -311,14 +311,14 @@ Methods:
 - <code title="delete /tenants/{tenant_id}">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">delete</a>(tenant_id) -> None</code>
 - <code title="get /tenants/{tenant_id}/users">client.tenants.<a href="./src/courier/resources/tenants/tenants.py">list_users</a>(tenant_id, \*\*<a href="src/courier/types/tenant_list_users_params.py">params</a>) -> <a href="./src/courier/types/tenant_list_users_response.py">TenantListUsersResponse</a></code>
 
-## DefaultPreferences
+## TenantDefaultPreferences
 
 ### Items
 
 Methods:
 
-- <code title="put /tenants/{tenant_id}/default_preferences/items/{topic_id}">client.tenants.default_preferences.items.<a href="./src/courier/resources/tenants/default_preferences/items.py">update</a>(topic_id, \*, tenant_id, \*\*<a href="src/courier/types/tenants/default_preferences/item_update_params.py">params</a>) -> None</code>
-- <code title="delete /tenants/{tenant_id}/default_preferences/items/{topic_id}">client.tenants.default_preferences.items.<a href="./src/courier/resources/tenants/default_preferences/items.py">delete</a>(topic_id, \*, tenant_id) -> None</code>
+- <code title="put /tenants/{tenant_id}/default_preferences/items/{topic_id}">client.tenants.tenant_default_preferences.items.<a href="./src/courier/resources/tenants/tenant_default_preferences/items.py">update</a>(topic_id, \*, tenant_id, \*\*<a href="src/courier/types/tenants/tenant_default_preferences/item_update_params.py">params</a>) -> None</code>
+- <code title="delete /tenants/{tenant_id}/default_preferences/items/{topic_id}">client.tenants.tenant_default_preferences.items.<a href="./src/courier/resources/tenants/tenant_default_preferences/items.py">delete</a>(topic_id, \*, tenant_id) -> None</code>
 
 ## Templates
 

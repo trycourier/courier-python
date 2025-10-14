@@ -16,22 +16,22 @@ from .templates import (
     TemplatesResourceWithStreamingResponse,
     AsyncTemplatesResourceWithStreamingResponse,
 )
-from .default_preferences import (
-    DefaultPreferencesResource,
-    AsyncDefaultPreferencesResource,
-    DefaultPreferencesResourceWithRawResponse,
-    AsyncDefaultPreferencesResourceWithRawResponse,
-    DefaultPreferencesResourceWithStreamingResponse,
-    AsyncDefaultPreferencesResourceWithStreamingResponse,
+from .tenant_default_preferences import (
+    TenantDefaultPreferencesResource,
+    AsyncTenantDefaultPreferencesResource,
+    TenantDefaultPreferencesResourceWithRawResponse,
+    AsyncTenantDefaultPreferencesResourceWithRawResponse,
+    TenantDefaultPreferencesResourceWithStreamingResponse,
+    AsyncTenantDefaultPreferencesResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "DefaultPreferencesResource",
-    "AsyncDefaultPreferencesResource",
-    "DefaultPreferencesResourceWithRawResponse",
-    "AsyncDefaultPreferencesResourceWithRawResponse",
-    "DefaultPreferencesResourceWithStreamingResponse",
-    "AsyncDefaultPreferencesResourceWithStreamingResponse",
+    "TenantDefaultPreferencesResource",
+    "AsyncTenantDefaultPreferencesResource",
+    "TenantDefaultPreferencesResourceWithRawResponse",
+    "AsyncTenantDefaultPreferencesResourceWithRawResponse",
+    "TenantDefaultPreferencesResourceWithStreamingResponse",
+    "AsyncTenantDefaultPreferencesResourceWithStreamingResponse",
     "TemplatesResource",
     "AsyncTemplatesResource",
     "TemplatesResourceWithRawResponse",
