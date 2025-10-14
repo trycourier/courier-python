@@ -1,5 +1,28 @@
 # Changelog
 
+## 6.4.0-alpha14 (2025-10-14)
+
+Full Changelog: [v6.4.0-alpha13...v6.4.0-alpha14](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha13...v6.4.0-alpha14)
+
+### Features
+
+* **api:** manual updates ([e112bd0](https://github.com/trycourier/courier-python/commit/e112bd07fe318d465a9001f674cefc659de76873))
+* **api:** manual updates ([d42b37a](https://github.com/trycourier/courier-python/commit/d42b37ac6d7a7b5c8aa4cc5a3eea1b72cb09afa4))
+* **api:** manual updates ([d47cd8b](https://github.com/trycourier/courier-python/commit/d47cd8b0f978bb63366d0a936e8acccd11765b10))
+* **api:** manual updates ([71f3a3c](https://github.com/trycourier/courier-python/commit/71f3a3c26f652978c94cc38793ab5092ad67f66a))
+* Examples and ref polish ([2064338](https://github.com/trycourier/courier-python/commit/2064338fb827f5e0ad9db7c0b5d4926a40ef8367))
+* Kick of merge attempt ([06e8c01](https://github.com/trycourier/courier-python/commit/06e8c015bc29116e7a082d09861f6b6f36302a1b))
+* Model sync ([01f64f4](https://github.com/trycourier/courier-python/commit/01f64f404515503bcf81349f9f8ccaa1c6233317))
+* Polish and Kick of Java Kit Gen ([bd0f5eb](https://github.com/trycourier/courier-python/commit/bd0f5ebf450895f319e0d1ee2e5ec2c198248137))
+* Template Id ([8d36ed8](https://github.com/trycourier/courier-python/commit/8d36ed831629ea1910533783f184c5798fba3aea))
+* Test Github Action ([cb50c99](https://github.com/trycourier/courier-python/commit/cb50c99f72467b58071fe058c42acd4359152ea4))
+* Test stainless open action ([b107881](https://github.com/trycourier/courier-python/commit/b107881432227ac071760c1f2918bf69ec4aec8d))
+
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([3826b8b](https://github.com/trycourier/courier-python/commit/3826b8b4fbe88b0e2b536c176e9ae7da86446445))
+
 ## 6.4.0-alpha13 (2025-10-07)
 
 Full Changelog: [v6.4.0-alpha12...v6.4.0-alpha13](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha12...v6.4.0-alpha13)
