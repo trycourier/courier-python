@@ -54,6 +54,7 @@ from courier.types import (
     Recipient,
     RecipientPreferences,
     Rule,
+    SubscribeToListsRequestItem,
     SubscriptionList,
     SubscriptionTopicNew,
     Tenant,
