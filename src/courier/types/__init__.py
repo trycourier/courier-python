@@ -63,6 +63,7 @@ from .shared import (
     ElementalImageNodeWithType as ElementalImageNodeWithType,
     ElementalQuoteNodeWithType as ElementalQuoteNodeWithType,
     ElementalActionNodeWithType as ElementalActionNodeWithType,
+    SubscribeToListsRequestItem as SubscribeToListsRequestItem,
     ElementalChannelNodeWithType as ElementalChannelNodeWithType,
     ElementalDividerNodeWithType as ElementalDividerNodeWithType,
     BaseTemplateTenantAssociation as BaseTemplateTenantAssociation,
