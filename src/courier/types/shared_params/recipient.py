@@ -22,7 +22,7 @@ class Preferences(TypedDict, total=False):
 
 class Recipient(TypedDict, total=False):
     account_id: Optional[str]
-    """Use `tenant_id` instead."""
+    """Deprecated - Use `tenant_id` instead."""
 
     context: Optional[MessageContext]
     """Context such as tenant_id to send the notification with."""

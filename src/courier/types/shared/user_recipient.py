@@ -21,7 +21,7 @@ class Preferences(BaseModel):
 
 class UserRecipient(BaseModel):
     account_id: Optional[str] = None
-    """Use `tenant_id` instead."""
+    """Deprecated - Use `tenant_id` instead."""
 
     context: Optional[MessageContext] = None
     """Context such as tenant_id to send the notification with."""

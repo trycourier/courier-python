@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.4.0-alpha16 (2025-10-17)
+
+Full Changelog: [v6.4.0-alpha15...v6.4.0-alpha16](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha15...v6.4.0-alpha16)
+
+### Bug Fixes
+
+* Dep Warning ([57f6081](https://github.com/trycourier/courier-python/commit/57f6081d87114e8c7fb0b8765a20321e9bf2542c))
+
 ## 6.4.0-alpha15 (2025-10-17)
 
 Full Changelog: [v6.4.0-alpha14...v6.4.0-alpha15](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha14...v6.4.0-alpha15)
