@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .shared_params.inbound_bulk_message import InboundBulkMessage
+from .inbound_bulk_message_param import InboundBulkMessageParam
 
 __all__ = ["BulkCreateJobParams"]
 
 
 class BulkCreateJobParams(TypedDict, total=False):
-    message: Required[InboundBulkMessage]
+    message: Required[InboundBulkMessageParam]

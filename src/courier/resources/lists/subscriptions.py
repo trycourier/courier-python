@@ -24,8 +24,8 @@ from ...types.lists import (
 )
 from ..._base_client import make_request_options
 from ...types.lists.subscription_list_response import SubscriptionListResponse
+from ...types.put_subscriptions_recipient_param import PutSubscriptionsRecipientParam
 from ...types.shared_params.recipient_preferences import RecipientPreferences
-from ...types.shared_params.put_subscriptions_recipient import PutSubscriptionsRecipient
 
 __all__ = ["SubscriptionsResource", "AsyncSubscriptionsResource"]
 
@@ -94,7 +94,7 @@ class SubscriptionsResource(SyncAPIResource):
         self,
         list_id: str,
         *,
-        recipients: Iterable[PutSubscriptionsRecipient],
+        recipients: Iterable[PutSubscriptionsRecipientParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,7 +131,7 @@ class SubscriptionsResource(SyncAPIResource):
         self,
         list_id: str,
         *,
-        recipients: Iterable[PutSubscriptionsRecipient],
+        recipients: Iterable[PutSubscriptionsRecipientParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -309,7 +309,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         self,
         list_id: str,
         *,
-        recipients: Iterable[PutSubscriptionsRecipient],
+        recipients: Iterable[PutSubscriptionsRecipientParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -346,7 +346,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         self,
         list_id: str,
         *,
-        recipients: Iterable[PutSubscriptionsRecipient],
+        recipients: Iterable[PutSubscriptionsRecipientParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-from .shared_params.inbound_bulk_message_user import InboundBulkMessageUser
+from .inbound_bulk_message_user_param import InboundBulkMessageUserParam
 
 __all__ = ["BulkAddUsersParams"]
 
 
 class BulkAddUsersParams(TypedDict, total=False):
-    users: Required[Iterable[InboundBulkMessageUser]]
+    users: Required[Iterable[InboundBulkMessageUserParam]]

@@ -3,8 +3,8 @@
 from typing import List, Optional
 from typing_extensions import Literal
 
+from .tenant import Tenant
 from .._models import BaseModel
-from .shared.tenant import Tenant
 
 __all__ = ["TenantListResponse"]
 

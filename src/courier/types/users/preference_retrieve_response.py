@@ -4,7 +4,7 @@ from typing import List
 
 from ..._models import BaseModel
 from ..shared.paging import Paging
-from ..shared.topic_preference import TopicPreference
+from .topic_preference import TopicPreference
 
 __all__ = ["PreferenceRetrieveResponse"]
 

@@ -21,7 +21,7 @@ from ...types.profiles import list_retrieve_params, list_subscribe_params
 from ...types.profiles.list_delete_response import ListDeleteResponse
 from ...types.profiles.list_retrieve_response import ListRetrieveResponse
 from ...types.profiles.list_subscribe_response import ListSubscribeResponse
-from ...types.shared_params.subscribe_to_lists_request_item import SubscribeToListsRequestItem
+from ...types.subscribe_to_lists_request_item_param import SubscribeToListsRequestItemParam
 
 __all__ = ["ListsResource", "AsyncListsResource"]
 
@@ -123,7 +123,7 @@ class ListsResource(SyncAPIResource):
         self,
         user_id: str,
         *,
-        lists: Iterable[SubscribeToListsRequestItem],
+        lists: Iterable[SubscribeToListsRequestItemParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -254,7 +254,7 @@ class AsyncListsResource(AsyncAPIResource):
         self,
         user_id: str,
         *,
-        lists: Iterable[SubscribeToListsRequestItem],
+        lists: Iterable[SubscribeToListsRequestItemParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

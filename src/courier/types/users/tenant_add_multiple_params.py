@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.tenant_association import TenantAssociation
+from ..tenant_association_param import TenantAssociationParam
 
 __all__ = ["TenantAddMultipleParams"]
 
 
 class TenantAddMultipleParams(TypedDict, total=False):
-    tenants: Required[Iterable[TenantAssociation]]
+    tenants: Required[Iterable[TenantAssociationParam]]

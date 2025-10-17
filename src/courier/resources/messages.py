@@ -18,8 +18,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.message_details import MessageDetails
 from ..types.message_list_response import MessageListResponse
-from ..types.shared.message_details import MessageDetails
 from ..types.message_content_response import MessageContentResponse
 from ..types.message_history_response import MessageHistoryResponse
 from ..types.message_retrieve_response import MessageRetrieveResponse

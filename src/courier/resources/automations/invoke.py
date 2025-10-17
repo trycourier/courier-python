@@ -18,7 +18,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.automations import invoke_invoke_ad_hoc_params, invoke_invoke_by_template_params
-from ...types.shared.automation_invoke_response import AutomationInvokeResponse
+from ...types.automation_invoke_response import AutomationInvokeResponse
 
 __all__ = ["InvokeResource", "AsyncInvokeResource"]
 

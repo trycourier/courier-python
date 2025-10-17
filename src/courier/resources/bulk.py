@@ -21,8 +21,8 @@ from .._base_client import make_request_options
 from ..types.bulk_create_job_response import BulkCreateJobResponse
 from ..types.bulk_list_users_response import BulkListUsersResponse
 from ..types.bulk_retrieve_job_response import BulkRetrieveJobResponse
-from ..types.shared_params.inbound_bulk_message import InboundBulkMessage
-from ..types.shared_params.inbound_bulk_message_user import InboundBulkMessageUser
+from ..types.inbound_bulk_message_param import InboundBulkMessageParam
+from ..types.inbound_bulk_message_user_param import InboundBulkMessageUserParam
 
 __all__ = ["BulkResource", "AsyncBulkResource"]
 
@@ -51,7 +51,7 @@ class BulkResource(SyncAPIResource):
         self,
         job_id: str,
         *,
-        users: Iterable[InboundBulkMessageUser],
+        users: Iterable[InboundBulkMessageUserParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -86,7 +86,7 @@ class BulkResource(SyncAPIResource):
     def create_job(
         self,
         *,
-        message: InboundBulkMessage,
+        message: InboundBulkMessageParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -248,7 +248,7 @@ class AsyncBulkResource(AsyncAPIResource):
         self,
         job_id: str,
         *,
-        users: Iterable[InboundBulkMessageUser],
+        users: Iterable[InboundBulkMessageUserParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -283,7 +283,7 @@ class AsyncBulkResource(AsyncAPIResource):
     async def create_job(
         self,
         *,
-        message: InboundBulkMessage,
+        message: InboundBulkMessageParam,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
