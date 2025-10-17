@@ -6,7 +6,7 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from ..shared.base_template_tenant_association import BaseTemplateTenantAssociation
+from ..base_template_tenant_association import BaseTemplateTenantAssociation
 
 __all__ = ["TemplateListResponse", "Item", "ItemData"]
 

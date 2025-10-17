@@ -14,7 +14,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.notification_get_content import NotificationGetContent
+from ...types.notification_get_content import NotificationGetContent
 
 __all__ = ["DraftResource", "AsyncDraftResource"]
 

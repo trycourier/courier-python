@@ -2,8 +2,8 @@
 
 from typing import List
 
+from ..check import Check
 from ..._models import BaseModel
-from ..shared.check import Check
 
 __all__ = ["CheckListResponse"]
 

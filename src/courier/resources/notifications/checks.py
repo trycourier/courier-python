@@ -18,7 +18,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.notifications import check_update_params
-from ...types.shared_params.base_check import BaseCheck
+from ...types.base_check_param import BaseCheckParam
 from ...types.notifications.check_list_response import CheckListResponse
 from ...types.notifications.check_update_response import CheckUpdateResponse
 
@@ -50,7 +50,7 @@ class ChecksResource(SyncAPIResource):
         submission_id: str,
         *,
         id: str,
-        checks: Iterable[BaseCheck],
+        checks: Iterable[BaseCheckParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -176,7 +176,7 @@ class AsyncChecksResource(AsyncAPIResource):
         submission_id: str,
         *,
         id: str,
-        checks: Iterable[BaseCheck],
+        checks: Iterable[BaseCheckParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

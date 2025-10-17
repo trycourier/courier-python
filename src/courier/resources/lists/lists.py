@@ -26,8 +26,8 @@ from .subscriptions import (
     AsyncSubscriptionsResourceWithStreamingResponse,
 )
 from ..._base_client import make_request_options
+from ...types.subscription_list import SubscriptionList
 from ...types.list_list_response import ListListResponse
-from ...types.shared.subscription_list import SubscriptionList
 from ...types.shared_params.recipient_preferences import RecipientPreferences
 
 __all__ = ["ListsResource", "AsyncListsResource"]

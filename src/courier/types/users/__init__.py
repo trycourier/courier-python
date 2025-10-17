@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .user_token import UserToken as UserToken
+from .topic_preference import TopicPreference as TopicPreference
 from .tenant_list_params import TenantListParams as TenantListParams
 from .token_list_response import TokenListResponse as TokenListResponse
 from .token_update_params import TokenUpdateParams as TokenUpdateParams

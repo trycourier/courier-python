@@ -4,7 +4,7 @@ from typing import List, Optional
 from typing_extensions import Literal
 
 from ..._models import BaseModel
-from ..shared.tenant_association import TenantAssociation
+from ..tenant_association import TenantAssociation
 
 __all__ = ["TenantListResponse"]
 
