@@ -3,8 +3,8 @@
 from typing import List
 
 from .._models import BaseModel
+from .audience import Audience
 from .shared.paging import Paging
-from .shared.audience import Audience
 
 __all__ = ["AudienceListResponse"]
 

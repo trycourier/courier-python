@@ -26,26 +26,26 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.shared.tenant import Tenant
+from ...types.tenant import Tenant
 from ...types.tenant_list_response import TenantListResponse
+from ...types.default_preferences_param import DefaultPreferencesParam
 from ...types.tenant_list_users_response import TenantListUsersResponse
-from .default_preferences.default_preferences import (
-    DefaultPreferencesResource,
-    AsyncDefaultPreferencesResource,
-    DefaultPreferencesResourceWithRawResponse,
-    AsyncDefaultPreferencesResourceWithRawResponse,
-    DefaultPreferencesResourceWithStreamingResponse,
-    AsyncDefaultPreferencesResourceWithStreamingResponse,
+from .tenant_default_preferences.tenant_default_preferences import (
+    TenantDefaultPreferencesResource,
+    AsyncTenantDefaultPreferencesResource,
+    TenantDefaultPreferencesResourceWithRawResponse,
+    AsyncTenantDefaultPreferencesResourceWithRawResponse,
+    TenantDefaultPreferencesResourceWithStreamingResponse,
+    AsyncTenantDefaultPreferencesResourceWithStreamingResponse,
 )
-from ...types.shared_params.default_preferences import DefaultPreferences
 
 __all__ = ["TenantsResource", "AsyncTenantsResource"]
 
 
 class TenantsResource(SyncAPIResource):
     @cached_property
-    def default_preferences(self) -> DefaultPreferencesResource:
-        return DefaultPreferencesResource(self._client)
+    def tenant_default_preferences(self) -> TenantDefaultPreferencesResource:
+        return TenantDefaultPreferencesResource(self._client)
 
     @cached_property
     def templates(self) -> TemplatesResource:
@@ -109,7 +109,7 @@ class TenantsResource(SyncAPIResource):
         *,
         name: str,
         brand_id: Optional[str] | Omit = omit,
-        default_preferences: Optional[DefaultPreferences] | Omit = omit,
+        default_preferences: Optional[DefaultPreferencesParam] | Omit = omit,
         parent_tenant_id: Optional[str] | Omit = omit,
         properties: Optional[Dict[str, object]] | Omit = omit,
         user_profile: Optional[Dict[str, object]] | Omit = omit,
@@ -302,8 +302,8 @@ class TenantsResource(SyncAPIResource):
 
 class AsyncTenantsResource(AsyncAPIResource):
     @cached_property
-    def default_preferences(self) -> AsyncDefaultPreferencesResource:
-        return AsyncDefaultPreferencesResource(self._client)
+    def tenant_default_preferences(self) -> AsyncTenantDefaultPreferencesResource:
+        return AsyncTenantDefaultPreferencesResource(self._client)
 
     @cached_property
     def templates(self) -> AsyncTemplatesResource:
@@ -367,7 +367,7 @@ class AsyncTenantsResource(AsyncAPIResource):
         *,
         name: str,
         brand_id: Optional[str] | Omit = omit,
-        default_preferences: Optional[DefaultPreferences] | Omit = omit,
+        default_preferences: Optional[DefaultPreferencesParam] | Omit = omit,
         parent_tenant_id: Optional[str] | Omit = omit,
         properties: Optional[Dict[str, object]] | Omit = omit,
         user_profile: Optional[Dict[str, object]] | Omit = omit,
@@ -579,8 +579,8 @@ class TenantsResourceWithRawResponse:
         )
 
     @cached_property
-    def default_preferences(self) -> DefaultPreferencesResourceWithRawResponse:
-        return DefaultPreferencesResourceWithRawResponse(self._tenants.default_preferences)
+    def tenant_default_preferences(self) -> TenantDefaultPreferencesResourceWithRawResponse:
+        return TenantDefaultPreferencesResourceWithRawResponse(self._tenants.tenant_default_preferences)
 
     @cached_property
     def templates(self) -> TemplatesResourceWithRawResponse:
@@ -608,8 +608,8 @@ class AsyncTenantsResourceWithRawResponse:
         )
 
     @cached_property
-    def default_preferences(self) -> AsyncDefaultPreferencesResourceWithRawResponse:
-        return AsyncDefaultPreferencesResourceWithRawResponse(self._tenants.default_preferences)
+    def tenant_default_preferences(self) -> AsyncTenantDefaultPreferencesResourceWithRawResponse:
+        return AsyncTenantDefaultPreferencesResourceWithRawResponse(self._tenants.tenant_default_preferences)
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithRawResponse:
@@ -637,8 +637,8 @@ class TenantsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def default_preferences(self) -> DefaultPreferencesResourceWithStreamingResponse:
-        return DefaultPreferencesResourceWithStreamingResponse(self._tenants.default_preferences)
+    def tenant_default_preferences(self) -> TenantDefaultPreferencesResourceWithStreamingResponse:
+        return TenantDefaultPreferencesResourceWithStreamingResponse(self._tenants.tenant_default_preferences)
 
     @cached_property
     def templates(self) -> TemplatesResourceWithStreamingResponse:
@@ -666,8 +666,8 @@ class AsyncTenantsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def default_preferences(self) -> AsyncDefaultPreferencesResourceWithStreamingResponse:
-        return AsyncDefaultPreferencesResourceWithStreamingResponse(self._tenants.default_preferences)
+    def tenant_default_preferences(self) -> AsyncTenantDefaultPreferencesResourceWithStreamingResponse:
+        return AsyncTenantDefaultPreferencesResourceWithStreamingResponse(self._tenants.tenant_default_preferences)
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithStreamingResponse:

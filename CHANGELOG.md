@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.4.0-alpha15 (2025-10-17)
+
+Full Changelog: [v6.4.0-alpha14...v6.4.0-alpha15](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha14...v6.4.0-alpha15)
+
+### Features
+
+* Changes to spec, examples and scripts ([78b8d02](https://github.com/trycourier/courier-python/commit/78b8d023d5e683676e24a273015bc41e3f4ba409))
+* More PHP and attempted node automerge ([14dc341](https://github.com/trycourier/courier-python/commit/14dc341fcc0abf5ebe420bb0b7cba33743d71cd2))
+
+
+### Bug Fixes
+
+* Updated paths for each model and go example updates ([5afd3bc](https://github.com/trycourier/courier-python/commit/5afd3bcbe1ebb4a53949101715726498f00e82eb))
+
 ## 6.4.0-alpha14 (2025-10-14)
 
 Full Changelog: [v6.4.0-alpha13...v6.4.0-alpha14](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha13...v6.4.0-alpha14)

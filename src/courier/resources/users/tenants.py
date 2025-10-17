@@ -18,8 +18,8 @@ from ..._response import (
 )
 from ...types.users import tenant_list_params, tenant_add_single_params, tenant_add_multiple_params
 from ..._base_client import make_request_options
+from ...types.tenant_association_param import TenantAssociationParam
 from ...types.users.tenant_list_response import TenantListResponse
-from ...types.shared_params.tenant_association import TenantAssociation
 
 __all__ = ["TenantsResource", "AsyncTenantsResource"]
 
@@ -97,7 +97,7 @@ class TenantsResource(SyncAPIResource):
         self,
         user_id: str,
         *,
-        tenants: Iterable[TenantAssociation],
+        tenants: Iterable[TenantAssociationParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -319,7 +319,7 @@ class AsyncTenantsResource(AsyncAPIResource):
         self,
         user_id: str,
         *,
-        tenants: Iterable[TenantAssociation],
+        tenants: Iterable[TenantAssociationParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Iterable
 from typing_extensions import Required, TypedDict
 
-from ..shared_params.put_subscriptions_recipient import PutSubscriptionsRecipient
+from ..put_subscriptions_recipient_param import PutSubscriptionsRecipientParam
 
 __all__ = ["SubscriptionAddParams"]
 
 
 class SubscriptionAddParams(TypedDict, total=False):
-    recipients: Required[Iterable[PutSubscriptionsRecipient]]
+    recipients: Required[Iterable[PutSubscriptionsRecipientParam]]

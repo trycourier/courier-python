@@ -2,20 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Iterable
+from typing_extensions import Required, TypedDict
 
-from ..._utils import PropertyInfo
-from ..shared_params.recipient_preferences import RecipientPreferences
+from ..subscribe_to_lists_request_item_param import SubscribeToListsRequestItemParam
 
-__all__ = ["ListSubscribeParams", "List"]
+__all__ = ["ListSubscribeParams"]
 
 
 class ListSubscribeParams(TypedDict, total=False):
-    lists: Required[Iterable[List]]
-
-
-class List(TypedDict, total=False):
-    list_id: Required[Annotated[str, PropertyInfo(alias="listId")]]
-
-    preferences: Optional[RecipientPreferences]
+    lists: Required[Iterable[SubscribeToListsRequestItemParam]]
