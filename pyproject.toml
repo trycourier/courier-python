@@ -1,6 +1,6 @@
 [project]
 name = "trycourier"
-version = "6.4.0-alpha16"
+version = "6.4.0-alpha17"
 description = "The official Python library for the courier API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -39,7 +39,7 @@ Homepage = "https://github.com/trycourier/courier-python"
 Repository = "https://github.com/trycourier/courier-python"
 
 [project.optional-dependencies]
-aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 
 [tool.rye]
 managed = true
