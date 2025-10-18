@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.4.0-alpha17 (2025-10-18)
+
+Full Changelog: [v6.4.0-alpha16...v6.4.0-alpha17](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha16...v6.4.0-alpha17)
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([e0d109f](https://github.com/trycourier/courier-python/commit/e0d109f1a1f1818a3649392af3c49b82890f0cc9))
+
 ## 6.4.0-alpha16 (2025-10-17)
 
 Full Changelog: [v6.4.0-alpha15...v6.4.0-alpha16](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha15...v6.4.0-alpha16)
