@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.4.0-alpha18 (2025-10-31)
+
+Full Changelog: [v6.4.0-alpha17...v6.4.0-alpha18](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha17...v6.4.0-alpha18)
+
+### Features
+
+* Comment adjustment to kick of build ([0ea3bef](https://github.com/trycourier/courier-python/commit/0ea3bef13736755b7d4cf9b76f73df6ed06c0dee))
+
+
+### Bug Fixes
+
+* Comment to kick off build ([a375abf](https://github.com/trycourier/courier-python/commit/a375abfa4ce25503b3d1b54b00092d49dcf3fbf4))
+
 ## 6.4.0-alpha17 (2025-10-18)
 
 Full Changelog: [v6.4.0-alpha16...v6.4.0-alpha17](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha16...v6.4.0-alpha17)
