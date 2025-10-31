@@ -17,5 +17,5 @@ class ElementalChannelNode(ElementalBaseNode):
     raw: Optional[Dict[str, object]] = None
     """Raw data to apply to the channel.
 
-    If `elements` has not been specified, `raw` is `required`.
+    If `elements` has not been specified, `raw` is required.
     """
