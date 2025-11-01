@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.4.0-alpha20 (2025-11-01)
+
+Full Changelog: [v6.4.0-alpha19...v6.4.0-alpha20](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha19...v6.4.0-alpha20)
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([a01184b](https://github.com/trycourier/courier-python/commit/a01184b50a2c8c951d499cf85967fa2350a5371f))
+
 ## 6.4.0-alpha19 (2025-11-01)
 
 Full Changelog: [v6.4.0-alpha18...v6.4.0-alpha19](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha18...v6.4.0-alpha19)
