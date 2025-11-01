@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.4.0-alpha19 (2025-11-01)
+
+Full Changelog: [v6.4.0-alpha18...v6.4.0-alpha19](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha18...v6.4.0-alpha19)
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([31633eb](https://github.com/trycourier/courier-python/commit/31633eb82c4d91ac6972769edac89b53309988b3))
+
 ## 6.4.0-alpha18 (2025-10-31)
 
 Full Changelog: [v6.4.0-alpha17...v6.4.0-alpha18](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha17...v6.4.0-alpha18)
