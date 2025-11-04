@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.4.0-alpha20 (2025-11-04)
+
+Full Changelog: [v6.4.0-alpha19...v6.4.0-alpha20](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha19...v6.4.0-alpha20)
+
+### Features
+
+* Attempt kick off again ([d6f825e](https://github.com/trycourier/courier-python/commit/d6f825e2fae7878f03066540056f672b5ff8463d))
+* Organization update ([4ba51f6](https://github.com/trycourier/courier-python/commit/4ba51f6bbdf8af2c82cd076935ade4d7d185971e))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([a01184b](https://github.com/trycourier/courier-python/commit/a01184b50a2c8c951d499cf85967fa2350a5371f))
+* **internal:** grammar fix (it's -&gt; its) ([e774a66](https://github.com/trycourier/courier-python/commit/e774a6671c0892b648f02d051c56a441baabc679))
+
 ## 6.4.0-alpha19 (2025-11-01)
 
 Full Changelog: [v6.4.0-alpha18...v6.4.0-alpha19](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha18...v6.4.0-alpha19)
