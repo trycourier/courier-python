@@ -248,14 +248,14 @@ class TokensResource(SyncAPIResource):
         Args:
           body_token: Full body of the token. Must match token in URL path parameter.
 
-          device: Information about the device the token is associated with.
+          device: Information about the device the token came from.
 
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
               disable expiration.
 
           properties: Properties sent to the provider along with the token
 
-          tracking: Information about the device the token is associated with.
+          tracking: Tracking information about the device the token came from.
 
           extra_headers: Send extra headers
 
@@ -513,14 +513,14 @@ class AsyncTokensResource(AsyncAPIResource):
         Args:
           body_token: Full body of the token. Must match token in URL path parameter.
 
-          device: Information about the device the token is associated with.
+          device: Information about the device the token came from.
 
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
               disable expiration.
 
           properties: Properties sent to the provider along with the token
 
-          tracking: Information about the device the token is associated with.
+          tracking: Tracking information about the device the token came from.
 
           extra_headers: Send extra headers
 

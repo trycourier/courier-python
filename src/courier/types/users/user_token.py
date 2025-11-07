@@ -49,7 +49,7 @@ class UserToken(BaseModel):
     provider_key: Literal["firebase-fcm", "apn", "expo", "onesignal"]
 
     device: Optional[Device] = None
-    """Information about the device the token is associated with."""
+    """Information about the device the token came from."""
 
     expiry_date: Union[str, bool, None] = None
     """ISO 8601 formatted date the token expires.
@@ -61,4 +61,4 @@ class UserToken(BaseModel):
     """Properties sent to the provider along with the token"""
 
     tracking: Optional[Tracking] = None
-    """Information about the device the token is associated with."""
+    """Tracking information about the device the token came from."""
