@@ -13,10 +13,10 @@ __all__ = ["TokenAddSingleParams", "Device", "Tracking"]
 class TokenAddSingleParams(TypedDict, total=False):
     user_id: Required[str]
 
-    provider_key: Required[Literal["firebase-fcm", "apn", "expo", "onesignal"]]
+    body_token: Required[Annotated[str, PropertyInfo(alias="token")]]
+    """Full body of the token. Must match token in URL path parameter."""
 
-    body_token: Annotated[Optional[str], PropertyInfo(alias="token")]
-    """Full body of the token. Must match token in URL."""
+    provider_key: Required[Literal["firebase-fcm", "apn", "expo", "onesignal"]]
 
     device: Optional[Device]
     """Information about the device the token is associated with."""
