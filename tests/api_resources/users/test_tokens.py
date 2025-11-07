@@ -293,6 +293,7 @@ class TestTokens:
         token = client.users.tokens.add_single(
             path_token="token",
             user_id="user_id",
+            body_token="token",
             provider_key="firebase-fcm",
         )
         assert token is None
@@ -303,8 +304,8 @@ class TestTokens:
         token = client.users.tokens.add_single(
             path_token="token",
             user_id="user_id",
-            provider_key="firebase-fcm",
             body_token="token",
+            provider_key="firebase-fcm",
             device={
                 "ad_id": "ad_id",
                 "app_id": "app_id",
@@ -330,6 +331,7 @@ class TestTokens:
         response = client.users.tokens.with_raw_response.add_single(
             path_token="token",
             user_id="user_id",
+            body_token="token",
             provider_key="firebase-fcm",
         )
 
@@ -344,6 +346,7 @@ class TestTokens:
         with client.users.tokens.with_streaming_response.add_single(
             path_token="token",
             user_id="user_id",
+            body_token="token",
             provider_key="firebase-fcm",
         ) as response:
             assert not response.is_closed
@@ -361,6 +364,7 @@ class TestTokens:
             client.users.tokens.with_raw_response.add_single(
                 path_token="token",
                 user_id="",
+                body_token="token",
                 provider_key="firebase-fcm",
             )
 
@@ -368,6 +372,7 @@ class TestTokens:
             client.users.tokens.with_raw_response.add_single(
                 path_token="",
                 user_id="user_id",
+                body_token="token",
                 provider_key="firebase-fcm",
             )
 
@@ -653,6 +658,7 @@ class TestAsyncTokens:
         token = await async_client.users.tokens.add_single(
             path_token="token",
             user_id="user_id",
+            body_token="token",
             provider_key="firebase-fcm",
         )
         assert token is None
@@ -663,8 +669,8 @@ class TestAsyncTokens:
         token = await async_client.users.tokens.add_single(
             path_token="token",
             user_id="user_id",
-            provider_key="firebase-fcm",
             body_token="token",
+            provider_key="firebase-fcm",
             device={
                 "ad_id": "ad_id",
                 "app_id": "app_id",
@@ -690,6 +696,7 @@ class TestAsyncTokens:
         response = await async_client.users.tokens.with_raw_response.add_single(
             path_token="token",
             user_id="user_id",
+            body_token="token",
             provider_key="firebase-fcm",
         )
 
@@ -704,6 +711,7 @@ class TestAsyncTokens:
         async with async_client.users.tokens.with_streaming_response.add_single(
             path_token="token",
             user_id="user_id",
+            body_token="token",
             provider_key="firebase-fcm",
         ) as response:
             assert not response.is_closed
@@ -721,6 +729,7 @@ class TestAsyncTokens:
             await async_client.users.tokens.with_raw_response.add_single(
                 path_token="token",
                 user_id="",
+                body_token="token",
                 provider_key="firebase-fcm",
             )
 
@@ -728,5 +737,6 @@ class TestAsyncTokens:
             await async_client.users.tokens.with_raw_response.add_single(
                 path_token="",
                 user_id="user_id",
+                body_token="token",
                 provider_key="firebase-fcm",
             )

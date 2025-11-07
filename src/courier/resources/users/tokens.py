@@ -229,8 +229,8 @@ class TokensResource(SyncAPIResource):
         path_token: str,
         *,
         user_id: str,
+        body_token: str,
         provider_key: Literal["firebase-fcm", "apn", "expo", "onesignal"],
-        body_token: Optional[str] | Omit = omit,
         device: Optional[token_add_single_params.Device] | Omit = omit,
         expiry_date: Union[str, bool, None] | Omit = omit,
         properties: object | Omit = omit,
@@ -246,16 +246,16 @@ class TokensResource(SyncAPIResource):
         Adds a single token to a user and overwrites a matching existing token.
 
         Args:
-          body_token: Full body of the token. Must match token in URL.
+          body_token: Full body of the token. Must match token in URL path parameter.
 
-          device: Information about the device the token is associated with.
+          device: Information about the device the token came from.
 
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
               disable expiration.
 
           properties: Properties sent to the provider along with the token
 
-          tracking: Information about the device the token is associated with.
+          tracking: Tracking information about the device the token came from.
 
           extra_headers: Send extra headers
 
@@ -274,8 +274,8 @@ class TokensResource(SyncAPIResource):
             f"/users/{user_id}/tokens/{path_token}",
             body=maybe_transform(
                 {
-                    "provider_key": provider_key,
                     "body_token": body_token,
+                    "provider_key": provider_key,
                     "device": device,
                     "expiry_date": expiry_date,
                     "properties": properties,
@@ -494,8 +494,8 @@ class AsyncTokensResource(AsyncAPIResource):
         path_token: str,
         *,
         user_id: str,
+        body_token: str,
         provider_key: Literal["firebase-fcm", "apn", "expo", "onesignal"],
-        body_token: Optional[str] | Omit = omit,
         device: Optional[token_add_single_params.Device] | Omit = omit,
         expiry_date: Union[str, bool, None] | Omit = omit,
         properties: object | Omit = omit,
@@ -511,16 +511,16 @@ class AsyncTokensResource(AsyncAPIResource):
         Adds a single token to a user and overwrites a matching existing token.
 
         Args:
-          body_token: Full body of the token. Must match token in URL.
+          body_token: Full body of the token. Must match token in URL path parameter.
 
-          device: Information about the device the token is associated with.
+          device: Information about the device the token came from.
 
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
               disable expiration.
 
           properties: Properties sent to the provider along with the token
 
-          tracking: Information about the device the token is associated with.
+          tracking: Tracking information about the device the token came from.
 
           extra_headers: Send extra headers
 
@@ -539,8 +539,8 @@ class AsyncTokensResource(AsyncAPIResource):
             f"/users/{user_id}/tokens/{path_token}",
             body=await async_maybe_transform(
                 {
-                    "provider_key": provider_key,
                     "body_token": body_token,
+                    "provider_key": provider_key,
                     "device": device,
                     "expiry_date": expiry_date,
                     "properties": properties,

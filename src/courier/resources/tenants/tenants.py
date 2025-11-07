@@ -27,25 +27,25 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.tenant import Tenant
+from .preferences.preferences import (
+    PreferencesResource,
+    AsyncPreferencesResource,
+    PreferencesResourceWithRawResponse,
+    AsyncPreferencesResourceWithRawResponse,
+    PreferencesResourceWithStreamingResponse,
+    AsyncPreferencesResourceWithStreamingResponse,
+)
 from ...types.tenant_list_response import TenantListResponse
 from ...types.default_preferences_param import DefaultPreferencesParam
 from ...types.tenant_list_users_response import TenantListUsersResponse
-from .tenant_default_preferences.tenant_default_preferences import (
-    TenantDefaultPreferencesResource,
-    AsyncTenantDefaultPreferencesResource,
-    TenantDefaultPreferencesResourceWithRawResponse,
-    AsyncTenantDefaultPreferencesResourceWithRawResponse,
-    TenantDefaultPreferencesResourceWithStreamingResponse,
-    AsyncTenantDefaultPreferencesResourceWithStreamingResponse,
-)
 
 __all__ = ["TenantsResource", "AsyncTenantsResource"]
 
 
 class TenantsResource(SyncAPIResource):
     @cached_property
-    def tenant_default_preferences(self) -> TenantDefaultPreferencesResource:
-        return TenantDefaultPreferencesResource(self._client)
+    def preferences(self) -> PreferencesResource:
+        return PreferencesResource(self._client)
 
     @cached_property
     def templates(self) -> TemplatesResource:
@@ -302,8 +302,8 @@ class TenantsResource(SyncAPIResource):
 
 class AsyncTenantsResource(AsyncAPIResource):
     @cached_property
-    def tenant_default_preferences(self) -> AsyncTenantDefaultPreferencesResource:
-        return AsyncTenantDefaultPreferencesResource(self._client)
+    def preferences(self) -> AsyncPreferencesResource:
+        return AsyncPreferencesResource(self._client)
 
     @cached_property
     def templates(self) -> AsyncTemplatesResource:
@@ -579,8 +579,8 @@ class TenantsResourceWithRawResponse:
         )
 
     @cached_property
-    def tenant_default_preferences(self) -> TenantDefaultPreferencesResourceWithRawResponse:
-        return TenantDefaultPreferencesResourceWithRawResponse(self._tenants.tenant_default_preferences)
+    def preferences(self) -> PreferencesResourceWithRawResponse:
+        return PreferencesResourceWithRawResponse(self._tenants.preferences)
 
     @cached_property
     def templates(self) -> TemplatesResourceWithRawResponse:
@@ -608,8 +608,8 @@ class AsyncTenantsResourceWithRawResponse:
         )
 
     @cached_property
-    def tenant_default_preferences(self) -> AsyncTenantDefaultPreferencesResourceWithRawResponse:
-        return AsyncTenantDefaultPreferencesResourceWithRawResponse(self._tenants.tenant_default_preferences)
+    def preferences(self) -> AsyncPreferencesResourceWithRawResponse:
+        return AsyncPreferencesResourceWithRawResponse(self._tenants.preferences)
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithRawResponse:
@@ -637,8 +637,8 @@ class TenantsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def tenant_default_preferences(self) -> TenantDefaultPreferencesResourceWithStreamingResponse:
-        return TenantDefaultPreferencesResourceWithStreamingResponse(self._tenants.tenant_default_preferences)
+    def preferences(self) -> PreferencesResourceWithStreamingResponse:
+        return PreferencesResourceWithStreamingResponse(self._tenants.preferences)
 
     @cached_property
     def templates(self) -> TemplatesResourceWithStreamingResponse:
@@ -666,8 +666,8 @@ class AsyncTenantsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def tenant_default_preferences(self) -> AsyncTenantDefaultPreferencesResourceWithStreamingResponse:
-        return AsyncTenantDefaultPreferencesResourceWithStreamingResponse(self._tenants.tenant_default_preferences)
+    def preferences(self) -> AsyncPreferencesResourceWithStreamingResponse:
+        return AsyncPreferencesResourceWithStreamingResponse(self._tenants.preferences)
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithStreamingResponse:

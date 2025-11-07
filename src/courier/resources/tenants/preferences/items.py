@@ -18,8 +18,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
+from ....types.tenants.preferences import item_update_params
 from ....types.shared.channel_classification import ChannelClassification
-from ....types.tenants.tenant_default_preferences import item_update_params
 
 __all__ = ["ItemsResource", "AsyncItemsResource"]
 
