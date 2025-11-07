@@ -19,7 +19,7 @@ class TokenAddSingleParams(TypedDict, total=False):
     provider_key: Required[Literal["firebase-fcm", "apn", "expo", "onesignal"]]
 
     device: Optional[Device]
-    """Information about the device the token is associated with."""
+    """Information about the device the token came from."""
 
     expiry_date: Union[str, bool, None]
     """ISO 8601 formatted date the token expires.
@@ -31,7 +31,7 @@ class TokenAddSingleParams(TypedDict, total=False):
     """Properties sent to the provider along with the token"""
 
     tracking: Optional[Tracking]
-    """Information about the device the token is associated with."""
+    """Tracking information about the device the token came from."""
 
 
 class Device(TypedDict, total=False):
