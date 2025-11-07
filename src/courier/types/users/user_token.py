@@ -43,10 +43,10 @@ class Tracking(BaseModel):
 
 
 class UserToken(BaseModel):
-    provider_key: Literal["firebase-fcm", "apn", "expo", "onesignal"]
+    token: str
+    """Full body of the token. Must match token in URL path parameter."""
 
-    token: Optional[str] = None
-    """Full body of the token. Must match token in URL."""
+    provider_key: Literal["firebase-fcm", "apn", "expo", "onesignal"]
 
     device: Optional[Device] = None
     """Information about the device the token is associated with."""
