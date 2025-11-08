@@ -28,7 +28,7 @@ class TokenAddSingleParams(TypedDict, total=False):
     """
 
     properties: object
-    """Properties sent to the provider along with the token"""
+    """Properties about the token."""
 
     tracking: Optional[Tracking]
     """Tracking information about the device the token came from."""
