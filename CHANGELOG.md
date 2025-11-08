@@ -1,5 +1,21 @@
 # Changelog
 
+## 6.4.0 (2025-11-08)
+
+Full Changelog: [v6.4.0-alpha20...v6.4.0](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha20...v6.4.0)
+
+### Features
+
+* **api:** manual updates ([b16bac2](https://github.com/trycourier/courier-python/commit/b16bac2553d106e3ddc040bdfe3beac79f8c0408))
+* **api:** manual updates ([cd9ed1b](https://github.com/trycourier/courier-python/commit/cd9ed1b563215b6896734669bd041c091f0db29a))
+* Token Prop Description Change ([66b3845](https://github.com/trycourier/courier-python/commit/66b3845cce21eca402dac7348ce9017fa8a55255))
+
+
+### Chores
+
+* configure new SDK language ([f004f07](https://github.com/trycourier/courier-python/commit/f004f07aabba46f78d7834c62b4ef1ce4ec11759))
+* **internal:** codegen related update ([6fb395b](https://github.com/trycourier/courier-python/commit/6fb395bb3062bb749130c8f6345fbfcd693d2584))
+
 ## 6.4.0-alpha20 (2025-11-04)
 
 Full Changelog: [v6.4.0-alpha19...v6.4.0-alpha20](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha19...v6.4.0-alpha20)
