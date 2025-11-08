@@ -253,7 +253,7 @@ class TokensResource(SyncAPIResource):
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
               disable expiration.
 
-          properties: Properties sent to the provider along with the token
+          properties: Properties about the token.
 
           tracking: Tracking information about the device the token came from.
 
@@ -518,7 +518,7 @@ class AsyncTokensResource(AsyncAPIResource):
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
               disable expiration.
 
-          properties: Properties sent to the provider along with the token
+          properties: Properties about the token.
 
           tracking: Tracking information about the device the token came from.
 

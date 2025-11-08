@@ -58,7 +58,7 @@ class UserToken(BaseModel):
     """
 
     properties: Optional[object] = None
-    """Properties sent to the provider along with the token"""
+    """Properties about the token."""
 
     tracking: Optional[Tracking] = None
     """Tracking information about the device the token came from."""
