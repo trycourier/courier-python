@@ -31,6 +31,9 @@ class Recipient(BaseModel):
     email: Optional[str] = None
     """The user's email address."""
 
+    list_id: Optional[str] = None
+    """The id of the list to send the message to."""
+
     locale: Optional[str] = None
     """The user's preferred ISO 639-1 language code."""
 
