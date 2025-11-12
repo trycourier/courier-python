@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.1.0 (2025-11-12)
+
+Full Changelog: [v7.0.1...v7.1.0](https://github.com/trycourier/courier-python/compare/v7.0.1...v7.1.0)
+
+### Features
+
+* NPM enabled ([a93573b](https://github.com/trycourier/courier-python/commit/a93573b77947d06113262e73b48c7aaba74e1832))
+
 ## 7.0.1 (2025-11-12)
 
 Full Changelog: [v7.0.0...v7.0.1](https://github.com/trycourier/courier-python/compare/v7.0.0...v7.0.1)

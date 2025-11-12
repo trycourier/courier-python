@@ -53,7 +53,7 @@ class SendResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SendMessageResponse:
         """
-        API to send a message to one or more recipients.
+        Send a message to one or more recipients.
 
         Args:
           message: The message property has the following primary top-level properties. They define
@@ -109,7 +109,7 @@ class AsyncSendResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SendMessageResponse:
         """
-        API to send a message to one or more recipients.
+        Send a message to one or more recipients.
 
         Args:
           message: The message property has the following primary top-level properties. They define
