@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.0.1 (2025-11-12)
+
+Full Changelog: [v7.0.0...v7.0.1](https://github.com/trycourier/courier-python/compare/v7.0.0...v7.0.1)
+
+### Chores
+
+* update SDK settings ([7c0140c](https://github.com/trycourier/courier-python/commit/7c0140c957a23aa2f60911b7383537215251927d))
+
 ## 7.0.0 (2025-11-12)
 
 Full Changelog: [v6.4.0...v7.0.0](https://github.com/trycourier/courier-python/compare/v6.4.0...v7.0.0)
