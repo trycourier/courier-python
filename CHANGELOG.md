@@ -1,5 +1,19 @@
 # Changelog
 
+## 7.0.0 (2025-11-12)
+
+Full Changelog: [v6.4.0...v7.0.0](https://github.com/trycourier/courier-python/compare/v6.4.0...v7.0.0)
+
+### Bug Fixes
+
+* compat with Python 3.14 ([a337f1e](https://github.com/trycourier/courier-python/commit/a337f1e0b438535a0f2fc15c9420e898bb8f70aa))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([97cf79e](https://github.com/trycourier/courier-python/commit/97cf79e38f18413e79e836660b76e8ef302c4132))
+
+
+### Chores
+
+* **package:** drop Python 3.8 support ([f229ffd](https://github.com/trycourier/courier-python/commit/f229ffdcb06fb808b578cec0d2920a5fb893a205))
+
 ## 6.4.0 (2025-11-08)
 
 Full Changelog: [v6.4.0-alpha20...v6.4.0](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha20...v6.4.0)
