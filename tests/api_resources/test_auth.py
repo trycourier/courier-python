@@ -21,8 +21,8 @@ class TestAuth:
     @parametrize
     def test_method_issue_token(self, client: Courier) -> None:
         auth = client.auth.issue_token(
-            expires_in="expires_in",
-            scope="scope",
+            expires_in="$YOUR_NUMBER days",
+            scope="user_id:$YOUR_USER_ID write:user-tokens inbox:read:messages inbox:write:events read:preferences write:preferences read:brands",
         )
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
@@ -30,8 +30,8 @@ class TestAuth:
     @parametrize
     def test_raw_response_issue_token(self, client: Courier) -> None:
         response = client.auth.with_raw_response.issue_token(
-            expires_in="expires_in",
-            scope="scope",
+            expires_in="$YOUR_NUMBER days",
+            scope="user_id:$YOUR_USER_ID write:user-tokens inbox:read:messages inbox:write:events read:preferences write:preferences read:brands",
         )
 
         assert response.is_closed is True
@@ -43,8 +43,8 @@ class TestAuth:
     @parametrize
     def test_streaming_response_issue_token(self, client: Courier) -> None:
         with client.auth.with_streaming_response.issue_token(
-            expires_in="expires_in",
-            scope="scope",
+            expires_in="$YOUR_NUMBER days",
+            scope="user_id:$YOUR_USER_ID write:user-tokens inbox:read:messages inbox:write:events read:preferences write:preferences read:brands",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -64,8 +64,8 @@ class TestAsyncAuth:
     @parametrize
     async def test_method_issue_token(self, async_client: AsyncCourier) -> None:
         auth = await async_client.auth.issue_token(
-            expires_in="expires_in",
-            scope="scope",
+            expires_in="$YOUR_NUMBER days",
+            scope="user_id:$YOUR_USER_ID write:user-tokens inbox:read:messages inbox:write:events read:preferences write:preferences read:brands",
         )
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
@@ -73,8 +73,8 @@ class TestAsyncAuth:
     @parametrize
     async def test_raw_response_issue_token(self, async_client: AsyncCourier) -> None:
         response = await async_client.auth.with_raw_response.issue_token(
-            expires_in="expires_in",
-            scope="scope",
+            expires_in="$YOUR_NUMBER days",
+            scope="user_id:$YOUR_USER_ID write:user-tokens inbox:read:messages inbox:write:events read:preferences write:preferences read:brands",
         )
 
         assert response.is_closed is True
@@ -86,8 +86,8 @@ class TestAsyncAuth:
     @parametrize
     async def test_streaming_response_issue_token(self, async_client: AsyncCourier) -> None:
         async with async_client.auth.with_streaming_response.issue_token(
-            expires_in="expires_in",
-            scope="scope",
+            expires_in="$YOUR_NUMBER days",
+            scope="user_id:$YOUR_USER_ID write:user-tokens inbox:read:messages inbox:write:events read:preferences write:preferences read:brands",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
