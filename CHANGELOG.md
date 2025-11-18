@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.1.0 (2025-11-18)
+
+Full Changelog: [v7.0.1...v7.1.0](https://github.com/trycourier/courier-python/compare/v7.0.1...v7.1.0)
+
+### Features
+
+* JWT scope updates ([79503e5](https://github.com/trycourier/courier-python/commit/79503e5c99993a0a81fdc8da9eb8553c541cf6af))
+* NPM enabled ([a93573b](https://github.com/trycourier/courier-python/commit/a93573b77947d06113262e73b48c7aaba74e1832))
+* Test ([cdeccac](https://github.com/trycourier/courier-python/commit/cdeccac6ac1d08ba5864b8e1a9b05b4ae5ae983f))
+
 ## 7.0.1 (2025-11-12)
 
 Full Changelog: [v7.0.0...v7.0.1](https://github.com/trycourier/courier-python/compare/v7.0.0...v7.0.1)
