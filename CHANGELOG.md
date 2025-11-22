@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.1.1 (2025-11-22)
+
+Full Changelog: [v7.1.0...v7.1.1](https://github.com/trycourier/courier-python/compare/v7.1.0...v7.1.1)
+
+### Chores
+
+* add Python 3.14 classifier and testing ([b712bc3](https://github.com/trycourier/courier-python/commit/b712bc3294d19db94aa6aae15b4bb5693e57e2c4))
+
 ## 7.1.0 (2025-11-18)
 
 Full Changelog: [v7.0.1...v7.1.0](https://github.com/trycourier/courier-python/compare/v7.0.1...v7.1.0)
