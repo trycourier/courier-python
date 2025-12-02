@@ -1,5 +1,19 @@
 # Changelog
 
+## 7.1.1 (2025-12-02)
+
+Full Changelog: [v7.1.0...v7.1.1](https://github.com/trycourier/courier-python/compare/v7.1.0...v7.1.1)
+
+### Bug Fixes
+
+* ensure streams are always closed ([0b75285](https://github.com/trycourier/courier-python/commit/0b75285d6addee258564f8b5a900b17248d2b1b7))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([b712bc3](https://github.com/trycourier/courier-python/commit/b712bc3294d19db94aa6aae15b4bb5693e57e2c4))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([8fb8ad7](https://github.com/trycourier/courier-python/commit/8fb8ad70a33482ae03cccd8de913b6c3b79101bf))
+
 ## 7.1.0 (2025-11-18)
 
 Full Changelog: [v7.0.1...v7.1.0](https://github.com/trycourier/courier-python/compare/v7.0.1...v7.1.0)
