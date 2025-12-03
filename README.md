@@ -91,6 +91,7 @@ pip install trycourier[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from courier import DefaultAioHttpClient
 from courier import AsyncCourier
@@ -98,7 +99,7 @@ from courier import AsyncCourier
 
 async def main() -> None:
     async with AsyncCourier(
-        api_key="My API Key",
+        api_key=os.environ.get("COURIER_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         response = await client.send.message(
