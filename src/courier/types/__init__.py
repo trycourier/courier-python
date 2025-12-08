@@ -25,7 +25,6 @@ from .shared import (
     PreferenceStatus as PreferenceStatus,
     ChannelPreference as ChannelPreference,
     ElementalBaseNode as ElementalBaseNode,
-    ProfilePreferences as ProfilePreferences,
     ElementalChannelNode as ElementalChannelNode,
     RecipientPreferences as RecipientPreferences,
     ChannelClassification as ChannelClassification,
