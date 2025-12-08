@@ -25,6 +25,9 @@ class Result(BaseModel):
 
     created_at: int
 
+    event_ids: List[str]
+    """Array of event IDs associated with this notification"""
+
     note: str
 
     routing: "MessageRouting"
