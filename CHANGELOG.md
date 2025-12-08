@@ -1,5 +1,24 @@
 # Changelog
 
+## 7.2.0 (2025-12-08)
+
+Full Changelog: [v7.1.1...v7.2.0](https://github.com/trycourier/courier-python/compare/v7.1.1...v7.2.0)
+
+### Features
+
+* Add event_ids field to Notification schema ([02bb30d](https://github.com/trycourier/courier-python/commit/02bb30db537aca01f146a165ddf08d561cea1244))
+
+
+### Bug Fixes
+
+* **client:** fix duplicate Go struct resulting from name derivations schema ([f2f7fc4](https://github.com/trycourier/courier-python/commit/f2f7fc498132b1ca3d39a90d178ab01ca372e6c9))
+
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([f393857](https://github.com/trycourier/courier-python/commit/f393857a8d91fdeb8eecb649033de72b8adbee9f))
+* update lockfile ([15713ee](https://github.com/trycourier/courier-python/commit/15713ee6c246e5d1a7388718b9d09303eebeb541))
+
 ## 7.1.1 (2025-12-02)
 
 Full Changelog: [v7.1.0...v7.1.1](https://github.com/trycourier/courier-python/compare/v7.1.0...v7.1.1)
