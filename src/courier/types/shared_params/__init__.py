@@ -12,7 +12,6 @@ from .elemental_content import ElementalContent as ElementalContent
 from .preference_status import PreferenceStatus as PreferenceStatus
 from .channel_preference import ChannelPreference as ChannelPreference
 from .elemental_base_node import ElementalBaseNode as ElementalBaseNode
-from .profile_preferences import ProfilePreferences as ProfilePreferences
 from .recipient_preferences import RecipientPreferences as RecipientPreferences
 from .channel_classification import ChannelClassification as ChannelClassification
 from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode

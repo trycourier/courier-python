@@ -2,11 +2,21 @@
 
 from typing import Dict, Optional
 
-from ..._models import BaseModel
-from .message_context import MessageContext
-from .profile_preferences import ProfilePreferences
+from pydantic import Field as FieldInfo
 
-__all__ = ["Recipient"]
+from ..._models import BaseModel
+from .preference import Preference
+from .message_context import MessageContext
+
+__all__ = ["Recipient", "Preferences"]
+
+
+class Preferences(BaseModel):
+    notifications: Dict[str, Preference]
+
+    categories: Optional[Dict[str, Preference]] = None
+
+    template_id: Optional[str] = FieldInfo(alias="templateId", default=None)
 
 
 class Recipient(BaseModel):
@@ -30,7 +40,7 @@ class Recipient(BaseModel):
     phone_number: Optional[str] = None
     """The user's phone number."""
 
-    preferences: Optional[ProfilePreferences] = None
+    preferences: Optional[Preferences] = None
 
     tenant_id: Optional[str] = None
     """The id of the tenant the user is associated with."""
