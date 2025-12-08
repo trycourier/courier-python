@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.3.0 (2025-12-08)
+
+Full Changelog: [v7.2.0...v7.3.0](https://github.com/trycourier/courier-python/compare/v7.2.0...v7.3.0)
+
+### Features
+
+* Fix UsersGetAllTokensResponse to return object with tokens property i… ([805f26a](https://github.com/trycourier/courier-python/commit/805f26a723b14446bd70d30e45da4c3ba73ca0f9))
+
 ## 7.2.0 (2025-12-08)
 
 Full Changelog: [v7.1.1...v7.2.0](https://github.com/trycourier/courier-python/compare/v7.1.1...v7.2.0)

@@ -3,12 +3,21 @@
 from __future__ import annotations
 
 from typing import Dict, Optional
-from typing_extensions import TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
+from ..._utils import PropertyInfo
+from .preference import Preference
 from .message_context import MessageContext
-from .profile_preferences import ProfilePreferences
 
-__all__ = ["Recipient"]
+__all__ = ["Recipient", "Preferences"]
+
+
+class Preferences(TypedDict, total=False):
+    notifications: Required[Dict[str, Preference]]
+
+    categories: Optional[Dict[str, Preference]]
+
+    template_id: Annotated[Optional[str], PropertyInfo(alias="templateId")]
 
 
 class Recipient(TypedDict, total=False):
@@ -32,7 +41,7 @@ class Recipient(TypedDict, total=False):
     phone_number: Optional[str]
     """The user's phone number."""
 
-    preferences: Optional[ProfilePreferences]
+    preferences: Optional[Preferences]
 
     tenant_id: Optional[str]
     """The id of the tenant the user is associated with."""
