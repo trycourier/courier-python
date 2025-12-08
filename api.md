@@ -24,6 +24,7 @@ from courier.types import (
     Paging,
     Preference,
     PreferenceStatus,
+    ProfilePreferences,
     Recipient,
     RecipientPreferences,
     Rule,
