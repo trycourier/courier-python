@@ -9,4 +9,6 @@ __all__ = ["TokenListResponse"]
 
 
 class TokenListResponse(BaseModel):
+    """A list of tokens registered with the user."""
+
     tokens: List[UserToken]
