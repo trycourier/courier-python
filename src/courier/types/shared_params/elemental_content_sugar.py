@@ -8,6 +8,8 @@ __all__ = ["ElementalContentSugar"]
 
 
 class ElementalContentSugar(TypedDict, total=False):
+    """Syntactic sugar to provide a fast shorthand for Courier Elemental Blocks."""
+
     body: Required[str]
     """The text content displayed in the notification."""
 

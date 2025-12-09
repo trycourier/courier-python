@@ -9,6 +9,8 @@ __all__ = ["UserToken", "Device", "Tracking"]
 
 
 class Device(BaseModel):
+    """Information about the device the token came from."""
+
     ad_id: Optional[str] = None
     """Id of the advertising identifier"""
 
@@ -29,6 +31,8 @@ class Device(BaseModel):
 
 
 class Tracking(BaseModel):
+    """Tracking information about the device the token came from."""
+
     ip: Optional[str] = None
     """The IP address of the device"""
 

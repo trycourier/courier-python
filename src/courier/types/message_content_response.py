@@ -16,6 +16,8 @@ class ResultContentBlock(BaseModel):
 
 
 class ResultContent(BaseModel):
+    """Content details of the rendered message."""
+
     blocks: List[ResultContentBlock]
     """The blocks of the rendered message."""
 

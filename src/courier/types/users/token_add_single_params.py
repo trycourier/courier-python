@@ -35,6 +35,8 @@ class TokenAddSingleParams(TypedDict, total=False):
 
 
 class Device(TypedDict, total=False):
+    """Information about the device the token came from."""
+
     ad_id: Optional[str]
     """Id of the advertising identifier"""
 
@@ -55,6 +57,8 @@ class Device(TypedDict, total=False):
 
 
 class Tracking(TypedDict, total=False):
+    """Tracking information about the device the token came from."""
+
     ip: Optional[str]
     """The IP address of the device"""
 

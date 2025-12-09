@@ -12,6 +12,8 @@ __all__ = ["TemplateListResponse", "Item", "ItemData"]
 
 
 class ItemData(BaseModel):
+    """The template's data containing it's routing configs"""
+
     routing: "MessageRouting"
 
 
