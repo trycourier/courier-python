@@ -71,7 +71,7 @@ class TestBulk:
     @parametrize
     def test_method_create_job(self, client: Courier) -> None:
         bulk = client.bulk.create_job(
-            message={"template": "template"},
+            message={"event": "event"},
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
@@ -80,12 +80,16 @@ class TestBulk:
     def test_method_create_job_with_all_params(self, client: Courier) -> None:
         bulk = client.bulk.create_job(
             message={
-                "template": "template",
-                "brand": "brand",
-                "data": {"foo": "bar"},
                 "event": "event",
+                "brand": "brand",
+                "content": {
+                    "body": "body",
+                    "title": "title",
+                },
+                "data": {"foo": "bar"},
                 "locale": {"foo": {"foo": "bar"}},
                 "override": {"foo": "bar"},
+                "template": "template",
             },
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
@@ -94,7 +98,7 @@ class TestBulk:
     @parametrize
     def test_raw_response_create_job(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.create_job(
-            message={"template": "template"},
+            message={"event": "event"},
         )
 
         assert response.is_closed is True
@@ -106,7 +110,7 @@ class TestBulk:
     @parametrize
     def test_streaming_response_create_job(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.create_job(
-            message={"template": "template"},
+            message={"event": "event"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -307,7 +311,7 @@ class TestAsyncBulk:
     @parametrize
     async def test_method_create_job(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.create_job(
-            message={"template": "template"},
+            message={"event": "event"},
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
@@ -316,12 +320,16 @@ class TestAsyncBulk:
     async def test_method_create_job_with_all_params(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.create_job(
             message={
-                "template": "template",
-                "brand": "brand",
-                "data": {"foo": "bar"},
                 "event": "event",
+                "brand": "brand",
+                "content": {
+                    "body": "body",
+                    "title": "title",
+                },
+                "data": {"foo": "bar"},
                 "locale": {"foo": {"foo": "bar"}},
                 "override": {"foo": "bar"},
+                "template": "template",
             },
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
@@ -330,7 +338,7 @@ class TestAsyncBulk:
     @parametrize
     async def test_raw_response_create_job(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.create_job(
-            message={"template": "template"},
+            message={"event": "event"},
         )
 
         assert response.is_closed is True
@@ -342,7 +350,7 @@ class TestAsyncBulk:
     @parametrize
     async def test_streaming_response_create_job(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.create_job(
-            message={"template": "template"},
+            message={"event": "event"},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

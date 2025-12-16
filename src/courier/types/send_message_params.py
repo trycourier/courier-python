@@ -84,6 +84,13 @@ class MessageDelay(TypedDict, total=False):
     duration: Optional[int]
     """The duration of the delay in milliseconds."""
 
+    timezone: Optional[str]
+    """IANA timezone identifier (e.g., "America/Los_Angeles", "UTC").
+
+    Used when resolving opening hours expressions. Takes precedence over user
+    profile timezone settings.
+    """
+
     until: Optional[str]
     """ISO 8601 timestamp or opening_hours-like format."""
 
@@ -134,6 +141,8 @@ class MessageProviders(_MessageProvidersReservedKeywords, total=False):
 
 
 class MessageRouting(TypedDict, total=False):
+    """Customize which channels/providers Courier may deliver the message through."""
+
     channels: Required[SequenceNotStr["MessageRoutingChannel"]]
     """A list of channels or providers (or nested routing rules)."""
 
@@ -156,6 +165,11 @@ MessageTo: TypeAlias = Union[UserRecipient, Iterable[Recipient]]
 
 
 class Message(TypedDict, total=False):
+    """The message property has the following primary top-level properties.
+
+    They define the destination and content of the message.
+    """
+
     brand_id: Optional[str]
 
     channels: Optional[Dict[str, MessageChannels]]

@@ -6,6 +6,8 @@ __all__ = ["ElementalContentSugar"]
 
 
 class ElementalContentSugar(BaseModel):
+    """Syntactic sugar to provide a fast shorthand for Courier Elemental Blocks."""
+
     body: str
     """The text content displayed in the notification."""
 

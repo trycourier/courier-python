@@ -61,6 +61,7 @@ class TestSend:
                 "data": {"foo": "bar"},
                 "delay": {
                     "duration": 0,
+                    "timezone": "timezone",
                     "until": "until",
                 },
                 "expiry": {
@@ -228,6 +229,7 @@ class TestAsyncSend:
                 "data": {"foo": "bar"},
                 "delay": {
                     "duration": 0,
+                    "timezone": "timezone",
                     "until": "until",
                 },
                 "expiry": {
