@@ -60,7 +60,11 @@ class BulkResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Ingest user data into a Bulk Job
+        Ingest user data into a Bulk Job.
+
+        **Important**: For email-based bulk jobs, each user must include `profile.email`
+        for provider routing to work correctly. The `to.email` field is not sufficient
+        for email provider routing.
 
         Args:
           extra_headers: Send extra headers
@@ -95,9 +99,22 @@ class BulkResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BulkCreateJobResponse:
         """
-        Create a bulk job
+        Creates a new bulk job for sending messages to multiple recipients.
+
+        **Required**: `message.event` (event ID or notification ID)
+
+        **Optional (V2 format)**: `message.template` (notification ID) or
+        `message.content` (Elemental content) can be provided to override the
+        notification associated with the event.
 
         Args:
+          message:
+              Bulk message definition. Supports two formats:
+
+              - V1 format: Requires `event` field (event ID or notification ID)
+              - V2 format: Optionally use `template` (notification ID) or `content` (Elemental
+                content) in addition to `event`
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -257,7 +274,11 @@ class AsyncBulkResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Ingest user data into a Bulk Job
+        Ingest user data into a Bulk Job.
+
+        **Important**: For email-based bulk jobs, each user must include `profile.email`
+        for provider routing to work correctly. The `to.email` field is not sufficient
+        for email provider routing.
 
         Args:
           extra_headers: Send extra headers
@@ -292,9 +313,22 @@ class AsyncBulkResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BulkCreateJobResponse:
         """
-        Create a bulk job
+        Creates a new bulk job for sending messages to multiple recipients.
+
+        **Required**: `message.event` (event ID or notification ID)
+
+        **Optional (V2 format)**: `message.template` (notification ID) or
+        `message.content` (Elemental content) can be provided to override the
+        notification associated with the event.
 
         Args:
+          message:
+              Bulk message definition. Supports two formats:
+
+              - V1 format: Requires `event` field (event ID or notification ID)
+              - V2 format: Optionally use `template` (notification ID) or `content` (Elemental
+                content) in addition to `event`
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
