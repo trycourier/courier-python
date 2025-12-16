@@ -1,5 +1,25 @@
 # Changelog
 
+## 7.4.0 (2025-12-16)
+
+Full Changelog: [v7.3.0...v7.4.0](https://github.com/trycourier/courier-python/compare/v7.3.0...v7.4.0)
+
+### Features
+
+* Add timezone field to Delay schema ([85b8c6f](https://github.com/trycourier/courier-python/commit/85b8c6f5fca9a68321d16c2927ea89cf509813d7))
+* Update bulk API spec: make event required, document profile.email req… ([1b99e93](https://github.com/trycourier/courier-python/commit/1b99e9336b2f38487b873962a81e9ffd2b82f019))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([ab5f2d0](https://github.com/trycourier/courier-python/commit/ab5f2d0b7e4f0534e3fff420f7f1ea6c159693bf))
+
+
+### Chores
+
+* add missing docstrings ([ea1dec0](https://github.com/trycourier/courier-python/commit/ea1dec0951b56ee5420d3c81d0fcbd5442ae726f))
+* **internal:** add missing files argument to base client ([a6fba70](https://github.com/trycourier/courier-python/commit/a6fba70d97a444af4c6c06c9adeb539051ceaee8))
+
 ## 7.3.0 (2025-12-08)
 
 Full Changelog: [v7.2.0...v7.3.0](https://github.com/trycourier/courier-python/compare/v7.2.0...v7.3.0)
