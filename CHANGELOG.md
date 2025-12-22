@@ -1,5 +1,24 @@
 # Changelog
 
+## 7.5.0 (2025-12-22)
+
+Full Changelog: [v7.4.0...v7.5.0](https://github.com/trycourier/courier-python/compare/v7.4.0...v7.5.0)
+
+### Features
+
+* **api:** add slack/teams/pagerduty/webhook/audience recipient types to send ([5401702](https://github.com/trycourier/courier-python/commit/54017021e9ff5ba391c2b702ccdec08cb17b4ecc))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([81d7991](https://github.com/trycourier/courier-python/commit/81d7991941ba20d717b289d4a2e87b16091ed6e0))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([14a2c9a](https://github.com/trycourier/courier-python/commit/14a2c9a30220a43af14730219bf9d81a406a7f8f))
+* speedup initial import ([1ce264e](https://github.com/trycourier/courier-python/commit/1ce264e0da7aac803ffd405e4672fd2f69fdfd10))
+
 ## 7.4.0 (2025-12-16)
 
 Full Changelog: [v7.3.0...v7.4.0](https://github.com/trycourier/courier-python/compare/v7.3.0...v7.4.0)
