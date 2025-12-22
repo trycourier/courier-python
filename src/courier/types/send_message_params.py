@@ -2,15 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable, Optional
+from typing import Dict, Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
 from .shared_params.utm import Utm
-from .shared_params.recipient import Recipient
+from .shared_params.list_recipient import ListRecipient
 from .shared_params.user_recipient import UserRecipient
 from .shared_params.message_context import MessageContext
+from .shared_params.slack_recipient import SlackRecipient
 from .shared_params.elemental_content import ElementalContent
+from .shared_params.webhook_recipient import WebhookRecipient
+from .shared_params.audience_recipient import AudienceRecipient
+from .shared_params.ms_teams_recipient import MsTeamsRecipient
+from .shared_params.pagerduty_recipient import PagerdutyRecipient
+from .shared_params.list_pattern_recipient import ListPatternRecipient
 from .shared_params.elemental_content_sugar import ElementalContentSugar
 
 __all__ = [
@@ -161,7 +167,16 @@ class MessageTimeout(TypedDict, total=False):
     provider: Optional[Dict[str, int]]
 
 
-MessageTo: TypeAlias = Union[UserRecipient, Iterable[Recipient]]
+MessageTo: TypeAlias = Union[
+    UserRecipient,
+    AudienceRecipient,
+    ListRecipient,
+    ListPatternRecipient,
+    SlackRecipient,
+    MsTeamsRecipient,
+    PagerdutyRecipient,
+    WebhookRecipient,
+]
 
 
 class Message(TypedDict, total=False):

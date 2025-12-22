@@ -147,7 +147,7 @@ class TestSend:
                         "template_id": "templateId",
                     },
                     "tenant_id": "tenant_id",
-                    "user_id": "example_user",
+                    "user_id": "user_id",
                 },
             },
         )
@@ -315,7 +315,7 @@ class TestAsyncSend:
                         "template_id": "templateId",
                     },
                     "tenant_id": "tenant_id",
-                    "user_id": "example_user",
+                    "user_id": "user_id",
                 },
             },
         )

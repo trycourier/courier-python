@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .filter import Filter
+from __future__ import annotations
+
 from .._models import BaseModel
 
 __all__ = ["Audience"]
@@ -15,10 +16,13 @@ class Audience(BaseModel):
     description: str
     """A description of the audience"""
 
-    filter: Filter
+    filter: "Filter"
     """A single filter to use for filtering"""
 
     name: str
     """The name of the audience"""
 
     updated_at: str
+
+
+from .filter import Filter
