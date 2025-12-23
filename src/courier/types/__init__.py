@@ -2,7 +2,15 @@
 
 from __future__ import annotations
 
-from . import shared, tenants, notification_list_response
+from . import (
+    shared,
+    tenants,
+    audience,
+    nested_filter_config,
+    audience_list_response,
+    audience_update_response,
+    notification_list_response,
+)
 from .. import _compat
 from .logo import Logo as Logo
 from .brand import Brand as Brand
@@ -11,30 +19,69 @@ from .icons import Icons as Icons
 from .filter import Filter as Filter
 from .shared import (
     Utm as Utm,
+    Expo as Expo,
     Rule as Rule,
+    Slack as Slack,
+    Token as Token,
     Paging as Paging,
+    Discord as Discord,
+    MsTeams as MsTeams,
+    Intercom as Intercom,
     Alignment as Alignment,
-    Recipient as Recipient,
+    Pagerduty as Pagerduty,
     TextStyle as TextStyle,
+    DeviceType as DeviceType,
+    ListFilter as ListFilter,
     Preference as Preference,
+    UserProfile as UserProfile,
     ElementalNode as ElementalNode,
+    ListRecipient as ListRecipient,
+    SendToChannel as SendToChannel,
     UserRecipient as UserRecipient,
+    WebhookMethod as WebhookMethod,
+    AirshipProfile as AirshipProfile,
+    AudienceFilter as AudienceFilter,
     MessageContext as MessageContext,
     MessageRouting as MessageRouting,
+    MultipleTokens as MultipleTokens,
+    SlackRecipient as SlackRecipient,
+    WebhookProfile as WebhookProfile,
+    WebhookAuthMode as WebhookAuthMode,
     ElementalContent as ElementalContent,
+    MsTeamsRecipient as MsTeamsRecipient,
     PreferenceStatus as PreferenceStatus,
+    SendToSlackEmail as SendToSlackEmail,
+    WebhookRecipient as WebhookRecipient,
+    AudienceRecipient as AudienceRecipient,
     ChannelPreference as ChannelPreference,
     ElementalBaseNode as ElementalBaseNode,
+    IntercomRecipient as IntercomRecipient,
+    SendDirectMessage as SendDirectMessage,
+    SendToSlackUserID as SendToSlackUserID,
+    PagerdutyRecipient as PagerdutyRecipient,
+    SendToMsTeamsEmail as SendToMsTeamsEmail,
+    SendToSlackChannel as SendToSlackChannel,
+    WebhookProfileType as WebhookProfileType,
+    SendToMsTeamsUserID as SendToMsTeamsUserID,
+    SlackBaseProperties as SlackBaseProperties,
     ElementalChannelNode as ElementalChannelNode,
+    ListPatternRecipient as ListPatternRecipient,
     RecipientPreferences as RecipientPreferences,
     ChannelClassification as ChannelClassification,
     ElementalContentSugar as ElementalContentSugar,
     MessageRoutingChannel as MessageRoutingChannel,
+    MsTeamsBaseProperties as MsTeamsBaseProperties,
+    WebhookAuthentication as WebhookAuthentication,
+    AirshipProfileAudience as AirshipProfileAudience,
+    SendToMsTeamsChannelID as SendToMsTeamsChannelID,
+    SendToMsTeamsChannelName as SendToMsTeamsChannelName,
+    UserProfileFirebaseToken as UserProfileFirebaseToken,
     ElementalMetaNodeWithType as ElementalMetaNodeWithType,
     ElementalTextNodeWithType as ElementalTextNodeWithType,
     ElementalImageNodeWithType as ElementalImageNodeWithType,
     ElementalQuoteNodeWithType as ElementalQuoteNodeWithType,
     ElementalActionNodeWithType as ElementalActionNodeWithType,
+    SendToMsTeamsConversationID as SendToMsTeamsConversationID,
     ElementalChannelNodeWithType as ElementalChannelNodeWithType,
     ElementalDividerNodeWithType as ElementalDividerNodeWithType,
     NotificationPreferenceDetails as NotificationPreferenceDetails,
@@ -51,6 +98,7 @@ from .email_footer import EmailFooter as EmailFooter
 from .email_header import EmailHeader as EmailHeader
 from .filter_param import FilterParam as FilterParam
 from .brand_snippet import BrandSnippet as BrandSnippet
+from .filter_config import FilterConfig as FilterConfig
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
 from .brand_template import BrandTemplate as BrandTemplate
@@ -73,6 +121,7 @@ from .brand_list_response import BrandListResponse as BrandListResponse
 from .brand_snippet_param import BrandSnippetParam as BrandSnippetParam
 from .brand_update_params import BrandUpdateParams as BrandUpdateParams
 from .default_preferences import DefaultPreferences as DefaultPreferences
+from .filter_config_param import FilterConfigParam as FilterConfigParam
 from .message_list_params import MessageListParams as MessageListParams
 from .send_message_params import SendMessageParams as SendMessageParams
 from .audience_list_params import AudienceListParams as AudienceListParams
@@ -81,6 +130,8 @@ from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
 from .brand_template_param import BrandTemplateParam as BrandTemplateParam
 from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
+from .nested_filter_config import NestedFilterConfig as NestedFilterConfig
+from .single_filter_config import SingleFilterConfig as SingleFilterConfig
 from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
@@ -122,7 +173,9 @@ from .brand_settings_email_param import BrandSettingsEmailParam as BrandSettings
 from .bulk_retrieve_job_response import BulkRetrieveJobResponse as BulkRetrieveJobResponse
 from .inbound_bulk_message_param import InboundBulkMessageParam as InboundBulkMessageParam
 from .inbound_track_event_params import InboundTrackEventParams as InboundTrackEventParams
+from .nested_filter_config_param import NestedFilterConfigParam as NestedFilterConfigParam
 from .notification_list_response import NotificationListResponse as NotificationListResponse
+from .single_filter_config_param import SingleFilterConfigParam as SingleFilterConfigParam
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
 from .brand_settings_in_app_param import BrandSettingsInAppParam as BrandSettingsInAppParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
@@ -140,10 +193,18 @@ from .subscribe_to_lists_request_item_param import SubscribeToListsRequestItemPa
 # Pydantic can resolve the necessary references.
 # See: https://github.com/pydantic/pydantic/issues/11250 for more context.
 if _compat.PYDANTIC_V1:
+    audience.Audience.update_forward_refs()  # type: ignore
+    nested_filter_config.NestedFilterConfig.update_forward_refs()  # type: ignore
+    audience_update_response.AudienceUpdateResponse.update_forward_refs()  # type: ignore
+    audience_list_response.AudienceListResponse.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
     tenants.template_list_response.TemplateListResponse.update_forward_refs()  # type: ignore
     shared.message_routing.MessageRouting.update_forward_refs()  # type: ignore
 else:
+    audience.Audience.model_rebuild(_parent_namespace_depth=0)
+    nested_filter_config.NestedFilterConfig.model_rebuild(_parent_namespace_depth=0)
+    audience_update_response.AudienceUpdateResponse.model_rebuild(_parent_namespace_depth=0)
+    audience_list_response.AudienceListResponse.model_rebuild(_parent_namespace_depth=0)
     notification_list_response.NotificationListResponse.model_rebuild(_parent_namespace_depth=0)
     tenants.template_list_response.TemplateListResponse.model_rebuild(_parent_namespace_depth=0)
     shared.message_routing.MessageRouting.model_rebuild(_parent_namespace_depth=0)

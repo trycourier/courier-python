@@ -137,7 +137,7 @@ response = client.send.message(
     message={
         "data": {"foo": "bar"},
         "template": "template_id",
-        "to": {"user_id": "example_user"},
+        "to": {"user_id": "user_id"},
     },
 )
 print(response.message)
