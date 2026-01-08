@@ -116,6 +116,7 @@ from .list_list_response import ListListResponse as ListListResponse
 from .list_update_params import ListUpdateParams as ListUpdateParams
 from .tenant_association import TenantAssociation as TenantAssociation
 from .tenant_list_params import TenantListParams as TenantListParams
+from .automation_template import AutomationTemplate as AutomationTemplate
 from .brand_create_params import BrandCreateParams as BrandCreateParams
 from .brand_list_response import BrandListResponse as BrandListResponse
 from .brand_snippet_param import BrandSnippetParam as BrandSnippetParam
@@ -142,6 +143,7 @@ from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
 from .send_message_response import SendMessageResponse as SendMessageResponse
 from .audience_list_response import AudienceListResponse as AudienceListResponse
 from .audience_update_params import AudienceUpdateParams as AudienceUpdateParams
+from .automation_list_params import AutomationListParams as AutomationListParams
 from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
 from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
 from .message_history_params import MessageHistoryParams as MessageHistoryParams
@@ -185,6 +187,7 @@ from .translation_retrieve_response import TranslationRetrieveResponse as Transl
 from .audience_list_members_response import AudienceListMembersResponse as AudienceListMembersResponse
 from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as InboundBulkMessageUserParam
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
+from .automation_template_list_response import AutomationTemplateListResponse as AutomationTemplateListResponse
 from .put_subscriptions_recipient_param import PutSubscriptionsRecipientParam as PutSubscriptionsRecipientParam
 from .subscribe_to_lists_request_item_param import SubscribeToListsRequestItemParam as SubscribeToListsRequestItemParam
 

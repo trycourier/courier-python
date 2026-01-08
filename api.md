@@ -139,8 +139,16 @@ Methods:
 Types:
 
 ```python
-from courier.types import AutomationInvokeResponse
+from courier.types import (
+    AutomationInvokeResponse,
+    AutomationTemplate,
+    AutomationTemplateListResponse,
+)
 ```
+
+Methods:
+
+- <code title="get /automations">client.automations.<a href="./src/courier/resources/automations/automations.py">list</a>(\*\*<a href="src/courier/types/automation_list_params.py">params</a>) -> <a href="./src/courier/types/automation_template_list_response.py">AutomationTemplateListResponse</a></code>
 
 ## Invoke
 
