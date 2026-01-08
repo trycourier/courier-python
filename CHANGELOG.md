@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.6.0 (2026-01-08)
+
+Full Changelog: [v7.5.0...v7.6.0](https://github.com/trycourier/courier-python/compare/v7.5.0...v7.6.0)
+
+### Features
+
+* **api:** remove audit_events/automations/brands/bulk/inbound/translations/tenants.templates ([9967cc0](https://github.com/trycourier/courier-python/commit/9967cc0183c5d3a8af38bae19f384c8d12c66b26))
+
+
+### Chores
+
+* **internal:** codegen related update ([0e618c3](https://github.com/trycourier/courier-python/commit/0e618c3ef16b92452a1488f378ef968cee961a6c))
+
 ## 7.5.0 (2025-12-22)
 
 Full Changelog: [v7.4.0...v7.5.0](https://github.com/trycourier/courier-python/compare/v7.4.0...v7.5.0)
