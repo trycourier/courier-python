@@ -29,7 +29,7 @@ class SingleFilterConfig(BaseModel):
 
     path: str
     """
-    The attribe name from profile whose value will be operated against the filter
+    The attribute name from profile whose value will be operated against the filter
     value
     """
 

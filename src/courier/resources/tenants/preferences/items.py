@@ -66,7 +66,7 @@ class ItemsResource(SyncAPIResource):
           custom_routing: The default channels to send to this tenant when has_custom_routing is enabled
 
           has_custom_routing: Override channel routing with custom preferences. This will override any
-              template prefernces that are set, but a user can still customize their
+              template preferences that are set, but a user can still customize their
               preferences
 
           extra_headers: Send extra headers
@@ -178,7 +178,7 @@ class AsyncItemsResource(AsyncAPIResource):
           custom_routing: The default channels to send to this tenant when has_custom_routing is enabled
 
           has_custom_routing: Override channel routing with custom preferences. This will override any
-              template prefernces that are set, but a user can still customize their
+              template preferences that are set, but a user can still customize their
               preferences
 
           extra_headers: Send extra headers

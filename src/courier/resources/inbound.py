@@ -70,7 +70,7 @@ class InboundResource(SyncAPIResource):
           message_id: A required unique identifier that will be used to de-duplicate requests. If not
               unique, will respond with 409 Conflict status
 
-          user_id: The user id associatiated with the track
+          user_id: The user id associated with the track
 
           extra_headers: Send extra headers
 
@@ -145,7 +145,7 @@ class AsyncInboundResource(AsyncAPIResource):
           message_id: A required unique identifier that will be used to de-duplicate requests. If not
               unique, will respond with 409 Conflict status
 
-          user_id: The user id associatiated with the track
+          user_id: The user id associated with the track
 
           extra_headers: Send extra headers
 
