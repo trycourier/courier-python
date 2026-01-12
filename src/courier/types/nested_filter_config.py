@@ -30,7 +30,7 @@ class NestedFilterConfig(BaseModel):
     ]
     """The operator to use for filtering"""
 
-    rules: List["FilterConfig"]
+    rules: List["Filter"]
 
 
-from .filter_config import FilterConfig
+from .filter import Filter

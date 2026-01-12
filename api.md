@@ -92,7 +92,6 @@ Types:
 from courier.types import (
     Audience,
     Filter,
-    FilterConfig,
     NestedFilterConfig,
     SingleFilterConfig,
     AudienceUpdateResponse,

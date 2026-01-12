@@ -98,7 +98,6 @@ from .email_footer import EmailFooter as EmailFooter
 from .email_header import EmailHeader as EmailHeader
 from .filter_param import FilterParam as FilterParam
 from .brand_snippet import BrandSnippet as BrandSnippet
-from .filter_config import FilterConfig as FilterConfig
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
 from .brand_template import BrandTemplate as BrandTemplate
@@ -122,7 +121,6 @@ from .brand_list_response import BrandListResponse as BrandListResponse
 from .brand_snippet_param import BrandSnippetParam as BrandSnippetParam
 from .brand_update_params import BrandUpdateParams as BrandUpdateParams
 from .default_preferences import DefaultPreferences as DefaultPreferences
-from .filter_config_param import FilterConfigParam as FilterConfigParam
 from .message_list_params import MessageListParams as MessageListParams
 from .send_message_params import SendMessageParams as SendMessageParams
 from .audience_list_params import AudienceListParams as AudienceListParams
