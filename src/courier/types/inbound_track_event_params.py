@@ -28,4 +28,4 @@ class InboundTrackEventParams(TypedDict, total=False):
     type: Required[Literal["track"]]
 
     user_id: Annotated[Optional[str], PropertyInfo(alias="userId")]
-    """The user id associatiated with the track"""
+    """The user id associated with the track"""

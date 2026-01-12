@@ -18,6 +18,6 @@ class SubscriptionTopicNew(BaseModel):
     has_custom_routing: Optional[bool] = None
     """Override channel routing with custom preferences.
 
-    This will override any template prefernces that are set, but a user can still
+    This will override any template preferences that are set, but a user can still
     customize their preferences
     """
