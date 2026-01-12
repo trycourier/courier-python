@@ -30,7 +30,7 @@ class NestedFilterConfigParam(TypedDict, total=False):
     ]
     """The operator to use for filtering"""
 
-    rules: Required[Iterable["FilterConfigParam"]]
+    rules: Required[Iterable["FilterParam"]]
 
 
-from .filter_config_param import FilterConfigParam
+from .filter_param import FilterParam
