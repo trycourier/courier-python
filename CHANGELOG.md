@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.6.1 (2026-01-12)
+
+Full Changelog: [v7.6.0...v7.6.1](https://github.com/trycourier/courier-python/compare/v7.6.0...v7.6.1)
+
+### Bug Fixes
+
+* **types:** remove FilterConfig/FilterConfigParam, consolidate to Filter/FilterParam types ([60a1861](https://github.com/trycourier/courier-python/commit/60a1861d91952d5059675259de9e1520f9d1e5fa))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([4f5a16f](https://github.com/trycourier/courier-python/commit/4f5a16fb4d691e54a01e07594a5416ef6aa68e1f))
+
 ## 7.6.0 (2026-01-08)
 
 Full Changelog: [v7.5.0...v7.6.0](https://github.com/trycourier/courier-python/compare/v7.5.0...v7.6.0)
