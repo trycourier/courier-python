@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
-from typing_extensions import TypeAlias, TypeAliasType
+from typing import List
 
-from .._compat import PYDANTIC_V1
-from .single_filter_config import SingleFilterConfig
+from .._models import BaseModel
 
 __all__ = ["Filter"]
 
-if TYPE_CHECKING or not PYDANTIC_V1:
-    Filter = TypeAliasType("Filter", Union[SingleFilterConfig, "NestedFilterConfig"])
-else:
-    Filter: TypeAlias = Union[SingleFilterConfig, "NestedFilterConfig"]
 
-from .nested_filter_config import NestedFilterConfig
+class Filter(BaseModel):
+    """Filter that contains an array of FilterConfig items"""
+
+    filters: List["FilterConfig"]
+
+
+from .filter_config import FilterConfig

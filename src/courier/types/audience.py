@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import Optional
+from typing_extensions import Literal
+
 from .._models import BaseModel
 
 __all__ = ["Audience"]
@@ -16,13 +19,16 @@ class Audience(BaseModel):
     description: str
     """A description of the audience"""
 
-    filter: "Filter"
-    """A single filter to use for filtering"""
-
     name: str
     """The name of the audience"""
 
     updated_at: str
+
+    filter: Optional["Filter"] = None
+    """Filter that contains an array of FilterConfig items"""
+
+    operator: Optional[Literal["AND", "OR"]] = None
+    """The logical operator (AND/OR) for the top-level filter"""
 
 
 from .filter import Filter

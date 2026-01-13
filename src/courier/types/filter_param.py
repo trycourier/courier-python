@@ -2,17 +2,16 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
-from typing_extensions import TypeAlias, TypeAliasType
-
-from .._compat import PYDANTIC_V1
-from .single_filter_config_param import SingleFilterConfigParam
+from typing import Iterable
+from typing_extensions import Required, TypedDict
 
 __all__ = ["FilterParam"]
 
-if TYPE_CHECKING or not PYDANTIC_V1:
-    FilterParam = TypeAliasType("FilterParam", Union[SingleFilterConfigParam, "NestedFilterConfigParam"])
-else:
-    FilterParam: TypeAlias = Union[SingleFilterConfigParam, "NestedFilterConfigParam"]
 
-from .nested_filter_config_param import NestedFilterConfigParam
+class FilterParam(TypedDict, total=False):
+    """Filter that contains an array of FilterConfig items"""
+
+    filters: Required[Iterable["FilterConfigParam"]]
+
+
+from .filter_config_param import FilterConfigParam

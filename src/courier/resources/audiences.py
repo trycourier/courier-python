@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
+from typing_extensions import Literal
 
 import httpx
 
@@ -87,6 +88,7 @@ class AudiencesResource(SyncAPIResource):
         description: Optional[str] | Omit = omit,
         filter: Optional[FilterParam] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        operator: Optional[Literal["AND", "OR"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -100,9 +102,11 @@ class AudiencesResource(SyncAPIResource):
         Args:
           description: A description of the audience
 
-          filter: A single filter to use for filtering
+          filter: Filter that contains an array of FilterConfig items
 
           name: The name of the audience
+
+          operator: The logical operator (AND/OR) for the top-level filter
 
           extra_headers: Send extra headers
 
@@ -121,6 +125,7 @@ class AudiencesResource(SyncAPIResource):
                     "description": description,
                     "filter": filter,
                     "name": name,
+                    "operator": operator,
                 },
                 audience_update_params.AudienceUpdateParams,
             ),
@@ -302,6 +307,7 @@ class AsyncAudiencesResource(AsyncAPIResource):
         description: Optional[str] | Omit = omit,
         filter: Optional[FilterParam] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        operator: Optional[Literal["AND", "OR"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -315,9 +321,11 @@ class AsyncAudiencesResource(AsyncAPIResource):
         Args:
           description: A description of the audience
 
-          filter: A single filter to use for filtering
+          filter: Filter that contains an array of FilterConfig items
 
           name: The name of the audience
+
+          operator: The logical operator (AND/OR) for the top-level filter
 
           extra_headers: Send extra headers
 
@@ -336,6 +344,7 @@ class AsyncAudiencesResource(AsyncAPIResource):
                     "description": description,
                     "filter": filter,
                     "name": name,
+                    "operator": operator,
                 },
                 audience_update_params.AudienceUpdateParams,
             ),
