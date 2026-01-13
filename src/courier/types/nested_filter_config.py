@@ -11,6 +11,8 @@ __all__ = ["NestedFilterConfig"]
 
 
 class NestedFilterConfig(BaseModel):
+    filters: List["FilterConfig"]
+
     operator: Literal[
         "ENDS_WITH",
         "EQ",
@@ -30,7 +32,5 @@ class NestedFilterConfig(BaseModel):
     ]
     """The operator to use for filtering"""
 
-    rules: List["Filter"]
 
-
-from .filter import Filter
+from .filter_config import FilterConfig

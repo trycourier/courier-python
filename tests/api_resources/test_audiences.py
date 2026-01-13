@@ -79,11 +79,16 @@ class TestAudiences:
             audience_id="audience_id",
             description="description",
             filter={
-                "operator": "ENDS_WITH",
-                "path": "path",
-                "value": "value",
+                "filters": [
+                    {
+                        "operator": "ENDS_WITH",
+                        "path": "path",
+                        "value": "value",
+                    }
+                ]
             },
             name="name",
+            operator="AND",
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 
@@ -313,11 +318,16 @@ class TestAsyncAudiences:
             audience_id="audience_id",
             description="description",
             filter={
-                "operator": "ENDS_WITH",
-                "path": "path",
-                "value": "value",
+                "filters": [
+                    {
+                        "operator": "ENDS_WITH",
+                        "path": "path",
+                        "value": "value",
+                    }
+                ]
             },
             name="name",
+            operator="AND",
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 

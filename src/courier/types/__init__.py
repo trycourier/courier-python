@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from . import (
+    filter,
     shared,
     tenants,
     audience,
@@ -98,6 +99,7 @@ from .email_footer import EmailFooter as EmailFooter
 from .email_header import EmailHeader as EmailHeader
 from .filter_param import FilterParam as FilterParam
 from .brand_snippet import BrandSnippet as BrandSnippet
+from .filter_config import FilterConfig as FilterConfig
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
 from .brand_template import BrandTemplate as BrandTemplate
@@ -121,6 +123,7 @@ from .brand_list_response import BrandListResponse as BrandListResponse
 from .brand_snippet_param import BrandSnippetParam as BrandSnippetParam
 from .brand_update_params import BrandUpdateParams as BrandUpdateParams
 from .default_preferences import DefaultPreferences as DefaultPreferences
+from .filter_config_param import FilterConfigParam as FilterConfigParam
 from .message_list_params import MessageListParams as MessageListParams
 from .send_message_params import SendMessageParams as SendMessageParams
 from .audience_list_params import AudienceListParams as AudienceListParams
@@ -195,6 +198,7 @@ from .subscribe_to_lists_request_item_param import SubscribeToListsRequestItemPa
 # See: https://github.com/pydantic/pydantic/issues/11250 for more context.
 if _compat.PYDANTIC_V1:
     audience.Audience.update_forward_refs()  # type: ignore
+    filter.Filter.update_forward_refs()  # type: ignore
     nested_filter_config.NestedFilterConfig.update_forward_refs()  # type: ignore
     audience_update_response.AudienceUpdateResponse.update_forward_refs()  # type: ignore
     audience_list_response.AudienceListResponse.update_forward_refs()  # type: ignore
@@ -203,6 +207,7 @@ if _compat.PYDANTIC_V1:
     shared.message_routing.MessageRouting.update_forward_refs()  # type: ignore
 else:
     audience.Audience.model_rebuild(_parent_namespace_depth=0)
+    filter.Filter.model_rebuild(_parent_namespace_depth=0)
     nested_filter_config.NestedFilterConfig.model_rebuild(_parent_namespace_depth=0)
     audience_update_response.AudienceUpdateResponse.model_rebuild(_parent_namespace_depth=0)
     audience_list_response.AudienceListResponse.model_rebuild(_parent_namespace_depth=0)

@@ -9,6 +9,8 @@ __all__ = ["NestedFilterConfigParam"]
 
 
 class NestedFilterConfigParam(TypedDict, total=False):
+    filters: Required[Iterable["FilterConfigParam"]]
+
     operator: Required[
         Literal[
             "ENDS_WITH",
@@ -30,7 +32,5 @@ class NestedFilterConfigParam(TypedDict, total=False):
     ]
     """The operator to use for filtering"""
 
-    rules: Required[Iterable["FilterParam"]]
 
-
-from .filter_param import FilterParam
+from .filter_config_param import FilterConfigParam
