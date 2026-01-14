@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Dict, Optional
-from typing_extensions import Required
 
 from .elemental_base_node import ElementalBaseNode
 
@@ -22,7 +21,7 @@ class ElementalChannelNode(ElementalBaseNode, total=False):
     [control flow docs](https://www.courier.com/docs/platform/content/elemental/control-flow/) for more details.
     """
 
-    channel: Required[str]
+    channel: str
     """The channel the contents of this element should be applied to.
 
     Can be `email`, `push`, `direct_message`, `sms` or a provider such as slack

@@ -20,10 +20,10 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.audience import Audience
-from ..types.filter_param import FilterParam
 from ..types.audience_list_response import AudienceListResponse
 from ..types.audience_update_response import AudienceUpdateResponse
 from ..types.audience_list_members_response import AudienceListMembersResponse
+from ..types.shared_params.audience_filter_config import AudienceFilterConfig
 
 __all__ = ["AudiencesResource", "AsyncAudiencesResource"]
 
@@ -86,7 +86,7 @@ class AudiencesResource(SyncAPIResource):
         audience_id: str,
         *,
         description: Optional[str] | Omit = omit,
-        filter: Optional[FilterParam] | Omit = omit,
+        filter: Optional[AudienceFilterConfig] | Omit = omit,
         name: Optional[str] | Omit = omit,
         operator: Optional[Literal["AND", "OR"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -102,7 +102,7 @@ class AudiencesResource(SyncAPIResource):
         Args:
           description: A description of the audience
 
-          filter: Filter that contains an array of FilterConfig items
+          filter: Filter configuration for audience membership containing an array of filter rules
 
           name: The name of the audience
 
@@ -305,7 +305,7 @@ class AsyncAudiencesResource(AsyncAPIResource):
         audience_id: str,
         *,
         description: Optional[str] | Omit = omit,
-        filter: Optional[FilterParam] | Omit = omit,
+        filter: Optional[AudienceFilterConfig] | Omit = omit,
         name: Optional[str] | Omit = omit,
         operator: Optional[Literal["AND", "OR"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -321,7 +321,7 @@ class AsyncAudiencesResource(AsyncAPIResource):
         Args:
           description: A description of the audience
 
-          filter: Filter that contains an array of FilterConfig items
+          filter: Filter configuration for audience membership containing an array of filter rules
 
           name: The name of the audience
 

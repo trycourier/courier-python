@@ -19,7 +19,7 @@ class ElementalChannelNode(ElementalBaseNode):
     [control flow docs](https://www.courier.com/docs/platform/content/elemental/control-flow/) for more details.
     """
 
-    channel: str
+    channel: Optional[str] = None
     """The channel the contents of this element should be applied to.
 
     Can be `email`, `push`, `direct_message`, `sms` or a provider such as slack
