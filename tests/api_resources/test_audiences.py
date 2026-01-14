@@ -81,7 +81,8 @@ class TestAudiences:
             filter={
                 "filters": [
                     {
-                        "operator": "ENDS_WITH",
+                        "operator": "operator",
+                        "filters": [],
                         "path": "path",
                         "value": "value",
                     }
@@ -320,7 +321,8 @@ class TestAsyncAudiences:
             filter={
                 "filters": [
                     {
-                        "operator": "ENDS_WITH",
+                        "operator": "operator",
+                        "filters": [],
                         "path": "path",
                         "value": "value",
                     }

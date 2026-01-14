@@ -24,11 +24,13 @@ class Audience(BaseModel):
 
     updated_at: str
 
-    filter: Optional["Filter"] = None
-    """Filter that contains an array of FilterConfig items"""
+    filter: Optional["AudienceFilterConfig"] = None
+    """
+    Filter configuration for audience membership containing an array of filter rules
+    """
 
     operator: Optional[Literal["AND", "OR"]] = None
     """The logical operator (AND/OR) for the top-level filter"""
 
 
-from .filter import Filter
+from .shared.audience_filter_config import AudienceFilterConfig

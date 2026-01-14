@@ -7,6 +7,7 @@ from .ms_teams import MsTeams as MsTeams
 from .pagerduty import Pagerduty as Pagerduty
 from .preference import Preference as Preference
 from .list_filter import ListFilter as ListFilter
+from .filter_config import FilterConfig as FilterConfig
 from .elemental_node import ElementalNode as ElementalNode
 from .list_recipient import ListRecipient as ListRecipient
 from .user_recipient import UserRecipient as UserRecipient
@@ -30,6 +31,7 @@ from .webhook_profile_type import WebhookProfileType as WebhookProfileType
 from .recipient_preferences import RecipientPreferences as RecipientPreferences
 from .send_to_slack_channel import SendToSlackChannel as SendToSlackChannel
 from .send_to_slack_user_id import SendToSlackUserID as SendToSlackUserID
+from .audience_filter_config import AudienceFilterConfig as AudienceFilterConfig
 from .channel_classification import ChannelClassification as ChannelClassification
 from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode
 from .list_pattern_recipient import ListPatternRecipient as ListPatternRecipient
