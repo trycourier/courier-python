@@ -6,6 +6,7 @@ from courier.types import (
     AirshipProfileAudience,
     Alignment,
     AudienceFilter,
+    AudienceFilterConfig,
     AudienceRecipient,
     ChannelClassification,
     ChannelPreference,
@@ -24,6 +25,7 @@ from courier.types import (
     ElementalQuoteNodeWithType,
     ElementalTextNodeWithType,
     Expo,
+    FilterConfig,
     Intercom,
     IntercomRecipient,
     ListFilter,
@@ -91,9 +93,6 @@ Types:
 ```python
 from courier.types import (
     Audience,
-    Filter,
-    NestedFilterConfig,
-    SingleFilterConfig,
     AudienceUpdateResponse,
     AudienceListResponse,
     AudienceListMembersResponse,

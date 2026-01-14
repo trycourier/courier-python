@@ -1,5 +1,19 @@
 # Changelog
 
+## 7.7.0 (2026-01-14)
+
+Full Changelog: [v7.6.1...v7.7.0](https://github.com/trycourier/courier-python/compare/v7.6.1...v7.7.0)
+
+### Features
+
+* **client:** add support for binary request streaming ([f0cc366](https://github.com/trycourier/courier-python/commit/f0cc366e61a95d66d2cf01477822c21625e3a2a3))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([a9d8cf1](https://github.com/trycourier/courier-python/commit/a9d8cf18d10f801475fb21b74546781769244cb4))
+* **internal:** regenerate SDK with no functional changes ([4b373e6](https://github.com/trycourier/courier-python/commit/4b373e6fabfd0005eb5f4d954fc9f2826120cc09))
+
 ## 7.6.1 (2026-01-12)
 
 Full Changelog: [v7.6.0...v7.6.1](https://github.com/trycourier/courier-python/compare/v7.6.0...v7.6.1)

@@ -16,6 +16,7 @@ from .text_style import TextStyle as TextStyle
 from .device_type import DeviceType as DeviceType
 from .list_filter import ListFilter as ListFilter
 from .user_profile import UserProfile as UserProfile
+from .filter_config import FilterConfig as FilterConfig
 from .elemental_node import ElementalNode as ElementalNode
 from .list_recipient import ListRecipient as ListRecipient
 from .user_recipient import UserRecipient as UserRecipient
@@ -45,6 +46,7 @@ from .recipient_preferences import RecipientPreferences as RecipientPreferences
 from .send_to_slack_channel import SendToSlackChannel as SendToSlackChannel
 from .send_to_slack_user_id import SendToSlackUserID as SendToSlackUserID
 from .slack_base_properties import SlackBaseProperties as SlackBaseProperties
+from .audience_filter_config import AudienceFilterConfig as AudienceFilterConfig
 from .channel_classification import ChannelClassification as ChannelClassification
 from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode
 from .list_pattern_recipient import ListPatternRecipient as ListPatternRecipient
