@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.7.1 (2026-01-17)
+
+Full Changelog: [v7.7.0...v7.7.1](https://github.com/trycourier/courier-python/compare/v7.7.0...v7.7.1)
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([3a5c4ad](https://github.com/trycourier/courier-python/commit/3a5c4ad617bd1bd8259dd4b786b9c0716e2b4076))
+
 ## 7.7.0 (2026-01-14)
 
 Full Changelog: [v7.6.1...v7.7.0](https://github.com/trycourier/courier-python/compare/v7.6.1...v7.7.0)
