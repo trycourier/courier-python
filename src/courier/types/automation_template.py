@@ -19,7 +19,7 @@ class AutomationTemplate(BaseModel):
     """The name of the automation template."""
 
     version: Literal["published", "draft"]
-    """The version of the template published, draft."""
+    """The version of the template published or drafted."""
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """ISO 8601 timestamp when the template was created."""
