@@ -1,5 +1,19 @@
 # Changelog
 
+## 7.7.1 (2026-01-27)
+
+Full Changelog: [v7.7.0...v7.7.1](https://github.com/trycourier/courier-python/compare/v7.7.0...v7.7.1)
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([d2d306b](https://github.com/trycourier/courier-python/commit/d2d306b62a83f3700f893d1949f4388b870d6ce9))
+* **internal:** update `actions/checkout` version ([3a5c4ad](https://github.com/trycourier/courier-python/commit/3a5c4ad617bd1bd8259dd4b786b9c0716e2b4076))
+
+
+### Documentation
+
+* **types:** clarify version field description in automation_template ([f04a9e0](https://github.com/trycourier/courier-python/commit/f04a9e04d27ba53cbdf8fe7f4a0a4c168b55b070))
+
 ## 7.7.0 (2026-01-14)
 
 Full Changelog: [v7.6.1...v7.7.0](https://github.com/trycourier/courier-python/compare/v7.6.1...v7.7.0)
