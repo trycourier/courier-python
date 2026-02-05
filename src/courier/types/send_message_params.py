@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
@@ -35,6 +35,7 @@ __all__ = [
     "MessageRouting",
     "MessageTimeout",
     "MessageTo",
+    "MessageToUnionMember8",
 ]
 
 
@@ -167,6 +168,17 @@ class MessageTimeout(TypedDict, total=False):
     provider: Optional[Dict[str, int]]
 
 
+MessageToUnionMember8: TypeAlias = Union[
+    UserRecipient,
+    AudienceRecipient,
+    ListRecipient,
+    ListPatternRecipient,
+    SlackRecipient,
+    MsTeamsRecipient,
+    PagerdutyRecipient,
+    WebhookRecipient,
+]
+
 MessageTo: TypeAlias = Union[
     UserRecipient,
     AudienceRecipient,
@@ -176,6 +188,7 @@ MessageTo: TypeAlias = Union[
     MsTeamsRecipient,
     PagerdutyRecipient,
     WebhookRecipient,
+    Iterable[MessageToUnionMember8],
 ]
 
 
