@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.8.0 (2026-02-06)
+
+Full Changelog: [v7.7.1...v7.8.0](https://github.com/trycourier/courier-python/compare/v7.7.1...v7.8.0)
+
+### Features
+
+* **api:** add publish/replace methods, versions resource to tenants.templates ([2b39781](https://github.com/trycourier/courier-python/commit/2b397816d696929cf5ad38b137b3c624f897ee26))
+* **api:** support list of recipients in send message ([76ccdfd](https://github.com/trycourier/courier-python/commit/76ccdfd9aee812c97cbad0d10b13b5746db4b24e))
+* **client:** add custom JSON encoder for extended type support ([b641cb6](https://github.com/trycourier/courier-python/commit/b641cb6819d5727a7ec7f1c3cf240a91a28ffd42))
+
 ## 7.7.1 (2026-01-27)
 
 Full Changelog: [v7.7.0...v7.7.1](https://github.com/trycourier/courier-python/compare/v7.7.0...v7.7.1)
