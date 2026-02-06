@@ -357,9 +357,14 @@ Types:
 from courier.types import (
     BaseTemplateTenantAssociation,
     DefaultPreferences,
+    PostTenantTemplatePublishRequest,
+    PostTenantTemplatePublishResponse,
+    PutTenantTemplateRequest,
+    PutTenantTemplateResponse,
     SubscriptionTopicNew,
     Tenant,
     TenantAssociation,
+    TenantTemplateInput,
     TenantListResponse,
     TenantListUsersResponse,
 )
@@ -392,8 +397,16 @@ from courier.types.tenants import TemplateListResponse
 
 Methods:
 
-- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
-- <code title="get /tenants/{tenant_id}/templates">client.tenants.templates.<a href="./src/courier/resources/tenants/templates.py">list</a>(tenant_id, \*\*<a href="src/courier/types/tenants/template_list_params.py">params</a>) -> <a href="./src/courier/types/tenants/template_list_response.py">TemplateListResponse</a></code>
+- <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
+- <code title="get /tenants/{tenant_id}/templates">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">list</a>(tenant_id, \*\*<a href="src/courier/types/tenants/template_list_params.py">params</a>) -> <a href="./src/courier/types/tenants/template_list_response.py">TemplateListResponse</a></code>
+- <code title="post /tenants/{tenant_id}/templates/{template_id}/publish">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">publish</a>(template_id, \*, tenant_id, \*\*<a href="src/courier/types/tenants/template_publish_params.py">params</a>) -> <a href="./src/courier/types/post_tenant_template_publish_response.py">PostTenantTemplatePublishResponse</a></code>
+- <code title="put /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">replace</a>(template_id, \*, tenant_id, \*\*<a href="src/courier/types/tenants/template_replace_params.py">params</a>) -> <a href="./src/courier/types/put_tenant_template_response.py">PutTenantTemplateResponse</a></code>
+
+### Versions
+
+Methods:
+
+- <code title="get /tenants/{tenant_id}/templates/{template_id}/versions/{version}">client.tenants.templates.versions.<a href="./src/courier/resources/tenants/templates/versions.py">retrieve</a>(version, \*, tenant_id, template_id) -> <a href="./src/courier/types/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
 
 # Translations
 
