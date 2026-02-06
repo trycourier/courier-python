@@ -10,14 +10,6 @@ from ...types import tenant_list_params, tenant_update_params, tenant_list_users
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
-from .templates import (
-    TemplatesResource,
-    AsyncTemplatesResource,
-    TemplatesResourceWithRawResponse,
-    AsyncTemplatesResourceWithRawResponse,
-    TemplatesResourceWithStreamingResponse,
-    AsyncTemplatesResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -27,6 +19,14 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.tenant import Tenant
+from .templates.templates import (
+    TemplatesResource,
+    AsyncTemplatesResource,
+    TemplatesResourceWithRawResponse,
+    AsyncTemplatesResourceWithRawResponse,
+    TemplatesResourceWithStreamingResponse,
+    AsyncTemplatesResourceWithStreamingResponse,
+)
 from .preferences.preferences import (
     PreferencesResource,
     AsyncPreferencesResource,

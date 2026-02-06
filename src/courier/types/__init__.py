@@ -166,8 +166,10 @@ from .inbound_track_event_params import InboundTrackEventParams as InboundTrackE
 from .notification_list_response import NotificationListResponse as NotificationListResponse
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
 from .brand_settings_in_app_param import BrandSettingsInAppParam as BrandSettingsInAppParam
+from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
 from .inbound_track_event_response import InboundTrackEventResponse as InboundTrackEventResponse
+from .put_tenant_template_response import PutTenantTemplateResponse as PutTenantTemplateResponse
 from .subscription_topic_new_param import SubscriptionTopicNewParam as SubscriptionTopicNewParam
 from .translation_retrieve_response import TranslationRetrieveResponse as TranslationRetrieveResponse
 from .audience_list_members_response import AudienceListMembersResponse as AudienceListMembersResponse
@@ -175,6 +177,9 @@ from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as Inbo
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
 from .automation_template_list_response import AutomationTemplateListResponse as AutomationTemplateListResponse
 from .put_subscriptions_recipient_param import PutSubscriptionsRecipientParam as PutSubscriptionsRecipientParam
+from .post_tenant_template_publish_response import (
+    PostTenantTemplatePublishResponse as PostTenantTemplatePublishResponse,
+)
 from .subscribe_to_lists_request_item_param import SubscribeToListsRequestItemParam as SubscribeToListsRequestItemParam
 
 # Rebuild cyclical models only after all modules are imported.
