@@ -223,7 +223,6 @@ class TestTemplates:
                         }
                     ],
                     "version": "version",
-                    "brand": "brand",
                 },
                 "channels": {
                     "foo": {
@@ -544,7 +543,6 @@ class TestAsyncTemplates:
                         }
                     ],
                     "version": "version",
-                    "brand": "brand",
                 },
                 "channels": {
                     "foo": {
