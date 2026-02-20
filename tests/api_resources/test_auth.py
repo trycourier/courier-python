@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAuth:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_issue_token(self, client: Courier) -> None:
         auth = client.auth.issue_token(
@@ -26,7 +26,7 @@ class TestAuth:
         )
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_issue_token(self, client: Courier) -> None:
         response = client.auth.with_raw_response.issue_token(
@@ -39,7 +39,7 @@ class TestAuth:
         auth = response.parse()
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_issue_token(self, client: Courier) -> None:
         with client.auth.with_streaming_response.issue_token(
@@ -60,7 +60,7 @@ class TestAsyncAuth:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_issue_token(self, async_client: AsyncCourier) -> None:
         auth = await async_client.auth.issue_token(
@@ -69,7 +69,7 @@ class TestAsyncAuth:
         )
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_issue_token(self, async_client: AsyncCourier) -> None:
         response = await async_client.auth.with_raw_response.issue_token(
@@ -82,7 +82,7 @@ class TestAsyncAuth:
         auth = await response.parse()
         assert_matches_type(AuthIssueTokenResponse, auth, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_issue_token(self, async_client: AsyncCourier) -> None:
         async with async_client.auth.with_streaming_response.issue_token(

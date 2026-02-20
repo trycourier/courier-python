@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestBulk:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add_users(self, client: Courier) -> None:
         bulk = client.bulk.add_users(
@@ -30,7 +30,7 @@ class TestBulk:
         )
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_add_users(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.add_users(
@@ -43,7 +43,7 @@ class TestBulk:
         bulk = response.parse()
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_add_users(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.add_users(
@@ -58,7 +58,7 @@ class TestBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_add_users(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -67,7 +67,7 @@ class TestBulk:
                 users=[{}],
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_job(self, client: Courier) -> None:
         bulk = client.bulk.create_job(
@@ -75,7 +75,7 @@ class TestBulk:
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_job_with_all_params(self, client: Courier) -> None:
         bulk = client.bulk.create_job(
@@ -94,7 +94,7 @@ class TestBulk:
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_job(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.create_job(
@@ -106,7 +106,7 @@ class TestBulk:
         bulk = response.parse()
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_job(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.create_job(
@@ -120,7 +120,7 @@ class TestBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_users(self, client: Courier) -> None:
         bulk = client.bulk.list_users(
@@ -128,7 +128,7 @@ class TestBulk:
         )
         assert_matches_type(BulkListUsersResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_users_with_all_params(self, client: Courier) -> None:
         bulk = client.bulk.list_users(
@@ -137,7 +137,7 @@ class TestBulk:
         )
         assert_matches_type(BulkListUsersResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_users(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.list_users(
@@ -149,7 +149,7 @@ class TestBulk:
         bulk = response.parse()
         assert_matches_type(BulkListUsersResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_users(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.list_users(
@@ -163,7 +163,7 @@ class TestBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list_users(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -171,7 +171,7 @@ class TestBulk:
                 job_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_job(self, client: Courier) -> None:
         bulk = client.bulk.retrieve_job(
@@ -179,7 +179,7 @@ class TestBulk:
         )
         assert_matches_type(BulkRetrieveJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_job(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.retrieve_job(
@@ -191,7 +191,7 @@ class TestBulk:
         bulk = response.parse()
         assert_matches_type(BulkRetrieveJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_job(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.retrieve_job(
@@ -205,7 +205,7 @@ class TestBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve_job(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -213,7 +213,7 @@ class TestBulk:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_run_job(self, client: Courier) -> None:
         bulk = client.bulk.run_job(
@@ -221,7 +221,7 @@ class TestBulk:
         )
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_run_job(self, client: Courier) -> None:
         response = client.bulk.with_raw_response.run_job(
@@ -233,7 +233,7 @@ class TestBulk:
         bulk = response.parse()
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_run_job(self, client: Courier) -> None:
         with client.bulk.with_streaming_response.run_job(
@@ -247,7 +247,7 @@ class TestBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_run_job(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -261,7 +261,7 @@ class TestAsyncBulk:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add_users(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.add_users(
@@ -270,7 +270,7 @@ class TestAsyncBulk:
         )
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_add_users(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.add_users(
@@ -283,7 +283,7 @@ class TestAsyncBulk:
         bulk = await response.parse()
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_add_users(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.add_users(
@@ -298,7 +298,7 @@ class TestAsyncBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_add_users(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -307,7 +307,7 @@ class TestAsyncBulk:
                 users=[{}],
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_job(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.create_job(
@@ -315,7 +315,7 @@ class TestAsyncBulk:
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_job_with_all_params(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.create_job(
@@ -334,7 +334,7 @@ class TestAsyncBulk:
         )
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_job(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.create_job(
@@ -346,7 +346,7 @@ class TestAsyncBulk:
         bulk = await response.parse()
         assert_matches_type(BulkCreateJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_job(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.create_job(
@@ -360,7 +360,7 @@ class TestAsyncBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_users(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.list_users(
@@ -368,7 +368,7 @@ class TestAsyncBulk:
         )
         assert_matches_type(BulkListUsersResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_users_with_all_params(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.list_users(
@@ -377,7 +377,7 @@ class TestAsyncBulk:
         )
         assert_matches_type(BulkListUsersResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_users(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.list_users(
@@ -389,7 +389,7 @@ class TestAsyncBulk:
         bulk = await response.parse()
         assert_matches_type(BulkListUsersResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_users(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.list_users(
@@ -403,7 +403,7 @@ class TestAsyncBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list_users(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -411,7 +411,7 @@ class TestAsyncBulk:
                 job_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_job(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.retrieve_job(
@@ -419,7 +419,7 @@ class TestAsyncBulk:
         )
         assert_matches_type(BulkRetrieveJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_job(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.retrieve_job(
@@ -431,7 +431,7 @@ class TestAsyncBulk:
         bulk = await response.parse()
         assert_matches_type(BulkRetrieveJobResponse, bulk, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_job(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.retrieve_job(
@@ -445,7 +445,7 @@ class TestAsyncBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve_job(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
@@ -453,7 +453,7 @@ class TestAsyncBulk:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_run_job(self, async_client: AsyncCourier) -> None:
         bulk = await async_client.bulk.run_job(
@@ -461,7 +461,7 @@ class TestAsyncBulk:
         )
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_run_job(self, async_client: AsyncCourier) -> None:
         response = await async_client.bulk.with_raw_response.run_job(
@@ -473,7 +473,7 @@ class TestAsyncBulk:
         bulk = await response.parse()
         assert bulk is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_run_job(self, async_client: AsyncCourier) -> None:
         async with async_client.bulk.with_streaming_response.run_job(
@@ -487,7 +487,7 @@ class TestAsyncBulk:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_run_job(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `job_id` but received ''"):
