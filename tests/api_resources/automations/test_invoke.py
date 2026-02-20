@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestInvoke:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_invoke_ad_hoc(self, client: Courier) -> None:
         invoke = client.automations.invoke.invoke_ad_hoc(
@@ -25,7 +25,7 @@ class TestInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_invoke_ad_hoc_with_all_params(self, client: Courier) -> None:
         invoke = client.automations.invoke.invoke_ad_hoc(
@@ -55,7 +55,7 @@ class TestInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_invoke_ad_hoc(self, client: Courier) -> None:
         response = client.automations.invoke.with_raw_response.invoke_ad_hoc(
@@ -67,7 +67,7 @@ class TestInvoke:
         invoke = response.parse()
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_invoke_ad_hoc(self, client: Courier) -> None:
         with client.automations.invoke.with_streaming_response.invoke_ad_hoc(
@@ -81,7 +81,7 @@ class TestInvoke:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_invoke_by_template(self, client: Courier) -> None:
         invoke = client.automations.invoke.invoke_by_template(
@@ -90,7 +90,7 @@ class TestInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_invoke_by_template_with_all_params(self, client: Courier) -> None:
         invoke = client.automations.invoke.invoke_by_template(
@@ -103,7 +103,7 @@ class TestInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_invoke_by_template(self, client: Courier) -> None:
         response = client.automations.invoke.with_raw_response.invoke_by_template(
@@ -116,7 +116,7 @@ class TestInvoke:
         invoke = response.parse()
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_invoke_by_template(self, client: Courier) -> None:
         with client.automations.invoke.with_streaming_response.invoke_by_template(
@@ -131,7 +131,7 @@ class TestInvoke:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_invoke_by_template(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_id` but received ''"):
@@ -146,7 +146,7 @@ class TestAsyncInvoke:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_invoke_ad_hoc(self, async_client: AsyncCourier) -> None:
         invoke = await async_client.automations.invoke.invoke_ad_hoc(
@@ -154,7 +154,7 @@ class TestAsyncInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_invoke_ad_hoc_with_all_params(self, async_client: AsyncCourier) -> None:
         invoke = await async_client.automations.invoke.invoke_ad_hoc(
@@ -184,7 +184,7 @@ class TestAsyncInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_invoke_ad_hoc(self, async_client: AsyncCourier) -> None:
         response = await async_client.automations.invoke.with_raw_response.invoke_ad_hoc(
@@ -196,7 +196,7 @@ class TestAsyncInvoke:
         invoke = await response.parse()
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_invoke_ad_hoc(self, async_client: AsyncCourier) -> None:
         async with async_client.automations.invoke.with_streaming_response.invoke_ad_hoc(
@@ -210,7 +210,7 @@ class TestAsyncInvoke:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_invoke_by_template(self, async_client: AsyncCourier) -> None:
         invoke = await async_client.automations.invoke.invoke_by_template(
@@ -219,7 +219,7 @@ class TestAsyncInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_invoke_by_template_with_all_params(self, async_client: AsyncCourier) -> None:
         invoke = await async_client.automations.invoke.invoke_by_template(
@@ -232,7 +232,7 @@ class TestAsyncInvoke:
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_invoke_by_template(self, async_client: AsyncCourier) -> None:
         response = await async_client.automations.invoke.with_raw_response.invoke_by_template(
@@ -245,7 +245,7 @@ class TestAsyncInvoke:
         invoke = await response.parse()
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_invoke_by_template(self, async_client: AsyncCourier) -> None:
         async with async_client.automations.invoke.with_streaming_response.invoke_by_template(
@@ -260,7 +260,7 @@ class TestAsyncInvoke:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_invoke_by_template(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_id` but received ''"):
