@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAudiences:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Courier) -> None:
         audience = client.audiences.retrieve(
@@ -30,7 +30,7 @@ class TestAudiences:
         )
         assert_matches_type(Audience, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Courier) -> None:
         response = client.audiences.with_raw_response.retrieve(
@@ -42,7 +42,7 @@ class TestAudiences:
         audience = response.parse()
         assert_matches_type(Audience, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Courier) -> None:
         with client.audiences.with_streaming_response.retrieve(
@@ -56,7 +56,7 @@ class TestAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_retrieve(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):
@@ -64,7 +64,7 @@ class TestAudiences:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Courier) -> None:
         audience = client.audiences.update(
@@ -72,7 +72,7 @@ class TestAudiences:
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Courier) -> None:
         audience = client.audiences.update(
@@ -93,7 +93,7 @@ class TestAudiences:
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Courier) -> None:
         response = client.audiences.with_raw_response.update(
@@ -105,7 +105,7 @@ class TestAudiences:
         audience = response.parse()
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Courier) -> None:
         with client.audiences.with_streaming_response.update(
@@ -119,7 +119,7 @@ class TestAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_update(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):
@@ -127,13 +127,13 @@ class TestAudiences:
                 audience_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Courier) -> None:
         audience = client.audiences.list()
         assert_matches_type(AudienceListResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Courier) -> None:
         audience = client.audiences.list(
@@ -141,7 +141,7 @@ class TestAudiences:
         )
         assert_matches_type(AudienceListResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Courier) -> None:
         response = client.audiences.with_raw_response.list()
@@ -151,7 +151,7 @@ class TestAudiences:
         audience = response.parse()
         assert_matches_type(AudienceListResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Courier) -> None:
         with client.audiences.with_streaming_response.list() as response:
@@ -163,7 +163,7 @@ class TestAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Courier) -> None:
         audience = client.audiences.delete(
@@ -171,7 +171,7 @@ class TestAudiences:
         )
         assert audience is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Courier) -> None:
         response = client.audiences.with_raw_response.delete(
@@ -183,7 +183,7 @@ class TestAudiences:
         audience = response.parse()
         assert audience is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Courier) -> None:
         with client.audiences.with_streaming_response.delete(
@@ -197,7 +197,7 @@ class TestAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_delete(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):
@@ -205,7 +205,7 @@ class TestAudiences:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_members(self, client: Courier) -> None:
         audience = client.audiences.list_members(
@@ -213,7 +213,7 @@ class TestAudiences:
         )
         assert_matches_type(AudienceListMembersResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_members_with_all_params(self, client: Courier) -> None:
         audience = client.audiences.list_members(
@@ -222,7 +222,7 @@ class TestAudiences:
         )
         assert_matches_type(AudienceListMembersResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_members(self, client: Courier) -> None:
         response = client.audiences.with_raw_response.list_members(
@@ -234,7 +234,7 @@ class TestAudiences:
         audience = response.parse()
         assert_matches_type(AudienceListMembersResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_members(self, client: Courier) -> None:
         with client.audiences.with_streaming_response.list_members(
@@ -248,7 +248,7 @@ class TestAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list_members(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):
@@ -262,7 +262,7 @@ class TestAsyncAudiences:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.retrieve(
@@ -270,7 +270,7 @@ class TestAsyncAudiences:
         )
         assert_matches_type(Audience, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCourier) -> None:
         response = await async_client.audiences.with_raw_response.retrieve(
@@ -282,7 +282,7 @@ class TestAsyncAudiences:
         audience = await response.parse()
         assert_matches_type(Audience, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCourier) -> None:
         async with async_client.audiences.with_streaming_response.retrieve(
@@ -296,7 +296,7 @@ class TestAsyncAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):
@@ -304,7 +304,7 @@ class TestAsyncAudiences:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.update(
@@ -312,7 +312,7 @@ class TestAsyncAudiences:
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.update(
@@ -333,7 +333,7 @@ class TestAsyncAudiences:
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
         response = await async_client.audiences.with_raw_response.update(
@@ -345,7 +345,7 @@ class TestAsyncAudiences:
         audience = await response.parse()
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
         async with async_client.audiences.with_streaming_response.update(
@@ -359,7 +359,7 @@ class TestAsyncAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_update(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):
@@ -367,13 +367,13 @@ class TestAsyncAudiences:
                 audience_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.list()
         assert_matches_type(AudienceListResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.list(
@@ -381,7 +381,7 @@ class TestAsyncAudiences:
         )
         assert_matches_type(AudienceListResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCourier) -> None:
         response = await async_client.audiences.with_raw_response.list()
@@ -391,7 +391,7 @@ class TestAsyncAudiences:
         audience = await response.parse()
         assert_matches_type(AudienceListResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCourier) -> None:
         async with async_client.audiences.with_streaming_response.list() as response:
@@ -403,7 +403,7 @@ class TestAsyncAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.delete(
@@ -411,7 +411,7 @@ class TestAsyncAudiences:
         )
         assert audience is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncCourier) -> None:
         response = await async_client.audiences.with_raw_response.delete(
@@ -423,7 +423,7 @@ class TestAsyncAudiences:
         audience = await response.parse()
         assert audience is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncCourier) -> None:
         async with async_client.audiences.with_streaming_response.delete(
@@ -437,7 +437,7 @@ class TestAsyncAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_delete(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):
@@ -445,7 +445,7 @@ class TestAsyncAudiences:
                 "",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_members(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.list_members(
@@ -453,7 +453,7 @@ class TestAsyncAudiences:
         )
         assert_matches_type(AudienceListMembersResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_members_with_all_params(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.list_members(
@@ -462,7 +462,7 @@ class TestAsyncAudiences:
         )
         assert_matches_type(AudienceListMembersResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_members(self, async_client: AsyncCourier) -> None:
         response = await async_client.audiences.with_raw_response.list_members(
@@ -474,7 +474,7 @@ class TestAsyncAudiences:
         audience = await response.parse()
         assert_matches_type(AudienceListMembersResponse, audience, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_members(self, async_client: AsyncCourier) -> None:
         async with async_client.audiences.with_streaming_response.list_members(
@@ -488,7 +488,7 @@ class TestAsyncAudiences:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list_members(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `audience_id` but received ''"):

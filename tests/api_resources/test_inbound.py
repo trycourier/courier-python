@@ -17,7 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestInbound:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_track_event(self, client: Courier) -> None:
         inbound = client.inbound.track_event(
@@ -32,7 +32,7 @@ class TestInbound:
         )
         assert_matches_type(InboundTrackEventResponse, inbound, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_track_event_with_all_params(self, client: Courier) -> None:
         inbound = client.inbound.track_event(
@@ -48,7 +48,7 @@ class TestInbound:
         )
         assert_matches_type(InboundTrackEventResponse, inbound, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_track_event(self, client: Courier) -> None:
         response = client.inbound.with_raw_response.track_event(
@@ -67,7 +67,7 @@ class TestInbound:
         inbound = response.parse()
         assert_matches_type(InboundTrackEventResponse, inbound, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_track_event(self, client: Courier) -> None:
         with client.inbound.with_streaming_response.track_event(
@@ -94,7 +94,7 @@ class TestAsyncInbound:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_track_event(self, async_client: AsyncCourier) -> None:
         inbound = await async_client.inbound.track_event(
@@ -109,7 +109,7 @@ class TestAsyncInbound:
         )
         assert_matches_type(InboundTrackEventResponse, inbound, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_track_event_with_all_params(self, async_client: AsyncCourier) -> None:
         inbound = await async_client.inbound.track_event(
@@ -125,7 +125,7 @@ class TestAsyncInbound:
         )
         assert_matches_type(InboundTrackEventResponse, inbound, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_track_event(self, async_client: AsyncCourier) -> None:
         response = await async_client.inbound.with_raw_response.track_event(
@@ -144,7 +144,7 @@ class TestAsyncInbound:
         inbound = await response.parse()
         assert_matches_type(InboundTrackEventResponse, inbound, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_track_event(self, async_client: AsyncCourier) -> None:
         async with async_client.inbound.with_streaming_response.track_event(
