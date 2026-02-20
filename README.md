@@ -1,3 +1,4 @@
+<!-- AUTO-GENERATED-OVERVIEW:START — Do not edit this section. It is synced from mintlify-docs. -->
 # Courier Python API library
 
 <!-- prettier-ignore -->
@@ -433,3 +434,4 @@ Python 3.9 or higher.
 ## Contributing
 
 See [the contributing documentation](./CONTRIBUTING.md).
+<!-- AUTO-GENERATED-OVERVIEW:END -->
