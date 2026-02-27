@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Iterable
 from typing_extensions import Required, TypedDict
 
 from .elemental_node import ElementalNode
@@ -15,5 +15,3 @@ class ElementalContent(TypedDict, total=False):
 
     version: Required[str]
     """For example, "2022-01-01" """
-
-    brand: Optional[str]

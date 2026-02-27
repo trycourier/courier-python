@@ -19,7 +19,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSubscriptions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.list(
@@ -27,7 +27,7 @@ class TestSubscriptions:
         )
         assert_matches_type(SubscriptionListResponse, subscription, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.list(
@@ -36,7 +36,7 @@ class TestSubscriptions:
         )
         assert_matches_type(SubscriptionListResponse, subscription, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.list(
@@ -48,7 +48,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert_matches_type(SubscriptionListResponse, subscription, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Courier) -> None:
         with client.lists.subscriptions.with_streaming_response.list(
@@ -62,7 +62,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_list(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -70,7 +70,7 @@ class TestSubscriptions:
                 list_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_add(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.add(
@@ -79,7 +79,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_add(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.add(
@@ -92,7 +92,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_add(self, client: Courier) -> None:
         with client.lists.subscriptions.with_streaming_response.add(
@@ -107,7 +107,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_add(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -116,7 +116,7 @@ class TestSubscriptions:
                 recipients=[{"recipient_id": "recipientId"}],
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_subscribe(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.subscribe(
@@ -125,7 +125,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_subscribe(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.subscribe(
@@ -138,7 +138,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_subscribe(self, client: Courier) -> None:
         with client.lists.subscriptions.with_streaming_response.subscribe(
@@ -153,7 +153,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_subscribe(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -162,7 +162,7 @@ class TestSubscriptions:
                 recipients=[{"recipient_id": "recipientId"}],
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_subscribe_user(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.subscribe_user(
@@ -171,7 +171,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_subscribe_user_with_all_params(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.subscribe_user(
@@ -206,7 +206,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_subscribe_user(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.subscribe_user(
@@ -219,7 +219,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_subscribe_user(self, client: Courier) -> None:
         with client.lists.subscriptions.with_streaming_response.subscribe_user(
@@ -234,7 +234,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_subscribe_user(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -249,7 +249,7 @@ class TestSubscriptions:
                 list_id="list_id",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_unsubscribe_user(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.unsubscribe_user(
@@ -258,7 +258,7 @@ class TestSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_unsubscribe_user(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.unsubscribe_user(
@@ -271,7 +271,7 @@ class TestSubscriptions:
         subscription = response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_unsubscribe_user(self, client: Courier) -> None:
         with client.lists.subscriptions.with_streaming_response.unsubscribe_user(
@@ -286,7 +286,7 @@ class TestSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_unsubscribe_user(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -307,7 +307,7 @@ class TestAsyncSubscriptions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.list(
@@ -315,7 +315,7 @@ class TestAsyncSubscriptions:
         )
         assert_matches_type(SubscriptionListResponse, subscription, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.list(
@@ -324,7 +324,7 @@ class TestAsyncSubscriptions:
         )
         assert_matches_type(SubscriptionListResponse, subscription, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.subscriptions.with_raw_response.list(
@@ -336,7 +336,7 @@ class TestAsyncSubscriptions:
         subscription = await response.parse()
         assert_matches_type(SubscriptionListResponse, subscription, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.subscriptions.with_streaming_response.list(
@@ -350,7 +350,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_list(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -358,7 +358,7 @@ class TestAsyncSubscriptions:
                 list_id="",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_add(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.add(
@@ -367,7 +367,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.subscriptions.with_raw_response.add(
@@ -380,7 +380,7 @@ class TestAsyncSubscriptions:
         subscription = await response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.subscriptions.with_streaming_response.add(
@@ -395,7 +395,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_add(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -404,7 +404,7 @@ class TestAsyncSubscriptions:
                 recipients=[{"recipient_id": "recipientId"}],
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_subscribe(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.subscribe(
@@ -413,7 +413,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_subscribe(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.subscriptions.with_raw_response.subscribe(
@@ -426,7 +426,7 @@ class TestAsyncSubscriptions:
         subscription = await response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_subscribe(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.subscriptions.with_streaming_response.subscribe(
@@ -441,7 +441,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_subscribe(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -450,7 +450,7 @@ class TestAsyncSubscriptions:
                 recipients=[{"recipient_id": "recipientId"}],
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_subscribe_user(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.subscribe_user(
@@ -459,7 +459,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_subscribe_user_with_all_params(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.subscribe_user(
@@ -494,7 +494,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_subscribe_user(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.subscriptions.with_raw_response.subscribe_user(
@@ -507,7 +507,7 @@ class TestAsyncSubscriptions:
         subscription = await response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_subscribe_user(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.subscriptions.with_streaming_response.subscribe_user(
@@ -522,7 +522,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_subscribe_user(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
@@ -537,7 +537,7 @@ class TestAsyncSubscriptions:
                 list_id="list_id",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_unsubscribe_user(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.unsubscribe_user(
@@ -546,7 +546,7 @@ class TestAsyncSubscriptions:
         )
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_unsubscribe_user(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.subscriptions.with_raw_response.unsubscribe_user(
@@ -559,7 +559,7 @@ class TestAsyncSubscriptions:
         subscription = await response.parse()
         assert subscription is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_unsubscribe_user(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.subscriptions.with_streaming_response.unsubscribe_user(
@@ -574,7 +574,7 @@ class TestAsyncSubscriptions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_unsubscribe_user(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):

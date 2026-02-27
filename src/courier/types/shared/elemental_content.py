@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List
 
 from ..._models import BaseModel
 from .elemental_node import ElementalNode
@@ -13,5 +13,3 @@ class ElementalContent(BaseModel):
 
     version: str
     """For example, "2022-01-01" """
-
-    brand: Optional[str] = None
