@@ -473,4 +473,4 @@ Methods:
 - <code title="get /users/{user_id}/tokens">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">list</a>(user_id) -> <a href="./src/courier/types/users/token_list_response.py">TokenListResponse</a></code>
 - <code title="delete /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">delete</a>(token, \*, user_id) -> None</code>
 - <code title="put /users/{user_id}/tokens">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_multiple</a>(user_id) -> None</code>
-- <code title="put /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_single</a>(path_token, \*, user_id, \*\*<a href="src/courier/types/users/token_add_single_params.py">params</a>) -> None</code>
+- <code title="put /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_single</a>(token, \*, user_id, \*\*<a href="src/courier/types/users/token_add_single_params.py">params</a>) -> None</code>

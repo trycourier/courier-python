@@ -3,18 +3,13 @@
 from __future__ import annotations
 
 from typing import Union, Optional
-from typing_extensions import Literal, Required, Annotated, TypedDict
-
-from ..._utils import PropertyInfo
+from typing_extensions import Literal, Required, TypedDict
 
 __all__ = ["TokenAddSingleParams", "Device", "Tracking"]
 
 
 class TokenAddSingleParams(TypedDict, total=False):
     user_id: Required[str]
-
-    body_token: Required[Annotated[str, PropertyInfo(alias="token")]]
-    """Full body of the token. Must match token in URL path parameter."""
 
     provider_key: Required[Literal["firebase-fcm", "apn", "expo", "onesignal"]]
 

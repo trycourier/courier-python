@@ -226,10 +226,9 @@ class TokensResource(SyncAPIResource):
 
     def add_single(
         self,
-        path_token: str,
+        token: str,
         *,
         user_id: str,
-        body_token: str,
         provider_key: Literal["firebase-fcm", "apn", "expo", "onesignal"],
         device: Optional[token_add_single_params.Device] | Omit = omit,
         expiry_date: Union[str, bool, None] | Omit = omit,
@@ -246,8 +245,6 @@ class TokensResource(SyncAPIResource):
         Adds a single token to a user and overwrites a matching existing token.
 
         Args:
-          body_token: Full body of the token. Must match token in URL path parameter.
-
           device: Information about the device the token came from.
 
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
@@ -267,14 +264,13 @@ class TokensResource(SyncAPIResource):
         """
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
-        if not path_token:
-            raise ValueError(f"Expected a non-empty value for `path_token` but received {path_token!r}")
+        if not token:
+            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
-            f"/users/{user_id}/tokens/{path_token}",
+            f"/users/{user_id}/tokens/{token}",
             body=maybe_transform(
                 {
-                    "body_token": body_token,
                     "provider_key": provider_key,
                     "device": device,
                     "expiry_date": expiry_date,
@@ -491,10 +487,9 @@ class AsyncTokensResource(AsyncAPIResource):
 
     async def add_single(
         self,
-        path_token: str,
+        token: str,
         *,
         user_id: str,
-        body_token: str,
         provider_key: Literal["firebase-fcm", "apn", "expo", "onesignal"],
         device: Optional[token_add_single_params.Device] | Omit = omit,
         expiry_date: Union[str, bool, None] | Omit = omit,
@@ -511,8 +506,6 @@ class AsyncTokensResource(AsyncAPIResource):
         Adds a single token to a user and overwrites a matching existing token.
 
         Args:
-          body_token: Full body of the token. Must match token in URL path parameter.
-
           device: Information about the device the token came from.
 
           expiry_date: ISO 8601 formatted date the token expires. Defaults to 2 months. Set to false to
@@ -532,14 +525,13 @@ class AsyncTokensResource(AsyncAPIResource):
         """
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
-        if not path_token:
-            raise ValueError(f"Expected a non-empty value for `path_token` but received {path_token!r}")
+        if not token:
+            raise ValueError(f"Expected a non-empty value for `token` but received {token!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
-            f"/users/{user_id}/tokens/{path_token}",
+            f"/users/{user_id}/tokens/{token}",
             body=await async_maybe_transform(
                 {
-                    "body_token": body_token,
                     "provider_key": provider_key,
                     "device": device,
                     "expiry_date": expiry_date,
