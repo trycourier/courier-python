@@ -291,9 +291,8 @@ class TestTokens:
     @parametrize
     def test_method_add_single(self, client: Courier) -> None:
         token = client.users.tokens.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
         )
         assert token is None
@@ -302,9 +301,8 @@ class TestTokens:
     @parametrize
     def test_method_add_single_with_all_params(self, client: Courier) -> None:
         token = client.users.tokens.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
             device={
                 "ad_id": "ad_id",
@@ -329,9 +327,8 @@ class TestTokens:
     @parametrize
     def test_raw_response_add_single(self, client: Courier) -> None:
         response = client.users.tokens.with_raw_response.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
         )
 
@@ -344,9 +341,8 @@ class TestTokens:
     @parametrize
     def test_streaming_response_add_single(self, client: Courier) -> None:
         with client.users.tokens.with_streaming_response.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
         ) as response:
             assert not response.is_closed
@@ -362,17 +358,15 @@ class TestTokens:
     def test_path_params_add_single(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.tokens.with_raw_response.add_single(
-                path_token="token",
+                token="token",
                 user_id="",
-                body_token="token",
                 provider_key="firebase-fcm",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `path_token` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `token` but received ''"):
             client.users.tokens.with_raw_response.add_single(
-                path_token="",
+                token="",
                 user_id="user_id",
-                body_token="token",
                 provider_key="firebase-fcm",
             )
 
@@ -656,9 +650,8 @@ class TestAsyncTokens:
     @parametrize
     async def test_method_add_single(self, async_client: AsyncCourier) -> None:
         token = await async_client.users.tokens.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
         )
         assert token is None
@@ -667,9 +660,8 @@ class TestAsyncTokens:
     @parametrize
     async def test_method_add_single_with_all_params(self, async_client: AsyncCourier) -> None:
         token = await async_client.users.tokens.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
             device={
                 "ad_id": "ad_id",
@@ -694,9 +686,8 @@ class TestAsyncTokens:
     @parametrize
     async def test_raw_response_add_single(self, async_client: AsyncCourier) -> None:
         response = await async_client.users.tokens.with_raw_response.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
         )
 
@@ -709,9 +700,8 @@ class TestAsyncTokens:
     @parametrize
     async def test_streaming_response_add_single(self, async_client: AsyncCourier) -> None:
         async with async_client.users.tokens.with_streaming_response.add_single(
-            path_token="token",
+            token="token",
             user_id="user_id",
-            body_token="token",
             provider_key="firebase-fcm",
         ) as response:
             assert not response.is_closed
@@ -727,16 +717,14 @@ class TestAsyncTokens:
     async def test_path_params_add_single(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.tokens.with_raw_response.add_single(
-                path_token="token",
+                token="token",
                 user_id="",
-                body_token="token",
                 provider_key="firebase-fcm",
             )
 
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `path_token` but received ''"):
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `token` but received ''"):
             await async_client.users.tokens.with_raw_response.add_single(
-                path_token="",
+                token="",
                 user_id="user_id",
-                body_token="token",
                 provider_key="firebase-fcm",
             )
