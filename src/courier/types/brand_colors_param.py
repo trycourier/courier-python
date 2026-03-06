@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
-from typing_extensions import TypeAlias, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["BrandColorsParam"]
 
 
-class BrandColorsParamTyped(TypedDict, total=False):
+class BrandColorsParam(TypedDict, total=False, extra_items=str):  # type: ignore[call-arg]
     primary: str
 
     secondary: str
-
-
-BrandColorsParam: TypeAlias = Union[BrandColorsParamTyped, Dict[str, str]]
