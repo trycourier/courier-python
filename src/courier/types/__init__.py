@@ -80,6 +80,7 @@ from .shared import (
     NotificationPreferenceDetails as NotificationPreferenceDetails,
 )
 from .tenant import Tenant as Tenant
+from .journey import Journey as Journey
 from .audience import Audience as Audience
 from .base_check import BaseCheck as BaseCheck
 from .email_head import EmailHead as EmailHead
@@ -113,6 +114,7 @@ from .brand_list_response import BrandListResponse as BrandListResponse
 from .brand_snippet_param import BrandSnippetParam as BrandSnippetParam
 from .brand_update_params import BrandUpdateParams as BrandUpdateParams
 from .default_preferences import DefaultPreferences as DefaultPreferences
+from .journey_list_params import JourneyListParams as JourneyListParams
 from .message_list_params import MessageListParams as MessageListParams
 from .send_message_params import SendMessageParams as SendMessageParams
 from .audience_list_params import AudienceListParams as AudienceListParams
@@ -125,6 +127,7 @@ from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
 from .bulk_add_users_params import BulkAddUsersParams as BulkAddUsersParams
+from .journey_invoke_params import JourneyInvokeParams as JourneyInvokeParams
 from .message_list_response import MessageListResponse as MessageListResponse
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
@@ -134,6 +137,7 @@ from .audience_update_params import AudienceUpdateParams as AudienceUpdateParams
 from .automation_list_params import AutomationListParams as AutomationListParams
 from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
 from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
+from .journeys_list_response import JourneysListResponse as JourneysListResponse
 from .message_history_params import MessageHistoryParams as MessageHistoryParams
 from .profile_replace_params import ProfileReplaceParams as ProfileReplaceParams
 from .subscription_topic_new import SubscriptionTopicNew as SubscriptionTopicNew
@@ -144,6 +148,7 @@ from .widget_background_param import WidgetBackgroundParam as WidgetBackgroundPa
 from .audience_update_response import AudienceUpdateResponse as AudienceUpdateResponse
 from .bulk_create_job_response import BulkCreateJobResponse as BulkCreateJobResponse
 from .bulk_list_users_response import BulkListUsersResponse as BulkListUsersResponse
+from .journeys_invoke_response import JourneysInvokeResponse as JourneysInvokeResponse
 from .message_content_response import MessageContentResponse as MessageContentResponse
 from .message_history_response import MessageHistoryResponse as MessageHistoryResponse
 from .notification_get_content import NotificationGetContent as NotificationGetContent

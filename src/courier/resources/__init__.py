@@ -64,6 +64,14 @@ from .tenants import (
     TenantsResourceWithStreamingResponse,
     AsyncTenantsResourceWithStreamingResponse,
 )
+from .journeys import (
+    JourneysResource,
+    AsyncJourneysResource,
+    JourneysResourceWithRawResponse,
+    AsyncJourneysResourceWithRawResponse,
+    JourneysResourceWithStreamingResponse,
+    AsyncJourneysResourceWithStreamingResponse,
+)
 from .messages import (
     MessagesResource,
     AsyncMessagesResource,
@@ -160,6 +168,12 @@ __all__ = [
     "AsyncAutomationsResourceWithRawResponse",
     "AutomationsResourceWithStreamingResponse",
     "AsyncAutomationsResourceWithStreamingResponse",
+    "JourneysResource",
+    "AsyncJourneysResource",
+    "JourneysResourceWithRawResponse",
+    "AsyncJourneysResourceWithRawResponse",
+    "JourneysResourceWithStreamingResponse",
+    "AsyncJourneysResourceWithStreamingResponse",
     "BrandsResource",
     "AsyncBrandsResource",
     "BrandsResourceWithRawResponse",

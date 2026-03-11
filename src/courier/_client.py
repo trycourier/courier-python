@@ -40,6 +40,7 @@ if TYPE_CHECKING:
         brands,
         inbound,
         tenants,
+        journeys,
         messages,
         profiles,
         requests,
@@ -54,6 +55,7 @@ if TYPE_CHECKING:
     from .resources.send import SendResource, AsyncSendResource
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.inbound import InboundResource, AsyncInboundResource
+    from .resources.journeys import JourneysResource, AsyncJourneysResource
     from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
@@ -153,6 +155,12 @@ class Courier(SyncAPIClient):
         from .resources.automations import AutomationsResource
 
         return AutomationsResource(self)
+
+    @cached_property
+    def journeys(self) -> JourneysResource:
+        from .resources.journeys import JourneysResource
+
+        return JourneysResource(self)
 
     @cached_property
     def brands(self) -> BrandsResource:
@@ -419,6 +427,12 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncAutomationsResource(self)
 
     @cached_property
+    def journeys(self) -> AsyncJourneysResource:
+        from .resources.journeys import AsyncJourneysResource
+
+        return AsyncJourneysResource(self)
+
+    @cached_property
     def brands(self) -> AsyncBrandsResource:
         from .resources.brands import AsyncBrandsResource
 
@@ -634,6 +648,12 @@ class CourierWithRawResponse:
         return AutomationsResourceWithRawResponse(self._client.automations)
 
     @cached_property
+    def journeys(self) -> journeys.JourneysResourceWithRawResponse:
+        from .resources.journeys import JourneysResourceWithRawResponse
+
+        return JourneysResourceWithRawResponse(self._client.journeys)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithRawResponse:
         from .resources.brands import BrandsResourceWithRawResponse
 
@@ -735,6 +755,12 @@ class AsyncCourierWithRawResponse:
         from .resources.automations import AsyncAutomationsResourceWithRawResponse
 
         return AsyncAutomationsResourceWithRawResponse(self._client.automations)
+
+    @cached_property
+    def journeys(self) -> journeys.AsyncJourneysResourceWithRawResponse:
+        from .resources.journeys import AsyncJourneysResourceWithRawResponse
+
+        return AsyncJourneysResourceWithRawResponse(self._client.journeys)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithRawResponse:
@@ -840,6 +866,12 @@ class CourierWithStreamedResponse:
         return AutomationsResourceWithStreamingResponse(self._client.automations)
 
     @cached_property
+    def journeys(self) -> journeys.JourneysResourceWithStreamingResponse:
+        from .resources.journeys import JourneysResourceWithStreamingResponse
+
+        return JourneysResourceWithStreamingResponse(self._client.journeys)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithStreamingResponse:
         from .resources.brands import BrandsResourceWithStreamingResponse
 
@@ -941,6 +973,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.automations import AsyncAutomationsResourceWithStreamingResponse
 
         return AsyncAutomationsResourceWithStreamingResponse(self._client.automations)
+
+    @cached_property
+    def journeys(self) -> journeys.AsyncJourneysResourceWithStreamingResponse:
+        from .resources.journeys import AsyncJourneysResourceWithStreamingResponse
+
+        return AsyncJourneysResourceWithStreamingResponse(self._client.journeys)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithStreamingResponse:
