@@ -1,5 +1,44 @@
 # Changelog
 
+## 7.9.0 (2026-03-12)
+
+Full Changelog: [v7.8.0...v7.9.0](https://github.com/trycourier/courier-python/compare/v7.8.0...v7.9.0)
+
+### Features
+
+* **api:** add journeys resource with list and invoke methods ([be92a16](https://github.com/trycourier/courier-python/commit/be92a168addb8487d27fa6d34e04208ed2476d45))
+* **api:** remove brand field from ElementalContent ([1354ff8](https://github.com/trycourier/courier-python/commit/1354ff8604b5732982ab3a36e3ed856070473ba5))
+
+
+### Bug Fixes
+
+* **api:** remove body_token, rename path_token in users.tokens.add_single ([3ee45a8](https://github.com/trycourier/courier-python/commit/3ee45a8171b58edeb0eaec4be7f7cb689abf0bfe))
+* mark MessageDetails timestamp fields as optional ([a86abbf](https://github.com/trycourier/courier-python/commit/a86abbf019dcfa29817a60db6b166dcbe5d48faa))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([8d5a384](https://github.com/trycourier/courier-python/commit/8d5a38409419c90d4197f5fcc089135f15c5e16b))
+* format all `api.md` files ([0b4aca7](https://github.com/trycourier/courier-python/commit/0b4aca79b5d4c568aa262978040f57a2ba540f6f))
+* **internal:** add request options to SSE classes ([7f342f9](https://github.com/trycourier/courier-python/commit/7f342f99eb625e3091aa1c0fb794fac4d6aec20c))
+* **internal:** bump dependencies ([2c1457d](https://github.com/trycourier/courier-python/commit/2c1457d5017fc4093501861ca2cf99e5112ddeed))
+* **internal:** fix lint error on Python 3.14 ([58f8a6e](https://github.com/trycourier/courier-python/commit/58f8a6e0f5ed3370ef13741188be2691be0aa73f))
+* **internal:** make `test_proxy_environment_variables` more resilient ([d82fd8d](https://github.com/trycourier/courier-python/commit/d82fd8d691c3944903526f5e2d78043f9b8c76dd))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([8aaf597](https://github.com/trycourier/courier-python/commit/8aaf597d7635aa5137092f1c5579ccffd3868a2e))
+* **internal:** remove mock server code ([31b4e07](https://github.com/trycourier/courier-python/commit/31b4e07803c62389646e9037ca1056508525c075))
+* update mock server docs ([f18d539](https://github.com/trycourier/courier-python/commit/f18d539df79d21c9e4484bfdc865dd68523e1920))
+
+
+### Documentation
+
+* add AUTO-GENERATED-OVERVIEW markers for README sync ([#126](https://github.com/trycourier/courier-python/issues/126)) ([69391e1](https://github.com/trycourier/courier-python/commit/69391e1455bfd27cc6eb8bdce8f28551c6efce85))
+* sync README from mintlify-docs (2026-02-20 18:11 UTC) ([#127](https://github.com/trycourier/courier-python/issues/127)) ([e3757cc](https://github.com/trycourier/courier-python/commit/e3757cc4a457623795cc8e7aa99a6079ad5c001d))
+
+
+### Refactors
+
+* **types:** use `extra_items` from PEP 728 ([e69f274](https://github.com/trycourier/courier-python/commit/e69f274a31bb179e242b89851468c234f5bbfa2f))
+
 ## 7.8.0 (2026-02-06)
 
 Full Changelog: [v7.7.1...v7.8.0](https://github.com/trycourier/courier-python/compare/v7.7.1...v7.8.0)

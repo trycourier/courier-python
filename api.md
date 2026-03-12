@@ -155,6 +155,24 @@ Methods:
 - <code title="post /automations/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_ad_hoc</a>(\*\*<a href="src/courier/types/automations/invoke_invoke_ad_hoc_params.py">params</a>) -> <a href="./src/courier/types/automation_invoke_response.py">AutomationInvokeResponse</a></code>
 - <code title="post /automations/{templateId}/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_by_template</a>(template_id, \*\*<a href="src/courier/types/automations/invoke_invoke_by_template_params.py">params</a>) -> <a href="./src/courier/types/automation_invoke_response.py">AutomationInvokeResponse</a></code>
 
+# Journeys
+
+Types:
+
+```python
+from courier.types import (
+    Journey,
+    JourneysInvokeRequest,
+    JourneysInvokeResponse,
+    JourneysListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /journeys">client.journeys.<a href="./src/courier/resources/journeys.py">list</a>(\*\*<a href="src/courier/types/journey_list_params.py">params</a>) -> <a href="./src/courier/types/journeys_list_response.py">JourneysListResponse</a></code>
+- <code title="post /journeys/{templateId}/invoke">client.journeys.<a href="./src/courier/resources/journeys.py">invoke</a>(template_id, \*\*<a href="src/courier/types/journey_invoke_params.py">params</a>) -> <a href="./src/courier/types/journeys_invoke_response.py">JourneysInvokeResponse</a></code>
+
 # Brands
 
 Types:
@@ -473,4 +491,4 @@ Methods:
 - <code title="get /users/{user_id}/tokens">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">list</a>(user_id) -> <a href="./src/courier/types/users/token_list_response.py">TokenListResponse</a></code>
 - <code title="delete /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">delete</a>(token, \*, user_id) -> None</code>
 - <code title="put /users/{user_id}/tokens">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_multiple</a>(user_id) -> None</code>
-- <code title="put /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_single</a>(path_token, \*, user_id, \*\*<a href="src/courier/types/users/token_add_single_params.py">params</a>) -> None</code>
+- <code title="put /users/{user_id}/tokens/{token}">client.users.tokens.<a href="./src/courier/resources/users/tokens.py">add_single</a>(token, \*, user_id, \*\*<a href="src/courier/types/users/token_add_single_params.py">params</a>) -> None</code>
