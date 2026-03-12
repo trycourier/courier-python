@@ -15,18 +15,6 @@ class MessageDetails(BaseModel):
     from a send).
     """
 
-    clicked: int
-    """
-    A UTC timestamp at which the recipient clicked on a tracked link for the first
-    time. Stored as a millisecond representation of the Unix epoch.
-    """
-
-    delivered: int
-    """A UTC timestamp at which the Integration provider delivered the message.
-
-    Stored as a millisecond representation of the Unix epoch.
-    """
-
     enqueued: int
     """A UTC timestamp at which Courier received the message request.
 
@@ -39,20 +27,8 @@ class MessageDetails(BaseModel):
     notification: str
     """A unique identifier associated with the notification of the delivered message."""
 
-    opened: int
-    """A UTC timestamp at which the recipient opened a message for the first time.
-
-    Stored as a millisecond representation of the Unix epoch.
-    """
-
     recipient: str
     """A unique identifier associated with the recipient of the delivered message."""
-
-    sent: int
-    """A UTC timestamp at which Courier passed the message to the Integration provider.
-
-    Stored as a millisecond representation of the Unix epoch.
-    """
 
     status: Literal[
         "CANCELED",
@@ -73,8 +49,26 @@ class MessageDetails(BaseModel):
     ]
     """The current status of the message."""
 
+    clicked: Optional[int] = None
+    """
+    A UTC timestamp at which the recipient clicked on a tracked link for the first
+    time. Stored as a millisecond representation of the Unix epoch.
+    """
+
+    delivered: Optional[int] = None
+    """A UTC timestamp at which the Integration provider delivered the message.
+
+    Stored as a millisecond representation of the Unix epoch.
+    """
+
     error: Optional[str] = None
     """A message describing the error that occurred."""
+
+    opened: Optional[int] = None
+    """A UTC timestamp at which the recipient opened a message for the first time.
+
+    Stored as a millisecond representation of the Unix epoch.
+    """
 
     reason: Optional[
         Literal[
@@ -90,3 +84,9 @@ class MessageDetails(BaseModel):
         ]
     ] = None
     """The reason for the current status of the message."""
+
+    sent: Optional[int] = None
+    """A UTC timestamp at which Courier passed the message to the Integration provider.
+
+    Stored as a millisecond representation of the Unix epoch.
+    """
