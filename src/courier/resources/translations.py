@@ -6,7 +6,7 @@ import httpx
 
 from ..types import translation_update_params
 from .._types import Body, Query, Headers, NoneType, NotGiven, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -69,7 +69,7 @@ class TranslationsResource(SyncAPIResource):
         if not locale:
             raise ValueError(f"Expected a non-empty value for `locale` but received {locale!r}")
         return self._get(
-            f"/translations/{domain}/{locale}",
+            path_template("/translations/{domain}/{locale}", domain=domain, locale=locale),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -107,7 +107,7 @@ class TranslationsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `locale` but received {locale!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
-            f"/translations/{domain}/{locale}",
+            path_template("/translations/{domain}/{locale}", domain=domain, locale=locale),
             body=maybe_transform(body, translation_update_params.TranslationUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -165,7 +165,7 @@ class AsyncTranslationsResource(AsyncAPIResource):
         if not locale:
             raise ValueError(f"Expected a non-empty value for `locale` but received {locale!r}")
         return await self._get(
-            f"/translations/{domain}/{locale}",
+            path_template("/translations/{domain}/{locale}", domain=domain, locale=locale),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -203,7 +203,7 @@ class AsyncTranslationsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `locale` but received {locale!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
-            f"/translations/{domain}/{locale}",
+            path_template("/translations/{domain}/{locale}", domain=domain, locale=locale),
             body=await async_maybe_transform(body, translation_update_params.TranslationUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
