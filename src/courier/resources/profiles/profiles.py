@@ -16,7 +16,7 @@ from .lists import (
 )
 from ...types import profile_create_params, profile_update_params, profile_replace_params
 from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -85,7 +85,7 @@ class ProfilesResource(SyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return self._post(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             body=maybe_transform({"profile": profile}, profile_create_params.ProfileCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -119,7 +119,7 @@ class ProfilesResource(SyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return self._get(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -156,7 +156,7 @@ class ProfilesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._patch(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             body=maybe_transform({"patch": patch}, profile_update_params.ProfileUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -191,7 +191,7 @@ class ProfilesResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -229,7 +229,7 @@ class ProfilesResource(SyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return self._put(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             body=maybe_transform({"profile": profile}, profile_replace_params.ProfileReplaceParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -290,7 +290,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return await self._post(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             body=await async_maybe_transform({"profile": profile}, profile_create_params.ProfileCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -324,7 +324,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return await self._get(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -361,7 +361,7 @@ class AsyncProfilesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._patch(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             body=await async_maybe_transform({"patch": patch}, profile_update_params.ProfileUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -396,7 +396,7 @@ class AsyncProfilesResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -434,7 +434,7 @@ class AsyncProfilesResource(AsyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return await self._put(
-            f"/profiles/{user_id}",
+            path_template("/profiles/{user_id}", user_id=user_id),
             body=await async_maybe_transform({"profile": profile}, profile_replace_params.ProfileReplaceParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

@@ -7,7 +7,7 @@ from typing import Iterable
 import httpx
 
 from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -73,7 +73,7 @@ class ChecksResource(SyncAPIResource):
         if not submission_id:
             raise ValueError(f"Expected a non-empty value for `submission_id` but received {submission_id!r}")
         return self._put(
-            f"/notifications/{id}/{submission_id}/checks",
+            path_template("/notifications/{id}/{submission_id}/checks", id=id, submission_id=submission_id),
             body=maybe_transform({"checks": checks}, check_update_params.CheckUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -108,7 +108,7 @@ class ChecksResource(SyncAPIResource):
         if not submission_id:
             raise ValueError(f"Expected a non-empty value for `submission_id` but received {submission_id!r}")
         return self._get(
-            f"/notifications/{id}/{submission_id}/checks",
+            path_template("/notifications/{id}/{submission_id}/checks", id=id, submission_id=submission_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -143,7 +143,7 @@ class ChecksResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `submission_id` but received {submission_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/notifications/{id}/{submission_id}/checks",
+            path_template("/notifications/{id}/{submission_id}/checks", id=id, submission_id=submission_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -199,7 +199,7 @@ class AsyncChecksResource(AsyncAPIResource):
         if not submission_id:
             raise ValueError(f"Expected a non-empty value for `submission_id` but received {submission_id!r}")
         return await self._put(
-            f"/notifications/{id}/{submission_id}/checks",
+            path_template("/notifications/{id}/{submission_id}/checks", id=id, submission_id=submission_id),
             body=await async_maybe_transform({"checks": checks}, check_update_params.CheckUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -234,7 +234,7 @@ class AsyncChecksResource(AsyncAPIResource):
         if not submission_id:
             raise ValueError(f"Expected a non-empty value for `submission_id` but received {submission_id!r}")
         return await self._get(
-            f"/notifications/{id}/{submission_id}/checks",
+            path_template("/notifications/{id}/{submission_id}/checks", id=id, submission_id=submission_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -269,7 +269,7 @@ class AsyncChecksResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `submission_id` but received {submission_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/notifications/{id}/{submission_id}/checks",
+            path_template("/notifications/{id}/{submission_id}/checks", id=id, submission_id=submission_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

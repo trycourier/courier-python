@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ...._types import Body, Query, Headers, NotGiven, not_given
+from ...._utils import path_template
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
@@ -77,7 +78,12 @@ class VersionsResource(SyncAPIResource):
         if not version:
             raise ValueError(f"Expected a non-empty value for `version` but received {version!r}")
         return self._get(
-            f"/tenants/{tenant_id}/templates/{template_id}/versions/{version}",
+            path_template(
+                "/tenants/{tenant_id}/templates/{template_id}/versions/{version}",
+                tenant_id=tenant_id,
+                template_id=template_id,
+                version=version,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -143,7 +149,12 @@ class AsyncVersionsResource(AsyncAPIResource):
         if not version:
             raise ValueError(f"Expected a non-empty value for `version` but received {version!r}")
         return await self._get(
-            f"/tenants/{tenant_id}/templates/{template_id}/versions/{version}",
+            path_template(
+                "/tenants/{tenant_id}/templates/{template_id}/versions/{version}",
+                tenant_id=tenant_id,
+                template_id=template_id,
+                version=version,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

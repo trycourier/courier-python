@@ -7,7 +7,7 @@ from typing import Iterable, Optional
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -79,7 +79,7 @@ class SubscriptionsResource(SyncAPIResource):
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return self._get(
-            f"/lists/{list_id}/subscriptions",
+            path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -119,7 +119,7 @@ class SubscriptionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
-            f"/lists/{list_id}/subscriptions",
+            path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             body=maybe_transform({"recipients": recipients}, subscription_add_params.SubscriptionAddParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -157,7 +157,7 @@ class SubscriptionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
-            f"/lists/{list_id}/subscriptions",
+            path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             body=maybe_transform({"recipients": recipients}, subscription_subscribe_params.SubscriptionSubscribeParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -197,7 +197,7 @@ class SubscriptionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
-            f"/lists/{list_id}/subscriptions/{user_id}",
+            path_template("/lists/{list_id}/subscriptions/{user_id}", list_id=list_id, user_id=user_id),
             body=maybe_transform(
                 {"preferences": preferences}, subscription_subscribe_user_params.SubscriptionSubscribeUserParams
             ),
@@ -237,7 +237,7 @@ class SubscriptionsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/lists/{list_id}/subscriptions/{user_id}",
+            path_template("/lists/{list_id}/subscriptions/{user_id}", list_id=list_id, user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -294,7 +294,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return await self._get(
-            f"/lists/{list_id}/subscriptions",
+            path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -334,7 +334,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
-            f"/lists/{list_id}/subscriptions",
+            path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             body=await async_maybe_transform({"recipients": recipients}, subscription_add_params.SubscriptionAddParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -372,7 +372,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
-            f"/lists/{list_id}/subscriptions",
+            path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             body=await async_maybe_transform(
                 {"recipients": recipients}, subscription_subscribe_params.SubscriptionSubscribeParams
             ),
@@ -414,7 +414,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
-            f"/lists/{list_id}/subscriptions/{user_id}",
+            path_template("/lists/{list_id}/subscriptions/{user_id}", list_id=list_id, user_id=user_id),
             body=await async_maybe_transform(
                 {"preferences": preferences}, subscription_subscribe_user_params.SubscriptionSubscribeUserParams
             ),
@@ -454,7 +454,7 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/lists/{list_id}/subscriptions/{user_id}",
+            path_template("/lists/{list_id}/subscriptions/{user_id}", list_id=list_id, user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
