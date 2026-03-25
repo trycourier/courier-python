@@ -304,12 +304,28 @@ Methods:
 Types:
 
 ```python
-from courier.types import BaseCheck, Check, NotificationGetContent, NotificationListResponse
+from courier.types import (
+    BaseCheck,
+    Check,
+    NotificationGetContent,
+    NotificationTemplateCreateRequest,
+    NotificationTemplateGetResponse,
+    NotificationTemplateMutationResponse,
+    NotificationTemplatePayload,
+    NotificationTemplateSummary,
+    NotificationTemplateUpdateRequest,
+    NotificationListResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">create</a>(\*\*<a href="src/courier/types/notification_create_params.py">params</a>) -> <a href="./src/courier/types/notification_template_mutation_response.py">NotificationTemplateMutationResponse</a></code>
+- <code title="get /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve</a>(id, \*\*<a href="src/courier/types/notification_retrieve_params.py">params</a>) -> <a href="./src/courier/types/notification_template_get_response.py">NotificationTemplateGetResponse</a></code>
 - <code title="get /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">list</a>(\*\*<a href="src/courier/types/notification_list_params.py">params</a>) -> <a href="./src/courier/types/notification_list_response.py">NotificationListResponse</a></code>
+- <code title="delete /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">archive</a>(id) -> None</code>
+- <code title="post /notifications/{id}/publish">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">publish</a>(id) -> None</code>
+- <code title="put /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">replace</a>(id, \*\*<a href="src/courier/types/notification_replace_params.py">params</a>) -> <a href="./src/courier/types/notification_template_mutation_response.py">NotificationTemplateMutationResponse</a></code>
 - <code title="get /notifications/{id}/content">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve_content</a>(id) -> <a href="./src/courier/types/notification_get_content.py">NotificationGetContent</a></code>
 
 ## Draft
