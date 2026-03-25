@@ -2,25 +2,33 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Union, Optional
+from typing_extensions import TypeAlias
 
 from .._models import BaseModel
 from .shared.paging import Paging
+from .notification_template_summary import NotificationTemplateSummary
 
-__all__ = ["NotificationListResponse", "Result", "ResultTags", "ResultTagsData"]
+__all__ = [
+    "NotificationListResponse",
+    "Result",
+    "ResultNotification",
+    "ResultNotificationTags",
+    "ResultNotificationTagsData",
+]
 
 
-class ResultTagsData(BaseModel):
+class ResultNotificationTagsData(BaseModel):
     id: str
 
     name: str
 
 
-class ResultTags(BaseModel):
-    data: List[ResultTagsData]
+class ResultNotificationTags(BaseModel):
+    data: List[ResultNotificationTagsData]
 
 
-class Result(BaseModel):
+class ResultNotification(BaseModel):
     id: str
 
     created_at: int
@@ -36,15 +44,19 @@ class Result(BaseModel):
 
     updated_at: int
 
-    tags: Optional[ResultTags] = None
+    tags: Optional[ResultNotificationTags] = None
 
     title: Optional[str] = None
+
+
+Result: TypeAlias = Union[ResultNotification, NotificationTemplateSummary]
 
 
 class NotificationListResponse(BaseModel):
     paging: Paging
 
     results: List[Result]
+    """Notification templates in this workspace."""
 
 
 from .shared.message_routing import MessageRouting
