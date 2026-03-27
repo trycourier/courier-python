@@ -90,6 +90,7 @@ from .icons_param import IconsParam as IconsParam
 from .brand_colors import BrandColors as BrandColors
 from .email_footer import EmailFooter as EmailFooter
 from .email_header import EmailHeader as EmailHeader
+from .version_node import VersionNode as VersionNode
 from .brand_snippet import BrandSnippet as BrandSnippet
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
@@ -172,6 +173,7 @@ from .notification_create_params import NotificationCreateParams as Notification
 from .notification_list_response import NotificationListResponse as NotificationListResponse
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
 from .brand_settings_in_app_param import BrandSettingsInAppParam as BrandSettingsInAppParam
+from .notification_publish_params import NotificationPublishParams as NotificationPublishParams
 from .notification_replace_params import NotificationReplaceParams as NotificationReplaceParams
 from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
@@ -186,6 +188,7 @@ from .audience_list_members_response import AudienceListMembersResponse as Audie
 from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as InboundBulkMessageUserParam
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
 from .automation_template_list_response import AutomationTemplateListResponse as AutomationTemplateListResponse
+from .notification_list_versions_params import NotificationListVersionsParams as NotificationListVersionsParams
 from .put_subscriptions_recipient_param import PutSubscriptionsRecipientParam as PutSubscriptionsRecipientParam
 from .notification_template_get_response import NotificationTemplateGetResponse as NotificationTemplateGetResponse
 from .notification_template_payload_param import NotificationTemplatePayloadParam as NotificationTemplatePayloadParam
@@ -195,6 +198,9 @@ from .post_tenant_template_publish_response import (
 from .subscribe_to_lists_request_item_param import SubscribeToListsRequestItemParam as SubscribeToListsRequestItemParam
 from .notification_template_mutation_response import (
     NotificationTemplateMutationResponse as NotificationTemplateMutationResponse,
+)
+from .notification_template_version_list_response import (
+    NotificationTemplateVersionListResponse as NotificationTemplateVersionListResponse,
 )
 
 # Rebuild cyclical models only after all modules are imported.

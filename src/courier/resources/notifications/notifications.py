@@ -26,8 +26,10 @@ from .checks import (
 from ...types import (
     notification_list_params,
     notification_create_params,
+    notification_publish_params,
     notification_replace_params,
     notification_retrieve_params,
+    notification_list_versions_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
@@ -45,6 +47,7 @@ from ...types.notification_list_response import NotificationListResponse
 from ...types.notification_template_get_response import NotificationTemplateGetResponse
 from ...types.notification_template_payload_param import NotificationTemplatePayloadParam
 from ...types.notification_template_mutation_response import NotificationTemplateMutationResponse
+from ...types.notification_template_version_list_response import NotificationTemplateVersionListResponse
 
 __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
 
@@ -251,10 +254,60 @@ class NotificationsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def list_versions(
+        self,
+        id: str,
+        *,
+        cursor: str | Omit = omit,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationTemplateVersionListResponse:
+        """
+        List versions of a notification template.
+
+        Args:
+          cursor: Opaque pagination cursor from a previous response. Omit for the first page.
+
+          limit: Maximum number of versions to return per page. Default 10, max 10.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            path_template("/notifications/{id}/versions", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                    },
+                    notification_list_versions_params.NotificationListVersionsParams,
+                ),
+            ),
+            cast_to=NotificationTemplateVersionListResponse,
+        )
+
     def publish(
         self,
         id: str,
         *,
+        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -262,10 +315,14 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Publish the current draft of a notification template.
+        """Publish a notification template.
+
+        Publishes the current draft by default. Pass a
+        version in the request body to publish a specific historical version.
 
         Args:
+          version: Historical version to publish (e.g. "v001"). Omit to publish the current draft.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -279,6 +336,7 @@ class NotificationsResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._post(
             path_template("/notifications/{id}/publish", id=id),
+            body=maybe_transform({"version": version}, notification_publish_params.NotificationPublishParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -570,10 +628,60 @@ class AsyncNotificationsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def list_versions(
+        self,
+        id: str,
+        *,
+        cursor: str | Omit = omit,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationTemplateVersionListResponse:
+        """
+        List versions of a notification template.
+
+        Args:
+          cursor: Opaque pagination cursor from a previous response. Omit for the first page.
+
+          limit: Maximum number of versions to return per page. Default 10, max 10.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            path_template("/notifications/{id}/versions", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                    },
+                    notification_list_versions_params.NotificationListVersionsParams,
+                ),
+            ),
+            cast_to=NotificationTemplateVersionListResponse,
+        )
+
     async def publish(
         self,
         id: str,
         *,
+        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -581,10 +689,14 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Publish the current draft of a notification template.
+        """Publish a notification template.
+
+        Publishes the current draft by default. Pass a
+        version in the request body to publish a specific historical version.
 
         Args:
+          version: Historical version to publish (e.g. "v001"). Omit to publish the current draft.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -598,6 +710,9 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._post(
             path_template("/notifications/{id}/publish", id=id),
+            body=await async_maybe_transform(
+                {"version": version}, notification_publish_params.NotificationPublishParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -701,6 +816,9 @@ class NotificationsResourceWithRawResponse:
         self.archive = to_raw_response_wrapper(
             notifications.archive,
         )
+        self.list_versions = to_raw_response_wrapper(
+            notifications.list_versions,
+        )
         self.publish = to_raw_response_wrapper(
             notifications.publish,
         )
@@ -735,6 +853,9 @@ class AsyncNotificationsResourceWithRawResponse:
         )
         self.archive = async_to_raw_response_wrapper(
             notifications.archive,
+        )
+        self.list_versions = async_to_raw_response_wrapper(
+            notifications.list_versions,
         )
         self.publish = async_to_raw_response_wrapper(
             notifications.publish,
@@ -771,6 +892,9 @@ class NotificationsResourceWithStreamingResponse:
         self.archive = to_streamed_response_wrapper(
             notifications.archive,
         )
+        self.list_versions = to_streamed_response_wrapper(
+            notifications.list_versions,
+        )
         self.publish = to_streamed_response_wrapper(
             notifications.publish,
         )
@@ -805,6 +929,9 @@ class AsyncNotificationsResourceWithStreamingResponse:
         )
         self.archive = async_to_streamed_response_wrapper(
             notifications.archive,
+        )
+        self.list_versions = async_to_streamed_response_wrapper(
+            notifications.list_versions,
         )
         self.publish = async_to_streamed_response_wrapper(
             notifications.publish,
