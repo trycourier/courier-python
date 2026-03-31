@@ -136,6 +136,14 @@ from .notifications import (
     NotificationsResourceWithStreamingResponse,
     AsyncNotificationsResourceWithStreamingResponse,
 )
+from .routing_strategies import (
+    RoutingStrategiesResource,
+    AsyncRoutingStrategiesResource,
+    RoutingStrategiesResourceWithRawResponse,
+    AsyncRoutingStrategiesResourceWithRawResponse,
+    RoutingStrategiesResourceWithStreamingResponse,
+    AsyncRoutingStrategiesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "SendResource",
@@ -216,6 +224,12 @@ __all__ = [
     "AsyncNotificationsResourceWithRawResponse",
     "NotificationsResourceWithStreamingResponse",
     "AsyncNotificationsResourceWithStreamingResponse",
+    "RoutingStrategiesResource",
+    "AsyncRoutingStrategiesResource",
+    "RoutingStrategiesResourceWithRawResponse",
+    "AsyncRoutingStrategiesResourceWithRawResponse",
+    "RoutingStrategiesResourceWithStreamingResponse",
+    "AsyncRoutingStrategiesResourceWithStreamingResponse",
     "ProfilesResource",
     "AsyncProfilesResource",
     "ProfilesResourceWithRawResponse",

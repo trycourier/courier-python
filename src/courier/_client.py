@@ -49,6 +49,7 @@ if TYPE_CHECKING:
         audit_events,
         translations,
         notifications,
+        routing_strategies,
     )
     from .resources.auth import AuthResource, AsyncAuthResource
     from .resources.bulk import BulkResource, AsyncBulkResource
@@ -65,6 +66,7 @@ if TYPE_CHECKING:
     from .resources.translations import TranslationsResource, AsyncTranslationsResource
     from .resources.tenants.tenants import TenantsResource, AsyncTenantsResource
     from .resources.profiles.profiles import ProfilesResource, AsyncProfilesResource
+    from .resources.routing_strategies import RoutingStrategiesResource, AsyncRoutingStrategiesResource
     from .resources.automations.automations import AutomationsResource, AsyncAutomationsResource
     from .resources.notifications.notifications import NotificationsResource, AsyncNotificationsResource
 
@@ -203,6 +205,12 @@ class Courier(SyncAPIClient):
         from .resources.notifications import NotificationsResource
 
         return NotificationsResource(self)
+
+    @cached_property
+    def routing_strategies(self) -> RoutingStrategiesResource:
+        from .resources.routing_strategies import RoutingStrategiesResource
+
+        return RoutingStrategiesResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
@@ -475,6 +483,12 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncNotificationsResource(self)
 
     @cached_property
+    def routing_strategies(self) -> AsyncRoutingStrategiesResource:
+        from .resources.routing_strategies import AsyncRoutingStrategiesResource
+
+        return AsyncRoutingStrategiesResource(self)
+
+    @cached_property
     def profiles(self) -> AsyncProfilesResource:
         from .resources.profiles import AsyncProfilesResource
 
@@ -696,6 +710,12 @@ class CourierWithRawResponse:
         return NotificationsResourceWithRawResponse(self._client.notifications)
 
     @cached_property
+    def routing_strategies(self) -> routing_strategies.RoutingStrategiesResourceWithRawResponse:
+        from .resources.routing_strategies import RoutingStrategiesResourceWithRawResponse
+
+        return RoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
+
+    @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
         from .resources.profiles import ProfilesResourceWithRawResponse
 
@@ -803,6 +823,12 @@ class AsyncCourierWithRawResponse:
         from .resources.notifications import AsyncNotificationsResourceWithRawResponse
 
         return AsyncNotificationsResourceWithRawResponse(self._client.notifications)
+
+    @cached_property
+    def routing_strategies(self) -> routing_strategies.AsyncRoutingStrategiesResourceWithRawResponse:
+        from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithRawResponse
+
+        return AsyncRoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
@@ -914,6 +940,12 @@ class CourierWithStreamedResponse:
         return NotificationsResourceWithStreamingResponse(self._client.notifications)
 
     @cached_property
+    def routing_strategies(self) -> routing_strategies.RoutingStrategiesResourceWithStreamingResponse:
+        from .resources.routing_strategies import RoutingStrategiesResourceWithStreamingResponse
+
+        return RoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
+
+    @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
         from .resources.profiles import ProfilesResourceWithStreamingResponse
 
@@ -1021,6 +1053,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.notifications import AsyncNotificationsResourceWithStreamingResponse
 
         return AsyncNotificationsResourceWithStreamingResponse(self._client.notifications)
+
+    @cached_property
+    def routing_strategies(self) -> routing_strategies.AsyncRoutingStrategiesResourceWithStreamingResponse:
+        from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithStreamingResponse
+
+        return AsyncRoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:

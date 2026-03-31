@@ -11,7 +11,9 @@ from .shared_params.list_recipient import ListRecipient
 from .shared_params.user_recipient import UserRecipient
 from .shared_params.message_context import MessageContext
 from .shared_params.slack_recipient import SlackRecipient
+from .shared_params.message_channels import MessageChannels
 from .shared_params.elemental_content import ElementalContent
+from .shared_params.message_providers import MessageProviders
 from .shared_params.webhook_recipient import WebhookRecipient
 from .shared_params.audience_recipient import AudienceRecipient
 from .shared_params.ms_teams_recipient import MsTeamsRecipient
@@ -22,16 +24,11 @@ from .shared_params.elemental_content_sugar import ElementalContentSugar
 __all__ = [
     "SendMessageParams",
     "Message",
-    "MessageChannels",
-    "MessageChannelsMetadata",
-    "MessageChannelsTimeouts",
     "MessageContent",
     "MessageDelay",
     "MessageExpiry",
     "MessageMetadata",
     "MessagePreferences",
-    "MessageProviders",
-    "MessageProvidersMetadata",
     "MessageRouting",
     "MessageTimeout",
     "MessageTo",
@@ -45,43 +42,6 @@ class SendMessageParams(TypedDict, total=False):
 
     They define the destination and content of the message.
     """
-
-
-class MessageChannelsMetadata(TypedDict, total=False):
-    utm: Optional[Utm]
-
-
-class MessageChannelsTimeouts(TypedDict, total=False):
-    channel: Optional[int]
-
-    provider: Optional[int]
-
-
-_MessageChannelsReservedKeywords = TypedDict(
-    "_MessageChannelsReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class MessageChannels(_MessageChannelsReservedKeywords, total=False):
-    brand_id: Optional[str]
-    """Brand id used for rendering."""
-
-    metadata: Optional[MessageChannelsMetadata]
-
-    override: Optional[Dict[str, object]]
-    """Channel specific overrides."""
-
-    providers: Optional[SequenceNotStr[str]]
-    """Providers enabled for this channel."""
-
-    routing_method: Optional[Literal["all", "single"]]
-    """Defaults to `single`."""
-
-    timeouts: Optional[MessageChannelsTimeouts]
 
 
 MessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContent]
@@ -123,28 +83,6 @@ class MessageMetadata(TypedDict, total=False):
 class MessagePreferences(TypedDict, total=False):
     subscription_topic_id: Required[str]
     """The subscription topic to apply to the message."""
-
-
-class MessageProvidersMetadata(TypedDict, total=False):
-    utm: Optional[Utm]
-
-
-_MessageProvidersReservedKeywords = TypedDict(
-    "_MessageProvidersReservedKeywords",
-    {
-        "if": Optional[str],
-    },
-    total=False,
-)
-
-
-class MessageProviders(_MessageProvidersReservedKeywords, total=False):
-    metadata: Optional[MessageProvidersMetadata]
-
-    override: Optional[Dict[str, object]]
-    """Provider-specific overrides."""
-
-    timeouts: Optional[int]
 
 
 class MessageRouting(TypedDict, total=False):
@@ -200,7 +138,7 @@ class Message(TypedDict, total=False):
 
     brand_id: Optional[str]
 
-    channels: Optional[Dict[str, MessageChannels]]
+    channels: Optional[MessageChannels]
     """Define run-time configuration for channels.
 
     Valid ChannelId's: email, sms, push, inbox, direct_message, banner, webhook.
@@ -224,7 +162,7 @@ class Message(TypedDict, total=False):
 
     preferences: Optional[MessagePreferences]
 
-    providers: Optional[Dict[str, MessageProviders]]
+    providers: Optional[MessageProviders]
 
     routing: Optional[MessageRouting]
     """Customize which channels/providers Courier may deliver the message through."""
