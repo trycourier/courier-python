@@ -69,6 +69,7 @@ from .shared import (
     SendToMsTeamsChannelID as SendToMsTeamsChannelID,
     SendToMsTeamsChannelName as SendToMsTeamsChannelName,
     UserProfileFirebaseToken as UserProfileFirebaseToken,
+    ElementalHTMLNodeWithType as ElementalHTMLNodeWithType,
     ElementalMetaNodeWithType as ElementalMetaNodeWithType,
     ElementalTextNodeWithType as ElementalTextNodeWithType,
     ElementalImageNodeWithType as ElementalImageNodeWithType,
