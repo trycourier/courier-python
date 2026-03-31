@@ -19,6 +19,7 @@ from courier.types import (
     ElementalContent,
     ElementalContentSugar,
     ElementalDividerNodeWithType,
+    ElementalHTMLNodeWithType,
     ElementalImageNodeWithType,
     ElementalMetaNodeWithType,
     ElementalNode,
