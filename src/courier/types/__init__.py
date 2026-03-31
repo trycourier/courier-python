@@ -2,7 +2,15 @@
 
 from __future__ import annotations
 
-from . import shared, tenants, audience, audience_list_response, audience_update_response, notification_list_response
+from . import (
+    shared,
+    tenants,
+    audience,
+    audience_list_response,
+    audience_update_response,
+    notification_list_response,
+    routing_strategy_get_response,
+)
 from .. import _compat
 from .logo import Logo as Logo
 from .brand import Brand as Brand
@@ -15,9 +23,12 @@ from .shared import (
     Slack as Slack,
     Token as Token,
     Paging as Paging,
+    Channel as Channel,
     Discord as Discord,
     MsTeams as MsTeams,
     Intercom as Intercom,
+    Metadata as Metadata,
+    Timeouts as Timeouts,
     Alignment as Alignment,
     Pagerduty as Pagerduty,
     TextStyle as TextStyle,
@@ -38,8 +49,11 @@ from .shared import (
     MultipleTokens as MultipleTokens,
     SlackRecipient as SlackRecipient,
     WebhookProfile as WebhookProfile,
+    ChannelMetadata as ChannelMetadata,
+    MessageChannels as MessageChannels,
     WebhookAuthMode as WebhookAuthMode,
     ElementalContent as ElementalContent,
+    MessageProviders as MessageProviders,
     MsTeamsRecipient as MsTeamsRecipient,
     PreferenceStatus as PreferenceStatus,
     SendToSlackEmail as SendToSlackEmail,
@@ -59,6 +73,7 @@ from .shared import (
     AudienceFilterConfig as AudienceFilterConfig,
     ElementalChannelNode as ElementalChannelNode,
     ListPatternRecipient as ListPatternRecipient,
+    MessageProvidersType as MessageProvidersType,
     RecipientPreferences as RecipientPreferences,
     ChannelClassification as ChannelClassification,
     ElementalContentSugar as ElementalContentSugar,
@@ -156,6 +171,7 @@ from .message_history_response import MessageHistoryResponse as MessageHistoryRe
 from .notification_get_content import NotificationGetContent as NotificationGetContent
 from .notification_list_params import NotificationListParams as NotificationListParams
 from .profile_replace_response import ProfileReplaceResponse as ProfileReplaceResponse
+from .routing_strategy_summary import RoutingStrategySummary as RoutingStrategySummary
 from .tenant_association_param import TenantAssociationParam as TenantAssociationParam
 from .tenant_list_users_params import TenantListUsersParams as TenantListUsersParams
 from .audit_event_list_response import AuditEventListResponse as AuditEventListResponse
@@ -181,17 +197,23 @@ from .audience_list_members_params import AudienceListMembersParams as AudienceL
 from .inbound_track_event_response import InboundTrackEventResponse as InboundTrackEventResponse
 from .notification_retrieve_params import NotificationRetrieveParams as NotificationRetrieveParams
 from .put_tenant_template_response import PutTenantTemplateResponse as PutTenantTemplateResponse
+from .routing_strategy_list_params import RoutingStrategyListParams as RoutingStrategyListParams
 from .subscription_topic_new_param import SubscriptionTopicNewParam as SubscriptionTopicNewParam
 from .notification_template_payload import NotificationTemplatePayload as NotificationTemplatePayload
 from .notification_template_summary import NotificationTemplateSummary as NotificationTemplateSummary
+from .routing_strategy_get_response import RoutingStrategyGetResponse as RoutingStrategyGetResponse
 from .translation_retrieve_response import TranslationRetrieveResponse as TranslationRetrieveResponse
 from .audience_list_members_response import AudienceListMembersResponse as AudienceListMembersResponse
+from .routing_strategy_create_params import RoutingStrategyCreateParams as RoutingStrategyCreateParams
+from .routing_strategy_list_response import RoutingStrategyListResponse as RoutingStrategyListResponse
 from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as InboundBulkMessageUserParam
+from .routing_strategy_replace_params import RoutingStrategyReplaceParams as RoutingStrategyReplaceParams
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
 from .automation_template_list_response import AutomationTemplateListResponse as AutomationTemplateListResponse
 from .notification_list_versions_params import NotificationListVersionsParams as NotificationListVersionsParams
 from .put_subscriptions_recipient_param import PutSubscriptionsRecipientParam as PutSubscriptionsRecipientParam
 from .notification_template_get_response import NotificationTemplateGetResponse as NotificationTemplateGetResponse
+from .routing_strategy_mutation_response import RoutingStrategyMutationResponse as RoutingStrategyMutationResponse
 from .notification_template_payload_param import NotificationTemplatePayloadParam as NotificationTemplatePayloadParam
 from .post_tenant_template_publish_response import (
     PostTenantTemplatePublishResponse as PostTenantTemplatePublishResponse,
@@ -213,6 +235,7 @@ if _compat.PYDANTIC_V1:
     audience_update_response.AudienceUpdateResponse.update_forward_refs()  # type: ignore
     audience_list_response.AudienceListResponse.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
+    routing_strategy_get_response.RoutingStrategyGetResponse.update_forward_refs()  # type: ignore
     tenants.template_list_response.TemplateListResponse.update_forward_refs()  # type: ignore
     shared.audience_filter_config.AudienceFilterConfig.update_forward_refs()  # type: ignore
     shared.filter_config.FilterConfig.update_forward_refs()  # type: ignore
@@ -222,6 +245,7 @@ else:
     audience_update_response.AudienceUpdateResponse.model_rebuild(_parent_namespace_depth=0)
     audience_list_response.AudienceListResponse.model_rebuild(_parent_namespace_depth=0)
     notification_list_response.NotificationListResponse.model_rebuild(_parent_namespace_depth=0)
+    routing_strategy_get_response.RoutingStrategyGetResponse.model_rebuild(_parent_namespace_depth=0)
     tenants.template_list_response.TemplateListResponse.model_rebuild(_parent_namespace_depth=0)
     shared.audience_filter_config.AudienceFilterConfig.model_rebuild(_parent_namespace_depth=0)
     shared.filter_config.FilterConfig.model_rebuild(_parent_namespace_depth=0)

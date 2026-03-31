@@ -3,7 +3,10 @@
 from .utm import Utm as Utm
 from .rule import Rule as Rule
 from .slack import Slack as Slack
+from .channel import Channel as Channel
+from .metadata import Metadata as Metadata
 from .ms_teams import MsTeams as MsTeams
+from .timeouts import Timeouts as Timeouts
 from .pagerduty import Pagerduty as Pagerduty
 from .preference import Preference as Preference
 from .list_filter import ListFilter as ListFilter
@@ -17,7 +20,10 @@ from .message_context import MessageContext as MessageContext
 from .message_routing import MessageRouting as MessageRouting
 from .slack_recipient import SlackRecipient as SlackRecipient
 from .webhook_profile import WebhookProfile as WebhookProfile
+from .channel_metadata import ChannelMetadata as ChannelMetadata
+from .message_channels import MessageChannels as MessageChannels
 from .elemental_content import ElementalContent as ElementalContent
+from .message_providers import MessageProviders as MessageProviders
 from .preference_status import PreferenceStatus as PreferenceStatus
 from .webhook_auth_mode import WebhookAuthMode as WebhookAuthMode
 from .webhook_recipient import WebhookRecipient as WebhookRecipient
@@ -35,6 +41,7 @@ from .audience_filter_config import AudienceFilterConfig as AudienceFilterConfig
 from .channel_classification import ChannelClassification as ChannelClassification
 from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode
 from .list_pattern_recipient import ListPatternRecipient as ListPatternRecipient
+from .message_providers_type import MessageProvidersType as MessageProvidersType
 from .send_to_ms_teams_email import SendToMsTeamsEmail as SendToMsTeamsEmail
 from .webhook_authentication import WebhookAuthentication as WebhookAuthentication
 from .elemental_content_sugar import ElementalContentSugar as ElementalContentSugar
