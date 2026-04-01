@@ -98,6 +98,7 @@ from .shared import (
 from .tenant import Tenant as Tenant
 from .journey import Journey as Journey
 from .audience import Audience as Audience
+from .provider import Provider as Provider
 from .base_check import BaseCheck as BaseCheck
 from .email_head import EmailHead as EmailHead
 from .logo_param import LogoParam as LogoParam
@@ -140,6 +141,7 @@ from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
 from .brand_template_param import BrandTemplateParam as BrandTemplateParam
 from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
+from .provider_list_params import ProviderListParams as ProviderListParams
 from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
@@ -157,10 +159,14 @@ from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
 from .journeys_list_response import JourneysListResponse as JourneysListResponse
 from .message_history_params import MessageHistoryParams as MessageHistoryParams
 from .profile_replace_params import ProfileReplaceParams as ProfileReplaceParams
+from .provider_create_params import ProviderCreateParams as ProviderCreateParams
+from .provider_list_response import ProviderListResponse as ProviderListResponse
+from .provider_update_params import ProviderUpdateParams as ProviderUpdateParams
 from .subscription_topic_new import SubscriptionTopicNew as SubscriptionTopicNew
 from .audit_event_list_params import AuditEventListParams as AuditEventListParams
 from .auth_issue_token_params import AuthIssueTokenParams as AuthIssueTokenParams
 from .profile_create_response import ProfileCreateResponse as ProfileCreateResponse
+from .providers_catalog_entry import ProvidersCatalogEntry as ProvidersCatalogEntry
 from .widget_background_param import WidgetBackgroundParam as WidgetBackgroundParam
 from .audience_update_response import AudienceUpdateResponse as AudienceUpdateResponse
 from .bulk_create_job_response import BulkCreateJobResponse as BulkCreateJobResponse

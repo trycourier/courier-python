@@ -115,6 +115,34 @@ Methods:
 - <code title="delete /audiences/{audience_id}">client.audiences.<a href="./src/courier/resources/audiences.py">delete</a>(audience_id) -> None</code>
 - <code title="get /audiences/{audience_id}/members">client.audiences.<a href="./src/courier/resources/audiences.py">list_members</a>(audience_id, \*\*<a href="src/courier/types/audience_list_members_params.py">params</a>) -> <a href="./src/courier/types/audience_list_members_response.py">AudienceListMembersResponse</a></code>
 
+# Providers
+
+Types:
+
+```python
+from courier.types import Provider, ProvidersCatalogEntry, ProviderListResponse
+```
+
+Methods:
+
+- <code title="post /providers">client.providers.<a href="./src/courier/resources/providers/providers.py">create</a>(\*\*<a href="src/courier/types/provider_create_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
+- <code title="get /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">retrieve</a>(id) -> <a href="./src/courier/types/provider.py">Provider</a></code>
+- <code title="post /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">update</a>(id, \*\*<a href="src/courier/types/provider_update_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
+- <code title="get /providers">client.providers.<a href="./src/courier/resources/providers/providers.py">list</a>(\*\*<a href="src/courier/types/provider_list_params.py">params</a>) -> <a href="./src/courier/types/provider_list_response.py">ProviderListResponse</a></code>
+- <code title="delete /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">delete</a>(id) -> None</code>
+
+## Catalog
+
+Types:
+
+```python
+from courier.types.providers import CatalogListResponse
+```
+
+Methods:
+
+- <code title="get /providers/catalog">client.providers.catalog.<a href="./src/courier/resources/providers/catalog.py">list</a>(\*\*<a href="src/courier/types/providers/catalog_list_params.py">params</a>) -> <a href="./src/courier/types/providers/catalog_list_response.py">CatalogListResponse</a></code>
+
 # AuditEvents
 
 Types:
