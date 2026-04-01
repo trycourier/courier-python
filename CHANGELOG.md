@@ -1,5 +1,37 @@
 # Changelog
 
+## 7.10.0 (2026-04-01)
+
+Full Changelog: [v7.9.0...v7.10.0](https://github.com/trycourier/courier-python/compare/v7.9.0...v7.10.0)
+
+### Features
+
+* **api:** add create/retrieve/archive/publish/replace, event_id param to notifications ([4951cdc](https://github.com/trycourier/courier-python/commit/4951cdc00d9c0c2a0db727142b6003582d1fc3c4))
+* **api:** add html type variant to ElementalNode ([6a1ddc7](https://github.com/trycourier/courier-python/commit/6a1ddc795e86d4988c0bf10d513addcdab87662f))
+* **api:** add providers resource with CRUD methods and catalog endpoint ([db4b86b](https://github.com/trycourier/courier-python/commit/db4b86ba098ec178d69effa22d4097aa54ddf904))
+* **api:** add routing_strategies resource ([7577000](https://github.com/trycourier/courier-python/commit/7577000f2e0a696a088563de4a17ac85b56d753d))
+* **internal:** implement indices array format for query and form serialization ([7fc2cd1](https://github.com/trycourier/courier-python/commit/7fc2cd18f58888f774d63ce974317cc6d388f09e))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([7ad4509](https://github.com/trycourier/courier-python/commit/7ad4509447a139223b654faf68003316d9f034c6))
+* **pydantic:** do not pass `by_alias` unless set ([65aef6b](https://github.com/trycourier/courier-python/commit/65aef6bb51884841b1df70c100577b7fb3333b56))
+* sanitize endpoint path params ([9497e29](https://github.com/trycourier/courier-python/commit/9497e29d2cdbb37f4dd1492274adde42d6e03793))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([f6f933d](https://github.com/trycourier/courier-python/commit/f6f933d7802669fefeee85e6f3935f506a772dd3))
+* **internal:** tweak CI branches ([40e254c](https://github.com/trycourier/courier-python/commit/40e254ca8d139b91b022ca7cd974acd25db6b913))
+* **internal:** update gitignore ([93aedb9](https://github.com/trycourier/courier-python/commit/93aedb9fdf91b5577a0b57bfdd367a11a37ba87b))
+* **types:** extract ElementalHTMLNodeWithType from inline union member ([1620896](https://github.com/trycourier/courier-python/commit/162089600320b6545fa4abf610c3055a43ecc0fb))
+
+
+### Documentation
+
+* add AGENTS.md for AI coding assistants ([#129](https://github.com/trycourier/courier-python/issues/129)) ([25609a5](https://github.com/trycourier/courier-python/commit/25609a5244514cdb7768d11cefdb52484e2632d6))
+
 ## 7.9.0 (2026-03-12)
 
 Full Changelog: [v7.8.0...v7.9.0](https://github.com/trycourier/courier-python/compare/v7.8.0...v7.9.0)
