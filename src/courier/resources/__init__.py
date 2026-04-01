@@ -104,6 +104,14 @@ from .audiences import (
     AudiencesResourceWithStreamingResponse,
     AsyncAudiencesResourceWithStreamingResponse,
 )
+from .providers import (
+    ProvidersResource,
+    AsyncProvidersResource,
+    ProvidersResourceWithRawResponse,
+    AsyncProvidersResourceWithRawResponse,
+    ProvidersResourceWithStreamingResponse,
+    AsyncProvidersResourceWithStreamingResponse,
+)
 from .automations import (
     AutomationsResource,
     AsyncAutomationsResource,
@@ -158,6 +166,12 @@ __all__ = [
     "AsyncAudiencesResourceWithRawResponse",
     "AudiencesResourceWithStreamingResponse",
     "AsyncAudiencesResourceWithStreamingResponse",
+    "ProvidersResource",
+    "AsyncProvidersResource",
+    "ProvidersResourceWithRawResponse",
+    "AsyncProvidersResourceWithRawResponse",
+    "ProvidersResourceWithStreamingResponse",
+    "AsyncProvidersResourceWithStreamingResponse",
     "AuditEventsResource",
     "AsyncAuditEventsResource",
     "AuditEventsResourceWithRawResponse",
