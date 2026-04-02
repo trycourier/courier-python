@@ -104,6 +104,14 @@ from .audiences import (
     AudiencesResourceWithStreamingResponse,
     AsyncAudiencesResourceWithStreamingResponse,
 )
+from .providers import (
+    ProvidersResource,
+    AsyncProvidersResource,
+    ProvidersResourceWithRawResponse,
+    AsyncProvidersResourceWithRawResponse,
+    ProvidersResourceWithStreamingResponse,
+    AsyncProvidersResourceWithStreamingResponse,
+)
 from .automations import (
     AutomationsResource,
     AsyncAutomationsResource,
@@ -136,6 +144,14 @@ from .notifications import (
     NotificationsResourceWithStreamingResponse,
     AsyncNotificationsResourceWithStreamingResponse,
 )
+from .routing_strategies import (
+    RoutingStrategiesResource,
+    AsyncRoutingStrategiesResource,
+    RoutingStrategiesResourceWithRawResponse,
+    AsyncRoutingStrategiesResourceWithRawResponse,
+    RoutingStrategiesResourceWithStreamingResponse,
+    AsyncRoutingStrategiesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "SendResource",
@@ -150,6 +166,12 @@ __all__ = [
     "AsyncAudiencesResourceWithRawResponse",
     "AudiencesResourceWithStreamingResponse",
     "AsyncAudiencesResourceWithStreamingResponse",
+    "ProvidersResource",
+    "AsyncProvidersResource",
+    "ProvidersResourceWithRawResponse",
+    "AsyncProvidersResourceWithRawResponse",
+    "ProvidersResourceWithStreamingResponse",
+    "AsyncProvidersResourceWithStreamingResponse",
     "AuditEventsResource",
     "AsyncAuditEventsResource",
     "AuditEventsResourceWithRawResponse",
@@ -216,6 +238,12 @@ __all__ = [
     "AsyncNotificationsResourceWithRawResponse",
     "NotificationsResourceWithStreamingResponse",
     "AsyncNotificationsResourceWithStreamingResponse",
+    "RoutingStrategiesResource",
+    "AsyncRoutingStrategiesResource",
+    "RoutingStrategiesResourceWithRawResponse",
+    "AsyncRoutingStrategiesResourceWithRawResponse",
+    "RoutingStrategiesResourceWithStreamingResponse",
+    "AsyncRoutingStrategiesResourceWithStreamingResponse",
     "ProfilesResource",
     "AsyncProfilesResource",
     "ProfilesResourceWithRawResponse",

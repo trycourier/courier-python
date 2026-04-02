@@ -45,10 +45,12 @@ if TYPE_CHECKING:
         profiles,
         requests,
         audiences,
+        providers,
         automations,
         audit_events,
         translations,
         notifications,
+        routing_strategies,
     )
     from .resources.auth import AuthResource, AsyncAuthResource
     from .resources.bulk import BulkResource, AsyncBulkResource
@@ -65,6 +67,8 @@ if TYPE_CHECKING:
     from .resources.translations import TranslationsResource, AsyncTranslationsResource
     from .resources.tenants.tenants import TenantsResource, AsyncTenantsResource
     from .resources.profiles.profiles import ProfilesResource, AsyncProfilesResource
+    from .resources.routing_strategies import RoutingStrategiesResource, AsyncRoutingStrategiesResource
+    from .resources.providers.providers import ProvidersResource, AsyncProvidersResource
     from .resources.automations.automations import AutomationsResource, AsyncAutomationsResource
     from .resources.notifications.notifications import NotificationsResource, AsyncNotificationsResource
 
@@ -139,6 +143,12 @@ class Courier(SyncAPIClient):
         return AudiencesResource(self)
 
     @cached_property
+    def providers(self) -> ProvidersResource:
+        from .resources.providers import ProvidersResource
+
+        return ProvidersResource(self)
+
+    @cached_property
     def audit_events(self) -> AuditEventsResource:
         from .resources.audit_events import AuditEventsResource
 
@@ -203,6 +213,12 @@ class Courier(SyncAPIClient):
         from .resources.notifications import NotificationsResource
 
         return NotificationsResource(self)
+
+    @cached_property
+    def routing_strategies(self) -> RoutingStrategiesResource:
+        from .resources.routing_strategies import RoutingStrategiesResource
+
+        return RoutingStrategiesResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
@@ -409,6 +425,12 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncAudiencesResource(self)
 
     @cached_property
+    def providers(self) -> AsyncProvidersResource:
+        from .resources.providers import AsyncProvidersResource
+
+        return AsyncProvidersResource(self)
+
+    @cached_property
     def audit_events(self) -> AsyncAuditEventsResource:
         from .resources.audit_events import AsyncAuditEventsResource
 
@@ -473,6 +495,12 @@ class AsyncCourier(AsyncAPIClient):
         from .resources.notifications import AsyncNotificationsResource
 
         return AsyncNotificationsResource(self)
+
+    @cached_property
+    def routing_strategies(self) -> AsyncRoutingStrategiesResource:
+        from .resources.routing_strategies import AsyncRoutingStrategiesResource
+
+        return AsyncRoutingStrategiesResource(self)
 
     @cached_property
     def profiles(self) -> AsyncProfilesResource:
@@ -630,6 +658,12 @@ class CourierWithRawResponse:
         return AudiencesResourceWithRawResponse(self._client.audiences)
 
     @cached_property
+    def providers(self) -> providers.ProvidersResourceWithRawResponse:
+        from .resources.providers import ProvidersResourceWithRawResponse
+
+        return ProvidersResourceWithRawResponse(self._client.providers)
+
+    @cached_property
     def audit_events(self) -> audit_events.AuditEventsResourceWithRawResponse:
         from .resources.audit_events import AuditEventsResourceWithRawResponse
 
@@ -696,6 +730,12 @@ class CourierWithRawResponse:
         return NotificationsResourceWithRawResponse(self._client.notifications)
 
     @cached_property
+    def routing_strategies(self) -> routing_strategies.RoutingStrategiesResourceWithRawResponse:
+        from .resources.routing_strategies import RoutingStrategiesResourceWithRawResponse
+
+        return RoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
+
+    @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
         from .resources.profiles import ProfilesResourceWithRawResponse
 
@@ -737,6 +777,12 @@ class AsyncCourierWithRawResponse:
         from .resources.audiences import AsyncAudiencesResourceWithRawResponse
 
         return AsyncAudiencesResourceWithRawResponse(self._client.audiences)
+
+    @cached_property
+    def providers(self) -> providers.AsyncProvidersResourceWithRawResponse:
+        from .resources.providers import AsyncProvidersResourceWithRawResponse
+
+        return AsyncProvidersResourceWithRawResponse(self._client.providers)
 
     @cached_property
     def audit_events(self) -> audit_events.AsyncAuditEventsResourceWithRawResponse:
@@ -805,6 +851,12 @@ class AsyncCourierWithRawResponse:
         return AsyncNotificationsResourceWithRawResponse(self._client.notifications)
 
     @cached_property
+    def routing_strategies(self) -> routing_strategies.AsyncRoutingStrategiesResourceWithRawResponse:
+        from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithRawResponse
+
+        return AsyncRoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
+
+    @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
         from .resources.profiles import AsyncProfilesResourceWithRawResponse
 
@@ -846,6 +898,12 @@ class CourierWithStreamedResponse:
         from .resources.audiences import AudiencesResourceWithStreamingResponse
 
         return AudiencesResourceWithStreamingResponse(self._client.audiences)
+
+    @cached_property
+    def providers(self) -> providers.ProvidersResourceWithStreamingResponse:
+        from .resources.providers import ProvidersResourceWithStreamingResponse
+
+        return ProvidersResourceWithStreamingResponse(self._client.providers)
 
     @cached_property
     def audit_events(self) -> audit_events.AuditEventsResourceWithStreamingResponse:
@@ -914,6 +972,12 @@ class CourierWithStreamedResponse:
         return NotificationsResourceWithStreamingResponse(self._client.notifications)
 
     @cached_property
+    def routing_strategies(self) -> routing_strategies.RoutingStrategiesResourceWithStreamingResponse:
+        from .resources.routing_strategies import RoutingStrategiesResourceWithStreamingResponse
+
+        return RoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
+
+    @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
         from .resources.profiles import ProfilesResourceWithStreamingResponse
 
@@ -955,6 +1019,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.audiences import AsyncAudiencesResourceWithStreamingResponse
 
         return AsyncAudiencesResourceWithStreamingResponse(self._client.audiences)
+
+    @cached_property
+    def providers(self) -> providers.AsyncProvidersResourceWithStreamingResponse:
+        from .resources.providers import AsyncProvidersResourceWithStreamingResponse
+
+        return AsyncProvidersResourceWithStreamingResponse(self._client.providers)
 
     @cached_property
     def audit_events(self) -> audit_events.AsyncAuditEventsResourceWithStreamingResponse:
@@ -1021,6 +1091,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.notifications import AsyncNotificationsResourceWithStreamingResponse
 
         return AsyncNotificationsResourceWithStreamingResponse(self._client.notifications)
+
+    @cached_property
+    def routing_strategies(self) -> routing_strategies.AsyncRoutingStrategiesResourceWithStreamingResponse:
+        from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithStreamingResponse
+
+        return AsyncRoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:

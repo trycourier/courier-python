@@ -8,7 +8,9 @@ from courier.types import (
     AudienceFilter,
     AudienceFilterConfig,
     AudienceRecipient,
+    Channel,
     ChannelClassification,
+    ChannelMetadata,
     ChannelPreference,
     DeviceType,
     Discord,
@@ -19,6 +21,7 @@ from courier.types import (
     ElementalContent,
     ElementalContentSugar,
     ElementalDividerNodeWithType,
+    ElementalHTMLNodeWithType,
     ElementalImageNodeWithType,
     ElementalMetaNodeWithType,
     ElementalNode,
@@ -31,9 +34,13 @@ from courier.types import (
     ListFilter,
     ListPatternRecipient,
     ListRecipient,
+    MessageChannels,
     MessageContext,
+    MessageProviders,
+    MessageProvidersType,
     MessageRouting,
     MessageRoutingChannel,
+    Metadata,
     MsTeams,
     MsTeamsBaseProperties,
     MsTeamsRecipient,
@@ -60,6 +67,7 @@ from courier.types import (
     SlackBaseProperties,
     SlackRecipient,
     TextStyle,
+    Timeouts,
     Token,
     UserProfile,
     UserProfileFirebaseToken,
@@ -106,6 +114,34 @@ Methods:
 - <code title="get /audiences">client.audiences.<a href="./src/courier/resources/audiences.py">list</a>(\*\*<a href="src/courier/types/audience_list_params.py">params</a>) -> <a href="./src/courier/types/audience_list_response.py">AudienceListResponse</a></code>
 - <code title="delete /audiences/{audience_id}">client.audiences.<a href="./src/courier/resources/audiences.py">delete</a>(audience_id) -> None</code>
 - <code title="get /audiences/{audience_id}/members">client.audiences.<a href="./src/courier/resources/audiences.py">list_members</a>(audience_id, \*\*<a href="src/courier/types/audience_list_members_params.py">params</a>) -> <a href="./src/courier/types/audience_list_members_response.py">AudienceListMembersResponse</a></code>
+
+# Providers
+
+Types:
+
+```python
+from courier.types import Provider, ProvidersCatalogEntry, ProviderListResponse
+```
+
+Methods:
+
+- <code title="post /providers">client.providers.<a href="./src/courier/resources/providers/providers.py">create</a>(\*\*<a href="src/courier/types/provider_create_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
+- <code title="get /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">retrieve</a>(id) -> <a href="./src/courier/types/provider.py">Provider</a></code>
+- <code title="post /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">update</a>(id, \*\*<a href="src/courier/types/provider_update_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
+- <code title="get /providers">client.providers.<a href="./src/courier/resources/providers/providers.py">list</a>(\*\*<a href="src/courier/types/provider_list_params.py">params</a>) -> <a href="./src/courier/types/provider_list_response.py">ProviderListResponse</a></code>
+- <code title="delete /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">delete</a>(id) -> None</code>
+
+## Catalog
+
+Types:
+
+```python
+from courier.types.providers import CatalogListResponse
+```
+
+Methods:
+
+- <code title="get /providers/catalog">client.providers.catalog.<a href="./src/courier/resources/providers/catalog.py">list</a>(\*\*<a href="src/courier/types/providers/catalog_list_params.py">params</a>) -> <a href="./src/courier/types/providers/catalog_list_response.py">CatalogListResponse</a></code>
 
 # AuditEvents
 
@@ -304,12 +340,32 @@ Methods:
 Types:
 
 ```python
-from courier.types import BaseCheck, Check, NotificationGetContent, NotificationListResponse
+from courier.types import (
+    BaseCheck,
+    Check,
+    NotificationGetContent,
+    NotificationTemplateCreateRequest,
+    NotificationTemplateGetResponse,
+    NotificationTemplateMutationResponse,
+    NotificationTemplatePayload,
+    NotificationTemplatePublishRequest,
+    NotificationTemplateSummary,
+    NotificationTemplateUpdateRequest,
+    NotificationTemplateVersionListResponse,
+    VersionNode,
+    NotificationListResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">create</a>(\*\*<a href="src/courier/types/notification_create_params.py">params</a>) -> <a href="./src/courier/types/notification_template_mutation_response.py">NotificationTemplateMutationResponse</a></code>
+- <code title="get /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve</a>(id, \*\*<a href="src/courier/types/notification_retrieve_params.py">params</a>) -> <a href="./src/courier/types/notification_template_get_response.py">NotificationTemplateGetResponse</a></code>
 - <code title="get /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">list</a>(\*\*<a href="src/courier/types/notification_list_params.py">params</a>) -> <a href="./src/courier/types/notification_list_response.py">NotificationListResponse</a></code>
+- <code title="delete /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">archive</a>(id) -> None</code>
+- <code title="get /notifications/{id}/versions">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">list_versions</a>(id, \*\*<a href="src/courier/types/notification_list_versions_params.py">params</a>) -> <a href="./src/courier/types/notification_template_version_list_response.py">NotificationTemplateVersionListResponse</a></code>
+- <code title="post /notifications/{id}/publish">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">publish</a>(id, \*\*<a href="src/courier/types/notification_publish_params.py">params</a>) -> None</code>
+- <code title="put /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">replace</a>(id, \*\*<a href="src/courier/types/notification_replace_params.py">params</a>) -> <a href="./src/courier/types/notification_template_mutation_response.py">NotificationTemplateMutationResponse</a></code>
 - <code title="get /notifications/{id}/content">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve_content</a>(id) -> <a href="./src/courier/types/notification_get_content.py">NotificationGetContent</a></code>
 
 ## Draft
@@ -331,6 +387,29 @@ Methods:
 - <code title="put /notifications/{id}/{submissionId}/checks">client.notifications.checks.<a href="./src/courier/resources/notifications/checks.py">update</a>(submission_id, \*, id, \*\*<a href="src/courier/types/notifications/check_update_params.py">params</a>) -> <a href="./src/courier/types/notifications/check_update_response.py">CheckUpdateResponse</a></code>
 - <code title="get /notifications/{id}/{submissionId}/checks">client.notifications.checks.<a href="./src/courier/resources/notifications/checks.py">list</a>(submission_id, \*, id) -> <a href="./src/courier/types/notifications/check_list_response.py">CheckListResponse</a></code>
 - <code title="delete /notifications/{id}/{submissionId}/checks">client.notifications.checks.<a href="./src/courier/resources/notifications/checks.py">delete</a>(submission_id, \*, id) -> None</code>
+
+# RoutingStrategies
+
+Types:
+
+```python
+from courier.types import (
+    RoutingStrategyCreateRequest,
+    RoutingStrategyGetResponse,
+    RoutingStrategyListResponse,
+    RoutingStrategyMutationResponse,
+    RoutingStrategyReplaceRequest,
+    RoutingStrategySummary,
+)
+```
+
+Methods:
+
+- <code title="post /routing-strategies">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">create</a>(\*\*<a href="src/courier/types/routing_strategy_create_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_mutation_response.py">RoutingStrategyMutationResponse</a></code>
+- <code title="get /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">retrieve</a>(id) -> <a href="./src/courier/types/routing_strategy_get_response.py">RoutingStrategyGetResponse</a></code>
+- <code title="get /routing-strategies">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">list</a>(\*\*<a href="src/courier/types/routing_strategy_list_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_list_response.py">RoutingStrategyListResponse</a></code>
+- <code title="delete /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">archive</a>(id) -> None</code>
+- <code title="put /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">replace</a>(id, \*\*<a href="src/courier/types/routing_strategy_replace_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_mutation_response.py">RoutingStrategyMutationResponse</a></code>
 
 # Profiles
 

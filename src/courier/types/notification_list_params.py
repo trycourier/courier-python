@@ -10,6 +10,10 @@ __all__ = ["NotificationListParams"]
 
 class NotificationListParams(TypedDict, total=False):
     cursor: Optional[str]
+    """Opaque pagination cursor from a previous response. Omit for the first page."""
+
+    event_id: str
+    """Filter to templates linked to this event map ID."""
 
     notes: Optional[bool]
-    """Retrieve the notes from the Notification template settings."""
+    """Include template notes in the response. Only applies to legacy templates."""

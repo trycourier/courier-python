@@ -8,7 +8,7 @@ import httpx
 
 from ...types import list_list_params, list_update_params
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -83,7 +83,7 @@ class ListsResource(SyncAPIResource):
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return self._get(
-            f"/lists/{list_id}",
+            path_template("/lists/{list_id}", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -119,7 +119,7 @@ class ListsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
-            f"/lists/{list_id}",
+            path_template("/lists/{list_id}", list_id=list_id),
             body=maybe_transform(
                 {
                     "name": name,
@@ -210,7 +210,7 @@ class ListsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            f"/lists/{list_id}",
+            path_template("/lists/{list_id}", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -244,7 +244,7 @@ class ListsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._put(
-            f"/lists/{list_id}/restore",
+            path_template("/lists/{list_id}/restore", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -302,7 +302,7 @@ class AsyncListsResource(AsyncAPIResource):
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         return await self._get(
-            f"/lists/{list_id}",
+            path_template("/lists/{list_id}", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -338,7 +338,7 @@ class AsyncListsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
-            f"/lists/{list_id}",
+            path_template("/lists/{list_id}", list_id=list_id),
             body=await async_maybe_transform(
                 {
                     "name": name,
@@ -429,7 +429,7 @@ class AsyncListsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            f"/lists/{list_id}",
+            path_template("/lists/{list_id}", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -463,7 +463,7 @@ class AsyncListsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._put(
-            f"/lists/{list_id}/restore",
+            path_template("/lists/{list_id}/restore", list_id=list_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

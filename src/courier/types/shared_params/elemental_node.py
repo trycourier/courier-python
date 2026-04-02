@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Union
 from typing_extensions import TypeAlias
 
+from .elemental_html_node_with_type import ElementalHTMLNodeWithType
 from .elemental_meta_node_with_type import ElementalMetaNodeWithType
 from .elemental_text_node_with_type import ElementalTextNodeWithType
 from .elemental_image_node_with_type import ElementalImageNodeWithType
@@ -23,4 +24,5 @@ ElementalNode: TypeAlias = Union[
     ElementalActionNodeWithType,
     ElementalDividerNodeWithType,
     ElementalQuoteNodeWithType,
+    ElementalHTMLNodeWithType,
 ]

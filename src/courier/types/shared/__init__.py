@@ -6,9 +6,12 @@ from .rule import Rule as Rule
 from .slack import Slack as Slack
 from .token import Token as Token
 from .paging import Paging as Paging
+from .channel import Channel as Channel
 from .discord import Discord as Discord
 from .intercom import Intercom as Intercom
+from .metadata import Metadata as Metadata
 from .ms_teams import MsTeams as MsTeams
+from .timeouts import Timeouts as Timeouts
 from .alignment import Alignment as Alignment
 from .pagerduty import Pagerduty as Pagerduty
 from .preference import Preference as Preference
@@ -29,7 +32,10 @@ from .multiple_tokens import MultipleTokens as MultipleTokens
 from .send_to_channel import SendToChannel as SendToChannel
 from .slack_recipient import SlackRecipient as SlackRecipient
 from .webhook_profile import WebhookProfile as WebhookProfile
+from .channel_metadata import ChannelMetadata as ChannelMetadata
+from .message_channels import MessageChannels as MessageChannels
 from .elemental_content import ElementalContent as ElementalContent
+from .message_providers import MessageProviders as MessageProviders
 from .preference_status import PreferenceStatus as PreferenceStatus
 from .webhook_auth_mode import WebhookAuthMode as WebhookAuthMode
 from .webhook_recipient import WebhookRecipient as WebhookRecipient
@@ -50,6 +56,7 @@ from .audience_filter_config import AudienceFilterConfig as AudienceFilterConfig
 from .channel_classification import ChannelClassification as ChannelClassification
 from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode
 from .list_pattern_recipient import ListPatternRecipient as ListPatternRecipient
+from .message_providers_type import MessageProvidersType as MessageProvidersType
 from .send_to_ms_teams_email import SendToMsTeamsEmail as SendToMsTeamsEmail
 from .webhook_authentication import WebhookAuthentication as WebhookAuthentication
 from .elemental_content_sugar import ElementalContentSugar as ElementalContentSugar
@@ -59,6 +66,7 @@ from .ms_teams_base_properties import MsTeamsBaseProperties as MsTeamsBaseProper
 from .send_to_ms_teams_user_id import SendToMsTeamsUserID as SendToMsTeamsUserID
 from .send_to_ms_teams_channel_id import SendToMsTeamsChannelID as SendToMsTeamsChannelID
 from .user_profile_firebase_token import UserProfileFirebaseToken as UserProfileFirebaseToken
+from .elemental_html_node_with_type import ElementalHTMLNodeWithType as ElementalHTMLNodeWithType
 from .elemental_meta_node_with_type import ElementalMetaNodeWithType as ElementalMetaNodeWithType
 from .elemental_text_node_with_type import ElementalTextNodeWithType as ElementalTextNodeWithType
 from .send_to_ms_teams_channel_name import SendToMsTeamsChannelName as SendToMsTeamsChannelName

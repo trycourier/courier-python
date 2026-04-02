@@ -7,7 +7,7 @@ from typing import Optional
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -78,7 +78,7 @@ class PreferencesResource(SyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return self._get(
-            f"/users/{user_id}/preferences",
+            path_template("/users/{user_id}/preferences", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -121,7 +121,7 @@ class PreferencesResource(SyncAPIResource):
         if not topic_id:
             raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return self._get(
-            f"/users/{user_id}/preferences/{topic_id}",
+            path_template("/users/{user_id}/preferences/{topic_id}", user_id=user_id, topic_id=topic_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -167,7 +167,7 @@ class PreferencesResource(SyncAPIResource):
         if not topic_id:
             raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return self._put(
-            f"/users/{user_id}/preferences/{topic_id}",
+            path_template("/users/{user_id}/preferences/{topic_id}", user_id=user_id, topic_id=topic_id),
             body=maybe_transform(
                 {"topic": topic}, preference_update_or_create_topic_params.PreferenceUpdateOrCreateTopicParams
             ),
@@ -234,7 +234,7 @@ class AsyncPreferencesResource(AsyncAPIResource):
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
         return await self._get(
-            f"/users/{user_id}/preferences",
+            path_template("/users/{user_id}/preferences", user_id=user_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -279,7 +279,7 @@ class AsyncPreferencesResource(AsyncAPIResource):
         if not topic_id:
             raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return await self._get(
-            f"/users/{user_id}/preferences/{topic_id}",
+            path_template("/users/{user_id}/preferences/{topic_id}", user_id=user_id, topic_id=topic_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -325,7 +325,7 @@ class AsyncPreferencesResource(AsyncAPIResource):
         if not topic_id:
             raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return await self._put(
-            f"/users/{user_id}/preferences/{topic_id}",
+            path_template("/users/{user_id}/preferences/{topic_id}", user_id=user_id, topic_id=topic_id),
             body=await async_maybe_transform(
                 {"topic": topic}, preference_update_or_create_topic_params.PreferenceUpdateOrCreateTopicParams
             ),

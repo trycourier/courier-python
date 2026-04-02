@@ -9,7 +9,7 @@ import httpx
 
 from ..types import journey_list_params, journey_invoke_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -138,7 +138,7 @@ class JourneysResource(SyncAPIResource):
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
         return self._post(
-            f"/journeys/{template_id}/invoke",
+            path_template("/journeys/{template_id}/invoke", template_id=template_id),
             body=maybe_transform(
                 {
                     "data": data,
@@ -267,7 +267,7 @@ class AsyncJourneysResource(AsyncAPIResource):
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
         return await self._post(
-            f"/journeys/{template_id}/invoke",
+            path_template("/journeys/{template_id}/invoke", template_id=template_id),
             body=await async_maybe_transform(
                 {
                     "data": data,
