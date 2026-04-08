@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .draft import (
-    DraftResource,
-    AsyncDraftResource,
-    DraftResourceWithRawResponse,
-    AsyncDraftResourceWithRawResponse,
-    DraftResourceWithStreamingResponse,
-    AsyncDraftResourceWithStreamingResponse,
-)
 from .checks import (
     ChecksResource,
     AsyncChecksResource,
@@ -26,12 +18,6 @@ from .notifications import (
 )
 
 __all__ = [
-    "DraftResource",
-    "AsyncDraftResource",
-    "DraftResourceWithRawResponse",
-    "AsyncDraftResourceWithRawResponse",
-    "DraftResourceWithStreamingResponse",
-    "AsyncDraftResourceWithStreamingResponse",
     "ChecksResource",
     "AsyncChecksResource",
     "ChecksResourceWithRawResponse",

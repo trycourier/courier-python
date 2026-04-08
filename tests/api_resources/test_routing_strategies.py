@@ -13,6 +13,7 @@ from courier.types import (
     RoutingStrategyGetResponse,
     RoutingStrategyListResponse,
     RoutingStrategyMutationResponse,
+    AssociatedNotificationListResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -238,6 +239,58 @@ class TestRoutingStrategies:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.routing_strategies.with_raw_response.archive(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_notifications(self, client: Courier) -> None:
+        routing_strategy = client.routing_strategies.list_notifications(
+            id="id",
+        )
+        assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_notifications_with_all_params(self, client: Courier) -> None:
+        routing_strategy = client.routing_strategies.list_notifications(
+            id="id",
+            cursor="cursor",
+            limit=1,
+        )
+        assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_notifications(self, client: Courier) -> None:
+        response = client.routing_strategies.with_raw_response.list_notifications(
+            id="id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        routing_strategy = response.parse()
+        assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_notifications(self, client: Courier) -> None:
+        with client.routing_strategies.with_streaming_response.list_notifications(
+            id="id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            routing_strategy = response.parse()
+            assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_list_notifications(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.routing_strategies.with_raw_response.list_notifications(
+                id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -578,6 +631,58 @@ class TestAsyncRoutingStrategies:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.routing_strategies.with_raw_response.archive(
                 "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_notifications(self, async_client: AsyncCourier) -> None:
+        routing_strategy = await async_client.routing_strategies.list_notifications(
+            id="id",
+        )
+        assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_notifications_with_all_params(self, async_client: AsyncCourier) -> None:
+        routing_strategy = await async_client.routing_strategies.list_notifications(
+            id="id",
+            cursor="cursor",
+            limit=1,
+        )
+        assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_notifications(self, async_client: AsyncCourier) -> None:
+        response = await async_client.routing_strategies.with_raw_response.list_notifications(
+            id="id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        routing_strategy = await response.parse()
+        assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_notifications(self, async_client: AsyncCourier) -> None:
+        async with async_client.routing_strategies.with_streaming_response.list_notifications(
+            id="id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            routing_strategy = await response.parse()
+            assert_matches_type(AssociatedNotificationListResponse, routing_strategy, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_list_notifications(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.routing_strategies.with_raw_response.list_notifications(
+                id="",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

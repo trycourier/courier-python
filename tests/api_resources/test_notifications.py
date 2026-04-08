@@ -10,9 +10,10 @@ import pytest
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
 from courier.types import (
-    NotificationGetContent,
     NotificationListResponse,
     NotificationTemplateGetResponse,
+    NotificationContentMutationResponse,
+    NotificationRetrieveContentResponse,
     NotificationTemplateMutationResponse,
     NotificationTemplateVersionListResponse,
 )
@@ -342,6 +343,206 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_put_content(self, client: Courier) -> None:
+        notification = client.notifications.put_content(
+            id="id",
+            content={"elements": [{}]},
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_put_content_with_all_params(self, client: Courier) -> None:
+        notification = client.notifications.put_content(
+            id="id",
+            content={
+                "elements": [{"type": "channel"}],
+                "version": "2022-01-01",
+            },
+            state="DRAFT",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_put_content(self, client: Courier) -> None:
+        response = client.notifications.with_raw_response.put_content(
+            id="id",
+            content={"elements": [{}]},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = response.parse()
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_put_content(self, client: Courier) -> None:
+        with client.notifications.with_streaming_response.put_content(
+            id="id",
+            content={"elements": [{}]},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = response.parse()
+            assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_put_content(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.notifications.with_raw_response.put_content(
+                id="",
+                content={"elements": [{}]},
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_put_element(self, client: Courier) -> None:
+        notification = client.notifications.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_put_element_with_all_params(self, client: Courier) -> None:
+        notification = client.notifications.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+            channels=["string"],
+            data={"content": "bar"},
+            if_="if",
+            loop="loop",
+            ref="ref",
+            state="DRAFT",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_put_element(self, client: Courier) -> None:
+        response = client.notifications.with_raw_response.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = response.parse()
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_put_element(self, client: Courier) -> None:
+        with client.notifications.with_streaming_response.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = response.parse()
+            assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_put_element(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.notifications.with_raw_response.put_element(
+                element_id="elementId",
+                id="",
+                type="text",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `element_id` but received ''"):
+            client.notifications.with_raw_response.put_element(
+                element_id="",
+                id="id",
+                type="text",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_put_locale(self, client: Courier) -> None:
+        notification = client.notifications.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_put_locale_with_all_params(self, client: Courier) -> None:
+        notification = client.notifications.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+            state="DRAFT",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_put_locale(self, client: Courier) -> None:
+        response = client.notifications.with_raw_response.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = response.parse()
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_put_locale(self, client: Courier) -> None:
+        with client.notifications.with_streaming_response.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = response.parse()
+            assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_put_locale(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.notifications.with_raw_response.put_locale(
+                locale_id="localeId",
+                id="",
+                elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `locale_id` but received ''"):
+            client.notifications.with_raw_response.put_locale(
+                locale_id="",
+                id="id",
+                elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_replace(self, client: Courier) -> None:
         notification = client.notifications.replace(
             id="id",
@@ -450,33 +651,42 @@ class TestNotifications:
     @parametrize
     def test_method_retrieve_content(self, client: Courier) -> None:
         notification = client.notifications.retrieve_content(
-            "id",
+            id="id",
         )
-        assert_matches_type(NotificationGetContent, notification, path=["response"])
+        assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_retrieve_content_with_all_params(self, client: Courier) -> None:
+        notification = client.notifications.retrieve_content(
+            id="id",
+            version="version",
+        )
+        assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_content(self, client: Courier) -> None:
         response = client.notifications.with_raw_response.retrieve_content(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = response.parse()
-        assert_matches_type(NotificationGetContent, notification, path=["response"])
+        assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_content(self, client: Courier) -> None:
         with client.notifications.with_streaming_response.retrieve_content(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = response.parse()
-            assert_matches_type(NotificationGetContent, notification, path=["response"])
+            assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -485,7 +695,7 @@ class TestNotifications:
     def test_path_params_retrieve_content(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.notifications.with_raw_response.retrieve_content(
-                "",
+                id="",
             )
 
 
@@ -813,6 +1023,206 @@ class TestAsyncNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_put_content(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.put_content(
+            id="id",
+            content={"elements": [{}]},
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_put_content_with_all_params(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.put_content(
+            id="id",
+            content={
+                "elements": [{"type": "channel"}],
+                "version": "2022-01-01",
+            },
+            state="DRAFT",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_put_content(self, async_client: AsyncCourier) -> None:
+        response = await async_client.notifications.with_raw_response.put_content(
+            id="id",
+            content={"elements": [{}]},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = await response.parse()
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_put_content(self, async_client: AsyncCourier) -> None:
+        async with async_client.notifications.with_streaming_response.put_content(
+            id="id",
+            content={"elements": [{}]},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = await response.parse()
+            assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_put_content(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.notifications.with_raw_response.put_content(
+                id="",
+                content={"elements": [{}]},
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_put_element(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_put_element_with_all_params(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+            channels=["string"],
+            data={"content": "bar"},
+            if_="if",
+            loop="loop",
+            ref="ref",
+            state="DRAFT",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_put_element(self, async_client: AsyncCourier) -> None:
+        response = await async_client.notifications.with_raw_response.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = await response.parse()
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_put_element(self, async_client: AsyncCourier) -> None:
+        async with async_client.notifications.with_streaming_response.put_element(
+            element_id="elementId",
+            id="id",
+            type="text",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = await response.parse()
+            assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_put_element(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.notifications.with_raw_response.put_element(
+                element_id="elementId",
+                id="",
+                type="text",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `element_id` but received ''"):
+            await async_client.notifications.with_raw_response.put_element(
+                element_id="",
+                id="id",
+                type="text",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_put_locale(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_put_locale_with_all_params(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+            state="DRAFT",
+        )
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_put_locale(self, async_client: AsyncCourier) -> None:
+        response = await async_client.notifications.with_raw_response.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = await response.parse()
+        assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_put_locale(self, async_client: AsyncCourier) -> None:
+        async with async_client.notifications.with_streaming_response.put_locale(
+            locale_id="localeId",
+            id="id",
+            elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = await response.parse()
+            assert_matches_type(NotificationContentMutationResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_put_locale(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.notifications.with_raw_response.put_locale(
+                locale_id="localeId",
+                id="",
+                elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `locale_id` but received ''"):
+            await async_client.notifications.with_raw_response.put_locale(
+                locale_id="",
+                id="id",
+                elements=[{"id": "elem_1"}, {"id": "elem_2"}],
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_replace(self, async_client: AsyncCourier) -> None:
         notification = await async_client.notifications.replace(
             id="id",
@@ -921,33 +1331,42 @@ class TestAsyncNotifications:
     @parametrize
     async def test_method_retrieve_content(self, async_client: AsyncCourier) -> None:
         notification = await async_client.notifications.retrieve_content(
-            "id",
+            id="id",
         )
-        assert_matches_type(NotificationGetContent, notification, path=["response"])
+        assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve_content_with_all_params(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.retrieve_content(
+            id="id",
+            version="version",
+        )
+        assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_content(self, async_client: AsyncCourier) -> None:
         response = await async_client.notifications.with_raw_response.retrieve_content(
-            "id",
+            id="id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = await response.parse()
-        assert_matches_type(NotificationGetContent, notification, path=["response"])
+        assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_content(self, async_client: AsyncCourier) -> None:
         async with async_client.notifications.with_streaming_response.retrieve_content(
-            "id",
+            id="id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = await response.parse()
-            assert_matches_type(NotificationGetContent, notification, path=["response"])
+            assert_matches_type(NotificationRetrieveContentResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -956,5 +1375,5 @@ class TestAsyncNotifications:
     async def test_path_params_retrieve_content(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.notifications.with_raw_response.retrieve_content(
-                "",
+                id="",
             )
