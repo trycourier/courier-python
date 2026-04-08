@@ -1,5 +1,19 @@
 # Changelog
 
+## 7.11.0 (2026-04-08)
+
+Full Changelog: [v7.10.0...v7.11.0](https://github.com/trycourier/courier-python/compare/v7.10.0...v7.11.0)
+
+### Features
+
+* **api:** add content/element/locale methods, remove draft resource, update notifications ([ea30dd6](https://github.com/trycourier/courier-python/commit/ea30dd640d10f3a7a64aa1b4d81f3f7c7e2f906b))
+* **api:** add list_notifications method to routing_strategies ([63adeb8](https://github.com/trycourier/courier-python/commit/63adeb8eaea8960cc5704eb672ebb1c24f46a946))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([7e44063](https://github.com/trycourier/courier-python/commit/7e4406306cf5002f4cc5867bf16411a30c4d42fa))
+
 ## 7.10.0 (2026-04-01)
 
 Full Changelog: [v7.9.0...v7.10.0](https://github.com/trycourier/courier-python/compare/v7.9.0...v7.10.0)
