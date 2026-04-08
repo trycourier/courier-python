@@ -399,6 +399,7 @@ Types:
 
 ```python
 from courier.types import (
+    AssociatedNotificationListResponse,
     RoutingStrategyCreateRequest,
     RoutingStrategyGetResponse,
     RoutingStrategyListResponse,
@@ -414,6 +415,7 @@ Methods:
 - <code title="get /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">retrieve</a>(id) -> <a href="./src/courier/types/routing_strategy_get_response.py">RoutingStrategyGetResponse</a></code>
 - <code title="get /routing-strategies">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">list</a>(\*\*<a href="src/courier/types/routing_strategy_list_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_list_response.py">RoutingStrategyListResponse</a></code>
 - <code title="delete /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">archive</a>(id) -> None</code>
+- <code title="get /routing-strategies/{id}/notifications">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">list_notifications</a>(id, \*\*<a href="src/courier/types/routing_strategy_list_notifications_params.py">params</a>) -> <a href="./src/courier/types/associated_notification_list_response.py">AssociatedNotificationListResponse</a></code>
 - <code title="put /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">replace</a>(id, \*\*<a href="src/courier/types/routing_strategy_replace_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_mutation_response.py">RoutingStrategyMutationResponse</a></code>
 
 # Profiles
