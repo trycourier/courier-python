@@ -2,19 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Dict, Iterable, Optional, cast
 from typing_extensions import Literal
 
 import httpx
 
-from .draft import (
-    DraftResource,
-    AsyncDraftResource,
-    DraftResourceWithRawResponse,
-    AsyncDraftResourceWithRawResponse,
-    DraftResourceWithStreamingResponse,
-    AsyncDraftResourceWithStreamingResponse,
-)
 from .checks import (
     ChecksResource,
     AsyncChecksResource,
@@ -24,14 +16,19 @@ from .checks import (
     AsyncChecksResourceWithStreamingResponse,
 )
 from ...types import (
+    NotificationTemplateState,
     notification_list_params,
     notification_create_params,
     notification_publish_params,
     notification_replace_params,
     notification_retrieve_params,
+    notification_put_locale_params,
+    notification_put_content_params,
+    notification_put_element_params,
     notification_list_versions_params,
+    notification_retrieve_content_params,
 )
-from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -42,10 +39,12 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.notification_get_content import NotificationGetContent
 from ...types.notification_list_response import NotificationListResponse
+from ...types.notification_template_state import NotificationTemplateState
 from ...types.notification_template_get_response import NotificationTemplateGetResponse
 from ...types.notification_template_payload_param import NotificationTemplatePayloadParam
+from ...types.notification_content_mutation_response import NotificationContentMutationResponse
+from ...types.notification_retrieve_content_response import NotificationRetrieveContentResponse
 from ...types.notification_template_mutation_response import NotificationTemplateMutationResponse
 from ...types.notification_template_version_list_response import NotificationTemplateVersionListResponse
 
@@ -53,10 +52,6 @@ __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
 
 
 class NotificationsResource(SyncAPIResource):
-    @cached_property
-    def draft(self) -> DraftResource:
-        return DraftResource(self._client)
-
     @cached_property
     def checks(self) -> ChecksResource:
         return ChecksResource(self._client)
@@ -343,6 +338,168 @@ class NotificationsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def put_content(
+        self,
+        id: str,
+        *,
+        content: notification_put_content_params.Content,
+        state: NotificationTemplateState | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationContentMutationResponse:
+        """Replace the elemental content of a notification template.
+
+        Overwrites all
+        elements in the template with the provided content. Only supported for V2
+        (elemental) templates.
+
+        Args:
+          content: Elemental content payload. The server defaults `version` when omitted.
+
+          state: Template state. Defaults to `DRAFT`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._put(
+            path_template("/notifications/{id}/content", id=id),
+            body=maybe_transform(
+                {
+                    "content": content,
+                    "state": state,
+                },
+                notification_put_content_params.NotificationPutContentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NotificationContentMutationResponse,
+        )
+
+    def put_element(
+        self,
+        element_id: str,
+        *,
+        id: str,
+        type: str,
+        channels: SequenceNotStr[str] | Omit = omit,
+        data: Dict[str, object] | Omit = omit,
+        if_: str | Omit = omit,
+        loop: str | Omit = omit,
+        ref: str | Omit = omit,
+        state: NotificationTemplateState | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationContentMutationResponse:
+        """Update a single element within a notification template.
+
+        Only supported for V2
+        (elemental) templates.
+
+        Args:
+          type: Element type (text, meta, action, image, etc.).
+
+          state: Template state. Defaults to `DRAFT`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not element_id:
+            raise ValueError(f"Expected a non-empty value for `element_id` but received {element_id!r}")
+        return self._put(
+            path_template("/notifications/{id}/elements/{element_id}", id=id, element_id=element_id),
+            body=maybe_transform(
+                {
+                    "type": type,
+                    "channels": channels,
+                    "data": data,
+                    "if_": if_,
+                    "loop": loop,
+                    "ref": ref,
+                    "state": state,
+                },
+                notification_put_element_params.NotificationPutElementParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NotificationContentMutationResponse,
+        )
+
+    def put_locale(
+        self,
+        locale_id: str,
+        *,
+        id: str,
+        elements: Iterable[notification_put_locale_params.Element],
+        state: NotificationTemplateState | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationContentMutationResponse:
+        """Set locale-specific content overrides for a notification template.
+
+        Each element
+        override must reference an existing element by ID. Only supported for V2
+        (elemental) templates.
+
+        Args:
+          elements: Elements with locale-specific content overrides.
+
+          state: Template state. Defaults to `DRAFT`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not locale_id:
+            raise ValueError(f"Expected a non-empty value for `locale_id` but received {locale_id!r}")
+        return self._put(
+            path_template("/notifications/{id}/locales/{locale_id}", id=id, locale_id=locale_id),
+            body=maybe_transform(
+                {
+                    "elements": elements,
+                    "state": state,
+                },
+                notification_put_locale_params.NotificationPutLocaleParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NotificationContentMutationResponse,
+        )
+
     def replace(
         self,
         id: str,
@@ -396,15 +553,25 @@ class NotificationsResource(SyncAPIResource):
         self,
         id: str,
         *,
+        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationGetContent:
-        """
+    ) -> NotificationRetrieveContentResponse:
+        """Retrieve the content of a notification template.
+
+        The response shape depends on
+        whether the template uses V1 (blocks/channels) or V2 (elemental) content. Use
+        the `version` query parameter to select draft, published, or a specific
+        historical version.
+
         Args:
+          version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
+              `published`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -415,20 +582,27 @@ class NotificationsResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._get(
-            path_template("/notifications/{id}/content", id=id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            NotificationRetrieveContentResponse,
+            self._get(
+                path_template("/notifications/{id}/content", id=id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=maybe_transform(
+                        {"version": version}, notification_retrieve_content_params.NotificationRetrieveContentParams
+                    ),
+                ),
+                cast_to=cast(
+                    Any, NotificationRetrieveContentResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=NotificationGetContent,
         )
 
 
 class AsyncNotificationsResource(AsyncAPIResource):
-    @cached_property
-    def draft(self) -> AsyncDraftResource:
-        return AsyncDraftResource(self._client)
-
     @cached_property
     def checks(self) -> AsyncChecksResource:
         return AsyncChecksResource(self._client)
@@ -719,6 +893,168 @@ class AsyncNotificationsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def put_content(
+        self,
+        id: str,
+        *,
+        content: notification_put_content_params.Content,
+        state: NotificationTemplateState | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationContentMutationResponse:
+        """Replace the elemental content of a notification template.
+
+        Overwrites all
+        elements in the template with the provided content. Only supported for V2
+        (elemental) templates.
+
+        Args:
+          content: Elemental content payload. The server defaults `version` when omitted.
+
+          state: Template state. Defaults to `DRAFT`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._put(
+            path_template("/notifications/{id}/content", id=id),
+            body=await async_maybe_transform(
+                {
+                    "content": content,
+                    "state": state,
+                },
+                notification_put_content_params.NotificationPutContentParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NotificationContentMutationResponse,
+        )
+
+    async def put_element(
+        self,
+        element_id: str,
+        *,
+        id: str,
+        type: str,
+        channels: SequenceNotStr[str] | Omit = omit,
+        data: Dict[str, object] | Omit = omit,
+        if_: str | Omit = omit,
+        loop: str | Omit = omit,
+        ref: str | Omit = omit,
+        state: NotificationTemplateState | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationContentMutationResponse:
+        """Update a single element within a notification template.
+
+        Only supported for V2
+        (elemental) templates.
+
+        Args:
+          type: Element type (text, meta, action, image, etc.).
+
+          state: Template state. Defaults to `DRAFT`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not element_id:
+            raise ValueError(f"Expected a non-empty value for `element_id` but received {element_id!r}")
+        return await self._put(
+            path_template("/notifications/{id}/elements/{element_id}", id=id, element_id=element_id),
+            body=await async_maybe_transform(
+                {
+                    "type": type,
+                    "channels": channels,
+                    "data": data,
+                    "if_": if_,
+                    "loop": loop,
+                    "ref": ref,
+                    "state": state,
+                },
+                notification_put_element_params.NotificationPutElementParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NotificationContentMutationResponse,
+        )
+
+    async def put_locale(
+        self,
+        locale_id: str,
+        *,
+        id: str,
+        elements: Iterable[notification_put_locale_params.Element],
+        state: NotificationTemplateState | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationContentMutationResponse:
+        """Set locale-specific content overrides for a notification template.
+
+        Each element
+        override must reference an existing element by ID. Only supported for V2
+        (elemental) templates.
+
+        Args:
+          elements: Elements with locale-specific content overrides.
+
+          state: Template state. Defaults to `DRAFT`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        if not locale_id:
+            raise ValueError(f"Expected a non-empty value for `locale_id` but received {locale_id!r}")
+        return await self._put(
+            path_template("/notifications/{id}/locales/{locale_id}", id=id, locale_id=locale_id),
+            body=await async_maybe_transform(
+                {
+                    "elements": elements,
+                    "state": state,
+                },
+                notification_put_locale_params.NotificationPutLocaleParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NotificationContentMutationResponse,
+        )
+
     async def replace(
         self,
         id: str,
@@ -772,15 +1108,25 @@ class AsyncNotificationsResource(AsyncAPIResource):
         self,
         id: str,
         *,
+        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationGetContent:
-        """
+    ) -> NotificationRetrieveContentResponse:
+        """Retrieve the content of a notification template.
+
+        The response shape depends on
+        whether the template uses V1 (blocks/channels) or V2 (elemental) content. Use
+        the `version` query parameter to select draft, published, or a specific
+        historical version.
+
         Args:
+          version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
+              `published`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -791,12 +1137,23 @@ class AsyncNotificationsResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._get(
-            path_template("/notifications/{id}/content", id=id),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+        return cast(
+            NotificationRetrieveContentResponse,
+            await self._get(
+                path_template("/notifications/{id}/content", id=id),
+                options=make_request_options(
+                    extra_headers=extra_headers,
+                    extra_query=extra_query,
+                    extra_body=extra_body,
+                    timeout=timeout,
+                    query=await async_maybe_transform(
+                        {"version": version}, notification_retrieve_content_params.NotificationRetrieveContentParams
+                    ),
+                ),
+                cast_to=cast(
+                    Any, NotificationRetrieveContentResponse
+                ),  # Union types cannot be passed in as arguments in the type system
             ),
-            cast_to=NotificationGetContent,
         )
 
 
@@ -822,16 +1179,21 @@ class NotificationsResourceWithRawResponse:
         self.publish = to_raw_response_wrapper(
             notifications.publish,
         )
+        self.put_content = to_raw_response_wrapper(
+            notifications.put_content,
+        )
+        self.put_element = to_raw_response_wrapper(
+            notifications.put_element,
+        )
+        self.put_locale = to_raw_response_wrapper(
+            notifications.put_locale,
+        )
         self.replace = to_raw_response_wrapper(
             notifications.replace,
         )
         self.retrieve_content = to_raw_response_wrapper(
             notifications.retrieve_content,
         )
-
-    @cached_property
-    def draft(self) -> DraftResourceWithRawResponse:
-        return DraftResourceWithRawResponse(self._notifications.draft)
 
     @cached_property
     def checks(self) -> ChecksResourceWithRawResponse:
@@ -860,16 +1222,21 @@ class AsyncNotificationsResourceWithRawResponse:
         self.publish = async_to_raw_response_wrapper(
             notifications.publish,
         )
+        self.put_content = async_to_raw_response_wrapper(
+            notifications.put_content,
+        )
+        self.put_element = async_to_raw_response_wrapper(
+            notifications.put_element,
+        )
+        self.put_locale = async_to_raw_response_wrapper(
+            notifications.put_locale,
+        )
         self.replace = async_to_raw_response_wrapper(
             notifications.replace,
         )
         self.retrieve_content = async_to_raw_response_wrapper(
             notifications.retrieve_content,
         )
-
-    @cached_property
-    def draft(self) -> AsyncDraftResourceWithRawResponse:
-        return AsyncDraftResourceWithRawResponse(self._notifications.draft)
 
     @cached_property
     def checks(self) -> AsyncChecksResourceWithRawResponse:
@@ -898,16 +1265,21 @@ class NotificationsResourceWithStreamingResponse:
         self.publish = to_streamed_response_wrapper(
             notifications.publish,
         )
+        self.put_content = to_streamed_response_wrapper(
+            notifications.put_content,
+        )
+        self.put_element = to_streamed_response_wrapper(
+            notifications.put_element,
+        )
+        self.put_locale = to_streamed_response_wrapper(
+            notifications.put_locale,
+        )
         self.replace = to_streamed_response_wrapper(
             notifications.replace,
         )
         self.retrieve_content = to_streamed_response_wrapper(
             notifications.retrieve_content,
         )
-
-    @cached_property
-    def draft(self) -> DraftResourceWithStreamingResponse:
-        return DraftResourceWithStreamingResponse(self._notifications.draft)
 
     @cached_property
     def checks(self) -> ChecksResourceWithStreamingResponse:
@@ -936,16 +1308,21 @@ class AsyncNotificationsResourceWithStreamingResponse:
         self.publish = async_to_streamed_response_wrapper(
             notifications.publish,
         )
+        self.put_content = async_to_streamed_response_wrapper(
+            notifications.put_content,
+        )
+        self.put_element = async_to_streamed_response_wrapper(
+            notifications.put_element,
+        )
+        self.put_locale = async_to_streamed_response_wrapper(
+            notifications.put_locale,
+        )
         self.replace = async_to_streamed_response_wrapper(
             notifications.replace,
         )
         self.retrieve_content = async_to_streamed_response_wrapper(
             notifications.retrieve_content,
         )
-
-    @cached_property
-    def draft(self) -> AsyncDraftResourceWithStreamingResponse:
-        return AsyncDraftResourceWithStreamingResponse(self._notifications.draft)
 
     @cached_property
     def checks(self) -> AsyncChecksResourceWithStreamingResponse:
