@@ -10,6 +10,7 @@ from ..types import (
     routing_strategy_list_params,
     routing_strategy_create_params,
     routing_strategy_replace_params,
+    routing_strategy_list_notifications_params,
 )
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
@@ -28,6 +29,7 @@ from ..types.routing_strategy_list_response import RoutingStrategyListResponse
 from ..types.shared_params.message_channels import MessageChannels
 from ..types.shared_params.message_providers import MessageProviders
 from ..types.routing_strategy_mutation_response import RoutingStrategyMutationResponse
+from ..types.associated_notification_list_response import AssociatedNotificationListResponse
 
 __all__ = ["RoutingStrategiesResource", "AsyncRoutingStrategiesResource"]
 
@@ -231,6 +233,57 @@ class RoutingStrategiesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    def list_notifications(
+        self,
+        id: str,
+        *,
+        cursor: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssociatedNotificationListResponse:
+        """List notification templates associated with a routing strategy.
+
+        Includes
+        template metadata only, not full content.
+
+        Args:
+          cursor: Opaque pagination cursor from a previous response. Omit for the first page.
+
+          limit: Maximum number of results per page. Default 20, max 100.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            path_template("/routing-strategies/{id}/notifications", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                    },
+                    routing_strategy_list_notifications_params.RoutingStrategyListNotificationsParams,
+                ),
+            ),
+            cast_to=AssociatedNotificationListResponse,
         )
 
     def replace(
@@ -499,6 +552,57 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def list_notifications(
+        self,
+        id: str,
+        *,
+        cursor: Optional[str] | Omit = omit,
+        limit: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AssociatedNotificationListResponse:
+        """List notification templates associated with a routing strategy.
+
+        Includes
+        template metadata only, not full content.
+
+        Args:
+          cursor: Opaque pagination cursor from a previous response. Omit for the first page.
+
+          limit: Maximum number of results per page. Default 20, max 100.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            path_template("/routing-strategies/{id}/notifications", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                    },
+                    routing_strategy_list_notifications_params.RoutingStrategyListNotificationsParams,
+                ),
+            ),
+            cast_to=AssociatedNotificationListResponse,
+        )
+
     async def replace(
         self,
         id: str,
@@ -580,6 +684,9 @@ class RoutingStrategiesResourceWithRawResponse:
         self.archive = to_raw_response_wrapper(
             routing_strategies.archive,
         )
+        self.list_notifications = to_raw_response_wrapper(
+            routing_strategies.list_notifications,
+        )
         self.replace = to_raw_response_wrapper(
             routing_strategies.replace,
         )
@@ -600,6 +707,9 @@ class AsyncRoutingStrategiesResourceWithRawResponse:
         )
         self.archive = async_to_raw_response_wrapper(
             routing_strategies.archive,
+        )
+        self.list_notifications = async_to_raw_response_wrapper(
+            routing_strategies.list_notifications,
         )
         self.replace = async_to_raw_response_wrapper(
             routing_strategies.replace,
@@ -622,6 +732,9 @@ class RoutingStrategiesResourceWithStreamingResponse:
         self.archive = to_streamed_response_wrapper(
             routing_strategies.archive,
         )
+        self.list_notifications = to_streamed_response_wrapper(
+            routing_strategies.list_notifications,
+        )
         self.replace = to_streamed_response_wrapper(
             routing_strategies.replace,
         )
@@ -642,6 +755,9 @@ class AsyncRoutingStrategiesResourceWithStreamingResponse:
         )
         self.archive = async_to_streamed_response_wrapper(
             routing_strategies.archive,
+        )
+        self.list_notifications = async_to_streamed_response_wrapper(
+            routing_strategies.list_notifications,
         )
         self.replace = async_to_streamed_response_wrapper(
             routing_strategies.replace,
