@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.11.1 (2026-04-13)
+
+Full Changelog: [v7.11.0...v7.11.1](https://github.com/trycourier/courier-python/compare/v7.11.0...v7.11.1)
+
+### Bug Fixes
+
+* **api:** correct providers update method, notifications/routing_strategies return types ([069bf70](https://github.com/trycourier/courier-python/commit/069bf70791042c6ac0233022a8066cf1724a173c))
+* ensure file data are only sent as 1 parameter ([ca4b529](https://github.com/trycourier/courier-python/commit/ca4b529bf902fa70de9776bd66154d9bb5783b2b))
+
 ## 7.11.0 (2026-04-08)
 
 Full Changelog: [v7.10.0...v7.11.0](https://github.com/trycourier/courier-python/compare/v7.10.0...v7.11.0)

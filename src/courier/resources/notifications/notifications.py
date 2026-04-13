@@ -45,7 +45,6 @@ from ...types.notification_template_get_response import NotificationTemplateGetR
 from ...types.notification_template_payload_param import NotificationTemplatePayloadParam
 from ...types.notification_content_mutation_response import NotificationContentMutationResponse
 from ...types.notification_retrieve_content_response import NotificationRetrieveContentResponse
-from ...types.notification_template_mutation_response import NotificationTemplateMutationResponse
 from ...types.notification_template_version_list_response import NotificationTemplateVersionListResponse
 
 __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
@@ -86,7 +85,7 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateMutationResponse:
+    ) -> NotificationTemplateGetResponse:
         """Create a notification template.
 
         Requires all fields in the notification object.
@@ -119,7 +118,7 @@ class NotificationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateMutationResponse,
+            cast_to=NotificationTemplateGetResponse,
         )
 
     def retrieve(
@@ -512,7 +511,7 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateMutationResponse:
+    ) -> NotificationTemplateGetResponse:
         """Replace a notification template.
 
         All fields are required.
@@ -546,7 +545,7 @@ class NotificationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateMutationResponse,
+            cast_to=NotificationTemplateGetResponse,
         )
 
     def retrieve_content(
@@ -637,7 +636,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateMutationResponse:
+    ) -> NotificationTemplateGetResponse:
         """Create a notification template.
 
         Requires all fields in the notification object.
@@ -670,7 +669,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateMutationResponse,
+            cast_to=NotificationTemplateGetResponse,
         )
 
     async def retrieve(
@@ -1067,7 +1066,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateMutationResponse:
+    ) -> NotificationTemplateGetResponse:
         """Replace a notification template.
 
         All fields are required.
@@ -1101,7 +1100,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateMutationResponse,
+            cast_to=NotificationTemplateGetResponse,
         )
 
     async def retrieve_content(

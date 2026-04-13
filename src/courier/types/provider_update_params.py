@@ -10,7 +10,11 @@ __all__ = ["ProviderUpdateParams"]
 
 class ProviderUpdateParams(TypedDict, total=False):
     provider: Required[str]
-    """The provider key identifying the type."""
+    """The provider key identifying the type.
+
+    Required on every request because it selects the provider-specific settings
+    schema for validation.
+    """
 
     alias: str
     """Updated alias. Omit to clear."""
