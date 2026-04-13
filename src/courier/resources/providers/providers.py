@@ -160,14 +160,17 @@ class ProvidersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
-        """Update an existing provider configuration.
+        """Replace an existing provider configuration.
 
-        The `provider` key is required. All
-        other fields are optional — omitted fields are cleared from the stored
-        configuration (this is a full replacement, not a partial merge).
+        The `provider` key is required and
+        determines which provider-specific settings schema is applied. All other fields
+        are optional — omitted fields are cleared from the stored configuration (this is
+        a full replacement, not a partial merge). Changing the provider type for an
+        existing configuration is not supported.
 
         Args:
-          provider: The provider key identifying the type.
+          provider: The provider key identifying the type. Required on every request because it
+              selects the provider-specific settings schema for validation.
 
           alias: Updated alias. Omit to clear.
 
@@ -187,7 +190,7 @@ class ProvidersResource(SyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return self._post(
+        return self._put(
             path_template("/providers/{id}", id=id),
             body=maybe_transform(
                 {
@@ -408,14 +411,17 @@ class AsyncProvidersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
-        """Update an existing provider configuration.
+        """Replace an existing provider configuration.
 
-        The `provider` key is required. All
-        other fields are optional — omitted fields are cleared from the stored
-        configuration (this is a full replacement, not a partial merge).
+        The `provider` key is required and
+        determines which provider-specific settings schema is applied. All other fields
+        are optional — omitted fields are cleared from the stored configuration (this is
+        a full replacement, not a partial merge). Changing the provider type for an
+        existing configuration is not supported.
 
         Args:
-          provider: The provider key identifying the type.
+          provider: The provider key identifying the type. Required on every request because it
+              selects the provider-specific settings schema for validation.
 
           alias: Updated alias. Omit to clear.
 
@@ -435,7 +441,7 @@ class AsyncProvidersResource(AsyncAPIResource):
         """
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
-        return await self._post(
+        return await self._put(
             path_template("/providers/{id}", id=id),
             body=await async_maybe_transform(
                 {

@@ -127,7 +127,7 @@ Methods:
 
 - <code title="post /providers">client.providers.<a href="./src/courier/resources/providers/providers.py">create</a>(\*\*<a href="src/courier/types/provider_create_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
 - <code title="get /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">retrieve</a>(id) -> <a href="./src/courier/types/provider.py">Provider</a></code>
-- <code title="post /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">update</a>(id, \*\*<a href="src/courier/types/provider_update_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
+- <code title="put /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">update</a>(id, \*\*<a href="src/courier/types/provider_update_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
 - <code title="get /providers">client.providers.<a href="./src/courier/resources/providers/providers.py">list</a>(\*\*<a href="src/courier/types/provider_list_params.py">params</a>) -> <a href="./src/courier/types/provider_list_response.py">ProviderListResponse</a></code>
 - <code title="delete /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">delete</a>(id) -> None</code>
 
@@ -352,7 +352,6 @@ from courier.types import (
     NotificationLocalePutRequest,
     NotificationTemplateCreateRequest,
     NotificationTemplateGetResponse,
-    NotificationTemplateMutationResponse,
     NotificationTemplatePayload,
     NotificationTemplatePublishRequest,
     NotificationTemplateState,
@@ -367,7 +366,7 @@ from courier.types import (
 
 Methods:
 
-- <code title="post /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">create</a>(\*\*<a href="src/courier/types/notification_create_params.py">params</a>) -> <a href="./src/courier/types/notification_template_mutation_response.py">NotificationTemplateMutationResponse</a></code>
+- <code title="post /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">create</a>(\*\*<a href="src/courier/types/notification_create_params.py">params</a>) -> <a href="./src/courier/types/notification_template_get_response.py">NotificationTemplateGetResponse</a></code>
 - <code title="get /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve</a>(id, \*\*<a href="src/courier/types/notification_retrieve_params.py">params</a>) -> <a href="./src/courier/types/notification_template_get_response.py">NotificationTemplateGetResponse</a></code>
 - <code title="get /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">list</a>(\*\*<a href="src/courier/types/notification_list_params.py">params</a>) -> <a href="./src/courier/types/notification_list_response.py">NotificationListResponse</a></code>
 - <code title="delete /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">archive</a>(id) -> None</code>
@@ -376,7 +375,7 @@ Methods:
 - <code title="put /notifications/{id}/content">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">put_content</a>(id, \*\*<a href="src/courier/types/notification_put_content_params.py">params</a>) -> <a href="./src/courier/types/notification_content_mutation_response.py">NotificationContentMutationResponse</a></code>
 - <code title="put /notifications/{id}/elements/{elementId}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">put_element</a>(element_id, \*, id, \*\*<a href="src/courier/types/notification_put_element_params.py">params</a>) -> <a href="./src/courier/types/notification_content_mutation_response.py">NotificationContentMutationResponse</a></code>
 - <code title="put /notifications/{id}/locales/{localeId}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">put_locale</a>(locale_id, \*, id, \*\*<a href="src/courier/types/notification_put_locale_params.py">params</a>) -> <a href="./src/courier/types/notification_content_mutation_response.py">NotificationContentMutationResponse</a></code>
-- <code title="put /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">replace</a>(id, \*\*<a href="src/courier/types/notification_replace_params.py">params</a>) -> <a href="./src/courier/types/notification_template_mutation_response.py">NotificationTemplateMutationResponse</a></code>
+- <code title="put /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">replace</a>(id, \*\*<a href="src/courier/types/notification_replace_params.py">params</a>) -> <a href="./src/courier/types/notification_template_get_response.py">NotificationTemplateGetResponse</a></code>
 - <code title="get /notifications/{id}/content">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve_content</a>(id, \*\*<a href="src/courier/types/notification_retrieve_content_params.py">params</a>) -> <a href="./src/courier/types/notification_retrieve_content_response.py">NotificationRetrieveContentResponse</a></code>
 
 ## Checks
@@ -403,7 +402,6 @@ from courier.types import (
     RoutingStrategyCreateRequest,
     RoutingStrategyGetResponse,
     RoutingStrategyListResponse,
-    RoutingStrategyMutationResponse,
     RoutingStrategyReplaceRequest,
     RoutingStrategySummary,
 )
@@ -411,12 +409,12 @@ from courier.types import (
 
 Methods:
 
-- <code title="post /routing-strategies">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">create</a>(\*\*<a href="src/courier/types/routing_strategy_create_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_mutation_response.py">RoutingStrategyMutationResponse</a></code>
+- <code title="post /routing-strategies">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">create</a>(\*\*<a href="src/courier/types/routing_strategy_create_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_get_response.py">RoutingStrategyGetResponse</a></code>
 - <code title="get /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">retrieve</a>(id) -> <a href="./src/courier/types/routing_strategy_get_response.py">RoutingStrategyGetResponse</a></code>
 - <code title="get /routing-strategies">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">list</a>(\*\*<a href="src/courier/types/routing_strategy_list_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_list_response.py">RoutingStrategyListResponse</a></code>
 - <code title="delete /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">archive</a>(id) -> None</code>
 - <code title="get /routing-strategies/{id}/notifications">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">list_notifications</a>(id, \*\*<a href="src/courier/types/routing_strategy_list_notifications_params.py">params</a>) -> <a href="./src/courier/types/associated_notification_list_response.py">AssociatedNotificationListResponse</a></code>
-- <code title="put /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">replace</a>(id, \*\*<a href="src/courier/types/routing_strategy_replace_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_mutation_response.py">RoutingStrategyMutationResponse</a></code>
+- <code title="put /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">replace</a>(id, \*\*<a href="src/courier/types/routing_strategy_replace_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_get_response.py">RoutingStrategyGetResponse</a></code>
 
 # Profiles
 
