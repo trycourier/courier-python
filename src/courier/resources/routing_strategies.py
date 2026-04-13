@@ -28,7 +28,6 @@ from ..types.shared_params.message_routing import MessageRouting
 from ..types.routing_strategy_list_response import RoutingStrategyListResponse
 from ..types.shared_params.message_channels import MessageChannels
 from ..types.shared_params.message_providers import MessageProviders
-from ..types.routing_strategy_mutation_response import RoutingStrategyMutationResponse
 from ..types.associated_notification_list_response import AssociatedNotificationListResponse
 
 __all__ = ["RoutingStrategiesResource", "AsyncRoutingStrategiesResource"]
@@ -69,7 +68,7 @@ class RoutingStrategiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RoutingStrategyMutationResponse:
+    ) -> RoutingStrategyGetResponse:
         """Create a routing strategy.
 
         Requires a name and routing configuration at minimum.
@@ -112,7 +111,7 @@ class RoutingStrategiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RoutingStrategyMutationResponse,
+            cast_to=RoutingStrategyGetResponse,
         )
 
     def retrieve(
@@ -302,7 +301,7 @@ class RoutingStrategiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RoutingStrategyMutationResponse:
+    ) -> RoutingStrategyGetResponse:
         """Replace a routing strategy.
 
         Full document replacement; the caller must send the
@@ -347,7 +346,7 @@ class RoutingStrategiesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RoutingStrategyMutationResponse,
+            cast_to=RoutingStrategyGetResponse,
         )
 
 
@@ -386,7 +385,7 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RoutingStrategyMutationResponse:
+    ) -> RoutingStrategyGetResponse:
         """Create a routing strategy.
 
         Requires a name and routing configuration at minimum.
@@ -429,7 +428,7 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RoutingStrategyMutationResponse,
+            cast_to=RoutingStrategyGetResponse,
         )
 
     async def retrieve(
@@ -619,7 +618,7 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RoutingStrategyMutationResponse:
+    ) -> RoutingStrategyGetResponse:
         """Replace a routing strategy.
 
         Full document replacement; the caller must send the
@@ -664,7 +663,7 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=RoutingStrategyMutationResponse,
+            cast_to=RoutingStrategyGetResponse,
         )
 
 

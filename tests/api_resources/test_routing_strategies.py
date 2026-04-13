@@ -12,7 +12,6 @@ from tests.utils import assert_matches_type
 from courier.types import (
     RoutingStrategyGetResponse,
     RoutingStrategyListResponse,
-    RoutingStrategyMutationResponse,
     AssociatedNotificationListResponse,
 )
 
@@ -32,7 +31,7 @@ class TestRoutingStrategies:
                 "method": "single",
             },
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -84,7 +83,7 @@ class TestRoutingStrategies:
             },
             tags=["production", "email"],
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -100,7 +99,7 @@ class TestRoutingStrategies:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         routing_strategy = response.parse()
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -116,7 +115,7 @@ class TestRoutingStrategies:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             routing_strategy = response.parse()
-            assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+            assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -304,7 +303,7 @@ class TestRoutingStrategies:
                 "method": "single",
             },
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -357,7 +356,7 @@ class TestRoutingStrategies:
             },
             tags=["production", "email", "v2"],
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -374,7 +373,7 @@ class TestRoutingStrategies:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         routing_strategy = response.parse()
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -391,7 +390,7 @@ class TestRoutingStrategies:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             routing_strategy = response.parse()
-            assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+            assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -424,7 +423,7 @@ class TestAsyncRoutingStrategies:
                 "method": "single",
             },
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -476,7 +475,7 @@ class TestAsyncRoutingStrategies:
             },
             tags=["production", "email"],
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -492,7 +491,7 @@ class TestAsyncRoutingStrategies:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         routing_strategy = await response.parse()
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -508,7 +507,7 @@ class TestAsyncRoutingStrategies:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             routing_strategy = await response.parse()
-            assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+            assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -696,7 +695,7 @@ class TestAsyncRoutingStrategies:
                 "method": "single",
             },
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -749,7 +748,7 @@ class TestAsyncRoutingStrategies:
             },
             tags=["production", "email", "v2"],
         )
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -766,7 +765,7 @@ class TestAsyncRoutingStrategies:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         routing_strategy = await response.parse()
-        assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+        assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -783,7 +782,7 @@ class TestAsyncRoutingStrategies:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             routing_strategy = await response.parse()
-            assert_matches_type(RoutingStrategyMutationResponse, routing_strategy, path=["response"])
+            assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

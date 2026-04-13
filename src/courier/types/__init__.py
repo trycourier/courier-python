@@ -227,7 +227,6 @@ from .notification_content_get_response import NotificationContentGetResponse as
 from .notification_list_versions_params import NotificationListVersionsParams as NotificationListVersionsParams
 from .put_subscriptions_recipient_param import PutSubscriptionsRecipientParam as PutSubscriptionsRecipientParam
 from .notification_template_get_response import NotificationTemplateGetResponse as NotificationTemplateGetResponse
-from .routing_strategy_mutation_response import RoutingStrategyMutationResponse as RoutingStrategyMutationResponse
 from .notification_template_payload_param import NotificationTemplatePayloadParam as NotificationTemplatePayloadParam
 from .notification_retrieve_content_params import NotificationRetrieveContentParams as NotificationRetrieveContentParams
 from .associated_notification_list_response import (
@@ -242,9 +241,6 @@ from .notification_content_mutation_response import (
 )
 from .notification_retrieve_content_response import (
     NotificationRetrieveContentResponse as NotificationRetrieveContentResponse,
-)
-from .notification_template_mutation_response import (
-    NotificationTemplateMutationResponse as NotificationTemplateMutationResponse,
 )
 from .routing_strategy_list_notifications_params import (
     RoutingStrategyListNotificationsParams as RoutingStrategyListNotificationsParams,
