@@ -6,7 +6,7 @@ from typing_extensions import Literal
 from .._models import BaseModel
 from .notification_template_payload import NotificationTemplatePayload
 
-__all__ = ["NotificationTemplateGetResponse", "Notification"]
+__all__ = ["NotificationTemplateResponse", "Notification"]
 
 
 class Notification(NotificationTemplatePayload):
@@ -18,10 +18,9 @@ class Notification(NotificationTemplatePayload):
     """The template ID."""
 
 
-class NotificationTemplateGetResponse(BaseModel):
-    """Envelope response for GET /notifications/{id}.
-
-    The notification object mirrors the POST/PUT input shape. Nullable fields return null when unset.
+class NotificationTemplateResponse(BaseModel):
+    """
+    Response for GET /notifications/{id}, POST /notifications, and PUT /notifications/{id}. Wraps the template payload inside a `notification` key alongside metadata.
     """
 
     created: int
