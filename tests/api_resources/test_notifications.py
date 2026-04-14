@@ -11,7 +11,7 @@ from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
 from courier.types import (
     NotificationListResponse,
-    NotificationTemplateGetResponse,
+    NotificationTemplateResponse,
     NotificationContentMutationResponse,
     NotificationRetrieveContentResponse,
     NotificationTemplateVersionListResponse,
@@ -39,7 +39,7 @@ class TestNotifications:
                 "tags": ["onboarding", "welcome"],
             },
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -58,7 +58,7 @@ class TestNotifications:
             },
             state="DRAFT",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -80,7 +80,7 @@ class TestNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = response.parse()
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -102,7 +102,7 @@ class TestNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = response.parse()
-            assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -112,7 +112,7 @@ class TestNotifications:
         notification = client.notifications.retrieve(
             id="id",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -121,7 +121,7 @@ class TestNotifications:
             id="id",
             version="version",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -133,7 +133,7 @@ class TestNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = response.parse()
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -145,7 +145,7 @@ class TestNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = response.parse()
-            assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -557,7 +557,7 @@ class TestNotifications:
                 "tags": ["updated"],
             },
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -577,7 +577,7 @@ class TestNotifications:
             },
             state="PUBLISHED",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -600,7 +600,7 @@ class TestNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = response.parse()
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -623,7 +623,7 @@ class TestNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = response.parse()
-            assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -719,7 +719,7 @@ class TestAsyncNotifications:
                 "tags": ["onboarding", "welcome"],
             },
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -738,7 +738,7 @@ class TestAsyncNotifications:
             },
             state="DRAFT",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -760,7 +760,7 @@ class TestAsyncNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = await response.parse()
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -782,7 +782,7 @@ class TestAsyncNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = await response.parse()
-            assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -792,7 +792,7 @@ class TestAsyncNotifications:
         notification = await async_client.notifications.retrieve(
             id="id",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -801,7 +801,7 @@ class TestAsyncNotifications:
             id="id",
             version="version",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -813,7 +813,7 @@ class TestAsyncNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = await response.parse()
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -825,7 +825,7 @@ class TestAsyncNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = await response.parse()
-            assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -1237,7 +1237,7 @@ class TestAsyncNotifications:
                 "tags": ["updated"],
             },
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1257,7 +1257,7 @@ class TestAsyncNotifications:
             },
             state="PUBLISHED",
         )
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1280,7 +1280,7 @@ class TestAsyncNotifications:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         notification = await response.parse()
-        assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -1303,7 +1303,7 @@ class TestAsyncNotifications:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             notification = await response.parse()
-            assert_matches_type(NotificationTemplateGetResponse, notification, path=["response"])
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
