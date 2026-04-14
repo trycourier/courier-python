@@ -3,37 +3,24 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .._models import BaseModel
 from .notification_template_payload import NotificationTemplatePayload
 
-__all__ = ["NotificationTemplateResponse", "Notification"]
+__all__ = ["NotificationTemplateResponse"]
 
 
-class Notification(NotificationTemplatePayload):
+class NotificationTemplateResponse(NotificationTemplatePayload):
     """
-    Full document shape used in POST and PUT request bodies, and returned inside the GET response envelope.
+    Response for GET /notifications/{id}, POST /notifications, and PUT /notifications/{id}. Returns all template fields at the top level.
     """
 
     id: str
     """The template ID."""
-
-
-class NotificationTemplateResponse(BaseModel):
-    """
-    Response for GET /notifications/{id}, POST /notifications, and PUT /notifications/{id}. Wraps the template payload inside a `notification` key alongside metadata.
-    """
 
     created: int
     """Epoch milliseconds when the template was created."""
 
     creator: str
     """User ID of the creator."""
-
-    notification: Notification
-    """
-    Full document shape used in POST and PUT request bodies, and returned inside the
-    GET response envelope.
-    """
 
     state: Literal["DRAFT", "PUBLISHED"]
     """The template state. Always uppercase."""

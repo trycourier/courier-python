@@ -92,8 +92,8 @@ class NotificationsResource(SyncAPIResource):
         Templates are created in draft state by default.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after creation. Case-insensitive input, normalized to uppercase
               in the response. Defaults to "DRAFT".
@@ -517,8 +517,8 @@ class NotificationsResource(SyncAPIResource):
         All fields are required.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after update. Case-insensitive input, normalized to uppercase in
               the response. Defaults to "DRAFT".
@@ -643,8 +643,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         Templates are created in draft state by default.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after creation. Case-insensitive input, normalized to uppercase
               in the response. Defaults to "DRAFT".
@@ -1072,8 +1072,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         All fields are required.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after update. Case-insensitive input, normalized to uppercase in
               the response. Defaults to "DRAFT".
