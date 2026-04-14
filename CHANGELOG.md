@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.11.2 (2026-04-14)
+
+Full Changelog: [v7.11.1...v7.11.2](https://github.com/trycourier/courier-python/compare/v7.11.1...v7.11.2)
+
+### Bug Fixes
+
+* **types:** flatten NotificationTemplateResponse structure ([de82b20](https://github.com/trycourier/courier-python/commit/de82b206f9d038b259de06360a6e52420c97c156))
+* **types:** make note optional in ResultNotification, flatten template response ([b7dc001](https://github.com/trycourier/courier-python/commit/b7dc001d77e093a2d93b4c8e7b7c93f5b4518edd))
+
 ## 7.11.1 (2026-04-13)
 
 Full Changelog: [v7.11.0...v7.11.1](https://github.com/trycourier/courier-python/compare/v7.11.0...v7.11.1)

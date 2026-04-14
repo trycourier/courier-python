@@ -41,7 +41,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.notification_list_response import NotificationListResponse
 from ...types.notification_template_state import NotificationTemplateState
-from ...types.notification_template_get_response import NotificationTemplateGetResponse
+from ...types.notification_template_response import NotificationTemplateResponse
 from ...types.notification_template_payload_param import NotificationTemplatePayloadParam
 from ...types.notification_content_mutation_response import NotificationContentMutationResponse
 from ...types.notification_retrieve_content_response import NotificationRetrieveContentResponse
@@ -85,15 +85,15 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateGetResponse:
+    ) -> NotificationTemplateResponse:
         """Create a notification template.
 
         Requires all fields in the notification object.
         Templates are created in draft state by default.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after creation. Case-insensitive input, normalized to uppercase
               in the response. Defaults to "DRAFT".
@@ -118,7 +118,7 @@ class NotificationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateGetResponse,
+            cast_to=NotificationTemplateResponse,
         )
 
     def retrieve(
@@ -132,7 +132,7 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateGetResponse:
+    ) -> NotificationTemplateResponse:
         """Retrieve a notification template by ID.
 
         Returns the published version by
@@ -161,7 +161,7 @@ class NotificationsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"version": version}, notification_retrieve_params.NotificationRetrieveParams),
             ),
-            cast_to=NotificationTemplateGetResponse,
+            cast_to=NotificationTemplateResponse,
         )
 
     def list(
@@ -511,14 +511,14 @@ class NotificationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateGetResponse:
+    ) -> NotificationTemplateResponse:
         """Replace a notification template.
 
         All fields are required.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after update. Case-insensitive input, normalized to uppercase in
               the response. Defaults to "DRAFT".
@@ -545,7 +545,7 @@ class NotificationsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateGetResponse,
+            cast_to=NotificationTemplateResponse,
         )
 
     def retrieve_content(
@@ -636,15 +636,15 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateGetResponse:
+    ) -> NotificationTemplateResponse:
         """Create a notification template.
 
         Requires all fields in the notification object.
         Templates are created in draft state by default.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after creation. Case-insensitive input, normalized to uppercase
               in the response. Defaults to "DRAFT".
@@ -669,7 +669,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateGetResponse,
+            cast_to=NotificationTemplateResponse,
         )
 
     async def retrieve(
@@ -683,7 +683,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateGetResponse:
+    ) -> NotificationTemplateResponse:
         """Retrieve a notification template by ID.
 
         Returns the published version by
@@ -714,7 +714,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
                     {"version": version}, notification_retrieve_params.NotificationRetrieveParams
                 ),
             ),
-            cast_to=NotificationTemplateGetResponse,
+            cast_to=NotificationTemplateResponse,
         )
 
     async def list(
@@ -1066,14 +1066,14 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> NotificationTemplateGetResponse:
+    ) -> NotificationTemplateResponse:
         """Replace a notification template.
 
         All fields are required.
 
         Args:
-          notification: Full document shape used in POST and PUT request bodies, and returned inside the
-              GET response envelope.
+          notification: Core template fields used in POST and PUT request bodies (nested under a
+              `notification` key) and returned at the top level in responses.
 
           state: Template state after update. Case-insensitive input, normalized to uppercase in
               the response. Defaults to "DRAFT".
@@ -1100,7 +1100,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NotificationTemplateGetResponse,
+            cast_to=NotificationTemplateResponse,
         )
 
     async def retrieve_content(

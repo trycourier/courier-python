@@ -12,8 +12,8 @@ __all__ = ["NotificationReplaceParams"]
 class NotificationReplaceParams(TypedDict, total=False):
     notification: Required[NotificationTemplatePayloadParam]
     """
-    Full document shape used in POST and PUT request bodies, and returned inside the
-    GET response envelope.
+    Core template fields used in POST and PUT request bodies (nested under a
+    `notification` key) and returned at the top level in responses.
     """
 
     state: Literal["DRAFT", "PUBLISHED"]

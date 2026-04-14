@@ -28,7 +28,7 @@ class Subscription(BaseModel):
 
 class NotificationTemplatePayload(BaseModel):
     """
-    Full document shape used in POST and PUT request bodies, and returned inside the GET response envelope.
+    Core template fields used in POST and PUT request bodies (nested under a `notification` key) and returned at the top level in responses.
     """
 
     brand: Optional[Brand] = None

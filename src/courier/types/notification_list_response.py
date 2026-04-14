@@ -36,13 +36,13 @@ class ResultNotification(BaseModel):
     event_ids: List[str]
     """Array of event IDs associated with this notification"""
 
-    note: str
-
     routing: "MessageRouting"
 
     topic_id: str
 
     updated_at: int
+
+    note: Optional[str] = None
 
     tags: Optional[ResultNotificationTags] = None
 
