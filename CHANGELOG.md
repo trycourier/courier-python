@@ -1,5 +1,29 @@
 # Changelog
 
+## 7.12.0 (2026-05-01)
+
+Full Changelog: [v7.11.2...v7.12.0](https://github.com/trycourier/courier-python/compare/v7.11.2...v7.12.0)
+
+### Features
+
+* support setting headers via env ([111bbaa](https://github.com/trycourier/courier-python/commit/111bbaa73c526cac005398950f3357631203fb4e))
+
+
+### Bug Fixes
+
+* use correct field name format for multipart file arrays ([4b98bee](https://github.com/trycourier/courier-python/commit/4b98beed2c666bebce1ddb8b1d8cccb68c40ffb6))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([f33e194](https://github.com/trycourier/courier-python/commit/f33e194bd4cf761f56d37371b0a778b2bd72938b))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([5be9e53](https://github.com/trycourier/courier-python/commit/5be9e537dd664f954d4a5348d8dc39f694972fb8))
+* **internal:** reformat pyproject.toml ([9d75a30](https://github.com/trycourier/courier-python/commit/9d75a3001d33be94d2942066c793ea828f84af0c))
+
 ## 7.11.2 (2026-04-14)
 
 Full Changelog: [v7.11.1...v7.11.2](https://github.com/trycourier/courier-python/compare/v7.11.1...v7.11.2)
