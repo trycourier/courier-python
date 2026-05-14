@@ -61,7 +61,6 @@ if TYPE_CHECKING:
     from .resources.send import SendResource, AsyncSendResource
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.inbound import InboundResource, AsyncInboundResource
-    from .resources.journeys import JourneysResource, AsyncJourneysResource
     from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
@@ -70,6 +69,7 @@ if TYPE_CHECKING:
     from .resources.audit_events import AuditEventsResource, AsyncAuditEventsResource
     from .resources.translations import TranslationsResource, AsyncTranslationsResource
     from .resources.tenants.tenants import TenantsResource, AsyncTenantsResource
+    from .resources.journeys.journeys import JourneysResource, AsyncJourneysResource
     from .resources.profiles.profiles import ProfilesResource, AsyncProfilesResource
     from .resources.routing_strategies import RoutingStrategiesResource, AsyncRoutingStrategiesResource
     from .resources.providers.providers import ProvidersResource, AsyncProvidersResource

@@ -6,6 +6,7 @@ from . import (
     shared,
     tenants,
     audience,
+    journey_response,
     audience_list_response,
     element_with_checksums,
     audience_update_response,
@@ -109,21 +110,28 @@ from .icons_param import IconsParam as IconsParam
 from .brand_colors import BrandColors as BrandColors
 from .email_footer import EmailFooter as EmailFooter
 from .email_header import EmailHeader as EmailHeader
+from .journey_node import JourneyNode as JourneyNode
 from .version_node import VersionNode as VersionNode
 from .brand_snippet import BrandSnippet as BrandSnippet
+from .journey_state import JourneyState as JourneyState
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
 from .brand_template import BrandTemplate as BrandTemplate
+from .journey_ai_node import JourneyAINode as JourneyAINode
 from .message_details import MessageDetails as MessageDetails
 from .base_check_param import BaseCheckParam as BaseCheckParam
 from .email_head_param import EmailHeadParam as EmailHeadParam
+from .journey_response import JourneyResponse as JourneyResponse
 from .list_list_params import ListListParams as ListListParams
 from .brand_list_params import BrandListParams as BrandListParams
+from .journey_exit_node import JourneyExitNode as JourneyExitNode
+from .journey_send_node import JourneySendNode as JourneySendNode
 from .subscription_list import SubscriptionList as SubscriptionList
 from .widget_background import WidgetBackground as WidgetBackground
 from .brand_colors_param import BrandColorsParam as BrandColorsParam
 from .email_footer_param import EmailFooterParam as EmailFooterParam
 from .email_header_param import EmailHeaderParam as EmailHeaderParam
+from .journey_node_param import JourneyNodeParam as JourneyNodeParam
 from .list_list_response import ListListResponse as ListListResponse
 from .list_update_params import ListUpdateParams as ListUpdateParams
 from .tenant_association import TenantAssociation as TenantAssociation
@@ -143,11 +151,14 @@ from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
 from .brand_template_param import BrandTemplateParam as BrandTemplateParam
 from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
+from .journey_version_item import JourneyVersionItem as JourneyVersionItem
 from .provider_list_params import ProviderListParams as ProviderListParams
 from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
 from .bulk_add_users_params import BulkAddUsersParams as BulkAddUsersParams
+from .journey_ai_node_param import JourneyAINodeParam as JourneyAINodeParam
+from .journey_create_params import JourneyCreateParams as JourneyCreateParams
 from .journey_invoke_params import JourneyInvokeParams as JourneyInvokeParams
 from .message_list_response import MessageListResponse as MessageListResponse
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
@@ -159,6 +170,10 @@ from .automation_list_params import AutomationListParams as AutomationListParams
 from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
 from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
 from .element_with_checksums import ElementWithChecksums as ElementWithChecksums
+from .journey_condition_atom import JourneyConditionAtom as JourneyConditionAtom
+from .journey_merge_strategy import JourneyMergeStrategy as JourneyMergeStrategy
+from .journey_publish_params import JourneyPublishParams as JourneyPublishParams
+from .journey_replace_params import JourneyReplaceParams as JourneyReplaceParams
 from .journeys_list_response import JourneysListResponse as JourneysListResponse
 from .message_history_params import MessageHistoryParams as MessageHistoryParams
 from .profile_replace_params import ProfileReplaceParams as ProfileReplaceParams
@@ -168,12 +183,19 @@ from .provider_update_params import ProviderUpdateParams as ProviderUpdateParams
 from .subscription_topic_new import SubscriptionTopicNew as SubscriptionTopicNew
 from .audit_event_list_params import AuditEventListParams as AuditEventListParams
 from .auth_issue_token_params import AuthIssueTokenParams as AuthIssueTokenParams
+from .journey_condition_group import JourneyConditionGroup as JourneyConditionGroup
+from .journey_exit_node_param import JourneyExitNodeParam as JourneyExitNodeParam
+from .journey_retrieve_params import JourneyRetrieveParams as JourneyRetrieveParams
+from .journey_send_node_param import JourneySendNodeParam as JourneySendNodeParam
 from .profile_create_response import ProfileCreateResponse as ProfileCreateResponse
 from .providers_catalog_entry import ProvidersCatalogEntry as ProvidersCatalogEntry
 from .widget_background_param import WidgetBackgroundParam as WidgetBackgroundParam
 from .audience_update_response import AudienceUpdateResponse as AudienceUpdateResponse
 from .bulk_create_job_response import BulkCreateJobResponse as BulkCreateJobResponse
 from .bulk_list_users_response import BulkListUsersResponse as BulkListUsersResponse
+from .journey_conditions_field import JourneyConditionsField as JourneyConditionsField
+from .journey_delay_until_node import JourneyDelayUntilNode as JourneyDelayUntilNode
+from .journey_template_summary import JourneyTemplateSummary as JourneyTemplateSummary
 from .journeys_invoke_response import JourneysInvokeResponse as JourneysInvokeResponse
 from .message_content_response import MessageContentResponse as MessageContentResponse
 from .message_history_response import MessageHistoryResponse as MessageHistoryResponse
@@ -199,39 +221,62 @@ from .notification_create_params import NotificationCreateParams as Notification
 from .notification_list_response import NotificationListResponse as NotificationListResponse
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
 from .brand_settings_in_app_param import BrandSettingsInAppParam as BrandSettingsInAppParam
+from .journey_delay_duration_node import JourneyDelayDurationNode as JourneyDelayDurationNode
+from .journey_fetch_post_put_node import JourneyFetchPostPutNode as JourneyFetchPostPutNode
 from .notification_publish_params import NotificationPublishParams as NotificationPublishParams
 from .notification_replace_params import NotificationReplaceParams as NotificationReplaceParams
 from .notification_template_state import NotificationTemplateState as NotificationTemplateState
 from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
 from .inbound_track_event_response import InboundTrackEventResponse as InboundTrackEventResponse
+from .journey_condition_atom_param import JourneyConditionAtomParam as JourneyConditionAtomParam
+from .journey_segment_trigger_node import JourneySegmentTriggerNode as JourneySegmentTriggerNode
+from .journey_throttle_static_node import JourneyThrottleStaticNode as JourneyThrottleStaticNode
 from .notification_retrieve_params import NotificationRetrieveParams as NotificationRetrieveParams
 from .put_tenant_template_response import PutTenantTemplateResponse as PutTenantTemplateResponse
 from .routing_strategy_list_params import RoutingStrategyListParams as RoutingStrategyListParams
 from .subscription_topic_new_param import SubscriptionTopicNewParam as SubscriptionTopicNewParam
+from .journey_condition_group_param import JourneyConditionGroupParam as JourneyConditionGroupParam
+from .journey_fetch_get_delete_node import JourneyFetchGetDeleteNode as JourneyFetchGetDeleteNode
+from .journey_template_get_response import JourneyTemplateGetResponse as JourneyTemplateGetResponse
+from .journey_throttle_dynamic_node import JourneyThrottleDynamicNode as JourneyThrottleDynamicNode
 from .notification_template_payload import NotificationTemplatePayload as NotificationTemplatePayload
 from .notification_template_summary import NotificationTemplateSummary as NotificationTemplateSummary
 from .routing_strategy_get_response import RoutingStrategyGetResponse as RoutingStrategyGetResponse
 from .translation_retrieve_response import TranslationRetrieveResponse as TranslationRetrieveResponse
 from .audience_list_members_response import AudienceListMembersResponse as AudienceListMembersResponse
+from .journey_condition_nested_group import JourneyConditionNestedGroup as JourneyConditionNestedGroup
+from .journey_conditions_field_param import JourneyConditionsFieldParam as JourneyConditionsFieldParam
+from .journey_delay_until_node_param import JourneyDelayUntilNodeParam as JourneyDelayUntilNodeParam
+from .journey_template_list_response import JourneyTemplateListResponse as JourneyTemplateListResponse
+from .journey_versions_list_response import JourneyVersionsListResponse as JourneyVersionsListResponse
 from .notification_put_locale_params import NotificationPutLocaleParams as NotificationPutLocaleParams
 from .notification_template_response import NotificationTemplateResponse as NotificationTemplateResponse
 from .routing_strategy_create_params import RoutingStrategyCreateParams as RoutingStrategyCreateParams
 from .routing_strategy_list_response import RoutingStrategyListResponse as RoutingStrategyListResponse
 from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as InboundBulkMessageUserParam
+from .journey_api_invoke_trigger_node import JourneyAPIInvokeTriggerNode as JourneyAPIInvokeTriggerNode
 from .notification_put_content_params import NotificationPutContentParams as NotificationPutContentParams
 from .notification_put_element_params import NotificationPutElementParams as NotificationPutElementParams
 from .routing_strategy_replace_params import RoutingStrategyReplaceParams as RoutingStrategyReplaceParams
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
 from .automation_template_list_response import AutomationTemplateListResponse as AutomationTemplateListResponse
+from .journey_delay_duration_node_param import JourneyDelayDurationNodeParam as JourneyDelayDurationNodeParam
+from .journey_fetch_post_put_node_param import JourneyFetchPostPutNodeParam as JourneyFetchPostPutNodeParam
 from .notification_content_get_response import NotificationContentGetResponse as NotificationContentGetResponse
 from .notification_list_versions_params import NotificationListVersionsParams as NotificationListVersionsParams
 from .put_subscriptions_recipient_param import PutSubscriptionsRecipientParam as PutSubscriptionsRecipientParam
+from .journey_segment_trigger_node_param import JourneySegmentTriggerNodeParam as JourneySegmentTriggerNodeParam
+from .journey_throttle_static_node_param import JourneyThrottleStaticNodeParam as JourneyThrottleStaticNodeParam
+from .journey_fetch_get_delete_node_param import JourneyFetchGetDeleteNodeParam as JourneyFetchGetDeleteNodeParam
+from .journey_throttle_dynamic_node_param import JourneyThrottleDynamicNodeParam as JourneyThrottleDynamicNodeParam
 from .notification_template_payload_param import NotificationTemplatePayloadParam as NotificationTemplatePayloadParam
+from .journey_condition_nested_group_param import JourneyConditionNestedGroupParam as JourneyConditionNestedGroupParam
 from .notification_retrieve_content_params import NotificationRetrieveContentParams as NotificationRetrieveContentParams
 from .associated_notification_list_response import (
     AssociatedNotificationListResponse as AssociatedNotificationListResponse,
 )
+from .journey_api_invoke_trigger_node_param import JourneyAPIInvokeTriggerNodeParam as JourneyAPIInvokeTriggerNodeParam
 from .post_tenant_template_publish_response import (
     PostTenantTemplatePublishResponse as PostTenantTemplatePublishResponse,
 )
@@ -257,6 +302,7 @@ if _compat.PYDANTIC_V1:
     audience.Audience.update_forward_refs()  # type: ignore
     audience_update_response.AudienceUpdateResponse.update_forward_refs()  # type: ignore
     audience_list_response.AudienceListResponse.update_forward_refs()  # type: ignore
+    journey_response.JourneyResponse.update_forward_refs()  # type: ignore
     element_with_checksums.ElementWithChecksums.update_forward_refs()  # type: ignore
     notification_content_get_response.NotificationContentGetResponse.update_forward_refs()  # type: ignore
     notification_list_response.NotificationListResponse.update_forward_refs()  # type: ignore
@@ -269,6 +315,7 @@ else:
     audience.Audience.model_rebuild(_parent_namespace_depth=0)
     audience_update_response.AudienceUpdateResponse.model_rebuild(_parent_namespace_depth=0)
     audience_list_response.AudienceListResponse.model_rebuild(_parent_namespace_depth=0)
+    journey_response.JourneyResponse.model_rebuild(_parent_namespace_depth=0)
     element_with_checksums.ElementWithChecksums.model_rebuild(_parent_namespace_depth=0)
     notification_content_get_response.NotificationContentGetResponse.model_rebuild(_parent_namespace_depth=0)
     notification_list_response.NotificationListResponse.model_rebuild(_parent_namespace_depth=0)
