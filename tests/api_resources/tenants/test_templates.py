@@ -130,6 +130,58 @@ class TestTemplates:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_delete(self, client: Courier) -> None:
+        template = client.tenants.templates.delete(
+            template_id="template_id",
+            tenant_id="tenant_id",
+        )
+        assert template is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_delete(self, client: Courier) -> None:
+        response = client.tenants.templates.with_raw_response.delete(
+            template_id="template_id",
+            tenant_id="tenant_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        template = response.parse()
+        assert template is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_delete(self, client: Courier) -> None:
+        with client.tenants.templates.with_streaming_response.delete(
+            template_id="template_id",
+            tenant_id="tenant_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            template = response.parse()
+            assert template is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_delete(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
+            client.tenants.templates.with_raw_response.delete(
+                template_id="template_id",
+                tenant_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_id` but received ''"):
+            client.tenants.templates.with_raw_response.delete(
+                template_id="",
+                tenant_id="tenant_id",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_publish(self, client: Courier) -> None:
         template = client.tenants.templates.publish(
             template_id="template_id",
@@ -446,6 +498,58 @@ class TestAsyncTemplates:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
             await async_client.tenants.templates.with_raw_response.list(
                 tenant_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_delete(self, async_client: AsyncCourier) -> None:
+        template = await async_client.tenants.templates.delete(
+            template_id="template_id",
+            tenant_id="tenant_id",
+        )
+        assert template is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_delete(self, async_client: AsyncCourier) -> None:
+        response = await async_client.tenants.templates.with_raw_response.delete(
+            template_id="template_id",
+            tenant_id="tenant_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        template = await response.parse()
+        assert template is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_delete(self, async_client: AsyncCourier) -> None:
+        async with async_client.tenants.templates.with_streaming_response.delete(
+            template_id="template_id",
+            tenant_id="tenant_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            template = await response.parse()
+            assert template is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_delete(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
+            await async_client.tenants.templates.with_raw_response.delete(
+                template_id="template_id",
+                tenant_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_id` but received ''"):
+            await async_client.tenants.templates.with_raw_response.delete(
+                template_id="",
+                tenant_id="tenant_id",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
