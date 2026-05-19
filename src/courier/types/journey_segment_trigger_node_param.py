@@ -10,6 +10,8 @@ __all__ = ["JourneySegmentTriggerNodeParam"]
 
 
 class JourneySegmentTriggerNodeParam(TypedDict, total=False):
+    """Trigger fired by a segment event (`identify`, `group`, or `track`)."""
+
     request_type: Required[Literal["identify", "group", "track"]]
 
     trigger_type: Required[Literal["segment"]]

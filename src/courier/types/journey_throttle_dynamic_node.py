@@ -10,6 +10,10 @@ __all__ = ["JourneyThrottleDynamicNode"]
 
 
 class JourneyThrottleDynamicNode(BaseModel):
+    """
+    Throttle the journey by a dynamic `throttle_key`, allowing at most `max_allowed` invocations per `period`.
+    """
+
     max_allowed: int
 
     period: str

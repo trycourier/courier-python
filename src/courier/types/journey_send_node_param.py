@@ -35,6 +35,11 @@ class Message(TypedDict, total=False):
 
 
 class JourneySendNodeParam(TypedDict, total=False):
+    """Send a notification template to the recipient.
+
+    Optionally override the recipient address, delay the send, or attach `data`.
+    """
+
     message: Required[Message]
 
     type: Required[Literal["send"]]

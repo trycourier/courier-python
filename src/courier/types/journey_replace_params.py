@@ -18,6 +18,7 @@ class JourneyReplaceParams(TypedDict, total=False):
     enabled: bool
 
     state: JourneyState
+    """Lifecycle state of a journey."""
 
 
 from .journey_node_param import JourneyNodeParam

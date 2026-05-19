@@ -10,6 +10,8 @@ __all__ = ["JourneyTemplateListResponse"]
 
 
 class JourneyTemplateListResponse(BaseModel):
+    """Paged list of journey-scoped notification templates."""
+
     paging: Paging
 
     results: List[JourneyTemplateSummary]

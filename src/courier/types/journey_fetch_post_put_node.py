@@ -11,7 +11,12 @@ __all__ = ["JourneyFetchPostPutNode"]
 
 
 class JourneyFetchPostPutNode(BaseModel):
+    """
+    Issue an HTTP POST or PUT request with a `body` and merge the response into the journey state per `merge_strategy`.
+    """
+
     merge_strategy: JourneyMergeStrategy
+    """Strategy for merging a fetch response into the journey run state."""
 
     method: Literal["post", "put"]
 

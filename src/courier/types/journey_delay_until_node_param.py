@@ -10,6 +10,8 @@ __all__ = ["JourneyDelayUntilNodeParam"]
 
 
 class JourneyDelayUntilNodeParam(TypedDict, total=False):
+    """Pause the journey run `until` a specific time."""
+
     mode: Required[Literal["until"]]
 
     type: Required[Literal["delay"]]

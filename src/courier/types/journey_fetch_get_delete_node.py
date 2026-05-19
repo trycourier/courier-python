@@ -11,7 +11,12 @@ __all__ = ["JourneyFetchGetDeleteNode"]
 
 
 class JourneyFetchGetDeleteNode(BaseModel):
+    """
+    Issue an HTTP GET or DELETE request and merge the response into the journey state per `merge_strategy`.
+    """
+
     merge_strategy: JourneyMergeStrategy
+    """Strategy for merging a fetch response into the journey run state."""
 
     method: Literal["get", "delete"]
 

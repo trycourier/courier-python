@@ -9,5 +9,7 @@ __all__ = ["TemplateListParams"]
 
 class TemplateListParams(TypedDict, total=False):
     cursor: str
+    """Pagination cursor from a prior response."""
 
     limit: int
+    """Page size. Minimum 1, maximum 100."""

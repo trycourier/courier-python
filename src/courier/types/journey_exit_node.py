@@ -9,6 +9,8 @@ __all__ = ["JourneyExitNode"]
 
 
 class JourneyExitNode(BaseModel):
+    """Terminate the journey run."""
+
     type: Literal["exit"]
 
     id: Optional[str] = None

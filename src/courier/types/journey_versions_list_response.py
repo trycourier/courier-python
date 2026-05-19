@@ -10,6 +10,8 @@ __all__ = ["JourneyVersionsListResponse"]
 
 
 class JourneyVersionsListResponse(BaseModel):
+    """Paged list of published journey versions, most recent first."""
+
     paging: Paging
 
     results: List[JourneyVersionItem]

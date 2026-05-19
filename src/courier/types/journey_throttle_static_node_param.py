@@ -10,6 +10,10 @@ __all__ = ["JourneyThrottleStaticNodeParam"]
 
 
 class JourneyThrottleStaticNodeParam(TypedDict, total=False):
+    """
+    Throttle the journey by a static `scope` (`user` or `global`), allowing at most `max_allowed` invocations per `period`.
+    """
+
     max_allowed: Required[int]
 
     period: Required[str]

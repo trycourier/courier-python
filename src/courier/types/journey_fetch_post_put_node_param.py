@@ -12,7 +12,12 @@ __all__ = ["JourneyFetchPostPutNodeParam"]
 
 
 class JourneyFetchPostPutNodeParam(TypedDict, total=False):
+    """
+    Issue an HTTP POST or PUT request with a `body` and merge the response into the journey state per `merge_strategy`.
+    """
+
     merge_strategy: Required[JourneyMergeStrategy]
+    """Strategy for merging a fetch response into the journey run state."""
 
     method: Required[Literal["post", "put"]]
 

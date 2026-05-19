@@ -44,7 +44,7 @@ class JourneyBranchNodePath(BaseModel):
 class JourneyBranchNode(BaseModel):
     """Branch node.
 
-    Routes to one of `paths[]` whose `conditions` match, else falls through to `default.nodes`. Inlined rather than referenced so the recursive `nodes: JourneyNode[]` cycle stays within a single generated module (Stainless Python forward-ref resolution does not span modules well for this recursion shape).
+    Routes to the first entry in `paths[]` whose `conditions` match, else falls through to `default.nodes`.
     """
 
     default: JourneyBranchNodeDefault
