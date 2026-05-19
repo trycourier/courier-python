@@ -9,3 +9,4 @@ __all__ = ["JourneyRetrieveParams"]
 
 class JourneyRetrieveParams(TypedDict, total=False):
     version: str
+    """Version selector: `draft`, `published` (default), or `vN`."""

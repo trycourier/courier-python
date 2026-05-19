@@ -34,6 +34,11 @@ class Message(BaseModel):
 
 
 class JourneySendNode(BaseModel):
+    """Send a notification template to the recipient.
+
+    Optionally override the recipient address, delay the send, or attach `data`.
+    """
+
     message: Message
 
     type: Literal["send"]

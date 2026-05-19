@@ -11,6 +11,11 @@ __all__ = ["JourneyAPIInvokeTriggerNodeParam"]
 
 
 class JourneyAPIInvokeTriggerNodeParam(TypedDict, total=False):
+    """Trigger fired when the journey is invoked via the API.
+
+    The optional `schema` field is a JSON Schema that validates the invocation payload.
+    """
+
     trigger_type: Required[Literal["api-invoke"]]
 
     type: Required[Literal["trigger"]]

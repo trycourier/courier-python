@@ -83,12 +83,18 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Create a new journey.
+        """Create a journey.
 
-        The journey is created in DRAFT state. Use POST
-        /journeys/{templateId}/publish to make it live.
+        Defaults to `DRAFT` state; pass `state: "PUBLISHED"` to
+        publish on create. Send nodes are not allowed on `POST`. The standard flow is:
+        create the journey shell here, add notification templates with
+        `POST /journeys/{templateId}/templates`, then wire them into the journey with
+        `PUT /journeys/{templateId}`. Call `POST /journeys/{templateId}/publish` to
+        publish a draft after the fact.
 
         Args:
+          state: Lifecycle state of a journey.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -132,6 +138,8 @@ class JourneysResource(SyncAPIResource):
         the working draft, or `?version=vN` to retrieve a historical version.
 
         Args:
+          version: Version selector: `draft`, `published` (default), or `vN`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -253,8 +261,10 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneysInvokeResponse:
-        """
-        Invoke a journey run from a journey template.
+        """Invoke a journey by id or alias to start a new run.
+
+        The response includes a
+        `runId` identifying the run.
 
         Args:
           data: Data payload passed to the journey. The expected shape can be predefined using
@@ -345,8 +355,9 @@ class JourneysResource(SyncAPIResource):
     ) -> JourneyResponse:
         """Publish the current draft as a new version.
 
-        Optionally rollback to a prior
-        version by passing `{ version: 'vN' }`.
+        Body is optional; pass
+        `{ "version": "vN" }` to roll back to a prior version instead. Returns 404 if
+        the journey has no draft to publish.
 
         Args:
           extra_headers: Send extra headers
@@ -385,10 +396,15 @@ class JourneysResource(SyncAPIResource):
     ) -> JourneyResponse:
         """Replace the journey draft.
 
-        Updates the working draft only; call POST
-        /journeys/{templateId}/publish to make it live.
+        Updates the working draft only; call
+        `POST /journeys/{templateId}/publish` to make it live, or pass
+        `state: "PUBLISHED"` in this request to publish immediately. Send-node
+        `template` ids must already exist and be scoped to this journey, and node ids
+        must not be claimed by another journey.
 
         Args:
+          state: Lifecycle state of a journey.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -455,12 +471,18 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Create a new journey.
+        """Create a journey.
 
-        The journey is created in DRAFT state. Use POST
-        /journeys/{templateId}/publish to make it live.
+        Defaults to `DRAFT` state; pass `state: "PUBLISHED"` to
+        publish on create. Send nodes are not allowed on `POST`. The standard flow is:
+        create the journey shell here, add notification templates with
+        `POST /journeys/{templateId}/templates`, then wire them into the journey with
+        `PUT /journeys/{templateId}`. Call `POST /journeys/{templateId}/publish` to
+        publish a draft after the fact.
 
         Args:
+          state: Lifecycle state of a journey.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -504,6 +526,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         the working draft, or `?version=vN` to retrieve a historical version.
 
         Args:
+          version: Version selector: `draft`, `published` (default), or `vN`.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -625,8 +649,10 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneysInvokeResponse:
-        """
-        Invoke a journey run from a journey template.
+        """Invoke a journey by id or alias to start a new run.
+
+        The response includes a
+        `runId` identifying the run.
 
         Args:
           data: Data payload passed to the journey. The expected shape can be predefined using
@@ -717,8 +743,9 @@ class AsyncJourneysResource(AsyncAPIResource):
     ) -> JourneyResponse:
         """Publish the current draft as a new version.
 
-        Optionally rollback to a prior
-        version by passing `{ version: 'vN' }`.
+        Body is optional; pass
+        `{ "version": "vN" }` to roll back to a prior version instead. Returns 404 if
+        the journey has no draft to publish.
 
         Args:
           extra_headers: Send extra headers
@@ -757,10 +784,15 @@ class AsyncJourneysResource(AsyncAPIResource):
     ) -> JourneyResponse:
         """Replace the journey draft.
 
-        Updates the working draft only; call POST
-        /journeys/{templateId}/publish to make it live.
+        Updates the working draft only; call
+        `POST /journeys/{templateId}/publish` to make it live, or pass
+        `state: "PUBLISHED"` in this request to publish immediately. Send-node
+        `template` ids must already exist and be scoped to this journey, and node ids
+        must not be claimed by another journey.
 
         Args:
+          state: Lifecycle state of a journey.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request

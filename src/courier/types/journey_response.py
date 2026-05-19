@@ -11,6 +11,8 @@ __all__ = ["JourneyResponse"]
 
 
 class JourneyResponse(BaseModel):
+    """A journey, with its current draft or published nodes and metadata."""
+
     id: str
 
     created: Optional[int] = None
@@ -26,6 +28,7 @@ class JourneyResponse(BaseModel):
     published: Optional[int] = None
 
     state: JourneyState
+    """Lifecycle state of a journey."""
 
     updated: Optional[int] = None
 

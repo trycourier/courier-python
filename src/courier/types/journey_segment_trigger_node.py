@@ -10,6 +10,8 @@ __all__ = ["JourneySegmentTriggerNode"]
 
 
 class JourneySegmentTriggerNode(BaseModel):
+    """Trigger fired by a segment event (`identify`, `group`, or `track`)."""
+
     request_type: Literal["identify", "group", "track"]
 
     trigger_type: Literal["segment"]

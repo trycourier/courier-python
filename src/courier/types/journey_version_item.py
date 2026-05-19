@@ -8,6 +8,8 @@ __all__ = ["JourneyVersionItem"]
 
 
 class JourneyVersionItem(BaseModel):
+    """A published version of a journey."""
+
     created: Optional[int] = None
 
     creator: Optional[str] = None

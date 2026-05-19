@@ -10,6 +10,11 @@ __all__ = ["JourneyAINode"]
 
 
 class JourneyAINode(BaseModel):
+    """Invoke an AI step with `user_prompt` and optional `web_search`.
+
+    Returns a structured response conforming to `output_schema`.
+    """
+
     output_schema: Dict[str, object]
     """A JSONSchema object (Draft-07-compatible). Validated at runtime by Ajv."""
 

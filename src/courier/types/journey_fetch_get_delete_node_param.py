@@ -12,7 +12,12 @@ __all__ = ["JourneyFetchGetDeleteNodeParam"]
 
 
 class JourneyFetchGetDeleteNodeParam(TypedDict, total=False):
+    """
+    Issue an HTTP GET or DELETE request and merge the response into the journey state per `merge_strategy`.
+    """
+
     merge_strategy: Required[JourneyMergeStrategy]
+    """Strategy for merging a fetch response into the journey run state."""
 
     method: Required[Literal["get", "delete"]]
 

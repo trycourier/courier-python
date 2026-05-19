@@ -65,8 +65,8 @@ class TemplatesResource(SyncAPIResource):
     ) -> JourneyTemplateGetResponse:
         """Create a notification template scoped to this journey.
 
-        The template is created
-        in DRAFT state.
+        Defaults to `DRAFT`
+        state; pass `state: "PUBLISHED"` to publish on create.
 
         Args:
           extra_headers: Send extra headers
@@ -154,10 +154,14 @@ class TemplatesResource(SyncAPIResource):
     ) -> JourneyTemplateListResponse:
         """List notification templates scoped to this journey.
 
-        Templates scoped to a
-        journey can only be referenced from `send` nodes of the same journey.
+        Journey-scoped notification
+        templates can only be referenced from `send` nodes within the same journey.
 
         Args:
+          cursor: Pagination cursor from a prior response.
+
+          limit: Page size. Minimum 1, maximum 100.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -198,7 +202,7 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a journey-scoped notification template.
+        """Archive the journey-scoped notification template.
 
         Archived templates cannot be
         sent.
@@ -242,8 +246,8 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List published versions of a journey-scoped notification template, ordered most
-        recent first.
+        List published versions of the journey-scoped notification template, ordered
+        most recent first.
 
         Args:
           extra_headers: Send extra headers
@@ -284,7 +288,9 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Publish the current draft of a journey-scoped notification template.
+        Publish the current draft of the journey-scoped notification template as a new
+        version. Optionally roll back to a prior version by passing
+        `{ "version": "vN" }`.
 
         Args:
           extra_headers: Send extra headers
@@ -328,7 +334,7 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
         """
-        Replace a journey-scoped notification template draft.
+        Replace the journey-scoped notification template draft.
 
         Args:
           extra_headers: Send extra headers
@@ -400,8 +406,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
     ) -> JourneyTemplateGetResponse:
         """Create a notification template scoped to this journey.
 
-        The template is created
-        in DRAFT state.
+        Defaults to `DRAFT`
+        state; pass `state: "PUBLISHED"` to publish on create.
 
         Args:
           extra_headers: Send extra headers
@@ -489,10 +495,14 @@ class AsyncTemplatesResource(AsyncAPIResource):
     ) -> JourneyTemplateListResponse:
         """List notification templates scoped to this journey.
 
-        Templates scoped to a
-        journey can only be referenced from `send` nodes of the same journey.
+        Journey-scoped notification
+        templates can only be referenced from `send` nodes within the same journey.
 
         Args:
+          cursor: Pagination cursor from a prior response.
+
+          limit: Page size. Minimum 1, maximum 100.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -533,7 +543,7 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a journey-scoped notification template.
+        """Archive the journey-scoped notification template.
 
         Archived templates cannot be
         sent.
@@ -577,8 +587,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List published versions of a journey-scoped notification template, ordered most
-        recent first.
+        List published versions of the journey-scoped notification template, ordered
+        most recent first.
 
         Args:
           extra_headers: Send extra headers
@@ -619,7 +629,9 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Publish the current draft of a journey-scoped notification template.
+        Publish the current draft of the journey-scoped notification template as a new
+        version. Optionally roll back to a prior version by passing
+        `{ "version": "vN" }`.
 
         Args:
           extra_headers: Send extra headers
@@ -663,7 +675,7 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
         """
-        Replace a journey-scoped notification template draft.
+        Replace the journey-scoped notification template draft.
 
         Args:
           extra_headers: Send extra headers

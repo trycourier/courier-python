@@ -10,6 +10,8 @@ __all__ = ["JourneyDelayUntilNode"]
 
 
 class JourneyDelayUntilNode(BaseModel):
+    """Pause the journey run `until` a specific time."""
+
     mode: Literal["until"]
 
     type: Literal["delay"]

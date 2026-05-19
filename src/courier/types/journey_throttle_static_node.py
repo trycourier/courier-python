@@ -10,6 +10,10 @@ __all__ = ["JourneyThrottleStaticNode"]
 
 
 class JourneyThrottleStaticNode(BaseModel):
+    """
+    Throttle the journey by a static `scope` (`user` or `global`), allowing at most `max_allowed` invocations per `period`.
+    """
+
     max_allowed: int
 
     period: str

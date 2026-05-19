@@ -8,6 +8,8 @@ __all__ = ["JourneyExitNodeParam"]
 
 
 class JourneyExitNodeParam(TypedDict, total=False):
+    """Terminate the journey run."""
+
     type: Required[Literal["exit"]]
 
     id: str

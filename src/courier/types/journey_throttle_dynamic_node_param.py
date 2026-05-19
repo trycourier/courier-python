@@ -10,6 +10,10 @@ __all__ = ["JourneyThrottleDynamicNodeParam"]
 
 
 class JourneyThrottleDynamicNodeParam(TypedDict, total=False):
+    """
+    Throttle the journey by a dynamic `throttle_key`, allowing at most `max_allowed` invocations per `period`.
+    """
+
     max_allowed: Required[int]
 
     period: Required[str]

@@ -26,6 +26,8 @@ class Subscription(BaseModel):
 
 
 class JourneyTemplateGetResponse(BaseModel):
+    """A journey-scoped notification template."""
+
     id: str
 
     brand: Optional[Brand] = None

@@ -8,6 +8,10 @@ __all__ = ["JourneyTemplateSummary"]
 
 
 class JourneyTemplateSummary(BaseModel):
+    """
+    Summary fields of a journey-scoped notification template returned in list responses.
+    """
+
     id: str
 
     created: int
