@@ -14,7 +14,7 @@ from .versions import (
     VersionsResourceWithStreamingResponse,
     AsyncVersionsResourceWithStreamingResponse,
 )
-from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -142,6 +142,48 @@ class TemplatesResource(SyncAPIResource):
                 ),
             ),
             cast_to=TemplateListResponse,
+        )
+
+    def delete(
+        self,
+        template_id: str,
+        *,
+        tenant_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Deletes the tenant's notification template with the given `template_id`.
+
+        Returns **204 No Content** with an empty body on success.
+
+        Returns **404** if there is no template with this ID for the tenant, including a
+        second `DELETE` after a successful removal.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tenant_id:
+            raise ValueError(f"Expected a non-empty value for `tenant_id` but received {tenant_id!r}")
+        if not template_id:
+            raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            path_template("/tenants/{tenant_id}/templates/{template_id}", tenant_id=tenant_id, template_id=template_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
         )
 
     def publish(
@@ -357,6 +399,48 @@ class AsyncTemplatesResource(AsyncAPIResource):
             cast_to=TemplateListResponse,
         )
 
+    async def delete(
+        self,
+        template_id: str,
+        *,
+        tenant_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Deletes the tenant's notification template with the given `template_id`.
+
+        Returns **204 No Content** with an empty body on success.
+
+        Returns **404** if there is no template with this ID for the tenant, including a
+        second `DELETE` after a successful removal.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not tenant_id:
+            raise ValueError(f"Expected a non-empty value for `tenant_id` but received {tenant_id!r}")
+        if not template_id:
+            raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            path_template("/tenants/{tenant_id}/templates/{template_id}", tenant_id=tenant_id, template_id=template_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def publish(
         self,
         template_id: str,
@@ -471,6 +555,9 @@ class TemplatesResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             templates.list,
         )
+        self.delete = to_raw_response_wrapper(
+            templates.delete,
+        )
         self.publish = to_raw_response_wrapper(
             templates.publish,
         )
@@ -492,6 +579,9 @@ class AsyncTemplatesResourceWithRawResponse:
         )
         self.list = async_to_raw_response_wrapper(
             templates.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            templates.delete,
         )
         self.publish = async_to_raw_response_wrapper(
             templates.publish,
@@ -515,6 +605,9 @@ class TemplatesResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             templates.list,
         )
+        self.delete = to_streamed_response_wrapper(
+            templates.delete,
+        )
         self.publish = to_streamed_response_wrapper(
             templates.publish,
         )
@@ -536,6 +629,9 @@ class AsyncTemplatesResourceWithStreamingResponse:
         )
         self.list = async_to_streamed_response_wrapper(
             templates.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            templates.delete,
         )
         self.publish = async_to_streamed_response_wrapper(
             templates.publish,

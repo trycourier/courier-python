@@ -197,7 +197,36 @@ Types:
 
 ```python
 from courier.types import (
+    CreateJourneyRequest,
     Journey,
+    JourneyAINode,
+    JourneyAPIInvokeTriggerNode,
+    JourneyConditionAtom,
+    JourneyConditionGroup,
+    JourneyConditionNestedGroup,
+    JourneyConditionsField,
+    JourneyDelayDurationNode,
+    JourneyDelayUntilNode,
+    JourneyExitNode,
+    JourneyFetchGetDeleteNode,
+    JourneyFetchPostPutNode,
+    JourneyMergeStrategy,
+    JourneyNode,
+    JourneyPublishRequest,
+    JourneyResponse,
+    JourneySegmentTriggerNode,
+    JourneySendNode,
+    JourneyState,
+    JourneyTemplateCreateRequest,
+    JourneyTemplateGetResponse,
+    JourneyTemplateListResponse,
+    JourneyTemplatePublishRequest,
+    JourneyTemplateReplaceRequest,
+    JourneyTemplateSummary,
+    JourneyThrottleDynamicNode,
+    JourneyThrottleStaticNode,
+    JourneyVersionItem,
+    JourneyVersionsListResponse,
     JourneysInvokeRequest,
     JourneysInvokeResponse,
     JourneysListResponse,
@@ -206,8 +235,26 @@ from courier.types import (
 
 Methods:
 
-- <code title="get /journeys">client.journeys.<a href="./src/courier/resources/journeys.py">list</a>(\*\*<a href="src/courier/types/journey_list_params.py">params</a>) -> <a href="./src/courier/types/journeys_list_response.py">JourneysListResponse</a></code>
-- <code title="post /journeys/{templateId}/invoke">client.journeys.<a href="./src/courier/resources/journeys.py">invoke</a>(template_id, \*\*<a href="src/courier/types/journey_invoke_params.py">params</a>) -> <a href="./src/courier/types/journeys_invoke_response.py">JourneysInvokeResponse</a></code>
+- <code title="post /journeys">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">create</a>(\*\*<a href="src/courier/types/journey_create_params.py">params</a>) -> <a href="./src/courier/types/journey_response.py">JourneyResponse</a></code>
+- <code title="get /journeys/{templateId}">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">retrieve</a>(template_id, \*\*<a href="src/courier/types/journey_retrieve_params.py">params</a>) -> <a href="./src/courier/types/journey_response.py">JourneyResponse</a></code>
+- <code title="get /journeys">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">list</a>(\*\*<a href="src/courier/types/journey_list_params.py">params</a>) -> <a href="./src/courier/types/journeys_list_response.py">JourneysListResponse</a></code>
+- <code title="delete /journeys/{templateId}">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">archive</a>(template_id) -> None</code>
+- <code title="post /journeys/{templateId}/invoke">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">invoke</a>(template_id, \*\*<a href="src/courier/types/journey_invoke_params.py">params</a>) -> <a href="./src/courier/types/journeys_invoke_response.py">JourneysInvokeResponse</a></code>
+- <code title="get /journeys/{templateId}/versions">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">list_versions</a>(template_id) -> <a href="./src/courier/types/journey_versions_list_response.py">JourneyVersionsListResponse</a></code>
+- <code title="post /journeys/{templateId}/publish">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">publish</a>(template_id, \*\*<a href="src/courier/types/journey_publish_params.py">params</a>) -> <a href="./src/courier/types/journey_response.py">JourneyResponse</a></code>
+- <code title="put /journeys/{templateId}">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">replace</a>(template_id, \*\*<a href="src/courier/types/journey_replace_params.py">params</a>) -> <a href="./src/courier/types/journey_response.py">JourneyResponse</a></code>
+
+## Templates
+
+Methods:
+
+- <code title="post /journeys/{templateId}/templates">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">create</a>(template_id, \*\*<a href="src/courier/types/journeys/template_create_params.py">params</a>) -> <a href="./src/courier/types/journey_template_get_response.py">JourneyTemplateGetResponse</a></code>
+- <code title="get /journeys/{templateId}/templates/{notificationId}">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">retrieve</a>(notification_id, \*, template_id) -> <a href="./src/courier/types/journey_template_get_response.py">JourneyTemplateGetResponse</a></code>
+- <code title="get /journeys/{templateId}/templates">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">list</a>(template_id, \*\*<a href="src/courier/types/journeys/template_list_params.py">params</a>) -> <a href="./src/courier/types/journey_template_list_response.py">JourneyTemplateListResponse</a></code>
+- <code title="delete /journeys/{templateId}/templates/{notificationId}">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">archive</a>(notification_id, \*, template_id) -> None</code>
+- <code title="get /journeys/{templateId}/templates/{notificationId}/versions">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">list_versions</a>(notification_id, \*, template_id) -> <a href="./src/courier/types/notification_template_version_list_response.py">NotificationTemplateVersionListResponse</a></code>
+- <code title="post /journeys/{templateId}/templates/{notificationId}/publish">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">publish</a>(notification_id, \*, template_id, \*\*<a href="src/courier/types/journeys/template_publish_params.py">params</a>) -> None</code>
+- <code title="put /journeys/{templateId}/templates/{notificationId}">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">replace</a>(notification_id, \*, template_id, \*\*<a href="src/courier/types/journeys/template_replace_params.py">params</a>) -> <a href="./src/courier/types/journey_template_get_response.py">JourneyTemplateGetResponse</a></code>
 
 # Brands
 
@@ -501,6 +548,7 @@ Methods:
 
 - <code title="get /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">retrieve</a>(template_id, \*, tenant_id) -> <a href="./src/courier/types/base_template_tenant_association.py">BaseTemplateTenantAssociation</a></code>
 - <code title="get /tenants/{tenant_id}/templates">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">list</a>(tenant_id, \*\*<a href="src/courier/types/tenants/template_list_params.py">params</a>) -> <a href="./src/courier/types/tenants/template_list_response.py">TemplateListResponse</a></code>
+- <code title="delete /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">delete</a>(template_id, \*, tenant_id) -> None</code>
 - <code title="post /tenants/{tenant_id}/templates/{template_id}/publish">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">publish</a>(template_id, \*, tenant_id, \*\*<a href="src/courier/types/tenants/template_publish_params.py">params</a>) -> <a href="./src/courier/types/post_tenant_template_publish_response.py">PostTenantTemplatePublishResponse</a></code>
 - <code title="put /tenants/{tenant_id}/templates/{template_id}">client.tenants.templates.<a href="./src/courier/resources/tenants/templates/templates.py">replace</a>(template_id, \*, tenant_id, \*\*<a href="src/courier/types/tenants/template_replace_params.py">params</a>) -> <a href="./src/courier/types/put_tenant_template_response.py">PutTenantTemplateResponse</a></code>
 

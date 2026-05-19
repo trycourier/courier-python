@@ -19,7 +19,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -57,7 +61,6 @@ if TYPE_CHECKING:
     from .resources.send import SendResource, AsyncSendResource
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.inbound import InboundResource, AsyncInboundResource
-    from .resources.journeys import JourneysResource, AsyncJourneysResource
     from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
@@ -66,6 +69,7 @@ if TYPE_CHECKING:
     from .resources.audit_events import AuditEventsResource, AsyncAuditEventsResource
     from .resources.translations import TranslationsResource, AsyncTranslationsResource
     from .resources.tenants.tenants import TenantsResource, AsyncTenantsResource
+    from .resources.journeys.journeys import JourneysResource, AsyncJourneysResource
     from .resources.profiles.profiles import ProfilesResource, AsyncProfilesResource
     from .resources.routing_strategies import RoutingStrategiesResource, AsyncRoutingStrategiesResource
     from .resources.providers.providers import ProvidersResource, AsyncProvidersResource
@@ -118,6 +122,15 @@ class Courier(SyncAPIClient):
             base_url = os.environ.get("COURIER_BASE_URL")
         if base_url is None:
             base_url = f"https://api.courier.com"
+
+        custom_headers_env = os.environ.get("COURIER_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         super().__init__(
             version=__version__,
@@ -400,6 +413,15 @@ class AsyncCourier(AsyncAPIClient):
             base_url = os.environ.get("COURIER_BASE_URL")
         if base_url is None:
             base_url = f"https://api.courier.com"
+
+        custom_headers_env = os.environ.get("COURIER_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
 
         super().__init__(
             version=__version__,
