@@ -14,8 +14,8 @@ __all__ = ["BrandCreateParams"]
 class BrandCreateParams(TypedDict, total=False):
     name: Required[str]
 
-    id: Optional[str]
+    settings: Required[BrandSettingsParam]
 
-    settings: Optional[BrandSettingsParam]
+    id: Optional[str]
 
     snippets: Optional[BrandSnippetsParam]

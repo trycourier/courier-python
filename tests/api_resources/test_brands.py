@@ -24,7 +24,8 @@ class TestBrands:
     @parametrize
     def test_method_create(self, client: Courier) -> None:
         brand = client.brands.create(
-            name="name",
+            name="My Brand",
+            settings={},
         )
         assert_matches_type(Brand, brand, path=["response"])
 
@@ -32,12 +33,11 @@ class TestBrands:
     @parametrize
     def test_method_create_with_all_params(self, client: Courier) -> None:
         brand = client.brands.create(
-            name="name",
-            id="id",
+            name="My Brand",
             settings={
                 "colors": {
-                    "primary": "primary",
-                    "secondary": "secondary",
+                    "primary": "#9D3789",
+                    "secondary": "#FFFFFF",
                 },
                 "email": {
                     "footer": {
@@ -96,6 +96,7 @@ class TestBrands:
                     "placement": "top",
                 },
             },
+            id="id",
             snippets={
                 "items": [
                     {
@@ -111,7 +112,8 @@ class TestBrands:
     @parametrize
     def test_raw_response_create(self, client: Courier) -> None:
         response = client.brands.with_raw_response.create(
-            name="name",
+            name="My Brand",
+            settings={},
         )
 
         assert response.is_closed is True
@@ -123,7 +125,8 @@ class TestBrands:
     @parametrize
     def test_streaming_response_create(self, client: Courier) -> None:
         with client.brands.with_streaming_response.create(
-            name="name",
+            name="My Brand",
+            settings={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -388,7 +391,8 @@ class TestAsyncBrands:
     @parametrize
     async def test_method_create(self, async_client: AsyncCourier) -> None:
         brand = await async_client.brands.create(
-            name="name",
+            name="My Brand",
+            settings={},
         )
         assert_matches_type(Brand, brand, path=["response"])
 
@@ -396,12 +400,11 @@ class TestAsyncBrands:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCourier) -> None:
         brand = await async_client.brands.create(
-            name="name",
-            id="id",
+            name="My Brand",
             settings={
                 "colors": {
-                    "primary": "primary",
-                    "secondary": "secondary",
+                    "primary": "#9D3789",
+                    "secondary": "#FFFFFF",
                 },
                 "email": {
                     "footer": {
@@ -460,6 +463,7 @@ class TestAsyncBrands:
                     "placement": "top",
                 },
             },
+            id="id",
             snippets={
                 "items": [
                     {
@@ -475,7 +479,8 @@ class TestAsyncBrands:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCourier) -> None:
         response = await async_client.brands.with_raw_response.create(
-            name="name",
+            name="My Brand",
+            settings={},
         )
 
         assert response.is_closed is True
@@ -487,7 +492,8 @@ class TestAsyncBrands:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCourier) -> None:
         async with async_client.brands.with_streaming_response.create(
-            name="name",
+            name="My Brand",
+            settings={},
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
