@@ -50,8 +50,8 @@ class BrandsResource(SyncAPIResource):
         self,
         *,
         name: str,
+        settings: BrandSettingsParam,
         id: Optional[str] | Omit = omit,
-        settings: Optional[BrandSettingsParam] | Omit = omit,
         snippets: Optional[BrandSnippetsParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -60,8 +60,10 @@ class BrandsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
-        """
-        Create a new brand
+        """Create a new brand.
+
+        Requires `name` and `settings` (with at least
+        `colors.primary` and `colors.secondary`).
 
         Args:
           extra_headers: Send extra headers
@@ -77,8 +79,8 @@ class BrandsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
-                    "id": id,
                     "settings": settings,
+                    "id": id,
                     "snippets": snippets,
                 },
                 brand_create_params.BrandCreateParams,
@@ -264,8 +266,8 @@ class AsyncBrandsResource(AsyncAPIResource):
         self,
         *,
         name: str,
+        settings: BrandSettingsParam,
         id: Optional[str] | Omit = omit,
-        settings: Optional[BrandSettingsParam] | Omit = omit,
         snippets: Optional[BrandSnippetsParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -274,8 +276,10 @@ class AsyncBrandsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
-        """
-        Create a new brand
+        """Create a new brand.
+
+        Requires `name` and `settings` (with at least
+        `colors.primary` and `colors.secondary`).
 
         Args:
           extra_headers: Send extra headers
@@ -291,8 +295,8 @@ class AsyncBrandsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
-                    "id": id,
                     "settings": settings,
+                    "id": id,
                     "snippets": snippets,
                 },
                 brand_create_params.BrandCreateParams,
