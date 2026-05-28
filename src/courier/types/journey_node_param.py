@@ -18,7 +18,79 @@ from .journey_fetch_get_delete_node_param import JourneyFetchGetDeleteNodeParam
 from .journey_throttle_dynamic_node_param import JourneyThrottleDynamicNodeParam
 from .journey_api_invoke_trigger_node_param import JourneyAPIInvokeTriggerNodeParam
 
-__all__ = ["JourneyNodeParam", "JourneyBranchNode", "JourneyBranchNodeDefault", "JourneyBranchNodePath"]
+__all__ = [
+    "JourneyNodeParam",
+    "JourneyBatchNode",
+    "JourneyBatchNodeRetain",
+    "JourneyBranchNode",
+    "JourneyBranchNodeDefault",
+    "JourneyBranchNodePath",
+]
+
+
+class JourneyBatchNodeRetain(TypedDict, total=False):
+    """
+    How to select which collected events to retain in the aggregated payload when the batch releases.
+    """
+
+    count: Required[int]
+
+    type: Required[Literal["first", "last", "highest", "lowest"]]
+
+    sort_key: str
+    """Dot-path into the event payload (e.g.
+
+    `data.priority`). Required when `type` is `highest` or `lowest`.
+    """
+
+
+class JourneyBatchNode(TypedDict, total=False):
+    """
+    Collect events arriving at the node into a single batch and fire one downstream step with the aggregated payload. The first event into a batch owns the run; later contributing events terminate at the batch step. The batch releases when any of `max_items` is reached, a quiet window of `wait_period` elapses, or the `max_wait_period` ceiling hits.
+    """
+
+    max_wait_period: Required[str]
+    """ISO 8601 duration.
+
+    Hard ceiling from the first event into the batch; releases the batch
+    unconditionally when it elapses.
+    """
+
+    retain: Required[JourneyBatchNodeRetain]
+    """
+    How to select which collected events to retain in the aggregated payload when
+    the batch releases.
+    """
+
+    scope: Required[Literal["user"]]
+
+    type: Required[Literal["batch"]]
+
+    wait_period: Required[str]
+    """ISO 8601 duration.
+
+    Quiet window that releases the batch when it elapses with no new contributing
+    events. Must be less than `max_wait_period`.
+    """
+
+    id: str
+
+    category_key: str
+    """Optional partition key.
+
+    Events with the same `category_key` are batched together; events with different
+    values are batched separately.
+    """
+
+    conditions: JourneyConditionsFieldParam
+    """Condition spec for a journey node.
+
+    Accepts a single condition atom, an AND/OR group, or an AND/OR nested group.
+    Omit the `conditions` property entirely to express "no conditions".
+    """
+
+    max_items: int
+    """Releases the batch once this many events have been collected."""
 
 
 class JourneyBranchNodeDefault(TypedDict, total=False):
@@ -66,6 +138,7 @@ JourneyNodeParam: TypeAlias = Union[
     JourneyAINodeParam,
     JourneyThrottleStaticNodeParam,
     JourneyThrottleDynamicNodeParam,
+    JourneyBatchNode,
     JourneyExitNodeParam,
     JourneyBranchNode,
 ]
