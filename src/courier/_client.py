@@ -42,6 +42,7 @@ if TYPE_CHECKING:
         lists,
         users,
         brands,
+        digests,
         inbound,
         tenants,
         journeys,
@@ -68,6 +69,7 @@ if TYPE_CHECKING:
     from .resources.users.users import UsersResource, AsyncUsersResource
     from .resources.audit_events import AuditEventsResource, AsyncAuditEventsResource
     from .resources.translations import TranslationsResource, AsyncTranslationsResource
+    from .resources.digests.digests import DigestsResource, AsyncDigestsResource
     from .resources.tenants.tenants import TenantsResource, AsyncTenantsResource
     from .resources.journeys.journeys import JourneysResource, AsyncJourneysResource
     from .resources.profiles.profiles import ProfilesResource, AsyncProfilesResource
@@ -196,6 +198,12 @@ class Courier(SyncAPIClient):
         from .resources.bulk import BulkResource
 
         return BulkResource(self)
+
+    @cached_property
+    def digests(self) -> DigestsResource:
+        from .resources.digests import DigestsResource
+
+        return DigestsResource(self)
 
     @cached_property
     def inbound(self) -> InboundResource:
@@ -489,6 +497,12 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncBulkResource(self)
 
     @cached_property
+    def digests(self) -> AsyncDigestsResource:
+        from .resources.digests import AsyncDigestsResource
+
+        return AsyncDigestsResource(self)
+
+    @cached_property
     def inbound(self) -> AsyncInboundResource:
         from .resources.inbound import AsyncInboundResource
 
@@ -722,6 +736,12 @@ class CourierWithRawResponse:
         return BulkResourceWithRawResponse(self._client.bulk)
 
     @cached_property
+    def digests(self) -> digests.DigestsResourceWithRawResponse:
+        from .resources.digests import DigestsResourceWithRawResponse
+
+        return DigestsResourceWithRawResponse(self._client.digests)
+
+    @cached_property
     def inbound(self) -> inbound.InboundResourceWithRawResponse:
         from .resources.inbound import InboundResourceWithRawResponse
 
@@ -841,6 +861,12 @@ class AsyncCourierWithRawResponse:
         from .resources.bulk import AsyncBulkResourceWithRawResponse
 
         return AsyncBulkResourceWithRawResponse(self._client.bulk)
+
+    @cached_property
+    def digests(self) -> digests.AsyncDigestsResourceWithRawResponse:
+        from .resources.digests import AsyncDigestsResourceWithRawResponse
+
+        return AsyncDigestsResourceWithRawResponse(self._client.digests)
 
     @cached_property
     def inbound(self) -> inbound.AsyncInboundResourceWithRawResponse:
@@ -964,6 +990,12 @@ class CourierWithStreamedResponse:
         return BulkResourceWithStreamingResponse(self._client.bulk)
 
     @cached_property
+    def digests(self) -> digests.DigestsResourceWithStreamingResponse:
+        from .resources.digests import DigestsResourceWithStreamingResponse
+
+        return DigestsResourceWithStreamingResponse(self._client.digests)
+
+    @cached_property
     def inbound(self) -> inbound.InboundResourceWithStreamingResponse:
         from .resources.inbound import InboundResourceWithStreamingResponse
 
@@ -1083,6 +1115,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.bulk import AsyncBulkResourceWithStreamingResponse
 
         return AsyncBulkResourceWithStreamingResponse(self._client.bulk)
+
+    @cached_property
+    def digests(self) -> digests.AsyncDigestsResourceWithStreamingResponse:
+        from .resources.digests import AsyncDigestsResourceWithStreamingResponse
+
+        return AsyncDigestsResourceWithStreamingResponse(self._client.digests)
 
     @cached_property
     def inbound(self) -> inbound.AsyncInboundResourceWithStreamingResponse:

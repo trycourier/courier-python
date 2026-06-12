@@ -48,6 +48,14 @@ from .brands import (
     BrandsResourceWithStreamingResponse,
     AsyncBrandsResourceWithStreamingResponse,
 )
+from .digests import (
+    DigestsResource,
+    AsyncDigestsResource,
+    DigestsResourceWithRawResponse,
+    AsyncDigestsResourceWithRawResponse,
+    DigestsResourceWithStreamingResponse,
+    AsyncDigestsResourceWithStreamingResponse,
+)
 from .inbound import (
     InboundResource,
     AsyncInboundResource,
@@ -208,6 +216,12 @@ __all__ = [
     "AsyncBulkResourceWithRawResponse",
     "BulkResourceWithStreamingResponse",
     "AsyncBulkResourceWithStreamingResponse",
+    "DigestsResource",
+    "AsyncDigestsResource",
+    "DigestsResourceWithRawResponse",
+    "AsyncDigestsResourceWithRawResponse",
+    "DigestsResourceWithStreamingResponse",
+    "AsyncDigestsResourceWithStreamingResponse",
     "InboundResource",
     "AsyncInboundResource",
     "InboundResourceWithRawResponse",
