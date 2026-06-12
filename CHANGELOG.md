@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.14.0 (2026-06-12)
+
+Full Changelog: [v7.13.0...v7.14.0](https://github.com/trycourier/courier-python/compare/v7.13.0...v7.14.0)
+
+### Features
+
+* **digests:** document digest REST endpoints in OpenAPI spec ([d88d2ae](https://github.com/trycourier/courier-python/commit/d88d2ae2d08af0abb7334e5ba1228619a85e9e3b))
+
 ## 7.13.0 (2026-05-28)
 
 Full Changelog: [v7.12.0...v7.13.0](https://github.com/trycourier/courier-python/compare/v7.12.0...v7.13.0)
