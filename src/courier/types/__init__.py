@@ -117,6 +117,8 @@ from .journey_state import JourneyState as JourneyState
 from .brand_settings import BrandSettings as BrandSettings
 from .brand_snippets import BrandSnippets as BrandSnippets
 from .brand_template import BrandTemplate as BrandTemplate
+from .digest_category import DigestCategory as DigestCategory
+from .digest_instance import DigestInstance as DigestInstance
 from .journey_ai_node import JourneyAINode as JourneyAINode
 from .message_details import MessageDetails as MessageDetails
 from .base_check_param import BaseCheckParam as BaseCheckParam
@@ -236,6 +238,7 @@ from .notification_retrieve_params import NotificationRetrieveParams as Notifica
 from .put_tenant_template_response import PutTenantTemplateResponse as PutTenantTemplateResponse
 from .routing_strategy_list_params import RoutingStrategyListParams as RoutingStrategyListParams
 from .subscription_topic_new_param import SubscriptionTopicNewParam as SubscriptionTopicNewParam
+from .digest_instance_list_response import DigestInstanceListResponse as DigestInstanceListResponse
 from .journey_condition_group_param import JourneyConditionGroupParam as JourneyConditionGroupParam
 from .journey_fetch_get_delete_node import JourneyFetchGetDeleteNode as JourneyFetchGetDeleteNode
 from .journey_template_get_response import JourneyTemplateGetResponse as JourneyTemplateGetResponse

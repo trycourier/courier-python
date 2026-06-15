@@ -310,6 +310,21 @@ Methods:
 - <code title="get /bulk/{job_id}">client.bulk.<a href="./src/courier/resources/bulk.py">retrieve_job</a>(job_id) -> <a href="./src/courier/types/bulk_retrieve_job_response.py">BulkRetrieveJobResponse</a></code>
 - <code title="post /bulk/{job_id}/run">client.bulk.<a href="./src/courier/resources/bulk.py">run_job</a>(job_id) -> None</code>
 
+# Digests
+
+Types:
+
+```python
+from courier.types import DigestCategory, DigestInstance, DigestInstanceListResponse
+```
+
+## Schedules
+
+Methods:
+
+- <code title="get /digests/schedules/{schedule_id}/instances">client.digests.schedules.<a href="./src/courier/resources/digests/schedules.py">list_instances</a>(schedule_id, \*\*<a href="src/courier/types/digests/schedule_list_instances_params.py">params</a>) -> <a href="./src/courier/types/digest_instance_list_response.py">DigestInstanceListResponse</a></code>
+- <code title="post /digests/schedules/{schedule_id}/trigger">client.digests.schedules.<a href="./src/courier/resources/digests/schedules.py">release</a>(schedule_id) -> None</code>
+
 # Inbound
 
 Types:
