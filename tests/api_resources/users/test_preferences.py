@@ -74,6 +74,68 @@ class TestPreferences:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_delete_topic(self, client: Courier) -> None:
+        preference = client.users.preferences.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+        )
+        assert preference is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_delete_topic_with_all_params(self, client: Courier) -> None:
+        preference = client.users.preferences.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+            tenant_id="tenant_id",
+        )
+        assert preference is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_delete_topic(self, client: Courier) -> None:
+        response = client.users.preferences.with_raw_response.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        preference = response.parse()
+        assert preference is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_delete_topic(self, client: Courier) -> None:
+        with client.users.preferences.with_streaming_response.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            preference = response.parse()
+            assert preference is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_delete_topic(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
+            client.users.preferences.with_raw_response.delete_topic(
+                topic_id="topic_id",
+                user_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
+            client.users.preferences.with_raw_response.delete_topic(
+                topic_id="",
+                user_id="user_id",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_retrieve_topic(self, client: Courier) -> None:
         preference = client.users.preferences.retrieve_topic(
             topic_id="topic_id",
@@ -261,6 +323,68 @@ class TestAsyncPreferences:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.preferences.with_raw_response.retrieve(
                 user_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_delete_topic(self, async_client: AsyncCourier) -> None:
+        preference = await async_client.users.preferences.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+        )
+        assert preference is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_delete_topic_with_all_params(self, async_client: AsyncCourier) -> None:
+        preference = await async_client.users.preferences.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+            tenant_id="tenant_id",
+        )
+        assert preference is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_delete_topic(self, async_client: AsyncCourier) -> None:
+        response = await async_client.users.preferences.with_raw_response.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        preference = await response.parse()
+        assert preference is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_delete_topic(self, async_client: AsyncCourier) -> None:
+        async with async_client.users.preferences.with_streaming_response.delete_topic(
+            topic_id="topic_id",
+            user_id="user_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            preference = await response.parse()
+            assert preference is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_delete_topic(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
+            await async_client.users.preferences.with_raw_response.delete_topic(
+                topic_id="topic_id",
+                user_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
+            await async_client.users.preferences.with_raw_response.delete_topic(
+                topic_id="",
+                user_id="user_id",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
