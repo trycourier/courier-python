@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -18,6 +18,7 @@ from ..._response import (
 )
 from ...types.users import (
     preference_retrieve_params,
+    preference_delete_topic_params,
     preference_retrieve_topic_params,
     preference_update_or_create_topic_params,
 )
@@ -87,6 +88,54 @@ class PreferencesResource(SyncAPIResource):
                 query=maybe_transform({"tenant_id": tenant_id}, preference_retrieve_params.PreferenceRetrieveParams),
             ),
             cast_to=PreferenceRetrieveResponse,
+        )
+
+    def delete_topic(
+        self,
+        topic_id: str,
+        *,
+        user_id: str,
+        tenant_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Remove a user's preferences for a specific subscription topic, resetting the
+        topic to its effective default. This operation is idempotent: deleting a
+        preference that does not exist succeeds with no error.
+
+        Args:
+          tenant_id: Delete the preferences of a user for this specific tenant context.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        if not topic_id:
+            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            path_template("/users/{user_id}/preferences/{topic_id}", user_id=user_id, topic_id=topic_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"tenant_id": tenant_id}, preference_delete_topic_params.PreferenceDeleteTopicParams
+                ),
+            ),
+            cast_to=NoneType,
         )
 
     def retrieve_topic(
@@ -247,6 +296,54 @@ class AsyncPreferencesResource(AsyncAPIResource):
             cast_to=PreferenceRetrieveResponse,
         )
 
+    async def delete_topic(
+        self,
+        topic_id: str,
+        *,
+        user_id: str,
+        tenant_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """
+        Remove a user's preferences for a specific subscription topic, resetting the
+        topic to its effective default. This operation is idempotent: deleting a
+        preference that does not exist succeeds with no error.
+
+        Args:
+          tenant_id: Delete the preferences of a user for this specific tenant context.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        if not topic_id:
+            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            path_template("/users/{user_id}/preferences/{topic_id}", user_id=user_id, topic_id=topic_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"tenant_id": tenant_id}, preference_delete_topic_params.PreferenceDeleteTopicParams
+                ),
+            ),
+            cast_to=NoneType,
+        )
+
     async def retrieve_topic(
         self,
         topic_id: str,
@@ -350,6 +447,9 @@ class PreferencesResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             preferences.retrieve,
         )
+        self.delete_topic = to_raw_response_wrapper(
+            preferences.delete_topic,
+        )
         self.retrieve_topic = to_raw_response_wrapper(
             preferences.retrieve_topic,
         )
@@ -364,6 +464,9 @@ class AsyncPreferencesResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             preferences.retrieve,
+        )
+        self.delete_topic = async_to_raw_response_wrapper(
+            preferences.delete_topic,
         )
         self.retrieve_topic = async_to_raw_response_wrapper(
             preferences.retrieve_topic,
@@ -380,6 +483,9 @@ class PreferencesResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             preferences.retrieve,
         )
+        self.delete_topic = to_streamed_response_wrapper(
+            preferences.delete_topic,
+        )
         self.retrieve_topic = to_streamed_response_wrapper(
             preferences.retrieve_topic,
         )
@@ -394,6 +500,9 @@ class AsyncPreferencesResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             preferences.retrieve,
+        )
+        self.delete_topic = async_to_streamed_response_wrapper(
+            preferences.delete_topic,
         )
         self.retrieve_topic = async_to_streamed_response_wrapper(
             preferences.retrieve_topic,

@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.15.0 (2026-06-17)
+
+Full Changelog: [v7.14.0...v7.15.0](https://github.com/trycourier/courier-python/compare/v7.14.0...v7.15.0)
+
+### Features
+
+* **openapi:** add add-to-digest JourneyNode variant ([7abe0d3](https://github.com/trycourier/courier-python/commit/7abe0d346d51a31301753dc54ac0025285a14dc8))
+* **openapi:** add DELETE /users/{id}/preferences/{topicId} ([1f14fd0](https://github.com/trycourier/courier-python/commit/1f14fd06794d54d5cc6d959867561a72d660462a))
+
 ## 7.14.0 (2026-06-12)
 
 Full Changelog: [v7.13.0...v7.14.0](https://github.com/trycourier/courier-python/compare/v7.13.0...v7.14.0)
