@@ -22,6 +22,7 @@ __all__ = [
     "JourneyNodeParam",
     "JourneyBatchNode",
     "JourneyBatchNodeRetain",
+    "JourneyAddToDigestNode",
     "JourneyBranchNode",
     "JourneyBranchNodeDefault",
     "JourneyBranchNodePath",
@@ -93,6 +94,27 @@ class JourneyBatchNode(TypedDict, total=False):
     """Releases the batch once this many events have been collected."""
 
 
+class JourneyAddToDigestNode(TypedDict, total=False):
+    """Add the current event to a digest keyed by the given subscription topic.
+
+    The digest accumulates events and releases them on the schedule configured for the topic.
+    """
+
+    subscription_topic_id: Required[str]
+    """The subscription topic that owns the digest the event is added to."""
+
+    type: Required[Literal["add-to-digest"]]
+
+    id: str
+
+    conditions: JourneyConditionsFieldParam
+    """Condition spec for a journey node.
+
+    Accepts a single condition atom, an AND/OR group, or an AND/OR nested group.
+    Omit the `conditions` property entirely to express "no conditions".
+    """
+
+
 class JourneyBranchNodeDefault(TypedDict, total=False):
     nodes: Required[Iterable["JourneyNodeParam"]]
 
@@ -139,6 +161,7 @@ JourneyNodeParam: TypeAlias = Union[
     JourneyThrottleStaticNodeParam,
     JourneyThrottleDynamicNodeParam,
     JourneyBatchNode,
+    JourneyAddToDigestNode,
     JourneyExitNodeParam,
     JourneyBranchNode,
 ]

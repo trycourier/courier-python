@@ -23,6 +23,7 @@ __all__ = [
     "JourneyNode",
     "JourneyBatchNode",
     "JourneyBatchNodeRetain",
+    "JourneyAddToDigestNode",
     "JourneyBranchNode",
     "JourneyBranchNodeDefault",
     "JourneyBranchNodePath",
@@ -94,6 +95,27 @@ class JourneyBatchNode(BaseModel):
     """Releases the batch once this many events have been collected."""
 
 
+class JourneyAddToDigestNode(BaseModel):
+    """Add the current event to a digest keyed by the given subscription topic.
+
+    The digest accumulates events and releases them on the schedule configured for the topic.
+    """
+
+    subscription_topic_id: str
+    """The subscription topic that owns the digest the event is added to."""
+
+    type: Literal["add-to-digest"]
+
+    id: Optional[str] = None
+
+    conditions: Optional[JourneyConditionsField] = None
+    """Condition spec for a journey node.
+
+    Accepts a single condition atom, an AND/OR group, or an AND/OR nested group.
+    Omit the `conditions` property entirely to express "no conditions".
+    """
+
+
 class JourneyBranchNodeDefault(BaseModel):
     nodes: List["JourneyNode"]
 
@@ -140,6 +162,7 @@ JourneyNode: TypeAlias = Union[
     JourneyThrottleStaticNode,
     JourneyThrottleDynamicNode,
     JourneyBatchNode,
+    JourneyAddToDigestNode,
     JourneyExitNode,
     JourneyBranchNode,
 ]
