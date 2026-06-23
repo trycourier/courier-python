@@ -506,9 +506,10 @@ class TemplatesResource(SyncAPIResource):
         """Retrieve the elemental content of a journey-scoped notification template.
 
         The
-        response contains the versioned elements with their content checksums. Pass
-        `?version=draft` (default `published`) to retrieve the working draft, or
-        `?version=vN` for a historical version.
+        response contains the versioned elements along with their content checksums,
+        which can be used to detect changes between versions. Pass `?version=draft`
+        (default `published`) to retrieve the working draft, or `?version=vN` for a
+        historical version.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
@@ -1014,9 +1015,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         """Retrieve the elemental content of a journey-scoped notification template.
 
         The
-        response contains the versioned elements with their content checksums. Pass
-        `?version=draft` (default `published`) to retrieve the working draft, or
-        `?version=vN` for a historical version.
+        response contains the versioned elements along with their content checksums,
+        which can be used to detect changes between versions. Pass `?version=draft`
+        (default `published`) to retrieve the working draft, or `?version=vN` for a
+        historical version.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
