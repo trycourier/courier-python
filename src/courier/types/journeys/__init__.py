@@ -6,3 +6,6 @@ from .template_list_params import TemplateListParams as TemplateListParams
 from .template_create_params import TemplateCreateParams as TemplateCreateParams
 from .template_publish_params import TemplatePublishParams as TemplatePublishParams
 from .template_replace_params import TemplateReplaceParams as TemplateReplaceParams
+from .template_put_locale_params import TemplatePutLocaleParams as TemplatePutLocaleParams
+from .template_put_content_params import TemplatePutContentParams as TemplatePutContentParams
+from .template_retrieve_content_params import TemplateRetrieveContentParams as TemplateRetrieveContentParams
