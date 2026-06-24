@@ -56,6 +56,7 @@ if TYPE_CHECKING:
         translations,
         notifications,
         routing_strategies,
+        preference_sections,
     )
     from .resources.auth import AuthResource, AsyncAuthResource
     from .resources.bulk import BulkResource, AsyncBulkResource
@@ -77,6 +78,10 @@ if TYPE_CHECKING:
     from .resources.providers.providers import ProvidersResource, AsyncProvidersResource
     from .resources.automations.automations import AutomationsResource, AsyncAutomationsResource
     from .resources.notifications.notifications import NotificationsResource, AsyncNotificationsResource
+    from .resources.preference_sections.preference_sections import (
+        PreferenceSectionsResource,
+        AsyncPreferenceSectionsResource,
+    )
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Courier", "AsyncCourier", "Client", "AsyncClient"]
 
@@ -240,6 +245,12 @@ class Courier(SyncAPIClient):
         from .resources.routing_strategies import RoutingStrategiesResource
 
         return RoutingStrategiesResource(self)
+
+    @cached_property
+    def preference_sections(self) -> PreferenceSectionsResource:
+        from .resources.preference_sections import PreferenceSectionsResource
+
+        return PreferenceSectionsResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
@@ -539,6 +550,12 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncRoutingStrategiesResource(self)
 
     @cached_property
+    def preference_sections(self) -> AsyncPreferenceSectionsResource:
+        from .resources.preference_sections import AsyncPreferenceSectionsResource
+
+        return AsyncPreferenceSectionsResource(self)
+
+    @cached_property
     def profiles(self) -> AsyncProfilesResource:
         from .resources.profiles import AsyncProfilesResource
 
@@ -778,6 +795,12 @@ class CourierWithRawResponse:
         return RoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
 
     @cached_property
+    def preference_sections(self) -> preference_sections.PreferenceSectionsResourceWithRawResponse:
+        from .resources.preference_sections import PreferenceSectionsResourceWithRawResponse
+
+        return PreferenceSectionsResourceWithRawResponse(self._client.preference_sections)
+
+    @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
         from .resources.profiles import ProfilesResourceWithRawResponse
 
@@ -903,6 +926,12 @@ class AsyncCourierWithRawResponse:
         from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithRawResponse
 
         return AsyncRoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
+
+    @cached_property
+    def preference_sections(self) -> preference_sections.AsyncPreferenceSectionsResourceWithRawResponse:
+        from .resources.preference_sections import AsyncPreferenceSectionsResourceWithRawResponse
+
+        return AsyncPreferenceSectionsResourceWithRawResponse(self._client.preference_sections)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
@@ -1032,6 +1061,12 @@ class CourierWithStreamedResponse:
         return RoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
 
     @cached_property
+    def preference_sections(self) -> preference_sections.PreferenceSectionsResourceWithStreamingResponse:
+        from .resources.preference_sections import PreferenceSectionsResourceWithStreamingResponse
+
+        return PreferenceSectionsResourceWithStreamingResponse(self._client.preference_sections)
+
+    @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
         from .resources.profiles import ProfilesResourceWithStreamingResponse
 
@@ -1157,6 +1192,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithStreamingResponse
 
         return AsyncRoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
+
+    @cached_property
+    def preference_sections(self) -> preference_sections.AsyncPreferenceSectionsResourceWithStreamingResponse:
+        from .resources.preference_sections import AsyncPreferenceSectionsResourceWithStreamingResponse
+
+        return AsyncPreferenceSectionsResourceWithStreamingResponse(self._client.preference_sections)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:
