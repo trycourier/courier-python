@@ -160,6 +160,14 @@ from .routing_strategies import (
     RoutingStrategiesResourceWithStreamingResponse,
     AsyncRoutingStrategiesResourceWithStreamingResponse,
 )
+from .preference_sections import (
+    PreferenceSectionsResource,
+    AsyncPreferenceSectionsResource,
+    PreferenceSectionsResourceWithRawResponse,
+    AsyncPreferenceSectionsResourceWithRawResponse,
+    PreferenceSectionsResourceWithStreamingResponse,
+    AsyncPreferenceSectionsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "SendResource",
@@ -258,6 +266,12 @@ __all__ = [
     "AsyncRoutingStrategiesResourceWithRawResponse",
     "RoutingStrategiesResourceWithStreamingResponse",
     "AsyncRoutingStrategiesResourceWithStreamingResponse",
+    "PreferenceSectionsResource",
+    "AsyncPreferenceSectionsResource",
+    "PreferenceSectionsResourceWithRawResponse",
+    "AsyncPreferenceSectionsResourceWithRawResponse",
+    "PreferenceSectionsResourceWithStreamingResponse",
+    "AsyncPreferenceSectionsResourceWithStreamingResponse",
     "ProfilesResource",
     "AsyncProfilesResource",
     "ProfilesResourceWithRawResponse",
