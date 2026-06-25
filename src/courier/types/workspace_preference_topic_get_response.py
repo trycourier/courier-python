@@ -6,10 +6,10 @@ from typing_extensions import Literal
 from .._models import BaseModel
 from .shared.channel_classification import ChannelClassification
 
-__all__ = ["PreferenceTopicGetResponse"]
+__all__ = ["WorkspacePreferenceTopicGetResponse"]
 
 
-class PreferenceTopicGetResponse(BaseModel):
+class WorkspacePreferenceTopicGetResponse(BaseModel):
     """A subscription preference topic in your workspace."""
 
     id: str
