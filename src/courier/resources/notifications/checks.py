@@ -96,7 +96,7 @@ class ChecksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckListResponse:
         """
-        Retrieve the checks for a notification template submission.
+        Retrieve the submission checks for a notification template.
 
         Args:
           extra_headers: Send extra headers
@@ -228,7 +228,7 @@ class AsyncChecksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckListResponse:
         """
-        Retrieve the checks for a notification template submission.
+        Retrieve the submission checks for a notification template.
 
         Args:
           extra_headers: Send extra headers
