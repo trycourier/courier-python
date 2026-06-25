@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.17.1 (2026-06-25)
+
+Full Changelog: [v7.17.0...v7.17.1](https://github.com/trycourier/courier-python/compare/v7.17.0...v7.17.1)
+
+### Documentation
+
+* **openapi:** add full response examples to every endpoint ([d42bc6b](https://github.com/trycourier/courier-python/commit/d42bc6b7ecd6c8fe4dbeea6e9bd8e4eb567cca84))
+* **openapi:** reword Cancel Submission description ([6e35fe4](https://github.com/trycourier/courier-python/commit/6e35fe48d31f568ae59687afe145676e282298b8))
+* **openapi:** reword Get Submission Checks description ([4c0ff82](https://github.com/trycourier/courier-python/commit/4c0ff82e577dcd5059c159c99fbf8b26e8750d27))
+* **openapi:** reword Replace Submission Checks description ([b897ea0](https://github.com/trycourier/courier-python/commit/b897ea0d23ef4fed99d6cb15b932e116a01fcf6a))
+
 ## 7.17.0 (2026-06-24)
 
 Full Changelog: [v7.16.0...v7.17.0](https://github.com/trycourier/courier-python/compare/v7.16.0...v7.17.0)
