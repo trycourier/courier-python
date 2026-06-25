@@ -132,7 +132,7 @@ class ChecksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Cancel a notification template submission.
+        Cancel a submission for a notification template.
 
         Args:
           extra_headers: Send extra headers
@@ -264,7 +264,7 @@ class AsyncChecksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Cancel a notification template submission.
+        Cancel a submission for a notification template.
 
         Args:
           extra_headers: Send extra headers
