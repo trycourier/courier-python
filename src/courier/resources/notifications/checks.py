@@ -59,7 +59,7 @@ class ChecksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckUpdateResponse:
         """
-        Replace the checks for a notification template submission.
+        Replace the submission checks for a notification template.
 
         Args:
           extra_headers: Send extra headers
@@ -191,7 +191,7 @@ class AsyncChecksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckUpdateResponse:
         """
-        Replace the checks for a notification template submission.
+        Replace the submission checks for a notification template.
 
         Args:
           extra_headers: Send extra headers
