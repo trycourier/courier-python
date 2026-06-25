@@ -160,13 +160,13 @@ from .routing_strategies import (
     RoutingStrategiesResourceWithStreamingResponse,
     AsyncRoutingStrategiesResourceWithStreamingResponse,
 )
-from .preference_sections import (
-    PreferenceSectionsResource,
-    AsyncPreferenceSectionsResource,
-    PreferenceSectionsResourceWithRawResponse,
-    AsyncPreferenceSectionsResourceWithRawResponse,
-    PreferenceSectionsResourceWithStreamingResponse,
-    AsyncPreferenceSectionsResourceWithStreamingResponse,
+from .workspace_preferences import (
+    WorkspacePreferencesResource,
+    AsyncWorkspacePreferencesResource,
+    WorkspacePreferencesResourceWithRawResponse,
+    AsyncWorkspacePreferencesResourceWithRawResponse,
+    WorkspacePreferencesResourceWithStreamingResponse,
+    AsyncWorkspacePreferencesResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -266,12 +266,12 @@ __all__ = [
     "AsyncRoutingStrategiesResourceWithRawResponse",
     "RoutingStrategiesResourceWithStreamingResponse",
     "AsyncRoutingStrategiesResourceWithStreamingResponse",
-    "PreferenceSectionsResource",
-    "AsyncPreferenceSectionsResource",
-    "PreferenceSectionsResourceWithRawResponse",
-    "AsyncPreferenceSectionsResourceWithRawResponse",
-    "PreferenceSectionsResourceWithStreamingResponse",
-    "AsyncPreferenceSectionsResourceWithStreamingResponse",
+    "WorkspacePreferencesResource",
+    "AsyncWorkspacePreferencesResource",
+    "WorkspacePreferencesResourceWithRawResponse",
+    "AsyncWorkspacePreferencesResourceWithRawResponse",
+    "WorkspacePreferencesResourceWithStreamingResponse",
+    "AsyncWorkspacePreferencesResourceWithStreamingResponse",
     "ProfilesResource",
     "AsyncProfilesResource",
     "ProfilesResourceWithRawResponse",

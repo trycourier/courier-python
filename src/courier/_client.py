@@ -56,7 +56,7 @@ if TYPE_CHECKING:
         translations,
         notifications,
         routing_strategies,
-        preference_sections,
+        workspace_preferences,
     )
     from .resources.auth import AuthResource, AsyncAuthResource
     from .resources.bulk import BulkResource, AsyncBulkResource
@@ -78,9 +78,9 @@ if TYPE_CHECKING:
     from .resources.providers.providers import ProvidersResource, AsyncProvidersResource
     from .resources.automations.automations import AutomationsResource, AsyncAutomationsResource
     from .resources.notifications.notifications import NotificationsResource, AsyncNotificationsResource
-    from .resources.preference_sections.preference_sections import (
-        PreferenceSectionsResource,
-        AsyncPreferenceSectionsResource,
+    from .resources.workspace_preferences.workspace_preferences import (
+        WorkspacePreferencesResource,
+        AsyncWorkspacePreferencesResource,
     )
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Courier", "AsyncCourier", "Client", "AsyncClient"]
@@ -247,10 +247,10 @@ class Courier(SyncAPIClient):
         return RoutingStrategiesResource(self)
 
     @cached_property
-    def preference_sections(self) -> PreferenceSectionsResource:
-        from .resources.preference_sections import PreferenceSectionsResource
+    def workspace_preferences(self) -> WorkspacePreferencesResource:
+        from .resources.workspace_preferences import WorkspacePreferencesResource
 
-        return PreferenceSectionsResource(self)
+        return WorkspacePreferencesResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
@@ -550,10 +550,10 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncRoutingStrategiesResource(self)
 
     @cached_property
-    def preference_sections(self) -> AsyncPreferenceSectionsResource:
-        from .resources.preference_sections import AsyncPreferenceSectionsResource
+    def workspace_preferences(self) -> AsyncWorkspacePreferencesResource:
+        from .resources.workspace_preferences import AsyncWorkspacePreferencesResource
 
-        return AsyncPreferenceSectionsResource(self)
+        return AsyncWorkspacePreferencesResource(self)
 
     @cached_property
     def profiles(self) -> AsyncProfilesResource:
@@ -795,10 +795,10 @@ class CourierWithRawResponse:
         return RoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
 
     @cached_property
-    def preference_sections(self) -> preference_sections.PreferenceSectionsResourceWithRawResponse:
-        from .resources.preference_sections import PreferenceSectionsResourceWithRawResponse
+    def workspace_preferences(self) -> workspace_preferences.WorkspacePreferencesResourceWithRawResponse:
+        from .resources.workspace_preferences import WorkspacePreferencesResourceWithRawResponse
 
-        return PreferenceSectionsResourceWithRawResponse(self._client.preference_sections)
+        return WorkspacePreferencesResourceWithRawResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
@@ -928,10 +928,10 @@ class AsyncCourierWithRawResponse:
         return AsyncRoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
 
     @cached_property
-    def preference_sections(self) -> preference_sections.AsyncPreferenceSectionsResourceWithRawResponse:
-        from .resources.preference_sections import AsyncPreferenceSectionsResourceWithRawResponse
+    def workspace_preferences(self) -> workspace_preferences.AsyncWorkspacePreferencesResourceWithRawResponse:
+        from .resources.workspace_preferences import AsyncWorkspacePreferencesResourceWithRawResponse
 
-        return AsyncPreferenceSectionsResourceWithRawResponse(self._client.preference_sections)
+        return AsyncWorkspacePreferencesResourceWithRawResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
@@ -1061,10 +1061,10 @@ class CourierWithStreamedResponse:
         return RoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
 
     @cached_property
-    def preference_sections(self) -> preference_sections.PreferenceSectionsResourceWithStreamingResponse:
-        from .resources.preference_sections import PreferenceSectionsResourceWithStreamingResponse
+    def workspace_preferences(self) -> workspace_preferences.WorkspacePreferencesResourceWithStreamingResponse:
+        from .resources.workspace_preferences import WorkspacePreferencesResourceWithStreamingResponse
 
-        return PreferenceSectionsResourceWithStreamingResponse(self._client.preference_sections)
+        return WorkspacePreferencesResourceWithStreamingResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
@@ -1194,10 +1194,10 @@ class AsyncCourierWithStreamedResponse:
         return AsyncRoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
 
     @cached_property
-    def preference_sections(self) -> preference_sections.AsyncPreferenceSectionsResourceWithStreamingResponse:
-        from .resources.preference_sections import AsyncPreferenceSectionsResourceWithStreamingResponse
+    def workspace_preferences(self) -> workspace_preferences.AsyncWorkspacePreferencesResourceWithStreamingResponse:
+        from .resources.workspace_preferences import AsyncWorkspacePreferencesResourceWithStreamingResponse
 
-        return AsyncPreferenceSectionsResourceWithStreamingResponse(self._client.preference_sections)
+        return AsyncWorkspacePreferencesResourceWithStreamingResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:
