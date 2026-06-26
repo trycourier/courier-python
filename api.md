@@ -481,42 +481,42 @@ Methods:
 - <code title="get /routing-strategies/{id}/notifications">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">list_notifications</a>(id, \*\*<a href="src/courier/types/routing_strategy_list_notifications_params.py">params</a>) -> <a href="./src/courier/types/associated_notification_list_response.py">AssociatedNotificationListResponse</a></code>
 - <code title="put /routing-strategies/{id}">client.routing_strategies.<a href="./src/courier/resources/routing_strategies.py">replace</a>(id, \*\*<a href="src/courier/types/routing_strategy_replace_params.py">params</a>) -> <a href="./src/courier/types/routing_strategy_get_response.py">RoutingStrategyGetResponse</a></code>
 
-# PreferenceSections
+# WorkspacePreferences
 
 Types:
 
 ```python
 from courier.types import (
-    PreferenceSectionCreateRequest,
-    PreferenceSectionGetResponse,
-    PreferenceSectionListResponse,
-    PreferenceSectionReplaceRequest,
-    PreferenceTopicCreateRequest,
-    PreferenceTopicGetResponse,
-    PreferenceTopicListResponse,
-    PreferenceTopicReplaceRequest,
     PublishPreferencesResponse,
+    WorkspacePreferenceCreateRequest,
+    WorkspacePreferenceGetResponse,
+    WorkspacePreferenceListResponse,
+    WorkspacePreferenceReplaceRequest,
+    WorkspacePreferenceTopicCreateRequest,
+    WorkspacePreferenceTopicGetResponse,
+    WorkspacePreferenceTopicListResponse,
+    WorkspacePreferenceTopicReplaceRequest,
 )
 ```
 
 Methods:
 
-- <code title="post /preferences/sections">client.preference_sections.<a href="./src/courier/resources/preference_sections/preference_sections.py">create</a>(\*\*<a href="src/courier/types/preference_section_create_params.py">params</a>) -> <a href="./src/courier/types/preference_section_get_response.py">PreferenceSectionGetResponse</a></code>
-- <code title="get /preferences/sections/{section_id}">client.preference_sections.<a href="./src/courier/resources/preference_sections/preference_sections.py">retrieve</a>(section_id) -> <a href="./src/courier/types/preference_section_get_response.py">PreferenceSectionGetResponse</a></code>
-- <code title="get /preferences/sections">client.preference_sections.<a href="./src/courier/resources/preference_sections/preference_sections.py">list</a>() -> <a href="./src/courier/types/preference_section_list_response.py">PreferenceSectionListResponse</a></code>
-- <code title="delete /preferences/sections/{section_id}">client.preference_sections.<a href="./src/courier/resources/preference_sections/preference_sections.py">archive</a>(section_id) -> None</code>
-- <code title="post /preferences/publish">client.preference_sections.<a href="./src/courier/resources/preference_sections/preference_sections.py">publish</a>() -> <a href="./src/courier/types/publish_preferences_response.py">PublishPreferencesResponse</a></code>
-- <code title="put /preferences/sections/{section_id}">client.preference_sections.<a href="./src/courier/resources/preference_sections/preference_sections.py">replace</a>(section_id, \*\*<a href="src/courier/types/preference_section_replace_params.py">params</a>) -> <a href="./src/courier/types/preference_section_get_response.py">PreferenceSectionGetResponse</a></code>
+- <code title="post /preferences/sections">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">create</a>(\*\*<a href="src/courier/types/workspace_preference_create_params.py">params</a>) -> <a href="./src/courier/types/workspace_preference_get_response.py">WorkspacePreferenceGetResponse</a></code>
+- <code title="get /preferences/sections/{section_id}">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">retrieve</a>(section_id) -> <a href="./src/courier/types/workspace_preference_get_response.py">WorkspacePreferenceGetResponse</a></code>
+- <code title="get /preferences/sections">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">list</a>() -> <a href="./src/courier/types/workspace_preference_list_response.py">WorkspacePreferenceListResponse</a></code>
+- <code title="delete /preferences/sections/{section_id}">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">archive</a>(section_id) -> None</code>
+- <code title="post /preferences/publish">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">publish</a>() -> <a href="./src/courier/types/publish_preferences_response.py">PublishPreferencesResponse</a></code>
+- <code title="put /preferences/sections/{section_id}">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">replace</a>(section_id, \*\*<a href="src/courier/types/workspace_preference_replace_params.py">params</a>) -> <a href="./src/courier/types/workspace_preference_get_response.py">WorkspacePreferenceGetResponse</a></code>
 
 ## Topics
 
 Methods:
 
-- <code title="post /preferences/sections/{section_id}/topics">client.preference_sections.topics.<a href="./src/courier/resources/preference_sections/topics.py">create</a>(section_id, \*\*<a href="src/courier/types/preference_sections/topic_create_params.py">params</a>) -> <a href="./src/courier/types/preference_topic_get_response.py">PreferenceTopicGetResponse</a></code>
-- <code title="get /preferences/sections/{section_id}/topics/{topic_id}">client.preference_sections.topics.<a href="./src/courier/resources/preference_sections/topics.py">retrieve</a>(topic_id, \*, section_id) -> <a href="./src/courier/types/preference_topic_get_response.py">PreferenceTopicGetResponse</a></code>
-- <code title="get /preferences/sections/{section_id}/topics">client.preference_sections.topics.<a href="./src/courier/resources/preference_sections/topics.py">list</a>(section_id) -> <a href="./src/courier/types/preference_topic_list_response.py">PreferenceTopicListResponse</a></code>
-- <code title="delete /preferences/sections/{section_id}/topics/{topic_id}">client.preference_sections.topics.<a href="./src/courier/resources/preference_sections/topics.py">archive</a>(topic_id, \*, section_id) -> None</code>
-- <code title="put /preferences/sections/{section_id}/topics/{topic_id}">client.preference_sections.topics.<a href="./src/courier/resources/preference_sections/topics.py">replace</a>(topic_id, \*, section_id, \*\*<a href="src/courier/types/preference_sections/topic_replace_params.py">params</a>) -> <a href="./src/courier/types/preference_topic_get_response.py">PreferenceTopicGetResponse</a></code>
+- <code title="post /preferences/sections/{section_id}/topics">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">create</a>(section_id, \*\*<a href="src/courier/types/workspace_preferences/topic_create_params.py">params</a>) -> <a href="./src/courier/types/workspace_preference_topic_get_response.py">WorkspacePreferenceTopicGetResponse</a></code>
+- <code title="get /preferences/sections/{section_id}/topics/{topic_id}">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">retrieve</a>(topic_id, \*, section_id) -> <a href="./src/courier/types/workspace_preference_topic_get_response.py">WorkspacePreferenceTopicGetResponse</a></code>
+- <code title="get /preferences/sections/{section_id}/topics">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">list</a>(section_id) -> <a href="./src/courier/types/workspace_preference_topic_list_response.py">WorkspacePreferenceTopicListResponse</a></code>
+- <code title="delete /preferences/sections/{section_id}/topics/{topic_id}">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">archive</a>(topic_id, \*, section_id) -> None</code>
+- <code title="put /preferences/sections/{section_id}/topics/{topic_id}">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">replace</a>(topic_id, \*, section_id, \*\*<a href="src/courier/types/workspace_preferences/topic_replace_params.py">params</a>) -> <a href="./src/courier/types/workspace_preference_topic_get_response.py">WorkspacePreferenceTopicGetResponse</a></code>
 
 # Profiles
 

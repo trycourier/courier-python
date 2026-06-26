@@ -2,11 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
-from typing_extensions import Literal
+from typing import List, Optional
 
 import httpx
 
+from .topics import (
+    TopicsResource,
+    AsyncTopicsResource,
+    TopicsResourceWithRawResponse,
+    AsyncTopicsResourceWithRawResponse,
+    TopicsResourceWithStreamingResponse,
+    AsyncTopicsResourceWithStreamingResponse,
+)
+from ...types import workspace_preference_create_params, workspace_preference_replace_params
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -18,69 +26,63 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.preference_sections import topic_create_params, topic_replace_params
-from ...types.preference_topic_get_response import PreferenceTopicGetResponse
+from ...types.publish_preferences_response import PublishPreferencesResponse
 from ...types.shared.channel_classification import ChannelClassification
-from ...types.preference_topic_list_response import PreferenceTopicListResponse
+from ...types.workspace_preference_get_response import WorkspacePreferenceGetResponse
+from ...types.workspace_preference_list_response import WorkspacePreferenceListResponse
 
-__all__ = ["TopicsResource", "AsyncTopicsResource"]
+__all__ = ["WorkspacePreferencesResource", "AsyncWorkspacePreferencesResource"]
 
 
-class TopicsResource(SyncAPIResource):
+class WorkspacePreferencesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TopicsResourceWithRawResponse:
+    def topics(self) -> TopicsResource:
+        return TopicsResource(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> WorkspacePreferencesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
         """
-        return TopicsResourceWithRawResponse(self)
+        return WorkspacePreferencesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TopicsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> WorkspacePreferencesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
         """
-        return TopicsResourceWithStreamingResponse(self)
+        return WorkspacePreferencesResourceWithStreamingResponse(self)
 
     def create(
         self,
-        section_id: str,
         *,
-        default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
         name: str,
-        allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
-        include_unsubscribe_header: Optional[bool] | Omit = omit,
+        has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
-        topic_data: Optional[Dict[str, object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicGetResponse:
-        """Create a subscription preference topic inside a section.
+    ) -> WorkspacePreferenceGetResponse:
+        """Create a workspace preference.
 
-        Fails with 404 if the
-        section does not exist. The topic id is generated and returned.
+        The workspace preference id is generated and
+        returned. Topics are created inside a workspace preference via POST
+        /preferences/sections/{section_id}/topics.
 
         Args:
-          default_status: The default subscription status applied when a recipient has not set their own.
+          name: Human-readable name for the workspace preference.
 
-          name: Human-readable name for the preference topic.
+          has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
-          allowed_preferences: Preference controls a recipient may customize for this topic. Defaults to empty
-              if omitted.
-
-          include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
-
-          routing_options: Default channels delivered for this topic. Defaults to empty if omitted.
-
-          topic_data: Arbitrary metadata associated with the topic.
+          routing_options: Default channels for the workspace preference. Defaults to empty if omitted.
 
           extra_headers: Send extra headers
 
@@ -90,43 +92,35 @@ class TopicsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not section_id:
-            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
         return self._post(
-            path_template("/preferences/sections/{section_id}/topics", section_id=section_id),
+            "/preferences/sections",
             body=maybe_transform(
                 {
-                    "default_status": default_status,
                     "name": name,
-                    "allowed_preferences": allowed_preferences,
-                    "include_unsubscribe_header": include_unsubscribe_header,
+                    "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
-                    "topic_data": topic_data,
                 },
-                topic_create_params.TopicCreateParams,
+                workspace_preference_create_params.WorkspacePreferenceCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicGetResponse,
+            cast_to=WorkspacePreferenceGetResponse,
         )
 
     def retrieve(
         self,
-        topic_id: str,
-        *,
         section_id: str,
+        *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicGetResponse:
-        """Retrieve a topic within a section.
-
-        Returns 404 if the section does not exist,
-        the topic does not exist, or the topic belongs to a different section.
+    ) -> WorkspacePreferenceGetResponse:
+        """
+        Retrieve a workspace preference by id, including its topics.
 
         Args:
           extra_headers: Send extra headers
@@ -139,21 +133,16 @@ class TopicsResource(SyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
-        if not topic_id:
-            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return self._get(
-            path_template(
-                "/preferences/sections/{section_id}/topics/{topic_id}", section_id=section_id, topic_id=topic_id
-            ),
+            path_template("/preferences/sections/{section_id}", section_id=section_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicGetResponse,
+            cast_to=WorkspacePreferenceGetResponse,
         )
 
     def list(
         self,
-        section_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -161,34 +150,24 @@ class TopicsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicListResponse:
+    ) -> WorkspacePreferenceListResponse:
+        """List the workspace's preferences.
+
+        Each workspace preference embeds its topics.
+        Scoped to the workspace of the API key.
         """
-        List the topics in a preference section.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not section_id:
-            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
         return self._get(
-            path_template("/preferences/sections/{section_id}/topics", section_id=section_id),
+            "/preferences/sections",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicListResponse,
+            cast_to=WorkspacePreferenceListResponse,
         )
 
     def archive(
         self,
-        topic_id: str,
-        *,
         section_id: str,
+        *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -196,9 +175,10 @@ class TopicsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a topic and remove it from its section.
+        """Archive a workspace preference.
 
-        Same 404 rules as GET.
+        The workspace preference must be empty: delete
+        its topics first, otherwise the request fails with 409.
 
         Args:
           extra_headers: Send extra headers
@@ -211,54 +191,64 @@ class TopicsResource(SyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
-        if not topic_id:
-            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
-            path_template(
-                "/preferences/sections/{section_id}/topics/{topic_id}", section_id=section_id, topic_id=topic_id
-            ),
+            path_template("/preferences/sections/{section_id}", section_id=section_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
 
-    def replace(
+    def publish(
         self,
-        topic_id: str,
         *,
-        section_id: str,
-        default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
-        name: str,
-        allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
-        include_unsubscribe_header: Optional[bool] | Omit = omit,
-        routing_options: Optional[List[ChannelClassification]] | Omit = omit,
-        topic_data: Optional[Dict[str, object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicGetResponse:
-        """Replace a topic within a section.
+    ) -> PublishPreferencesResponse:
+        """Publish the workspace's preferences page.
+
+        Takes a snapshot of every workspace
+        preference with its topics under a new published version, making the current
+        state visible on the hosted preferences page (non-draft).
+        """
+        return self._post(
+            "/preferences/publish",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PublishPreferencesResponse,
+        )
+
+    def replace(
+        self,
+        section_id: str,
+        *,
+        name: str,
+        has_custom_routing: Optional[bool] | Omit = omit,
+        routing_options: Optional[List[ChannelClassification]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkspacePreferenceGetResponse:
+        """Replace a workspace preference.
 
         Full document replacement; missing optional
-        fields are cleared. Same 404 rules as GET.
+        fields are cleared. Topics attached to the workspace preference are unaffected.
 
         Args:
-          default_status: The default subscription status applied when a recipient has not set their own.
+          name: Human-readable name for the workspace preference.
 
-          name: Human-readable name for the preference topic.
+          has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
-          allowed_preferences: Preference controls a recipient may customize. Omit to clear.
-
-          include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
-
-          routing_options: Default channels delivered for this topic. Omit to clear.
-
-          topic_data: Arbitrary metadata associated with the topic. Omit to clear.
+          routing_options: Default channels for the workspace preference. Omit to clear.
 
           extra_headers: Send extra headers
 
@@ -270,85 +260,72 @@ class TopicsResource(SyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
-        if not topic_id:
-            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return self._put(
-            path_template(
-                "/preferences/sections/{section_id}/topics/{topic_id}", section_id=section_id, topic_id=topic_id
-            ),
+            path_template("/preferences/sections/{section_id}", section_id=section_id),
             body=maybe_transform(
                 {
-                    "default_status": default_status,
                     "name": name,
-                    "allowed_preferences": allowed_preferences,
-                    "include_unsubscribe_header": include_unsubscribe_header,
+                    "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
-                    "topic_data": topic_data,
                 },
-                topic_replace_params.TopicReplaceParams,
+                workspace_preference_replace_params.WorkspacePreferenceReplaceParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicGetResponse,
+            cast_to=WorkspacePreferenceGetResponse,
         )
 
 
-class AsyncTopicsResource(AsyncAPIResource):
+class AsyncWorkspacePreferencesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncTopicsResourceWithRawResponse:
+    def topics(self) -> AsyncTopicsResource:
+        return AsyncTopicsResource(self._client)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncWorkspacePreferencesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/trycourier/courier-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncTopicsResourceWithRawResponse(self)
+        return AsyncWorkspacePreferencesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncTopicsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncWorkspacePreferencesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/trycourier/courier-python#with_streaming_response
         """
-        return AsyncTopicsResourceWithStreamingResponse(self)
+        return AsyncWorkspacePreferencesResourceWithStreamingResponse(self)
 
     async def create(
         self,
-        section_id: str,
         *,
-        default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
         name: str,
-        allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
-        include_unsubscribe_header: Optional[bool] | Omit = omit,
+        has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
-        topic_data: Optional[Dict[str, object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicGetResponse:
-        """Create a subscription preference topic inside a section.
+    ) -> WorkspacePreferenceGetResponse:
+        """Create a workspace preference.
 
-        Fails with 404 if the
-        section does not exist. The topic id is generated and returned.
+        The workspace preference id is generated and
+        returned. Topics are created inside a workspace preference via POST
+        /preferences/sections/{section_id}/topics.
 
         Args:
-          default_status: The default subscription status applied when a recipient has not set their own.
+          name: Human-readable name for the workspace preference.
 
-          name: Human-readable name for the preference topic.
+          has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
-          allowed_preferences: Preference controls a recipient may customize for this topic. Defaults to empty
-              if omitted.
-
-          include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
-
-          routing_options: Default channels delivered for this topic. Defaults to empty if omitted.
-
-          topic_data: Arbitrary metadata associated with the topic.
+          routing_options: Default channels for the workspace preference. Defaults to empty if omitted.
 
           extra_headers: Send extra headers
 
@@ -358,43 +335,35 @@ class AsyncTopicsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not section_id:
-            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
         return await self._post(
-            path_template("/preferences/sections/{section_id}/topics", section_id=section_id),
+            "/preferences/sections",
             body=await async_maybe_transform(
                 {
-                    "default_status": default_status,
                     "name": name,
-                    "allowed_preferences": allowed_preferences,
-                    "include_unsubscribe_header": include_unsubscribe_header,
+                    "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
-                    "topic_data": topic_data,
                 },
-                topic_create_params.TopicCreateParams,
+                workspace_preference_create_params.WorkspacePreferenceCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicGetResponse,
+            cast_to=WorkspacePreferenceGetResponse,
         )
 
     async def retrieve(
         self,
-        topic_id: str,
-        *,
         section_id: str,
+        *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicGetResponse:
-        """Retrieve a topic within a section.
-
-        Returns 404 if the section does not exist,
-        the topic does not exist, or the topic belongs to a different section.
+    ) -> WorkspacePreferenceGetResponse:
+        """
+        Retrieve a workspace preference by id, including its topics.
 
         Args:
           extra_headers: Send extra headers
@@ -407,21 +376,16 @@ class AsyncTopicsResource(AsyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
-        if not topic_id:
-            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return await self._get(
-            path_template(
-                "/preferences/sections/{section_id}/topics/{topic_id}", section_id=section_id, topic_id=topic_id
-            ),
+            path_template("/preferences/sections/{section_id}", section_id=section_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicGetResponse,
+            cast_to=WorkspacePreferenceGetResponse,
         )
 
     async def list(
         self,
-        section_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -429,34 +393,24 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicListResponse:
+    ) -> WorkspacePreferenceListResponse:
+        """List the workspace's preferences.
+
+        Each workspace preference embeds its topics.
+        Scoped to the workspace of the API key.
         """
-        List the topics in a preference section.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not section_id:
-            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
         return await self._get(
-            path_template("/preferences/sections/{section_id}/topics", section_id=section_id),
+            "/preferences/sections",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicListResponse,
+            cast_to=WorkspacePreferenceListResponse,
         )
 
     async def archive(
         self,
-        topic_id: str,
-        *,
         section_id: str,
+        *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -464,9 +418,10 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a topic and remove it from its section.
+        """Archive a workspace preference.
 
-        Same 404 rules as GET.
+        The workspace preference must be empty: delete
+        its topics first, otherwise the request fails with 409.
 
         Args:
           extra_headers: Send extra headers
@@ -479,54 +434,64 @@ class AsyncTopicsResource(AsyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
-        if not topic_id:
-            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
-            path_template(
-                "/preferences/sections/{section_id}/topics/{topic_id}", section_id=section_id, topic_id=topic_id
-            ),
+            path_template("/preferences/sections/{section_id}", section_id=section_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
         )
 
-    async def replace(
+    async def publish(
         self,
-        topic_id: str,
         *,
-        section_id: str,
-        default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
-        name: str,
-        allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
-        include_unsubscribe_header: Optional[bool] | Omit = omit,
-        routing_options: Optional[List[ChannelClassification]] | Omit = omit,
-        topic_data: Optional[Dict[str, object]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PreferenceTopicGetResponse:
-        """Replace a topic within a section.
+    ) -> PublishPreferencesResponse:
+        """Publish the workspace's preferences page.
+
+        Takes a snapshot of every workspace
+        preference with its topics under a new published version, making the current
+        state visible on the hosted preferences page (non-draft).
+        """
+        return await self._post(
+            "/preferences/publish",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PublishPreferencesResponse,
+        )
+
+    async def replace(
+        self,
+        section_id: str,
+        *,
+        name: str,
+        has_custom_routing: Optional[bool] | Omit = omit,
+        routing_options: Optional[List[ChannelClassification]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> WorkspacePreferenceGetResponse:
+        """Replace a workspace preference.
 
         Full document replacement; missing optional
-        fields are cleared. Same 404 rules as GET.
+        fields are cleared. Topics attached to the workspace preference are unaffected.
 
         Args:
-          default_status: The default subscription status applied when a recipient has not set their own.
+          name: Human-readable name for the workspace preference.
 
-          name: Human-readable name for the preference topic.
+          has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
-          allowed_preferences: Preference controls a recipient may customize. Omit to clear.
-
-          include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
-
-          routing_options: Default channels delivered for this topic. Omit to clear.
-
-          topic_data: Arbitrary metadata associated with the topic. Omit to clear.
+          routing_options: Default channels for the workspace preference. Omit to clear.
 
           extra_headers: Send extra headers
 
@@ -538,109 +503,130 @@ class AsyncTopicsResource(AsyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
-        if not topic_id:
-            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
         return await self._put(
-            path_template(
-                "/preferences/sections/{section_id}/topics/{topic_id}", section_id=section_id, topic_id=topic_id
-            ),
+            path_template("/preferences/sections/{section_id}", section_id=section_id),
             body=await async_maybe_transform(
                 {
-                    "default_status": default_status,
                     "name": name,
-                    "allowed_preferences": allowed_preferences,
-                    "include_unsubscribe_header": include_unsubscribe_header,
+                    "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
-                    "topic_data": topic_data,
                 },
-                topic_replace_params.TopicReplaceParams,
+                workspace_preference_replace_params.WorkspacePreferenceReplaceParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PreferenceTopicGetResponse,
+            cast_to=WorkspacePreferenceGetResponse,
         )
 
 
-class TopicsResourceWithRawResponse:
-    def __init__(self, topics: TopicsResource) -> None:
-        self._topics = topics
+class WorkspacePreferencesResourceWithRawResponse:
+    def __init__(self, workspace_preferences: WorkspacePreferencesResource) -> None:
+        self._workspace_preferences = workspace_preferences
 
         self.create = to_raw_response_wrapper(
-            topics.create,
+            workspace_preferences.create,
         )
         self.retrieve = to_raw_response_wrapper(
-            topics.retrieve,
+            workspace_preferences.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            topics.list,
+            workspace_preferences.list,
         )
         self.archive = to_raw_response_wrapper(
-            topics.archive,
+            workspace_preferences.archive,
+        )
+        self.publish = to_raw_response_wrapper(
+            workspace_preferences.publish,
         )
         self.replace = to_raw_response_wrapper(
-            topics.replace,
+            workspace_preferences.replace,
         )
 
+    @cached_property
+    def topics(self) -> TopicsResourceWithRawResponse:
+        return TopicsResourceWithRawResponse(self._workspace_preferences.topics)
 
-class AsyncTopicsResourceWithRawResponse:
-    def __init__(self, topics: AsyncTopicsResource) -> None:
-        self._topics = topics
+
+class AsyncWorkspacePreferencesResourceWithRawResponse:
+    def __init__(self, workspace_preferences: AsyncWorkspacePreferencesResource) -> None:
+        self._workspace_preferences = workspace_preferences
 
         self.create = async_to_raw_response_wrapper(
-            topics.create,
+            workspace_preferences.create,
         )
         self.retrieve = async_to_raw_response_wrapper(
-            topics.retrieve,
+            workspace_preferences.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            topics.list,
+            workspace_preferences.list,
         )
         self.archive = async_to_raw_response_wrapper(
-            topics.archive,
+            workspace_preferences.archive,
+        )
+        self.publish = async_to_raw_response_wrapper(
+            workspace_preferences.publish,
         )
         self.replace = async_to_raw_response_wrapper(
-            topics.replace,
+            workspace_preferences.replace,
         )
 
+    @cached_property
+    def topics(self) -> AsyncTopicsResourceWithRawResponse:
+        return AsyncTopicsResourceWithRawResponse(self._workspace_preferences.topics)
 
-class TopicsResourceWithStreamingResponse:
-    def __init__(self, topics: TopicsResource) -> None:
-        self._topics = topics
+
+class WorkspacePreferencesResourceWithStreamingResponse:
+    def __init__(self, workspace_preferences: WorkspacePreferencesResource) -> None:
+        self._workspace_preferences = workspace_preferences
 
         self.create = to_streamed_response_wrapper(
-            topics.create,
+            workspace_preferences.create,
         )
         self.retrieve = to_streamed_response_wrapper(
-            topics.retrieve,
+            workspace_preferences.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            topics.list,
+            workspace_preferences.list,
         )
         self.archive = to_streamed_response_wrapper(
-            topics.archive,
+            workspace_preferences.archive,
+        )
+        self.publish = to_streamed_response_wrapper(
+            workspace_preferences.publish,
         )
         self.replace = to_streamed_response_wrapper(
-            topics.replace,
+            workspace_preferences.replace,
         )
 
+    @cached_property
+    def topics(self) -> TopicsResourceWithStreamingResponse:
+        return TopicsResourceWithStreamingResponse(self._workspace_preferences.topics)
 
-class AsyncTopicsResourceWithStreamingResponse:
-    def __init__(self, topics: AsyncTopicsResource) -> None:
-        self._topics = topics
+
+class AsyncWorkspacePreferencesResourceWithStreamingResponse:
+    def __init__(self, workspace_preferences: AsyncWorkspacePreferencesResource) -> None:
+        self._workspace_preferences = workspace_preferences
 
         self.create = async_to_streamed_response_wrapper(
-            topics.create,
+            workspace_preferences.create,
         )
         self.retrieve = async_to_streamed_response_wrapper(
-            topics.retrieve,
+            workspace_preferences.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            topics.list,
+            workspace_preferences.list,
         )
         self.archive = async_to_streamed_response_wrapper(
-            topics.archive,
+            workspace_preferences.archive,
+        )
+        self.publish = async_to_streamed_response_wrapper(
+            workspace_preferences.publish,
         )
         self.replace = async_to_streamed_response_wrapper(
-            topics.replace,
+            workspace_preferences.replace,
         )
+
+    @cached_property
+    def topics(self) -> AsyncTopicsResourceWithStreamingResponse:
+        return AsyncTopicsResourceWithStreamingResponse(self._workspace_preferences.topics)

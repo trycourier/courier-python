@@ -9,7 +9,7 @@ import pytest
 
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
-from courier.types import PreferenceTopicGetResponse, PreferenceTopicListResponse
+from courier.types import WorkspacePreferenceTopicGetResponse, WorkspacePreferenceTopicListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -20,17 +20,17 @@ class TestTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Courier) -> None:
-        topic = client.preference_sections.topics.create(
+        topic = client.workspace_preferences.topics.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Courier) -> None:
-        topic = client.preference_sections.topics.create(
+        topic = client.workspace_preferences.topics.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
@@ -39,12 +39,12 @@ class TestTopics:
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Courier) -> None:
-        response = client.preference_sections.topics.with_raw_response.create(
+        response = client.workspace_preferences.topics.with_raw_response.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
@@ -53,12 +53,12 @@ class TestTopics:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = response.parse()
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Courier) -> None:
-        with client.preference_sections.topics.with_streaming_response.create(
+        with client.workspace_preferences.topics.with_streaming_response.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
@@ -67,7 +67,7 @@ class TestTopics:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = response.parse()
-            assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -75,7 +75,7 @@ class TestTopics:
     @parametrize
     def test_path_params_create(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.create(
+            client.workspace_preferences.topics.with_raw_response.create(
                 section_id="",
                 default_status="OPTED_OUT",
                 name="Marketing",
@@ -84,16 +84,16 @@ class TestTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Courier) -> None:
-        topic = client.preference_sections.topics.retrieve(
+        topic = client.workspace_preferences.topics.retrieve(
             topic_id="topic_id",
             section_id="section_id",
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Courier) -> None:
-        response = client.preference_sections.topics.with_raw_response.retrieve(
+        response = client.workspace_preferences.topics.with_raw_response.retrieve(
             topic_id="topic_id",
             section_id="section_id",
         )
@@ -101,12 +101,12 @@ class TestTopics:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = response.parse()
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Courier) -> None:
-        with client.preference_sections.topics.with_streaming_response.retrieve(
+        with client.workspace_preferences.topics.with_streaming_response.retrieve(
             topic_id="topic_id",
             section_id="section_id",
         ) as response:
@@ -114,7 +114,7 @@ class TestTopics:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = response.parse()
-            assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -122,13 +122,13 @@ class TestTopics:
     @parametrize
     def test_path_params_retrieve(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.retrieve(
+            client.workspace_preferences.topics.with_raw_response.retrieve(
                 topic_id="topic_id",
                 section_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.retrieve(
+            client.workspace_preferences.topics.with_raw_response.retrieve(
                 topic_id="",
                 section_id="section_id",
             )
@@ -136,34 +136,34 @@ class TestTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Courier) -> None:
-        topic = client.preference_sections.topics.list(
+        topic = client.workspace_preferences.topics.list(
             "section_id",
         )
-        assert_matches_type(PreferenceTopicListResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicListResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Courier) -> None:
-        response = client.preference_sections.topics.with_raw_response.list(
+        response = client.workspace_preferences.topics.with_raw_response.list(
             "section_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = response.parse()
-        assert_matches_type(PreferenceTopicListResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicListResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Courier) -> None:
-        with client.preference_sections.topics.with_streaming_response.list(
+        with client.workspace_preferences.topics.with_streaming_response.list(
             "section_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = response.parse()
-            assert_matches_type(PreferenceTopicListResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicListResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -171,14 +171,14 @@ class TestTopics:
     @parametrize
     def test_path_params_list(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.list(
+            client.workspace_preferences.topics.with_raw_response.list(
                 "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_archive(self, client: Courier) -> None:
-        topic = client.preference_sections.topics.archive(
+        topic = client.workspace_preferences.topics.archive(
             topic_id="topic_id",
             section_id="section_id",
         )
@@ -187,7 +187,7 @@ class TestTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_archive(self, client: Courier) -> None:
-        response = client.preference_sections.topics.with_raw_response.archive(
+        response = client.workspace_preferences.topics.with_raw_response.archive(
             topic_id="topic_id",
             section_id="section_id",
         )
@@ -200,7 +200,7 @@ class TestTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_archive(self, client: Courier) -> None:
-        with client.preference_sections.topics.with_streaming_response.archive(
+        with client.workspace_preferences.topics.with_streaming_response.archive(
             topic_id="topic_id",
             section_id="section_id",
         ) as response:
@@ -216,13 +216,13 @@ class TestTopics:
     @parametrize
     def test_path_params_archive(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.archive(
+            client.workspace_preferences.topics.with_raw_response.archive(
                 topic_id="topic_id",
                 section_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.archive(
+            client.workspace_preferences.topics.with_raw_response.archive(
                 topic_id="",
                 section_id="section_id",
             )
@@ -230,18 +230,18 @@ class TestTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_replace(self, client: Courier) -> None:
-        topic = client.preference_sections.topics.replace(
+        topic = client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
             name="name",
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_replace_with_all_params(self, client: Courier) -> None:
-        topic = client.preference_sections.topics.replace(
+        topic = client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
@@ -251,12 +251,12 @@ class TestTopics:
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_replace(self, client: Courier) -> None:
-        response = client.preference_sections.topics.with_raw_response.replace(
+        response = client.workspace_preferences.topics.with_raw_response.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
@@ -266,12 +266,12 @@ class TestTopics:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = response.parse()
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_replace(self, client: Courier) -> None:
-        with client.preference_sections.topics.with_streaming_response.replace(
+        with client.workspace_preferences.topics.with_streaming_response.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
@@ -281,7 +281,7 @@ class TestTopics:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = response.parse()
-            assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -289,7 +289,7 @@ class TestTopics:
     @parametrize
     def test_path_params_replace(self, client: Courier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.replace(
+            client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="topic_id",
                 section_id="",
                 default_status="OPTED_OUT",
@@ -297,7 +297,7 @@ class TestTopics:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            client.preference_sections.topics.with_raw_response.replace(
+            client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="",
                 section_id="section_id",
                 default_status="OPTED_OUT",
@@ -313,17 +313,17 @@ class TestAsyncTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncCourier) -> None:
-        topic = await async_client.preference_sections.topics.create(
+        topic = await async_client.workspace_preferences.topics.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCourier) -> None:
-        topic = await async_client.preference_sections.topics.create(
+        topic = await async_client.workspace_preferences.topics.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
@@ -332,12 +332,12 @@ class TestAsyncTopics:
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCourier) -> None:
-        response = await async_client.preference_sections.topics.with_raw_response.create(
+        response = await async_client.workspace_preferences.topics.with_raw_response.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
@@ -346,12 +346,12 @@ class TestAsyncTopics:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = await response.parse()
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCourier) -> None:
-        async with async_client.preference_sections.topics.with_streaming_response.create(
+        async with async_client.workspace_preferences.topics.with_streaming_response.create(
             section_id="section_id",
             default_status="OPTED_OUT",
             name="Marketing",
@@ -360,7 +360,7 @@ class TestAsyncTopics:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = await response.parse()
-            assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -368,7 +368,7 @@ class TestAsyncTopics:
     @parametrize
     async def test_path_params_create(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.create(
+            await async_client.workspace_preferences.topics.with_raw_response.create(
                 section_id="",
                 default_status="OPTED_OUT",
                 name="Marketing",
@@ -377,16 +377,16 @@ class TestAsyncTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncCourier) -> None:
-        topic = await async_client.preference_sections.topics.retrieve(
+        topic = await async_client.workspace_preferences.topics.retrieve(
             topic_id="topic_id",
             section_id="section_id",
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncCourier) -> None:
-        response = await async_client.preference_sections.topics.with_raw_response.retrieve(
+        response = await async_client.workspace_preferences.topics.with_raw_response.retrieve(
             topic_id="topic_id",
             section_id="section_id",
         )
@@ -394,12 +394,12 @@ class TestAsyncTopics:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = await response.parse()
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncCourier) -> None:
-        async with async_client.preference_sections.topics.with_streaming_response.retrieve(
+        async with async_client.workspace_preferences.topics.with_streaming_response.retrieve(
             topic_id="topic_id",
             section_id="section_id",
         ) as response:
@@ -407,7 +407,7 @@ class TestAsyncTopics:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = await response.parse()
-            assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -415,13 +415,13 @@ class TestAsyncTopics:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.retrieve(
+            await async_client.workspace_preferences.topics.with_raw_response.retrieve(
                 topic_id="topic_id",
                 section_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.retrieve(
+            await async_client.workspace_preferences.topics.with_raw_response.retrieve(
                 topic_id="",
                 section_id="section_id",
             )
@@ -429,34 +429,34 @@ class TestAsyncTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncCourier) -> None:
-        topic = await async_client.preference_sections.topics.list(
+        topic = await async_client.workspace_preferences.topics.list(
             "section_id",
         )
-        assert_matches_type(PreferenceTopicListResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicListResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncCourier) -> None:
-        response = await async_client.preference_sections.topics.with_raw_response.list(
+        response = await async_client.workspace_preferences.topics.with_raw_response.list(
             "section_id",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = await response.parse()
-        assert_matches_type(PreferenceTopicListResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicListResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncCourier) -> None:
-        async with async_client.preference_sections.topics.with_streaming_response.list(
+        async with async_client.workspace_preferences.topics.with_streaming_response.list(
             "section_id",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = await response.parse()
-            assert_matches_type(PreferenceTopicListResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicListResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -464,14 +464,14 @@ class TestAsyncTopics:
     @parametrize
     async def test_path_params_list(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.list(
+            await async_client.workspace_preferences.topics.with_raw_response.list(
                 "",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_archive(self, async_client: AsyncCourier) -> None:
-        topic = await async_client.preference_sections.topics.archive(
+        topic = await async_client.workspace_preferences.topics.archive(
             topic_id="topic_id",
             section_id="section_id",
         )
@@ -480,7 +480,7 @@ class TestAsyncTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_archive(self, async_client: AsyncCourier) -> None:
-        response = await async_client.preference_sections.topics.with_raw_response.archive(
+        response = await async_client.workspace_preferences.topics.with_raw_response.archive(
             topic_id="topic_id",
             section_id="section_id",
         )
@@ -493,7 +493,7 @@ class TestAsyncTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_archive(self, async_client: AsyncCourier) -> None:
-        async with async_client.preference_sections.topics.with_streaming_response.archive(
+        async with async_client.workspace_preferences.topics.with_streaming_response.archive(
             topic_id="topic_id",
             section_id="section_id",
         ) as response:
@@ -509,13 +509,13 @@ class TestAsyncTopics:
     @parametrize
     async def test_path_params_archive(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.archive(
+            await async_client.workspace_preferences.topics.with_raw_response.archive(
                 topic_id="topic_id",
                 section_id="",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.archive(
+            await async_client.workspace_preferences.topics.with_raw_response.archive(
                 topic_id="",
                 section_id="section_id",
             )
@@ -523,18 +523,18 @@ class TestAsyncTopics:
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_replace(self, async_client: AsyncCourier) -> None:
-        topic = await async_client.preference_sections.topics.replace(
+        topic = await async_client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
             name="name",
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_replace_with_all_params(self, async_client: AsyncCourier) -> None:
-        topic = await async_client.preference_sections.topics.replace(
+        topic = await async_client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
@@ -544,12 +544,12 @@ class TestAsyncTopics:
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
         )
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_replace(self, async_client: AsyncCourier) -> None:
-        response = await async_client.preference_sections.topics.with_raw_response.replace(
+        response = await async_client.workspace_preferences.topics.with_raw_response.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
@@ -559,12 +559,12 @@ class TestAsyncTopics:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         topic = await response.parse()
-        assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+        assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_replace(self, async_client: AsyncCourier) -> None:
-        async with async_client.preference_sections.topics.with_streaming_response.replace(
+        async with async_client.workspace_preferences.topics.with_streaming_response.replace(
             topic_id="topic_id",
             section_id="section_id",
             default_status="OPTED_OUT",
@@ -574,7 +574,7 @@ class TestAsyncTopics:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             topic = await response.parse()
-            assert_matches_type(PreferenceTopicGetResponse, topic, path=["response"])
+            assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -582,7 +582,7 @@ class TestAsyncTopics:
     @parametrize
     async def test_path_params_replace(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.replace(
+            await async_client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="topic_id",
                 section_id="",
                 default_status="OPTED_OUT",
@@ -590,7 +590,7 @@ class TestAsyncTopics:
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
-            await async_client.preference_sections.topics.with_raw_response.replace(
+            await async_client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="",
                 section_id="section_id",
                 default_status="OPTED_OUT",

@@ -7,15 +7,15 @@ from typing_extensions import Required, TypedDict
 
 from .shared.channel_classification import ChannelClassification
 
-__all__ = ["PreferenceSectionReplaceParams"]
+__all__ = ["WorkspacePreferenceReplaceParams"]
 
 
-class PreferenceSectionReplaceParams(TypedDict, total=False):
+class WorkspacePreferenceReplaceParams(TypedDict, total=False):
     name: Required[str]
-    """Human-readable name for the section."""
+    """Human-readable name for the workspace preference."""
 
     has_custom_routing: Optional[bool]
-    """Whether the section defines custom routing for its topics."""
+    """Whether the workspace preference defines custom routing for its topics."""
 
     routing_options: Optional[List[ChannelClassification]]
-    """Default channels for the section. Omit to clear."""
+    """Default channels for the workspace preference. Omit to clear."""
