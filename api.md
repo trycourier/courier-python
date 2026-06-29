@@ -197,6 +197,8 @@ Types:
 
 ```python
 from courier.types import (
+    CancelJourneyRequest,
+    CancelJourneyResponse,
     CreateJourneyRequest,
     Journey,
     JourneyAINode,
@@ -208,6 +210,8 @@ from courier.types import (
     JourneyDelayDurationNode,
     JourneyDelayUntilNode,
     JourneyExitNode,
+    JourneyExperiment,
+    JourneyExperimentVariant,
     JourneyFetchGetDeleteNode,
     JourneyFetchPostPutNode,
     JourneyMergeStrategy,
@@ -239,6 +243,7 @@ Methods:
 - <code title="get /journeys/{templateId}">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">retrieve</a>(template_id, \*\*<a href="src/courier/types/journey_retrieve_params.py">params</a>) -> <a href="./src/courier/types/journey_response.py">JourneyResponse</a></code>
 - <code title="get /journeys">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">list</a>(\*\*<a href="src/courier/types/journey_list_params.py">params</a>) -> <a href="./src/courier/types/journeys_list_response.py">JourneysListResponse</a></code>
 - <code title="delete /journeys/{templateId}">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">archive</a>(template_id) -> None</code>
+- <code title="post /journeys/cancel">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">cancel</a>(\*\*<a href="src/courier/types/journey_cancel_params.py">params</a>) -> <a href="./src/courier/types/cancel_journey_response.py">CancelJourneyResponse</a></code>
 - <code title="post /journeys/{templateId}/invoke">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">invoke</a>(template_id, \*\*<a href="src/courier/types/journey_invoke_params.py">params</a>) -> <a href="./src/courier/types/journeys_invoke_response.py">JourneysInvokeResponse</a></code>
 - <code title="get /journeys/{templateId}/versions">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">list_versions</a>(template_id) -> <a href="./src/courier/types/journey_versions_list_response.py">JourneyVersionsListResponse</a></code>
 - <code title="post /journeys/{templateId}/publish">client.journeys.<a href="./src/courier/resources/journeys/journeys.py">publish</a>(template_id, \*\*<a href="src/courier/types/journey_publish_params.py">params</a>) -> <a href="./src/courier/types/journey_response.py">JourneyResponse</a></code>
