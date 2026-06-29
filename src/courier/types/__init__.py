@@ -133,6 +133,7 @@ from .widget_background import WidgetBackground as WidgetBackground
 from .brand_colors_param import BrandColorsParam as BrandColorsParam
 from .email_footer_param import EmailFooterParam as EmailFooterParam
 from .email_header_param import EmailHeaderParam as EmailHeaderParam
+from .journey_experiment import JourneyExperiment as JourneyExperiment
 from .journey_node_param import JourneyNodeParam as JourneyNodeParam
 from .list_list_response import ListListResponse as ListListResponse
 from .list_update_params import ListUpdateParams as ListUpdateParams
@@ -160,6 +161,7 @@ from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
 from .bulk_add_users_params import BulkAddUsersParams as BulkAddUsersParams
 from .journey_ai_node_param import JourneyAINodeParam as JourneyAINodeParam
+from .journey_cancel_params import JourneyCancelParams as JourneyCancelParams
 from .journey_create_params import JourneyCreateParams as JourneyCreateParams
 from .journey_invoke_params import JourneyInvokeParams as JourneyInvokeParams
 from .message_list_response import MessageListResponse as MessageListResponse
@@ -185,6 +187,7 @@ from .provider_update_params import ProviderUpdateParams as ProviderUpdateParams
 from .subscription_topic_new import SubscriptionTopicNew as SubscriptionTopicNew
 from .audit_event_list_params import AuditEventListParams as AuditEventListParams
 from .auth_issue_token_params import AuthIssueTokenParams as AuthIssueTokenParams
+from .cancel_journey_response import CancelJourneyResponse as CancelJourneyResponse
 from .journey_condition_group import JourneyConditionGroup as JourneyConditionGroup
 from .journey_exit_node_param import JourneyExitNodeParam as JourneyExitNodeParam
 from .journey_retrieve_params import JourneyRetrieveParams as JourneyRetrieveParams
@@ -197,6 +200,7 @@ from .bulk_create_job_response import BulkCreateJobResponse as BulkCreateJobResp
 from .bulk_list_users_response import BulkListUsersResponse as BulkListUsersResponse
 from .journey_conditions_field import JourneyConditionsField as JourneyConditionsField
 from .journey_delay_until_node import JourneyDelayUntilNode as JourneyDelayUntilNode
+from .journey_experiment_param import JourneyExperimentParam as JourneyExperimentParam
 from .journey_template_summary import JourneyTemplateSummary as JourneyTemplateSummary
 from .journeys_invoke_response import JourneysInvokeResponse as JourneysInvokeResponse
 from .message_content_response import MessageContentResponse as MessageContentResponse
@@ -219,6 +223,7 @@ from .brand_settings_email_param import BrandSettingsEmailParam as BrandSettings
 from .bulk_retrieve_job_response import BulkRetrieveJobResponse as BulkRetrieveJobResponse
 from .inbound_bulk_message_param import InboundBulkMessageParam as InboundBulkMessageParam
 from .inbound_track_event_params import InboundTrackEventParams as InboundTrackEventParams
+from .journey_experiment_variant import JourneyExperimentVariant as JourneyExperimentVariant
 from .notification_create_params import NotificationCreateParams as NotificationCreateParams
 from .notification_list_response import NotificationListResponse as NotificationListResponse
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
@@ -230,6 +235,7 @@ from .notification_replace_params import NotificationReplaceParams as Notificati
 from .notification_template_state import NotificationTemplateState as NotificationTemplateState
 from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
+from .cancel_journey_request_param import CancelJourneyRequestParam as CancelJourneyRequestParam
 from .inbound_track_event_response import InboundTrackEventResponse as InboundTrackEventResponse
 from .journey_condition_atom_param import JourneyConditionAtomParam as JourneyConditionAtomParam
 from .journey_segment_trigger_node import JourneySegmentTriggerNode as JourneySegmentTriggerNode
@@ -264,6 +270,7 @@ from .notification_put_content_params import NotificationPutContentParams as Not
 from .notification_put_element_params import NotificationPutElementParams as NotificationPutElementParams
 from .routing_strategy_replace_params import RoutingStrategyReplaceParams as RoutingStrategyReplaceParams
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
+from .journey_experiment_variant_param import JourneyExperimentVariantParam as JourneyExperimentVariantParam
 from .automation_template_list_response import AutomationTemplateListResponse as AutomationTemplateListResponse
 from .journey_delay_duration_node_param import JourneyDelayDurationNodeParam as JourneyDelayDurationNodeParam
 from .journey_fetch_post_put_node_param import JourneyFetchPostPutNodeParam as JourneyFetchPostPutNodeParam

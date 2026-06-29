@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable
-from typing_extensions import Literal
+from typing import Any, Dict, Iterable, cast
+from typing_extensions import Literal, overload
 
 import httpx
 
 from ...types import (
     JourneyState,
     journey_list_params,
+    journey_cancel_params,
     journey_create_params,
     journey_invoke_params,
     journey_publish_params,
@@ -17,7 +18,7 @@ from ...types import (
     journey_retrieve_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from .templates import (
     TemplatesResource,
@@ -39,6 +40,7 @@ from ...types.journey_state import JourneyState
 from ...types.journey_response import JourneyResponse
 from ...types.journey_node_param import JourneyNodeParam
 from ...types.journeys_list_response import JourneysListResponse
+from ...types.cancel_journey_response import CancelJourneyResponse
 from ...types.journeys_invoke_response import JourneysInvokeResponse
 from ...types.journey_versions_list_response import JourneyVersionsListResponse
 
@@ -245,6 +247,105 @@ class JourneysResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    @overload
+    def cancel(
+        self,
+        *,
+        cancelation_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CancelJourneyResponse:
+        """Cancel journey runs.
+
+        The request body must contain EXACTLY ONE of
+        `cancelation_token` (cancels every run associated with the token) or `run_id`
+        (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
+        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
+        is idempotent and non-clobbering: a run that has already finished
+        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
+        current status is echoed back.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def cancel(
+        self,
+        *,
+        run_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CancelJourneyResponse:
+        """Cancel journey runs.
+
+        The request body must contain EXACTLY ONE of
+        `cancelation_token` (cancels every run associated with the token) or `run_id`
+        (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
+        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
+        is idempotent and non-clobbering: a run that has already finished
+        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
+        current status is echoed back.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["cancelation_token"], ["run_id"])
+    def cancel(
+        self,
+        *,
+        cancelation_token: str | Omit = omit,
+        run_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CancelJourneyResponse:
+        return cast(
+            CancelJourneyResponse,
+            self._post(
+                "/journeys/cancel",
+                body=maybe_transform(
+                    {
+                        "cancelation_token": cancelation_token,
+                        "run_id": run_id,
+                    },
+                    journey_cancel_params.JourneyCancelParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, CancelJourneyResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
         )
 
     def invoke(
@@ -635,6 +736,105 @@ class AsyncJourneysResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    @overload
+    async def cancel(
+        self,
+        *,
+        cancelation_token: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CancelJourneyResponse:
+        """Cancel journey runs.
+
+        The request body must contain EXACTLY ONE of
+        `cancelation_token` (cancels every run associated with the token) or `run_id`
+        (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
+        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
+        is idempotent and non-clobbering: a run that has already finished
+        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
+        current status is echoed back.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def cancel(
+        self,
+        *,
+        run_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CancelJourneyResponse:
+        """Cancel journey runs.
+
+        The request body must contain EXACTLY ONE of
+        `cancelation_token` (cancels every run associated with the token) or `run_id`
+        (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
+        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
+        is idempotent and non-clobbering: a run that has already finished
+        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
+        current status is echoed back.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(["cancelation_token"], ["run_id"])
+    async def cancel(
+        self,
+        *,
+        cancelation_token: str | Omit = omit,
+        run_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> CancelJourneyResponse:
+        return cast(
+            CancelJourneyResponse,
+            await self._post(
+                "/journeys/cancel",
+                body=await async_maybe_transform(
+                    {
+                        "cancelation_token": cancelation_token,
+                        "run_id": run_id,
+                    },
+                    journey_cancel_params.JourneyCancelParams,
+                ),
+                options=make_request_options(
+                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                ),
+                cast_to=cast(
+                    Any, CancelJourneyResponse
+                ),  # Union types cannot be passed in as arguments in the type system
+            ),
+        )
+
     async def invoke(
         self,
         template_id: str,
@@ -837,6 +1037,9 @@ class JourneysResourceWithRawResponse:
         self.archive = to_raw_response_wrapper(
             journeys.archive,
         )
+        self.cancel = to_raw_response_wrapper(
+            journeys.cancel,
+        )
         self.invoke = to_raw_response_wrapper(
             journeys.invoke,
         )
@@ -870,6 +1073,9 @@ class AsyncJourneysResourceWithRawResponse:
         )
         self.archive = async_to_raw_response_wrapper(
             journeys.archive,
+        )
+        self.cancel = async_to_raw_response_wrapper(
+            journeys.cancel,
         )
         self.invoke = async_to_raw_response_wrapper(
             journeys.invoke,
@@ -905,6 +1111,9 @@ class JourneysResourceWithStreamingResponse:
         self.archive = to_streamed_response_wrapper(
             journeys.archive,
         )
+        self.cancel = to_streamed_response_wrapper(
+            journeys.cancel,
+        )
         self.invoke = to_streamed_response_wrapper(
             journeys.invoke,
         )
@@ -938,6 +1147,9 @@ class AsyncJourneysResourceWithStreamingResponse:
         )
         self.archive = async_to_streamed_response_wrapper(
             journeys.archive,
+        )
+        self.cancel = async_to_streamed_response_wrapper(
+            journeys.cancel,
         )
         self.invoke = async_to_streamed_response_wrapper(
             journeys.invoke,

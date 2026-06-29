@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from courier.types import (
     JourneyResponse,
     JourneysListResponse,
+    CancelJourneyResponse,
     JourneysInvokeResponse,
     JourneyVersionsListResponse,
 )
@@ -241,6 +242,74 @@ class TestJourneys:
             client.journeys.with_raw_response.archive(
                 "",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_cancel_overload_1(self, client: Courier) -> None:
+        journey = client.journeys.cancel(
+            cancelation_token="x",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_cancel_overload_1(self, client: Courier) -> None:
+        response = client.journeys.with_raw_response.cancel(
+            cancelation_token="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        journey = response.parse()
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_cancel_overload_1(self, client: Courier) -> None:
+        with client.journeys.with_streaming_response.cancel(
+            cancelation_token="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            journey = response.parse()
+            assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_cancel_overload_2(self, client: Courier) -> None:
+        journey = client.journeys.cancel(
+            run_id="x",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_cancel_overload_2(self, client: Courier) -> None:
+        response = client.journeys.with_raw_response.cancel(
+            run_id="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        journey = response.parse()
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_cancel_overload_2(self, client: Courier) -> None:
+        with client.journeys.with_streaming_response.cancel(
+            run_id="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            journey = response.parse()
+            assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -706,6 +775,74 @@ class TestAsyncJourneys:
             await async_client.journeys.with_raw_response.archive(
                 "",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_cancel_overload_1(self, async_client: AsyncCourier) -> None:
+        journey = await async_client.journeys.cancel(
+            cancelation_token="x",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_cancel_overload_1(self, async_client: AsyncCourier) -> None:
+        response = await async_client.journeys.with_raw_response.cancel(
+            cancelation_token="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        journey = await response.parse()
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_cancel_overload_1(self, async_client: AsyncCourier) -> None:
+        async with async_client.journeys.with_streaming_response.cancel(
+            cancelation_token="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            journey = await response.parse()
+            assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_cancel_overload_2(self, async_client: AsyncCourier) -> None:
+        journey = await async_client.journeys.cancel(
+            run_id="x",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_cancel_overload_2(self, async_client: AsyncCourier) -> None:
+        response = await async_client.journeys.with_raw_response.cancel(
+            run_id="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        journey = await response.parse()
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_cancel_overload_2(self, async_client: AsyncCourier) -> None:
+        async with async_client.journeys.with_streaming_response.cancel(
+            run_id="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            journey = await response.parse()
+            assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
