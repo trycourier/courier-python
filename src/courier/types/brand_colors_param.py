@@ -7,7 +7,11 @@ from typing_extensions import TypedDict
 __all__ = ["BrandColorsParam"]
 
 
-class BrandColorsParam(TypedDict, total=False, extra_items=str):  # type: ignore[call-arg]
+class BrandColorsParam(  # type: ignore[call-arg]
+    TypedDict,
+    total=False,
+    extra_items=str,  # pyright: ignore[reportGeneralTypeIssues]
+):
     primary: str
 
     secondary: str
