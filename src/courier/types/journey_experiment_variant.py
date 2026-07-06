@@ -10,7 +10,7 @@ __all__ = ["JourneyExperimentVariant"]
 
 
 class JourneyExperimentVariant(BaseModel):
-    """A single weighted arm of an experiment.
+    """A single weighted variant of an experiment.
 
     Variant ids must be unique within the experiment and the sum of all variant weights must be greater than 0. Weights are relative (no sum-to-100 requirement) — routing normalizes them proportionally.
     """
@@ -24,4 +24,4 @@ class JourneyExperimentVariant(BaseModel):
     """Relative routing weight. Must be non-negative."""
 
     name: Optional[str] = None
-    """Optional, cosmetic display name for the variant."""
+    """Optional display name for the variant."""
