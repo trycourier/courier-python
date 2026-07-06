@@ -1,5 +1,25 @@
 # Changelog
 
+## 7.18.0 (2026-07-06)
+
+Full Changelog: [v7.17.1...v7.18.0](https://github.com/trycourier/courier-python/compare/v7.17.1...v7.18.0)
+
+### Features
+
+* **openapi:** Journeys cancel-by-token endpoint + send-node experiments (C-18986) ([2506b29](https://github.com/trycourier/courier-python/commit/2506b29674ce56a9d4cfff46b39c849f28ab2875))
+
+
+### Bug Fixes
+
+* **types:** avoid type-checker errors on params with additional properties ([2898ba5](https://github.com/trycourier/courier-python/commit/2898ba510e0aeb8de9da57e4f50e6951af14f223))
+
+
+### Documentation
+
+* **openapi:** reword Cancel journey runs 400 description (re-trigger deploy) ([c881e7b](https://github.com/trycourier/courier-python/commit/c881e7bc06d0c0c4bfb933b07eeecc52a72f751b))
+* **openapi:** reword Cancel journey runs description (re-trigger deploy) ([520683d](https://github.com/trycourier/courier-python/commit/520683d2b469b56652b6b3d5303e24984fa0a6a4))
+* **openapi:** tighten Journeys cancel/experiment copy (C-19177) ([3083af5](https://github.com/trycourier/courier-python/commit/3083af565bcb5d13cd9ba4dcdeec06d8bdf19618))
+
 ## 7.17.1 (2026-06-25)
 
 Full Changelog: [v7.17.0...v7.17.1](https://github.com/trycourier/courier-python/compare/v7.17.0...v7.17.1)
