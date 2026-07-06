@@ -26,10 +26,11 @@ class JourneyExperiment(BaseModel):
     """Between 2 and 10 weighted template variants."""
 
     id: Optional[str] = None
-    """Server-authoritative experiment id (prefixed `exp_`).
+    """Unique experiment id (prefixed `exp_`).
 
-    Omit to have the server mint one; when supplied it must be a valid `exp_` id.
+    Omit to have one generated automatically; when supplied it must be a valid
+    `exp_` id.
     """
 
     name: Optional[str] = None
-    """Optional, cosmetic display name for the experiment."""
+    """Optional display name for the experiment."""

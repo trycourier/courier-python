@@ -266,10 +266,9 @@ class JourneysResource(SyncAPIResource):
         The request body must contain EXACTLY ONE of
         `cancelation_token` (cancels every run associated with the token) or `run_id`
         (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
-        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
-        is idempotent and non-clobbering: a run that has already finished
-        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
-        current status is echoed back.
+        `run_id` that does not match a run for the tenant returns `404`. Cancelation is
+        idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was already
+        `CANCELED` is left unchanged and its current status is returned.
 
         Args:
           extra_headers: Send extra headers
@@ -299,10 +298,9 @@ class JourneysResource(SyncAPIResource):
         The request body must contain EXACTLY ONE of
         `cancelation_token` (cancels every run associated with the token) or `run_id`
         (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
-        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
-        is idempotent and non-clobbering: a run that has already finished
-        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
-        current status is echoed back.
+        `run_id` that does not match a run for the tenant returns `404`. Cancelation is
+        idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was already
+        `CANCELED` is left unchanged and its current status is returned.
 
         Args:
           extra_headers: Send extra headers
@@ -753,10 +751,9 @@ class AsyncJourneysResource(AsyncAPIResource):
         The request body must contain EXACTLY ONE of
         `cancelation_token` (cancels every run associated with the token) or `run_id`
         (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
-        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
-        is idempotent and non-clobbering: a run that has already finished
-        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
-        current status is echoed back.
+        `run_id` that does not match a run for the tenant returns `404`. Cancelation is
+        idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was already
+        `CANCELED` is left unchanged and its current status is returned.
 
         Args:
           extra_headers: Send extra headers
@@ -786,10 +783,9 @@ class AsyncJourneysResource(AsyncAPIResource):
         The request body must contain EXACTLY ONE of
         `cancelation_token` (cancels every run associated with the token) or `run_id`
         (cancels a single tenant-scoped run). Supplying both or neither is a `400`. A
-        `run_id` that does not exist for the caller's tenant returns `404`. Cancelation
-        is idempotent and non-clobbering: a run that has already finished
-        (`PROCESSED`/`ERROR`) or was already `CANCELED` is left untouched and its
-        current status is echoed back.
+        `run_id` that does not match a run for the tenant returns `404`. Cancelation is
+        idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was already
+        `CANCELED` is left unchanged and its current status is returned.
 
         Args:
           extra_headers: Send extra headers
