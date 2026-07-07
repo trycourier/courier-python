@@ -21,7 +21,11 @@ class AudienceUpdateParams(TypedDict, total=False):
     """The name of the audience"""
 
     operator: Optional[Literal["AND", "OR"]]
-    """The logical operator (AND/OR) for the top-level filter"""
+    """The logical operator (AND/OR) combining the top-level `filter.filters`.
+
+    Convenience alias for `filter.operator`: if set, it is applied to the top-level
+    filter group. Prefer setting `operator` directly inside `filter`.
+    """
 
 
 from .shared_params.audience_filter_config import AudienceFilterConfig
