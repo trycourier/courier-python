@@ -30,7 +30,10 @@ class Audience(BaseModel):
     """
 
     operator: Optional[Literal["AND", "OR"]] = None
-    """The logical operator (AND/OR) for the top-level filter"""
+    """The logical operator (AND/OR) combining the top-level `filter.filters`.
+
+    Convenience alias for `filter.operator`.
+    """
 
 
 from .shared.audience_filter_config import AudienceFilterConfig

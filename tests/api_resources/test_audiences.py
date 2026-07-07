@@ -86,7 +86,8 @@ class TestAudiences:
                         "path": "path",
                         "value": "value",
                     }
-                ]
+                ],
+                "operator": "AND",
             },
             name="name",
             operator="AND",
@@ -326,7 +327,8 @@ class TestAsyncAudiences:
                         "path": "path",
                         "value": "value",
                     }
-                ]
+                ],
+                "operator": "AND",
             },
             name="name",
             operator="AND",
