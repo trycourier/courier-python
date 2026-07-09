@@ -82,7 +82,7 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 }
             ],
         )
@@ -96,7 +96,7 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     "custom_routing": ["inbox", "email"],
                     "has_custom_routing": True,
                 }
@@ -113,7 +113,7 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 }
             ],
         )
@@ -131,7 +131,7 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 }
             ],
         ) as response:
@@ -152,7 +152,7 @@ class TestPreferences:
                 topics=[
                     {
                         "status": "OPTED_IN",
-                        "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                        "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     }
                 ],
             )
@@ -165,11 +165,11 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                 },
             ],
         )
@@ -183,13 +183,13 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     "custom_routing": ["inbox", "email"],
                     "has_custom_routing": True,
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                     "custom_routing": ["direct_message"],
                     "has_custom_routing": True,
                 },
@@ -206,11 +206,11 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                 },
             ],
         )
@@ -228,11 +228,11 @@ class TestPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                 },
             ],
         ) as response:
@@ -253,11 +253,11 @@ class TestPreferences:
                 topics=[
                     {
                         "status": "OPTED_IN",
-                        "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                        "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     },
                     {
                         "status": "OPTED_OUT",
-                        "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                        "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                     },
                 ],
             )
@@ -523,7 +523,7 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 }
             ],
         )
@@ -537,7 +537,7 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     "custom_routing": ["inbox", "email"],
                     "has_custom_routing": True,
                 }
@@ -554,7 +554,7 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 }
             ],
         )
@@ -572,7 +572,7 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 }
             ],
         ) as response:
@@ -593,7 +593,7 @@ class TestAsyncPreferences:
                 topics=[
                     {
                         "status": "OPTED_IN",
-                        "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                        "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     }
                 ],
             )
@@ -606,11 +606,11 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                 },
             ],
         )
@@ -624,13 +624,13 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     "custom_routing": ["inbox", "email"],
                     "has_custom_routing": True,
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                     "custom_routing": ["direct_message"],
                     "has_custom_routing": True,
                 },
@@ -647,11 +647,11 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                 },
             ],
         )
@@ -669,11 +669,11 @@ class TestAsyncPreferences:
             topics=[
                 {
                     "status": "OPTED_IN",
-                    "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                    "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                 },
                 {
                     "status": "OPTED_OUT",
-                    "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                    "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                 },
             ],
         ) as response:
@@ -694,11 +694,11 @@ class TestAsyncPreferences:
                 topics=[
                     {
                         "status": "OPTED_IN",
-                        "topic_id": "74Q4QGFBEX481DP6JRPMV751H4XT",
+                        "topic_id": "pt_01kx4h2jdafq8bk996nn92357r",
                     },
                     {
                         "status": "OPTED_OUT",
-                        "topic_id": "5Q4QGFBEX481DP6JRPMV751H4YU",
+                        "topic_id": "pt_01kx4h2jdafq8bk99eyt3dx43x",
                     },
                 ],
             )

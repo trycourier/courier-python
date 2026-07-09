@@ -35,7 +35,7 @@ class TestNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -53,7 +53,7 @@ class TestNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
             state="DRAFT",
@@ -72,7 +72,7 @@ class TestNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -94,7 +94,7 @@ class TestNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         ) as response:
@@ -715,7 +715,7 @@ class TestAsyncNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -733,7 +733,7 @@ class TestAsyncNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
             state="DRAFT",
@@ -752,7 +752,7 @@ class TestAsyncNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -774,7 +774,7 @@ class TestAsyncNotifications:
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         ) as response:
