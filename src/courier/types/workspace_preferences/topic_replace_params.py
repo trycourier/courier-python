@@ -22,6 +22,12 @@ class TopicReplaceParams(TypedDict, total=False):
     allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]]
     """Preference controls a recipient may customize. Omit to clear."""
 
+    description: Optional[str]
+    """Optional description shown under the topic on the hosted preferences page.
+
+    Omit to clear.
+    """
+
     include_unsubscribe_header: Optional[bool]
     """Whether to include a list-unsubscribe header on emails for this topic."""
 

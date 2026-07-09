@@ -34,6 +34,7 @@ class TestWorkspacePreferences:
     def test_method_create_with_all_params(self, client: Courier) -> None:
         workspace_preference = client.workspace_preferences.create(
             name="Account Notifications",
+            description="description",
             has_custom_routing=True,
             routing_options=["direct_message"],
         )
@@ -185,6 +186,16 @@ class TestWorkspacePreferences:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_publish_with_all_params(self, client: Courier) -> None:
+        workspace_preference = client.workspace_preferences.publish(
+            brand_id="brand_id",
+            description="description",
+            heading="heading",
+        )
+        assert_matches_type(PublishPreferencesResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_publish(self, client: Courier) -> None:
         response = client.workspace_preferences.with_raw_response.publish()
 
@@ -220,6 +231,7 @@ class TestWorkspacePreferences:
         workspace_preference = client.workspace_preferences.replace(
             section_id="section_id",
             name="name",
+            description="description",
             has_custom_routing=True,
             routing_options=["direct_message"],
         )
@@ -281,6 +293,7 @@ class TestAsyncWorkspacePreferences:
     async def test_method_create_with_all_params(self, async_client: AsyncCourier) -> None:
         workspace_preference = await async_client.workspace_preferences.create(
             name="Account Notifications",
+            description="description",
             has_custom_routing=True,
             routing_options=["direct_message"],
         )
@@ -432,6 +445,16 @@ class TestAsyncWorkspacePreferences:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_publish_with_all_params(self, async_client: AsyncCourier) -> None:
+        workspace_preference = await async_client.workspace_preferences.publish(
+            brand_id="brand_id",
+            description="description",
+            heading="heading",
+        )
+        assert_matches_type(PublishPreferencesResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_raw_response_publish(self, async_client: AsyncCourier) -> None:
         response = await async_client.workspace_preferences.with_raw_response.publish()
 
@@ -467,6 +490,7 @@ class TestAsyncWorkspacePreferences:
         workspace_preference = await async_client.workspace_preferences.replace(
             section_id="section_id",
             name="name",
+            description="description",
             has_custom_routing=True,
             routing_options=["direct_message"],
         )

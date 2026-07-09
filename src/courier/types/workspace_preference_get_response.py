@@ -33,6 +33,9 @@ class WorkspacePreferenceGetResponse(BaseModel):
     creator: Optional[str] = None
     """Id of the creator."""
 
+    description: Optional[str] = None
+    """Optional description shown under the section on the hosted preferences page."""
+
     updated: Optional[str] = None
     """ISO-8601 timestamp of the last update."""
 
