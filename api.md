@@ -642,8 +642,11 @@ Types:
 
 ```python
 from courier.types.users import (
+    BulkPreferenceTopic,
     TopicPreference,
     PreferenceRetrieveResponse,
+    PreferenceBulkReplaceResponse,
+    PreferenceBulkUpdateResponse,
     PreferenceRetrieveTopicResponse,
     PreferenceUpdateOrCreateTopicResponse,
 )
@@ -652,6 +655,8 @@ from courier.types.users import (
 Methods:
 
 - <code title="get /users/{user_id}/preferences">client.users.preferences.<a href="./src/courier/resources/users/preferences.py">retrieve</a>(user_id, \*\*<a href="src/courier/types/users/preference_retrieve_params.py">params</a>) -> <a href="./src/courier/types/users/preference_retrieve_response.py">PreferenceRetrieveResponse</a></code>
+- <code title="put /users/{user_id}/preferences">client.users.preferences.<a href="./src/courier/resources/users/preferences.py">bulk_replace</a>(user_id, \*\*<a href="src/courier/types/users/preference_bulk_replace_params.py">params</a>) -> <a href="./src/courier/types/users/preference_bulk_replace_response.py">PreferenceBulkReplaceResponse</a></code>
+- <code title="post /users/{user_id}/preferences">client.users.preferences.<a href="./src/courier/resources/users/preferences.py">bulk_update</a>(user_id, \*\*<a href="src/courier/types/users/preference_bulk_update_params.py">params</a>) -> <a href="./src/courier/types/users/preference_bulk_update_response.py">PreferenceBulkUpdateResponse</a></code>
 - <code title="delete /users/{user_id}/preferences/{topic_id}">client.users.preferences.<a href="./src/courier/resources/users/preferences.py">delete_topic</a>(topic_id, \*, user_id, \*\*<a href="src/courier/types/users/preference_delete_topic_params.py">params</a>) -> None</code>
 - <code title="get /users/{user_id}/preferences/{topic_id}">client.users.preferences.<a href="./src/courier/resources/users/preferences.py">retrieve_topic</a>(topic_id, \*, user_id, \*\*<a href="src/courier/types/users/preference_retrieve_topic_params.py">params</a>) -> <a href="./src/courier/types/users/preference_retrieve_topic_response.py">PreferenceRetrieveTopicResponse</a></code>
 - <code title="put /users/{user_id}/preferences/{topic_id}">client.users.preferences.<a href="./src/courier/resources/users/preferences.py">update_or_create_topic</a>(topic_id, \*, user_id, \*\*<a href="src/courier/types/users/preference_update_or_create_topic_params.py">params</a>) -> <a href="./src/courier/types/users/preference_update_or_create_topic_response.py">PreferenceUpdateOrCreateTopicResponse</a></code>

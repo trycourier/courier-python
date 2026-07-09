@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 
 import httpx
 
@@ -18,12 +18,16 @@ from ..._response import (
 )
 from ...types.users import (
     preference_retrieve_params,
+    preference_bulk_update_params,
+    preference_bulk_replace_params,
     preference_delete_topic_params,
     preference_retrieve_topic_params,
     preference_update_or_create_topic_params,
 )
 from ..._base_client import make_request_options
 from ...types.users.preference_retrieve_response import PreferenceRetrieveResponse
+from ...types.users.preference_bulk_update_response import PreferenceBulkUpdateResponse
+from ...types.users.preference_bulk_replace_response import PreferenceBulkReplaceResponse
 from ...types.users.preference_retrieve_topic_response import PreferenceRetrieveTopicResponse
 from ...types.users.preference_update_or_create_topic_response import PreferenceUpdateOrCreateTopicResponse
 
@@ -88,6 +92,134 @@ class PreferencesResource(SyncAPIResource):
                 query=maybe_transform({"tenant_id": tenant_id}, preference_retrieve_params.PreferenceRetrieveParams),
             ),
             cast_to=PreferenceRetrieveResponse,
+        )
+
+    def bulk_replace(
+        self,
+        user_id: str,
+        *,
+        topics: Iterable[preference_bulk_replace_params.Topic],
+        tenant_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PreferenceBulkReplaceResponse:
+        """Replace a user's complete set of preference overrides in a single request.
+
+        The
+        topics in the request body become the recipient's entire set of overrides:
+        listed topics are created or updated, and every existing override that is not
+        included in the body is reset to its topic default. Submitting an empty `topics`
+        array is a valid clear-all that resets every existing override.
+
+        This operation is validation-atomic (all-or-nothing): structural validation
+        fails fast with a single `400`, and if any topic is semantically invalid (an
+        unknown topic, a `REQUIRED` topic that cannot be opted out, or a custom routing
+        request that is not available on the workspace's plan) the request returns a
+        single `400` aggregating every failure in `errors` and writes nothing. On
+        success it returns `200` with `items` (the complete resulting override set) and
+        `deleted` (the ids of the overrides that were reset to default).
+
+        Every `topic_id` in the response — in `items`, `deleted`, and any `errors` — is
+        returned in Courier's canonical topic id form, regardless of the form supplied
+        in the request.
+
+        Args:
+          topics: The complete set of topic overrides for the user. Up to 50 topics may be
+              provided. Any existing override not listed here is reset to its topic default;
+              an empty array resets every existing override.
+
+          tenant_id: Update the preferences of a user for this specific tenant context.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        return self._put(
+            path_template("/users/{user_id}/preferences", user_id=user_id),
+            body=maybe_transform({"topics": topics}, preference_bulk_replace_params.PreferenceBulkReplaceParams),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"tenant_id": tenant_id}, preference_bulk_replace_params.PreferenceBulkReplaceParams
+                ),
+            ),
+            cast_to=PreferenceBulkReplaceResponse,
+        )
+
+    def bulk_update(
+        self,
+        user_id: str,
+        *,
+        topics: Iterable[preference_bulk_update_params.Topic],
+        tenant_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PreferenceBulkUpdateResponse:
+        """
+        Additively create or update a user's preferences for one or more subscription
+        topics in a single request. Only the topics included in the request body are
+        created or updated; any existing overrides for topics not listed are left
+        untouched.
+
+        Structural validation of the request body fails fast with a single `400`. Beyond
+        that, each topic is processed independently (partial-success, not
+        all-or-nothing): valid topics are written and returned in `items`, while topics
+        that cannot be applied are collected in `errors` with a per-topic `reason` (for
+        example an unknown topic, a `REQUIRED` topic that cannot be opted out, a custom
+        routing request that is not available on the workspace's plan, or a write
+        failure). The request therefore returns `200` with both lists whenever the body
+        is structurally valid.
+
+        Every `topic_id` in the response — in both `items` and `errors` — is returned in
+        Courier's canonical topic id form, regardless of the form supplied in the
+        request.
+
+        Args:
+          topics: The topics to create or update. Between 1 and 50 topics may be provided in a
+              single request.
+
+          tenant_id: Update the preferences of a user for this specific tenant context.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        return self._post(
+            path_template("/users/{user_id}/preferences", user_id=user_id),
+            body=maybe_transform({"topics": topics}, preference_bulk_update_params.PreferenceBulkUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"tenant_id": tenant_id}, preference_bulk_update_params.PreferenceBulkUpdateParams
+                ),
+            ),
+            cast_to=PreferenceBulkUpdateResponse,
         )
 
     def delete_topic(
@@ -296,6 +428,138 @@ class AsyncPreferencesResource(AsyncAPIResource):
             cast_to=PreferenceRetrieveResponse,
         )
 
+    async def bulk_replace(
+        self,
+        user_id: str,
+        *,
+        topics: Iterable[preference_bulk_replace_params.Topic],
+        tenant_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PreferenceBulkReplaceResponse:
+        """Replace a user's complete set of preference overrides in a single request.
+
+        The
+        topics in the request body become the recipient's entire set of overrides:
+        listed topics are created or updated, and every existing override that is not
+        included in the body is reset to its topic default. Submitting an empty `topics`
+        array is a valid clear-all that resets every existing override.
+
+        This operation is validation-atomic (all-or-nothing): structural validation
+        fails fast with a single `400`, and if any topic is semantically invalid (an
+        unknown topic, a `REQUIRED` topic that cannot be opted out, or a custom routing
+        request that is not available on the workspace's plan) the request returns a
+        single `400` aggregating every failure in `errors` and writes nothing. On
+        success it returns `200` with `items` (the complete resulting override set) and
+        `deleted` (the ids of the overrides that were reset to default).
+
+        Every `topic_id` in the response — in `items`, `deleted`, and any `errors` — is
+        returned in Courier's canonical topic id form, regardless of the form supplied
+        in the request.
+
+        Args:
+          topics: The complete set of topic overrides for the user. Up to 50 topics may be
+              provided. Any existing override not listed here is reset to its topic default;
+              an empty array resets every existing override.
+
+          tenant_id: Update the preferences of a user for this specific tenant context.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        return await self._put(
+            path_template("/users/{user_id}/preferences", user_id=user_id),
+            body=await async_maybe_transform(
+                {"topics": topics}, preference_bulk_replace_params.PreferenceBulkReplaceParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"tenant_id": tenant_id}, preference_bulk_replace_params.PreferenceBulkReplaceParams
+                ),
+            ),
+            cast_to=PreferenceBulkReplaceResponse,
+        )
+
+    async def bulk_update(
+        self,
+        user_id: str,
+        *,
+        topics: Iterable[preference_bulk_update_params.Topic],
+        tenant_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PreferenceBulkUpdateResponse:
+        """
+        Additively create or update a user's preferences for one or more subscription
+        topics in a single request. Only the topics included in the request body are
+        created or updated; any existing overrides for topics not listed are left
+        untouched.
+
+        Structural validation of the request body fails fast with a single `400`. Beyond
+        that, each topic is processed independently (partial-success, not
+        all-or-nothing): valid topics are written and returned in `items`, while topics
+        that cannot be applied are collected in `errors` with a per-topic `reason` (for
+        example an unknown topic, a `REQUIRED` topic that cannot be opted out, a custom
+        routing request that is not available on the workspace's plan, or a write
+        failure). The request therefore returns `200` with both lists whenever the body
+        is structurally valid.
+
+        Every `topic_id` in the response — in both `items` and `errors` — is returned in
+        Courier's canonical topic id form, regardless of the form supplied in the
+        request.
+
+        Args:
+          topics: The topics to create or update. Between 1 and 50 topics may be provided in a
+              single request.
+
+          tenant_id: Update the preferences of a user for this specific tenant context.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not user_id:
+            raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        return await self._post(
+            path_template("/users/{user_id}/preferences", user_id=user_id),
+            body=await async_maybe_transform(
+                {"topics": topics}, preference_bulk_update_params.PreferenceBulkUpdateParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"tenant_id": tenant_id}, preference_bulk_update_params.PreferenceBulkUpdateParams
+                ),
+            ),
+            cast_to=PreferenceBulkUpdateResponse,
+        )
+
     async def delete_topic(
         self,
         topic_id: str,
@@ -447,6 +711,12 @@ class PreferencesResourceWithRawResponse:
         self.retrieve = to_raw_response_wrapper(
             preferences.retrieve,
         )
+        self.bulk_replace = to_raw_response_wrapper(
+            preferences.bulk_replace,
+        )
+        self.bulk_update = to_raw_response_wrapper(
+            preferences.bulk_update,
+        )
         self.delete_topic = to_raw_response_wrapper(
             preferences.delete_topic,
         )
@@ -464,6 +734,12 @@ class AsyncPreferencesResourceWithRawResponse:
 
         self.retrieve = async_to_raw_response_wrapper(
             preferences.retrieve,
+        )
+        self.bulk_replace = async_to_raw_response_wrapper(
+            preferences.bulk_replace,
+        )
+        self.bulk_update = async_to_raw_response_wrapper(
+            preferences.bulk_update,
         )
         self.delete_topic = async_to_raw_response_wrapper(
             preferences.delete_topic,
@@ -483,6 +759,12 @@ class PreferencesResourceWithStreamingResponse:
         self.retrieve = to_streamed_response_wrapper(
             preferences.retrieve,
         )
+        self.bulk_replace = to_streamed_response_wrapper(
+            preferences.bulk_replace,
+        )
+        self.bulk_update = to_streamed_response_wrapper(
+            preferences.bulk_update,
+        )
         self.delete_topic = to_streamed_response_wrapper(
             preferences.delete_topic,
         )
@@ -500,6 +782,12 @@ class AsyncPreferencesResourceWithStreamingResponse:
 
         self.retrieve = async_to_streamed_response_wrapper(
             preferences.retrieve,
+        )
+        self.bulk_replace = async_to_streamed_response_wrapper(
+            preferences.bulk_replace,
+        )
+        self.bulk_update = async_to_streamed_response_wrapper(
+            preferences.bulk_update,
         )
         self.delete_topic = async_to_streamed_response_wrapper(
             preferences.delete_topic,
