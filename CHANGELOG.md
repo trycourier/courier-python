@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.19.0 (2026-07-09)
+
+Full Changelog: [v7.18.2...v7.19.0](https://github.com/trycourier/courier-python/compare/v7.18.2...v7.19.0)
+
+### Features
+
+* Add bulk user preference upsert and replace endpoints ([53d28d9](https://github.com/trycourier/courier-python/commit/53d28d9260952cdbaecf774fe28bfbf05b688395))
+* Preferences v3 REST fields: section/topic description + publish body ([8f33229](https://github.com/trycourier/courier-python/commit/8f3322973866ce8060729bd3b03b4f7bbf95766e))
+
 ## 7.18.2 (2026-07-09)
 
 Full Changelog: [v7.18.1...v7.18.2](https://github.com/trycourier/courier-python/compare/v7.18.1...v7.18.2)
