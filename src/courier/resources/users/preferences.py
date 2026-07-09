@@ -132,7 +132,7 @@ class PreferencesResource(SyncAPIResource):
               provided. Any existing override not listed here is reset to its topic default;
               an empty array resets every existing override.
 
-          tenant_id: Update the preferences of a user for this specific tenant context.
+          tenant_id: Replace the preferences of a user for this specific tenant context.
 
           extra_headers: Send extra headers
 
@@ -466,7 +466,7 @@ class AsyncPreferencesResource(AsyncAPIResource):
               provided. Any existing override not listed here is reset to its topic default;
               an empty array resets every existing override.
 
-          tenant_id: Update the preferences of a user for this specific tenant context.
+          tenant_id: Replace the preferences of a user for this specific tenant context.
 
           extra_headers: Send extra headers
 
