@@ -192,6 +192,7 @@ from .journey_condition_group import JourneyConditionGroup as JourneyConditionGr
 from .journey_exit_node_param import JourneyExitNodeParam as JourneyExitNodeParam
 from .journey_retrieve_params import JourneyRetrieveParams as JourneyRetrieveParams
 from .journey_send_node_param import JourneySendNodeParam as JourneySendNodeParam
+from .message_resend_response import MessageResendResponse as MessageResendResponse
 from .profile_create_response import ProfileCreateResponse as ProfileCreateResponse
 from .providers_catalog_entry import ProvidersCatalogEntry as ProvidersCatalogEntry
 from .widget_background_param import WidgetBackgroundParam as WidgetBackgroundParam

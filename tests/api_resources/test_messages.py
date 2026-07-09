@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from courier.types import (
     MessageDetails,
     MessageListResponse,
+    MessageResendResponse,
     MessageContentResponse,
     MessageHistoryResponse,
     MessageRetrieveResponse,
@@ -249,6 +250,48 @@ class TestMessages:
                 message_id="",
             )
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_resend(self, client: Courier) -> None:
+        message = client.messages.resend(
+            "message_id",
+        )
+        assert_matches_type(MessageResendResponse, message, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_resend(self, client: Courier) -> None:
+        response = client.messages.with_raw_response.resend(
+            "message_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        message = response.parse()
+        assert_matches_type(MessageResendResponse, message, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_resend(self, client: Courier) -> None:
+        with client.messages.with_streaming_response.resend(
+            "message_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            message = response.parse()
+            assert_matches_type(MessageResendResponse, message, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_resend(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
+            client.messages.with_raw_response.resend(
+                "",
+            )
+
 
 class TestAsyncMessages:
     parametrize = pytest.mark.parametrize(
@@ -479,4 +522,46 @@ class TestAsyncMessages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             await async_client.messages.with_raw_response.history(
                 message_id="",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_resend(self, async_client: AsyncCourier) -> None:
+        message = await async_client.messages.resend(
+            "message_id",
+        )
+        assert_matches_type(MessageResendResponse, message, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_resend(self, async_client: AsyncCourier) -> None:
+        response = await async_client.messages.with_raw_response.resend(
+            "message_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        message = await response.parse()
+        assert_matches_type(MessageResendResponse, message, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_resend(self, async_client: AsyncCourier) -> None:
+        async with async_client.messages.with_streaming_response.resend(
+            "message_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            message = await response.parse()
+            assert_matches_type(MessageResendResponse, message, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_resend(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
+            await async_client.messages.with_raw_response.resend(
+                "",
             )
