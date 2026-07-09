@@ -42,5 +42,8 @@ class WorkspacePreferenceTopicGetResponse(BaseModel):
     creator: Optional[str] = None
     """Id of the creator."""
 
+    description: Optional[str] = None
+    """Optional description shown under the topic on the hosted preferences page."""
+
     updater: Optional[str] = None
     """Id of the last updater."""
