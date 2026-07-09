@@ -20,6 +20,7 @@ from .._response import (
 from .._base_client import make_request_options
 from ..types.message_details import MessageDetails
 from ..types.message_list_response import MessageListResponse
+from ..types.message_resend_response import MessageResendResponse
 from ..types.message_content_response import MessageContentResponse
 from ..types.message_history_response import MessageHistoryResponse
 from ..types.message_retrieve_response import MessageRetrieveResponse
@@ -294,6 +295,44 @@ class MessagesResource(SyncAPIResource):
             cast_to=MessageHistoryResponse,
         )
 
+    def resend(
+        self,
+        message_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageResendResponse:
+        """Resend a previously sent message.
+
+        The original send request is loaded from
+        storage and a brand-new send is enqueued for the same recipient and content,
+        producing a **new** `messageId` — the original message is not modified.
+        Throttled by a per-message rate limit; a repeat inside the limit window returns
+        `429 Too Many Requests`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return self._post(
+            path_template("/messages/{message_id}/resend", message_id=message_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageResendResponse,
+        )
+
 
 class AsyncMessagesResource(AsyncAPIResource):
     @cached_property
@@ -562,6 +601,44 @@ class AsyncMessagesResource(AsyncAPIResource):
             cast_to=MessageHistoryResponse,
         )
 
+    async def resend(
+        self,
+        message_id: str,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageResendResponse:
+        """Resend a previously sent message.
+
+        The original send request is loaded from
+        storage and a brand-new send is enqueued for the same recipient and content,
+        producing a **new** `messageId` — the original message is not modified.
+        Throttled by a per-message rate limit; a repeat inside the limit window returns
+        `429 Too Many Requests`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return await self._post(
+            path_template("/messages/{message_id}/resend", message_id=message_id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MessageResendResponse,
+        )
+
 
 class MessagesResourceWithRawResponse:
     def __init__(self, messages: MessagesResource) -> None:
@@ -581,6 +658,9 @@ class MessagesResourceWithRawResponse:
         )
         self.history = to_raw_response_wrapper(
             messages.history,
+        )
+        self.resend = to_raw_response_wrapper(
+            messages.resend,
         )
 
 
@@ -603,6 +683,9 @@ class AsyncMessagesResourceWithRawResponse:
         self.history = async_to_raw_response_wrapper(
             messages.history,
         )
+        self.resend = async_to_raw_response_wrapper(
+            messages.resend,
+        )
 
 
 class MessagesResourceWithStreamingResponse:
@@ -624,6 +707,9 @@ class MessagesResourceWithStreamingResponse:
         self.history = to_streamed_response_wrapper(
             messages.history,
         )
+        self.resend = to_streamed_response_wrapper(
+            messages.resend,
+        )
 
 
 class AsyncMessagesResourceWithStreamingResponse:
@@ -644,4 +730,7 @@ class AsyncMessagesResourceWithStreamingResponse:
         )
         self.history = async_to_streamed_response_wrapper(
             messages.history,
+        )
+        self.resend = async_to_streamed_response_wrapper(
+            messages.resend,
         )
