@@ -14,7 +14,11 @@ from .topics import (
     TopicsResourceWithStreamingResponse,
     AsyncTopicsResourceWithStreamingResponse,
 )
-from ...types import workspace_preference_create_params, workspace_preference_replace_params
+from ...types import (
+    workspace_preference_create_params,
+    workspace_preference_publish_params,
+    workspace_preference_replace_params,
+)
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -62,6 +66,7 @@ class WorkspacePreferencesResource(SyncAPIResource):
         self,
         *,
         name: str,
+        description: Optional[str] | Omit = omit,
         has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -80,6 +85,8 @@ class WorkspacePreferencesResource(SyncAPIResource):
         Args:
           name: Human-readable name for the workspace preference.
 
+          description: Optional description shown under the section on the hosted preferences page.
+
           has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
           routing_options: Default channels for the workspace preference. Defaults to empty if omitted.
@@ -97,6 +104,7 @@ class WorkspacePreferencesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
+                    "description": description,
                     "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
                 },
@@ -203,6 +211,9 @@ class WorkspacePreferencesResource(SyncAPIResource):
     def publish(
         self,
         *,
+        brand_id: Optional[str] | Omit = omit,
+        description: Optional[str] | Omit = omit,
+        heading: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -215,9 +226,33 @@ class WorkspacePreferencesResource(SyncAPIResource):
         Takes a snapshot of every workspace
         preference with its topics under a new published version, making the current
         state visible on the hosted preferences page (non-draft).
+
+        Args:
+          brand_id: Brand for the hosted page - "default" (workspace default brand), "none" (no
+              brand), or a specific brand id. Defaults to "default".
+
+          description: Description shown under the heading on the hosted preferences page.
+
+          heading: Heading shown at the top of the hosted preferences page.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
             "/preferences/publish",
+            body=maybe_transform(
+                {
+                    "brand_id": brand_id,
+                    "description": description,
+                    "heading": heading,
+                },
+                workspace_preference_publish_params.WorkspacePreferencePublishParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -229,6 +264,7 @@ class WorkspacePreferencesResource(SyncAPIResource):
         section_id: str,
         *,
         name: str,
+        description: Optional[str] | Omit = omit,
         has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -245,6 +281,9 @@ class WorkspacePreferencesResource(SyncAPIResource):
 
         Args:
           name: Human-readable name for the workspace preference.
+
+          description: Optional description shown under the section on the hosted preferences page.
+              Omit to clear.
 
           has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
@@ -265,6 +304,7 @@ class WorkspacePreferencesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
+                    "description": description,
                     "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
                 },
@@ -305,6 +345,7 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         self,
         *,
         name: str,
+        description: Optional[str] | Omit = omit,
         has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -323,6 +364,8 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         Args:
           name: Human-readable name for the workspace preference.
 
+          description: Optional description shown under the section on the hosted preferences page.
+
           has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
           routing_options: Default channels for the workspace preference. Defaults to empty if omitted.
@@ -340,6 +383,7 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
+                    "description": description,
                     "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
                 },
@@ -446,6 +490,9 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
     async def publish(
         self,
         *,
+        brand_id: Optional[str] | Omit = omit,
+        description: Optional[str] | Omit = omit,
+        heading: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -458,9 +505,33 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         Takes a snapshot of every workspace
         preference with its topics under a new published version, making the current
         state visible on the hosted preferences page (non-draft).
+
+        Args:
+          brand_id: Brand for the hosted page - "default" (workspace default brand), "none" (no
+              brand), or a specific brand id. Defaults to "default".
+
+          description: Description shown under the heading on the hosted preferences page.
+
+          heading: Heading shown at the top of the hosted preferences page.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
             "/preferences/publish",
+            body=await async_maybe_transform(
+                {
+                    "brand_id": brand_id,
+                    "description": description,
+                    "heading": heading,
+                },
+                workspace_preference_publish_params.WorkspacePreferencePublishParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -472,6 +543,7 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         section_id: str,
         *,
         name: str,
+        description: Optional[str] | Omit = omit,
         has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -488,6 +560,9 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
 
         Args:
           name: Human-readable name for the workspace preference.
+
+          description: Optional description shown under the section on the hosted preferences page.
+              Omit to clear.
 
           has_custom_routing: Whether the workspace preference defines custom routing for its topics.
 
@@ -508,6 +583,7 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
+                    "description": description,
                     "has_custom_routing": has_custom_routing,
                     "routing_options": routing_options,
                 },

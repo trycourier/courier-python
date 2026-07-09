@@ -23,6 +23,9 @@ class TopicCreateParams(TypedDict, total=False):
     Defaults to empty if omitted.
     """
 
+    description: Optional[str]
+    """Optional description shown under the topic on the hosted preferences page."""
+
     include_unsubscribe_header: Optional[bool]
     """Whether to include a list-unsubscribe header on emails for this topic."""
 

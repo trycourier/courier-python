@@ -53,6 +53,7 @@ class TopicsResource(SyncAPIResource):
         default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
+        description: Optional[str] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -77,6 +78,8 @@ class TopicsResource(SyncAPIResource):
           allowed_preferences: Preference controls a recipient may customize for this topic. Defaults to empty
               if omitted.
 
+          description: Optional description shown under the topic on the hosted preferences page.
+
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
           routing_options: Default channels delivered for this topic. Defaults to empty if omitted.
@@ -100,6 +103,7 @@ class TopicsResource(SyncAPIResource):
                     "default_status": default_status,
                     "name": name,
                     "allowed_preferences": allowed_preferences,
+                    "description": description,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,
@@ -235,6 +239,7 @@ class TopicsResource(SyncAPIResource):
         default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
+        description: Optional[str] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -256,6 +261,9 @@ class TopicsResource(SyncAPIResource):
           name: Human-readable name for the preference topic.
 
           allowed_preferences: Preference controls a recipient may customize. Omit to clear.
+
+          description: Optional description shown under the topic on the hosted preferences page. Omit
+              to clear.
 
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
@@ -284,6 +292,7 @@ class TopicsResource(SyncAPIResource):
                     "default_status": default_status,
                     "name": name,
                     "allowed_preferences": allowed_preferences,
+                    "description": description,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,
@@ -324,6 +333,7 @@ class AsyncTopicsResource(AsyncAPIResource):
         default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
+        description: Optional[str] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -348,6 +358,8 @@ class AsyncTopicsResource(AsyncAPIResource):
           allowed_preferences: Preference controls a recipient may customize for this topic. Defaults to empty
               if omitted.
 
+          description: Optional description shown under the topic on the hosted preferences page.
+
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
           routing_options: Default channels delivered for this topic. Defaults to empty if omitted.
@@ -371,6 +383,7 @@ class AsyncTopicsResource(AsyncAPIResource):
                     "default_status": default_status,
                     "name": name,
                     "allowed_preferences": allowed_preferences,
+                    "description": description,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,
@@ -506,6 +519,7 @@ class AsyncTopicsResource(AsyncAPIResource):
         default_status: Literal["OPTED_OUT", "OPTED_IN", "REQUIRED"],
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
+        description: Optional[str] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -527,6 +541,9 @@ class AsyncTopicsResource(AsyncAPIResource):
           name: Human-readable name for the preference topic.
 
           allowed_preferences: Preference controls a recipient may customize. Omit to clear.
+
+          description: Optional description shown under the topic on the hosted preferences page. Omit
+              to clear.
 
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
@@ -555,6 +572,7 @@ class AsyncTopicsResource(AsyncAPIResource):
                     "default_status": default_status,
                     "name": name,
                     "allowed_preferences": allowed_preferences,
+                    "description": description,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,

@@ -494,6 +494,7 @@ Types:
 
 ```python
 from courier.types import (
+    PublishPreferencesRequest,
     PublishPreferencesResponse,
     WorkspacePreferenceCreateRequest,
     WorkspacePreferenceGetResponse,
@@ -512,7 +513,7 @@ Methods:
 - <code title="get /preferences/sections/{section_id}">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">retrieve</a>(section_id) -> <a href="./src/courier/types/workspace_preference_get_response.py">WorkspacePreferenceGetResponse</a></code>
 - <code title="get /preferences/sections">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">list</a>() -> <a href="./src/courier/types/workspace_preference_list_response.py">WorkspacePreferenceListResponse</a></code>
 - <code title="delete /preferences/sections/{section_id}">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">archive</a>(section_id) -> None</code>
-- <code title="post /preferences/publish">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">publish</a>() -> <a href="./src/courier/types/publish_preferences_response.py">PublishPreferencesResponse</a></code>
+- <code title="post /preferences/publish">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">publish</a>(\*\*<a href="src/courier/types/workspace_preference_publish_params.py">params</a>) -> <a href="./src/courier/types/publish_preferences_response.py">PublishPreferencesResponse</a></code>
 - <code title="put /preferences/sections/{section_id}">client.workspace_preferences.<a href="./src/courier/resources/workspace_preferences/workspace_preferences.py">replace</a>(section_id, \*\*<a href="src/courier/types/workspace_preference_replace_params.py">params</a>) -> <a href="./src/courier/types/workspace_preference_get_response.py">WorkspacePreferenceGetResponse</a></code>
 
 ## Topics
