@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.18.2 (2026-07-09)
+
+Full Changelog: [v7.18.1...v7.18.2](https://github.com/trycourier/courier-python/compare/v7.18.1...v7.18.2)
+
+### Chores
+
+* update api-spec with new message resend endpoint ([692be20](https://github.com/trycourier/courier-python/commit/692be204486c24fa3c92740f806a54233b738ef4))
+
 ## 7.18.1 (2026-07-07)
 
 Full Changelog: [v7.18.0...v7.18.1](https://github.com/trycourier/courier-python/compare/v7.18.0...v7.18.1)
