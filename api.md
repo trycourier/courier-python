@@ -388,6 +388,7 @@ from courier.types import (
     MessageListResponse,
     MessageContentResponse,
     MessageHistoryResponse,
+    MessageResendResponse,
 )
 ```
 
@@ -398,6 +399,7 @@ Methods:
 - <code title="post /messages/{message_id}/cancel">client.messages.<a href="./src/courier/resources/messages.py">cancel</a>(message_id) -> <a href="./src/courier/types/message_details.py">MessageDetails</a></code>
 - <code title="get /messages/{message_id}/output">client.messages.<a href="./src/courier/resources/messages.py">content</a>(message_id) -> <a href="./src/courier/types/message_content_response.py">MessageContentResponse</a></code>
 - <code title="get /messages/{message_id}/history">client.messages.<a href="./src/courier/resources/messages.py">history</a>(message_id, \*\*<a href="src/courier/types/message_history_params.py">params</a>) -> <a href="./src/courier/types/message_history_response.py">MessageHistoryResponse</a></code>
+- <code title="post /messages/{message_id}/resend">client.messages.<a href="./src/courier/resources/messages.py">resend</a>(message_id) -> <a href="./src/courier/types/message_resend_response.py">MessageResendResponse</a></code>
 
 # Requests
 
