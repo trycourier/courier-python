@@ -19,7 +19,7 @@ class PreferenceBulkReplaceParams(TypedDict, total=False):
     """
 
     tenant_id: Optional[str]
-    """Update the preferences of a user for this specific tenant context."""
+    """Replace the preferences of a user for this specific tenant context."""
 
 
 class Topic(TypedDict, total=False):
