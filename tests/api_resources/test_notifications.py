@@ -28,14 +28,14 @@ class TestNotifications:
     def test_method_create(self, client: Courier) -> None:
         notification = client.notifications.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -46,14 +46,14 @@ class TestNotifications:
     def test_method_create_with_all_params(self, client: Courier) -> None:
         notification = client.notifications.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{"type": "channel"}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
             state="DRAFT",
@@ -65,14 +65,14 @@ class TestNotifications:
     def test_raw_response_create(self, client: Courier) -> None:
         response = client.notifications.with_raw_response.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -87,14 +87,14 @@ class TestNotifications:
     def test_streaming_response_create(self, client: Courier) -> None:
         with client.notifications.with_streaming_response.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         ) as response:
@@ -708,14 +708,14 @@ class TestAsyncNotifications:
     async def test_method_create(self, async_client: AsyncCourier) -> None:
         notification = await async_client.notifications.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -726,14 +726,14 @@ class TestAsyncNotifications:
     async def test_method_create_with_all_params(self, async_client: AsyncCourier) -> None:
         notification = await async_client.notifications.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{"type": "channel"}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
             state="DRAFT",
@@ -745,14 +745,14 @@ class TestAsyncNotifications:
     async def test_raw_response_create(self, async_client: AsyncCourier) -> None:
         response = await async_client.notifications.with_raw_response.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         )
@@ -767,14 +767,14 @@ class TestAsyncNotifications:
     async def test_streaming_response_create(self, async_client: AsyncCourier) -> None:
         async with async_client.notifications.with_streaming_response.create(
             notification={
-                "brand": {"id": "brand_abc"},
+                "brand": {"id": "bnd_01kx4mrd0pfzw8wt7pn7p2fzag"},
                 "content": {
                     "elements": [{}],
                     "version": "2022-01-01",
                 },
                 "name": "Welcome Email",
-                "routing": {"strategy_id": "rs_123"},
-                "subscription": {"topic_id": "marketing"},
+                "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
+                "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
             },
         ) as response:

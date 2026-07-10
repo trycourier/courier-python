@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.19.2 (2026-07-10)
+
+Full Changelog: [v7.19.1...v7.19.2](https://github.com/trycourier/courier-python/compare/v7.19.1...v7.19.2)
+
+### Documentation
+
+* **openapi:** canonical type-id prefixes across all examples ([#162](https://github.com/trycourier/courier-python/issues/162)) ([3749e9a](https://github.com/trycourier/courier-python/commit/3749e9a6c9f16cd829d623e47a453b217d0a1664))
+* **openapi:** use canonical type-id prefixes in id examples ([#160](https://github.com/trycourier/courier-python/issues/160)) ([b212fdc](https://github.com/trycourier/courier-python/commit/b212fdcbc462fd3391391c931ab62284c6ba4633))
+
 ## 7.19.1 (2026-07-09)
 
 Full Changelog: [v7.19.0...v7.19.1](https://github.com/trycourier/courier-python/compare/v7.19.0...v7.19.1)
