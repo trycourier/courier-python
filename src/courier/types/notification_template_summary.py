@@ -25,6 +25,12 @@ class NotificationTemplateSummary(BaseModel):
 
     tags: List[str]
 
+    subscription_topic_id: Optional[str] = None
+    """The linked subscription (preference) topic of the published version.
+
+    Omitted when no topic is linked or the template has never been published.
+    """
+
     updated: Optional[int] = None
     """Epoch milliseconds of last update."""
 
