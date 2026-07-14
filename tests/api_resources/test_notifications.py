@@ -239,6 +239,48 @@ class TestNotifications:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_duplicate(self, client: Courier) -> None:
+        notification = client.notifications.duplicate(
+            "id",
+        )
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_duplicate(self, client: Courier) -> None:
+        response = client.notifications.with_raw_response.duplicate(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = response.parse()
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_duplicate(self, client: Courier) -> None:
+        with client.notifications.with_streaming_response.duplicate(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = response.parse()
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_duplicate(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            client.notifications.with_raw_response.duplicate(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_list_versions(self, client: Courier) -> None:
         notification = client.notifications.list_versions(
             id="id",
@@ -914,6 +956,48 @@ class TestAsyncNotifications:
     async def test_path_params_archive(self, async_client: AsyncCourier) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.notifications.with_raw_response.archive(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_duplicate(self, async_client: AsyncCourier) -> None:
+        notification = await async_client.notifications.duplicate(
+            "id",
+        )
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_duplicate(self, async_client: AsyncCourier) -> None:
+        response = await async_client.notifications.with_raw_response.duplicate(
+            "id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        notification = await response.parse()
+        assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_duplicate(self, async_client: AsyncCourier) -> None:
+        async with async_client.notifications.with_streaming_response.duplicate(
+            "id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            notification = await response.parse()
+            assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_duplicate(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
+            await async_client.notifications.with_raw_response.duplicate(
                 "",
             )
 
