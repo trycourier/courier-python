@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.20.0 (2026-07-20)
+
+Full Changelog: [v7.19.2...v7.20.0](https://github.com/trycourier/courier-python/compare/v7.19.2...v7.20.0)
+
+### Features
+
+* Document POST /notifications/{id}/duplicate [C-18607] ([#165](https://github.com/trycourier/courier-python/issues/165)) ([15985d7](https://github.com/trycourier/courier-python/commit/15985d79d0969c41dc4cfca6833dd111bbc5c0ca))
+* Merge pull request [#149](https://github.com/trycourier/courier-python/issues/149) from trycourier/geraldosilva/c-19201-notification-template-subscription-topic-id ([99b10ca](https://github.com/trycourier/courier-python/commit/99b10cad359b2377e6bb8bc797be42c93a8823b8))
+* Merge pull request [#168](https://github.com/trycourier/courier-python/issues/168) from trycourier/geraldosilva/c-19419-topic-id-notification-template-summary ([067ad71](https://github.com/trycourier/courier-python/commit/067ad7121cafb54fc602a5f707fd1d3bbe80c727))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([6ad03f8](https://github.com/trycourier/courier-python/commit/6ad03f80591c974b0f90a5375eb99594979635ca))
+
 ## 7.19.2 (2026-07-10)
 
 Full Changelog: [v7.19.1...v7.19.2](https://github.com/trycourier/courier-python/compare/v7.19.1...v7.19.2)
