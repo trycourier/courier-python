@@ -31,6 +31,12 @@ class NotificationTemplateSummary(BaseModel):
     Omitted when no topic is linked or the template has never been published.
     """
 
+    topic_id: Optional[str] = None
+    """
+    Alias of subscription_topic_id, provided under the same name V1 list items use
+    for the linked topic. Always carries the same value as subscription_topic_id.
+    """
+
     updated: Optional[int] = None
     """Epoch milliseconds of last update."""
 
