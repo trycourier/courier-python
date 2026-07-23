@@ -296,28 +296,6 @@ Methods:
 - <code title="get /brands">client.brands.<a href="./src/courier/resources/brands.py">list</a>(\*\*<a href="src/courier/types/brand_list_params.py">params</a>) -> <a href="./src/courier/types/brand_list_response.py">BrandListResponse</a></code>
 - <code title="delete /brands/{brand_id}">client.brands.<a href="./src/courier/resources/brands.py">delete</a>(brand_id) -> None</code>
 
-# Bulk
-
-Types:
-
-```python
-from courier.types import (
-    InboundBulkMessage,
-    InboundBulkMessageUser,
-    BulkCreateJobResponse,
-    BulkListUsersResponse,
-    BulkRetrieveJobResponse,
-)
-```
-
-Methods:
-
-- <code title="post /bulk/{job_id}">client.bulk.<a href="./src/courier/resources/bulk.py">add_users</a>(job_id, \*\*<a href="src/courier/types/bulk_add_users_params.py">params</a>) -> None</code>
-- <code title="post /bulk">client.bulk.<a href="./src/courier/resources/bulk.py">create_job</a>(\*\*<a href="src/courier/types/bulk_create_job_params.py">params</a>) -> <a href="./src/courier/types/bulk_create_job_response.py">BulkCreateJobResponse</a></code>
-- <code title="get /bulk/{job_id}/users">client.bulk.<a href="./src/courier/resources/bulk.py">list_users</a>(job_id, \*\*<a href="src/courier/types/bulk_list_users_params.py">params</a>) -> <a href="./src/courier/types/bulk_list_users_response.py">BulkListUsersResponse</a></code>
-- <code title="get /bulk/{job_id}">client.bulk.<a href="./src/courier/resources/bulk.py">retrieve_job</a>(job_id) -> <a href="./src/courier/types/bulk_retrieve_job_response.py">BulkRetrieveJobResponse</a></code>
-- <code title="post /bulk/{job_id}/run">client.bulk.<a href="./src/courier/resources/bulk.py">run_job</a>(job_id) -> None</code>
-
 # Digests
 
 Types:

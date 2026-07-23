@@ -153,13 +153,11 @@ from .brand_settings_email import BrandSettingsEmail as BrandSettingsEmail
 from .brand_settings_param import BrandSettingsParam as BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam as BrandSnippetsParam
 from .brand_template_param import BrandTemplateParam as BrandTemplateParam
-from .inbound_bulk_message import InboundBulkMessage as InboundBulkMessage
 from .journey_version_item import JourneyVersionItem as JourneyVersionItem
 from .provider_list_params import ProviderListParams as ProviderListParams
 from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
-from .bulk_add_users_params import BulkAddUsersParams as BulkAddUsersParams
 from .journey_ai_node_param import JourneyAINodeParam as JourneyAINodeParam
 from .journey_cancel_params import JourneyCancelParams as JourneyCancelParams
 from .journey_create_params import JourneyCreateParams as JourneyCreateParams
@@ -171,8 +169,6 @@ from .send_message_response import SendMessageResponse as SendMessageResponse
 from .audience_list_response import AudienceListResponse as AudienceListResponse
 from .audience_update_params import AudienceUpdateParams as AudienceUpdateParams
 from .automation_list_params import AutomationListParams as AutomationListParams
-from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
-from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
 from .element_with_checksums import ElementWithChecksums as ElementWithChecksums
 from .journey_condition_atom import JourneyConditionAtom as JourneyConditionAtom
 from .journey_merge_strategy import JourneyMergeStrategy as JourneyMergeStrategy
@@ -197,8 +193,6 @@ from .profile_create_response import ProfileCreateResponse as ProfileCreateRespo
 from .providers_catalog_entry import ProvidersCatalogEntry as ProvidersCatalogEntry
 from .widget_background_param import WidgetBackgroundParam as WidgetBackgroundParam
 from .audience_update_response import AudienceUpdateResponse as AudienceUpdateResponse
-from .bulk_create_job_response import BulkCreateJobResponse as BulkCreateJobResponse
-from .bulk_list_users_response import BulkListUsersResponse as BulkListUsersResponse
 from .journey_conditions_field import JourneyConditionsField as JourneyConditionsField
 from .journey_delay_until_node import JourneyDelayUntilNode as JourneyDelayUntilNode
 from .journey_experiment_param import JourneyExperimentParam as JourneyExperimentParam
@@ -215,14 +209,11 @@ from .tenant_list_users_params import TenantListUsersParams as TenantListUsersPa
 from .audit_event_list_response import AuditEventListResponse as AuditEventListResponse
 from .auth_issue_token_response import AuthIssueTokenResponse as AuthIssueTokenResponse
 from .default_preferences_param import DefaultPreferencesParam as DefaultPreferencesParam
-from .inbound_bulk_message_user import InboundBulkMessageUser as InboundBulkMessageUser
 from .message_retrieve_response import MessageRetrieveResponse as MessageRetrieveResponse
 from .profile_retrieve_response import ProfileRetrieveResponse as ProfileRetrieveResponse
 from .translation_update_params import TranslationUpdateParams as TranslationUpdateParams
 from .automation_invoke_response import AutomationInvokeResponse as AutomationInvokeResponse
 from .brand_settings_email_param import BrandSettingsEmailParam as BrandSettingsEmailParam
-from .bulk_retrieve_job_response import BulkRetrieveJobResponse as BulkRetrieveJobResponse
-from .inbound_bulk_message_param import InboundBulkMessageParam as InboundBulkMessageParam
 from .inbound_track_event_params import InboundTrackEventParams as InboundTrackEventParams
 from .journey_experiment_variant import JourneyExperimentVariant as JourneyExperimentVariant
 from .notification_create_params import NotificationCreateParams as NotificationCreateParams
@@ -265,7 +256,6 @@ from .notification_put_locale_params import NotificationPutLocaleParams as Notif
 from .notification_template_response import NotificationTemplateResponse as NotificationTemplateResponse
 from .routing_strategy_create_params import RoutingStrategyCreateParams as RoutingStrategyCreateParams
 from .routing_strategy_list_response import RoutingStrategyListResponse as RoutingStrategyListResponse
-from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as InboundBulkMessageUserParam
 from .journey_api_invoke_trigger_node import JourneyAPIInvokeTriggerNode as JourneyAPIInvokeTriggerNode
 from .notification_put_content_params import NotificationPutContentParams as NotificationPutContentParams
 from .notification_put_element_params import NotificationPutElementParams as NotificationPutElementParams
