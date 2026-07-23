@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.21.0 (2026-07-23)
+
+Full Changelog: [v7.20.0...v7.21.0](https://github.com/trycourier/courier-python/compare/v7.20.0...v7.21.0)
+
+### Features
+
+* Remove /bulk endpoints from api-spec (C-19507) ([#171](https://github.com/trycourier/courier-python/issues/171)) ([8fdd704](https://github.com/trycourier/courier-python/commit/8fdd7045e10a5b8c83397cdca6a27466875126d2))
+
 ## 7.20.0 (2026-07-20)
 
 Full Changelog: [v7.19.2...v7.20.0](https://github.com/trycourier/courier-python/compare/v7.19.2...v7.20.0)
