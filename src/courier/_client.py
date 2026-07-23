@@ -37,7 +37,6 @@ from ._base_client import (
 if TYPE_CHECKING:
     from .resources import (
         auth,
-        bulk,
         send,
         lists,
         users,
@@ -59,7 +58,6 @@ if TYPE_CHECKING:
         workspace_preferences,
     )
     from .resources.auth import AuthResource, AsyncAuthResource
-    from .resources.bulk import BulkResource, AsyncBulkResource
     from .resources.send import SendResource, AsyncSendResource
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.inbound import InboundResource, AsyncInboundResource
@@ -197,12 +195,6 @@ class Courier(SyncAPIClient):
         from .resources.brands import BrandsResource
 
         return BrandsResource(self)
-
-    @cached_property
-    def bulk(self) -> BulkResource:
-        from .resources.bulk import BulkResource
-
-        return BulkResource(self)
 
     @cached_property
     def digests(self) -> DigestsResource:
@@ -502,12 +494,6 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncBrandsResource(self)
 
     @cached_property
-    def bulk(self) -> AsyncBulkResource:
-        from .resources.bulk import AsyncBulkResource
-
-        return AsyncBulkResource(self)
-
-    @cached_property
     def digests(self) -> AsyncDigestsResource:
         from .resources.digests import AsyncDigestsResource
 
@@ -747,12 +733,6 @@ class CourierWithRawResponse:
         return BrandsResourceWithRawResponse(self._client.brands)
 
     @cached_property
-    def bulk(self) -> bulk.BulkResourceWithRawResponse:
-        from .resources.bulk import BulkResourceWithRawResponse
-
-        return BulkResourceWithRawResponse(self._client.bulk)
-
-    @cached_property
     def digests(self) -> digests.DigestsResourceWithRawResponse:
         from .resources.digests import DigestsResourceWithRawResponse
 
@@ -878,12 +858,6 @@ class AsyncCourierWithRawResponse:
         from .resources.brands import AsyncBrandsResourceWithRawResponse
 
         return AsyncBrandsResourceWithRawResponse(self._client.brands)
-
-    @cached_property
-    def bulk(self) -> bulk.AsyncBulkResourceWithRawResponse:
-        from .resources.bulk import AsyncBulkResourceWithRawResponse
-
-        return AsyncBulkResourceWithRawResponse(self._client.bulk)
 
     @cached_property
     def digests(self) -> digests.AsyncDigestsResourceWithRawResponse:
@@ -1013,12 +987,6 @@ class CourierWithStreamedResponse:
         return BrandsResourceWithStreamingResponse(self._client.brands)
 
     @cached_property
-    def bulk(self) -> bulk.BulkResourceWithStreamingResponse:
-        from .resources.bulk import BulkResourceWithStreamingResponse
-
-        return BulkResourceWithStreamingResponse(self._client.bulk)
-
-    @cached_property
     def digests(self) -> digests.DigestsResourceWithStreamingResponse:
         from .resources.digests import DigestsResourceWithStreamingResponse
 
@@ -1144,12 +1112,6 @@ class AsyncCourierWithStreamedResponse:
         from .resources.brands import AsyncBrandsResourceWithStreamingResponse
 
         return AsyncBrandsResourceWithStreamingResponse(self._client.brands)
-
-    @cached_property
-    def bulk(self) -> bulk.AsyncBulkResourceWithStreamingResponse:
-        from .resources.bulk import AsyncBulkResourceWithStreamingResponse
-
-        return AsyncBulkResourceWithStreamingResponse(self._client.bulk)
 
     @cached_property
     def digests(self) -> digests.AsyncDigestsResourceWithStreamingResponse:
