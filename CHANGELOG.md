@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.21.1 (2026-07-23)
+
+Full Changelog: [v7.21.0...v7.21.1](https://github.com/trycourier/courier-python/compare/v7.21.0...v7.21.1)
+
+### Documentation
+
+* **openapi:** describe user topic-preference fields explicitly ([#172](https://github.com/trycourier/courier-python/issues/172)) ([842699a](https://github.com/trycourier/courier-python/commit/842699a68811d63aca9ef8d8865266623ff3e42c))
+
 ## 7.21.0 (2026-07-23)
 
 Full Changelog: [v7.20.0...v7.21.0](https://github.com/trycourier/courier-python/compare/v7.20.0...v7.21.0)
