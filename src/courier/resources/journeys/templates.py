@@ -117,11 +117,9 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """Fetch a journey-scoped notification template by id.
-
-        Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns a journey's own notification template with its name, brand, subscription
+        topic, and content. Defaults to the published version.
 
         Args:
           extra_headers: Send extra headers
@@ -211,10 +209,10 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive the journey-scoped notification template.
+        """Archives one journey's notification template, preventing further sends.
 
-        Archived templates cannot be
-        sent.
+        Detach
+        any send node referencing it beforehand.
 
         Args:
           extra_headers: Send extra headers
@@ -255,8 +253,8 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List published versions of the journey-scoped notification template, ordered
-        most recent first.
+        Lists the published versions of a template that belongs to a journey, most
+        recent first. Paged by cursor.
 
         Args:
           extra_headers: Send extra headers
@@ -296,10 +294,10 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Publish the current draft of the journey-scoped notification template as a new
-        version. Optionally roll back to a prior version by passing
-        `{ "version": "vN" }`.
+        """Publishes a journey-scoped template's draft as a new version.
+
+        Pass a version
+        instead to roll back the template to an earlier publish.
 
         Args:
           extra_headers: Send extra headers
@@ -455,8 +453,10 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """
-        Replace the journey-scoped notification template draft.
+        """Replaces the draft content of one journey's notification template.
+
+        Publish it
+        before send nodes referencing it render the change.
 
         Args:
           extra_headers: Send extra headers
@@ -503,13 +503,9 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentGetResponse:
-        """Retrieve the elemental content of a journey-scoped notification template.
-
-        The
-        response contains the versioned elements along with their content checksums,
-        which can be used to detect changes between versions. Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns the Elemental elements and version of a journey-scoped template's
+        content. Compare versions to see what changed between publishes.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
@@ -626,11 +622,9 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """Fetch a journey-scoped notification template by id.
-
-        Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns a journey's own notification template with its name, brand, subscription
+        topic, and content. Defaults to the published version.
 
         Args:
           extra_headers: Send extra headers
@@ -720,10 +714,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive the journey-scoped notification template.
+        """Archives one journey's notification template, preventing further sends.
 
-        Archived templates cannot be
-        sent.
+        Detach
+        any send node referencing it beforehand.
 
         Args:
           extra_headers: Send extra headers
@@ -764,8 +758,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List published versions of the journey-scoped notification template, ordered
-        most recent first.
+        Lists the published versions of a template that belongs to a journey, most
+        recent first. Paged by cursor.
 
         Args:
           extra_headers: Send extra headers
@@ -805,10 +799,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Publish the current draft of the journey-scoped notification template as a new
-        version. Optionally roll back to a prior version by passing
-        `{ "version": "vN" }`.
+        """Publishes a journey-scoped template's draft as a new version.
+
+        Pass a version
+        instead to roll back the template to an earlier publish.
 
         Args:
           extra_headers: Send extra headers
@@ -964,8 +958,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """
-        Replace the journey-scoped notification template draft.
+        """Replaces the draft content of one journey's notification template.
+
+        Publish it
+        before send nodes referencing it render the change.
 
         Args:
           extra_headers: Send extra headers
@@ -1012,13 +1008,9 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentGetResponse:
-        """Retrieve the elemental content of a journey-scoped notification template.
-
-        The
-        response contains the versioned elements along with their content checksums,
-        which can be used to detect changes between versions. Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns the Elemental elements and version of a journey-scoped template's
+        content. Compare versions to see what changed between publishes.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to

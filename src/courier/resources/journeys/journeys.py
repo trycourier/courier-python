@@ -85,14 +85,9 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Create a journey.
-
-        Defaults to `DRAFT` state; pass `state: "PUBLISHED"` to
-        publish on create. Send nodes are not allowed on `POST`. The standard flow is:
-        create the journey shell here, add notification templates with
-        `POST /journeys/{templateId}/templates`, then wire them into the journey with
-        `PUT /journeys/{templateId}`. Call `POST /journeys/{templateId}/publish` to
-        publish a draft after the fact.
+        """
+        Creates a journey from a set of nodes, in draft state unless you pass a
+        published state. Send nodes cannot be included until their templates exist.
 
         Args:
           state: Lifecycle state of a journey.
@@ -176,12 +171,12 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneysListResponse:
-        """Get the list of journeys.
+        """
+        Lists the workspace's journeys, each carrying a name, state, and enabled flag.
+        Paged by cursor.
 
         Args:
-          cursor: A cursor token for pagination.
-
-        Use the cursor from the previous response to
+          cursor: A cursor token for pagination. Use the cursor from the previous response to
               fetch the next page of results.
 
           version: The version of journeys to retrieve. Accepted values are published (for
@@ -224,10 +219,10 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a journey.
+        """Archives a journey so it can no longer be invoked.
 
-        Archived journeys cannot be invoked. Existing journey runs
-        continue to completion.
+        Runs already in flight
+        continue to completion, so archiving never strands a user mid-sequence.
 
         Args:
           extra_headers: Send extra headers
@@ -261,14 +256,9 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CancelJourneyResponse:
-        """Cancel journey runs.
-
-        The request body must include EXACTLY ONE of
-        `cancelation_token` (cancels every run associated with the token) or `run_id`
-        (cancels a single tenant-scoped run). Supplying both or neither returns a `400`.
-        A `run_id` that does not match a run for the tenant returns `404`. Cancelation
-        is idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was
-        already `CANCELED` is left unchanged and its current status is returned.
+        """
+        Cancels in-flight journey runs, either every run sharing a cancelation token or
+        one run by id. Use it to stop a sequence when the event resolves.
 
         Args:
           extra_headers: Send extra headers
@@ -293,14 +283,9 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CancelJourneyResponse:
-        """Cancel journey runs.
-
-        The request body must include EXACTLY ONE of
-        `cancelation_token` (cancels every run associated with the token) or `run_id`
-        (cancels a single tenant-scoped run). Supplying both or neither returns a `400`.
-        A `run_id` that does not match a run for the tenant returns `404`. Cancelation
-        is idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was
-        already `CANCELED` is left unchanged and its current status is returned.
+        """
+        Cancels in-flight journey runs, either every run sharing a cancelation token or
+        one run by id. Use it to stop a sequence when the event resolves.
 
         Args:
           extra_headers: Send extra headers
@@ -360,10 +345,10 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneysInvokeResponse:
-        """Invoke a journey by id or alias to start a new run.
+        """Starts a journey run for one user and returns a runId.
 
-        The response includes a
-        `runId` identifying the run.
+        Runs execute
+        asynchronously, so the response arrives before any message is sent.
 
         Args:
           data: Data payload passed to the journey. The expected shape can be predefined using
@@ -419,7 +404,8 @@ class JourneysResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyVersionsListResponse:
         """
-        List published versions of a journey, ordered most recent first.
+        Lists a journey's published versions, most recent first, so you have a version
+        id to roll back to. Paged by cursor.
 
         Args:
           extra_headers: Send extra headers
@@ -452,11 +438,9 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Publish the current draft as a new version.
-
-        Body is optional; pass
-        `{ "version": "vN" }` to roll back to a prior version instead. Returns 404 if
-        the journey has no draft to publish.
+        """
+        Publishes a journey's current draft as a new version, making it live for new
+        runs. Pass a version instead to roll back to an earlier one.
 
         Args:
           extra_headers: Send extra headers
@@ -493,13 +477,9 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Replace the journey draft.
-
-        Updates the working draft only; call
-        `POST /journeys/{templateId}/publish` to make it live, or pass
-        `state: "PUBLISHED"` in this request to publish immediately. Send-node
-        `template` ids must already exist and be scoped to this journey, and node ids
-        must not be claimed by another journey.
+        """
+        Replaces a journey's working draft, leaving the published version live until you
+        publish. Reach for this when editing a journey already running.
 
         Args:
           state: Lifecycle state of a journey.
@@ -570,14 +550,9 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Create a journey.
-
-        Defaults to `DRAFT` state; pass `state: "PUBLISHED"` to
-        publish on create. Send nodes are not allowed on `POST`. The standard flow is:
-        create the journey shell here, add notification templates with
-        `POST /journeys/{templateId}/templates`, then wire them into the journey with
-        `PUT /journeys/{templateId}`. Call `POST /journeys/{templateId}/publish` to
-        publish a draft after the fact.
+        """
+        Creates a journey from a set of nodes, in draft state unless you pass a
+        published state. Send nodes cannot be included until their templates exist.
 
         Args:
           state: Lifecycle state of a journey.
@@ -661,12 +636,12 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneysListResponse:
-        """Get the list of journeys.
+        """
+        Lists the workspace's journeys, each carrying a name, state, and enabled flag.
+        Paged by cursor.
 
         Args:
-          cursor: A cursor token for pagination.
-
-        Use the cursor from the previous response to
+          cursor: A cursor token for pagination. Use the cursor from the previous response to
               fetch the next page of results.
 
           version: The version of journeys to retrieve. Accepted values are published (for
@@ -709,10 +684,10 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a journey.
+        """Archives a journey so it can no longer be invoked.
 
-        Archived journeys cannot be invoked. Existing journey runs
-        continue to completion.
+        Runs already in flight
+        continue to completion, so archiving never strands a user mid-sequence.
 
         Args:
           extra_headers: Send extra headers
@@ -746,14 +721,9 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CancelJourneyResponse:
-        """Cancel journey runs.
-
-        The request body must include EXACTLY ONE of
-        `cancelation_token` (cancels every run associated with the token) or `run_id`
-        (cancels a single tenant-scoped run). Supplying both or neither returns a `400`.
-        A `run_id` that does not match a run for the tenant returns `404`. Cancelation
-        is idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was
-        already `CANCELED` is left unchanged and its current status is returned.
+        """
+        Cancels in-flight journey runs, either every run sharing a cancelation token or
+        one run by id. Use it to stop a sequence when the event resolves.
 
         Args:
           extra_headers: Send extra headers
@@ -778,14 +748,9 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CancelJourneyResponse:
-        """Cancel journey runs.
-
-        The request body must include EXACTLY ONE of
-        `cancelation_token` (cancels every run associated with the token) or `run_id`
-        (cancels a single tenant-scoped run). Supplying both or neither returns a `400`.
-        A `run_id` that does not match a run for the tenant returns `404`. Cancelation
-        is idempotent: a run that has already finished (`PROCESSED`/`ERROR`) or was
-        already `CANCELED` is left unchanged and its current status is returned.
+        """
+        Cancels in-flight journey runs, either every run sharing a cancelation token or
+        one run by id. Use it to stop a sequence when the event resolves.
 
         Args:
           extra_headers: Send extra headers
@@ -845,10 +810,10 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneysInvokeResponse:
-        """Invoke a journey by id or alias to start a new run.
+        """Starts a journey run for one user and returns a runId.
 
-        The response includes a
-        `runId` identifying the run.
+        Runs execute
+        asynchronously, so the response arrives before any message is sent.
 
         Args:
           data: Data payload passed to the journey. The expected shape can be predefined using
@@ -904,7 +869,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyVersionsListResponse:
         """
-        List published versions of a journey, ordered most recent first.
+        Lists a journey's published versions, most recent first, so you have a version
+        id to roll back to. Paged by cursor.
 
         Args:
           extra_headers: Send extra headers
@@ -937,11 +903,9 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Publish the current draft as a new version.
-
-        Body is optional; pass
-        `{ "version": "vN" }` to roll back to a prior version instead. Returns 404 if
-        the journey has no draft to publish.
+        """
+        Publishes a journey's current draft as a new version, making it live for new
+        runs. Pass a version instead to roll back to an earlier one.
 
         Args:
           extra_headers: Send extra headers
@@ -978,13 +942,9 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyResponse:
-        """Replace the journey draft.
-
-        Updates the working draft only; call
-        `POST /journeys/{templateId}/publish` to make it live, or pass
-        `state: "PUBLISHED"` in this request to publish immediately. Send-node
-        `template` ids must already exist and be scoped to this journey, and node ids
-        must not be claimed by another journey.
+        """
+        Replaces a journey's working draft, leaving the published version live until you
+        publish. Reach for this when editing a journey already running.
 
         Args:
           state: Lifecycle state of a journey.

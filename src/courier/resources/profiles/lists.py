@@ -58,8 +58,10 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListRetrieveResponse:
-        """
-        Returns the subscribed lists for a specified user.
+        """Returns the lists a user is subscribed to, with paging.
+
+        Use it to check what a
+        recipient will receive before sending to a list.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of message statuses.
@@ -97,8 +99,10 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListDeleteResponse:
-        """
-        Removes all list subscriptions for given user.
+        """Removes every list subscription for a user at once.
+
+        Their profile and
+        preferences are untouched, so this only affects list-targeted sends.
 
         Args:
           extra_headers: Send extra headers
@@ -131,10 +135,9 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListSubscribeResponse:
-        """Subscribes the given user to one or more lists.
-
-        If the list does not exist, it
-        will be created.
+        """
+        Subscribes a user to one or more lists, creating any list that does not yet
+        exist. Optional preferences apply to each subscription.
 
         Args:
           extra_headers: Send extra headers
@@ -189,8 +192,10 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListRetrieveResponse:
-        """
-        Returns the subscribed lists for a specified user.
+        """Returns the lists a user is subscribed to, with paging.
+
+        Use it to check what a
+        recipient will receive before sending to a list.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of message statuses.
@@ -228,8 +233,10 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListDeleteResponse:
-        """
-        Removes all list subscriptions for given user.
+        """Removes every list subscription for a user at once.
+
+        Their profile and
+        preferences are untouched, so this only affects list-targeted sends.
 
         Args:
           extra_headers: Send extra headers
@@ -262,10 +269,9 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListSubscribeResponse:
-        """Subscribes the given user to one or more lists.
-
-        If the list does not exist, it
-        will be created.
+        """
+        Subscribes a user to one or more lists, creating any list that does not yet
+        exist. Optional preferences apply to each subscription.
 
         Args:
           extra_headers: Send extra headers

@@ -60,10 +60,10 @@ class BrandsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
-        """Create a new brand.
+        """Creates a brand from a name and settings, including primary and secondary
+        colors.
 
-        Requires `name` and `settings` (with at least
-        `colors.primary` and `colors.secondary`).
+        Brands supply the logo, colors, and styling that templates render with.
 
         Args:
           extra_headers: Send extra headers
@@ -103,7 +103,8 @@ class BrandsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Fetch a specific brand by brand ID.
+        Returns one brand by id, including its colors, logo and styling settings,
+        Handlebars snippets, and published version.
 
         Args:
           extra_headers: Send extra headers
@@ -139,7 +140,8 @@ class BrandsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Replace an existing brand with the supplied values.
+        Replaces a brand with the values you supply, so send the complete settings and
+        snippets rather than only the fields you want changed.
 
         Args:
           name: The name of the brand.
@@ -181,8 +183,10 @@ class BrandsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandListResponse:
-        """
-        Get the list of brands.
+        """Lists the workspace's brands.
+
+        Every entry carries its name, styling settings,
+        snippets, and published version.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of brands.
@@ -218,8 +222,10 @@ class BrandsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a brand by brand ID.
+        """Deletes a brand by id.
+
+        Reassign any template or tenant that references it before
+        deleting to keep their styling intact.
 
         Args:
           extra_headers: Send extra headers
@@ -276,10 +282,10 @@ class AsyncBrandsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
-        """Create a new brand.
+        """Creates a brand from a name and settings, including primary and secondary
+        colors.
 
-        Requires `name` and `settings` (with at least
-        `colors.primary` and `colors.secondary`).
+        Brands supply the logo, colors, and styling that templates render with.
 
         Args:
           extra_headers: Send extra headers
@@ -319,7 +325,8 @@ class AsyncBrandsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Fetch a specific brand by brand ID.
+        Returns one brand by id, including its colors, logo and styling settings,
+        Handlebars snippets, and published version.
 
         Args:
           extra_headers: Send extra headers
@@ -355,7 +362,8 @@ class AsyncBrandsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Replace an existing brand with the supplied values.
+        Replaces a brand with the values you supply, so send the complete settings and
+        snippets rather than only the fields you want changed.
 
         Args:
           name: The name of the brand.
@@ -397,8 +405,10 @@ class AsyncBrandsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandListResponse:
-        """
-        Get the list of brands.
+        """Lists the workspace's brands.
+
+        Every entry carries its name, styling settings,
+        snippets, and published version.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of brands.
@@ -434,8 +444,10 @@ class AsyncBrandsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a brand by brand ID.
+        """Deletes a brand by id.
+
+        Reassign any template or tenant that references it before
+        deleting to keep their styling intact.
 
         Args:
           extra_headers: Send extra headers

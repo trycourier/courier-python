@@ -125,10 +125,9 @@ class RoutingStrategiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RoutingStrategyGetResponse:
-        """Retrieve a routing strategy by ID.
-
-        Returns the full entity including routing
-        content and metadata.
+        """
+        Returns one routing strategy by id with its name, tags, channels, and the
+        routing rules that decide provider order and fallback.
 
         Args:
           extra_headers: Send extra headers
@@ -247,10 +246,10 @@ class RoutingStrategiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AssociatedNotificationListResponse:
-        """List notification templates associated with a routing strategy.
+        """Returns the notification templates using a routing strategy, with paging.
 
-        Includes
-        template metadata only, not full content.
+        Check
+        this before changing a strategy that templates depend on.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -442,10 +441,9 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RoutingStrategyGetResponse:
-        """Retrieve a routing strategy by ID.
-
-        Returns the full entity including routing
-        content and metadata.
+        """
+        Returns one routing strategy by id with its name, tags, channels, and the
+        routing rules that decide provider order and fallback.
 
         Args:
           extra_headers: Send extra headers
@@ -564,10 +562,10 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AssociatedNotificationListResponse:
-        """List notification templates associated with a routing strategy.
+        """Returns the notification templates using a routing strategy, with paging.
 
-        Includes
-        template metadata only, not full content.
+        Check
+        this before changing a strategy that templates depend on.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.

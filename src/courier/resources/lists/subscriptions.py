@@ -63,7 +63,8 @@ class SubscriptionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionListResponse:
         """
-        Get the list's subscriptions.
+        Returns the users subscribed to a list with paging, each with the preferences
+        recorded for that subscription.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of list subscriptions
@@ -179,8 +180,8 @@ class SubscriptionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Subscribe a user to an existing list (note: if the List does not exist, it will
-        be automatically created).
+        Subscribes one user to a list, creating the list if it does not yet exist.
+        Optional preferences apply to this subscription only.
 
         Args:
           extra_headers: Send extra headers
@@ -219,8 +220,10 @@ class SubscriptionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a subscription to a list by list ID and user ID.
+        """Removes one user's subscription to a list, addressed by list id and user id.
+
+        The
+        user's profile and other subscriptions are separate resources.
 
         Args:
           extra_headers: Send extra headers
@@ -278,7 +281,8 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionListResponse:
         """
-        Get the list's subscriptions.
+        Returns the users subscribed to a list with paging, each with the preferences
+        recorded for that subscription.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of list subscriptions
@@ -396,8 +400,8 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Subscribe a user to an existing list (note: if the List does not exist, it will
-        be automatically created).
+        Subscribes one user to a list, creating the list if it does not yet exist.
+        Optional preferences apply to this subscription only.
 
         Args:
           extra_headers: Send extra headers
@@ -436,8 +440,10 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a subscription to a list by list ID and user ID.
+        """Removes one user's subscription to a list, addressed by list id and user id.
+
+        The
+        user's profile and other subscriptions are separate resources.
 
         Args:
           extra_headers: Send extra headers

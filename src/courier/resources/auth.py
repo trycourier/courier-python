@@ -53,8 +53,10 @@ class AuthResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthIssueTokenResponse:
-        """
-        Returns a new access token.
+        """Returns a JWT for authenticating client-side SDKs such as the Inbox.
+
+        You supply
+        the scope and an expires_in duration, both required.
 
         Args:
           expires_in:
@@ -143,8 +145,10 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthIssueTokenResponse:
-        """
-        Returns a new access token.
+        """Returns a JWT for authenticating client-side SDKs such as the Inbox.
+
+        You supply
+        the scope and an expires_in duration, both required.
 
         Args:
           expires_in:

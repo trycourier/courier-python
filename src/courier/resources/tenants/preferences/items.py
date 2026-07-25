@@ -60,7 +60,8 @@ class ItemsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Create or Replace Default Preferences For Topic
+        Sets a tenant's default opt-in status for one subscription topic, which applies
+        to every member unless a user sets their own override.
 
         Args:
           custom_routing: The default channels to send to this tenant when has_custom_routing is enabled
@@ -113,7 +114,8 @@ class ItemsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Remove Default Preferences For Topic
+        Removes a tenant's default preference for one subscription topic, addressed by
+        tenant id and topic id.
 
         Args:
           extra_headers: Send extra headers
@@ -176,7 +178,8 @@ class AsyncItemsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Create or Replace Default Preferences For Topic
+        Sets a tenant's default opt-in status for one subscription topic, which applies
+        to every member unless a user sets their own override.
 
         Args:
           custom_routing: The default channels to send to this tenant when has_custom_routing is enabled
@@ -229,7 +232,8 @@ class AsyncItemsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Remove Default Preferences For Topic
+        Removes a tenant's default preference for one subscription topic, addressed by
+        tenant id and topic id.
 
         Args:
           extra_headers: Send extra headers

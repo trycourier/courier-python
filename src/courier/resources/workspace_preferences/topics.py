@@ -64,11 +64,10 @@ class TopicsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Create a subscription preference topic inside a workspace preference.
+        """Creates a subscription topic inside a workspace preference.
 
-        Fails with
-        404 if the workspace preference does not exist. The topic id is generated and
-        returned.
+        The default status
+        sets whether users start opted in, opted out, or required.
 
         Args:
           default_status: The default subscription status applied when a recipient has not set their own.
@@ -128,11 +127,9 @@ class TopicsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Retrieve a topic within a workspace preference.
-
-        Returns 404 if the workspace
-        preference does not exist, the topic does not exist, or the topic belongs to a
-        different workspace preference.
+        """
+        Returns one subscription topic with its default status, routing options, allowed
+        preferences, and unsubscribe header setting.
 
         Args:
           extra_headers: Send extra headers
@@ -169,7 +166,8 @@ class TopicsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicListResponse:
         """
-        List the topics in a workspace preference.
+        Returns the subscription topics inside a workspace preference, each with its
+        default status and routing options.
 
         Args:
           extra_headers: Send extra headers
@@ -202,10 +200,9 @@ class TopicsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a topic and remove it from its workspace preference.
-
-        Same 404 rules as
-        GET.
+        """
+        Archives a subscription topic and removes it from its workspace preference,
+        addressed by section id and topic id.
 
         Args:
           extra_headers: Send extra headers
@@ -344,11 +341,10 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Create a subscription preference topic inside a workspace preference.
+        """Creates a subscription topic inside a workspace preference.
 
-        Fails with
-        404 if the workspace preference does not exist. The topic id is generated and
-        returned.
+        The default status
+        sets whether users start opted in, opted out, or required.
 
         Args:
           default_status: The default subscription status applied when a recipient has not set their own.
@@ -408,11 +404,9 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Retrieve a topic within a workspace preference.
-
-        Returns 404 if the workspace
-        preference does not exist, the topic does not exist, or the topic belongs to a
-        different workspace preference.
+        """
+        Returns one subscription topic with its default status, routing options, allowed
+        preferences, and unsubscribe header setting.
 
         Args:
           extra_headers: Send extra headers
@@ -449,7 +443,8 @@ class AsyncTopicsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicListResponse:
         """
-        List the topics in a workspace preference.
+        Returns the subscription topics inside a workspace preference, each with its
+        default status and routing options.
 
         Args:
           extra_headers: Send extra headers
@@ -482,10 +477,9 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a topic and remove it from its workspace preference.
-
-        Same 404 rules as
-        GET.
+        """
+        Archives a subscription topic and removes it from its workspace preference,
+        addressed by section id and topic id.
 
         Args:
           extra_headers: Send extra headers

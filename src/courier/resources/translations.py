@@ -53,7 +53,8 @@ class TranslationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
-        Get translations by locale
+        Returns the translation strings stored for one domain and locale, for use in
+        localized notification content.
 
         Args:
           extra_headers: Send extra headers
@@ -89,8 +90,10 @@ class TranslationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Update a translation
+        """Uploads the translation strings for one domain and locale.
+
+        Courier uses them to
+        render localized content for recipients in that locale.
 
         Args:
           extra_headers: Send extra headers
@@ -149,7 +152,8 @@ class AsyncTranslationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
-        Get translations by locale
+        Returns the translation strings stored for one domain and locale, for use in
+        localized notification content.
 
         Args:
           extra_headers: Send extra headers
@@ -185,8 +189,10 @@ class AsyncTranslationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Update a translation
+        """Uploads the translation strings for one domain and locale.
+
+        Courier uses them to
+        render localized content for recipients in that locale.
 
         Args:
           extra_headers: Send extra headers

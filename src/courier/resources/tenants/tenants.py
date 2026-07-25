@@ -82,7 +82,8 @@ class TenantsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Get a Tenant
+        Returns one tenant with its name, parent tenant id, default preferences,
+        properties, and the user profile applied to its members.
 
         Args:
           extra_headers: Send extra headers
@@ -121,7 +122,8 @@ class TenantsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Create or Replace a Tenant
+        Creates or replaces a tenant from a name, parent, brand, properties, and default
+        preferences supplied in the request body.
 
         Args:
           name: Name of the tenant.
@@ -180,7 +182,8 @@ class TenantsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListResponse:
         """
-        Get a List of Tenants
+        Lists the workspace's tenants, each carrying a name, parent tenant, properties,
+        and default preferences. Paged.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -227,8 +230,10 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a Tenant
+        """Deletes a tenant.
+
+        Its members' workspace-level profiles and preferences live
+        outside the tenant and are managed separately.
 
         Args:
           extra_headers: Send extra headers
@@ -263,8 +268,10 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListUsersResponse:
-        """
-        Get Users in Tenant
+        """Returns the users belonging to a tenant with cursor paging.
+
+        Use it to see who a
+        tenant-scoped send will reach.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -340,7 +347,8 @@ class AsyncTenantsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Get a Tenant
+        Returns one tenant with its name, parent tenant id, default preferences,
+        properties, and the user profile applied to its members.
 
         Args:
           extra_headers: Send extra headers
@@ -379,7 +387,8 @@ class AsyncTenantsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Create or Replace a Tenant
+        Creates or replaces a tenant from a name, parent, brand, properties, and default
+        preferences supplied in the request body.
 
         Args:
           name: Name of the tenant.
@@ -438,7 +447,8 @@ class AsyncTenantsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListResponse:
         """
-        Get a List of Tenants
+        Lists the workspace's tenants, each carrying a name, parent tenant, properties,
+        and default preferences. Paged.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -485,8 +495,10 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a Tenant
+        """Deletes a tenant.
+
+        Its members' workspace-level profiles and preferences live
+        outside the tenant and are managed separately.
 
         Args:
           extra_headers: Send extra headers
@@ -521,8 +533,10 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListUsersResponse:
-        """
-        Get Users in Tenant
+        """Returns the users belonging to a tenant with cursor paging.
+
+        Use it to see who a
+        tenant-scoped send will reach.
 
         Args:
           cursor: Continue the pagination with the next cursor
