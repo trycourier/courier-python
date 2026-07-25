@@ -70,8 +70,8 @@ class ProfilesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileCreateResponse:
         """
-        Merge the supplied values with an existing profile or create a new profile if
-        one doesn't already exist.
+        Merges the supplied values into a user's profile, creating it if absent and
+        leaving any key you omit untouched. Prefer this for everyday writes.
 
         Args:
           extra_headers: Send extra headers
@@ -105,7 +105,8 @@ class ProfilesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileRetrieveResponse:
         """
-        Returns the specified user profile.
+        Returns a user's stored profile and preferences, including the email address,
+        phone number, and push tokens Courier can reach them on.
 
         Args:
           extra_headers: Send extra headers
@@ -139,7 +140,8 @@ class ProfilesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Update a profile
+        Applies a JSON Patch to a user profile, adding, removing, or replacing
+        individual fields without sending the whole object.
 
         Args:
           patch: List of patch operations to apply to the profile.
@@ -175,8 +177,10 @@ class ProfilesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Deletes the specified user profile.
+        """Deletes a user's profile and stored contact details.
+
+        List subscriptions and
+        preferences are separate resources, so remove those too if required.
 
         Args:
           extra_headers: Send extra headers
@@ -210,12 +214,10 @@ class ProfilesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileReplaceResponse:
-        """
-        When using `PUT`, be sure to include all the key-value pairs required by the
-        recipient's profile. Any key-value pairs that exist in the profile but fail to
-        be included in the `PUT` request will be removed from the profile. Remember, a
-        `PUT` update is a full replacement of the data. For partial updates, use the
-        [Patch](https://www.courier.com/docs/reference/profiles/patch/) request.
+        """Overwrites a user profile in full, removing any key absent from the request
+        body.
+
+        Use the patch endpoint when changing a single field.
 
         Args:
           extra_headers: Send extra headers
@@ -275,8 +277,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileCreateResponse:
         """
-        Merge the supplied values with an existing profile or create a new profile if
-        one doesn't already exist.
+        Merges the supplied values into a user's profile, creating it if absent and
+        leaving any key you omit untouched. Prefer this for everyday writes.
 
         Args:
           extra_headers: Send extra headers
@@ -310,7 +312,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileRetrieveResponse:
         """
-        Returns the specified user profile.
+        Returns a user's stored profile and preferences, including the email address,
+        phone number, and push tokens Courier can reach them on.
 
         Args:
           extra_headers: Send extra headers
@@ -344,7 +347,8 @@ class AsyncProfilesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Update a profile
+        Applies a JSON Patch to a user profile, adding, removing, or replacing
+        individual fields without sending the whole object.
 
         Args:
           patch: List of patch operations to apply to the profile.
@@ -380,8 +384,10 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Deletes the specified user profile.
+        """Deletes a user's profile and stored contact details.
+
+        List subscriptions and
+        preferences are separate resources, so remove those too if required.
 
         Args:
           extra_headers: Send extra headers
@@ -415,12 +421,10 @@ class AsyncProfilesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProfileReplaceResponse:
-        """
-        When using `PUT`, be sure to include all the key-value pairs required by the
-        recipient's profile. Any key-value pairs that exist in the profile but fail to
-        be included in the `PUT` request will be removed from the profile. Remember, a
-        `PUT` update is a full replacement of the data. For partial updates, use the
-        [Patch](https://www.courier.com/docs/reference/profiles/patch/) request.
+        """Overwrites a user profile in full, removing any key absent from the request
+        body.
+
+        Use the patch endpoint when changing a single field.
 
         Args:
           extra_headers: Send extra headers

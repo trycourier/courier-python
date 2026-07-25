@@ -60,7 +60,8 @@ class AudiencesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Audience:
         """
-        Returns the specified audience by id.
+        Returns one audience with its name, description, and the filter and AND or OR
+        operator that decide which users belong to it.
 
         Args:
           extra_headers: Send extra headers
@@ -97,7 +98,8 @@ class AudiencesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AudienceUpdateResponse:
         """
-        Creates or updates audience.
+        Creates or replaces an audience from a filter and an AND or OR operator.
+        Membership recalculates automatically as profiles change.
 
         Args:
           description: A description of the audience
@@ -148,8 +150,10 @@ class AudiencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AudienceListResponse:
-        """
-        Get the audiences associated with the authorization token.
+        """Returns the audiences in the workspace with paging.
+
+        Audiences are filter-based
+        groups that recalculate as user profiles change.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of audiences
@@ -186,7 +190,8 @@ class AudiencesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes the specified audience.
+        Deletes an audience permanently, so update any caller sending to it by audience
+        id first. Those sends fail once the audience is gone.
 
         Args:
           extra_headers: Send extra headers
@@ -220,8 +225,10 @@ class AudiencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AudienceListMembersResponse:
-        """
-        Get list of members of an audience.
+        """Returns the users currently matching an audience filter, with paging.
+
+        Membership
+        is recalculated, so results shift as profiles change.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of members
@@ -281,7 +288,8 @@ class AsyncAudiencesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Audience:
         """
-        Returns the specified audience by id.
+        Returns one audience with its name, description, and the filter and AND or OR
+        operator that decide which users belong to it.
 
         Args:
           extra_headers: Send extra headers
@@ -318,7 +326,8 @@ class AsyncAudiencesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AudienceUpdateResponse:
         """
-        Creates or updates audience.
+        Creates or replaces an audience from a filter and an AND or OR operator.
+        Membership recalculates automatically as profiles change.
 
         Args:
           description: A description of the audience
@@ -369,8 +378,10 @@ class AsyncAudiencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AudienceListResponse:
-        """
-        Get the audiences associated with the authorization token.
+        """Returns the audiences in the workspace with paging.
+
+        Audiences are filter-based
+        groups that recalculate as user profiles change.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of audiences
@@ -407,7 +418,8 @@ class AsyncAudiencesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Deletes the specified audience.
+        Deletes an audience permanently, so update any caller sending to it by audience
+        id first. Those sends fail once the audience is gone.
 
         Args:
           extra_headers: Send extra headers
@@ -441,8 +453,10 @@ class AsyncAudiencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AudienceListMembersResponse:
-        """
-        Get list of members of an audience.
+        """Returns the users currently matching an audience filter, with paging.
+
+        Membership
+        is recalculated, so results shift as profiles change.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of members

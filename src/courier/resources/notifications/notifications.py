@@ -177,8 +177,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationListResponse:
-        """
-        List notification templates in your workspace.
+        """Lists the workspace's notification templates.
+
+        Each carries a name, tags, brand,
+        routing, and its draft or published state.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -225,8 +227,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive a notification template.
+        """Archives a notification template, preventing new sends from referencing it.
+
+        The
+        template stays retrievable for its version history.
 
         Args:
           extra_headers: Send extra headers
@@ -259,14 +263,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Duplicate a notification template.
-
-        Creates a standalone copy within the same
-        workspace and environment, with " COPY" appended to the title. The copy clones
-        the source draft's tags, brand, subscription topic, routing strategy, channels,
-        and content, and is always created as a standalone template (it is not linked to
-        any journey or broadcast, even if the source was). Templates that are scoped to
-        a journey or a broadcast cannot be duplicated through this endpoint.
+        """
+        Copies a notification template within the same workspace and environment,
+        appending " COPY" to the title. The copy is standalone and independently
+        editable.
 
         Args:
           extra_headers: Send extra headers
@@ -301,7 +301,8 @@ class NotificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List versions of a notification template.
+        Returns a notification template's published versions, most recent first, for
+        comparison or rollback. Paged.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -389,11 +390,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Replace the elemental content of a notification template.
+        """Replaces all Elemental content in a template, overwriting every existing
+        element.
 
-        Overwrites all
-        elements in the template with the provided content. Only supported for V2
-        (elemental) templates.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           content: Elemental content payload. The server defaults `version` when omitted.
@@ -444,10 +444,9 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Update a single element within a notification template.
-
-        Only supported for V2
-        (elemental) templates.
+        """
+        Replaces one Elemental element in a template, addressed by its element id.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           type: Element type (text, meta, action, image, etc.).
@@ -500,11 +499,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Set locale-specific content overrides for a notification template.
+        """Sets locale-specific content overrides for a template.
 
-        Each element
-        override must reference an existing element by ID. Only supported for V2
-        (elemental) templates.
+        Each override must
+        reference an element that already exists in the default content.
 
         Args:
           elements: Elements with locale-specific content overrides.
@@ -551,9 +549,9 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Replace a notification template.
-
-        All fields are required.
+        """
+        Replaces a notification template in full, so send every field rather than only
+        the ones you want changed. Publish separately to make it live.
 
         Args:
           notification: Core template fields used in POST and PUT request bodies (nested under a
@@ -599,12 +597,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationRetrieveContentResponse:
-        """Retrieve the content of a notification template.
+        """Returns a template's content and checksum.
 
-        The response shape depends on
-        whether the template uses V1 (blocks/channels) or V2 (elemental) content. Use
-        the `version` query parameter to select draft, published, or a specific
-        historical version.
+        V2 templates return Elemental
+        elements, while V1 templates return blocks and channels instead.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
@@ -769,8 +765,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationListResponse:
-        """
-        List notification templates in your workspace.
+        """Lists the workspace's notification templates.
+
+        Each carries a name, tags, brand,
+        routing, and its draft or published state.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -817,8 +815,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive a notification template.
+        """Archives a notification template, preventing new sends from referencing it.
+
+        The
+        template stays retrievable for its version history.
 
         Args:
           extra_headers: Send extra headers
@@ -851,14 +851,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Duplicate a notification template.
-
-        Creates a standalone copy within the same
-        workspace and environment, with " COPY" appended to the title. The copy clones
-        the source draft's tags, brand, subscription topic, routing strategy, channels,
-        and content, and is always created as a standalone template (it is not linked to
-        any journey or broadcast, even if the source was). Templates that are scoped to
-        a journey or a broadcast cannot be duplicated through this endpoint.
+        """
+        Copies a notification template within the same workspace and environment,
+        appending " COPY" to the title. The copy is standalone and independently
+        editable.
 
         Args:
           extra_headers: Send extra headers
@@ -893,7 +889,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List versions of a notification template.
+        Returns a notification template's published versions, most recent first, for
+        comparison or rollback. Paged.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -983,11 +980,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Replace the elemental content of a notification template.
+        """Replaces all Elemental content in a template, overwriting every existing
+        element.
 
-        Overwrites all
-        elements in the template with the provided content. Only supported for V2
-        (elemental) templates.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           content: Elemental content payload. The server defaults `version` when omitted.
@@ -1038,10 +1034,9 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Update a single element within a notification template.
-
-        Only supported for V2
-        (elemental) templates.
+        """
+        Replaces one Elemental element in a template, addressed by its element id.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           type: Element type (text, meta, action, image, etc.).
@@ -1094,11 +1089,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Set locale-specific content overrides for a notification template.
+        """Sets locale-specific content overrides for a template.
 
-        Each element
-        override must reference an existing element by ID. Only supported for V2
-        (elemental) templates.
+        Each override must
+        reference an element that already exists in the default content.
 
         Args:
           elements: Elements with locale-specific content overrides.
@@ -1145,9 +1139,9 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Replace a notification template.
-
-        All fields are required.
+        """
+        Replaces a notification template in full, so send every field rather than only
+        the ones you want changed. Publish separately to make it live.
 
         Args:
           notification: Core template fields used in POST and PUT request bodies (nested under a
@@ -1193,12 +1187,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationRetrieveContentResponse:
-        """Retrieve the content of a notification template.
+        """Returns a template's content and checksum.
 
-        The response shape depends on
-        whether the template uses V1 (blocks/channels) or V2 (elemental) content. Use
-        the `version` query parameter to select draft, published, or a specific
-        historical version.
+        V2 templates return Elemental
+        elements, while V1 templates return blocks and channels instead.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to

@@ -67,12 +67,12 @@ class AutomationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationTemplateListResponse:
-        """Get the list of automations.
+        """
+        Lists the workspace's saved automation templates, each with its id and a cursor
+        for paging to the next page of results.
 
         Args:
-          cursor: A cursor token for pagination.
-
-        Use the cursor from the previous response to
+          cursor: A cursor token for pagination. Use the cursor from the previous response to
               fetch the next page of results.
 
           version: The version of templates to retrieve. Accepted values are published (for
@@ -141,12 +141,12 @@ class AsyncAutomationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationTemplateListResponse:
-        """Get the list of automations.
+        """
+        Lists the workspace's saved automation templates, each with its id and a cursor
+        for paging to the next page of results.
 
         Args:
-          cursor: A cursor token for pagination.
-
-        Use the cursor from the previous response to
+          cursor: A cursor token for pagination. Use the cursor from the previous response to
               fetch the next page of results.
 
           version: The version of templates to retrieve. Accepted values are published (for

@@ -57,8 +57,10 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListResponse:
-        """
-        Returns a paginated list of user tenant associations.
+        """Returns the tenants a user belongs to, with cursor paging.
+
+        A user can belong to
+        many tenants, each with its own profile and preferences.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -105,11 +107,9 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """This endpoint is used to add a user to multiple tenants in one call.
-
-        A custom
-        profile can also be supplied for each tenant. This profile will be merged with
-        the user's main profile when sending to the user with that tenant.
+        """
+        Adds a user to several tenants in one call, each optionally with a per-tenant
+        profile that overrides their workspace profile.
 
         Args:
           extra_headers: Send extra headers
@@ -146,10 +146,8 @@ class TenantsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        This endpoint is used to add a single tenant.
-
-        A custom profile can also be supplied with the tenant. This profile will be
-        merged with the user's main profile when sending to the user with that tenant.
+        Adds a user to one tenant, optionally with a tenant-specific profile that
+        overrides their workspace profile for sends in that tenant.
 
         Args:
           extra_headers: Send extra headers
@@ -185,8 +183,10 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Removes a user from any tenants they may have been associated with.
+        """Removes a user from every tenant they belong to in one call.
+
+        Their
+        workspace-level profile is a separate resource.
 
         Args:
           extra_headers: Send extra headers
@@ -220,8 +220,10 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Removes a user from the supplied tenant.
+        """Removes a user from one tenant.
+
+        Their other tenant memberships and workspace
+        profile are managed through separate endpoints.
 
         Args:
           extra_headers: Send extra headers
@@ -279,8 +281,10 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListResponse:
-        """
-        Returns a paginated list of user tenant associations.
+        """Returns the tenants a user belongs to, with cursor paging.
+
+        A user can belong to
+        many tenants, each with its own profile and preferences.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -327,11 +331,9 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """This endpoint is used to add a user to multiple tenants in one call.
-
-        A custom
-        profile can also be supplied for each tenant. This profile will be merged with
-        the user's main profile when sending to the user with that tenant.
+        """
+        Adds a user to several tenants in one call, each optionally with a per-tenant
+        profile that overrides their workspace profile.
 
         Args:
           extra_headers: Send extra headers
@@ -368,10 +370,8 @@ class AsyncTenantsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        This endpoint is used to add a single tenant.
-
-        A custom profile can also be supplied with the tenant. This profile will be
-        merged with the user's main profile when sending to the user with that tenant.
+        Adds a user to one tenant, optionally with a tenant-specific profile that
+        overrides their workspace profile for sends in that tenant.
 
         Args:
           extra_headers: Send extra headers
@@ -407,8 +407,10 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Removes a user from any tenants they may have been associated with.
+        """Removes a user from every tenant they belong to in one call.
+
+        Their
+        workspace-level profile is a separate resource.
 
         Args:
           extra_headers: Send extra headers
@@ -442,8 +444,10 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Removes a user from the supplied tenant.
+        """Removes a user from one tenant.
+
+        Their other tenant memberships and workspace
+        profile are managed through separate endpoints.
 
         Args:
           extra_headers: Send extra headers

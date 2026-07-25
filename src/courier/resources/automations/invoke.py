@@ -59,12 +59,9 @@ class InvokeResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationInvokeResponse:
-        """Invoke an ad hoc automation run.
-
-        This endpoint accepts a JSON payload with a
-        series of automation steps. For information about what steps are available,
-        checkout the ad hoc automation guide
-        [here](https://www.courier.com/docs/automations/steps/).
+        """
+        Runs a series of automation steps supplied inline, without a saved template, and
+        returns a runId.
 
         Args:
           extra_headers: Send extra headers
@@ -111,7 +108,8 @@ class InvokeResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationInvokeResponse:
         """
-        Invoke an automation run from an automation template.
+        Starts an automation run from a saved template for one recipient, with optional
+        data and profile, and returns a runId.
 
         Args:
           extra_headers: Send extra headers
@@ -179,12 +177,9 @@ class AsyncInvokeResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationInvokeResponse:
-        """Invoke an ad hoc automation run.
-
-        This endpoint accepts a JSON payload with a
-        series of automation steps. For information about what steps are available,
-        checkout the ad hoc automation guide
-        [here](https://www.courier.com/docs/automations/steps/).
+        """
+        Runs a series of automation steps supplied inline, without a saved template, and
+        returns a runId.
 
         Args:
           extra_headers: Send extra headers
@@ -231,7 +226,8 @@ class AsyncInvokeResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationInvokeResponse:
         """
-        Invoke an automation run from an automation template.
+        Starts an automation run from a saved template for one recipient, with optional
+        data and profile, and returns a runId.
 
         Args:
           extra_headers: Send extra headers

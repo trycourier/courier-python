@@ -56,7 +56,8 @@ class AuditEventsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuditEvent:
         """
-        Fetch a specific audit event by ID.
+        Returns one audit event by id, including the actor who performed it, the target
+        they changed, the source, the event type, and a timestamp.
 
         Args:
           extra_headers: Send extra headers
@@ -88,8 +89,10 @@ class AuditEventsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuditEventListResponse:
-        """
-        Fetch the list of audit events
+        """Returns the workspace's audit event log with cursor paging.
+
+        Each event records
+        the actor, target, source, type, and timestamp of a change.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of audit events.
@@ -147,7 +150,8 @@ class AsyncAuditEventsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuditEvent:
         """
-        Fetch a specific audit event by ID.
+        Returns one audit event by id, including the actor who performed it, the target
+        they changed, the source, the event type, and a timestamp.
 
         Args:
           extra_headers: Send extra headers
@@ -179,8 +183,10 @@ class AsyncAuditEventsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuditEventListResponse:
-        """
-        Fetch the list of audit events
+        """Returns the workspace's audit event log with cursor paging.
+
+        Each event records
+        the actor, target, source, type, and timestamp of a change.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of audit events.

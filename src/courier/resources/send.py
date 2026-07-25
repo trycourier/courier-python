@@ -52,8 +52,10 @@ class SendResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SendMessageResponse:
-        """
-        Send a message to one or more recipients.
+        """Sends a message to one or more recipients and returns a requestId.
+
+        Courier
+        routes it to email, SMS, push, chat, or in-app based on your rules.
 
         Args:
           message: The message property has the following primary top-level properties. They define
@@ -108,8 +110,10 @@ class AsyncSendResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SendMessageResponse:
-        """
-        Send a message to one or more recipients.
+        """Sends a message to one or more recipients and returns a requestId.
+
+        Courier
+        routes it to email, SMS, push, chat, or in-app based on your rules.
 
         Args:
           message: The message property has the following primary top-level properties. They define

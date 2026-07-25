@@ -76,11 +76,10 @@ class WorkspacePreferencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
-        """Create a workspace preference.
+        """Creates a workspace preference and returns its generated id.
 
-        The workspace preference id is generated and
-        returned. Topics are created inside a workspace preference via POST
-        /preferences/sections/{section_id}/topics.
+        Add subscription
+        topics to it afterwards with the topics endpoint.
 
         Args:
           name: Human-readable name for the workspace preference.
@@ -128,7 +127,8 @@ class WorkspacePreferencesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
         """
-        Retrieve a workspace preference by id, including its topics.
+        Returns one workspace preference by id, including its subscription topics,
+        routing options, and custom routing flag.
 
         Args:
           extra_headers: Send extra headers
@@ -159,10 +159,9 @@ class WorkspacePreferencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceListResponse:
-        """List the workspace's preferences.
-
-        Each workspace preference embeds its topics.
-        Scoped to the workspace of the API key.
+        """
+        Returns the workspace's preferences, each embedding its subscription topics,
+        routing options, and whether custom routing is allowed.
         """
         return self._get(
             "/preferences/sections",
@@ -221,11 +220,9 @@ class WorkspacePreferencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PublishPreferencesResponse:
-        """Publish the workspace's preferences page.
-
-        Takes a snapshot of every workspace
-        preference with its topics under a new published version, making the current
-        state visible on the hosted preferences page (non-draft).
+        """
+        Publishes the workspace preference page, snapshotting every preference and
+        topic, and returns the page id and a preview URL.
 
         Args:
           brand_id: Brand for the hosted page - "default" (workspace default brand), "none" (no
@@ -355,11 +352,10 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
-        """Create a workspace preference.
+        """Creates a workspace preference and returns its generated id.
 
-        The workspace preference id is generated and
-        returned. Topics are created inside a workspace preference via POST
-        /preferences/sections/{section_id}/topics.
+        Add subscription
+        topics to it afterwards with the topics endpoint.
 
         Args:
           name: Human-readable name for the workspace preference.
@@ -407,7 +403,8 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
         """
-        Retrieve a workspace preference by id, including its topics.
+        Returns one workspace preference by id, including its subscription topics,
+        routing options, and custom routing flag.
 
         Args:
           extra_headers: Send extra headers
@@ -438,10 +435,9 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceListResponse:
-        """List the workspace's preferences.
-
-        Each workspace preference embeds its topics.
-        Scoped to the workspace of the API key.
+        """
+        Returns the workspace's preferences, each embedding its subscription topics,
+        routing options, and whether custom routing is allowed.
         """
         return await self._get(
             "/preferences/sections",
@@ -500,11 +496,9 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PublishPreferencesResponse:
-        """Publish the workspace's preferences page.
-
-        Takes a snapshot of every workspace
-        preference with its topics under a new published version, making the current
-        state visible on the hosted preferences page (non-draft).
+        """
+        Publishes the workspace preference page, snapshotting every preference and
+        topic, and returns the page id and a preview URL.
 
         Args:
           brand_id: Brand for the hosted page - "default" (workspace default brand), "none" (no

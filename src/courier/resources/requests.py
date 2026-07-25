@@ -50,8 +50,10 @@ class RequestsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive message
+        """Archives a send request by its request id.
+
+        Use it to remove test sends or
+        superseded requests from the message list without deleting them.
 
         Args:
           extra_headers: Send extra headers
@@ -105,8 +107,10 @@ class AsyncRequestsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive message
+        """Archives a send request by its request id.
+
+        Use it to remove test sends or
+        superseded requests from the message list without deleting them.
 
         Args:
           extra_headers: Send extra headers
