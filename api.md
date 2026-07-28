@@ -355,6 +355,15 @@ Methods:
 - <code title="put /lists/{list_id}/subscriptions/{user_id}">client.lists.subscriptions.<a href="./src/courier/resources/lists/subscriptions.py">subscribe_user</a>(user_id, \*, list_id, \*\*<a href="src/courier/types/lists/subscription_subscribe_user_params.py">params</a>) -> None</code>
 - <code title="delete /lists/{list_id}/subscriptions/{user_id}">client.lists.subscriptions.<a href="./src/courier/resources/lists/subscriptions.py">unsubscribe_user</a>(user_id, \*, list_id) -> None</code>
 
+# Inbox
+
+## Messages
+
+Methods:
+
+- <code title="delete /inbox/messages/{message_id}">client.inbox.messages.<a href="./src/courier/resources/inbox/messages.py">delete</a>(message_id) -> None</code>
+- <code title="put /inbox/messages/{message_id}/restore">client.inbox.messages.<a href="./src/courier/resources/inbox/messages.py">restore</a>(message_id) -> None</code>
+
 # Messages
 
 Types:
