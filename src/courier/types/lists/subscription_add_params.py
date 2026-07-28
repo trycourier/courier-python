@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
+from ..._utils import PropertyInfo
 from ..put_subscriptions_recipient_param import PutSubscriptionsRecipientParam
 
 __all__ = ["SubscriptionAddParams"]
@@ -12,3 +13,7 @@ __all__ = ["SubscriptionAddParams"]
 
 class SubscriptionAddParams(TypedDict, total=False):
     recipients: Required[Iterable[PutSubscriptionsRecipientParam]]
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

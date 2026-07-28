@@ -52,6 +52,8 @@ class TestInvoke:
             profile={"tenant_id": "bar"},
             recipient="user-yes",
             template="template",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
@@ -100,6 +102,8 @@ class TestInvoke:
             data={"foo": "bar"},
             profile={"foo": "bar"},
             template="template",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
@@ -181,6 +185,8 @@ class TestAsyncInvoke:
             profile={"tenant_id": "bar"},
             recipient="user-yes",
             template="template",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
@@ -229,6 +235,8 @@ class TestAsyncInvoke:
             data={"foo": "bar"},
             profile={"foo": "bar"},
             template="template",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 

@@ -125,6 +125,47 @@ class TestLists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_subscribe_with_all_params(self, client: Courier) -> None:
+        list_ = client.profiles.lists.subscribe(
+            user_id="user_id",
+            lists=[
+                {
+                    "list_id": "listId",
+                    "preferences": {
+                        "categories": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                        "notifications": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                    },
+                }
+            ],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
+        )
+        assert_matches_type(ListSubscribeResponse, list_, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_subscribe(self, client: Courier) -> None:
         response = client.profiles.lists.with_raw_response.subscribe(
             user_id="user_id",
@@ -265,6 +306,47 @@ class TestAsyncLists:
         list_ = await async_client.profiles.lists.subscribe(
             user_id="user_id",
             lists=[{"list_id": "listId"}],
+        )
+        assert_matches_type(ListSubscribeResponse, list_, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_subscribe_with_all_params(self, async_client: AsyncCourier) -> None:
+        list_ = await async_client.profiles.lists.subscribe(
+            user_id="user_id",
+            lists=[
+                {
+                    "list_id": "listId",
+                    "preferences": {
+                        "categories": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                        "notifications": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                    },
+                }
+            ],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(ListSubscribeResponse, list_, path=["response"])
 

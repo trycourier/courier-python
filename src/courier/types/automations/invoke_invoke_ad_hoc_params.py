@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+
+from ..._utils import PropertyInfo
 
 __all__ = [
     "InvokeInvokeAdHocParams",
@@ -32,6 +34,10 @@ class InvokeInvokeAdHocParams(TypedDict, total=False):
     recipient: Optional[str]
 
     template: Optional[str]
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]
 
 
 class AutomationStepAutomationDelayStep(TypedDict, total=False):

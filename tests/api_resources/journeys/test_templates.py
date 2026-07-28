@@ -69,6 +69,8 @@ class TestTemplates:
             },
             provider_key="x",
             state="state",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneyTemplateGetResponse, template, path=["response"])
 
@@ -363,6 +365,8 @@ class TestTemplates:
             notification_id="x",
             template_id="x",
             version="v321669910225",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert template is None
 
@@ -807,6 +811,8 @@ class TestAsyncTemplates:
             },
             provider_key="x",
             state="state",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneyTemplateGetResponse, template, path=["response"])
 
@@ -1101,6 +1107,8 @@ class TestAsyncTemplates:
             notification_id="x",
             template_id="x",
             version="v321669910225",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert template is None
 

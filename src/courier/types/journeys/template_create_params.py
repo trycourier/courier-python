@@ -27,6 +27,10 @@ class TemplateCreateParams(TypedDict, total=False):
 
     state: str
 
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]
+
 
 class NotificationBrand(TypedDict, total=False):
     id: Required[str]

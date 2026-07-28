@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .brand_settings_param import BrandSettingsParam
 from .brand_snippets_param import BrandSnippetsParam
 
@@ -19,3 +20,7 @@ class BrandCreateParams(TypedDict, total=False):
     id: Optional[str]
 
     snippets: Optional[BrandSnippetsParam]
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

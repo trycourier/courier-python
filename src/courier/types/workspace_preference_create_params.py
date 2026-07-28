@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from typing import List, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .shared.channel_classification import ChannelClassification
 
 __all__ = ["WorkspacePreferenceCreateParams"]
@@ -22,3 +23,7 @@ class WorkspacePreferenceCreateParams(TypedDict, total=False):
 
     routing_options: Optional[List[ChannelClassification]]
     """Default channels for the workspace preference. Defaults to empty if omitted."""
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

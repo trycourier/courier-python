@@ -195,6 +195,8 @@ class TestPreferences:
                 },
             ],
             tenant_id="tenant_id",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(PreferenceBulkUpdateResponse, preference, path=["response"])
 
@@ -636,6 +638,8 @@ class TestAsyncPreferences:
                 },
             ],
             tenant_id="tenant_id",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(PreferenceBulkUpdateResponse, preference, path=["response"])
 

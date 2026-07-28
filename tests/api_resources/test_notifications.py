@@ -57,6 +57,8 @@ class TestNotifications:
                 "tags": ["onboarding", "welcome"],
             },
             state="DRAFT",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
@@ -345,6 +347,8 @@ class TestNotifications:
         notification = client.notifications.publish(
             id="id",
             version="v321669910225",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert notification is None
 
@@ -779,6 +783,8 @@ class TestAsyncNotifications:
                 "tags": ["onboarding", "welcome"],
             },
             state="DRAFT",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(NotificationTemplateResponse, notification, path=["response"])
 
@@ -1067,6 +1073,8 @@ class TestAsyncNotifications:
         notification = await async_client.notifications.publish(
             id="id",
             version="v321669910225",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert notification is None
 

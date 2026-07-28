@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import SequenceNotStr
+from .._utils import PropertyInfo
 from .shared_params.utm import Utm
 from .shared_params.list_recipient import ListRecipient
 from .shared_params.user_recipient import UserRecipient
@@ -42,6 +43,10 @@ class SendMessageParams(TypedDict, total=False):
 
     They define the destination and content of the message.
     """
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]
 
 
 MessageContent: TypeAlias = Union[ElementalContentSugar, ElementalContent]

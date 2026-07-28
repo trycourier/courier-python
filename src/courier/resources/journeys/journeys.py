@@ -18,7 +18,7 @@ from ...types import (
     journey_retrieve_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, required_args, maybe_transform, async_maybe_transform
+from ..._utils import path_template, required_args, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from .templates import (
     TemplatesResource,
@@ -78,6 +78,8 @@ class JourneysResource(SyncAPIResource):
         nodes: Iterable[JourneyNodeParam],
         enabled: bool | Omit = omit,
         state: JourneyState | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -100,6 +102,15 @@ class JourneysResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/journeys",
             body=maybe_transform(
@@ -249,6 +260,8 @@ class JourneysResource(SyncAPIResource):
         self,
         *,
         cancelation_token: str,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -276,6 +289,8 @@ class JourneysResource(SyncAPIResource):
         self,
         *,
         run_id: str,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -303,6 +318,8 @@ class JourneysResource(SyncAPIResource):
         self,
         *,
         cancelation_token: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         run_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -311,6 +328,15 @@ class JourneysResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CancelJourneyResponse:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return cast(
             CancelJourneyResponse,
             self._post(
@@ -338,6 +364,8 @@ class JourneysResource(SyncAPIResource):
         data: Dict[str, object] | Omit = omit,
         profile: Dict[str, object] | Omit = omit,
         user_id: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -376,6 +404,15 @@ class JourneysResource(SyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/journeys/{template_id}/invoke", template_id=template_id),
             body=maybe_transform(
@@ -431,6 +468,8 @@ class JourneysResource(SyncAPIResource):
         template_id: str,
         *,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -453,6 +492,15 @@ class JourneysResource(SyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/journeys/{template_id}/publish", template_id=template_id),
             body=maybe_transform({"version": version}, journey_publish_params.JourneyPublishParams),
@@ -543,6 +591,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         nodes: Iterable[JourneyNodeParam],
         enabled: bool | Omit = omit,
         state: JourneyState | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -565,6 +615,15 @@ class AsyncJourneysResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/journeys",
             body=await async_maybe_transform(
@@ -714,6 +773,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         self,
         *,
         cancelation_token: str,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -741,6 +802,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         self,
         *,
         run_id: str,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -768,6 +831,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         self,
         *,
         cancelation_token: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         run_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -776,6 +841,15 @@ class AsyncJourneysResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CancelJourneyResponse:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return cast(
             CancelJourneyResponse,
             await self._post(
@@ -803,6 +877,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         data: Dict[str, object] | Omit = omit,
         profile: Dict[str, object] | Omit = omit,
         user_id: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -841,6 +917,15 @@ class AsyncJourneysResource(AsyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/journeys/{template_id}/invoke", template_id=template_id),
             body=await async_maybe_transform(
@@ -896,6 +981,8 @@ class AsyncJourneysResource(AsyncAPIResource):
         template_id: str,
         *,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -918,6 +1005,15 @@ class AsyncJourneysResource(AsyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/journeys/{template_id}/publish", template_id=template_id),
             body=await async_maybe_transform({"version": version}, journey_publish_params.JourneyPublishParams),
