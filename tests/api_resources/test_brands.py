@@ -105,6 +105,8 @@ class TestBrands:
                     }
                 ]
             },
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(Brand, brand, path=["response"])
 
@@ -472,6 +474,8 @@ class TestAsyncBrands:
                     }
                 ]
             },
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(Brand, brand, path=["response"])
 

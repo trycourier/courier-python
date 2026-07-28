@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from typing import Dict, List, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from ..._utils import PropertyInfo
 from ..shared.channel_classification import ChannelClassification
 
 __all__ = ["TopicCreateParams"]
@@ -34,3 +35,7 @@ class TopicCreateParams(TypedDict, total=False):
 
     topic_data: Optional[Dict[str, object]]
     """Arbitrary metadata associated with the topic."""
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

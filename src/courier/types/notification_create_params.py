@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .notification_template_payload_param import NotificationTemplatePayloadParam
 
 __all__ = ["NotificationCreateParams"]
@@ -22,3 +23,7 @@ class NotificationCreateParams(TypedDict, total=False):
     Case-insensitive input, normalized to uppercase in the response. Defaults to
     "DRAFT".
     """
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

@@ -36,6 +36,8 @@ class TestProviders:
             alias="alias",
             settings={"foo": "bar"},
             title="title",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -265,6 +267,8 @@ class TestAsyncProviders:
             alias="alias",
             settings={"foo": "bar"},
             title="title",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(Provider, provider, path=["response"])
 

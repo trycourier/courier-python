@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
+from .._utils import PropertyInfo
 from .shared_params.message_channels import MessageChannels
 from .shared_params.message_providers import MessageProviders
 
@@ -30,6 +31,10 @@ class RoutingStrategyCreateParams(TypedDict, total=False):
 
     tags: Optional[SequenceNotStr[str]]
     """Optional tags for categorization."""
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]
 
 
 from .shared_params.message_routing import MessageRouting

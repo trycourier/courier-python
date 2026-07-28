@@ -81,6 +81,47 @@ class TestSubscriptions:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_add_with_all_params(self, client: Courier) -> None:
+        subscription = client.lists.subscriptions.add(
+            list_id="list_id",
+            recipients=[
+                {
+                    "recipient_id": "recipientId",
+                    "preferences": {
+                        "categories": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                        "notifications": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                    },
+                }
+            ],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
+        )
+        assert subscription is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_add(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.add(
             list_id="list_id",
@@ -364,6 +405,47 @@ class TestAsyncSubscriptions:
         subscription = await async_client.lists.subscriptions.add(
             list_id="list_id",
             recipients=[{"recipient_id": "recipientId"}],
+        )
+        assert subscription is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_add_with_all_params(self, async_client: AsyncCourier) -> None:
+        subscription = await async_client.lists.subscriptions.add(
+            list_id="list_id",
+            recipients=[
+                {
+                    "recipient_id": "recipientId",
+                    "preferences": {
+                        "categories": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                        "notifications": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                    },
+                }
+            ],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert subscription is None
 

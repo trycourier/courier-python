@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["WorkspacePreferencePublishParams"]
 
@@ -20,3 +22,7 @@ class WorkspacePreferencePublishParams(TypedDict, total=False):
 
     heading: Optional[str]
     """Heading shown at the top of the hosted preferences page."""
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

@@ -8,7 +8,7 @@ import httpx
 
 from ...types import NotificationTemplateState
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -65,6 +65,8 @@ class TemplatesResource(SyncAPIResource):
         notification: template_create_params.Notification,
         provider_key: str | Omit = omit,
         state: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -88,6 +90,15 @@ class TemplatesResource(SyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/journeys/{template_id}/templates", template_id=template_id),
             body=maybe_transform(
@@ -287,6 +298,8 @@ class TemplatesResource(SyncAPIResource):
         *,
         template_id: str,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -313,6 +326,15 @@ class TemplatesResource(SyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template(
                 "/journeys/{template_id}/templates/{notification_id}/publish",
@@ -570,6 +592,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         notification: template_create_params.Notification,
         provider_key: str | Omit = omit,
         state: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -593,6 +617,15 @@ class AsyncTemplatesResource(AsyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/journeys/{template_id}/templates", template_id=template_id),
             body=await async_maybe_transform(
@@ -792,6 +825,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         *,
         template_id: str,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -818,6 +853,15 @@ class AsyncTemplatesResource(AsyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template(
                 "/journeys/{template_id}/templates/{notification_id}/publish",

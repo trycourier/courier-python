@@ -64,6 +64,8 @@ class TestJourneys:
             ],
             enabled=True,
             state="DRAFT",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneyResponse, journey, path=["response"])
 
@@ -253,6 +255,16 @@ class TestJourneys:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_cancel_with_all_params_overload_1(self, client: Courier) -> None:
+        journey = client.journeys.cancel(
+            cancelation_token="x",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_cancel_overload_1(self, client: Courier) -> None:
         response = client.journeys.with_raw_response.cancel(
             cancelation_token="x",
@@ -282,6 +294,16 @@ class TestJourneys:
     def test_method_cancel_overload_2(self, client: Courier) -> None:
         journey = client.journeys.cancel(
             run_id="x",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_cancel_with_all_params_overload_2(self, client: Courier) -> None:
+        journey = client.journeys.cancel(
+            run_id="x",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(CancelJourneyResponse, journey, path=["response"])
 
@@ -330,6 +352,8 @@ class TestJourneys:
             },
             profile={"foo": "bar"},
             user_id="user-123",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneysInvokeResponse, journey, path=["response"])
 
@@ -423,6 +447,8 @@ class TestJourneys:
         journey = client.journeys.publish(
             template_id="x",
             version="v321669910225",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneyResponse, journey, path=["response"])
 
@@ -597,6 +623,8 @@ class TestAsyncJourneys:
             ],
             enabled=True,
             state="DRAFT",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneyResponse, journey, path=["response"])
 
@@ -786,6 +814,16 @@ class TestAsyncJourneys:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_cancel_with_all_params_overload_1(self, async_client: AsyncCourier) -> None:
+        journey = await async_client.journeys.cancel(
+            cancelation_token="x",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_raw_response_cancel_overload_1(self, async_client: AsyncCourier) -> None:
         response = await async_client.journeys.with_raw_response.cancel(
             cancelation_token="x",
@@ -815,6 +853,16 @@ class TestAsyncJourneys:
     async def test_method_cancel_overload_2(self, async_client: AsyncCourier) -> None:
         journey = await async_client.journeys.cancel(
             run_id="x",
+        )
+        assert_matches_type(CancelJourneyResponse, journey, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_cancel_with_all_params_overload_2(self, async_client: AsyncCourier) -> None:
+        journey = await async_client.journeys.cancel(
+            run_id="x",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(CancelJourneyResponse, journey, path=["response"])
 
@@ -863,6 +911,8 @@ class TestAsyncJourneys:
             },
             profile={"foo": "bar"},
             user_id="user-123",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneysInvokeResponse, journey, path=["response"])
 
@@ -956,6 +1006,8 @@ class TestAsyncJourneys:
         journey = await async_client.journeys.publish(
             template_id="x",
             version="v321669910225",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(JourneyResponse, journey, path=["response"])
 
