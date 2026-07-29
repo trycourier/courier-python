@@ -264,6 +264,36 @@ Methods:
 - <code title="put /journeys/{templateId}/templates/{notificationId}">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">replace</a>(notification_id, \*, template_id, \*\*<a href="src/courier/types/journeys/template_replace_params.py">params</a>) -> <a href="./src/courier/types/journey_template_get_response.py">JourneyTemplateGetResponse</a></code>
 - <code title="get /journeys/{templateId}/templates/{notificationId}/content">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">retrieve_content</a>(notification_id, \*, template_id, \*\*<a href="src/courier/types/journeys/template_retrieve_content_params.py">params</a>) -> <a href="./src/courier/types/notification_content_get_response.py">NotificationContentGetResponse</a></code>
 
+# Broadcasts
+
+Types:
+
+```python
+from courier.types import (
+    Broadcast,
+    BroadcastListResponse,
+    BroadcastSchedule,
+    CreateBroadcastRequest,
+    ScheduleBroadcastRequest,
+    SendBroadcastRequest,
+    UpdateBroadcastRequest,
+)
+```
+
+Methods:
+
+- <code title="post /broadcasts">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">create</a>(\*\*<a href="src/courier/types/broadcast_create_params.py">params</a>) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+- <code title="get /broadcasts/{broadcastId}">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">retrieve</a>(broadcast_id) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+- <code title="put /broadcasts/{broadcastId}">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">update</a>(broadcast_id, \*\*<a href="src/courier/types/broadcast_update_params.py">params</a>) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+- <code title="get /broadcasts">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">list</a>(\*\*<a href="src/courier/types/broadcast_list_params.py">params</a>) -> <a href="./src/courier/types/broadcast_list_response.py">BroadcastListResponse</a></code>
+- <code title="delete /broadcasts/{broadcastId}">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">archive</a>(broadcast_id) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+- <code title="post /broadcasts/{broadcastId}/cancel">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">cancel</a>(broadcast_id) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+- <code title="post /broadcasts/{broadcastId}/duplicate">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">duplicate</a>(broadcast_id) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+- <code title="put /broadcasts/{broadcastId}/content">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">put_content</a>(broadcast_id, \*\*<a href="src/courier/types/broadcast_put_content_params.py">params</a>) -> <a href="./src/courier/types/notification_content_mutation_response.py">NotificationContentMutationResponse</a></code>
+- <code title="get /broadcasts/{broadcastId}/content">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">retrieve_content</a>(broadcast_id, \*\*<a href="src/courier/types/broadcast_retrieve_content_params.py">params</a>) -> <a href="./src/courier/types/notification_content_get_response.py">NotificationContentGetResponse</a></code>
+- <code title="post /broadcasts/{broadcastId}/schedule">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">schedule</a>(broadcast_id, \*\*<a href="src/courier/types/broadcast_schedule_params.py">params</a>) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+- <code title="post /broadcasts/{broadcastId}/send">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">send</a>(broadcast_id, \*\*<a href="src/courier/types/broadcast_send_params.py">params</a>) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
+
 # Brands
 
 Types:
