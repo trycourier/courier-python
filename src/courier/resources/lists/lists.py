@@ -34,8 +34,15 @@ __all__ = ["ListsResource", "AsyncListsResource"]
 
 
 class ListsResource(SyncAPIResource):
+    """
+    Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+    """
+
     @cached_property
     def subscriptions(self) -> SubscriptionsResource:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return SubscriptionsResource(self._client)
 
     @cached_property
@@ -261,8 +268,15 @@ class ListsResource(SyncAPIResource):
 
 
 class AsyncListsResource(AsyncAPIResource):
+    """
+    Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+    """
+
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsResource:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return AsyncSubscriptionsResource(self._client)
 
     @cached_property
@@ -509,6 +523,9 @@ class ListsResourceWithRawResponse:
 
     @cached_property
     def subscriptions(self) -> SubscriptionsResourceWithRawResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return SubscriptionsResourceWithRawResponse(self._lists.subscriptions)
 
 
@@ -534,6 +551,9 @@ class AsyncListsResourceWithRawResponse:
 
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsResourceWithRawResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return AsyncSubscriptionsResourceWithRawResponse(self._lists.subscriptions)
 
 
@@ -559,6 +579,9 @@ class ListsResourceWithStreamingResponse:
 
     @cached_property
     def subscriptions(self) -> SubscriptionsResourceWithStreamingResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return SubscriptionsResourceWithStreamingResponse(self._lists.subscriptions)
 
 
@@ -584,4 +607,7 @@ class AsyncListsResourceWithStreamingResponse:
 
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsResourceWithStreamingResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return AsyncSubscriptionsResourceWithStreamingResponse(self._lists.subscriptions)

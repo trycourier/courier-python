@@ -21,6 +21,10 @@ __all__ = ["VersionsResource", "AsyncVersionsResource"]
 
 
 class VersionsResource(SyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def with_raw_response(self) -> VersionsResourceWithRawResponse:
         """
@@ -87,6 +91,10 @@ class VersionsResource(SyncAPIResource):
 
 
 class AsyncVersionsResource(AsyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncVersionsResourceWithRawResponse:
         """

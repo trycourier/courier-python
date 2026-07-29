@@ -25,6 +25,10 @@ __all__ = ["InboundResource", "AsyncInboundResource"]
 
 
 class InboundResource(SyncAPIResource):
+    """
+    Record an inbound event that triggers the journeys and automations mapped to it.
+    """
+
     @cached_property
     def with_raw_response(self) -> InboundResourceWithRawResponse:
         """
@@ -101,6 +105,10 @@ class InboundResource(SyncAPIResource):
 
 
 class AsyncInboundResource(AsyncAPIResource):
+    """
+    Record an inbound event that triggers the journeys and automations mapped to it.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncInboundResourceWithRawResponse:
         """

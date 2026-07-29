@@ -19,6 +19,7 @@ __all__ = ["InboxResource", "AsyncInboxResource"]
 class InboxResource(SyncAPIResource):
     @cached_property
     def messages(self) -> MessagesResource:
+        """Manage the messages in a user's in-app inbox."""
         return MessagesResource(self._client)
 
     @cached_property
@@ -44,6 +45,7 @@ class InboxResource(SyncAPIResource):
 class AsyncInboxResource(AsyncAPIResource):
     @cached_property
     def messages(self) -> AsyncMessagesResource:
+        """Manage the messages in a user's in-app inbox."""
         return AsyncMessagesResource(self._client)
 
     @cached_property
@@ -72,6 +74,7 @@ class InboxResourceWithRawResponse:
 
     @cached_property
     def messages(self) -> MessagesResourceWithRawResponse:
+        """Manage the messages in a user's in-app inbox."""
         return MessagesResourceWithRawResponse(self._inbox.messages)
 
 
@@ -81,6 +84,7 @@ class AsyncInboxResourceWithRawResponse:
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithRawResponse:
+        """Manage the messages in a user's in-app inbox."""
         return AsyncMessagesResourceWithRawResponse(self._inbox.messages)
 
 
@@ -90,6 +94,7 @@ class InboxResourceWithStreamingResponse:
 
     @cached_property
     def messages(self) -> MessagesResourceWithStreamingResponse:
+        """Manage the messages in a user's in-app inbox."""
         return MessagesResourceWithStreamingResponse(self._inbox.messages)
 
 
@@ -99,4 +104,5 @@ class AsyncInboxResourceWithStreamingResponse:
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
+        """Manage the messages in a user's in-app inbox."""
         return AsyncMessagesResourceWithStreamingResponse(self._inbox.messages)

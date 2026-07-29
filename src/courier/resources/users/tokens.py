@@ -26,6 +26,10 @@ __all__ = ["TokensResource", "AsyncTokensResource"]
 
 
 class TokensResource(SyncAPIResource):
+    """
+    Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+    """
+
     @cached_property
     def with_raw_response(self) -> TokensResourceWithRawResponse:
         """
@@ -293,6 +297,10 @@ class TokensResource(SyncAPIResource):
 
 
 class AsyncTokensResource(AsyncAPIResource):
+    """
+    Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTokensResourceWithRawResponse:
         """

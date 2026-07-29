@@ -27,6 +27,10 @@ __all__ = ["BrandsResource", "AsyncBrandsResource"]
 
 
 class BrandsResource(SyncAPIResource):
+    """
+    Manage the logos, colors, and layout that give the templates you send a consistent look.
+    """
+
     @cached_property
     def with_raw_response(self) -> BrandsResourceWithRawResponse:
         """
@@ -260,6 +264,10 @@ class BrandsResource(SyncAPIResource):
 
 
 class AsyncBrandsResource(AsyncAPIResource):
+    """
+    Manage the logos, colors, and layout that give the templates you send a consistent look.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncBrandsResourceWithRawResponse:
         """

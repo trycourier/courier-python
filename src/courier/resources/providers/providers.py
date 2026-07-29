@@ -33,8 +33,15 @@ __all__ = ["ProvidersResource", "AsyncProvidersResource"]
 
 
 class ProvidersResource(SyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def catalog(self) -> CatalogResource:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return CatalogResource(self._client)
 
     @cached_property
@@ -289,8 +296,15 @@ class ProvidersResource(SyncAPIResource):
 
 
 class AsyncProvidersResource(AsyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def catalog(self) -> AsyncCatalogResource:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return AsyncCatalogResource(self._client)
 
     @cached_property
@@ -566,6 +580,9 @@ class ProvidersResourceWithRawResponse:
 
     @cached_property
     def catalog(self) -> CatalogResourceWithRawResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return CatalogResourceWithRawResponse(self._providers.catalog)
 
 
@@ -591,6 +608,9 @@ class AsyncProvidersResourceWithRawResponse:
 
     @cached_property
     def catalog(self) -> AsyncCatalogResourceWithRawResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return AsyncCatalogResourceWithRawResponse(self._providers.catalog)
 
 
@@ -616,6 +636,9 @@ class ProvidersResourceWithStreamingResponse:
 
     @cached_property
     def catalog(self) -> CatalogResourceWithStreamingResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return CatalogResourceWithStreamingResponse(self._providers.catalog)
 
 
@@ -641,4 +664,7 @@ class AsyncProvidersResourceWithStreamingResponse:
 
     @cached_property
     def catalog(self) -> AsyncCatalogResourceWithStreamingResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return AsyncCatalogResourceWithStreamingResponse(self._providers.catalog)

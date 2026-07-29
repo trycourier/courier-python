@@ -29,6 +29,10 @@ __all__ = ["AudiencesResource", "AsyncAudiencesResource"]
 
 
 class AudiencesResource(SyncAPIResource):
+    """
+    Define filter-based groups whose membership Courier recalculates as user profiles change.
+    """
+
     @cached_property
     def with_raw_response(self) -> AudiencesResourceWithRawResponse:
         """
@@ -257,6 +261,10 @@ class AudiencesResource(SyncAPIResource):
 
 
 class AsyncAudiencesResource(AsyncAPIResource):
+    """
+    Define filter-based groups whose membership Courier recalculates as user profiles change.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncAudiencesResourceWithRawResponse:
         """

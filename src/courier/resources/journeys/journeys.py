@@ -48,8 +48,15 @@ __all__ = ["JourneysResource", "AsyncJourneysResource"]
 
 
 class JourneysResource(SyncAPIResource):
+    """
+    Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+    """
+
     @cached_property
     def templates(self) -> TemplatesResource:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         return TemplatesResource(self._client)
 
     @cached_property
@@ -561,8 +568,15 @@ class JourneysResource(SyncAPIResource):
 
 
 class AsyncJourneysResource(AsyncAPIResource):
+    """
+    Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+    """
+
     @cached_property
     def templates(self) -> AsyncTemplatesResource:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         return AsyncTemplatesResource(self._client)
 
     @cached_property
@@ -1107,6 +1121,9 @@ class JourneysResourceWithRawResponse:
 
     @cached_property
     def templates(self) -> TemplatesResourceWithRawResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         return TemplatesResourceWithRawResponse(self._journeys.templates)
 
 
@@ -1144,6 +1161,9 @@ class AsyncJourneysResourceWithRawResponse:
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithRawResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         return AsyncTemplatesResourceWithRawResponse(self._journeys.templates)
 
 
@@ -1181,6 +1201,9 @@ class JourneysResourceWithStreamingResponse:
 
     @cached_property
     def templates(self) -> TemplatesResourceWithStreamingResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         return TemplatesResourceWithStreamingResponse(self._journeys.templates)
 
 
@@ -1218,4 +1241,7 @@ class AsyncJourneysResourceWithStreamingResponse:
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithStreamingResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         return AsyncTemplatesResourceWithStreamingResponse(self._journeys.templates)

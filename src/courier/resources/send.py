@@ -22,6 +22,10 @@ __all__ = ["SendResource", "AsyncSendResource"]
 
 
 class SendResource(SyncAPIResource):
+    """
+    Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+    """
+
     @cached_property
     def with_raw_response(self) -> SendResourceWithRawResponse:
         """
@@ -91,6 +95,10 @@ class SendResource(SyncAPIResource):
 
 
 class AsyncSendResource(AsyncAPIResource):
+    """
+    Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSendResourceWithRawResponse:
         """

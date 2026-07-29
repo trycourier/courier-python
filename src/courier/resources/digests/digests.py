@@ -19,6 +19,9 @@ __all__ = ["DigestsResource", "AsyncDigestsResource"]
 class DigestsResource(SyncAPIResource):
     @cached_property
     def schedules(self) -> SchedulesResource:
+        """
+        Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+        """
         return SchedulesResource(self._client)
 
     @cached_property
@@ -44,6 +47,9 @@ class DigestsResource(SyncAPIResource):
 class AsyncDigestsResource(AsyncAPIResource):
     @cached_property
     def schedules(self) -> AsyncSchedulesResource:
+        """
+        Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+        """
         return AsyncSchedulesResource(self._client)
 
     @cached_property
@@ -72,6 +78,9 @@ class DigestsResourceWithRawResponse:
 
     @cached_property
     def schedules(self) -> SchedulesResourceWithRawResponse:
+        """
+        Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+        """
         return SchedulesResourceWithRawResponse(self._digests.schedules)
 
 
@@ -81,6 +90,9 @@ class AsyncDigestsResourceWithRawResponse:
 
     @cached_property
     def schedules(self) -> AsyncSchedulesResourceWithRawResponse:
+        """
+        Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+        """
         return AsyncSchedulesResourceWithRawResponse(self._digests.schedules)
 
 
@@ -90,6 +102,9 @@ class DigestsResourceWithStreamingResponse:
 
     @cached_property
     def schedules(self) -> SchedulesResourceWithStreamingResponse:
+        """
+        Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+        """
         return SchedulesResourceWithStreamingResponse(self._digests.schedules)
 
 
@@ -99,4 +114,7 @@ class AsyncDigestsResourceWithStreamingResponse:
 
     @cached_property
     def schedules(self) -> AsyncSchedulesResourceWithStreamingResponse:
+        """
+        Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+        """
         return AsyncSchedulesResourceWithStreamingResponse(self._digests.schedules)

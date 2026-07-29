@@ -22,6 +22,10 @@ __all__ = ["SchedulesResource", "AsyncSchedulesResource"]
 
 
 class SchedulesResource(SyncAPIResource):
+    """
+    Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+    """
+
     @cached_property
     def with_raw_response(self) -> SchedulesResourceWithRawResponse:
         """
@@ -129,6 +133,10 @@ class SchedulesResource(SyncAPIResource):
 
 
 class AsyncSchedulesResource(AsyncAPIResource):
+    """
+    Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSchedulesResourceWithRawResponse:
         """

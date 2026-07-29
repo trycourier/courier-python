@@ -34,6 +34,10 @@ __all__ = ["RoutingStrategiesResource", "AsyncRoutingStrategiesResource"]
 
 
 class RoutingStrategiesResource(SyncAPIResource):
+    """
+    Define reusable channel routing and failover strategies, and see which templates use them.
+    """
+
     @cached_property
     def with_raw_response(self) -> RoutingStrategiesResourceWithRawResponse:
         """
@@ -361,6 +365,10 @@ class RoutingStrategiesResource(SyncAPIResource):
 
 
 class AsyncRoutingStrategiesResource(AsyncAPIResource):
+    """
+    Define reusable channel routing and failover strategies, and see which templates use them.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncRoutingStrategiesResourceWithRawResponse:
         """

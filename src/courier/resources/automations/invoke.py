@@ -24,6 +24,10 @@ __all__ = ["InvokeResource", "AsyncInvokeResource"]
 
 
 class InvokeResource(SyncAPIResource):
+    """
+    Invoke a stored automation template or an ad hoc automation defined in the request.
+    """
+
     @cached_property
     def with_raw_response(self) -> InvokeResourceWithRawResponse:
         """
@@ -164,6 +168,10 @@ class InvokeResource(SyncAPIResource):
 
 
 class AsyncInvokeResource(AsyncAPIResource):
+    """
+    Invoke a stored automation template or an ad hoc automation defined in the request.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncInvokeResourceWithRawResponse:
         """

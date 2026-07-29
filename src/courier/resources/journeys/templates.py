@@ -38,6 +38,10 @@ __all__ = ["TemplatesResource", "AsyncTemplatesResource"]
 
 
 class TemplatesResource(SyncAPIResource):
+    """
+    Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+    """
+
     @cached_property
     def with_raw_response(self) -> TemplatesResourceWithRawResponse:
         """
@@ -565,6 +569,10 @@ class TemplatesResource(SyncAPIResource):
 
 
 class AsyncTemplatesResource(AsyncAPIResource):
+    """
+    Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTemplatesResourceWithRawResponse:
         """

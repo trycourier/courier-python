@@ -26,6 +26,10 @@ __all__ = ["ChecksResource", "AsyncChecksResource"]
 
 
 class ChecksResource(SyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def with_raw_response(self) -> ChecksResourceWithRawResponse:
         """
@@ -162,6 +166,10 @@ class ChecksResource(SyncAPIResource):
 
 
 class AsyncChecksResource(AsyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncChecksResourceWithRawResponse:
         """

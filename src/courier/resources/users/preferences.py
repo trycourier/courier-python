@@ -35,6 +35,10 @@ __all__ = ["PreferencesResource", "AsyncPreferencesResource"]
 
 
 class PreferencesResource(SyncAPIResource):
+    """
+    Read and write a single user's notification preferences, per topic and per channel.
+    """
+
     @cached_property
     def with_raw_response(self) -> PreferencesResourceWithRawResponse:
         """
@@ -350,6 +354,10 @@ class PreferencesResource(SyncAPIResource):
 
 
 class AsyncPreferencesResource(AsyncAPIResource):
+    """
+    Read and write a single user's notification preferences, per topic and per channel.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPreferencesResourceWithRawResponse:
         """

@@ -51,8 +51,15 @@ __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
 
 
 class NotificationsResource(SyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def checks(self) -> ChecksResource:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return ChecksResource(self._client)
 
     @cached_property
@@ -659,8 +666,15 @@ class NotificationsResource(SyncAPIResource):
 
 
 class AsyncNotificationsResource(AsyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def checks(self) -> AsyncChecksResource:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return AsyncChecksResource(self._client)
 
     @cached_property
@@ -1313,6 +1327,9 @@ class NotificationsResourceWithRawResponse:
 
     @cached_property
     def checks(self) -> ChecksResourceWithRawResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return ChecksResourceWithRawResponse(self._notifications.checks)
 
 
@@ -1359,6 +1376,9 @@ class AsyncNotificationsResourceWithRawResponse:
 
     @cached_property
     def checks(self) -> AsyncChecksResourceWithRawResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return AsyncChecksResourceWithRawResponse(self._notifications.checks)
 
 
@@ -1405,6 +1425,9 @@ class NotificationsResourceWithStreamingResponse:
 
     @cached_property
     def checks(self) -> ChecksResourceWithStreamingResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return ChecksResourceWithStreamingResponse(self._notifications.checks)
 
 
@@ -1451,4 +1474,7 @@ class AsyncNotificationsResourceWithStreamingResponse:
 
     @cached_property
     def checks(self) -> AsyncChecksResourceWithStreamingResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return AsyncChecksResourceWithStreamingResponse(self._notifications.checks)

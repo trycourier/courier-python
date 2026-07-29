@@ -27,6 +27,10 @@ __all__ = ["TopicsResource", "AsyncTopicsResource"]
 
 
 class TopicsResource(SyncAPIResource):
+    """
+    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+    """
+
     @cached_property
     def with_raw_response(self) -> TopicsResourceWithRawResponse:
         """
@@ -315,6 +319,10 @@ class TopicsResource(SyncAPIResource):
 
 
 class AsyncTopicsResource(AsyncAPIResource):
+    """
+    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTopicsResourceWithRawResponse:
         """

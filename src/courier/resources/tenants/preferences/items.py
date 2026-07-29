@@ -25,6 +25,10 @@ __all__ = ["ItemsResource", "AsyncItemsResource"]
 
 
 class ItemsResource(SyncAPIResource):
+    """
+    Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+    """
+
     @cached_property
     def with_raw_response(self) -> ItemsResourceWithRawResponse:
         """
@@ -143,6 +147,10 @@ class ItemsResource(SyncAPIResource):
 
 
 class AsyncItemsResource(AsyncAPIResource):
+    """
+    Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncItemsResourceWithRawResponse:
         """

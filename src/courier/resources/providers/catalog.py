@@ -22,6 +22,10 @@ __all__ = ["CatalogResource", "AsyncCatalogResource"]
 
 
 class CatalogResource(SyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def with_raw_response(self) -> CatalogResourceWithRawResponse:
         """
@@ -95,6 +99,10 @@ class CatalogResource(SyncAPIResource):
 
 
 class AsyncCatalogResource(AsyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncCatalogResourceWithRawResponse:
         """

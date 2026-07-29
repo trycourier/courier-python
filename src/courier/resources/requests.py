@@ -20,6 +20,10 @@ __all__ = ["RequestsResource", "AsyncRequestsResource"]
 
 
 class RequestsResource(SyncAPIResource):
+    """
+    Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+    """
+
     @cached_property
     def with_raw_response(self) -> RequestsResourceWithRawResponse:
         """
@@ -77,6 +81,10 @@ class RequestsResource(SyncAPIResource):
 
 
 class AsyncRequestsResource(AsyncAPIResource):
+    """
+    Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncRequestsResourceWithRawResponse:
         """
