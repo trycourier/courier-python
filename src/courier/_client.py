@@ -215,6 +215,9 @@ class Courier(SyncAPIClient):
 
     @cached_property
     def broadcasts(self) -> BroadcastsResource:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import BroadcastsResource
 
         return BroadcastsResource(self)
@@ -576,6 +579,9 @@ class AsyncCourier(AsyncAPIClient):
 
     @cached_property
     def broadcasts(self) -> AsyncBroadcastsResource:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import AsyncBroadcastsResource
 
         return AsyncBroadcastsResource(self)
@@ -879,6 +885,9 @@ class CourierWithRawResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.BroadcastsResourceWithRawResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import BroadcastsResourceWithRawResponse
 
         return BroadcastsResourceWithRawResponse(self._client.broadcasts)
@@ -1070,6 +1079,9 @@ class AsyncCourierWithRawResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.AsyncBroadcastsResourceWithRawResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import AsyncBroadcastsResourceWithRawResponse
 
         return AsyncBroadcastsResourceWithRawResponse(self._client.broadcasts)
@@ -1261,6 +1273,9 @@ class CourierWithStreamedResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.BroadcastsResourceWithStreamingResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import BroadcastsResourceWithStreamingResponse
 
         return BroadcastsResourceWithStreamingResponse(self._client.broadcasts)
@@ -1452,6 +1467,9 @@ class AsyncCourierWithStreamedResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.AsyncBroadcastsResourceWithStreamingResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import AsyncBroadcastsResourceWithStreamingResponse
 
         return AsyncBroadcastsResourceWithStreamingResponse(self._client.broadcasts)

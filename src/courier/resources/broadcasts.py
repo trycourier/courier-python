@@ -38,6 +38,10 @@ __all__ = ["BroadcastsResource", "AsyncBroadcastsResource"]
 
 
 class BroadcastsResource(SyncAPIResource):
+    """
+    Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+    """
+
     @cached_property
     def with_raw_response(self) -> BroadcastsResourceWithRawResponse:
         """
@@ -529,6 +533,10 @@ class BroadcastsResource(SyncAPIResource):
 
 
 class AsyncBroadcastsResource(AsyncAPIResource):
+    """
+    Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncBroadcastsResourceWithRawResponse:
         """
