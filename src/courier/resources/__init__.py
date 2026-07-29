@@ -120,6 +120,14 @@ from .providers import (
     ProvidersResourceWithStreamingResponse,
     AsyncProvidersResourceWithStreamingResponse,
 )
+from .broadcasts import (
+    BroadcastsResource,
+    AsyncBroadcastsResource,
+    BroadcastsResourceWithRawResponse,
+    AsyncBroadcastsResourceWithRawResponse,
+    BroadcastsResourceWithStreamingResponse,
+    AsyncBroadcastsResourceWithStreamingResponse,
+)
 from .automations import (
     AutomationsResource,
     AsyncAutomationsResource,
@@ -212,6 +220,12 @@ __all__ = [
     "AsyncJourneysResourceWithRawResponse",
     "JourneysResourceWithStreamingResponse",
     "AsyncJourneysResourceWithStreamingResponse",
+    "BroadcastsResource",
+    "AsyncBroadcastsResource",
+    "BroadcastsResourceWithRawResponse",
+    "AsyncBroadcastsResourceWithRawResponse",
+    "BroadcastsResourceWithStreamingResponse",
+    "AsyncBroadcastsResourceWithStreamingResponse",
     "BrandsResource",
     "AsyncBrandsResource",
     "BrandsResourceWithRawResponse",
