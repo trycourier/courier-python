@@ -1,5 +1,21 @@
 # Changelog
 
+## 7.22.0 (2026-07-29)
+
+Full Changelog: [v7.21.0...v7.22.0](https://github.com/trycourier/courier-python/compare/v7.21.0...v7.22.0)
+
+### Features
+
+* Document DELETE/PUT restore for inbox messages (C-19268) ([#175](https://github.com/trycourier/courier-python/issues/175)) ([6e32a5c](https://github.com/trycourier/courier-python/commit/6e32a5cb55d541ba89ac260aa62fa0d1d40505d9))
+* spec: rename and reorder the API reference sections ([#179](https://github.com/trycourier/courier-python/issues/179)) ([742efe6](https://github.com/trycourier/courier-python/commit/742efe6045de6ae33afeb780205ea7010d93a98b))
+
+
+### Documentation
+
+* **openapi:** describe user topic-preference fields explicitly ([#172](https://github.com/trycourier/courier-python/issues/172)) ([842699a](https://github.com/trycourier/courier-python/commit/842699a68811d63aca9ef8d8865266623ff3e42c))
+* **openapi:** document Idempotency-Key header on idempotent POST endpoints ([#176](https://github.com/trycourier/courier-python/issues/176)) ([9209315](https://github.com/trycourier/courier-python/commit/92093156c03c0c8a56e7a43fe41b4d4490fcc7b2))
+* **openapi:** rewrite operation descriptions for agents and SEO ([#174](https://github.com/trycourier/courier-python/issues/174)) ([c90b5d3](https://github.com/trycourier/courier-python/commit/c90b5d325da4e542a46a089084205ce145d65ef1))
+
 ## 7.21.0 (2026-07-23)
 
 Full Changelog: [v7.20.0...v7.21.0](https://github.com/trycourier/courier-python/compare/v7.20.0...v7.21.0)
