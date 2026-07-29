@@ -22,6 +22,10 @@ __all__ = ["SchedulesResource", "AsyncSchedulesResource"]
 
 
 class SchedulesResource(SyncAPIResource):
+    """
+    Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+    """
+
     @cached_property
     def with_raw_response(self) -> SchedulesResourceWithRawResponse:
         """
@@ -54,11 +58,9 @@ class SchedulesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DigestInstanceListResponse:
-        """List the digest instances for a schedule.
-
-        Each instance represents the events
-        accumulated for a single user against the schedule, and can be used to monitor
-        digest accumulation before the digest is released.
+        """
+        Returns the digest instances for a schedule, one per user, with cursor paging.
+        Use it to see what has accumulated before a digest releases.
 
         Args:
           cursor: A cursor token from a previous response, used to fetch the next page of results.
@@ -131,6 +133,10 @@ class SchedulesResource(SyncAPIResource):
 
 
 class AsyncSchedulesResource(AsyncAPIResource):
+    """
+    Inspect what has accumulated in a digest schedule and release a digest ahead of its next scheduled delivery.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSchedulesResourceWithRawResponse:
         """
@@ -163,11 +169,9 @@ class AsyncSchedulesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> DigestInstanceListResponse:
-        """List the digest instances for a schedule.
-
-        Each instance represents the events
-        accumulated for a single user against the schedule, and can be used to monitor
-        digest accumulation before the digest is released.
+        """
+        Returns the digest instances for a schedule, one per user, with cursor paging.
+        Use it to see what has accumulated before a digest releases.
 
         Args:
           cursor: A cursor token from a previous response, used to fetch the next page of results.

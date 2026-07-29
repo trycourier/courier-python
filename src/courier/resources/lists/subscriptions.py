@@ -7,7 +7,7 @@ from typing import Iterable, Optional
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -31,6 +31,10 @@ __all__ = ["SubscriptionsResource", "AsyncSubscriptionsResource"]
 
 
 class SubscriptionsResource(SyncAPIResource):
+    """
+    Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+    """
+
     @cached_property
     def with_raw_response(self) -> SubscriptionsResourceWithRawResponse:
         """
@@ -63,7 +67,8 @@ class SubscriptionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionListResponse:
         """
-        Get the list's subscriptions.
+        Returns the users subscribed to a list with paging, each with the preferences
+        recorded for that subscription.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of list subscriptions
@@ -95,6 +100,8 @@ class SubscriptionsResource(SyncAPIResource):
         list_id: str,
         *,
         recipients: Iterable[PutSubscriptionsRecipientParam],
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -118,6 +125,15 @@ class SubscriptionsResource(SyncAPIResource):
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             body=maybe_transform({"recipients": recipients}, subscription_add_params.SubscriptionAddParams),
@@ -179,8 +195,8 @@ class SubscriptionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Subscribe a user to an existing list (note: if the List does not exist, it will
-        be automatically created).
+        Subscribes one user to a list, creating the list if it does not yet exist.
+        Optional preferences apply to this subscription only.
 
         Args:
           extra_headers: Send extra headers
@@ -219,8 +235,10 @@ class SubscriptionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a subscription to a list by list ID and user ID.
+        """Removes one user's subscription to a list, addressed by list id and user id.
+
+        The
+        user's profile and other subscriptions are separate resources.
 
         Args:
           extra_headers: Send extra headers
@@ -246,6 +264,10 @@ class SubscriptionsResource(SyncAPIResource):
 
 
 class AsyncSubscriptionsResource(AsyncAPIResource):
+    """
+    Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncSubscriptionsResourceWithRawResponse:
         """
@@ -278,7 +300,8 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionListResponse:
         """
-        Get the list's subscriptions.
+        Returns the users subscribed to a list with paging, each with the preferences
+        recorded for that subscription.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of list subscriptions
@@ -310,6 +333,8 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         list_id: str,
         *,
         recipients: Iterable[PutSubscriptionsRecipientParam],
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -333,6 +358,15 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         if not list_id:
             raise ValueError(f"Expected a non-empty value for `list_id` but received {list_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/lists/{list_id}/subscriptions", list_id=list_id),
             body=await async_maybe_transform({"recipients": recipients}, subscription_add_params.SubscriptionAddParams),
@@ -396,8 +430,8 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Subscribe a user to an existing list (note: if the List does not exist, it will
-        be automatically created).
+        Subscribes one user to a list, creating the list if it does not yet exist.
+        Optional preferences apply to this subscription only.
 
         Args:
           extra_headers: Send extra headers
@@ -436,8 +470,10 @@ class AsyncSubscriptionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a subscription to a list by list ID and user ID.
+        """Removes one user's subscription to a list, addressed by list id and user id.
+
+        The
+        user's profile and other subscriptions are separate resources.
 
         Args:
           extra_headers: Send extra headers

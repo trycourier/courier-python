@@ -8,7 +8,7 @@ import httpx
 
 from ..types import brand_list_params, brand_create_params, brand_update_params
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -27,6 +27,10 @@ __all__ = ["BrandsResource", "AsyncBrandsResource"]
 
 
 class BrandsResource(SyncAPIResource):
+    """
+    Manage the logos, colors, and layout that give the templates you send a consistent look.
+    """
+
     @cached_property
     def with_raw_response(self) -> BrandsResourceWithRawResponse:
         """
@@ -53,6 +57,8 @@ class BrandsResource(SyncAPIResource):
         settings: BrandSettingsParam,
         id: Optional[str] | Omit = omit,
         snippets: Optional[BrandSnippetsParam] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -60,10 +66,10 @@ class BrandsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
-        """Create a new brand.
+        """Creates a brand from a name and settings, including primary and secondary
+        colors.
 
-        Requires `name` and `settings` (with at least
-        `colors.primary` and `colors.secondary`).
+        Brands supply the logo, colors, and styling that templates render with.
 
         Args:
           extra_headers: Send extra headers
@@ -74,6 +80,15 @@ class BrandsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/brands",
             body=maybe_transform(
@@ -103,7 +118,8 @@ class BrandsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Fetch a specific brand by brand ID.
+        Returns one brand by id, including its colors, logo and styling settings,
+        Handlebars snippets, and published version.
 
         Args:
           extra_headers: Send extra headers
@@ -139,7 +155,8 @@ class BrandsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Replace an existing brand with the supplied values.
+        Replaces a brand with the values you supply, so send the complete settings and
+        snippets rather than only the fields you want changed.
 
         Args:
           name: The name of the brand.
@@ -181,8 +198,10 @@ class BrandsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandListResponse:
-        """
-        Get the list of brands.
+        """Lists the workspace's brands.
+
+        Every entry carries its name, styling settings,
+        snippets, and published version.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of brands.
@@ -218,8 +237,10 @@ class BrandsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a brand by brand ID.
+        """Deletes a brand by id.
+
+        Reassign any template or tenant that references it before
+        deleting to keep their styling intact.
 
         Args:
           extra_headers: Send extra headers
@@ -243,6 +264,10 @@ class BrandsResource(SyncAPIResource):
 
 
 class AsyncBrandsResource(AsyncAPIResource):
+    """
+    Manage the logos, colors, and layout that give the templates you send a consistent look.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncBrandsResourceWithRawResponse:
         """
@@ -269,6 +294,8 @@ class AsyncBrandsResource(AsyncAPIResource):
         settings: BrandSettingsParam,
         id: Optional[str] | Omit = omit,
         snippets: Optional[BrandSnippetsParam] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -276,10 +303,10 @@ class AsyncBrandsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
-        """Create a new brand.
+        """Creates a brand from a name and settings, including primary and secondary
+        colors.
 
-        Requires `name` and `settings` (with at least
-        `colors.primary` and `colors.secondary`).
+        Brands supply the logo, colors, and styling that templates render with.
 
         Args:
           extra_headers: Send extra headers
@@ -290,6 +317,15 @@ class AsyncBrandsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/brands",
             body=await async_maybe_transform(
@@ -319,7 +355,8 @@ class AsyncBrandsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Fetch a specific brand by brand ID.
+        Returns one brand by id, including its colors, logo and styling settings,
+        Handlebars snippets, and published version.
 
         Args:
           extra_headers: Send extra headers
@@ -355,7 +392,8 @@ class AsyncBrandsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Brand:
         """
-        Replace an existing brand with the supplied values.
+        Replaces a brand with the values you supply, so send the complete settings and
+        snippets rather than only the fields you want changed.
 
         Args:
           name: The name of the brand.
@@ -397,8 +435,10 @@ class AsyncBrandsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BrandListResponse:
-        """
-        Get the list of brands.
+        """Lists the workspace's brands.
+
+        Every entry carries its name, styling settings,
+        snippets, and published version.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of brands.
@@ -434,8 +474,10 @@ class AsyncBrandsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a brand by brand ID.
+        """Deletes a brand by id.
+
+        Reassign any template or tenant that references it before
+        deleting to keep their styling intact.
 
         Args:
           extra_headers: Send extra headers

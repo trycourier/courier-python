@@ -37,6 +37,8 @@ class TestWorkspacePreferences:
             description="description",
             has_custom_routing=True,
             routing_options=["direct_message"],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(WorkspacePreferenceGetResponse, workspace_preference, path=["response"])
 
@@ -191,6 +193,8 @@ class TestWorkspacePreferences:
             brand_id="brand_id",
             description="description",
             heading="heading",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(PublishPreferencesResponse, workspace_preference, path=["response"])
 
@@ -296,6 +300,8 @@ class TestAsyncWorkspacePreferences:
             description="description",
             has_custom_routing=True,
             routing_options=["direct_message"],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(WorkspacePreferenceGetResponse, workspace_preference, path=["response"])
 
@@ -450,6 +456,8 @@ class TestAsyncWorkspacePreferences:
             brand_id="brand_id",
             description="description",
             heading="heading",
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(PublishPreferencesResponse, workspace_preference, path=["response"])
 

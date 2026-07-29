@@ -7,7 +7,7 @@ from typing import Iterable, Optional
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -27,6 +27,10 @@ __all__ = ["ListsResource", "AsyncListsResource"]
 
 
 class ListsResource(SyncAPIResource):
+    """
+    Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+    """
+
     @cached_property
     def with_raw_response(self) -> ListsResourceWithRawResponse:
         """
@@ -58,8 +62,10 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListRetrieveResponse:
-        """
-        Returns the subscribed lists for a specified user.
+        """Returns the lists a user is subscribed to, with paging.
+
+        Use it to check what a
+        recipient will receive before sending to a list.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of message statuses.
@@ -97,8 +103,10 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListDeleteResponse:
-        """
-        Removes all list subscriptions for given user.
+        """Removes every list subscription for a user at once.
+
+        Their profile and
+        preferences are untouched, so this only affects list-targeted sends.
 
         Args:
           extra_headers: Send extra headers
@@ -124,6 +132,8 @@ class ListsResource(SyncAPIResource):
         user_id: str,
         *,
         lists: Iterable[SubscribeToListsRequestItemParam],
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,10 +141,9 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListSubscribeResponse:
-        """Subscribes the given user to one or more lists.
-
-        If the list does not exist, it
-        will be created.
+        """
+        Subscribes a user to one or more lists, creating any list that does not yet
+        exist. Optional preferences apply to each subscription.
 
         Args:
           extra_headers: Send extra headers
@@ -147,6 +156,15 @@ class ListsResource(SyncAPIResource):
         """
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/profiles/{user_id}/lists", user_id=user_id),
             body=maybe_transform({"lists": lists}, list_subscribe_params.ListSubscribeParams),
@@ -158,6 +176,10 @@ class ListsResource(SyncAPIResource):
 
 
 class AsyncListsResource(AsyncAPIResource):
+    """
+    Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncListsResourceWithRawResponse:
         """
@@ -189,8 +211,10 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListRetrieveResponse:
-        """
-        Returns the subscribed lists for a specified user.
+        """Returns the lists a user is subscribed to, with paging.
+
+        Use it to check what a
+        recipient will receive before sending to a list.
 
         Args:
           cursor: A unique identifier that allows for fetching the next set of message statuses.
@@ -228,8 +252,10 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListDeleteResponse:
-        """
-        Removes all list subscriptions for given user.
+        """Removes every list subscription for a user at once.
+
+        Their profile and
+        preferences are untouched, so this only affects list-targeted sends.
 
         Args:
           extra_headers: Send extra headers
@@ -255,6 +281,8 @@ class AsyncListsResource(AsyncAPIResource):
         user_id: str,
         *,
         lists: Iterable[SubscribeToListsRequestItemParam],
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -262,10 +290,9 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListSubscribeResponse:
-        """Subscribes the given user to one or more lists.
-
-        If the list does not exist, it
-        will be created.
+        """
+        Subscribes a user to one or more lists, creating any list that does not yet
+        exist. Optional preferences apply to each subscription.
 
         Args:
           extra_headers: Send extra headers
@@ -278,6 +305,15 @@ class AsyncListsResource(AsyncAPIResource):
         """
         if not user_id:
             raise ValueError(f"Expected a non-empty value for `user_id` but received {user_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/profiles/{user_id}/lists", user_id=user_id),
             body=await async_maybe_transform({"lists": lists}, list_subscribe_params.ListSubscribeParams),

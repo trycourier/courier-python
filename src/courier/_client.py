@@ -38,6 +38,7 @@ if TYPE_CHECKING:
     from .resources import (
         auth,
         send,
+        inbox,
         lists,
         users,
         brands,
@@ -64,6 +65,7 @@ if TYPE_CHECKING:
     from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
+    from .resources.inbox.inbox import InboxResource, AsyncInboxResource
     from .resources.lists.lists import ListsResource, AsyncListsResource
     from .resources.users.users import UsersResource, AsyncUsersResource
     from .resources.audit_events import AuditEventsResource, AsyncAuditEventsResource
@@ -150,48 +152,70 @@ class Courier(SyncAPIClient):
 
     @cached_property
     def send(self) -> SendResource:
+        """
+        Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+        """
         from .resources.send import SendResource
 
         return SendResource(self)
 
     @cached_property
     def audiences(self) -> AudiencesResource:
+        """
+        Define filter-based groups whose membership Courier recalculates as user profiles change.
+        """
         from .resources.audiences import AudiencesResource
 
         return AudiencesResource(self)
 
     @cached_property
     def providers(self) -> ProvidersResource:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         from .resources.providers import ProvidersResource
 
         return ProvidersResource(self)
 
     @cached_property
     def audit_events(self) -> AuditEventsResource:
+        """Read the audit trail of configuration and access changes in your workspace."""
         from .resources.audit_events import AuditEventsResource
 
         return AuditEventsResource(self)
 
     @cached_property
     def auth(self) -> AuthResource:
+        """
+        Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+        """
         from .resources.auth import AuthResource
 
         return AuthResource(self)
 
     @cached_property
     def automations(self) -> AutomationsResource:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         from .resources.automations import AutomationsResource
 
         return AutomationsResource(self)
 
     @cached_property
     def journeys(self) -> JourneysResource:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         from .resources.journeys import JourneysResource
 
         return JourneysResource(self)
 
     @cached_property
     def brands(self) -> BrandsResource:
+        """
+        Manage the logos, colors, and layout that give the templates you send a consistent look.
+        """
         from .resources.brands import BrandsResource
 
         return BrandsResource(self)
@@ -204,60 +228,96 @@ class Courier(SyncAPIClient):
 
     @cached_property
     def inbound(self) -> InboundResource:
+        """
+        Record an inbound event that triggers the journeys and automations mapped to it.
+        """
         from .resources.inbound import InboundResource
 
         return InboundResource(self)
 
     @cached_property
     def lists(self) -> ListsResource:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         from .resources.lists import ListsResource
 
         return ListsResource(self)
 
     @cached_property
+    def inbox(self) -> InboxResource:
+        from .resources.inbox import InboxResource
+
+        return InboxResource(self)
+
+    @cached_property
     def messages(self) -> MessagesResource:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.messages import MessagesResource
 
         return MessagesResource(self)
 
     @cached_property
     def requests(self) -> RequestsResource:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.requests import RequestsResource
 
         return RequestsResource(self)
 
     @cached_property
     def notifications(self) -> NotificationsResource:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         from .resources.notifications import NotificationsResource
 
         return NotificationsResource(self)
 
     @cached_property
     def routing_strategies(self) -> RoutingStrategiesResource:
+        """
+        Define reusable channel routing and failover strategies, and see which templates use them.
+        """
         from .resources.routing_strategies import RoutingStrategiesResource
 
         return RoutingStrategiesResource(self)
 
     @cached_property
     def workspace_preferences(self) -> WorkspacePreferencesResource:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         from .resources.workspace_preferences import WorkspacePreferencesResource
 
         return WorkspacePreferencesResource(self)
 
     @cached_property
     def profiles(self) -> ProfilesResource:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         from .resources.profiles import ProfilesResource
 
         return ProfilesResource(self)
 
     @cached_property
     def tenants(self) -> TenantsResource:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         from .resources.tenants import TenantsResource
 
         return TenantsResource(self)
 
     @cached_property
     def translations(self) -> TranslationsResource:
+        """
+        Store and retrieve the translation strings Courier uses to render localized template content.
+        """
         from .resources.translations import TranslationsResource
 
         return TranslationsResource(self)
@@ -447,48 +507,70 @@ class AsyncCourier(AsyncAPIClient):
 
     @cached_property
     def send(self) -> AsyncSendResource:
+        """
+        Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+        """
         from .resources.send import AsyncSendResource
 
         return AsyncSendResource(self)
 
     @cached_property
     def audiences(self) -> AsyncAudiencesResource:
+        """
+        Define filter-based groups whose membership Courier recalculates as user profiles change.
+        """
         from .resources.audiences import AsyncAudiencesResource
 
         return AsyncAudiencesResource(self)
 
     @cached_property
     def providers(self) -> AsyncProvidersResource:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         from .resources.providers import AsyncProvidersResource
 
         return AsyncProvidersResource(self)
 
     @cached_property
     def audit_events(self) -> AsyncAuditEventsResource:
+        """Read the audit trail of configuration and access changes in your workspace."""
         from .resources.audit_events import AsyncAuditEventsResource
 
         return AsyncAuditEventsResource(self)
 
     @cached_property
     def auth(self) -> AsyncAuthResource:
+        """
+        Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+        """
         from .resources.auth import AsyncAuthResource
 
         return AsyncAuthResource(self)
 
     @cached_property
     def automations(self) -> AsyncAutomationsResource:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         from .resources.automations import AsyncAutomationsResource
 
         return AsyncAutomationsResource(self)
 
     @cached_property
     def journeys(self) -> AsyncJourneysResource:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         from .resources.journeys import AsyncJourneysResource
 
         return AsyncJourneysResource(self)
 
     @cached_property
     def brands(self) -> AsyncBrandsResource:
+        """
+        Manage the logos, colors, and layout that give the templates you send a consistent look.
+        """
         from .resources.brands import AsyncBrandsResource
 
         return AsyncBrandsResource(self)
@@ -501,60 +583,96 @@ class AsyncCourier(AsyncAPIClient):
 
     @cached_property
     def inbound(self) -> AsyncInboundResource:
+        """
+        Record an inbound event that triggers the journeys and automations mapped to it.
+        """
         from .resources.inbound import AsyncInboundResource
 
         return AsyncInboundResource(self)
 
     @cached_property
     def lists(self) -> AsyncListsResource:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         from .resources.lists import AsyncListsResource
 
         return AsyncListsResource(self)
 
     @cached_property
+    def inbox(self) -> AsyncInboxResource:
+        from .resources.inbox import AsyncInboxResource
+
+        return AsyncInboxResource(self)
+
+    @cached_property
     def messages(self) -> AsyncMessagesResource:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.messages import AsyncMessagesResource
 
         return AsyncMessagesResource(self)
 
     @cached_property
     def requests(self) -> AsyncRequestsResource:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.requests import AsyncRequestsResource
 
         return AsyncRequestsResource(self)
 
     @cached_property
     def notifications(self) -> AsyncNotificationsResource:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         from .resources.notifications import AsyncNotificationsResource
 
         return AsyncNotificationsResource(self)
 
     @cached_property
     def routing_strategies(self) -> AsyncRoutingStrategiesResource:
+        """
+        Define reusable channel routing and failover strategies, and see which templates use them.
+        """
         from .resources.routing_strategies import AsyncRoutingStrategiesResource
 
         return AsyncRoutingStrategiesResource(self)
 
     @cached_property
     def workspace_preferences(self) -> AsyncWorkspacePreferencesResource:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         from .resources.workspace_preferences import AsyncWorkspacePreferencesResource
 
         return AsyncWorkspacePreferencesResource(self)
 
     @cached_property
     def profiles(self) -> AsyncProfilesResource:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         from .resources.profiles import AsyncProfilesResource
 
         return AsyncProfilesResource(self)
 
     @cached_property
     def tenants(self) -> AsyncTenantsResource:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         from .resources.tenants import AsyncTenantsResource
 
         return AsyncTenantsResource(self)
 
     @cached_property
     def translations(self) -> AsyncTranslationsResource:
+        """
+        Store and retrieve the translation strings Courier uses to render localized template content.
+        """
         from .resources.translations import AsyncTranslationsResource
 
         return AsyncTranslationsResource(self)
@@ -686,48 +804,70 @@ class CourierWithRawResponse:
 
     @cached_property
     def send(self) -> send.SendResourceWithRawResponse:
+        """
+        Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+        """
         from .resources.send import SendResourceWithRawResponse
 
         return SendResourceWithRawResponse(self._client.send)
 
     @cached_property
     def audiences(self) -> audiences.AudiencesResourceWithRawResponse:
+        """
+        Define filter-based groups whose membership Courier recalculates as user profiles change.
+        """
         from .resources.audiences import AudiencesResourceWithRawResponse
 
         return AudiencesResourceWithRawResponse(self._client.audiences)
 
     @cached_property
     def providers(self) -> providers.ProvidersResourceWithRawResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         from .resources.providers import ProvidersResourceWithRawResponse
 
         return ProvidersResourceWithRawResponse(self._client.providers)
 
     @cached_property
     def audit_events(self) -> audit_events.AuditEventsResourceWithRawResponse:
+        """Read the audit trail of configuration and access changes in your workspace."""
         from .resources.audit_events import AuditEventsResourceWithRawResponse
 
         return AuditEventsResourceWithRawResponse(self._client.audit_events)
 
     @cached_property
     def auth(self) -> auth.AuthResourceWithRawResponse:
+        """
+        Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+        """
         from .resources.auth import AuthResourceWithRawResponse
 
         return AuthResourceWithRawResponse(self._client.auth)
 
     @cached_property
     def automations(self) -> automations.AutomationsResourceWithRawResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         from .resources.automations import AutomationsResourceWithRawResponse
 
         return AutomationsResourceWithRawResponse(self._client.automations)
 
     @cached_property
     def journeys(self) -> journeys.JourneysResourceWithRawResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         from .resources.journeys import JourneysResourceWithRawResponse
 
         return JourneysResourceWithRawResponse(self._client.journeys)
 
     @cached_property
     def brands(self) -> brands.BrandsResourceWithRawResponse:
+        """
+        Manage the logos, colors, and layout that give the templates you send a consistent look.
+        """
         from .resources.brands import BrandsResourceWithRawResponse
 
         return BrandsResourceWithRawResponse(self._client.brands)
@@ -740,60 +880,96 @@ class CourierWithRawResponse:
 
     @cached_property
     def inbound(self) -> inbound.InboundResourceWithRawResponse:
+        """
+        Record an inbound event that triggers the journeys and automations mapped to it.
+        """
         from .resources.inbound import InboundResourceWithRawResponse
 
         return InboundResourceWithRawResponse(self._client.inbound)
 
     @cached_property
     def lists(self) -> lists.ListsResourceWithRawResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         from .resources.lists import ListsResourceWithRawResponse
 
         return ListsResourceWithRawResponse(self._client.lists)
 
     @cached_property
+    def inbox(self) -> inbox.InboxResourceWithRawResponse:
+        from .resources.inbox import InboxResourceWithRawResponse
+
+        return InboxResourceWithRawResponse(self._client.inbox)
+
+    @cached_property
     def messages(self) -> messages.MessagesResourceWithRawResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.messages import MessagesResourceWithRawResponse
 
         return MessagesResourceWithRawResponse(self._client.messages)
 
     @cached_property
     def requests(self) -> requests.RequestsResourceWithRawResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.requests import RequestsResourceWithRawResponse
 
         return RequestsResourceWithRawResponse(self._client.requests)
 
     @cached_property
     def notifications(self) -> notifications.NotificationsResourceWithRawResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         from .resources.notifications import NotificationsResourceWithRawResponse
 
         return NotificationsResourceWithRawResponse(self._client.notifications)
 
     @cached_property
     def routing_strategies(self) -> routing_strategies.RoutingStrategiesResourceWithRawResponse:
+        """
+        Define reusable channel routing and failover strategies, and see which templates use them.
+        """
         from .resources.routing_strategies import RoutingStrategiesResourceWithRawResponse
 
         return RoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
 
     @cached_property
     def workspace_preferences(self) -> workspace_preferences.WorkspacePreferencesResourceWithRawResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         from .resources.workspace_preferences import WorkspacePreferencesResourceWithRawResponse
 
         return WorkspacePreferencesResourceWithRawResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithRawResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         from .resources.profiles import ProfilesResourceWithRawResponse
 
         return ProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def tenants(self) -> tenants.TenantsResourceWithRawResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         from .resources.tenants import TenantsResourceWithRawResponse
 
         return TenantsResourceWithRawResponse(self._client.tenants)
 
     @cached_property
     def translations(self) -> translations.TranslationsResourceWithRawResponse:
+        """
+        Store and retrieve the translation strings Courier uses to render localized template content.
+        """
         from .resources.translations import TranslationsResourceWithRawResponse
 
         return TranslationsResourceWithRawResponse(self._client.translations)
@@ -813,48 +989,70 @@ class AsyncCourierWithRawResponse:
 
     @cached_property
     def send(self) -> send.AsyncSendResourceWithRawResponse:
+        """
+        Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+        """
         from .resources.send import AsyncSendResourceWithRawResponse
 
         return AsyncSendResourceWithRawResponse(self._client.send)
 
     @cached_property
     def audiences(self) -> audiences.AsyncAudiencesResourceWithRawResponse:
+        """
+        Define filter-based groups whose membership Courier recalculates as user profiles change.
+        """
         from .resources.audiences import AsyncAudiencesResourceWithRawResponse
 
         return AsyncAudiencesResourceWithRawResponse(self._client.audiences)
 
     @cached_property
     def providers(self) -> providers.AsyncProvidersResourceWithRawResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         from .resources.providers import AsyncProvidersResourceWithRawResponse
 
         return AsyncProvidersResourceWithRawResponse(self._client.providers)
 
     @cached_property
     def audit_events(self) -> audit_events.AsyncAuditEventsResourceWithRawResponse:
+        """Read the audit trail of configuration and access changes in your workspace."""
         from .resources.audit_events import AsyncAuditEventsResourceWithRawResponse
 
         return AsyncAuditEventsResourceWithRawResponse(self._client.audit_events)
 
     @cached_property
     def auth(self) -> auth.AsyncAuthResourceWithRawResponse:
+        """
+        Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+        """
         from .resources.auth import AsyncAuthResourceWithRawResponse
 
         return AsyncAuthResourceWithRawResponse(self._client.auth)
 
     @cached_property
     def automations(self) -> automations.AsyncAutomationsResourceWithRawResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         from .resources.automations import AsyncAutomationsResourceWithRawResponse
 
         return AsyncAutomationsResourceWithRawResponse(self._client.automations)
 
     @cached_property
     def journeys(self) -> journeys.AsyncJourneysResourceWithRawResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         from .resources.journeys import AsyncJourneysResourceWithRawResponse
 
         return AsyncJourneysResourceWithRawResponse(self._client.journeys)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithRawResponse:
+        """
+        Manage the logos, colors, and layout that give the templates you send a consistent look.
+        """
         from .resources.brands import AsyncBrandsResourceWithRawResponse
 
         return AsyncBrandsResourceWithRawResponse(self._client.brands)
@@ -867,60 +1065,96 @@ class AsyncCourierWithRawResponse:
 
     @cached_property
     def inbound(self) -> inbound.AsyncInboundResourceWithRawResponse:
+        """
+        Record an inbound event that triggers the journeys and automations mapped to it.
+        """
         from .resources.inbound import AsyncInboundResourceWithRawResponse
 
         return AsyncInboundResourceWithRawResponse(self._client.inbound)
 
     @cached_property
     def lists(self) -> lists.AsyncListsResourceWithRawResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         from .resources.lists import AsyncListsResourceWithRawResponse
 
         return AsyncListsResourceWithRawResponse(self._client.lists)
 
     @cached_property
+    def inbox(self) -> inbox.AsyncInboxResourceWithRawResponse:
+        from .resources.inbox import AsyncInboxResourceWithRawResponse
+
+        return AsyncInboxResourceWithRawResponse(self._client.inbox)
+
+    @cached_property
     def messages(self) -> messages.AsyncMessagesResourceWithRawResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.messages import AsyncMessagesResourceWithRawResponse
 
         return AsyncMessagesResourceWithRawResponse(self._client.messages)
 
     @cached_property
     def requests(self) -> requests.AsyncRequestsResourceWithRawResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.requests import AsyncRequestsResourceWithRawResponse
 
         return AsyncRequestsResourceWithRawResponse(self._client.requests)
 
     @cached_property
     def notifications(self) -> notifications.AsyncNotificationsResourceWithRawResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         from .resources.notifications import AsyncNotificationsResourceWithRawResponse
 
         return AsyncNotificationsResourceWithRawResponse(self._client.notifications)
 
     @cached_property
     def routing_strategies(self) -> routing_strategies.AsyncRoutingStrategiesResourceWithRawResponse:
+        """
+        Define reusable channel routing and failover strategies, and see which templates use them.
+        """
         from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithRawResponse
 
         return AsyncRoutingStrategiesResourceWithRawResponse(self._client.routing_strategies)
 
     @cached_property
     def workspace_preferences(self) -> workspace_preferences.AsyncWorkspacePreferencesResourceWithRawResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         from .resources.workspace_preferences import AsyncWorkspacePreferencesResourceWithRawResponse
 
         return AsyncWorkspacePreferencesResourceWithRawResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithRawResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         from .resources.profiles import AsyncProfilesResourceWithRawResponse
 
         return AsyncProfilesResourceWithRawResponse(self._client.profiles)
 
     @cached_property
     def tenants(self) -> tenants.AsyncTenantsResourceWithRawResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         from .resources.tenants import AsyncTenantsResourceWithRawResponse
 
         return AsyncTenantsResourceWithRawResponse(self._client.tenants)
 
     @cached_property
     def translations(self) -> translations.AsyncTranslationsResourceWithRawResponse:
+        """
+        Store and retrieve the translation strings Courier uses to render localized template content.
+        """
         from .resources.translations import AsyncTranslationsResourceWithRawResponse
 
         return AsyncTranslationsResourceWithRawResponse(self._client.translations)
@@ -940,48 +1174,70 @@ class CourierWithStreamedResponse:
 
     @cached_property
     def send(self) -> send.SendResourceWithStreamingResponse:
+        """
+        Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+        """
         from .resources.send import SendResourceWithStreamingResponse
 
         return SendResourceWithStreamingResponse(self._client.send)
 
     @cached_property
     def audiences(self) -> audiences.AudiencesResourceWithStreamingResponse:
+        """
+        Define filter-based groups whose membership Courier recalculates as user profiles change.
+        """
         from .resources.audiences import AudiencesResourceWithStreamingResponse
 
         return AudiencesResourceWithStreamingResponse(self._client.audiences)
 
     @cached_property
     def providers(self) -> providers.ProvidersResourceWithStreamingResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         from .resources.providers import ProvidersResourceWithStreamingResponse
 
         return ProvidersResourceWithStreamingResponse(self._client.providers)
 
     @cached_property
     def audit_events(self) -> audit_events.AuditEventsResourceWithStreamingResponse:
+        """Read the audit trail of configuration and access changes in your workspace."""
         from .resources.audit_events import AuditEventsResourceWithStreamingResponse
 
         return AuditEventsResourceWithStreamingResponse(self._client.audit_events)
 
     @cached_property
     def auth(self) -> auth.AuthResourceWithStreamingResponse:
+        """
+        Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+        """
         from .resources.auth import AuthResourceWithStreamingResponse
 
         return AuthResourceWithStreamingResponse(self._client.auth)
 
     @cached_property
     def automations(self) -> automations.AutomationsResourceWithStreamingResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         from .resources.automations import AutomationsResourceWithStreamingResponse
 
         return AutomationsResourceWithStreamingResponse(self._client.automations)
 
     @cached_property
     def journeys(self) -> journeys.JourneysResourceWithStreamingResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         from .resources.journeys import JourneysResourceWithStreamingResponse
 
         return JourneysResourceWithStreamingResponse(self._client.journeys)
 
     @cached_property
     def brands(self) -> brands.BrandsResourceWithStreamingResponse:
+        """
+        Manage the logos, colors, and layout that give the templates you send a consistent look.
+        """
         from .resources.brands import BrandsResourceWithStreamingResponse
 
         return BrandsResourceWithStreamingResponse(self._client.brands)
@@ -994,60 +1250,96 @@ class CourierWithStreamedResponse:
 
     @cached_property
     def inbound(self) -> inbound.InboundResourceWithStreamingResponse:
+        """
+        Record an inbound event that triggers the journeys and automations mapped to it.
+        """
         from .resources.inbound import InboundResourceWithStreamingResponse
 
         return InboundResourceWithStreamingResponse(self._client.inbound)
 
     @cached_property
     def lists(self) -> lists.ListsResourceWithStreamingResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         from .resources.lists import ListsResourceWithStreamingResponse
 
         return ListsResourceWithStreamingResponse(self._client.lists)
 
     @cached_property
+    def inbox(self) -> inbox.InboxResourceWithStreamingResponse:
+        from .resources.inbox import InboxResourceWithStreamingResponse
+
+        return InboxResourceWithStreamingResponse(self._client.inbox)
+
+    @cached_property
     def messages(self) -> messages.MessagesResourceWithStreamingResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.messages import MessagesResourceWithStreamingResponse
 
         return MessagesResourceWithStreamingResponse(self._client.messages)
 
     @cached_property
     def requests(self) -> requests.RequestsResourceWithStreamingResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.requests import RequestsResourceWithStreamingResponse
 
         return RequestsResourceWithStreamingResponse(self._client.requests)
 
     @cached_property
     def notifications(self) -> notifications.NotificationsResourceWithStreamingResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         from .resources.notifications import NotificationsResourceWithStreamingResponse
 
         return NotificationsResourceWithStreamingResponse(self._client.notifications)
 
     @cached_property
     def routing_strategies(self) -> routing_strategies.RoutingStrategiesResourceWithStreamingResponse:
+        """
+        Define reusable channel routing and failover strategies, and see which templates use them.
+        """
         from .resources.routing_strategies import RoutingStrategiesResourceWithStreamingResponse
 
         return RoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
 
     @cached_property
     def workspace_preferences(self) -> workspace_preferences.WorkspacePreferencesResourceWithStreamingResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         from .resources.workspace_preferences import WorkspacePreferencesResourceWithStreamingResponse
 
         return WorkspacePreferencesResourceWithStreamingResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.ProfilesResourceWithStreamingResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         from .resources.profiles import ProfilesResourceWithStreamingResponse
 
         return ProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def tenants(self) -> tenants.TenantsResourceWithStreamingResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         from .resources.tenants import TenantsResourceWithStreamingResponse
 
         return TenantsResourceWithStreamingResponse(self._client.tenants)
 
     @cached_property
     def translations(self) -> translations.TranslationsResourceWithStreamingResponse:
+        """
+        Store and retrieve the translation strings Courier uses to render localized template content.
+        """
         from .resources.translations import TranslationsResourceWithStreamingResponse
 
         return TranslationsResourceWithStreamingResponse(self._client.translations)
@@ -1067,48 +1359,70 @@ class AsyncCourierWithStreamedResponse:
 
     @cached_property
     def send(self) -> send.AsyncSendResourceWithStreamingResponse:
+        """
+        Send a message to one or more recipients — users, lists, audiences, or tenants — across every channel you have configured.
+        """
         from .resources.send import AsyncSendResourceWithStreamingResponse
 
         return AsyncSendResourceWithStreamingResponse(self._client.send)
 
     @cached_property
     def audiences(self) -> audiences.AsyncAudiencesResourceWithStreamingResponse:
+        """
+        Define filter-based groups whose membership Courier recalculates as user profiles change.
+        """
         from .resources.audiences import AsyncAudiencesResourceWithStreamingResponse
 
         return AsyncAudiencesResourceWithStreamingResponse(self._client.audiences)
 
     @cached_property
     def providers(self) -> providers.AsyncProvidersResourceWithStreamingResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         from .resources.providers import AsyncProvidersResourceWithStreamingResponse
 
         return AsyncProvidersResourceWithStreamingResponse(self._client.providers)
 
     @cached_property
     def audit_events(self) -> audit_events.AsyncAuditEventsResourceWithStreamingResponse:
+        """Read the audit trail of configuration and access changes in your workspace."""
         from .resources.audit_events import AsyncAuditEventsResourceWithStreamingResponse
 
         return AsyncAuditEventsResourceWithStreamingResponse(self._client.audit_events)
 
     @cached_property
     def auth(self) -> auth.AsyncAuthResourceWithStreamingResponse:
+        """
+        Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+        """
         from .resources.auth import AsyncAuthResourceWithStreamingResponse
 
         return AsyncAuthResourceWithStreamingResponse(self._client.auth)
 
     @cached_property
     def automations(self) -> automations.AsyncAutomationsResourceWithStreamingResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         from .resources.automations import AsyncAutomationsResourceWithStreamingResponse
 
         return AsyncAutomationsResourceWithStreamingResponse(self._client.automations)
 
     @cached_property
     def journeys(self) -> journeys.AsyncJourneysResourceWithStreamingResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
         from .resources.journeys import AsyncJourneysResourceWithStreamingResponse
 
         return AsyncJourneysResourceWithStreamingResponse(self._client.journeys)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithStreamingResponse:
+        """
+        Manage the logos, colors, and layout that give the templates you send a consistent look.
+        """
         from .resources.brands import AsyncBrandsResourceWithStreamingResponse
 
         return AsyncBrandsResourceWithStreamingResponse(self._client.brands)
@@ -1121,60 +1435,96 @@ class AsyncCourierWithStreamedResponse:
 
     @cached_property
     def inbound(self) -> inbound.AsyncInboundResourceWithStreamingResponse:
+        """
+        Record an inbound event that triggers the journeys and automations mapped to it.
+        """
         from .resources.inbound import AsyncInboundResourceWithStreamingResponse
 
         return AsyncInboundResourceWithStreamingResponse(self._client.inbound)
 
     @cached_property
     def lists(self) -> lists.AsyncListsResourceWithStreamingResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         from .resources.lists import AsyncListsResourceWithStreamingResponse
 
         return AsyncListsResourceWithStreamingResponse(self._client.lists)
 
     @cached_property
+    def inbox(self) -> inbox.AsyncInboxResourceWithStreamingResponse:
+        from .resources.inbox import AsyncInboxResourceWithStreamingResponse
+
+        return AsyncInboxResourceWithStreamingResponse(self._client.inbox)
+
+    @cached_property
     def messages(self) -> messages.AsyncMessagesResourceWithStreamingResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.messages import AsyncMessagesResourceWithStreamingResponse
 
         return AsyncMessagesResourceWithStreamingResponse(self._client.messages)
 
     @cached_property
     def requests(self) -> requests.AsyncRequestsResourceWithStreamingResponse:
+        """
+        Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+        """
         from .resources.requests import AsyncRequestsResourceWithStreamingResponse
 
         return AsyncRequestsResourceWithStreamingResponse(self._client.requests)
 
     @cached_property
     def notifications(self) -> notifications.AsyncNotificationsResourceWithStreamingResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         from .resources.notifications import AsyncNotificationsResourceWithStreamingResponse
 
         return AsyncNotificationsResourceWithStreamingResponse(self._client.notifications)
 
     @cached_property
     def routing_strategies(self) -> routing_strategies.AsyncRoutingStrategiesResourceWithStreamingResponse:
+        """
+        Define reusable channel routing and failover strategies, and see which templates use them.
+        """
         from .resources.routing_strategies import AsyncRoutingStrategiesResourceWithStreamingResponse
 
         return AsyncRoutingStrategiesResourceWithStreamingResponse(self._client.routing_strategies)
 
     @cached_property
     def workspace_preferences(self) -> workspace_preferences.AsyncWorkspacePreferencesResourceWithStreamingResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         from .resources.workspace_preferences import AsyncWorkspacePreferencesResourceWithStreamingResponse
 
         return AsyncWorkspacePreferencesResourceWithStreamingResponse(self._client.workspace_preferences)
 
     @cached_property
     def profiles(self) -> profiles.AsyncProfilesResourceWithStreamingResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         from .resources.profiles import AsyncProfilesResourceWithStreamingResponse
 
         return AsyncProfilesResourceWithStreamingResponse(self._client.profiles)
 
     @cached_property
     def tenants(self) -> tenants.AsyncTenantsResourceWithStreamingResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         from .resources.tenants import AsyncTenantsResourceWithStreamingResponse
 
         return AsyncTenantsResourceWithStreamingResponse(self._client.tenants)
 
     @cached_property
     def translations(self) -> translations.AsyncTranslationsResourceWithStreamingResponse:
+        """
+        Store and retrieve the translation strings Courier uses to render localized template content.
+        """
         from .resources.translations import AsyncTranslationsResourceWithStreamingResponse
 
         return AsyncTranslationsResourceWithStreamingResponse(self._client.translations)

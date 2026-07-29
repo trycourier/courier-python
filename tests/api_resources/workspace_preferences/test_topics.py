@@ -39,6 +39,8 @@ class TestTopics:
             include_unsubscribe_header=True,
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
@@ -334,6 +336,8 @@ class TestAsyncTopics:
             include_unsubscribe_header=True,
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 

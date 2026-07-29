@@ -22,6 +22,10 @@ __all__ = ["CatalogResource", "AsyncCatalogResource"]
 
 
 class CatalogResource(SyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def with_raw_response(self) -> CatalogResourceWithRawResponse:
         """
@@ -55,10 +59,8 @@ class CatalogResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CatalogListResponse:
         """
-        Returns the catalog of available provider types with their display names,
-        descriptions, and configuration schema fields (snake_case, with `type` and
-        `required`). Providers with no configurable schema return only `provider`,
-        `name`, and `description`.
+        Returns the provider types Courier supports, each with a display name,
+        description, and the configuration fields it requires.
 
         Args:
           channel: Exact match (case-insensitive) against the provider channel taxonomy (e.g.
@@ -97,6 +99,10 @@ class CatalogResource(SyncAPIResource):
 
 
 class AsyncCatalogResource(AsyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncCatalogResourceWithRawResponse:
         """
@@ -130,10 +136,8 @@ class AsyncCatalogResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CatalogListResponse:
         """
-        Returns the catalog of available provider types with their display names,
-        descriptions, and configuration schema fields (snake_case, with `type` and
-        `required`). Providers with no configurable schema return only `provider`,
-        `name`, and `description`.
+        Returns the provider types Courier supports, each with a display name,
+        description, and the configuration fields it requires.
 
         Args:
           channel: Exact match (case-insensitive) against the provider channel taxonomy (e.g.

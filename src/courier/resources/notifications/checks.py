@@ -26,6 +26,10 @@ __all__ = ["ChecksResource", "AsyncChecksResource"]
 
 
 class ChecksResource(SyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def with_raw_response(self) -> ChecksResourceWithRawResponse:
         """
@@ -59,7 +63,8 @@ class ChecksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckUpdateResponse:
         """
-        Replace the submission checks for a notification template.
+        Replaces the approval checks on a template submission with the complete set
+        supplied in the request body.
 
         Args:
           extra_headers: Send extra headers
@@ -96,7 +101,8 @@ class ChecksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckListResponse:
         """
-        Retrieve the submission checks for a notification template.
+        Returns the approval checks recorded for a template submission, each with its
+        pass or fail result.
 
         Args:
           extra_headers: Send extra headers
@@ -131,8 +137,10 @@ class ChecksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Cancel a submission for a notification template.
+        """Cancels a pending template submission, withdrawing it from the approval
+        workflow.
+
+        The template stays in draft and can be resubmitted later.
 
         Args:
           extra_headers: Send extra headers
@@ -158,6 +166,10 @@ class ChecksResource(SyncAPIResource):
 
 
 class AsyncChecksResource(AsyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncChecksResourceWithRawResponse:
         """
@@ -191,7 +203,8 @@ class AsyncChecksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckUpdateResponse:
         """
-        Replace the submission checks for a notification template.
+        Replaces the approval checks on a template submission with the complete set
+        supplied in the request body.
 
         Args:
           extra_headers: Send extra headers
@@ -228,7 +241,8 @@ class AsyncChecksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> CheckListResponse:
         """
-        Retrieve the submission checks for a notification template.
+        Returns the approval checks recorded for a template submission, each with its
+        pass or fail result.
 
         Args:
           extra_headers: Send extra headers
@@ -263,8 +277,10 @@ class AsyncChecksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Cancel a submission for a notification template.
+        """Cancels a pending template submission, withdrawing it from the approval
+        workflow.
+
+        The template stays in draft and can be resubmitted later.
 
         Args:
           extra_headers: Send extra headers

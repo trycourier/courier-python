@@ -8,7 +8,7 @@ import httpx
 
 from ...types import NotificationTemplateState
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -38,6 +38,10 @@ __all__ = ["TemplatesResource", "AsyncTemplatesResource"]
 
 
 class TemplatesResource(SyncAPIResource):
+    """
+    Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+    """
+
     @cached_property
     def with_raw_response(self) -> TemplatesResourceWithRawResponse:
         """
@@ -65,6 +69,8 @@ class TemplatesResource(SyncAPIResource):
         notification: template_create_params.Notification,
         provider_key: str | Omit = omit,
         state: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -88,6 +94,15 @@ class TemplatesResource(SyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/journeys/{template_id}/templates", template_id=template_id),
             body=maybe_transform(
@@ -117,11 +132,9 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """Fetch a journey-scoped notification template by id.
-
-        Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns a journey's own notification template with its name, brand, subscription
+        topic, and content. Defaults to the published version.
 
         Args:
           extra_headers: Send extra headers
@@ -211,10 +224,10 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive the journey-scoped notification template.
+        """Archives one journey's notification template, preventing further sends.
 
-        Archived templates cannot be
-        sent.
+        Detach
+        any send node referencing it beforehand.
 
         Args:
           extra_headers: Send extra headers
@@ -255,8 +268,8 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List published versions of the journey-scoped notification template, ordered
-        most recent first.
+        Lists the published versions of a template that belongs to a journey, most
+        recent first. Paged by cursor.
 
         Args:
           extra_headers: Send extra headers
@@ -289,6 +302,8 @@ class TemplatesResource(SyncAPIResource):
         *,
         template_id: str,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -296,10 +311,10 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Publish the current draft of the journey-scoped notification template as a new
-        version. Optionally roll back to a prior version by passing
-        `{ "version": "vN" }`.
+        """Publishes a journey-scoped template's draft as a new version.
+
+        Pass a version
+        instead to roll back the template to an earlier publish.
 
         Args:
           extra_headers: Send extra headers
@@ -315,6 +330,15 @@ class TemplatesResource(SyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template(
                 "/journeys/{template_id}/templates/{notification_id}/publish",
@@ -455,8 +479,10 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """
-        Replace the journey-scoped notification template draft.
+        """Replaces the draft content of one journey's notification template.
+
+        Publish it
+        before send nodes referencing it render the change.
 
         Args:
           extra_headers: Send extra headers
@@ -503,13 +529,9 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentGetResponse:
-        """Retrieve the elemental content of a journey-scoped notification template.
-
-        The
-        response contains the versioned elements along with their content checksums,
-        which can be used to detect changes between versions. Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns the Elemental elements and version of a journey-scoped template's
+        content. Compare versions to see what changed between publishes.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
@@ -547,6 +569,10 @@ class TemplatesResource(SyncAPIResource):
 
 
 class AsyncTemplatesResource(AsyncAPIResource):
+    """
+    Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTemplatesResourceWithRawResponse:
         """
@@ -574,6 +600,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         notification: template_create_params.Notification,
         provider_key: str | Omit = omit,
         state: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -597,6 +625,15 @@ class AsyncTemplatesResource(AsyncAPIResource):
         """
         if not template_id:
             raise ValueError(f"Expected a non-empty value for `template_id` but received {template_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/journeys/{template_id}/templates", template_id=template_id),
             body=await async_maybe_transform(
@@ -626,11 +663,9 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """Fetch a journey-scoped notification template by id.
-
-        Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns a journey's own notification template with its name, brand, subscription
+        topic, and content. Defaults to the published version.
 
         Args:
           extra_headers: Send extra headers
@@ -720,10 +755,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive the journey-scoped notification template.
+        """Archives one journey's notification template, preventing further sends.
 
-        Archived templates cannot be
-        sent.
+        Detach
+        any send node referencing it beforehand.
 
         Args:
           extra_headers: Send extra headers
@@ -764,8 +799,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List published versions of the journey-scoped notification template, ordered
-        most recent first.
+        Lists the published versions of a template that belongs to a journey, most
+        recent first. Paged by cursor.
 
         Args:
           extra_headers: Send extra headers
@@ -798,6 +833,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         *,
         template_id: str,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -805,10 +842,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Publish the current draft of the journey-scoped notification template as a new
-        version. Optionally roll back to a prior version by passing
-        `{ "version": "vN" }`.
+        """Publishes a journey-scoped template's draft as a new version.
+
+        Pass a version
+        instead to roll back the template to an earlier publish.
 
         Args:
           extra_headers: Send extra headers
@@ -824,6 +861,15 @@ class AsyncTemplatesResource(AsyncAPIResource):
         if not notification_id:
             raise ValueError(f"Expected a non-empty value for `notification_id` but received {notification_id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template(
                 "/journeys/{template_id}/templates/{notification_id}/publish",
@@ -964,8 +1010,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> JourneyTemplateGetResponse:
-        """
-        Replace the journey-scoped notification template draft.
+        """Replaces the draft content of one journey's notification template.
+
+        Publish it
+        before send nodes referencing it render the change.
 
         Args:
           extra_headers: Send extra headers
@@ -1012,13 +1060,9 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentGetResponse:
-        """Retrieve the elemental content of a journey-scoped notification template.
-
-        The
-        response contains the versioned elements along with their content checksums,
-        which can be used to detect changes between versions. Pass `?version=draft`
-        (default `published`) to retrieve the working draft, or `?version=vN` for a
-        historical version.
+        """
+        Returns the Elemental elements and version of a journey-scoped template's
+        content. Compare versions to see what changed between publishes.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to

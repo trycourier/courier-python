@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from typing import List, Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from ..._utils import PropertyInfo
 from ..shared.channel_classification import ChannelClassification
 
 __all__ = ["PreferenceBulkUpdateParams", "Topic"]
@@ -19,6 +20,10 @@ class PreferenceBulkUpdateParams(TypedDict, total=False):
 
     tenant_id: Optional[str]
     """Update the preferences of a user for this specific tenant context."""
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]
 
 
 class Topic(TypedDict, total=False):

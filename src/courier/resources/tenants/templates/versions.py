@@ -21,6 +21,10 @@ __all__ = ["VersionsResource", "AsyncVersionsResource"]
 
 
 class VersionsResource(SyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def with_raw_response(self) -> VersionsResourceWithRawResponse:
         """
@@ -54,13 +58,8 @@ class VersionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BaseTemplateTenantAssociation:
         """
-        Fetches a specific version of a tenant template.
-
-        Supports the following version formats:
-
-        - `latest` - The most recent version of the template
-        - `published` - The currently published version
-        - `v{version}` - A specific version (e.g., "v1", "v2", "v1.0.0")
+        Returns one version of a tenant template, addressed by version number or by
+        latest, with its content and publish timestamp.
 
         Args:
           extra_headers: Send extra headers
@@ -92,6 +91,10 @@ class VersionsResource(SyncAPIResource):
 
 
 class AsyncVersionsResource(AsyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncVersionsResourceWithRawResponse:
         """
@@ -125,13 +128,8 @@ class AsyncVersionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BaseTemplateTenantAssociation:
         """
-        Fetches a specific version of a tenant template.
-
-        Supports the following version formats:
-
-        - `latest` - The most recent version of the template
-        - `published` - The currently published version
-        - `v{version}` - A specific version (e.g., "v1", "v2", "v1.0.0")
+        Returns one version of a tenant template, addressed by version number or by
+        latest, with its content and publish timestamp.
 
         Args:
           extra_headers: Send extra headers

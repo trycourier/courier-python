@@ -43,12 +43,19 @@ __all__ = ["TenantsResource", "AsyncTenantsResource"]
 
 
 class TenantsResource(SyncAPIResource):
+    """
+    Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+    """
+
     @cached_property
     def preferences(self) -> PreferencesResource:
         return PreferencesResource(self._client)
 
     @cached_property
     def templates(self) -> TemplatesResource:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return TemplatesResource(self._client)
 
     @cached_property
@@ -82,7 +89,8 @@ class TenantsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Get a Tenant
+        Returns one tenant with its name, parent tenant id, default preferences,
+        properties, and the user profile applied to its members.
 
         Args:
           extra_headers: Send extra headers
@@ -121,7 +129,8 @@ class TenantsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Create or Replace a Tenant
+        Creates or replaces a tenant from a name, parent, brand, properties, and default
+        preferences supplied in the request body.
 
         Args:
           name: Name of the tenant.
@@ -180,7 +189,8 @@ class TenantsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListResponse:
         """
-        Get a List of Tenants
+        Lists the workspace's tenants, each carrying a name, parent tenant, properties,
+        and default preferences. Paged.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -227,8 +237,10 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a Tenant
+        """Deletes a tenant.
+
+        Its members' workspace-level profiles and preferences live
+        outside the tenant and are managed separately.
 
         Args:
           extra_headers: Send extra headers
@@ -263,8 +275,10 @@ class TenantsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListUsersResponse:
-        """
-        Get Users in Tenant
+        """Returns the users belonging to a tenant with cursor paging.
+
+        Use it to see who a
+        tenant-scoped send will reach.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -301,12 +315,19 @@ class TenantsResource(SyncAPIResource):
 
 
 class AsyncTenantsResource(AsyncAPIResource):
+    """
+    Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+    """
+
     @cached_property
     def preferences(self) -> AsyncPreferencesResource:
         return AsyncPreferencesResource(self._client)
 
     @cached_property
     def templates(self) -> AsyncTemplatesResource:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncTemplatesResource(self._client)
 
     @cached_property
@@ -340,7 +361,8 @@ class AsyncTenantsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Get a Tenant
+        Returns one tenant with its name, parent tenant id, default preferences,
+        properties, and the user profile applied to its members.
 
         Args:
           extra_headers: Send extra headers
@@ -379,7 +401,8 @@ class AsyncTenantsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Tenant:
         """
-        Create or Replace a Tenant
+        Creates or replaces a tenant from a name, parent, brand, properties, and default
+        preferences supplied in the request body.
 
         Args:
           name: Name of the tenant.
@@ -438,7 +461,8 @@ class AsyncTenantsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListResponse:
         """
-        Get a List of Tenants
+        Lists the workspace's tenants, each carrying a name, parent tenant, properties,
+        and default preferences. Paged.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -485,8 +509,10 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a Tenant
+        """Deletes a tenant.
+
+        Its members' workspace-level profiles and preferences live
+        outside the tenant and are managed separately.
 
         Args:
           extra_headers: Send extra headers
@@ -521,8 +547,10 @@ class AsyncTenantsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TenantListUsersResponse:
-        """
-        Get Users in Tenant
+        """Returns the users belonging to a tenant with cursor paging.
+
+        Use it to see who a
+        tenant-scoped send will reach.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -584,6 +612,9 @@ class TenantsResourceWithRawResponse:
 
     @cached_property
     def templates(self) -> TemplatesResourceWithRawResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return TemplatesResourceWithRawResponse(self._tenants.templates)
 
 
@@ -613,6 +644,9 @@ class AsyncTenantsResourceWithRawResponse:
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithRawResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncTemplatesResourceWithRawResponse(self._tenants.templates)
 
 
@@ -642,6 +676,9 @@ class TenantsResourceWithStreamingResponse:
 
     @cached_property
     def templates(self) -> TemplatesResourceWithStreamingResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return TemplatesResourceWithStreamingResponse(self._tenants.templates)
 
 
@@ -671,4 +708,7 @@ class AsyncTenantsResourceWithStreamingResponse:
 
     @cached_property
     def templates(self) -> AsyncTemplatesResourceWithStreamingResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncTemplatesResourceWithStreamingResponse(self._tenants.templates)

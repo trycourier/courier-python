@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Dict
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["JourneyInvokeParams"]
 
@@ -33,3 +35,7 @@ class JourneyInvokeParams(TypedDict, total=False):
     If not provided, the system will attempt to resolve the user identifier from
     profile or data objects.
     """
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

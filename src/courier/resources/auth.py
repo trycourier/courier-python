@@ -22,6 +22,10 @@ __all__ = ["AuthResource", "AsyncAuthResource"]
 
 
 class AuthResource(SyncAPIResource):
+    """
+    Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+    """
+
     @cached_property
     def with_raw_response(self) -> AuthResourceWithRawResponse:
         """
@@ -53,8 +57,10 @@ class AuthResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthIssueTokenResponse:
-        """
-        Returns a new access token.
+        """Returns a JWT for authenticating client-side SDKs such as the Inbox.
+
+        You supply
+        the scope and an expires_in duration, both required.
 
         Args:
           expires_in:
@@ -112,6 +118,10 @@ class AuthResource(SyncAPIResource):
 
 
 class AsyncAuthResource(AsyncAPIResource):
+    """
+    Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncAuthResourceWithRawResponse:
         """
@@ -143,8 +153,10 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthIssueTokenResponse:
-        """
-        Returns a new access token.
+        """Returns a JWT for authenticating client-side SDKs such as the Inbox.
+
+        You supply
+        the scope and an expires_in duration, both required.
 
         Args:
           expires_in:

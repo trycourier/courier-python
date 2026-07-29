@@ -8,7 +8,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -27,6 +27,10 @@ __all__ = ["TopicsResource", "AsyncTopicsResource"]
 
 
 class TopicsResource(SyncAPIResource):
+    """
+    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+    """
+
     @cached_property
     def with_raw_response(self) -> TopicsResourceWithRawResponse:
         """
@@ -57,6 +61,8 @@ class TopicsResource(SyncAPIResource):
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -64,11 +70,10 @@ class TopicsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Create a subscription preference topic inside a workspace preference.
+        """Creates a subscription topic inside a workspace preference.
 
-        Fails with
-        404 if the workspace preference does not exist. The topic id is generated and
-        returned.
+        The default status
+        sets whether users start opted in, opted out, or required.
 
         Args:
           default_status: The default subscription status applied when a recipient has not set their own.
@@ -96,6 +101,15 @@ class TopicsResource(SyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/preferences/sections/{section_id}/topics", section_id=section_id),
             body=maybe_transform(
@@ -128,11 +142,9 @@ class TopicsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Retrieve a topic within a workspace preference.
-
-        Returns 404 if the workspace
-        preference does not exist, the topic does not exist, or the topic belongs to a
-        different workspace preference.
+        """
+        Returns one subscription topic with its default status, routing options, allowed
+        preferences, and unsubscribe header setting.
 
         Args:
           extra_headers: Send extra headers
@@ -169,7 +181,8 @@ class TopicsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicListResponse:
         """
-        List the topics in a workspace preference.
+        Returns the subscription topics inside a workspace preference, each with its
+        default status and routing options.
 
         Args:
           extra_headers: Send extra headers
@@ -202,10 +215,9 @@ class TopicsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a topic and remove it from its workspace preference.
-
-        Same 404 rules as
-        GET.
+        """
+        Archives a subscription topic and removes it from its workspace preference,
+        addressed by section id and topic id.
 
         Args:
           extra_headers: Send extra headers
@@ -307,6 +319,10 @@ class TopicsResource(SyncAPIResource):
 
 
 class AsyncTopicsResource(AsyncAPIResource):
+    """
+    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTopicsResourceWithRawResponse:
         """
@@ -337,6 +353,8 @@ class AsyncTopicsResource(AsyncAPIResource):
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -344,11 +362,10 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Create a subscription preference topic inside a workspace preference.
+        """Creates a subscription topic inside a workspace preference.
 
-        Fails with
-        404 if the workspace preference does not exist. The topic id is generated and
-        returned.
+        The default status
+        sets whether users start opted in, opted out, or required.
 
         Args:
           default_status: The default subscription status applied when a recipient has not set their own.
@@ -376,6 +393,15 @@ class AsyncTopicsResource(AsyncAPIResource):
         """
         if not section_id:
             raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/preferences/sections/{section_id}/topics", section_id=section_id),
             body=await async_maybe_transform(
@@ -408,11 +434,9 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicGetResponse:
-        """Retrieve a topic within a workspace preference.
-
-        Returns 404 if the workspace
-        preference does not exist, the topic does not exist, or the topic belongs to a
-        different workspace preference.
+        """
+        Returns one subscription topic with its default status, routing options, allowed
+        preferences, and unsubscribe header setting.
 
         Args:
           extra_headers: Send extra headers
@@ -449,7 +473,8 @@ class AsyncTopicsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceTopicListResponse:
         """
-        List the topics in a workspace preference.
+        Returns the subscription topics inside a workspace preference, each with its
+        default status and routing options.
 
         Args:
           extra_headers: Send extra headers
@@ -482,10 +507,9 @@ class AsyncTopicsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Archive a topic and remove it from its workspace preference.
-
-        Same 404 rules as
-        GET.
+        """
+        Archives a subscription topic and removes it from its workspace preference,
+        addressed by section id and topic id.
 
         Args:
           extra_headers: Send extra headers

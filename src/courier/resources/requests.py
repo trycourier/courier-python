@@ -20,6 +20,10 @@ __all__ = ["RequestsResource", "AsyncRequestsResource"]
 
 
 class RequestsResource(SyncAPIResource):
+    """
+    Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+    """
+
     @cached_property
     def with_raw_response(self) -> RequestsResourceWithRawResponse:
         """
@@ -50,8 +54,10 @@ class RequestsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive message
+        """Archives a send request by its request id.
+
+        Use it to remove test sends or
+        superseded requests from the message list without deleting them.
 
         Args:
           extra_headers: Send extra headers
@@ -75,6 +81,10 @@ class RequestsResource(SyncAPIResource):
 
 
 class AsyncRequestsResource(AsyncAPIResource):
+    """
+    Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncRequestsResourceWithRawResponse:
         """
@@ -105,8 +115,10 @@ class AsyncRequestsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive message
+        """Archives a send request by its request id.
+
+        Use it to remove test sends or
+        superseded requests from the message list without deleting them.
 
         Args:
           extra_headers: Send extra headers

@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Dict, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
+
+from ..._utils import PropertyInfo
 
 __all__ = ["InvokeInvokeByTemplateParams"]
 
@@ -18,3 +20,7 @@ class InvokeInvokeByTemplateParams(TypedDict, total=False):
     profile: Optional[Dict[str, object]]
 
     template: Optional[str]
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

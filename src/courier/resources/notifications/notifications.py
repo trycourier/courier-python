@@ -29,7 +29,7 @@ from ...types import (
     notification_retrieve_content_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -51,8 +51,15 @@ __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
 
 
 class NotificationsResource(SyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def checks(self) -> ChecksResource:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return ChecksResource(self._client)
 
     @cached_property
@@ -79,6 +86,8 @@ class NotificationsResource(SyncAPIResource):
         *,
         notification: NotificationTemplatePayloadParam,
         state: Literal["DRAFT", "PUBLISHED"] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -106,6 +115,15 @@ class NotificationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/notifications",
             body=maybe_transform(
@@ -177,8 +195,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationListResponse:
-        """
-        List notification templates in your workspace.
+        """Lists the workspace's notification templates.
+
+        Each carries a name, tags, brand,
+        routing, and its draft or published state.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -225,8 +245,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive a notification template.
+        """Archives a notification template, preventing new sends from referencing it.
+
+        The
+        template stays retrievable for its version history.
 
         Args:
           extra_headers: Send extra headers
@@ -259,14 +281,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Duplicate a notification template.
-
-        Creates a standalone copy within the same
-        workspace and environment, with " COPY" appended to the title. The copy clones
-        the source draft's tags, brand, subscription topic, routing strategy, channels,
-        and content, and is always created as a standalone template (it is not linked to
-        any journey or broadcast, even if the source was). Templates that are scoped to
-        a journey or a broadcast cannot be duplicated through this endpoint.
+        """
+        Copies a notification template within the same workspace and environment,
+        appending " COPY" to the title. The copy is standalone and independently
+        editable.
 
         Args:
           extra_headers: Send extra headers
@@ -301,7 +319,8 @@ class NotificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List versions of a notification template.
+        Returns a notification template's published versions, most recent first, for
+        comparison or rollback. Paged.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -341,6 +360,8 @@ class NotificationsResource(SyncAPIResource):
         id: str,
         *,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -367,6 +388,15 @@ class NotificationsResource(SyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             path_template("/notifications/{id}/publish", id=id),
             body=maybe_transform({"version": version}, notification_publish_params.NotificationPublishParams),
@@ -389,11 +419,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Replace the elemental content of a notification template.
+        """Replaces all Elemental content in a template, overwriting every existing
+        element.
 
-        Overwrites all
-        elements in the template with the provided content. Only supported for V2
-        (elemental) templates.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           content: Elemental content payload. The server defaults `version` when omitted.
@@ -444,10 +473,9 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Update a single element within a notification template.
-
-        Only supported for V2
-        (elemental) templates.
+        """
+        Replaces one Elemental element in a template, addressed by its element id.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           type: Element type (text, meta, action, image, etc.).
@@ -500,11 +528,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Set locale-specific content overrides for a notification template.
+        """Sets locale-specific content overrides for a template.
 
-        Each element
-        override must reference an existing element by ID. Only supported for V2
-        (elemental) templates.
+        Each override must
+        reference an element that already exists in the default content.
 
         Args:
           elements: Elements with locale-specific content overrides.
@@ -551,9 +578,9 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Replace a notification template.
-
-        All fields are required.
+        """
+        Replaces a notification template in full, so send every field rather than only
+        the ones you want changed. Publish separately to make it live.
 
         Args:
           notification: Core template fields used in POST and PUT request bodies (nested under a
@@ -599,12 +626,10 @@ class NotificationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationRetrieveContentResponse:
-        """Retrieve the content of a notification template.
+        """Returns a template's content and checksum.
 
-        The response shape depends on
-        whether the template uses V1 (blocks/channels) or V2 (elemental) content. Use
-        the `version` query parameter to select draft, published, or a specific
-        historical version.
+        V2 templates return Elemental
+        elements, while V1 templates return blocks and channels instead.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
@@ -641,8 +666,15 @@ class NotificationsResource(SyncAPIResource):
 
 
 class AsyncNotificationsResource(AsyncAPIResource):
+    """
+    Create, update, version, publish, and localize notification templates and their content.
+    """
+
     @cached_property
     def checks(self) -> AsyncChecksResource:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return AsyncChecksResource(self._client)
 
     @cached_property
@@ -669,6 +701,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         *,
         notification: NotificationTemplatePayloadParam,
         state: Literal["DRAFT", "PUBLISHED"] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -696,6 +730,15 @@ class AsyncNotificationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/notifications",
             body=await async_maybe_transform(
@@ -769,8 +812,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationListResponse:
-        """
-        List notification templates in your workspace.
+        """Lists the workspace's notification templates.
+
+        Each carries a name, tags, brand,
+        routing, and its draft or published state.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -817,8 +862,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Archive a notification template.
+        """Archives a notification template, preventing new sends from referencing it.
+
+        The
+        template stays retrievable for its version history.
 
         Args:
           extra_headers: Send extra headers
@@ -851,14 +898,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Duplicate a notification template.
-
-        Creates a standalone copy within the same
-        workspace and environment, with " COPY" appended to the title. The copy clones
-        the source draft's tags, brand, subscription topic, routing strategy, channels,
-        and content, and is always created as a standalone template (it is not linked to
-        any journey or broadcast, even if the source was). Templates that are scoped to
-        a journey or a broadcast cannot be duplicated through this endpoint.
+        """
+        Copies a notification template within the same workspace and environment,
+        appending " COPY" to the title. The copy is standalone and independently
+        editable.
 
         Args:
           extra_headers: Send extra headers
@@ -893,7 +936,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateVersionListResponse:
         """
-        List versions of a notification template.
+        Returns a notification template's published versions, most recent first, for
+        comparison or rollback. Paged.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -933,6 +977,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         id: str,
         *,
         version: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -959,6 +1005,15 @@ class AsyncNotificationsResource(AsyncAPIResource):
         if not id:
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             path_template("/notifications/{id}/publish", id=id),
             body=await async_maybe_transform(
@@ -983,11 +1038,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Replace the elemental content of a notification template.
+        """Replaces all Elemental content in a template, overwriting every existing
+        element.
 
-        Overwrites all
-        elements in the template with the provided content. Only supported for V2
-        (elemental) templates.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           content: Elemental content payload. The server defaults `version` when omitted.
@@ -1038,10 +1092,9 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Update a single element within a notification template.
-
-        Only supported for V2
-        (elemental) templates.
+        """
+        Replaces one Elemental element in a template, addressed by its element id.
+        Supported for V2 templates only, not V1 blocks and channels.
 
         Args:
           type: Element type (text, meta, action, image, etc.).
@@ -1094,11 +1147,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationContentMutationResponse:
-        """Set locale-specific content overrides for a notification template.
+        """Sets locale-specific content overrides for a template.
 
-        Each element
-        override must reference an existing element by ID. Only supported for V2
-        (elemental) templates.
+        Each override must
+        reference an element that already exists in the default content.
 
         Args:
           elements: Elements with locale-specific content overrides.
@@ -1145,9 +1197,9 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationTemplateResponse:
-        """Replace a notification template.
-
-        All fields are required.
+        """
+        Replaces a notification template in full, so send every field rather than only
+        the ones you want changed. Publish separately to make it live.
 
         Args:
           notification: Core template fields used in POST and PUT request bodies (nested under a
@@ -1193,12 +1245,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> NotificationRetrieveContentResponse:
-        """Retrieve the content of a notification template.
+        """Returns a template's content and checksum.
 
-        The response shape depends on
-        whether the template uses V1 (blocks/channels) or V2 (elemental) content. Use
-        the `version` query parameter to select draft, published, or a specific
-        historical version.
+        V2 templates return Elemental
+        elements, while V1 templates return blocks and channels instead.
 
         Args:
           version: Accepts `draft`, `published`, or a version string (e.g., `v001`). Defaults to
@@ -1277,6 +1327,9 @@ class NotificationsResourceWithRawResponse:
 
     @cached_property
     def checks(self) -> ChecksResourceWithRawResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return ChecksResourceWithRawResponse(self._notifications.checks)
 
 
@@ -1323,6 +1376,9 @@ class AsyncNotificationsResourceWithRawResponse:
 
     @cached_property
     def checks(self) -> AsyncChecksResourceWithRawResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return AsyncChecksResourceWithRawResponse(self._notifications.checks)
 
 
@@ -1369,6 +1425,9 @@ class NotificationsResourceWithStreamingResponse:
 
     @cached_property
     def checks(self) -> ChecksResourceWithStreamingResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return ChecksResourceWithStreamingResponse(self._notifications.checks)
 
 
@@ -1415,4 +1474,7 @@ class AsyncNotificationsResourceWithStreamingResponse:
 
     @cached_property
     def checks(self) -> AsyncChecksResourceWithStreamingResponse:
+        """
+        Create, update, version, publish, and localize notification templates and their content.
+        """
         return AsyncChecksResourceWithStreamingResponse(self._notifications.checks)

@@ -82,6 +82,8 @@ class TestRoutingStrategies:
                 }
             },
             tags=["production", "email"],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 
@@ -474,6 +476,8 @@ class TestAsyncRoutingStrategies:
                 }
             },
             tags=["production", "email"],
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(RoutingStrategyGetResponse, routing_strategy, path=["response"])
 

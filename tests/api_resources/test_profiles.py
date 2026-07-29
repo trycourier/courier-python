@@ -32,6 +32,17 @@ class TestProfiles:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_create_with_all_params(self, client: Courier) -> None:
+        profile = client.profiles.create(
+            user_id="user_id",
+            profile={"foo": "bar"},
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
+        )
+        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_create(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.create(
             user_id="user_id",
@@ -279,6 +290,17 @@ class TestAsyncProfiles:
         profile = await async_client.profiles.create(
             user_id="user_id",
             profile={"foo": "bar"},
+        )
+        assert_matches_type(ProfileCreateResponse, profile, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncCourier) -> None:
+        profile = await async_client.profiles.create(
+            user_id="user_id",
+            profile={"foo": "bar"},
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 

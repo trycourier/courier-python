@@ -16,7 +16,7 @@ from .catalog import (
     AsyncCatalogResourceWithStreamingResponse,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -33,8 +33,15 @@ __all__ = ["ProvidersResource", "AsyncProvidersResource"]
 
 
 class ProvidersResource(SyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def catalog(self) -> CatalogResource:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return CatalogResource(self._client)
 
     @cached_property
@@ -63,6 +70,8 @@ class ProvidersResource(SyncAPIResource):
         alias: str | Omit = omit,
         settings: Dict[str, object] | Omit = omit,
         title: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,10 +79,9 @@ class ProvidersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
-        """Create a new provider configuration.
-
-        The `provider` field must be a known
-        Courier provider key (see catalog).
+        """
+        Configures a provider integration from a Courier provider key and its settings.
+        Check the catalog endpoint for the schema each provider expects.
 
         Args:
           provider: The provider key identifying the type (e.g. "sendgrid", "twilio"). Must be a
@@ -95,6 +103,15 @@ class ProvidersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/providers",
             body=maybe_transform(
@@ -124,7 +141,8 @@ class ProvidersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
         """
-        Fetch a single provider configuration by ID.
+        Returns one configured provider by id, including its channel, provider key,
+        alias, title, and current settings.
 
         Args:
           extra_headers: Send extra headers
@@ -160,13 +178,9 @@ class ProvidersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
-        """Replace an existing provider configuration.
-
-        The `provider` key is required and
-        determines which provider-specific settings schema is applied. All other fields
-        are optional — omitted fields are cleared from the stored configuration (this is
-        a full replacement, not a partial merge). Changing the provider type for an
-        existing configuration is not supported.
+        """
+        Replaces a provider's configuration in full, clearing any field you omit rather
+        than merging it. Send the complete settings object.
 
         Args:
           provider: The provider key identifying the type. Required on every request because it
@@ -218,10 +232,9 @@ class ProvidersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProviderListResponse:
-        """List configured provider integrations for the current workspace.
-
-        Supports
-        cursor-based pagination.
+        """
+        Lists the provider integrations configured in the workspace, one entry per
+        channel and provider key with its alias and settings.
 
         Args:
           cursor: Opaque cursor for fetching the next page.
@@ -257,10 +270,9 @@ class ProvidersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Delete a provider configuration.
-
-        Returns 409 if the provider is still referenced
-        by routing or notifications.
+        """
+        Deletes a provider configuration, which fails while routing strategies or
+        templates still reference it. Update those references first.
 
         Args:
           extra_headers: Send extra headers
@@ -284,8 +296,15 @@ class ProvidersResource(SyncAPIResource):
 
 
 class AsyncProvidersResource(AsyncAPIResource):
+    """
+    Configure the channel providers Courier delivers through, and browse the provider types it supports.
+    """
+
     @cached_property
     def catalog(self) -> AsyncCatalogResource:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return AsyncCatalogResource(self._client)
 
     @cached_property
@@ -314,6 +333,8 @@ class AsyncProvidersResource(AsyncAPIResource):
         alias: str | Omit = omit,
         settings: Dict[str, object] | Omit = omit,
         title: str | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -321,10 +342,9 @@ class AsyncProvidersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
-        """Create a new provider configuration.
-
-        The `provider` field must be a known
-        Courier provider key (see catalog).
+        """
+        Configures a provider integration from a Courier provider key and its settings.
+        Check the catalog endpoint for the schema each provider expects.
 
         Args:
           provider: The provider key identifying the type (e.g. "sendgrid", "twilio"). Must be a
@@ -346,6 +366,15 @@ class AsyncProvidersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/providers",
             body=await async_maybe_transform(
@@ -375,7 +404,8 @@ class AsyncProvidersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
         """
-        Fetch a single provider configuration by ID.
+        Returns one configured provider by id, including its channel, provider key,
+        alias, title, and current settings.
 
         Args:
           extra_headers: Send extra headers
@@ -411,13 +441,9 @@ class AsyncProvidersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
-        """Replace an existing provider configuration.
-
-        The `provider` key is required and
-        determines which provider-specific settings schema is applied. All other fields
-        are optional — omitted fields are cleared from the stored configuration (this is
-        a full replacement, not a partial merge). Changing the provider type for an
-        existing configuration is not supported.
+        """
+        Replaces a provider's configuration in full, clearing any field you omit rather
+        than merging it. Send the complete settings object.
 
         Args:
           provider: The provider key identifying the type. Required on every request because it
@@ -469,10 +495,9 @@ class AsyncProvidersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProviderListResponse:
-        """List configured provider integrations for the current workspace.
-
-        Supports
-        cursor-based pagination.
+        """
+        Lists the provider integrations configured in the workspace, one entry per
+        channel and provider key with its alias and settings.
 
         Args:
           cursor: Opaque cursor for fetching the next page.
@@ -508,10 +533,9 @@ class AsyncProvidersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """Delete a provider configuration.
-
-        Returns 409 if the provider is still referenced
-        by routing or notifications.
+        """
+        Deletes a provider configuration, which fails while routing strategies or
+        templates still reference it. Update those references first.
 
         Args:
           extra_headers: Send extra headers
@@ -556,6 +580,9 @@ class ProvidersResourceWithRawResponse:
 
     @cached_property
     def catalog(self) -> CatalogResourceWithRawResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return CatalogResourceWithRawResponse(self._providers.catalog)
 
 
@@ -581,6 +608,9 @@ class AsyncProvidersResourceWithRawResponse:
 
     @cached_property
     def catalog(self) -> AsyncCatalogResourceWithRawResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return AsyncCatalogResourceWithRawResponse(self._providers.catalog)
 
 
@@ -606,6 +636,9 @@ class ProvidersResourceWithStreamingResponse:
 
     @cached_property
     def catalog(self) -> CatalogResourceWithStreamingResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return CatalogResourceWithStreamingResponse(self._providers.catalog)
 
 
@@ -631,4 +664,7 @@ class AsyncProvidersResourceWithStreamingResponse:
 
     @cached_property
     def catalog(self) -> AsyncCatalogResourceWithStreamingResponse:
+        """
+        Configure the channel providers Courier delivers through, and browse the provider types it supports.
+        """
         return AsyncCatalogResourceWithStreamingResponse(self._providers.catalog)

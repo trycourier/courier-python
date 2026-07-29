@@ -150,6 +150,8 @@ class TestSend:
                     "user_id": "user_id",
                 },
             },
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(SendMessageResponse, send, path=["response"])
 
@@ -318,6 +320,8 @@ class TestAsyncSend:
                     "user_id": "user_id",
                 },
             },
+            idempotency_key="order-ORD-456-user-123",
+            x_idempotency_expiration="1785312000",
         )
         assert_matches_type(SendMessageResponse, send, path=["response"])
 

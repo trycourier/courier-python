@@ -13,7 +13,7 @@ from ..types import (
     routing_strategy_list_notifications_params,
 )
 from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -34,6 +34,10 @@ __all__ = ["RoutingStrategiesResource", "AsyncRoutingStrategiesResource"]
 
 
 class RoutingStrategiesResource(SyncAPIResource):
+    """
+    Define reusable channel routing and failover strategies, and see which templates use them.
+    """
+
     @cached_property
     def with_raw_response(self) -> RoutingStrategiesResourceWithRawResponse:
         """
@@ -62,6 +66,8 @@ class RoutingStrategiesResource(SyncAPIResource):
         description: Optional[str] | Omit = omit,
         providers: Optional[MessageProviders] | Omit = omit,
         tags: Optional[SequenceNotStr[str]] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -95,6 +101,15 @@ class RoutingStrategiesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/routing-strategies",
             body=maybe_transform(
@@ -125,10 +140,9 @@ class RoutingStrategiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RoutingStrategyGetResponse:
-        """Retrieve a routing strategy by ID.
-
-        Returns the full entity including routing
-        content and metadata.
+        """
+        Returns one routing strategy by id with its name, tags, channels, and the
+        routing rules that decide provider order and fallback.
 
         Args:
           extra_headers: Send extra headers
@@ -247,10 +261,10 @@ class RoutingStrategiesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AssociatedNotificationListResponse:
-        """List notification templates associated with a routing strategy.
+        """Returns the notification templates using a routing strategy, with paging.
 
-        Includes
-        template metadata only, not full content.
+        Check
+        this before changing a strategy that templates depend on.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.
@@ -351,6 +365,10 @@ class RoutingStrategiesResource(SyncAPIResource):
 
 
 class AsyncRoutingStrategiesResource(AsyncAPIResource):
+    """
+    Define reusable channel routing and failover strategies, and see which templates use them.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncRoutingStrategiesResourceWithRawResponse:
         """
@@ -379,6 +397,8 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
         description: Optional[str] | Omit = omit,
         providers: Optional[MessageProviders] | Omit = omit,
         tags: Optional[SequenceNotStr[str]] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -412,6 +432,15 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/routing-strategies",
             body=await async_maybe_transform(
@@ -442,10 +471,9 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RoutingStrategyGetResponse:
-        """Retrieve a routing strategy by ID.
-
-        Returns the full entity including routing
-        content and metadata.
+        """
+        Returns one routing strategy by id with its name, tags, channels, and the
+        routing rules that decide provider order and fallback.
 
         Args:
           extra_headers: Send extra headers
@@ -564,10 +592,10 @@ class AsyncRoutingStrategiesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AssociatedNotificationListResponse:
-        """List notification templates associated with a routing strategy.
+        """Returns the notification templates using a routing strategy, with paging.
 
-        Includes
-        template metadata only, not full content.
+        Check
+        this before changing a strategy that templates depend on.
 
         Args:
           cursor: Opaque pagination cursor from a previous response. Omit for the first page.

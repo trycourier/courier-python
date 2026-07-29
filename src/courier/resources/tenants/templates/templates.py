@@ -36,8 +36,15 @@ __all__ = ["TemplatesResource", "AsyncTemplatesResource"]
 
 
 class TemplatesResource(SyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def versions(self) -> VersionsResource:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return VersionsResource(self._client)
 
     @cached_property
@@ -72,7 +79,8 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BaseTemplateTenantAssociation:
         """
-        Get a Template in Tenant
+        Returns a tenant's notification template with its content, version, and created,
+        updated, and published timestamps.
 
         Args:
           extra_headers: Send extra headers
@@ -109,7 +117,8 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TemplateListResponse:
         """
-        List Templates in Tenant
+        Lists a tenant's notification templates, each carrying its version and published
+        timestamp. Paged.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -156,13 +165,10 @@ class TemplatesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Deletes the tenant's notification template with the given `template_id`.
+        """Deletes a tenant's notification template by id.
 
-        Returns **204 No Content** with an empty body on success.
-
-        Returns **404** if there is no template with this ID for the tenant, including a
-        second `DELETE` after a successful removal.
+        Sends for that tenant then use
+        the workspace template registered under the same id.
 
         Args:
           extra_headers: Send extra headers
@@ -200,10 +206,8 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PostTenantTemplatePublishResponse:
         """
-        Publishes a specific version of a notification template for a tenant.
-
-        The template must already exist in the tenant's notification map. If no version
-        is specified, defaults to publishing the "latest" version.
+        Publishes a version of a tenant's notification template, making it the content
+        that tenant's sends render from until you publish another.
 
         Args:
           version: The version of the template to publish (e.g., "v1", "v2", "latest"). If not
@@ -247,13 +251,8 @@ class TemplatesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PutTenantTemplateResponse:
         """
-        Creates or updates a notification template for a tenant.
-
-        If the template already exists for the tenant, it will be updated (200).
-        Otherwise, a new template is created (201).
-
-        Optionally publishes the template immediately if the `published` flag is set to
-        true.
+        Creates or updates a notification template scoped to one tenant, letting a
+        tenant override the content the workspace template would send.
 
         Args:
           template: Template configuration for creating or updating a tenant notification template
@@ -291,8 +290,15 @@ class TemplatesResource(SyncAPIResource):
 
 
 class AsyncTemplatesResource(AsyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def versions(self) -> AsyncVersionsResource:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncVersionsResource(self._client)
 
     @cached_property
@@ -327,7 +333,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> BaseTemplateTenantAssociation:
         """
-        Get a Template in Tenant
+        Returns a tenant's notification template with its content, version, and created,
+        updated, and published timestamps.
 
         Args:
           extra_headers: Send extra headers
@@ -364,7 +371,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TemplateListResponse:
         """
-        List Templates in Tenant
+        Lists a tenant's notification templates, each carrying its version and published
+        timestamp. Paged.
 
         Args:
           cursor: Continue the pagination with the next cursor
@@ -411,13 +419,10 @@ class AsyncTemplatesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Deletes the tenant's notification template with the given `template_id`.
+        """Deletes a tenant's notification template by id.
 
-        Returns **204 No Content** with an empty body on success.
-
-        Returns **404** if there is no template with this ID for the tenant, including a
-        second `DELETE` after a successful removal.
+        Sends for that tenant then use
+        the workspace template registered under the same id.
 
         Args:
           extra_headers: Send extra headers
@@ -455,10 +460,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PostTenantTemplatePublishResponse:
         """
-        Publishes a specific version of a notification template for a tenant.
-
-        The template must already exist in the tenant's notification map. If no version
-        is specified, defaults to publishing the "latest" version.
+        Publishes a version of a tenant's notification template, making it the content
+        that tenant's sends render from until you publish another.
 
         Args:
           version: The version of the template to publish (e.g., "v1", "v2", "latest"). If not
@@ -502,13 +505,8 @@ class AsyncTemplatesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PutTenantTemplateResponse:
         """
-        Creates or updates a notification template for a tenant.
-
-        If the template already exists for the tenant, it will be updated (200).
-        Otherwise, a new template is created (201).
-
-        Optionally publishes the template immediately if the `published` flag is set to
-        true.
+        Creates or updates a notification template scoped to one tenant, letting a
+        tenant override the content the workspace template would send.
 
         Args:
           template: Template configuration for creating or updating a tenant notification template
@@ -567,6 +565,9 @@ class TemplatesResourceWithRawResponse:
 
     @cached_property
     def versions(self) -> VersionsResourceWithRawResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return VersionsResourceWithRawResponse(self._templates.versions)
 
 
@@ -592,6 +593,9 @@ class AsyncTemplatesResourceWithRawResponse:
 
     @cached_property
     def versions(self) -> AsyncVersionsResourceWithRawResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncVersionsResourceWithRawResponse(self._templates.versions)
 
 
@@ -617,6 +621,9 @@ class TemplatesResourceWithStreamingResponse:
 
     @cached_property
     def versions(self) -> VersionsResourceWithStreamingResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return VersionsResourceWithStreamingResponse(self._templates.versions)
 
 
@@ -642,4 +649,7 @@ class AsyncTemplatesResourceWithStreamingResponse:
 
     @cached_property
     def versions(self) -> AsyncVersionsResourceWithStreamingResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncVersionsResourceWithStreamingResponse(self._templates.versions)

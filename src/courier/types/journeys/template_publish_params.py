@@ -13,3 +13,7 @@ class TemplatePublishParams(TypedDict, total=False):
     template_id: Required[Annotated[str, PropertyInfo(alias="templateId")]]
 
     version: str
+
+    idempotency_key: Annotated[str, PropertyInfo(alias="Idempotency-Key")]
+
+    x_idempotency_expiration: Annotated[str, PropertyInfo(alias="x-idempotency-expiration")]

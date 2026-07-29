@@ -20,7 +20,7 @@ from ...types import (
     workspace_preference_replace_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
-from ..._utils import path_template, maybe_transform, async_maybe_transform
+from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -39,8 +39,15 @@ __all__ = ["WorkspacePreferencesResource", "AsyncWorkspacePreferencesResource"]
 
 
 class WorkspacePreferencesResource(SyncAPIResource):
+    """
+    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+    """
+
     @cached_property
     def topics(self) -> TopicsResource:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         return TopicsResource(self._client)
 
     @cached_property
@@ -69,6 +76,8 @@ class WorkspacePreferencesResource(SyncAPIResource):
         description: Optional[str] | Omit = omit,
         has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -76,11 +85,10 @@ class WorkspacePreferencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
-        """Create a workspace preference.
+        """Creates a workspace preference and returns its generated id.
 
-        The workspace preference id is generated and
-        returned. Topics are created inside a workspace preference via POST
-        /preferences/sections/{section_id}/topics.
+        Add subscription
+        topics to it afterwards with the topics endpoint.
 
         Args:
           name: Human-readable name for the workspace preference.
@@ -99,6 +107,15 @@ class WorkspacePreferencesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/preferences/sections",
             body=maybe_transform(
@@ -128,7 +145,8 @@ class WorkspacePreferencesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
         """
-        Retrieve a workspace preference by id, including its topics.
+        Returns one workspace preference by id, including its subscription topics,
+        routing options, and custom routing flag.
 
         Args:
           extra_headers: Send extra headers
@@ -159,10 +177,9 @@ class WorkspacePreferencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceListResponse:
-        """List the workspace's preferences.
-
-        Each workspace preference embeds its topics.
-        Scoped to the workspace of the API key.
+        """
+        Returns the workspace's preferences, each embedding its subscription topics,
+        routing options, and whether custom routing is allowed.
         """
         return self._get(
             "/preferences/sections",
@@ -214,6 +231,8 @@ class WorkspacePreferencesResource(SyncAPIResource):
         brand_id: Optional[str] | Omit = omit,
         description: Optional[str] | Omit = omit,
         heading: Optional[str] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -221,11 +240,9 @@ class WorkspacePreferencesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PublishPreferencesResponse:
-        """Publish the workspace's preferences page.
-
-        Takes a snapshot of every workspace
-        preference with its topics under a new published version, making the current
-        state visible on the hosted preferences page (non-draft).
+        """
+        Publishes the workspace preference page, snapshotting every preference and
+        topic, and returns the page id and a preview URL.
 
         Args:
           brand_id: Brand for the hosted page - "default" (workspace default brand), "none" (no
@@ -243,6 +260,15 @@ class WorkspacePreferencesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/preferences/publish",
             body=maybe_transform(
@@ -318,8 +344,15 @@ class WorkspacePreferencesResource(SyncAPIResource):
 
 
 class AsyncWorkspacePreferencesResource(AsyncAPIResource):
+    """
+    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+    """
+
     @cached_property
     def topics(self) -> AsyncTopicsResource:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         return AsyncTopicsResource(self._client)
 
     @cached_property
@@ -348,6 +381,8 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         description: Optional[str] | Omit = omit,
         has_custom_routing: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -355,11 +390,10 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
-        """Create a workspace preference.
+        """Creates a workspace preference and returns its generated id.
 
-        The workspace preference id is generated and
-        returned. Topics are created inside a workspace preference via POST
-        /preferences/sections/{section_id}/topics.
+        Add subscription
+        topics to it afterwards with the topics endpoint.
 
         Args:
           name: Human-readable name for the workspace preference.
@@ -378,6 +412,15 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/preferences/sections",
             body=await async_maybe_transform(
@@ -407,7 +450,8 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceGetResponse:
         """
-        Retrieve a workspace preference by id, including its topics.
+        Returns one workspace preference by id, including its subscription topics,
+        routing options, and custom routing flag.
 
         Args:
           extra_headers: Send extra headers
@@ -438,10 +482,9 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WorkspacePreferenceListResponse:
-        """List the workspace's preferences.
-
-        Each workspace preference embeds its topics.
-        Scoped to the workspace of the API key.
+        """
+        Returns the workspace's preferences, each embedding its subscription topics,
+        routing options, and whether custom routing is allowed.
         """
         return await self._get(
             "/preferences/sections",
@@ -493,6 +536,8 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         brand_id: Optional[str] | Omit = omit,
         description: Optional[str] | Omit = omit,
         heading: Optional[str] | Omit = omit,
+        idempotency_key: str | Omit = omit,
+        x_idempotency_expiration: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -500,11 +545,9 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PublishPreferencesResponse:
-        """Publish the workspace's preferences page.
-
-        Takes a snapshot of every workspace
-        preference with its topics under a new published version, making the current
-        state visible on the hosted preferences page (non-draft).
+        """
+        Publishes the workspace preference page, snapshotting every preference and
+        topic, and returns the page id and a preview URL.
 
         Args:
           brand_id: Brand for the hosted page - "default" (workspace default brand), "none" (no
@@ -522,6 +565,15 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Idempotency-Key": idempotency_key,
+                    "x-idempotency-expiration": x_idempotency_expiration,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/preferences/publish",
             body=await async_maybe_transform(
@@ -621,6 +673,9 @@ class WorkspacePreferencesResourceWithRawResponse:
 
     @cached_property
     def topics(self) -> TopicsResourceWithRawResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         return TopicsResourceWithRawResponse(self._workspace_preferences.topics)
 
 
@@ -649,6 +704,9 @@ class AsyncWorkspacePreferencesResourceWithRawResponse:
 
     @cached_property
     def topics(self) -> AsyncTopicsResourceWithRawResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         return AsyncTopicsResourceWithRawResponse(self._workspace_preferences.topics)
 
 
@@ -677,6 +735,9 @@ class WorkspacePreferencesResourceWithStreamingResponse:
 
     @cached_property
     def topics(self) -> TopicsResourceWithStreamingResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         return TopicsResourceWithStreamingResponse(self._workspace_preferences.topics)
 
 
@@ -705,4 +766,7 @@ class AsyncWorkspacePreferencesResourceWithStreamingResponse:
 
     @cached_property
     def topics(self) -> AsyncTopicsResourceWithStreamingResponse:
+        """
+        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
+        """
         return AsyncTopicsResourceWithStreamingResponse(self._workspace_preferences.topics)

@@ -34,8 +34,15 @@ __all__ = ["ListsResource", "AsyncListsResource"]
 
 
 class ListsResource(SyncAPIResource):
+    """
+    Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+    """
+
     @cached_property
     def subscriptions(self) -> SubscriptionsResource:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return SubscriptionsResource(self._client)
 
     @cached_property
@@ -68,8 +75,10 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionList:
-        """
-        Returns a list based on the list ID provided.
+        """Returns one list by id with its name and created and updated timestamps.
+
+        Fetch
+        its subscribers separately with the subscriptions endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -103,8 +112,10 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Create or replace an existing list with the supplied values.
+        """Creates or replaces a list from a name and preferences.
+
+        Subscribers are managed
+        through the separate subscriptions endpoints.
 
         Args:
           extra_headers: Send extra headers
@@ -146,7 +157,8 @@ class ListsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListListResponse:
         """
-        Returns all of the lists, with the ability to filter based on a pattern.
+        Returns the workspace's lists, filterable by a pattern to fetch a subset such as
+        every regional list. Paged by cursor.
 
         Args:
           cursor: A unique identifier that allows for fetching the next page of lists.
@@ -194,8 +206,10 @@ class ListsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a list by list ID.
+        """Deletes a list, halting sends that target it.
+
+        A previously deleted list can be
+        brought back with the companion restore endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -229,7 +243,8 @@ class ListsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Restore a previously deleted list.
+        Restores a previously deleted list along with its subscribers, so a list removed
+        by mistake can be brought back rather than rebuilt.
 
         Args:
           extra_headers: Send extra headers
@@ -253,8 +268,15 @@ class ListsResource(SyncAPIResource):
 
 
 class AsyncListsResource(AsyncAPIResource):
+    """
+    Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+    """
+
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsResource:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return AsyncSubscriptionsResource(self._client)
 
     @cached_property
@@ -287,8 +309,10 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SubscriptionList:
-        """
-        Returns a list based on the list ID provided.
+        """Returns one list by id with its name and created and updated timestamps.
+
+        Fetch
+        its subscribers separately with the subscriptions endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -322,8 +346,10 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Create or replace an existing list with the supplied values.
+        """Creates or replaces a list from a name and preferences.
+
+        Subscribers are managed
+        through the separate subscriptions endpoints.
 
         Args:
           extra_headers: Send extra headers
@@ -365,7 +391,8 @@ class AsyncListsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ListListResponse:
         """
-        Returns all of the lists, with the ability to filter based on a pattern.
+        Returns the workspace's lists, filterable by a pattern to fetch a subset such as
+        every regional list. Paged by cursor.
 
         Args:
           cursor: A unique identifier that allows for fetching the next page of lists.
@@ -413,8 +440,10 @@ class AsyncListsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
-        """
-        Delete a list by list ID.
+        """Deletes a list, halting sends that target it.
+
+        A previously deleted list can be
+        brought back with the companion restore endpoint.
 
         Args:
           extra_headers: Send extra headers
@@ -448,7 +477,8 @@ class AsyncListsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
-        Restore a previously deleted list.
+        Restores a previously deleted list along with its subscribers, so a list removed
+        by mistake can be brought back rather than rebuilt.
 
         Args:
           extra_headers: Send extra headers
@@ -493,6 +523,9 @@ class ListsResourceWithRawResponse:
 
     @cached_property
     def subscriptions(self) -> SubscriptionsResourceWithRawResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return SubscriptionsResourceWithRawResponse(self._lists.subscriptions)
 
 
@@ -518,6 +551,9 @@ class AsyncListsResourceWithRawResponse:
 
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsResourceWithRawResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return AsyncSubscriptionsResourceWithRawResponse(self._lists.subscriptions)
 
 
@@ -543,6 +579,9 @@ class ListsResourceWithStreamingResponse:
 
     @cached_property
     def subscriptions(self) -> SubscriptionsResourceWithStreamingResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return SubscriptionsResourceWithStreamingResponse(self._lists.subscriptions)
 
 
@@ -568,4 +607,7 @@ class AsyncListsResourceWithStreamingResponse:
 
     @cached_property
     def subscriptions(self) -> AsyncSubscriptionsResourceWithStreamingResponse:
+        """
+        Manage static groups of users that you subscribe explicitly, and send to them by list id or list pattern.
+        """
         return AsyncSubscriptionsResourceWithStreamingResponse(self._lists.subscriptions)

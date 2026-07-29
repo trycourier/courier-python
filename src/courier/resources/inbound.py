@@ -25,6 +25,10 @@ __all__ = ["InboundResource", "AsyncInboundResource"]
 
 
 class InboundResource(SyncAPIResource):
+    """
+    Record an inbound event that triggers the journeys and automations mapped to it.
+    """
+
     @cached_property
     def with_raw_response(self) -> InboundResourceWithRawResponse:
         """
@@ -59,12 +63,13 @@ class InboundResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InboundTrackEventResponse:
-        """Courier Track Event
+        """Records an inbound event that can trigger a journey.
+
+        Requires an event name, a
+        messageId you generate, a type, and a properties object.
 
         Args:
-          event: A descriptive name of the event.
-
-        This name will appear as a trigger in the
+          event: A descriptive name of the event. This name will appear as a trigger in the
               Courier Automation Trigger node.
 
           message_id: A required unique identifier that will be used to de-duplicate requests. If not
@@ -100,6 +105,10 @@ class InboundResource(SyncAPIResource):
 
 
 class AsyncInboundResource(AsyncAPIResource):
+    """
+    Record an inbound event that triggers the journeys and automations mapped to it.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncInboundResourceWithRawResponse:
         """
@@ -134,12 +143,13 @@ class AsyncInboundResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InboundTrackEventResponse:
-        """Courier Track Event
+        """Records an inbound event that can trigger a journey.
+
+        Requires an event name, a
+        messageId you generate, a type, and a properties object.
 
         Args:
-          event: A descriptive name of the event.
-
-        This name will appear as a trigger in the
+          event: A descriptive name of the event. This name will appear as a trigger in the
               Courier Automation Trigger node.
 
           message_id: A required unique identifier that will be used to de-duplicate requests. If not

@@ -32,8 +32,15 @@ __all__ = ["AutomationsResource", "AsyncAutomationsResource"]
 
 
 class AutomationsResource(SyncAPIResource):
+    """
+    Invoke a stored automation template or an ad hoc automation defined in the request.
+    """
+
     @cached_property
     def invoke(self) -> InvokeResource:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         return InvokeResource(self._client)
 
     @cached_property
@@ -67,12 +74,12 @@ class AutomationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationTemplateListResponse:
-        """Get the list of automations.
+        """
+        Lists the workspace's saved automation templates, each with its id and a cursor
+        for paging to the next page of results.
 
         Args:
-          cursor: A cursor token for pagination.
-
-        Use the cursor from the previous response to
+          cursor: A cursor token for pagination. Use the cursor from the previous response to
               fetch the next page of results.
 
           version: The version of templates to retrieve. Accepted values are published (for
@@ -106,8 +113,15 @@ class AutomationsResource(SyncAPIResource):
 
 
 class AsyncAutomationsResource(AsyncAPIResource):
+    """
+    Invoke a stored automation template or an ad hoc automation defined in the request.
+    """
+
     @cached_property
     def invoke(self) -> AsyncInvokeResource:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         return AsyncInvokeResource(self._client)
 
     @cached_property
@@ -141,12 +155,12 @@ class AsyncAutomationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AutomationTemplateListResponse:
-        """Get the list of automations.
+        """
+        Lists the workspace's saved automation templates, each with its id and a cursor
+        for paging to the next page of results.
 
         Args:
-          cursor: A cursor token for pagination.
-
-        Use the cursor from the previous response to
+          cursor: A cursor token for pagination. Use the cursor from the previous response to
               fetch the next page of results.
 
           version: The version of templates to retrieve. Accepted values are published (for
@@ -189,6 +203,9 @@ class AutomationsResourceWithRawResponse:
 
     @cached_property
     def invoke(self) -> InvokeResourceWithRawResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         return InvokeResourceWithRawResponse(self._automations.invoke)
 
 
@@ -202,6 +219,9 @@ class AsyncAutomationsResourceWithRawResponse:
 
     @cached_property
     def invoke(self) -> AsyncInvokeResourceWithRawResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         return AsyncInvokeResourceWithRawResponse(self._automations.invoke)
 
 
@@ -215,6 +235,9 @@ class AutomationsResourceWithStreamingResponse:
 
     @cached_property
     def invoke(self) -> InvokeResourceWithStreamingResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         return InvokeResourceWithStreamingResponse(self._automations.invoke)
 
 
@@ -228,4 +251,7 @@ class AsyncAutomationsResourceWithStreamingResponse:
 
     @cached_property
     def invoke(self) -> AsyncInvokeResourceWithStreamingResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
         return AsyncInvokeResourceWithStreamingResponse(self._automations.invoke)
