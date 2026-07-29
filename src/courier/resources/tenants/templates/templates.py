@@ -36,8 +36,15 @@ __all__ = ["TemplatesResource", "AsyncTemplatesResource"]
 
 
 class TemplatesResource(SyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def versions(self) -> VersionsResource:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return VersionsResource(self._client)
 
     @cached_property
@@ -283,8 +290,15 @@ class TemplatesResource(SyncAPIResource):
 
 
 class AsyncTemplatesResource(AsyncAPIResource):
+    """
+    Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+    """
+
     @cached_property
     def versions(self) -> AsyncVersionsResource:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncVersionsResource(self._client)
 
     @cached_property
@@ -551,6 +565,9 @@ class TemplatesResourceWithRawResponse:
 
     @cached_property
     def versions(self) -> VersionsResourceWithRawResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return VersionsResourceWithRawResponse(self._templates.versions)
 
 
@@ -576,6 +593,9 @@ class AsyncTemplatesResourceWithRawResponse:
 
     @cached_property
     def versions(self) -> AsyncVersionsResourceWithRawResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncVersionsResourceWithRawResponse(self._templates.versions)
 
 
@@ -601,6 +621,9 @@ class TemplatesResourceWithStreamingResponse:
 
     @cached_property
     def versions(self) -> VersionsResourceWithStreamingResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return VersionsResourceWithStreamingResponse(self._templates.versions)
 
 
@@ -626,4 +649,7 @@ class AsyncTemplatesResourceWithStreamingResponse:
 
     @cached_property
     def versions(self) -> AsyncVersionsResourceWithStreamingResponse:
+        """
+        Manage the templates and template versions scoped to a single tenant, including the ones authored in the embedded designer.
+        """
         return AsyncVersionsResourceWithStreamingResponse(self._templates.versions)

@@ -35,14 +35,23 @@ __all__ = ["UsersResource", "AsyncUsersResource"]
 class UsersResource(SyncAPIResource):
     @cached_property
     def preferences(self) -> PreferencesResource:
+        """
+        Read and write a single user's notification preferences, per topic and per channel.
+        """
         return PreferencesResource(self._client)
 
     @cached_property
     def tenants(self) -> TenantsResource:
+        """
+        Associate a user with one or more tenants, and read or remove those associations.
+        """
         return TenantsResource(self._client)
 
     @cached_property
     def tokens(self) -> TokensResource:
+        """
+        Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+        """
         return TokensResource(self._client)
 
     @cached_property
@@ -68,14 +77,23 @@ class UsersResource(SyncAPIResource):
 class AsyncUsersResource(AsyncAPIResource):
     @cached_property
     def preferences(self) -> AsyncPreferencesResource:
+        """
+        Read and write a single user's notification preferences, per topic and per channel.
+        """
         return AsyncPreferencesResource(self._client)
 
     @cached_property
     def tenants(self) -> AsyncTenantsResource:
+        """
+        Associate a user with one or more tenants, and read or remove those associations.
+        """
         return AsyncTenantsResource(self._client)
 
     @cached_property
     def tokens(self) -> AsyncTokensResource:
+        """
+        Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+        """
         return AsyncTokensResource(self._client)
 
     @cached_property
@@ -104,14 +122,23 @@ class UsersResourceWithRawResponse:
 
     @cached_property
     def preferences(self) -> PreferencesResourceWithRawResponse:
+        """
+        Read and write a single user's notification preferences, per topic and per channel.
+        """
         return PreferencesResourceWithRawResponse(self._users.preferences)
 
     @cached_property
     def tenants(self) -> TenantsResourceWithRawResponse:
+        """
+        Associate a user with one or more tenants, and read or remove those associations.
+        """
         return TenantsResourceWithRawResponse(self._users.tenants)
 
     @cached_property
     def tokens(self) -> TokensResourceWithRawResponse:
+        """
+        Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+        """
         return TokensResourceWithRawResponse(self._users.tokens)
 
 
@@ -121,14 +148,23 @@ class AsyncUsersResourceWithRawResponse:
 
     @cached_property
     def preferences(self) -> AsyncPreferencesResourceWithRawResponse:
+        """
+        Read and write a single user's notification preferences, per topic and per channel.
+        """
         return AsyncPreferencesResourceWithRawResponse(self._users.preferences)
 
     @cached_property
     def tenants(self) -> AsyncTenantsResourceWithRawResponse:
+        """
+        Associate a user with one or more tenants, and read or remove those associations.
+        """
         return AsyncTenantsResourceWithRawResponse(self._users.tenants)
 
     @cached_property
     def tokens(self) -> AsyncTokensResourceWithRawResponse:
+        """
+        Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+        """
         return AsyncTokensResourceWithRawResponse(self._users.tokens)
 
 
@@ -138,14 +174,23 @@ class UsersResourceWithStreamingResponse:
 
     @cached_property
     def preferences(self) -> PreferencesResourceWithStreamingResponse:
+        """
+        Read and write a single user's notification preferences, per topic and per channel.
+        """
         return PreferencesResourceWithStreamingResponse(self._users.preferences)
 
     @cached_property
     def tenants(self) -> TenantsResourceWithStreamingResponse:
+        """
+        Associate a user with one or more tenants, and read or remove those associations.
+        """
         return TenantsResourceWithStreamingResponse(self._users.tenants)
 
     @cached_property
     def tokens(self) -> TokensResourceWithStreamingResponse:
+        """
+        Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+        """
         return TokensResourceWithStreamingResponse(self._users.tokens)
 
 
@@ -155,12 +200,21 @@ class AsyncUsersResourceWithStreamingResponse:
 
     @cached_property
     def preferences(self) -> AsyncPreferencesResourceWithStreamingResponse:
+        """
+        Read and write a single user's notification preferences, per topic and per channel.
+        """
         return AsyncPreferencesResourceWithStreamingResponse(self._users.preferences)
 
     @cached_property
     def tenants(self) -> AsyncTenantsResourceWithStreamingResponse:
+        """
+        Associate a user with one or more tenants, and read or remove those associations.
+        """
         return AsyncTenantsResourceWithStreamingResponse(self._users.tenants)
 
     @cached_property
     def tokens(self) -> AsyncTokensResourceWithStreamingResponse:
+        """
+        Register and manage the APNS and FCM device tokens Courier delivers push notifications to.
+        """
         return AsyncTokensResourceWithStreamingResponse(self._users.tokens)

@@ -19,6 +19,9 @@ __all__ = ["PreferencesResource", "AsyncPreferencesResource"]
 class PreferencesResource(SyncAPIResource):
     @cached_property
     def items(self) -> ItemsResource:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         return ItemsResource(self._client)
 
     @cached_property
@@ -44,6 +47,9 @@ class PreferencesResource(SyncAPIResource):
 class AsyncPreferencesResource(AsyncAPIResource):
     @cached_property
     def items(self) -> AsyncItemsResource:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         return AsyncItemsResource(self._client)
 
     @cached_property
@@ -72,6 +78,9 @@ class PreferencesResourceWithRawResponse:
 
     @cached_property
     def items(self) -> ItemsResourceWithRawResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         return ItemsResourceWithRawResponse(self._preferences.items)
 
 
@@ -81,6 +90,9 @@ class AsyncPreferencesResourceWithRawResponse:
 
     @cached_property
     def items(self) -> AsyncItemsResourceWithRawResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         return AsyncItemsResourceWithRawResponse(self._preferences.items)
 
 
@@ -90,6 +102,9 @@ class PreferencesResourceWithStreamingResponse:
 
     @cached_property
     def items(self) -> ItemsResourceWithStreamingResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         return ItemsResourceWithStreamingResponse(self._preferences.items)
 
 
@@ -99,4 +114,7 @@ class AsyncPreferencesResourceWithStreamingResponse:
 
     @cached_property
     def items(self) -> AsyncItemsResourceWithStreamingResponse:
+        """
+        Manage tenants — the organizations, teams, or accounts your users belong to — along with their users and default preferences.
+        """
         return AsyncItemsResourceWithStreamingResponse(self._preferences.items)

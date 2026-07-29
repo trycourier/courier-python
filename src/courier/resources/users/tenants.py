@@ -25,6 +25,10 @@ __all__ = ["TenantsResource", "AsyncTenantsResource"]
 
 
 class TenantsResource(SyncAPIResource):
+    """
+    Associate a user with one or more tenants, and read or remove those associations.
+    """
+
     @cached_property
     def with_raw_response(self) -> TenantsResourceWithRawResponse:
         """
@@ -249,6 +253,10 @@ class TenantsResource(SyncAPIResource):
 
 
 class AsyncTenantsResource(AsyncAPIResource):
+    """
+    Associate a user with one or more tenants, and read or remove those associations.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTenantsResourceWithRawResponse:
         """

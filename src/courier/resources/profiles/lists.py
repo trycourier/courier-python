@@ -27,6 +27,10 @@ __all__ = ["ListsResource", "AsyncListsResource"]
 
 
 class ListsResource(SyncAPIResource):
+    """
+    Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+    """
+
     @cached_property
     def with_raw_response(self) -> ListsResourceWithRawResponse:
         """
@@ -172,6 +176,10 @@ class ListsResource(SyncAPIResource):
 
 
 class AsyncListsResource(AsyncAPIResource):
+    """
+    Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncListsResourceWithRawResponse:
         """

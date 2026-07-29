@@ -22,6 +22,10 @@ __all__ = ["AuthResource", "AsyncAuthResource"]
 
 
 class AuthResource(SyncAPIResource):
+    """
+    Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+    """
+
     @cached_property
     def with_raw_response(self) -> AuthResourceWithRawResponse:
         """
@@ -114,6 +118,10 @@ class AuthResource(SyncAPIResource):
 
 
 class AsyncAuthResource(AsyncAPIResource):
+    """
+    Issue scoped, short-lived JWTs so client-side SDKs — Inbox, Preferences, and the embedded designer — can call Courier as a single user. Server-side requests authenticate with your workspace API key instead.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncAuthResourceWithRawResponse:
         """

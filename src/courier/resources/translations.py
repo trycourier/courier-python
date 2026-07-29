@@ -21,6 +21,10 @@ __all__ = ["TranslationsResource", "AsyncTranslationsResource"]
 
 
 class TranslationsResource(SyncAPIResource):
+    """
+    Store and retrieve the translation strings Courier uses to render localized template content.
+    """
+
     @cached_property
     def with_raw_response(self) -> TranslationsResourceWithRawResponse:
         """
@@ -120,6 +124,10 @@ class TranslationsResource(SyncAPIResource):
 
 
 class AsyncTranslationsResource(AsyncAPIResource):
+    """
+    Store and retrieve the translation strings Courier uses to render localized template content.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncTranslationsResourceWithRawResponse:
         """

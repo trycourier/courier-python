@@ -34,8 +34,15 @@ __all__ = ["ProfilesResource", "AsyncProfilesResource"]
 
 
 class ProfilesResource(SyncAPIResource):
+    """
+    Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+    """
+
     @cached_property
     def lists(self) -> ListsResource:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         return ListsResource(self._client)
 
     @cached_property
@@ -252,8 +259,15 @@ class ProfilesResource(SyncAPIResource):
 
 
 class AsyncProfilesResource(AsyncAPIResource):
+    """
+    Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+    """
+
     @cached_property
     def lists(self) -> AsyncListsResource:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         return AsyncListsResource(self._client)
 
     @cached_property
@@ -491,6 +505,9 @@ class ProfilesResourceWithRawResponse:
 
     @cached_property
     def lists(self) -> ListsResourceWithRawResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         return ListsResourceWithRawResponse(self._profiles.lists)
 
 
@@ -516,6 +533,9 @@ class AsyncProfilesResourceWithRawResponse:
 
     @cached_property
     def lists(self) -> AsyncListsResourceWithRawResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         return AsyncListsResourceWithRawResponse(self._profiles.lists)
 
 
@@ -541,6 +561,9 @@ class ProfilesResourceWithStreamingResponse:
 
     @cached_property
     def lists(self) -> ListsResourceWithStreamingResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         return ListsResourceWithStreamingResponse(self._profiles.lists)
 
 
@@ -566,4 +589,7 @@ class AsyncProfilesResourceWithStreamingResponse:
 
     @cached_property
     def lists(self) -> AsyncListsResourceWithStreamingResponse:
+        """
+        Store the contact information Courier delivers to for each user — email, phone number, push tokens, and any custom data you send to.
+        """
         return AsyncListsResourceWithStreamingResponse(self._profiles.lists)
