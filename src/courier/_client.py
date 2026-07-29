@@ -51,6 +51,7 @@ if TYPE_CHECKING:
         requests,
         audiences,
         providers,
+        broadcasts,
         automations,
         audit_events,
         translations,
@@ -65,6 +66,7 @@ if TYPE_CHECKING:
     from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
+    from .resources.broadcasts import BroadcastsResource, AsyncBroadcastsResource
     from .resources.inbox.inbox import InboxResource, AsyncInboxResource
     from .resources.lists.lists import ListsResource, AsyncListsResource
     from .resources.users.users import UsersResource, AsyncUsersResource
@@ -210,6 +212,12 @@ class Courier(SyncAPIClient):
         from .resources.journeys import JourneysResource
 
         return JourneysResource(self)
+
+    @cached_property
+    def broadcasts(self) -> BroadcastsResource:
+        from .resources.broadcasts import BroadcastsResource
+
+        return BroadcastsResource(self)
 
     @cached_property
     def brands(self) -> BrandsResource:
@@ -567,6 +575,12 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncJourneysResource(self)
 
     @cached_property
+    def broadcasts(self) -> AsyncBroadcastsResource:
+        from .resources.broadcasts import AsyncBroadcastsResource
+
+        return AsyncBroadcastsResource(self)
+
+    @cached_property
     def brands(self) -> AsyncBrandsResource:
         """
         Manage the logos, colors, and layout that give the templates you send a consistent look.
@@ -864,6 +878,12 @@ class CourierWithRawResponse:
         return JourneysResourceWithRawResponse(self._client.journeys)
 
     @cached_property
+    def broadcasts(self) -> broadcasts.BroadcastsResourceWithRawResponse:
+        from .resources.broadcasts import BroadcastsResourceWithRawResponse
+
+        return BroadcastsResourceWithRawResponse(self._client.broadcasts)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithRawResponse:
         """
         Manage the logos, colors, and layout that give the templates you send a consistent look.
@@ -1047,6 +1067,12 @@ class AsyncCourierWithRawResponse:
         from .resources.journeys import AsyncJourneysResourceWithRawResponse
 
         return AsyncJourneysResourceWithRawResponse(self._client.journeys)
+
+    @cached_property
+    def broadcasts(self) -> broadcasts.AsyncBroadcastsResourceWithRawResponse:
+        from .resources.broadcasts import AsyncBroadcastsResourceWithRawResponse
+
+        return AsyncBroadcastsResourceWithRawResponse(self._client.broadcasts)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithRawResponse:
@@ -1234,6 +1260,12 @@ class CourierWithStreamedResponse:
         return JourneysResourceWithStreamingResponse(self._client.journeys)
 
     @cached_property
+    def broadcasts(self) -> broadcasts.BroadcastsResourceWithStreamingResponse:
+        from .resources.broadcasts import BroadcastsResourceWithStreamingResponse
+
+        return BroadcastsResourceWithStreamingResponse(self._client.broadcasts)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithStreamingResponse:
         """
         Manage the logos, colors, and layout that give the templates you send a consistent look.
@@ -1417,6 +1449,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.journeys import AsyncJourneysResourceWithStreamingResponse
 
         return AsyncJourneysResourceWithStreamingResponse(self._client.journeys)
+
+    @cached_property
+    def broadcasts(self) -> broadcasts.AsyncBroadcastsResourceWithStreamingResponse:
+        from .resources.broadcasts import AsyncBroadcastsResourceWithStreamingResponse
+
+        return AsyncBroadcastsResourceWithStreamingResponse(self._client.broadcasts)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithStreamingResponse:

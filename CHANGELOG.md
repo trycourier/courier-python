@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.23.0 (2026-07-29)
+
+Full Changelog: [v7.22.0...v7.23.0](https://github.com/trycourier/courier-python/compare/v7.22.0...v7.23.0)
+
+### Features
+
+* **broadcasts:** document Broadcasts CRUD REST API ([#170](https://github.com/trycourier/courier-python/issues/170)) ([8e63975](https://github.com/trycourier/courier-python/commit/8e639757661144e35f43d31923a7d6190874253e))
+
 ## 7.22.0 (2026-07-29)
 
 Full Changelog: [v7.21.0...v7.22.0](https://github.com/trycourier/courier-python/compare/v7.21.0...v7.22.0)

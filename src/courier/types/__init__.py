@@ -102,6 +102,7 @@ from .tenant import Tenant as Tenant
 from .journey import Journey as Journey
 from .audience import Audience as Audience
 from .provider import Provider as Provider
+from .broadcast import Broadcast as Broadcast
 from .base_check import BaseCheck as BaseCheck
 from .email_head import EmailHead as EmailHead
 from .logo_param import LogoParam as LogoParam
@@ -131,6 +132,7 @@ from .journey_send_node import JourneySendNode as JourneySendNode
 from .subscription_list import SubscriptionList as SubscriptionList
 from .widget_background import WidgetBackground as WidgetBackground
 from .brand_colors_param import BrandColorsParam as BrandColorsParam
+from .broadcast_schedule import BroadcastSchedule as BroadcastSchedule
 from .email_footer_param import EmailFooterParam as EmailFooterParam
 from .email_header_param import EmailHeaderParam as EmailHeaderParam
 from .journey_experiment import JourneyExperiment as JourneyExperiment
@@ -158,6 +160,8 @@ from .provider_list_params import ProviderListParams as ProviderListParams
 from .tenant_list_response import TenantListResponse as TenantListResponse
 from .tenant_update_params import TenantUpdateParams as TenantUpdateParams
 from .brand_settings_in_app import BrandSettingsInApp as BrandSettingsInApp
+from .broadcast_list_params import BroadcastListParams as BroadcastListParams
+from .broadcast_send_params import BroadcastSendParams as BroadcastSendParams
 from .journey_ai_node_param import JourneyAINodeParam as JourneyAINodeParam
 from .journey_cancel_params import JourneyCancelParams as JourneyCancelParams
 from .journey_create_params import JourneyCreateParams as JourneyCreateParams
@@ -183,6 +187,9 @@ from .provider_update_params import ProviderUpdateParams as ProviderUpdateParams
 from .subscription_topic_new import SubscriptionTopicNew as SubscriptionTopicNew
 from .audit_event_list_params import AuditEventListParams as AuditEventListParams
 from .auth_issue_token_params import AuthIssueTokenParams as AuthIssueTokenParams
+from .broadcast_create_params import BroadcastCreateParams as BroadcastCreateParams
+from .broadcast_list_response import BroadcastListResponse as BroadcastListResponse
+from .broadcast_update_params import BroadcastUpdateParams as BroadcastUpdateParams
 from .cancel_journey_response import CancelJourneyResponse as CancelJourneyResponse
 from .journey_condition_group import JourneyConditionGroup as JourneyConditionGroup
 from .journey_exit_node_param import JourneyExitNodeParam as JourneyExitNodeParam
@@ -208,6 +215,7 @@ from .tenant_association_param import TenantAssociationParam as TenantAssociatio
 from .tenant_list_users_params import TenantListUsersParams as TenantListUsersParams
 from .audit_event_list_response import AuditEventListResponse as AuditEventListResponse
 from .auth_issue_token_response import AuthIssueTokenResponse as AuthIssueTokenResponse
+from .broadcast_schedule_params import BroadcastScheduleParams as BroadcastScheduleParams
 from .default_preferences_param import DefaultPreferencesParam as DefaultPreferencesParam
 from .message_retrieve_response import MessageRetrieveResponse as MessageRetrieveResponse
 from .profile_retrieve_response import ProfileRetrieveResponse as ProfileRetrieveResponse
@@ -227,6 +235,7 @@ from .notification_replace_params import NotificationReplaceParams as Notificati
 from .notification_template_state import NotificationTemplateState as NotificationTemplateState
 from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
+from .broadcast_put_content_params import BroadcastPutContentParams as BroadcastPutContentParams
 from .cancel_journey_request_param import CancelJourneyRequestParam as CancelJourneyRequestParam
 from .inbound_track_event_response import InboundTrackEventResponse as InboundTrackEventResponse
 from .journey_condition_atom_param import JourneyConditionAtomParam as JourneyConditionAtomParam
@@ -263,6 +272,7 @@ from .routing_strategy_replace_params import RoutingStrategyReplaceParams as Rou
 from .base_template_tenant_association import BaseTemplateTenantAssociation as BaseTemplateTenantAssociation
 from .journey_experiment_variant_param import JourneyExperimentVariantParam as JourneyExperimentVariantParam
 from .automation_template_list_response import AutomationTemplateListResponse as AutomationTemplateListResponse
+from .broadcast_retrieve_content_params import BroadcastRetrieveContentParams as BroadcastRetrieveContentParams
 from .journey_delay_duration_node_param import JourneyDelayDurationNodeParam as JourneyDelayDurationNodeParam
 from .journey_fetch_post_put_node_param import JourneyFetchPostPutNodeParam as JourneyFetchPostPutNodeParam
 from .notification_content_get_response import NotificationContentGetResponse as NotificationContentGetResponse
