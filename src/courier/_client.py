@@ -38,7 +38,6 @@ if TYPE_CHECKING:
     from .resources import (
         auth,
         send,
-        inbox,
         lists,
         users,
         brands,
@@ -67,7 +66,6 @@ if TYPE_CHECKING:
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
     from .resources.broadcasts import BroadcastsResource, AsyncBroadcastsResource
-    from .resources.inbox.inbox import InboxResource, AsyncInboxResource
     from .resources.lists.lists import ListsResource, AsyncListsResource
     from .resources.users.users import UsersResource, AsyncUsersResource
     from .resources.audit_events import AuditEventsResource, AsyncAuditEventsResource
@@ -254,12 +252,6 @@ class Courier(SyncAPIClient):
         from .resources.lists import ListsResource
 
         return ListsResource(self)
-
-    @cached_property
-    def inbox(self) -> InboxResource:
-        from .resources.inbox import InboxResource
-
-        return InboxResource(self)
 
     @cached_property
     def messages(self) -> MessagesResource:
@@ -620,12 +612,6 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncListsResource(self)
 
     @cached_property
-    def inbox(self) -> AsyncInboxResource:
-        from .resources.inbox import AsyncInboxResource
-
-        return AsyncInboxResource(self)
-
-    @cached_property
     def messages(self) -> AsyncMessagesResource:
         """
         Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
@@ -926,12 +912,6 @@ class CourierWithRawResponse:
         return ListsResourceWithRawResponse(self._client.lists)
 
     @cached_property
-    def inbox(self) -> inbox.InboxResourceWithRawResponse:
-        from .resources.inbox import InboxResourceWithRawResponse
-
-        return InboxResourceWithRawResponse(self._client.inbox)
-
-    @cached_property
     def messages(self) -> messages.MessagesResourceWithRawResponse:
         """
         Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
@@ -1118,12 +1098,6 @@ class AsyncCourierWithRawResponse:
         from .resources.lists import AsyncListsResourceWithRawResponse
 
         return AsyncListsResourceWithRawResponse(self._client.lists)
-
-    @cached_property
-    def inbox(self) -> inbox.AsyncInboxResourceWithRawResponse:
-        from .resources.inbox import AsyncInboxResourceWithRawResponse
-
-        return AsyncInboxResourceWithRawResponse(self._client.inbox)
 
     @cached_property
     def messages(self) -> messages.AsyncMessagesResourceWithRawResponse:
@@ -1314,12 +1288,6 @@ class CourierWithStreamedResponse:
         return ListsResourceWithStreamingResponse(self._client.lists)
 
     @cached_property
-    def inbox(self) -> inbox.InboxResourceWithStreamingResponse:
-        from .resources.inbox import InboxResourceWithStreamingResponse
-
-        return InboxResourceWithStreamingResponse(self._client.inbox)
-
-    @cached_property
     def messages(self) -> messages.MessagesResourceWithStreamingResponse:
         """
         Look up the messages Courier has accepted, inspect their delivery history and rendered output, and cancel, resend, or archive them.
@@ -1506,12 +1474,6 @@ class AsyncCourierWithStreamedResponse:
         from .resources.lists import AsyncListsResourceWithStreamingResponse
 
         return AsyncListsResourceWithStreamingResponse(self._client.lists)
-
-    @cached_property
-    def inbox(self) -> inbox.AsyncInboxResourceWithStreamingResponse:
-        from .resources.inbox import AsyncInboxResourceWithStreamingResponse
-
-        return AsyncInboxResourceWithStreamingResponse(self._client.inbox)
 
     @cached_property
     def messages(self) -> messages.AsyncMessagesResourceWithStreamingResponse:
