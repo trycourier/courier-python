@@ -34,9 +34,10 @@ class TestJourneys:
                     "type": "trigger",
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {},
+                    "type": "send",
                 },
+                {"type": "exit"},
             ],
         )
         assert_matches_type(JourneyResponse, journey, path=["response"])
@@ -55,11 +56,46 @@ class TestJourneys:
                     "schema": {"foo": "bar"},
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {
+                        "context": {"tenant_id": "x"},
+                        "data": {"foo": "bar"},
+                        "delay": {
+                            "until": "x",
+                            "timezone": "x",
+                        },
+                        "template": "nt_01kx4h2jdafq8bk9aftxak4b40",
+                        "to": {
+                            "email_override": "x",
+                            "phone_number_override": "x",
+                            "user_id_override": "x",
+                        },
+                    },
+                    "type": "send",
                     "id": "send-1",
                     "conditions": ["string", "string"],
-                    "schema": {"foo": "bar"},
+                    "experiment": {
+                        "bucketing_key": "x",
+                        "variants": [
+                            {
+                                "id": "x",
+                                "template_id": "x",
+                                "weight": 0,
+                                "name": "name",
+                            },
+                            {
+                                "id": "x",
+                                "template_id": "x",
+                                "weight": 0,
+                                "name": "name",
+                            },
+                        ],
+                        "id": "x",
+                        "name": "name",
+                    },
+                },
+                {
+                    "type": "exit",
+                    "id": "exit-1",
                 },
             ],
             enabled=True,
@@ -80,9 +116,10 @@ class TestJourneys:
                     "type": "trigger",
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {},
+                    "type": "send",
                 },
+                {"type": "exit"},
             ],
         )
 
@@ -102,9 +139,10 @@ class TestJourneys:
                     "type": "trigger",
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {},
+                    "type": "send",
                 },
+                {"type": "exit"},
             ],
         ) as response:
             assert not response.is_closed
@@ -593,9 +631,10 @@ class TestAsyncJourneys:
                     "type": "trigger",
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {},
+                    "type": "send",
                 },
+                {"type": "exit"},
             ],
         )
         assert_matches_type(JourneyResponse, journey, path=["response"])
@@ -614,11 +653,46 @@ class TestAsyncJourneys:
                     "schema": {"foo": "bar"},
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {
+                        "context": {"tenant_id": "x"},
+                        "data": {"foo": "bar"},
+                        "delay": {
+                            "until": "x",
+                            "timezone": "x",
+                        },
+                        "template": "nt_01kx4h2jdafq8bk9aftxak4b40",
+                        "to": {
+                            "email_override": "x",
+                            "phone_number_override": "x",
+                            "user_id_override": "x",
+                        },
+                    },
+                    "type": "send",
                     "id": "send-1",
                     "conditions": ["string", "string"],
-                    "schema": {"foo": "bar"},
+                    "experiment": {
+                        "bucketing_key": "x",
+                        "variants": [
+                            {
+                                "id": "x",
+                                "template_id": "x",
+                                "weight": 0,
+                                "name": "name",
+                            },
+                            {
+                                "id": "x",
+                                "template_id": "x",
+                                "weight": 0,
+                                "name": "name",
+                            },
+                        ],
+                        "id": "x",
+                        "name": "name",
+                    },
+                },
+                {
+                    "type": "exit",
+                    "id": "exit-1",
                 },
             ],
             enabled=True,
@@ -639,9 +713,10 @@ class TestAsyncJourneys:
                     "type": "trigger",
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {},
+                    "type": "send",
                 },
+                {"type": "exit"},
             ],
         )
 
@@ -661,9 +736,10 @@ class TestAsyncJourneys:
                     "type": "trigger",
                 },
                 {
-                    "trigger_type": "api-invoke",
-                    "type": "trigger",
+                    "message": {},
+                    "type": "send",
                 },
+                {"type": "exit"},
             ],
         ) as response:
             assert not response.is_closed

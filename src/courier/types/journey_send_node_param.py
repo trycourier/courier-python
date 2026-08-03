@@ -8,7 +8,29 @@ from typing_extensions import Literal, Required, TypedDict
 from .journey_experiment_param import JourneyExperimentParam
 from .journey_conditions_field_param import JourneyConditionsFieldParam
 
-__all__ = ["JourneySendNodeParam", "Message", "MessageDelay", "MessageTo"]
+__all__ = ["JourneySendNodeParam", "Message", "MessageContext", "MessageDelay", "MessageTo"]
+
+
+class MessageContext(TypedDict, total=False):
+    """Tenant context for this send.
+
+    Set it to deliver on behalf of one of your customers, so the message uses that tenant's brand and settings.
+    """
+
+    tenant_id: Required[str]
+    """The tenant to send as.
+
+    Accepts either a literal tenant id (`acme-tenant`) or a whole-string mustache
+    reference to a value the run already holds — `{{data.tenant_id}}` from the
+    invocation payload, or `{{f1.body.tenant_id}}` from the response of an earlier
+    fetch node with id `f1`. A reference is resolved separately on every run, so a
+    single journey can deliver as many tenants. Two forms are rejected with `400`:
+    mid-string interpolation such as `tenant-{{data.region}}`, and any value
+    beginning with `refs.`, which is reserved for internal use. A reference that
+    resolves to nothing at run time does not stop the run — the message is still
+    sent, with no tenant context — so make sure the referenced value is always
+    present. `GET` returns the value in the same form it was supplied.
+    """
 
 
 class MessageDelay(TypedDict, total=False):
@@ -26,6 +48,13 @@ class MessageTo(TypedDict, total=False):
 
 
 class Message(TypedDict, total=False):
+    context: MessageContext
+    """Tenant context for this send.
+
+    Set it to deliver on behalf of one of your customers, so the message uses that
+    tenant's brand and settings.
+    """
+
     data: Dict[str, object]
 
     delay: MessageDelay
@@ -38,7 +67,7 @@ class Message(TypedDict, total=False):
 class JourneySendNodeParam(TypedDict, total=False):
     """Send to the recipient.
 
-    A send node sources its content from EXACTLY ONE of `message.template` (a single notification template) or `experiment` (an A/B split across weighted template variants) — supplying both, or neither, is rejected. Optionally override the recipient address, delay the send, or attach `data`.
+    A send node sources its content from EXACTLY ONE of `message.template` (a single notification template) or `experiment` (an A/B split across weighted template variants) — supplying both, or neither, is rejected. Optionally override the recipient address, send as a tenant, delay the send, or attach `data`.
     """
 
     message: Required[Message]
