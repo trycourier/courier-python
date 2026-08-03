@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.24.0 (2026-08-03)
+
+Full Changelog: [v7.23.0...v7.24.0](https://github.com/trycourier/courier-python/compare/v7.23.0...v7.24.0)
+
+### Features
+
+* Merge pull request [#183](https://github.com/trycourier/courier-python/issues/183) from trycourier/dantran/c-19684-api-spec-document-messagecontexttenant_id-on-journey-send ([b7a7bef](https://github.com/trycourier/courier-python/commit/b7a7bef41f9aa21c72b105e29f7cb0cf855e4043))
+* spec: remove inbox message delete/restore endpoints for now (C-19268) ([#182](https://github.com/trycourier/courier-python/issues/182)) ([dfdc63d](https://github.com/trycourier/courier-python/commit/dfdc63d3d184091ddc3f81a851aa156d43f6b61e))
+* spec: reorder API reference sections to match the Studio nav ([#180](https://github.com/trycourier/courier-python/issues/180)) ([044758a](https://github.com/trycourier/courier-python/commit/044758a95673f15a0a7b01b3021ff0359ef6c5bd))
+
 ## 7.23.0 (2026-07-29)
 
 Full Changelog: [v7.22.0...v7.23.0](https://github.com/trycourier/courier-python/compare/v7.22.0...v7.23.0)

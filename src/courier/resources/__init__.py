@@ -16,14 +16,6 @@ from .send import (
     SendResourceWithStreamingResponse,
     AsyncSendResourceWithStreamingResponse,
 )
-from .inbox import (
-    InboxResource,
-    AsyncInboxResource,
-    InboxResourceWithRawResponse,
-    AsyncInboxResourceWithRawResponse,
-    InboxResourceWithStreamingResponse,
-    AsyncInboxResourceWithStreamingResponse,
-)
 from .lists import (
     ListsResource,
     AsyncListsResource,
@@ -250,12 +242,6 @@ __all__ = [
     "AsyncListsResourceWithRawResponse",
     "ListsResourceWithStreamingResponse",
     "AsyncListsResourceWithStreamingResponse",
-    "InboxResource",
-    "AsyncInboxResource",
-    "InboxResourceWithRawResponse",
-    "AsyncInboxResourceWithRawResponse",
-    "InboxResourceWithStreamingResponse",
-    "AsyncInboxResourceWithStreamingResponse",
     "MessagesResource",
     "AsyncMessagesResource",
     "MessagesResourceWithRawResponse",

@@ -38,7 +38,6 @@ if TYPE_CHECKING:
     from .resources import (
         auth,
         send,
-        inbox,
         lists,
         users,
         brands,
@@ -67,7 +66,6 @@ if TYPE_CHECKING:
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
     from .resources.broadcasts import BroadcastsResource, AsyncBroadcastsResource
-    from .resources.inbox.inbox import InboxResource, AsyncInboxResource
     from .resources.lists.lists import ListsResource, AsyncListsResource
     from .resources.users.users import UsersResource, AsyncUsersResource
     from .resources.audit_events import AuditEventsResource, AsyncAuditEventsResource
@@ -215,6 +213,9 @@ class Courier(SyncAPIClient):
 
     @cached_property
     def broadcasts(self) -> BroadcastsResource:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import BroadcastsResource
 
         return BroadcastsResource(self)
@@ -251,12 +252,6 @@ class Courier(SyncAPIClient):
         from .resources.lists import ListsResource
 
         return ListsResource(self)
-
-    @cached_property
-    def inbox(self) -> InboxResource:
-        from .resources.inbox import InboxResource
-
-        return InboxResource(self)
 
     @cached_property
     def messages(self) -> MessagesResource:
@@ -576,6 +571,9 @@ class AsyncCourier(AsyncAPIClient):
 
     @cached_property
     def broadcasts(self) -> AsyncBroadcastsResource:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import AsyncBroadcastsResource
 
         return AsyncBroadcastsResource(self)
@@ -612,12 +610,6 @@ class AsyncCourier(AsyncAPIClient):
         from .resources.lists import AsyncListsResource
 
         return AsyncListsResource(self)
-
-    @cached_property
-    def inbox(self) -> AsyncInboxResource:
-        from .resources.inbox import AsyncInboxResource
-
-        return AsyncInboxResource(self)
 
     @cached_property
     def messages(self) -> AsyncMessagesResource:
@@ -879,6 +871,9 @@ class CourierWithRawResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.BroadcastsResourceWithRawResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import BroadcastsResourceWithRawResponse
 
         return BroadcastsResourceWithRawResponse(self._client.broadcasts)
@@ -915,12 +910,6 @@ class CourierWithRawResponse:
         from .resources.lists import ListsResourceWithRawResponse
 
         return ListsResourceWithRawResponse(self._client.lists)
-
-    @cached_property
-    def inbox(self) -> inbox.InboxResourceWithRawResponse:
-        from .resources.inbox import InboxResourceWithRawResponse
-
-        return InboxResourceWithRawResponse(self._client.inbox)
 
     @cached_property
     def messages(self) -> messages.MessagesResourceWithRawResponse:
@@ -1070,6 +1059,9 @@ class AsyncCourierWithRawResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.AsyncBroadcastsResourceWithRawResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import AsyncBroadcastsResourceWithRawResponse
 
         return AsyncBroadcastsResourceWithRawResponse(self._client.broadcasts)
@@ -1106,12 +1098,6 @@ class AsyncCourierWithRawResponse:
         from .resources.lists import AsyncListsResourceWithRawResponse
 
         return AsyncListsResourceWithRawResponse(self._client.lists)
-
-    @cached_property
-    def inbox(self) -> inbox.AsyncInboxResourceWithRawResponse:
-        from .resources.inbox import AsyncInboxResourceWithRawResponse
-
-        return AsyncInboxResourceWithRawResponse(self._client.inbox)
 
     @cached_property
     def messages(self) -> messages.AsyncMessagesResourceWithRawResponse:
@@ -1261,6 +1247,9 @@ class CourierWithStreamedResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.BroadcastsResourceWithStreamingResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import BroadcastsResourceWithStreamingResponse
 
         return BroadcastsResourceWithStreamingResponse(self._client.broadcasts)
@@ -1297,12 +1286,6 @@ class CourierWithStreamedResponse:
         from .resources.lists import ListsResourceWithStreamingResponse
 
         return ListsResourceWithStreamingResponse(self._client.lists)
-
-    @cached_property
-    def inbox(self) -> inbox.InboxResourceWithStreamingResponse:
-        from .resources.inbox import InboxResourceWithStreamingResponse
-
-        return InboxResourceWithStreamingResponse(self._client.inbox)
 
     @cached_property
     def messages(self) -> messages.MessagesResourceWithStreamingResponse:
@@ -1452,6 +1435,9 @@ class AsyncCourierWithStreamedResponse:
 
     @cached_property
     def broadcasts(self) -> broadcasts.AsyncBroadcastsResourceWithStreamingResponse:
+        """
+        Create a one-off send to a list or audience, author its content, then send it immediately or schedule it for later.
+        """
         from .resources.broadcasts import AsyncBroadcastsResourceWithStreamingResponse
 
         return AsyncBroadcastsResourceWithStreamingResponse(self._client.broadcasts)
@@ -1488,12 +1474,6 @@ class AsyncCourierWithStreamedResponse:
         from .resources.lists import AsyncListsResourceWithStreamingResponse
 
         return AsyncListsResourceWithStreamingResponse(self._client.lists)
-
-    @cached_property
-    def inbox(self) -> inbox.AsyncInboxResourceWithStreamingResponse:
-        from .resources.inbox import AsyncInboxResourceWithStreamingResponse
-
-        return AsyncInboxResourceWithStreamingResponse(self._client.inbox)
 
     @cached_property
     def messages(self) -> messages.AsyncMessagesResourceWithStreamingResponse:
