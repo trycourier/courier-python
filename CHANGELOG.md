@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.25.0 (2026-08-04)
+
+Full Changelog: [v7.24.0...v7.25.0](https://github.com/trycourier/courier-python/compare/v7.24.0...v7.25.0)
+
+### Features
+
+* Merge pull request [#178](https://github.com/trycourier/courier-python/issues/178) from trycourier/geraldosilva/c-19484-elemental-formatting-controls ([90f3b0b](https://github.com/trycourier/courier-python/commit/90f3b0bac8cb602c288f2d03429df6de6d04ac90))
+
 ## 7.24.0 (2026-08-03)
 
 Full Changelog: [v7.23.0...v7.24.0](https://github.com/trycourier/courier-python/compare/v7.23.0...v7.24.0)
