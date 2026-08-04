@@ -25,6 +25,28 @@ class ElementalChannelNode(ElementalBaseNode):
     Can be `email`, `push`, `direct_message`, `sms` or a provider such as slack
     """
 
+    font_size: Optional[str] = None
+    """Email only.
+
+    Document-level base font size (CSS px, e.g. `16px`) for body content — text,
+    quote, list and action button labels. Heading styles (`h1`/`h2`/`h3`) and
+    `subtext` keep their preset sizes.
+    """
+
+    line_height: Optional[str] = None
+    """Email only.
+
+    Document-level line height (CSS px or unitless multiplier, e.g. `24px` or `1.5`)
+    applied to all body content unless overridden per block.
+    """
+
+    padding: Optional[str] = None
+    """Email only.
+
+    Document-level body padding applied once around the email body, as a CSS px
+    shorthand (1–4 values), e.g. `48px 64px`.
+    """
+
     raw: Optional[Dict[str, object]] = None
     """Raw data to apply to the channel.
 
