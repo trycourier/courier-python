@@ -55,6 +55,7 @@ class TestNotifications:
                 "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
                 "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
+                "alias": "welcome",
             },
             state="DRAFT",
             idempotency_key="order-ORD-456-user-123",
@@ -620,6 +621,7 @@ class TestNotifications:
                 "routing": {"strategy_id": "strategy_id"},
                 "subscription": {"topic_id": "topic_id"},
                 "tags": ["updated"],
+                "alias": "alias",
             },
             state="PUBLISHED",
         )
@@ -781,6 +783,7 @@ class TestAsyncNotifications:
                 "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
                 "subscription": {"topic_id": "pt_01kx4h2jdafq8bk9a26x0kvd1t"},
                 "tags": ["onboarding", "welcome"],
+                "alias": "welcome",
             },
             state="DRAFT",
             idempotency_key="order-ORD-456-user-123",
@@ -1346,6 +1349,7 @@ class TestAsyncNotifications:
                 "routing": {"strategy_id": "strategy_id"},
                 "subscription": {"topic_id": "topic_id"},
                 "tags": ["updated"],
+                "alias": "alias",
             },
             state="PUBLISHED",
         )

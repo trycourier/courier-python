@@ -42,9 +42,9 @@ from ..._base_client import make_request_options
 from ...types.notification_list_response import NotificationListResponse
 from ...types.notification_template_state import NotificationTemplateState
 from ...types.notification_template_response import NotificationTemplateResponse
-from ...types.notification_template_payload_param import NotificationTemplatePayloadParam
 from ...types.notification_content_mutation_response import NotificationContentMutationResponse
 from ...types.notification_retrieve_content_response import NotificationRetrieveContentResponse
+from ...types.notification_template_write_payload_param import NotificationTemplateWritePayloadParam
 from ...types.notification_template_version_list_response import NotificationTemplateVersionListResponse
 
 __all__ = ["NotificationsResource", "AsyncNotificationsResource"]
@@ -84,7 +84,7 @@ class NotificationsResource(SyncAPIResource):
     def create(
         self,
         *,
-        notification: NotificationTemplatePayloadParam,
+        notification: NotificationTemplateWritePayloadParam,
         state: Literal["DRAFT", "PUBLISHED"] | Omit = omit,
         idempotency_key: str | Omit = omit,
         x_idempotency_expiration: str | Omit = omit,
@@ -101,8 +101,8 @@ class NotificationsResource(SyncAPIResource):
         Templates are created in draft state by default.
 
         Args:
-          notification: Core template fields used in POST and PUT request bodies (nested under a
-              `notification` key) and returned at the top level in responses.
+          notification: Template fields accepted in POST and PUT request bodies, nested under a
+              `notification` key.
 
           state: Template state after creation. Case-insensitive input, normalized to uppercase
               in the response. Defaults to "DRAFT".
@@ -569,7 +569,7 @@ class NotificationsResource(SyncAPIResource):
         self,
         id: str,
         *,
-        notification: NotificationTemplatePayloadParam,
+        notification: NotificationTemplateWritePayloadParam,
         state: Literal["DRAFT", "PUBLISHED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -583,8 +583,8 @@ class NotificationsResource(SyncAPIResource):
         the ones you want changed. Publish separately to make it live.
 
         Args:
-          notification: Core template fields used in POST and PUT request bodies (nested under a
-              `notification` key) and returned at the top level in responses.
+          notification: Template fields accepted in POST and PUT request bodies, nested under a
+              `notification` key.
 
           state: Template state after update. Case-insensitive input, normalized to uppercase in
               the response. Defaults to "DRAFT".
@@ -699,7 +699,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        notification: NotificationTemplatePayloadParam,
+        notification: NotificationTemplateWritePayloadParam,
         state: Literal["DRAFT", "PUBLISHED"] | Omit = omit,
         idempotency_key: str | Omit = omit,
         x_idempotency_expiration: str | Omit = omit,
@@ -716,8 +716,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         Templates are created in draft state by default.
 
         Args:
-          notification: Core template fields used in POST and PUT request bodies (nested under a
-              `notification` key) and returned at the top level in responses.
+          notification: Template fields accepted in POST and PUT request bodies, nested under a
+              `notification` key.
 
           state: Template state after creation. Case-insensitive input, normalized to uppercase
               in the response. Defaults to "DRAFT".
@@ -1188,7 +1188,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        notification: NotificationTemplatePayloadParam,
+        notification: NotificationTemplateWritePayloadParam,
         state: Literal["DRAFT", "PUBLISHED"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1202,8 +1202,8 @@ class AsyncNotificationsResource(AsyncAPIResource):
         the ones you want changed. Publish separately to make it live.
 
         Args:
-          notification: Core template fields used in POST and PUT request bodies (nested under a
-              `notification` key) and returned at the top level in responses.
+          notification: Template fields accepted in POST and PUT request bodies, nested under a
+              `notification` key.
 
           state: Template state after update. Case-insensitive input, normalized to uppercase in
               the response. Defaults to "DRAFT".

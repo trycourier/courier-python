@@ -232,6 +232,7 @@ from .journey_delay_duration_node import JourneyDelayDurationNode as JourneyDela
 from .journey_fetch_post_put_node import JourneyFetchPostPutNode as JourneyFetchPostPutNode
 from .notification_publish_params import NotificationPublishParams as NotificationPublishParams
 from .notification_replace_params import NotificationReplaceParams as NotificationReplaceParams
+from .notification_template_alias import NotificationTemplateAlias as NotificationTemplateAlias
 from .notification_template_state import NotificationTemplateState as NotificationTemplateState
 from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
@@ -309,6 +310,9 @@ from .workspace_preference_topic_get_response import (
 )
 from .workspace_preference_topic_list_response import (
     WorkspacePreferenceTopicListResponse as WorkspacePreferenceTopicListResponse,
+)
+from .notification_template_write_payload_param import (
+    NotificationTemplateWritePayloadParam as NotificationTemplateWritePayloadParam,
 )
 from .routing_strategy_list_notifications_params import (
     RoutingStrategyListNotificationsParams as RoutingStrategyListNotificationsParams,
