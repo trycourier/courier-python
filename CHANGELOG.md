@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.26.0 (2026-08-10)
+
+Full Changelog: [v7.25.0...v7.26.0](https://github.com/trycourier/courier-python/compare/v7.25.0...v7.26.0)
+
+### Features
+
+* Merge pull request [#185](https://github.com/trycourier/courier-python/issues/185) from trycourier/geraldosilva/c-19821-notifications-alias-v2 ([7559ff3](https://github.com/trycourier/courier-python/commit/7559ff3012059025eb764927e1a2246b93fd8bbb))
+
 ## 7.25.0 (2026-08-04)
 
 Full Changelog: [v7.24.0...v7.25.0](https://github.com/trycourier/courier-python/compare/v7.24.0...v7.25.0)
