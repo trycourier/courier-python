@@ -1,0 +1,733 @@
+# Changelog
+
+## 7.26.0 (2026-08-10)
+
+Full Changelog: [v7.25.0...v7.26.0](https://github.com/trycourier/courier-python/compare/v7.25.0...v7.26.0)
+
+### Features
+
+* Merge pull request [#185](https://github.com/trycourier/courier-python/issues/185) from trycourier/geraldosilva/c-19821-notifications-alias-v2 ([7559ff3](https://github.com/trycourier/courier-python/commit/7559ff3012059025eb764927e1a2246b93fd8bbb))
+
+## 7.25.0 (2026-08-04)
+
+Full Changelog: [v7.24.0...v7.25.0](https://github.com/trycourier/courier-python/compare/v7.24.0...v7.25.0)
+
+### Features
+
+* Merge pull request [#178](https://github.com/trycourier/courier-python/issues/178) from trycourier/geraldosilva/c-19484-elemental-formatting-controls ([90f3b0b](https://github.com/trycourier/courier-python/commit/90f3b0bac8cb602c288f2d03429df6de6d04ac90))
+
+## 7.24.0 (2026-08-03)
+
+Full Changelog: [v7.23.0...v7.24.0](https://github.com/trycourier/courier-python/compare/v7.23.0...v7.24.0)
+
+### Features
+
+* Merge pull request [#183](https://github.com/trycourier/courier-python/issues/183) from trycourier/dantran/c-19684-api-spec-document-messagecontexttenant_id-on-journey-send ([b7a7bef](https://github.com/trycourier/courier-python/commit/b7a7bef41f9aa21c72b105e29f7cb0cf855e4043))
+* spec: remove inbox message delete/restore endpoints for now (C-19268) ([#182](https://github.com/trycourier/courier-python/issues/182)) ([dfdc63d](https://github.com/trycourier/courier-python/commit/dfdc63d3d184091ddc3f81a851aa156d43f6b61e))
+* spec: reorder API reference sections to match the Studio nav ([#180](https://github.com/trycourier/courier-python/issues/180)) ([044758a](https://github.com/trycourier/courier-python/commit/044758a95673f15a0a7b01b3021ff0359ef6c5bd))
+
+## 7.23.0 (2026-07-29)
+
+Full Changelog: [v7.22.0...v7.23.0](https://github.com/trycourier/courier-python/compare/v7.22.0...v7.23.0)
+
+### Features
+
+* **broadcasts:** document Broadcasts CRUD REST API ([#170](https://github.com/trycourier/courier-python/issues/170)) ([8e63975](https://github.com/trycourier/courier-python/commit/8e639757661144e35f43d31923a7d6190874253e))
+
+## 7.22.0 (2026-07-29)
+
+Full Changelog: [v7.21.0...v7.22.0](https://github.com/trycourier/courier-python/compare/v7.21.0...v7.22.0)
+
+### Features
+
+* Document DELETE/PUT restore for inbox messages (C-19268) ([#175](https://github.com/trycourier/courier-python/issues/175)) ([6e32a5c](https://github.com/trycourier/courier-python/commit/6e32a5cb55d541ba89ac260aa62fa0d1d40505d9))
+* spec: rename and reorder the API reference sections ([#179](https://github.com/trycourier/courier-python/issues/179)) ([742efe6](https://github.com/trycourier/courier-python/commit/742efe6045de6ae33afeb780205ea7010d93a98b))
+
+
+### Documentation
+
+* **openapi:** describe user topic-preference fields explicitly ([#172](https://github.com/trycourier/courier-python/issues/172)) ([842699a](https://github.com/trycourier/courier-python/commit/842699a68811d63aca9ef8d8865266623ff3e42c))
+* **openapi:** document Idempotency-Key header on idempotent POST endpoints ([#176](https://github.com/trycourier/courier-python/issues/176)) ([9209315](https://github.com/trycourier/courier-python/commit/92093156c03c0c8a56e7a43fe41b4d4490fcc7b2))
+* **openapi:** rewrite operation descriptions for agents and SEO ([#174](https://github.com/trycourier/courier-python/issues/174)) ([c90b5d3](https://github.com/trycourier/courier-python/commit/c90b5d325da4e542a46a089084205ce145d65ef1))
+
+## 7.21.0 (2026-07-23)
+
+Full Changelog: [v7.20.0...v7.21.0](https://github.com/trycourier/courier-python/compare/v7.20.0...v7.21.0)
+
+### Features
+
+* Remove /bulk endpoints from api-spec (C-19507) ([#171](https://github.com/trycourier/courier-python/issues/171)) ([8fdd704](https://github.com/trycourier/courier-python/commit/8fdd7045e10a5b8c83397cdca6a27466875126d2))
+
+## 7.20.0 (2026-07-20)
+
+Full Changelog: [v7.19.2...v7.20.0](https://github.com/trycourier/courier-python/compare/v7.19.2...v7.20.0)
+
+### Features
+
+* Document POST /notifications/{id}/duplicate [C-18607] ([#165](https://github.com/trycourier/courier-python/issues/165)) ([15985d7](https://github.com/trycourier/courier-python/commit/15985d79d0969c41dc4cfca6833dd111bbc5c0ca))
+* Merge pull request [#149](https://github.com/trycourier/courier-python/issues/149) from trycourier/geraldosilva/c-19201-notification-template-subscription-topic-id ([99b10ca](https://github.com/trycourier/courier-python/commit/99b10cad359b2377e6bb8bc797be42c93a8823b8))
+* Merge pull request [#168](https://github.com/trycourier/courier-python/issues/168) from trycourier/geraldosilva/c-19419-topic-id-notification-template-summary ([067ad71](https://github.com/trycourier/courier-python/commit/067ad7121cafb54fc602a5f707fd1d3bbe80c727))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([6ad03f8](https://github.com/trycourier/courier-python/commit/6ad03f80591c974b0f90a5375eb99594979635ca))
+
+## 7.19.2 (2026-07-10)
+
+Full Changelog: [v7.19.1...v7.19.2](https://github.com/trycourier/courier-python/compare/v7.19.1...v7.19.2)
+
+### Documentation
+
+* **openapi:** canonical type-id prefixes across all examples ([#162](https://github.com/trycourier/courier-python/issues/162)) ([3749e9a](https://github.com/trycourier/courier-python/commit/3749e9a6c9f16cd829d623e47a453b217d0a1664))
+* **openapi:** use canonical type-id prefixes in id examples ([#160](https://github.com/trycourier/courier-python/issues/160)) ([b212fdc](https://github.com/trycourier/courier-python/commit/b212fdcbc462fd3391391c931ab62284c6ba4633))
+
+## 7.19.1 (2026-07-09)
+
+Full Changelog: [v7.19.0...v7.19.1](https://github.com/trycourier/courier-python/compare/v7.19.0...v7.19.1)
+
+## 7.19.0 (2026-07-09)
+
+Full Changelog: [v7.18.2...v7.19.0](https://github.com/trycourier/courier-python/compare/v7.18.2...v7.19.0)
+
+### Features
+
+* Add bulk user preference upsert and replace endpoints ([53d28d9](https://github.com/trycourier/courier-python/commit/53d28d9260952cdbaecf774fe28bfbf05b688395))
+* Preferences v3 REST fields: section/topic description + publish body ([8f33229](https://github.com/trycourier/courier-python/commit/8f3322973866ce8060729bd3b03b4f7bbf95766e))
+
+## 7.18.2 (2026-07-09)
+
+Full Changelog: [v7.18.1...v7.18.2](https://github.com/trycourier/courier-python/compare/v7.18.1...v7.18.2)
+
+### Chores
+
+* update api-spec with new message resend endpoint ([692be20](https://github.com/trycourier/courier-python/commit/692be204486c24fa3c92740f806a54233b738ef4))
+
+## 7.18.1 (2026-07-07)
+
+Full Changelog: [v7.18.0...v7.18.1](https://github.com/trycourier/courier-python/compare/v7.18.0...v7.18.1)
+
+### Documentation
+
+* **openapi:** document audiences filter combinator (SUP-686) ([133bd64](https://github.com/trycourier/courier-python/commit/133bd6484d2fdf4856a72ccdacb8571feca062b4))
+
+## 7.18.0 (2026-07-06)
+
+Full Changelog: [v7.17.1...v7.18.0](https://github.com/trycourier/courier-python/compare/v7.17.1...v7.18.0)
+
+### Features
+
+* **openapi:** Journeys cancel-by-token endpoint + send-node experiments (C-18986) ([2506b29](https://github.com/trycourier/courier-python/commit/2506b29674ce56a9d4cfff46b39c849f28ab2875))
+
+
+### Bug Fixes
+
+* **types:** avoid type-checker errors on params with additional properties ([2898ba5](https://github.com/trycourier/courier-python/commit/2898ba510e0aeb8de9da57e4f50e6951af14f223))
+
+
+### Documentation
+
+* **openapi:** reword Cancel journey runs 400 description (re-trigger deploy) ([c881e7b](https://github.com/trycourier/courier-python/commit/c881e7bc06d0c0c4bfb933b07eeecc52a72f751b))
+* **openapi:** reword Cancel journey runs description (re-trigger deploy) ([520683d](https://github.com/trycourier/courier-python/commit/520683d2b469b56652b6b3d5303e24984fa0a6a4))
+* **openapi:** tighten Journeys cancel/experiment copy (C-19177) ([3083af5](https://github.com/trycourier/courier-python/commit/3083af565bcb5d13cd9ba4dcdeec06d8bdf19618))
+
+## 7.17.1 (2026-06-25)
+
+Full Changelog: [v7.17.0...v7.17.1](https://github.com/trycourier/courier-python/compare/v7.17.0...v7.17.1)
+
+### Documentation
+
+* **openapi:** add full response examples to every endpoint ([d42bc6b](https://github.com/trycourier/courier-python/commit/d42bc6b7ecd6c8fe4dbeea6e9bd8e4eb567cca84))
+* **openapi:** reword Cancel Submission description ([6e35fe4](https://github.com/trycourier/courier-python/commit/6e35fe48d31f568ae59687afe145676e282298b8))
+* **openapi:** reword Get Submission Checks description ([4c0ff82](https://github.com/trycourier/courier-python/commit/4c0ff82e577dcd5059c159c99fbf8b26e8750d27))
+* **openapi:** reword Replace Submission Checks description ([b897ea0](https://github.com/trycourier/courier-python/commit/b897ea0d23ef4fed99d6cb15b932e116a01fcf6a))
+
+## 7.17.0 (2026-06-24)
+
+Full Changelog: [v7.16.0...v7.17.0](https://github.com/trycourier/courier-python/compare/v7.16.0...v7.17.0)
+
+### Features
+
+* **preferences:** workspace preference sections & nested topics endpoints ([362609a](https://github.com/trycourier/courier-python/commit/362609ad7f9f9416c9b3bfabb846128c595dcda6))
+
+## 7.16.0 (2026-06-23)
+
+Full Changelog: [v7.15.0...v7.16.0](https://github.com/trycourier/courier-python/compare/v7.15.0...v7.16.0)
+
+### Features
+
+* **journeys:** add content + locale endpoints to journey-scoped templates ([dea52d4](https://github.com/trycourier/courier-python/commit/dea52d47c6dc1cc708f3bbe675903948ebbc9a3c))
+
+
+### Documentation
+
+* **journeys:** clarify checksum usage + re-trigger docs sync for journey content endpoints ([0d36476](https://github.com/trycourier/courier-python/commit/0d364764936d55679839613c82d26f59d1cd9580))
+
+## 7.15.0 (2026-06-17)
+
+Full Changelog: [v7.14.0...v7.15.0](https://github.com/trycourier/courier-python/compare/v7.14.0...v7.15.0)
+
+### Features
+
+* **openapi:** add add-to-digest JourneyNode variant ([7abe0d3](https://github.com/trycourier/courier-python/commit/7abe0d346d51a31301753dc54ac0025285a14dc8))
+* **openapi:** add DELETE /users/{id}/preferences/{topicId} ([1f14fd0](https://github.com/trycourier/courier-python/commit/1f14fd06794d54d5cc6d959867561a72d660462a))
+
+## 7.14.0 (2026-06-12)
+
+Full Changelog: [v7.13.0...v7.14.0](https://github.com/trycourier/courier-python/compare/v7.13.0...v7.14.0)
+
+### Features
+
+* **digests:** document digest REST endpoints in OpenAPI spec ([d88d2ae](https://github.com/trycourier/courier-python/commit/d88d2ae2d08af0abb7334e5ba1228619a85e9e3b))
+
+## 7.13.0 (2026-05-28)
+
+Full Changelog: [v7.12.0...v7.13.0](https://github.com/trycourier/courier-python/compare/v7.12.0...v7.13.0)
+
+### Features
+
+* C-18612 Add Journeys `batch` node variant to OpenAPI spec ([04a39c2](https://github.com/trycourier/courier-python/commit/04a39c2f0f9b2bba3284f0684ead652d767fc2e5))
+* Mark `settings` as required on POST /brands ([ea30e96](https://github.com/trycourier/courier-python/commit/ea30e96a3b540b5add452cd96388427581b2065c))
+
+## 7.12.0 (2026-05-19)
+
+Full Changelog: [v7.11.2...v7.12.0](https://github.com/trycourier/courier-python/compare/v7.11.2...v7.12.0)
+
+### Features
+
+* [C-18380] Journeys API reference: copy + naming cleanup ([974e8c8](https://github.com/trycourier/courier-python/commit/974e8c8bd203e9c497bdf4d7c1ecb5454e2acc7d))
+* [SUP-607] Add DELETE endpoint for Courier Create tenant templates ([3238616](https://github.com/trycourier/courier-python/commit/3238616527f879b97342e9ea9a4ac92ea99f4081))
+* **api:** add journey CRUD/versioning/templates endpoints, update types ([f352f50](https://github.com/trycourier/courier-python/commit/f352f50dde5c78a96ac7f12f1358d71dcc637ee3))
+* **internal/types:** support eagerly validating pydantic iterators ([87f6e77](https://github.com/trycourier/courier-python/commit/87f6e77c795a9eb8a0c51586401a9129ecc0a9f9))
+* support setting headers via env ([111bbaa](https://github.com/trycourier/courier-python/commit/111bbaa73c526cac005398950f3357631203fb4e))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([ee15d9a](https://github.com/trycourier/courier-python/commit/ee15d9a08a7aa77c6daba0402545b3f9d7d95333))
+* use correct field name format for multipart file arrays ([4b98bee](https://github.com/trycourier/courier-python/commit/4b98beed2c666bebce1ddb8b1d8cccb68c40ffb6))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([f33e194](https://github.com/trycourier/courier-python/commit/f33e194bd4cf761f56d37371b0a778b2bd72938b))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([5be9e53](https://github.com/trycourier/courier-python/commit/5be9e537dd664f954d4a5348d8dc39f694972fb8))
+* **internal:** reformat pyproject.toml ([9d75a30](https://github.com/trycourier/courier-python/commit/9d75a3001d33be94d2942066c793ea828f84af0c))
+
+## 7.11.2 (2026-04-14)
+
+Full Changelog: [v7.11.1...v7.11.2](https://github.com/trycourier/courier-python/compare/v7.11.1...v7.11.2)
+
+### Bug Fixes
+
+* **types:** flatten NotificationTemplateResponse structure ([de82b20](https://github.com/trycourier/courier-python/commit/de82b206f9d038b259de06360a6e52420c97c156))
+* **types:** make note optional in ResultNotification, flatten template response ([b7dc001](https://github.com/trycourier/courier-python/commit/b7dc001d77e093a2d93b4c8e7b7c93f5b4518edd))
+
+## 7.11.1 (2026-04-13)
+
+Full Changelog: [v7.11.0...v7.11.1](https://github.com/trycourier/courier-python/compare/v7.11.0...v7.11.1)
+
+### Bug Fixes
+
+* **api:** correct providers update method, notifications/routing_strategies return types ([069bf70](https://github.com/trycourier/courier-python/commit/069bf70791042c6ac0233022a8066cf1724a173c))
+* ensure file data are only sent as 1 parameter ([ca4b529](https://github.com/trycourier/courier-python/commit/ca4b529bf902fa70de9776bd66154d9bb5783b2b))
+
+## 7.11.0 (2026-04-08)
+
+Full Changelog: [v7.10.0...v7.11.0](https://github.com/trycourier/courier-python/compare/v7.10.0...v7.11.0)
+
+### Features
+
+* **api:** add content/element/locale methods, remove draft resource, update notifications ([ea30dd6](https://github.com/trycourier/courier-python/commit/ea30dd640d10f3a7a64aa1b4d81f3f7c7e2f906b))
+* **api:** add list_notifications method to routing_strategies ([63adeb8](https://github.com/trycourier/courier-python/commit/63adeb8eaea8960cc5704eb672ebb1c24f46a946))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([7e44063](https://github.com/trycourier/courier-python/commit/7e4406306cf5002f4cc5867bf16411a30c4d42fa))
+
+## 7.10.0 (2026-04-01)
+
+Full Changelog: [v7.9.0...v7.10.0](https://github.com/trycourier/courier-python/compare/v7.9.0...v7.10.0)
+
+### Features
+
+* **api:** add create/retrieve/archive/publish/replace, event_id param to notifications ([4951cdc](https://github.com/trycourier/courier-python/commit/4951cdc00d9c0c2a0db727142b6003582d1fc3c4))
+* **api:** add html type variant to ElementalNode ([6a1ddc7](https://github.com/trycourier/courier-python/commit/6a1ddc795e86d4988c0bf10d513addcdab87662f))
+* **api:** add providers resource with CRUD methods and catalog endpoint ([db4b86b](https://github.com/trycourier/courier-python/commit/db4b86ba098ec178d69effa22d4097aa54ddf904))
+* **api:** add routing_strategies resource ([7577000](https://github.com/trycourier/courier-python/commit/7577000f2e0a696a088563de4a17ac85b56d753d))
+* **internal:** implement indices array format for query and form serialization ([7fc2cd1](https://github.com/trycourier/courier-python/commit/7fc2cd18f58888f774d63ce974317cc6d388f09e))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([7ad4509](https://github.com/trycourier/courier-python/commit/7ad4509447a139223b654faf68003316d9f034c6))
+* **pydantic:** do not pass `by_alias` unless set ([65aef6b](https://github.com/trycourier/courier-python/commit/65aef6bb51884841b1df70c100577b7fb3333b56))
+* sanitize endpoint path params ([9497e29](https://github.com/trycourier/courier-python/commit/9497e29d2cdbb37f4dd1492274adde42d6e03793))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([f6f933d](https://github.com/trycourier/courier-python/commit/f6f933d7802669fefeee85e6f3935f506a772dd3))
+* **internal:** tweak CI branches ([40e254c](https://github.com/trycourier/courier-python/commit/40e254ca8d139b91b022ca7cd974acd25db6b913))
+* **internal:** update gitignore ([93aedb9](https://github.com/trycourier/courier-python/commit/93aedb9fdf91b5577a0b57bfdd367a11a37ba87b))
+* **types:** extract ElementalHTMLNodeWithType from inline union member ([1620896](https://github.com/trycourier/courier-python/commit/162089600320b6545fa4abf610c3055a43ecc0fb))
+
+
+### Documentation
+
+* add AGENTS.md for AI coding assistants ([#129](https://github.com/trycourier/courier-python/issues/129)) ([25609a5](https://github.com/trycourier/courier-python/commit/25609a5244514cdb7768d11cefdb52484e2632d6))
+
+## 7.9.0 (2026-03-12)
+
+Full Changelog: [v7.8.0...v7.9.0](https://github.com/trycourier/courier-python/compare/v7.8.0...v7.9.0)
+
+### Features
+
+* **api:** add journeys resource with list and invoke methods ([be92a16](https://github.com/trycourier/courier-python/commit/be92a168addb8487d27fa6d34e04208ed2476d45))
+* **api:** remove brand field from ElementalContent ([1354ff8](https://github.com/trycourier/courier-python/commit/1354ff8604b5732982ab3a36e3ed856070473ba5))
+
+
+### Bug Fixes
+
+* **api:** remove body_token, rename path_token in users.tokens.add_single ([3ee45a8](https://github.com/trycourier/courier-python/commit/3ee45a8171b58edeb0eaec4be7f7cb689abf0bfe))
+* mark MessageDetails timestamp fields as optional ([a86abbf](https://github.com/trycourier/courier-python/commit/a86abbf019dcfa29817a60db6b166dcbe5d48faa))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([8d5a384](https://github.com/trycourier/courier-python/commit/8d5a38409419c90d4197f5fcc089135f15c5e16b))
+* format all `api.md` files ([0b4aca7](https://github.com/trycourier/courier-python/commit/0b4aca79b5d4c568aa262978040f57a2ba540f6f))
+* **internal:** add request options to SSE classes ([7f342f9](https://github.com/trycourier/courier-python/commit/7f342f99eb625e3091aa1c0fb794fac4d6aec20c))
+* **internal:** bump dependencies ([2c1457d](https://github.com/trycourier/courier-python/commit/2c1457d5017fc4093501861ca2cf99e5112ddeed))
+* **internal:** fix lint error on Python 3.14 ([58f8a6e](https://github.com/trycourier/courier-python/commit/58f8a6e0f5ed3370ef13741188be2691be0aa73f))
+* **internal:** make `test_proxy_environment_variables` more resilient ([d82fd8d](https://github.com/trycourier/courier-python/commit/d82fd8d691c3944903526f5e2d78043f9b8c76dd))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([8aaf597](https://github.com/trycourier/courier-python/commit/8aaf597d7635aa5137092f1c5579ccffd3868a2e))
+* **internal:** remove mock server code ([31b4e07](https://github.com/trycourier/courier-python/commit/31b4e07803c62389646e9037ca1056508525c075))
+* update mock server docs ([f18d539](https://github.com/trycourier/courier-python/commit/f18d539df79d21c9e4484bfdc865dd68523e1920))
+
+
+### Documentation
+
+* add AUTO-GENERATED-OVERVIEW markers for README sync ([#126](https://github.com/trycourier/courier-python/issues/126)) ([69391e1](https://github.com/trycourier/courier-python/commit/69391e1455bfd27cc6eb8bdce8f28551c6efce85))
+* sync README from mintlify-docs (2026-02-20 18:11 UTC) ([#127](https://github.com/trycourier/courier-python/issues/127)) ([e3757cc](https://github.com/trycourier/courier-python/commit/e3757cc4a457623795cc8e7aa99a6079ad5c001d))
+
+
+### Refactors
+
+* **types:** use `extra_items` from PEP 728 ([e69f274](https://github.com/trycourier/courier-python/commit/e69f274a31bb179e242b89851468c234f5bbfa2f))
+
+## 7.8.0 (2026-02-06)
+
+Full Changelog: [v7.7.1...v7.8.0](https://github.com/trycourier/courier-python/compare/v7.7.1...v7.8.0)
+
+### Features
+
+* **api:** add publish/replace methods, versions resource to tenants.templates ([2b39781](https://github.com/trycourier/courier-python/commit/2b397816d696929cf5ad38b137b3c624f897ee26))
+* **api:** support list of recipients in send message ([76ccdfd](https://github.com/trycourier/courier-python/commit/76ccdfd9aee812c97cbad0d10b13b5746db4b24e))
+* **client:** add custom JSON encoder for extended type support ([b641cb6](https://github.com/trycourier/courier-python/commit/b641cb6819d5727a7ec7f1c3cf240a91a28ffd42))
+
+## 7.7.1 (2026-01-27)
+
+Full Changelog: [v7.7.0...v7.7.1](https://github.com/trycourier/courier-python/compare/v7.7.0...v7.7.1)
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([d2d306b](https://github.com/trycourier/courier-python/commit/d2d306b62a83f3700f893d1949f4388b870d6ce9))
+* **internal:** update `actions/checkout` version ([3a5c4ad](https://github.com/trycourier/courier-python/commit/3a5c4ad617bd1bd8259dd4b786b9c0716e2b4076))
+
+
+### Documentation
+
+* **types:** clarify version field description in automation_template ([f04a9e0](https://github.com/trycourier/courier-python/commit/f04a9e04d27ba53cbdf8fe7f4a0a4c168b55b070))
+
+## 7.7.0 (2026-01-14)
+
+Full Changelog: [v7.6.1...v7.7.0](https://github.com/trycourier/courier-python/compare/v7.6.1...v7.7.0)
+
+### Features
+
+* **client:** add support for binary request streaming ([f0cc366](https://github.com/trycourier/courier-python/commit/f0cc366e61a95d66d2cf01477822c21625e3a2a3))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([a9d8cf1](https://github.com/trycourier/courier-python/commit/a9d8cf18d10f801475fb21b74546781769244cb4))
+* **internal:** regenerate SDK with no functional changes ([4b373e6](https://github.com/trycourier/courier-python/commit/4b373e6fabfd0005eb5f4d954fc9f2826120cc09))
+
+## 7.6.1 (2026-01-12)
+
+Full Changelog: [v7.6.0...v7.6.1](https://github.com/trycourier/courier-python/compare/v7.6.0...v7.6.1)
+
+### Bug Fixes
+
+* **types:** remove FilterConfig/FilterConfigParam, consolidate to Filter/FilterParam types ([60a1861](https://github.com/trycourier/courier-python/commit/60a1861d91952d5059675259de9e1520f9d1e5fa))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([4f5a16f](https://github.com/trycourier/courier-python/commit/4f5a16fb4d691e54a01e07594a5416ef6aa68e1f))
+
+## 7.6.0 (2026-01-08)
+
+Full Changelog: [v7.5.0...v7.6.0](https://github.com/trycourier/courier-python/compare/v7.5.0...v7.6.0)
+
+### Features
+
+* **api:** remove audit_events/automations/brands/bulk/inbound/translations/tenants.templates ([9967cc0](https://github.com/trycourier/courier-python/commit/9967cc0183c5d3a8af38bae19f384c8d12c66b26))
+
+
+### Chores
+
+* **internal:** codegen related update ([0e618c3](https://github.com/trycourier/courier-python/commit/0e618c3ef16b92452a1488f378ef968cee961a6c))
+
+## 7.5.0 (2025-12-22)
+
+Full Changelog: [v7.4.0...v7.5.0](https://github.com/trycourier/courier-python/compare/v7.4.0...v7.5.0)
+
+### Features
+
+* **api:** add slack/teams/pagerduty/webhook/audience recipient types to send ([5401702](https://github.com/trycourier/courier-python/commit/54017021e9ff5ba391c2b702ccdec08cb17b4ecc))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([81d7991](https://github.com/trycourier/courier-python/commit/81d7991941ba20d717b289d4a2e87b16091ed6e0))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([14a2c9a](https://github.com/trycourier/courier-python/commit/14a2c9a30220a43af14730219bf9d81a406a7f8f))
+* speedup initial import ([1ce264e](https://github.com/trycourier/courier-python/commit/1ce264e0da7aac803ffd405e4672fd2f69fdfd10))
+
+## 7.4.0 (2025-12-16)
+
+Full Changelog: [v7.3.0...v7.4.0](https://github.com/trycourier/courier-python/compare/v7.3.0...v7.4.0)
+
+### Features
+
+* Add timezone field to Delay schema ([85b8c6f](https://github.com/trycourier/courier-python/commit/85b8c6f5fca9a68321d16c2927ea89cf509813d7))
+* Update bulk API spec: make event required, document profile.email req… ([1b99e93](https://github.com/trycourier/courier-python/commit/1b99e9336b2f38487b873962a81e9ffd2b82f019))
+
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([ab5f2d0](https://github.com/trycourier/courier-python/commit/ab5f2d0b7e4f0534e3fff420f7f1ea6c159693bf))
+
+
+### Chores
+
+* add missing docstrings ([ea1dec0](https://github.com/trycourier/courier-python/commit/ea1dec0951b56ee5420d3c81d0fcbd5442ae726f))
+* **internal:** add missing files argument to base client ([a6fba70](https://github.com/trycourier/courier-python/commit/a6fba70d97a444af4c6c06c9adeb539051ceaee8))
+
+## 7.3.0 (2025-12-08)
+
+Full Changelog: [v7.2.0...v7.3.0](https://github.com/trycourier/courier-python/compare/v7.2.0...v7.3.0)
+
+### Features
+
+* Fix UsersGetAllTokensResponse to return object with tokens property i… ([805f26a](https://github.com/trycourier/courier-python/commit/805f26a723b14446bd70d30e45da4c3ba73ca0f9))
+
+## 7.2.0 (2025-12-08)
+
+Full Changelog: [v7.1.1...v7.2.0](https://github.com/trycourier/courier-python/compare/v7.1.1...v7.2.0)
+
+### Features
+
+* Add event_ids field to Notification schema ([02bb30d](https://github.com/trycourier/courier-python/commit/02bb30db537aca01f146a165ddf08d561cea1244))
+
+
+### Bug Fixes
+
+* **client:** fix duplicate Go struct resulting from name derivations schema ([f2f7fc4](https://github.com/trycourier/courier-python/commit/f2f7fc498132b1ca3d39a90d178ab01ca372e6c9))
+
+
+### Chores
+
+* **docs:** use environment variables for authentication in code snippets ([f393857](https://github.com/trycourier/courier-python/commit/f393857a8d91fdeb8eecb649033de72b8adbee9f))
+* update lockfile ([15713ee](https://github.com/trycourier/courier-python/commit/15713ee6c246e5d1a7388718b9d09303eebeb541))
+
+## 7.1.1 (2025-12-02)
+
+Full Changelog: [v7.1.0...v7.1.1](https://github.com/trycourier/courier-python/compare/v7.1.0...v7.1.1)
+
+### Bug Fixes
+
+* ensure streams are always closed ([0b75285](https://github.com/trycourier/courier-python/commit/0b75285d6addee258564f8b5a900b17248d2b1b7))
+
+
+### Chores
+
+* add Python 3.14 classifier and testing ([b712bc3](https://github.com/trycourier/courier-python/commit/b712bc3294d19db94aa6aae15b4bb5693e57e2c4))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([8fb8ad7](https://github.com/trycourier/courier-python/commit/8fb8ad70a33482ae03cccd8de913b6c3b79101bf))
+
+## 7.1.0 (2025-11-18)
+
+Full Changelog: [v7.0.1...v7.1.0](https://github.com/trycourier/courier-python/compare/v7.0.1...v7.1.0)
+
+### Features
+
+* JWT scope updates ([79503e5](https://github.com/trycourier/courier-python/commit/79503e5c99993a0a81fdc8da9eb8553c541cf6af))
+* NPM enabled ([a93573b](https://github.com/trycourier/courier-python/commit/a93573b77947d06113262e73b48c7aaba74e1832))
+* Test ([cdeccac](https://github.com/trycourier/courier-python/commit/cdeccac6ac1d08ba5864b8e1a9b05b4ae5ae983f))
+
+## 7.0.1 (2025-11-12)
+
+Full Changelog: [v7.0.0...v7.0.1](https://github.com/trycourier/courier-python/compare/v7.0.0...v7.0.1)
+
+### Chores
+
+* update SDK settings ([7c0140c](https://github.com/trycourier/courier-python/commit/7c0140c957a23aa2f60911b7383537215251927d))
+
+## 7.0.0 (2025-11-12)
+
+Full Changelog: [v6.4.0...v7.0.0](https://github.com/trycourier/courier-python/compare/v6.4.0...v7.0.0)
+
+### Bug Fixes
+
+* compat with Python 3.14 ([a337f1e](https://github.com/trycourier/courier-python/commit/a337f1e0b438535a0f2fc15c9420e898bb8f70aa))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([97cf79e](https://github.com/trycourier/courier-python/commit/97cf79e38f18413e79e836660b76e8ef302c4132))
+
+
+### Chores
+
+* **package:** drop Python 3.8 support ([f229ffd](https://github.com/trycourier/courier-python/commit/f229ffdcb06fb808b578cec0d2920a5fb893a205))
+
+## 6.4.0 (2025-11-08)
+
+Full Changelog: [v6.4.0-alpha20...v6.4.0](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha20...v6.4.0)
+
+### Features
+
+* **api:** manual updates ([b16bac2](https://github.com/trycourier/courier-python/commit/b16bac2553d106e3ddc040bdfe3beac79f8c0408))
+* **api:** manual updates ([cd9ed1b](https://github.com/trycourier/courier-python/commit/cd9ed1b563215b6896734669bd041c091f0db29a))
+* Token Prop Description Change ([66b3845](https://github.com/trycourier/courier-python/commit/66b3845cce21eca402dac7348ce9017fa8a55255))
+
+
+### Chores
+
+* configure new SDK language ([f004f07](https://github.com/trycourier/courier-python/commit/f004f07aabba46f78d7834c62b4ef1ce4ec11759))
+* **internal:** codegen related update ([6fb395b](https://github.com/trycourier/courier-python/commit/6fb395bb3062bb749130c8f6345fbfcd693d2584))
+
+## 6.4.0-alpha20 (2025-11-04)
+
+Full Changelog: [v6.4.0-alpha19...v6.4.0-alpha20](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha19...v6.4.0-alpha20)
+
+### Features
+
+* Attempt kick off again ([d6f825e](https://github.com/trycourier/courier-python/commit/d6f825e2fae7878f03066540056f672b5ff8463d))
+* Organization update ([4ba51f6](https://github.com/trycourier/courier-python/commit/4ba51f6bbdf8af2c82cd076935ade4d7d185971e))
+
+
+### Chores
+
+* **internal/tests:** avoid race condition with implicit client cleanup ([a01184b](https://github.com/trycourier/courier-python/commit/a01184b50a2c8c951d499cf85967fa2350a5371f))
+* **internal:** grammar fix (it's -&gt; its) ([e774a66](https://github.com/trycourier/courier-python/commit/e774a6671c0892b648f02d051c56a441baabc679))
+
+## 6.4.0-alpha19 (2025-11-01)
+
+Full Changelog: [v6.4.0-alpha18...v6.4.0-alpha19](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha18...v6.4.0-alpha19)
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([31633eb](https://github.com/trycourier/courier-python/commit/31633eb82c4d91ac6972769edac89b53309988b3))
+
+## 6.4.0-alpha18 (2025-10-31)
+
+Full Changelog: [v6.4.0-alpha17...v6.4.0-alpha18](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha17...v6.4.0-alpha18)
+
+### Features
+
+* Comment adjustment to kick of build ([0ea3bef](https://github.com/trycourier/courier-python/commit/0ea3bef13736755b7d4cf9b76f73df6ed06c0dee))
+
+
+### Bug Fixes
+
+* Comment to kick off build ([a375abf](https://github.com/trycourier/courier-python/commit/a375abfa4ce25503b3d1b54b00092d49dcf3fbf4))
+
+## 6.4.0-alpha17 (2025-10-18)
+
+Full Changelog: [v6.4.0-alpha16...v6.4.0-alpha17](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha16...v6.4.0-alpha17)
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([e0d109f](https://github.com/trycourier/courier-python/commit/e0d109f1a1f1818a3649392af3c49b82890f0cc9))
+
+## 6.4.0-alpha16 (2025-10-17)
+
+Full Changelog: [v6.4.0-alpha15...v6.4.0-alpha16](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha15...v6.4.0-alpha16)
+
+### Bug Fixes
+
+* Dep Warning ([57f6081](https://github.com/trycourier/courier-python/commit/57f6081d87114e8c7fb0b8765a20321e9bf2542c))
+
+## 6.4.0-alpha15 (2025-10-17)
+
+Full Changelog: [v6.4.0-alpha14...v6.4.0-alpha15](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha14...v6.4.0-alpha15)
+
+### Features
+
+* Changes to spec, examples and scripts ([78b8d02](https://github.com/trycourier/courier-python/commit/78b8d023d5e683676e24a273015bc41e3f4ba409))
+* More PHP and attempted node automerge ([14dc341](https://github.com/trycourier/courier-python/commit/14dc341fcc0abf5ebe420bb0b7cba33743d71cd2))
+
+
+### Bug Fixes
+
+* Updated paths for each model and go example updates ([5afd3bc](https://github.com/trycourier/courier-python/commit/5afd3bcbe1ebb4a53949101715726498f00e82eb))
+
+## 6.4.0-alpha14 (2025-10-14)
+
+Full Changelog: [v6.4.0-alpha13...v6.4.0-alpha14](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha13...v6.4.0-alpha14)
+
+### Features
+
+* **api:** manual updates ([e112bd0](https://github.com/trycourier/courier-python/commit/e112bd07fe318d465a9001f674cefc659de76873))
+* **api:** manual updates ([d42b37a](https://github.com/trycourier/courier-python/commit/d42b37ac6d7a7b5c8aa4cc5a3eea1b72cb09afa4))
+* **api:** manual updates ([d47cd8b](https://github.com/trycourier/courier-python/commit/d47cd8b0f978bb63366d0a936e8acccd11765b10))
+* **api:** manual updates ([71f3a3c](https://github.com/trycourier/courier-python/commit/71f3a3c26f652978c94cc38793ab5092ad67f66a))
+* Examples and ref polish ([2064338](https://github.com/trycourier/courier-python/commit/2064338fb827f5e0ad9db7c0b5d4926a40ef8367))
+* Kick of merge attempt ([06e8c01](https://github.com/trycourier/courier-python/commit/06e8c015bc29116e7a082d09861f6b6f36302a1b))
+* Model sync ([01f64f4](https://github.com/trycourier/courier-python/commit/01f64f404515503bcf81349f9f8ccaa1c6233317))
+* Polish and Kick of Java Kit Gen ([bd0f5eb](https://github.com/trycourier/courier-python/commit/bd0f5ebf450895f319e0d1ee2e5ec2c198248137))
+* Template Id ([8d36ed8](https://github.com/trycourier/courier-python/commit/8d36ed831629ea1910533783f184c5798fba3aea))
+* Test Github Action ([cb50c99](https://github.com/trycourier/courier-python/commit/cb50c99f72467b58071fe058c42acd4359152ea4))
+* Test stainless open action ([b107881](https://github.com/trycourier/courier-python/commit/b107881432227ac071760c1f2918bf69ec4aec8d))
+
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([3826b8b](https://github.com/trycourier/courier-python/commit/3826b8b4fbe88b0e2b536c176e9ae7da86446445))
+
+## 6.4.0-alpha13 (2025-10-07)
+
+Full Changelog: [v6.4.0-alpha12...v6.4.0-alpha13](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha12...v6.4.0-alpha13)
+
+### Features
+
+* **api:** manual updates ([1482bb2](https://github.com/trycourier/courier-python/commit/1482bb27d45147a4b65e671b81faaff53f786225))
+
+## 6.4.0-alpha12 (2025-10-07)
+
+Full Changelog: [v6.4.0-alpha11...v6.4.0-alpha12](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha11...v6.4.0-alpha12)
+
+### Features
+
+* **api:** manual updates ([ad3b963](https://github.com/trycourier/courier-python/commit/ad3b9633fa1ceba37addacfde355a595d61b4e10))
+* **api:** manual updates ([0fa89b2](https://github.com/trycourier/courier-python/commit/0fa89b2c933ae9f5cb8ca2510ee37a4b6cc2db5f))
+
+## 6.4.0-alpha11 (2025-10-07)
+
+Full Changelog: [v6.4.0-alpha9...v6.4.0-alpha11](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha9...v6.4.0-alpha11)
+
+### Features
+
+* **api:** manual updates ([26ed528](https://github.com/trycourier/courier-python/commit/26ed528ff384d590feeef3405b5e2cb15136c25b))
+* **api:** manual updates ([250903a](https://github.com/trycourier/courier-python/commit/250903a54c817c31f369d7739bb16f4a1a693c24))
+* **api:** manual updates ([1878d7e](https://github.com/trycourier/courier-python/commit/1878d7ebb8b8b6ab96c48cade6e8adc7f85ee73f))
+* **api:** manual updates ([87191fd](https://github.com/trycourier/courier-python/commit/87191fd3b6b369946744a4d5459979c3c6b1fead))
+* **api:** manual updates ([cc4c950](https://github.com/trycourier/courier-python/commit/cc4c9500b58b8d337a59f79cd7ca58ab1ee4e4fc))
+* **api:** manual updates ([899b66a](https://github.com/trycourier/courier-python/commit/899b66a240ea0dee22607751d8b1f6375b656610))
+* **api:** manual updates ([f1e4f47](https://github.com/trycourier/courier-python/commit/f1e4f47468781a5bd3b7e2f001570d7990c85f00))
+* **api:** manual updates ([def8956](https://github.com/trycourier/courier-python/commit/def895610f763927486200d52191229730b676a4))
+* **api:** manual updates ([ae8ca25](https://github.com/trycourier/courier-python/commit/ae8ca2565fbaed044943de63bd72ecb2db329815))
+
+
+### Chores
+
+* update SDK settings ([32ed923](https://github.com/trycourier/courier-python/commit/32ed923a5ad675ec4e1f70623dca1e7447dda737))
+* update SDK settings ([480ec2f](https://github.com/trycourier/courier-python/commit/480ec2f6dde592809c21ce10e834686bf56bb4f9))
+
+## 6.4.0-alpha9 (2025-10-06)
+
+Full Changelog: [v6.4.0-alpha8...v6.4.0-alpha9](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha8...v6.4.0-alpha9)
+
+### Features
+
+* **api:** manual updates ([ca9ad78](https://github.com/trycourier/courier-python/commit/ca9ad7836de13c74bb8079dbee85e24b952a3062))
+* **api:** manual updates ([834a929](https://github.com/trycourier/courier-python/commit/834a929017d2cce9fc436c74ed2ee62dc35755b4))
+* **api:** manual updates ([8ac4acb](https://github.com/trycourier/courier-python/commit/8ac4acb4c4b727f5909b362bed3feec644e4b619))
+
+## 6.4.0-alpha8 (2025-10-06)
+
+Full Changelog: [v6.4.0-alpha7...v6.4.0-alpha8](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha7...v6.4.0-alpha8)
+
+### Features
+
+* **api:** manual updates ([9f8698c](https://github.com/trycourier/courier-python/commit/9f8698cc478334c02ee28e1b9149f9f255887f35))
+
+## 6.4.0-alpha7 (2025-10-03)
+
+Full Changelog: [v6.4.0-alpha6...v6.4.0-alpha7](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha6...v6.4.0-alpha7)
+
+### Features
+
+* **api:** manual updates ([afad076](https://github.com/trycourier/courier-python/commit/afad076eed4506db36e9997072a6c74bc127a64e))
+* **api:** manual updates ([07455a3](https://github.com/trycourier/courier-python/commit/07455a32228d749413929e164d47b504edd86354))
+
+## 6.4.0-alpha6 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha5...v6.4.0-alpha6](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha5...v6.4.0-alpha6)
+
+### Features
+
+* **api:** manual updates ([a451897](https://github.com/trycourier/courier-python/commit/a45189735dca2ee6983378929a634b606b9020e2))
+* **api:** manual updates ([36bb627](https://github.com/trycourier/courier-python/commit/36bb62743986c845fad2f3fecaa188d7de556385))
+
+## 6.4.0-alpha5 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha4...v6.4.0-alpha5](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha4...v6.4.0-alpha5)
+
+### Features
+
+* **api:** manual updates ([c34431e](https://github.com/trycourier/courier-python/commit/c34431efa9d87ddf206192dec64b06889c900a45))
+
+## 6.4.0-alpha4 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha3...v6.4.0-alpha4](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha3...v6.4.0-alpha4)
+
+### Features
+
+* **api:** manual updates ([1d2cb25](https://github.com/trycourier/courier-python/commit/1d2cb258a5765cdf7aa8ce86158b01947565530b))
+
+## 6.4.0-alpha3 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha2...v6.4.0-alpha3](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha2...v6.4.0-alpha3)
+
+### Features
+
+* **api:** manual updates ([75fba38](https://github.com/trycourier/courier-python/commit/75fba382fb63386480b3b12b3d48ee329244e85d))
+
+## 6.4.0-alpha2 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha1...v6.4.0-alpha2](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha1...v6.4.0-alpha2)
+
+### Features
+
+* **api:** manual updates ([174ee72](https://github.com/trycourier/courier-python/commit/174ee72b20f2dca6ec5f680f0ed6d7efabc1833a))
+
+## 6.4.0-alpha1 (2025-10-02)
+
+Full Changelog: [v6.4.0-alpha0...v6.4.0-alpha1](https://github.com/trycourier/courier-python/compare/v6.4.0-alpha0...v6.4.0-alpha1)
+
+### Chores
+
+* update SDK settings ([6c392ae](https://github.com/trycourier/courier-python/commit/6c392ae4d5e6a1d41eb3b175964978d79a783f58))
+
+## 6.4.0-alpha0 (2025-10-02)
+
+Full Changelog: [v0.0.1...v6.4.0-alpha0](https://github.com/trycourier/courier-python/compare/v0.0.1...v6.4.0-alpha0)
+
+### Features
+
+* **api:** manual updates ([2e6a07a](https://github.com/trycourier/courier-python/commit/2e6a07ab17a63673de30d2dd088a492e1ecf5073))
+* **api:** manual updates ([51a28ef](https://github.com/trycourier/courier-python/commit/51a28efc4e1d20328556ae691fe4a768bbb277b4))
+* **api:** manual updates ([b16bac2](https://github.com/trycourier/courier-python/commit/b16bac2553d106e3ddc040bdfe3beac79f8c0408))
+* **api:** manual updates ([cd9ed1b](https://github.com/trycourier/courier-python/commit/cd9ed1b563215b6896734669bd041c091f0db29a))
+
+
+### Chores
+
+* configure new SDK language ([f004f07](https://github.com/trycourier/courier-python/commit/f004f07aabba46f78d7834c62b4ef1ce4ec11759))
+* **internal:** codegen related update ([6fb395b](https://github.com/trycourier/courier-python/commit/6fb395bb3062bb749130c8f6345fbfcd693d2584))
+* update SDK settings ([3317d9e](https://github.com/trycourier/courier-python/commit/3317d9ec8f294d05ddd89e3b2e7f5da9a8716127))
+* update SDK settings ([2677204](https://github.com/trycourier/courier-python/commit/2677204576bea283de2c5f7e17cad008a0ca497b))
