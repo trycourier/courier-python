@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.26.1 (2026-08-12)
+
+Full Changelog: [v7.26.0...v7.26.1](https://github.com/trycourier/courier-python/compare/v7.26.0...v7.26.1)
+
 ## 7.26.0 (2026-08-10)
 
 Full Changelog: [v7.25.0...v7.26.0](https://github.com/trycourier/courier-python/compare/v7.25.0...v7.26.0)
