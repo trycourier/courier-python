@@ -75,7 +75,7 @@ class TestSubscriptions:
     def test_method_add(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.add(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
         assert subscription is None
 
@@ -86,7 +86,7 @@ class TestSubscriptions:
             list_id="list_id",
             recipients=[
                 {
-                    "recipient_id": "recipientId",
+                    "recipient_id": "user_abc",
                     "preferences": {
                         "categories": {
                             "foo": {
@@ -113,7 +113,36 @@ class TestSubscriptions:
                             }
                         },
                     },
-                }
+                },
+                {
+                    "recipient_id": "user_def",
+                    "preferences": {
+                        "categories": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                        "notifications": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                    },
+                },
             ],
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
@@ -125,7 +154,7 @@ class TestSubscriptions:
     def test_raw_response_add(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.add(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
 
         assert response.is_closed is True
@@ -138,7 +167,7 @@ class TestSubscriptions:
     def test_streaming_response_add(self, client: Courier) -> None:
         with client.lists.subscriptions.with_streaming_response.add(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -154,7 +183,7 @@ class TestSubscriptions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             client.lists.subscriptions.with_raw_response.add(
                 list_id="",
-                recipients=[{"recipient_id": "recipientId"}],
+                recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -162,7 +191,7 @@ class TestSubscriptions:
     def test_method_subscribe(self, client: Courier) -> None:
         subscription = client.lists.subscriptions.subscribe(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
         assert subscription is None
 
@@ -171,7 +200,7 @@ class TestSubscriptions:
     def test_raw_response_subscribe(self, client: Courier) -> None:
         response = client.lists.subscriptions.with_raw_response.subscribe(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
 
         assert response.is_closed is True
@@ -184,7 +213,7 @@ class TestSubscriptions:
     def test_streaming_response_subscribe(self, client: Courier) -> None:
         with client.lists.subscriptions.with_streaming_response.subscribe(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -200,7 +229,7 @@ class TestSubscriptions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             client.lists.subscriptions.with_raw_response.subscribe(
                 list_id="",
-                recipients=[{"recipient_id": "recipientId"}],
+                recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -232,7 +261,7 @@ class TestSubscriptions:
                     }
                 },
                 "notifications": {
-                    "foo": {
+                    "nt_01kx4h2jdafq8bk9aftxak4b40": {
                         "status": "OPTED_IN",
                         "channel_preferences": [{"channel": "direct_message"}],
                         "rules": [
@@ -404,7 +433,7 @@ class TestAsyncSubscriptions:
     async def test_method_add(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.add(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
         assert subscription is None
 
@@ -415,7 +444,7 @@ class TestAsyncSubscriptions:
             list_id="list_id",
             recipients=[
                 {
-                    "recipient_id": "recipientId",
+                    "recipient_id": "user_abc",
                     "preferences": {
                         "categories": {
                             "foo": {
@@ -442,7 +471,36 @@ class TestAsyncSubscriptions:
                             }
                         },
                     },
-                }
+                },
+                {
+                    "recipient_id": "user_def",
+                    "preferences": {
+                        "categories": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                        "notifications": {
+                            "foo": {
+                                "status": "OPTED_IN",
+                                "channel_preferences": [{"channel": "direct_message"}],
+                                "rules": [
+                                    {
+                                        "until": "until",
+                                        "start": "start",
+                                    }
+                                ],
+                            }
+                        },
+                    },
+                },
             ],
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
@@ -454,7 +512,7 @@ class TestAsyncSubscriptions:
     async def test_raw_response_add(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.subscriptions.with_raw_response.add(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
 
         assert response.is_closed is True
@@ -467,7 +525,7 @@ class TestAsyncSubscriptions:
     async def test_streaming_response_add(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.subscriptions.with_streaming_response.add(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -483,7 +541,7 @@ class TestAsyncSubscriptions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             await async_client.lists.subscriptions.with_raw_response.add(
                 list_id="",
-                recipients=[{"recipient_id": "recipientId"}],
+                recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -491,7 +549,7 @@ class TestAsyncSubscriptions:
     async def test_method_subscribe(self, async_client: AsyncCourier) -> None:
         subscription = await async_client.lists.subscriptions.subscribe(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
         assert subscription is None
 
@@ -500,7 +558,7 @@ class TestAsyncSubscriptions:
     async def test_raw_response_subscribe(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.subscriptions.with_raw_response.subscribe(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         )
 
         assert response.is_closed is True
@@ -513,7 +571,7 @@ class TestAsyncSubscriptions:
     async def test_streaming_response_subscribe(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.subscriptions.with_streaming_response.subscribe(
             list_id="list_id",
-            recipients=[{"recipient_id": "recipientId"}],
+            recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -529,7 +587,7 @@ class TestAsyncSubscriptions:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             await async_client.lists.subscriptions.with_raw_response.subscribe(
                 list_id="",
-                recipients=[{"recipient_id": "recipientId"}],
+                recipients=[{"recipient_id": "user_abc"}, {"recipient_id": "user_def"}],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -561,7 +619,7 @@ class TestAsyncSubscriptions:
                     }
                 },
                 "notifications": {
-                    "foo": {
+                    "nt_01kx4h2jdafq8bk9aftxak4b40": {
                         "status": "OPTED_IN",
                         "channel_preferences": [{"channel": "direct_message"}],
                         "rules": [

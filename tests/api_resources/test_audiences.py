@@ -77,19 +77,19 @@ class TestAudiences:
     def test_method_update_with_all_params(self, client: Courier) -> None:
         audience = client.audiences.update(
             audience_id="audience_id",
-            description="description",
+            description="Users located in the US",
             filter={
                 "filters": [
                     {
-                        "operator": "operator",
+                        "operator": "EQ",
                         "filters": [],
-                        "path": "path",
-                        "value": "value",
+                        "path": "profile.location",
+                        "value": "US",
                     }
                 ],
                 "operator": "AND",
             },
-            name="name",
+            name="Engaged US Users",
             operator="AND",
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])
@@ -318,19 +318,19 @@ class TestAsyncAudiences:
     async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
         audience = await async_client.audiences.update(
             audience_id="audience_id",
-            description="description",
+            description="Users located in the US",
             filter={
                 "filters": [
                     {
-                        "operator": "operator",
+                        "operator": "EQ",
                         "filters": [],
-                        "path": "path",
-                        "value": "value",
+                        "path": "profile.location",
+                        "value": "US",
                     }
                 ],
                 "operator": "AND",
             },
-            name="name",
+            name="Engaged US Users",
             operator="AND",
         )
         assert_matches_type(AudienceUpdateResponse, audience, path=["response"])

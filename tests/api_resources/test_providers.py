@@ -24,7 +24,7 @@ class TestProviders:
     @parametrize
     def test_method_create(self, client: Courier) -> None:
         provider = client.providers.create(
-            provider="provider",
+            provider="sendgrid",
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -32,10 +32,10 @@ class TestProviders:
     @parametrize
     def test_method_create_with_all_params(self, client: Courier) -> None:
         provider = client.providers.create(
-            provider="provider",
+            provider="sendgrid",
             alias="alias",
-            settings={"foo": "bar"},
-            title="title",
+            settings={"api_key": "bar"},
+            title="Production SendGrid",
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
         )
@@ -45,7 +45,7 @@ class TestProviders:
     @parametrize
     def test_raw_response_create(self, client: Courier) -> None:
         response = client.providers.with_raw_response.create(
-            provider="provider",
+            provider="sendgrid",
         )
 
         assert response.is_closed is True
@@ -57,7 +57,7 @@ class TestProviders:
     @parametrize
     def test_streaming_response_create(self, client: Courier) -> None:
         with client.providers.with_streaming_response.create(
-            provider="provider",
+            provider="sendgrid",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -114,7 +114,7 @@ class TestProviders:
     def test_method_update(self, client: Courier) -> None:
         provider = client.providers.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -123,10 +123,10 @@ class TestProviders:
     def test_method_update_with_all_params(self, client: Courier) -> None:
         provider = client.providers.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
             alias="alias",
-            settings={"foo": "bar"},
-            title="title",
+            settings={"api_key": "bar"},
+            title="Production SendGrid",
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -135,7 +135,7 @@ class TestProviders:
     def test_raw_response_update(self, client: Courier) -> None:
         response = client.providers.with_raw_response.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
         )
 
         assert response.is_closed is True
@@ -148,7 +148,7 @@ class TestProviders:
     def test_streaming_response_update(self, client: Courier) -> None:
         with client.providers.with_streaming_response.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -164,7 +164,7 @@ class TestProviders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.providers.with_raw_response.update(
                 id="",
-                provider="provider",
+                provider="sendgrid",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -255,7 +255,7 @@ class TestAsyncProviders:
     @parametrize
     async def test_method_create(self, async_client: AsyncCourier) -> None:
         provider = await async_client.providers.create(
-            provider="provider",
+            provider="sendgrid",
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -263,10 +263,10 @@ class TestAsyncProviders:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncCourier) -> None:
         provider = await async_client.providers.create(
-            provider="provider",
+            provider="sendgrid",
             alias="alias",
-            settings={"foo": "bar"},
-            title="title",
+            settings={"api_key": "bar"},
+            title="Production SendGrid",
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
         )
@@ -276,7 +276,7 @@ class TestAsyncProviders:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncCourier) -> None:
         response = await async_client.providers.with_raw_response.create(
-            provider="provider",
+            provider="sendgrid",
         )
 
         assert response.is_closed is True
@@ -288,7 +288,7 @@ class TestAsyncProviders:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncCourier) -> None:
         async with async_client.providers.with_streaming_response.create(
-            provider="provider",
+            provider="sendgrid",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -345,7 +345,7 @@ class TestAsyncProviders:
     async def test_method_update(self, async_client: AsyncCourier) -> None:
         provider = await async_client.providers.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -354,10 +354,10 @@ class TestAsyncProviders:
     async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
         provider = await async_client.providers.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
             alias="alias",
-            settings={"foo": "bar"},
-            title="title",
+            settings={"api_key": "bar"},
+            title="Production SendGrid",
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -366,7 +366,7 @@ class TestAsyncProviders:
     async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
         response = await async_client.providers.with_raw_response.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
         )
 
         assert response.is_closed is True
@@ -379,7 +379,7 @@ class TestAsyncProviders:
     async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
         async with async_client.providers.with_streaming_response.update(
             id="id",
-            provider="provider",
+            provider="sendgrid",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -395,7 +395,7 @@ class TestAsyncProviders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.providers.with_raw_response.update(
                 id="",
-                provider="provider",
+                provider="sendgrid",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

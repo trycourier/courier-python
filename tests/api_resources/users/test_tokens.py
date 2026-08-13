@@ -77,8 +77,8 @@ class TestTokens:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
+                    "op": "replace",
+                    "path": "/expiry_date",
                 }
             ],
         )
@@ -92,8 +92,8 @@ class TestTokens:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
+                    "op": "replace",
+                    "path": "/expiry_date",
                 }
             ],
         )
@@ -111,8 +111,8 @@ class TestTokens:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
+                    "op": "replace",
+                    "path": "/expiry_date",
                 }
             ],
         ) as response:
@@ -133,8 +133,8 @@ class TestTokens:
                 user_id="",
                 patch=[
                     {
-                        "op": "op",
-                        "path": "path",
+                        "op": "replace",
+                        "path": "/expiry_date",
                     }
                 ],
             )
@@ -145,8 +145,8 @@ class TestTokens:
                 user_id="user_id",
                 patch=[
                     {
-                        "op": "op",
-                        "path": "path",
+                        "op": "replace",
+                        "path": "/expiry_date",
                     }
                 ],
             )
@@ -306,7 +306,7 @@ class TestTokens:
             provider_key="firebase-fcm",
             device={
                 "ad_id": "ad_id",
-                "app_id": "app_id",
+                "app_id": "com.example.app",
                 "device_id": "device_id",
                 "manufacturer": "manufacturer",
                 "model": "model",
@@ -436,8 +436,8 @@ class TestAsyncTokens:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
+                    "op": "replace",
+                    "path": "/expiry_date",
                 }
             ],
         )
@@ -451,8 +451,8 @@ class TestAsyncTokens:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
+                    "op": "replace",
+                    "path": "/expiry_date",
                 }
             ],
         )
@@ -470,8 +470,8 @@ class TestAsyncTokens:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
+                    "op": "replace",
+                    "path": "/expiry_date",
                 }
             ],
         ) as response:
@@ -492,8 +492,8 @@ class TestAsyncTokens:
                 user_id="",
                 patch=[
                     {
-                        "op": "op",
-                        "path": "path",
+                        "op": "replace",
+                        "path": "/expiry_date",
                     }
                 ],
             )
@@ -504,8 +504,8 @@ class TestAsyncTokens:
                 user_id="user_id",
                 patch=[
                     {
-                        "op": "op",
-                        "path": "path",
+                        "op": "replace",
+                        "path": "/expiry_date",
                     }
                 ],
             )
@@ -665,7 +665,7 @@ class TestAsyncTokens:
             provider_key="firebase-fcm",
             device={
                 "ad_id": "ad_id",
-                "app_id": "app_id",
+                "app_id": "com.example.app",
                 "device_id": "device_id",
                 "manufacturer": "manufacturer",
                 "model": "model",

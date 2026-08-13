@@ -88,7 +88,7 @@ class TestInvoke:
     def test_method_invoke_by_template(self, client: Courier) -> None:
         invoke = client.automations.invoke.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
@@ -97,10 +97,10 @@ class TestInvoke:
     def test_method_invoke_by_template_with_all_params(self, client: Courier) -> None:
         invoke = client.automations.invoke.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
             brand="brand",
-            data={"foo": "bar"},
-            profile={"foo": "bar"},
+            data={"orderId": "bar"},
+            profile={"email": "bar"},
             template="template",
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
@@ -112,7 +112,7 @@ class TestInvoke:
     def test_raw_response_invoke_by_template(self, client: Courier) -> None:
         response = client.automations.invoke.with_raw_response.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
         )
 
         assert response.is_closed is True
@@ -125,7 +125,7 @@ class TestInvoke:
     def test_streaming_response_invoke_by_template(self, client: Courier) -> None:
         with client.automations.invoke.with_streaming_response.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -141,7 +141,7 @@ class TestInvoke:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_id` but received ''"):
             client.automations.invoke.with_raw_response.invoke_by_template(
                 template_id="",
-                recipient="recipient",
+                recipient="user_abc",
             )
 
 
@@ -221,7 +221,7 @@ class TestAsyncInvoke:
     async def test_method_invoke_by_template(self, async_client: AsyncCourier) -> None:
         invoke = await async_client.automations.invoke.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
         )
         assert_matches_type(AutomationInvokeResponse, invoke, path=["response"])
 
@@ -230,10 +230,10 @@ class TestAsyncInvoke:
     async def test_method_invoke_by_template_with_all_params(self, async_client: AsyncCourier) -> None:
         invoke = await async_client.automations.invoke.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
             brand="brand",
-            data={"foo": "bar"},
-            profile={"foo": "bar"},
+            data={"orderId": "bar"},
+            profile={"email": "bar"},
             template="template",
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
@@ -245,7 +245,7 @@ class TestAsyncInvoke:
     async def test_raw_response_invoke_by_template(self, async_client: AsyncCourier) -> None:
         response = await async_client.automations.invoke.with_raw_response.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
         )
 
         assert response.is_closed is True
@@ -258,7 +258,7 @@ class TestAsyncInvoke:
     async def test_streaming_response_invoke_by_template(self, async_client: AsyncCourier) -> None:
         async with async_client.automations.invoke.with_streaming_response.invoke_by_template(
             template_id="templateId",
-            recipient="recipient",
+            recipient="user_abc",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -274,5 +274,5 @@ class TestAsyncInvoke:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `template_id` but received ''"):
             await async_client.automations.invoke.with_raw_response.invoke_by_template(
                 template_id="",
-                recipient="recipient",
+                recipient="user_abc",
             )

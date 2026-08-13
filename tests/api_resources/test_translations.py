@@ -74,7 +74,7 @@ class TestTranslations:
         translation = client.translations.update(
             locale="locale",
             domain="domain",
-            body="body",
+            body='msgid "Hello"\nmsgstr "Hola"',
         )
         assert translation is None
 
@@ -84,7 +84,7 @@ class TestTranslations:
         response = client.translations.with_raw_response.update(
             locale="locale",
             domain="domain",
-            body="body",
+            body='msgid "Hello"\nmsgstr "Hola"',
         )
 
         assert response.is_closed is True
@@ -98,7 +98,7 @@ class TestTranslations:
         with client.translations.with_streaming_response.update(
             locale="locale",
             domain="domain",
-            body="body",
+            body='msgid "Hello"\nmsgstr "Hola"',
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -115,14 +115,14 @@ class TestTranslations:
             client.translations.with_raw_response.update(
                 locale="locale",
                 domain="",
-                body="body",
+                body='msgid "Hello"\nmsgstr "Hola"',
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `locale` but received ''"):
             client.translations.with_raw_response.update(
                 locale="",
                 domain="domain",
-                body="body",
+                body='msgid "Hello"\nmsgstr "Hola"',
             )
 
 
@@ -189,7 +189,7 @@ class TestAsyncTranslations:
         translation = await async_client.translations.update(
             locale="locale",
             domain="domain",
-            body="body",
+            body='msgid "Hello"\nmsgstr "Hola"',
         )
         assert translation is None
 
@@ -199,7 +199,7 @@ class TestAsyncTranslations:
         response = await async_client.translations.with_raw_response.update(
             locale="locale",
             domain="domain",
-            body="body",
+            body='msgid "Hello"\nmsgstr "Hola"',
         )
 
         assert response.is_closed is True
@@ -213,7 +213,7 @@ class TestAsyncTranslations:
         async with async_client.translations.with_streaming_response.update(
             locale="locale",
             domain="domain",
-            body="body",
+            body='msgid "Hello"\nmsgstr "Hola"',
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -230,12 +230,12 @@ class TestAsyncTranslations:
             await async_client.translations.with_raw_response.update(
                 locale="locale",
                 domain="",
-                body="body",
+                body='msgid "Hello"\nmsgstr "Hola"',
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `locale` but received ''"):
             await async_client.translations.with_raw_response.update(
                 locale="",
                 domain="domain",
-                body="body",
+                body='msgid "Hello"\nmsgstr "Hola"',
             )

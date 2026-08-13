@@ -236,8 +236,8 @@ class TestTopics:
         topic = client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
+            default_status="OPTED_IN",
+            name="Product Updates",
         )
         assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
@@ -247,12 +247,12 @@ class TestTopics:
         topic = client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
-            allowed_preferences=["snooze"],
+            default_status="OPTED_IN",
+            name="Product Updates",
+            allowed_preferences=["channel_preferences"],
             description="description",
             include_unsubscribe_header=True,
-            routing_options=["direct_message"],
+            routing_options=["email", "inbox"],
             topic_data={"foo": "bar"},
         )
         assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
@@ -263,8 +263,8 @@ class TestTopics:
         response = client.workspace_preferences.topics.with_raw_response.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
+            default_status="OPTED_IN",
+            name="Product Updates",
         )
 
         assert response.is_closed is True
@@ -278,8 +278,8 @@ class TestTopics:
         with client.workspace_preferences.topics.with_streaming_response.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
+            default_status="OPTED_IN",
+            name="Product Updates",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -296,16 +296,16 @@ class TestTopics:
             client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="topic_id",
                 section_id="",
-                default_status="OPTED_OUT",
-                name="name",
+                default_status="OPTED_IN",
+                name="Product Updates",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
             client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="",
                 section_id="section_id",
-                default_status="OPTED_OUT",
-                name="name",
+                default_status="OPTED_IN",
+                name="Product Updates",
             )
 
 
@@ -533,8 +533,8 @@ class TestAsyncTopics:
         topic = await async_client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
+            default_status="OPTED_IN",
+            name="Product Updates",
         )
         assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
 
@@ -544,12 +544,12 @@ class TestAsyncTopics:
         topic = await async_client.workspace_preferences.topics.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
-            allowed_preferences=["snooze"],
+            default_status="OPTED_IN",
+            name="Product Updates",
+            allowed_preferences=["channel_preferences"],
             description="description",
             include_unsubscribe_header=True,
-            routing_options=["direct_message"],
+            routing_options=["email", "inbox"],
             topic_data={"foo": "bar"},
         )
         assert_matches_type(WorkspacePreferenceTopicGetResponse, topic, path=["response"])
@@ -560,8 +560,8 @@ class TestAsyncTopics:
         response = await async_client.workspace_preferences.topics.with_raw_response.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
+            default_status="OPTED_IN",
+            name="Product Updates",
         )
 
         assert response.is_closed is True
@@ -575,8 +575,8 @@ class TestAsyncTopics:
         async with async_client.workspace_preferences.topics.with_streaming_response.replace(
             topic_id="topic_id",
             section_id="section_id",
-            default_status="OPTED_OUT",
-            name="name",
+            default_status="OPTED_IN",
+            name="Product Updates",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -593,14 +593,14 @@ class TestAsyncTopics:
             await async_client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="topic_id",
                 section_id="",
-                default_status="OPTED_OUT",
-                name="name",
+                default_status="OPTED_IN",
+                name="Product Updates",
             )
 
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
             await async_client.workspace_preferences.topics.with_raw_response.replace(
                 topic_id="",
                 section_id="section_id",
-                default_status="OPTED_OUT",
-                name="name",
+                default_status="OPTED_IN",
+                name="Product Updates",
             )
