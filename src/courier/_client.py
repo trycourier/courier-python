@@ -37,6 +37,7 @@ from ._base_client import (
 if TYPE_CHECKING:
     from .resources import (
         auth,
+        bulk,
         send,
         lists,
         users,
@@ -59,6 +60,7 @@ if TYPE_CHECKING:
         workspace_preferences,
     )
     from .resources.auth import AuthResource, AsyncAuthResource
+    from .resources.bulk import BulkResource, AsyncBulkResource
     from .resources.send import SendResource, AsyncSendResource
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.inbound import InboundResource, AsyncInboundResource
@@ -219,6 +221,12 @@ class Courier(SyncAPIClient):
         from .resources.broadcasts import BroadcastsResource
 
         return BroadcastsResource(self)
+
+    @cached_property
+    def bulk(self) -> BulkResource:
+        from .resources.bulk import BulkResource
+
+        return BulkResource(self)
 
     @cached_property
     def brands(self) -> BrandsResource:
@@ -579,6 +587,12 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncBroadcastsResource(self)
 
     @cached_property
+    def bulk(self) -> AsyncBulkResource:
+        from .resources.bulk import AsyncBulkResource
+
+        return AsyncBulkResource(self)
+
+    @cached_property
     def brands(self) -> AsyncBrandsResource:
         """
         Manage the logos, colors, and layout that give the templates you send a consistent look.
@@ -879,6 +893,12 @@ class CourierWithRawResponse:
         return BroadcastsResourceWithRawResponse(self._client.broadcasts)
 
     @cached_property
+    def bulk(self) -> bulk.BulkResourceWithRawResponse:
+        from .resources.bulk import BulkResourceWithRawResponse
+
+        return BulkResourceWithRawResponse(self._client.bulk)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithRawResponse:
         """
         Manage the logos, colors, and layout that give the templates you send a consistent look.
@@ -1065,6 +1085,12 @@ class AsyncCourierWithRawResponse:
         from .resources.broadcasts import AsyncBroadcastsResourceWithRawResponse
 
         return AsyncBroadcastsResourceWithRawResponse(self._client.broadcasts)
+
+    @cached_property
+    def bulk(self) -> bulk.AsyncBulkResourceWithRawResponse:
+        from .resources.bulk import AsyncBulkResourceWithRawResponse
+
+        return AsyncBulkResourceWithRawResponse(self._client.bulk)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithRawResponse:
@@ -1255,6 +1281,12 @@ class CourierWithStreamedResponse:
         return BroadcastsResourceWithStreamingResponse(self._client.broadcasts)
 
     @cached_property
+    def bulk(self) -> bulk.BulkResourceWithStreamingResponse:
+        from .resources.bulk import BulkResourceWithStreamingResponse
+
+        return BulkResourceWithStreamingResponse(self._client.bulk)
+
+    @cached_property
     def brands(self) -> brands.BrandsResourceWithStreamingResponse:
         """
         Manage the logos, colors, and layout that give the templates you send a consistent look.
@@ -1441,6 +1473,12 @@ class AsyncCourierWithStreamedResponse:
         from .resources.broadcasts import AsyncBroadcastsResourceWithStreamingResponse
 
         return AsyncBroadcastsResourceWithStreamingResponse(self._client.broadcasts)
+
+    @cached_property
+    def bulk(self) -> bulk.AsyncBulkResourceWithStreamingResponse:
+        from .resources.bulk import AsyncBulkResourceWithStreamingResponse
+
+        return AsyncBulkResourceWithStreamingResponse(self._client.bulk)
 
     @cached_property
     def brands(self) -> brands.AsyncBrandsResourceWithStreamingResponse:
