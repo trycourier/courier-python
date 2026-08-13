@@ -8,6 +8,14 @@ from .auth import (
     AuthResourceWithStreamingResponse,
     AsyncAuthResourceWithStreamingResponse,
 )
+from .bulk import (
+    BulkResource,
+    AsyncBulkResource,
+    BulkResourceWithRawResponse,
+    AsyncBulkResourceWithRawResponse,
+    BulkResourceWithStreamingResponse,
+    AsyncBulkResourceWithStreamingResponse,
+)
 from .send import (
     SendResource,
     AsyncSendResource,
@@ -218,6 +226,12 @@ __all__ = [
     "AsyncBroadcastsResourceWithRawResponse",
     "BroadcastsResourceWithStreamingResponse",
     "AsyncBroadcastsResourceWithStreamingResponse",
+    "BulkResource",
+    "AsyncBulkResource",
+    "BulkResourceWithRawResponse",
+    "AsyncBulkResourceWithRawResponse",
+    "BulkResourceWithStreamingResponse",
+    "AsyncBulkResourceWithStreamingResponse",
     "BrandsResource",
     "AsyncBrandsResource",
     "BrandsResourceWithRawResponse",
