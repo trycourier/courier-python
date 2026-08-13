@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.26.2](https://github.com/trycourier/courier-python/compare/v7.26.1...v7.26.2) (2026-08-13)
+
+
+### Documentation
+
+* **api:** say what the bulk job endpoints return ([#167](https://github.com/trycourier/courier-python/issues/167)) ([4d26713](https://github.com/trycourier/courier-python/commit/4d26713f5bd5949aabe48904c87553f891076472))
+
 ## [7.26.1](https://github.com/trycourier/courier-python/compare/v7.26.0...v7.26.1) (2026-08-13)
 
 
