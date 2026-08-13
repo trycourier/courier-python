@@ -68,7 +68,7 @@ class TestTenants:
     def test_method_update(self, client: Courier) -> None:
         tenant = client.tenants.update(
             tenant_id="tenant_id",
-            name="name",
+            name="Acme Corp",
         )
         assert_matches_type(Tenant, tenant, path=["response"])
 
@@ -77,8 +77,8 @@ class TestTenants:
     def test_method_update_with_all_params(self, client: Courier) -> None:
         tenant = client.tenants.update(
             tenant_id="tenant_id",
-            name="name",
-            brand_id="brand_id",
+            name="Acme Corp",
+            brand_id="bnd_01kx4mrd0pfzw8wt7pn7p2fzag",
             default_preferences={
                 "items": [
                     {
@@ -90,7 +90,7 @@ class TestTenants:
                 ]
             },
             parent_tenant_id="parent_tenant_id",
-            properties={"foo": "bar"},
+            properties={"plan": "bar"},
             user_profile={"foo": "bar"},
         )
         assert_matches_type(Tenant, tenant, path=["response"])
@@ -100,7 +100,7 @@ class TestTenants:
     def test_raw_response_update(self, client: Courier) -> None:
         response = client.tenants.with_raw_response.update(
             tenant_id="tenant_id",
-            name="name",
+            name="Acme Corp",
         )
 
         assert response.is_closed is True
@@ -113,7 +113,7 @@ class TestTenants:
     def test_streaming_response_update(self, client: Courier) -> None:
         with client.tenants.with_streaming_response.update(
             tenant_id="tenant_id",
-            name="name",
+            name="Acme Corp",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -129,7 +129,7 @@ class TestTenants:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
             client.tenants.with_raw_response.update(
                 tenant_id="",
-                name="name",
+                name="Acme Corp",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -317,7 +317,7 @@ class TestAsyncTenants:
     async def test_method_update(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.tenants.update(
             tenant_id="tenant_id",
-            name="name",
+            name="Acme Corp",
         )
         assert_matches_type(Tenant, tenant, path=["response"])
 
@@ -326,8 +326,8 @@ class TestAsyncTenants:
     async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.tenants.update(
             tenant_id="tenant_id",
-            name="name",
-            brand_id="brand_id",
+            name="Acme Corp",
+            brand_id="bnd_01kx4mrd0pfzw8wt7pn7p2fzag",
             default_preferences={
                 "items": [
                     {
@@ -339,7 +339,7 @@ class TestAsyncTenants:
                 ]
             },
             parent_tenant_id="parent_tenant_id",
-            properties={"foo": "bar"},
+            properties={"plan": "bar"},
             user_profile={"foo": "bar"},
         )
         assert_matches_type(Tenant, tenant, path=["response"])
@@ -349,7 +349,7 @@ class TestAsyncTenants:
     async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
         response = await async_client.tenants.with_raw_response.update(
             tenant_id="tenant_id",
-            name="name",
+            name="Acme Corp",
         )
 
         assert response.is_closed is True
@@ -362,7 +362,7 @@ class TestAsyncTenants:
     async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
         async with async_client.tenants.with_streaming_response.update(
             tenant_id="tenant_id",
-            name="name",
+            name="Acme Corp",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -378,7 +378,7 @@ class TestAsyncTenants:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `tenant_id` but received ''"):
             await async_client.tenants.with_raw_response.update(
                 tenant_id="",
-                name="name",
+                name="Acme Corp",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

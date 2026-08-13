@@ -195,7 +195,7 @@ class TestTemplates:
         template = client.tenants.templates.publish(
             template_id="template_id",
             tenant_id="tenant_id",
-            version="version",
+            version="latest",
         )
         assert_matches_type(PostTenantTemplatePublishResponse, template, path=["response"])
 
@@ -251,7 +251,7 @@ class TestTemplates:
             template={
                 "content": {
                     "elements": [{}],
-                    "version": "version",
+                    "version": "2022-01-01",
                 }
             },
         )
@@ -274,7 +274,7 @@ class TestTemplates:
                             "type": "text",
                         }
                     ],
-                    "version": "version",
+                    "version": "2022-01-01",
                 },
                 "channels": {
                     "foo": {
@@ -315,8 +315,8 @@ class TestTemplates:
                     }
                 },
                 "routing": {
-                    "channels": ["string"],
-                    "method": "all",
+                    "channels": ["email"],
+                    "method": "single",
                 },
             },
             published=True,
@@ -332,7 +332,7 @@ class TestTemplates:
             template={
                 "content": {
                     "elements": [{}],
-                    "version": "version",
+                    "version": "2022-01-01",
                 }
             },
         )
@@ -351,7 +351,7 @@ class TestTemplates:
             template={
                 "content": {
                     "elements": [{}],
-                    "version": "version",
+                    "version": "2022-01-01",
                 }
             },
         ) as response:
@@ -373,7 +373,7 @@ class TestTemplates:
                 template={
                     "content": {
                         "elements": [{}],
-                        "version": "version",
+                        "version": "2022-01-01",
                     }
                 },
             )
@@ -385,7 +385,7 @@ class TestTemplates:
                 template={
                     "content": {
                         "elements": [{}],
-                        "version": "version",
+                        "version": "2022-01-01",
                     }
                 },
             )
@@ -567,7 +567,7 @@ class TestAsyncTemplates:
         template = await async_client.tenants.templates.publish(
             template_id="template_id",
             tenant_id="tenant_id",
-            version="version",
+            version="latest",
         )
         assert_matches_type(PostTenantTemplatePublishResponse, template, path=["response"])
 
@@ -623,7 +623,7 @@ class TestAsyncTemplates:
             template={
                 "content": {
                     "elements": [{}],
-                    "version": "version",
+                    "version": "2022-01-01",
                 }
             },
         )
@@ -646,7 +646,7 @@ class TestAsyncTemplates:
                             "type": "text",
                         }
                     ],
-                    "version": "version",
+                    "version": "2022-01-01",
                 },
                 "channels": {
                     "foo": {
@@ -687,8 +687,8 @@ class TestAsyncTemplates:
                     }
                 },
                 "routing": {
-                    "channels": ["string"],
-                    "method": "all",
+                    "channels": ["email"],
+                    "method": "single",
                 },
             },
             published=True,
@@ -704,7 +704,7 @@ class TestAsyncTemplates:
             template={
                 "content": {
                     "elements": [{}],
-                    "version": "version",
+                    "version": "2022-01-01",
                 }
             },
         )
@@ -723,7 +723,7 @@ class TestAsyncTemplates:
             template={
                 "content": {
                     "elements": [{}],
-                    "version": "version",
+                    "version": "2022-01-01",
                 }
             },
         ) as response:
@@ -745,7 +745,7 @@ class TestAsyncTemplates:
                 template={
                     "content": {
                         "elements": [{}],
-                        "version": "version",
+                        "version": "2022-01-01",
                     }
                 },
             )
@@ -757,7 +757,7 @@ class TestAsyncTemplates:
                 template={
                     "content": {
                         "elements": [{}],
-                        "version": "version",
+                        "version": "2022-01-01",
                     }
                 },
             )

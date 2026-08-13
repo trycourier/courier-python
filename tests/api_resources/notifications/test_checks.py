@@ -25,7 +25,7 @@ class TestChecks:
             id="id",
             checks=[
                 {
-                    "id": "id",
+                    "id": "abc-123",
                     "status": "RESOLVED",
                     "type": "custom",
                 }
@@ -41,7 +41,7 @@ class TestChecks:
             id="id",
             checks=[
                 {
-                    "id": "id",
+                    "id": "abc-123",
                     "status": "RESOLVED",
                     "type": "custom",
                 }
@@ -61,7 +61,7 @@ class TestChecks:
             id="id",
             checks=[
                 {
-                    "id": "id",
+                    "id": "abc-123",
                     "status": "RESOLVED",
                     "type": "custom",
                 }
@@ -84,7 +84,7 @@ class TestChecks:
                 id="",
                 checks=[
                     {
-                        "id": "id",
+                        "id": "abc-123",
                         "status": "RESOLVED",
                         "type": "custom",
                     }
@@ -97,7 +97,7 @@ class TestChecks:
                 id="id",
                 checks=[
                     {
-                        "id": "id",
+                        "id": "abc-123",
                         "status": "RESOLVED",
                         "type": "custom",
                     }
@@ -222,7 +222,7 @@ class TestAsyncChecks:
             id="id",
             checks=[
                 {
-                    "id": "id",
+                    "id": "abc-123",
                     "status": "RESOLVED",
                     "type": "custom",
                 }
@@ -238,7 +238,7 @@ class TestAsyncChecks:
             id="id",
             checks=[
                 {
-                    "id": "id",
+                    "id": "abc-123",
                     "status": "RESOLVED",
                     "type": "custom",
                 }
@@ -258,7 +258,7 @@ class TestAsyncChecks:
             id="id",
             checks=[
                 {
-                    "id": "id",
+                    "id": "abc-123",
                     "status": "RESOLVED",
                     "type": "custom",
                 }
@@ -281,7 +281,7 @@ class TestAsyncChecks:
                 id="",
                 checks=[
                     {
-                        "id": "id",
+                        "id": "abc-123",
                         "status": "RESOLVED",
                         "type": "custom",
                     }
@@ -294,7 +294,7 @@ class TestAsyncChecks:
                 id="id",
                 checks=[
                     {
-                        "id": "id",
+                        "id": "abc-123",
                         "status": "RESOLVED",
                         "type": "custom",
                     }

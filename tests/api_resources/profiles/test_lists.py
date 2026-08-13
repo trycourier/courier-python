@@ -119,7 +119,7 @@ class TestLists:
     def test_method_subscribe(self, client: Courier) -> None:
         list_ = client.profiles.lists.subscribe(
             user_id="user_id",
-            lists=[{"list_id": "listId"}],
+            lists=[{"list_id": "example.list.id"}],
         )
         assert_matches_type(ListSubscribeResponse, list_, path=["response"])
 
@@ -130,7 +130,7 @@ class TestLists:
             user_id="user_id",
             lists=[
                 {
-                    "list_id": "listId",
+                    "list_id": "example.list.id",
                     "preferences": {
                         "categories": {
                             "foo": {
@@ -169,7 +169,7 @@ class TestLists:
     def test_raw_response_subscribe(self, client: Courier) -> None:
         response = client.profiles.lists.with_raw_response.subscribe(
             user_id="user_id",
-            lists=[{"list_id": "listId"}],
+            lists=[{"list_id": "example.list.id"}],
         )
 
         assert response.is_closed is True
@@ -182,7 +182,7 @@ class TestLists:
     def test_streaming_response_subscribe(self, client: Courier) -> None:
         with client.profiles.lists.with_streaming_response.subscribe(
             user_id="user_id",
-            lists=[{"list_id": "listId"}],
+            lists=[{"list_id": "example.list.id"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -198,7 +198,7 @@ class TestLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.lists.with_raw_response.subscribe(
                 user_id="",
-                lists=[{"list_id": "listId"}],
+                lists=[{"list_id": "example.list.id"}],
             )
 
 
@@ -305,7 +305,7 @@ class TestAsyncLists:
     async def test_method_subscribe(self, async_client: AsyncCourier) -> None:
         list_ = await async_client.profiles.lists.subscribe(
             user_id="user_id",
-            lists=[{"list_id": "listId"}],
+            lists=[{"list_id": "example.list.id"}],
         )
         assert_matches_type(ListSubscribeResponse, list_, path=["response"])
 
@@ -316,7 +316,7 @@ class TestAsyncLists:
             user_id="user_id",
             lists=[
                 {
-                    "list_id": "listId",
+                    "list_id": "example.list.id",
                     "preferences": {
                         "categories": {
                             "foo": {
@@ -355,7 +355,7 @@ class TestAsyncLists:
     async def test_raw_response_subscribe(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.lists.with_raw_response.subscribe(
             user_id="user_id",
-            lists=[{"list_id": "listId"}],
+            lists=[{"list_id": "example.list.id"}],
         )
 
         assert response.is_closed is True
@@ -368,7 +368,7 @@ class TestAsyncLists:
     async def test_streaming_response_subscribe(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.lists.with_streaming_response.subscribe(
             user_id="user_id",
-            lists=[{"list_id": "listId"}],
+            lists=[{"list_id": "example.list.id"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -384,5 +384,5 @@ class TestAsyncLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.lists.with_raw_response.subscribe(
                 user_id="",
-                lists=[{"list_id": "listId"}],
+                lists=[{"list_id": "example.list.id"}],
             )

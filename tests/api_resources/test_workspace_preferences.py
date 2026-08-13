@@ -190,9 +190,9 @@ class TestWorkspacePreferences:
     @parametrize
     def test_method_publish_with_all_params(self, client: Courier) -> None:
         workspace_preference = client.workspace_preferences.publish(
-            brand_id="brand_id",
-            description="description",
-            heading="heading",
+            brand_id="bnd_01kx4mrd0pfzw8wt7pn7p2fzag",
+            description="Choose what you hear from us about.",
+            heading="Notification Preferences",
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
         )
@@ -225,7 +225,7 @@ class TestWorkspacePreferences:
     def test_method_replace(self, client: Courier) -> None:
         workspace_preference = client.workspace_preferences.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
         )
         assert_matches_type(WorkspacePreferenceGetResponse, workspace_preference, path=["response"])
 
@@ -234,10 +234,10 @@ class TestWorkspacePreferences:
     def test_method_replace_with_all_params(self, client: Courier) -> None:
         workspace_preference = client.workspace_preferences.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
             description="description",
             has_custom_routing=True,
-            routing_options=["direct_message"],
+            routing_options=["email", "push"],
         )
         assert_matches_type(WorkspacePreferenceGetResponse, workspace_preference, path=["response"])
 
@@ -246,7 +246,7 @@ class TestWorkspacePreferences:
     def test_raw_response_replace(self, client: Courier) -> None:
         response = client.workspace_preferences.with_raw_response.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
         )
 
         assert response.is_closed is True
@@ -259,7 +259,7 @@ class TestWorkspacePreferences:
     def test_streaming_response_replace(self, client: Courier) -> None:
         with client.workspace_preferences.with_streaming_response.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -275,7 +275,7 @@ class TestWorkspacePreferences:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
             client.workspace_preferences.with_raw_response.replace(
                 section_id="",
-                name="name",
+                name="Account Notifications",
             )
 
 
@@ -453,9 +453,9 @@ class TestAsyncWorkspacePreferences:
     @parametrize
     async def test_method_publish_with_all_params(self, async_client: AsyncCourier) -> None:
         workspace_preference = await async_client.workspace_preferences.publish(
-            brand_id="brand_id",
-            description="description",
-            heading="heading",
+            brand_id="bnd_01kx4mrd0pfzw8wt7pn7p2fzag",
+            description="Choose what you hear from us about.",
+            heading="Notification Preferences",
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
         )
@@ -488,7 +488,7 @@ class TestAsyncWorkspacePreferences:
     async def test_method_replace(self, async_client: AsyncCourier) -> None:
         workspace_preference = await async_client.workspace_preferences.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
         )
         assert_matches_type(WorkspacePreferenceGetResponse, workspace_preference, path=["response"])
 
@@ -497,10 +497,10 @@ class TestAsyncWorkspacePreferences:
     async def test_method_replace_with_all_params(self, async_client: AsyncCourier) -> None:
         workspace_preference = await async_client.workspace_preferences.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
             description="description",
             has_custom_routing=True,
-            routing_options=["direct_message"],
+            routing_options=["email", "push"],
         )
         assert_matches_type(WorkspacePreferenceGetResponse, workspace_preference, path=["response"])
 
@@ -509,7 +509,7 @@ class TestAsyncWorkspacePreferences:
     async def test_raw_response_replace(self, async_client: AsyncCourier) -> None:
         response = await async_client.workspace_preferences.with_raw_response.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
         )
 
         assert response.is_closed is True
@@ -522,7 +522,7 @@ class TestAsyncWorkspacePreferences:
     async def test_streaming_response_replace(self, async_client: AsyncCourier) -> None:
         async with async_client.workspace_preferences.with_streaming_response.replace(
             section_id="section_id",
-            name="name",
+            name="Account Notifications",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -538,5 +538,5 @@ class TestAsyncWorkspacePreferences:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
             await async_client.workspace_preferences.with_raw_response.replace(
                 section_id="",
-                name="name",
+                name="Account Notifications",
             )

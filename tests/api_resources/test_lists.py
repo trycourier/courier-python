@@ -64,7 +64,7 @@ class TestLists:
     def test_method_update(self, client: Courier) -> None:
         list_ = client.lists.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
         )
         assert list_ is None
 
@@ -73,7 +73,7 @@ class TestLists:
     def test_method_update_with_all_params(self, client: Courier) -> None:
         list_ = client.lists.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
             preferences={
                 "categories": {
                     "foo": {
@@ -108,7 +108,7 @@ class TestLists:
     def test_raw_response_update(self, client: Courier) -> None:
         response = client.lists.with_raw_response.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
         )
 
         assert response.is_closed is True
@@ -121,7 +121,7 @@ class TestLists:
     def test_streaming_response_update(self, client: Courier) -> None:
         with client.lists.with_streaming_response.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -137,7 +137,7 @@ class TestLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             client.lists.with_raw_response.update(
                 list_id="",
-                name="name",
+                name="Product Updates",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -314,7 +314,7 @@ class TestAsyncLists:
     async def test_method_update(self, async_client: AsyncCourier) -> None:
         list_ = await async_client.lists.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
         )
         assert list_ is None
 
@@ -323,7 +323,7 @@ class TestAsyncLists:
     async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
         list_ = await async_client.lists.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
             preferences={
                 "categories": {
                     "foo": {
@@ -358,7 +358,7 @@ class TestAsyncLists:
     async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
         response = await async_client.lists.with_raw_response.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
         )
 
         assert response.is_closed is True
@@ -371,7 +371,7 @@ class TestAsyncLists:
     async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
         async with async_client.lists.with_streaming_response.update(
             list_id="list_id",
-            name="name",
+            name="Product Updates",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -387,7 +387,7 @@ class TestAsyncLists:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `list_id` but received ''"):
             await async_client.lists.with_raw_response.update(
                 list_id="",
-                name="name",
+                name="Product Updates",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

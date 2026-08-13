@@ -76,7 +76,7 @@ class TestTenants:
     def test_method_add_multiple(self, client: Courier) -> None:
         tenant = client.users.tenants.add_multiple(
             user_id="user_id",
-            tenants=[{"tenant_id": "tenant_id"}],
+            tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
         )
         assert tenant is None
 
@@ -85,7 +85,7 @@ class TestTenants:
     def test_raw_response_add_multiple(self, client: Courier) -> None:
         response = client.users.tenants.with_raw_response.add_multiple(
             user_id="user_id",
-            tenants=[{"tenant_id": "tenant_id"}],
+            tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
         )
 
         assert response.is_closed is True
@@ -98,7 +98,7 @@ class TestTenants:
     def test_streaming_response_add_multiple(self, client: Courier) -> None:
         with client.users.tenants.with_streaming_response.add_multiple(
             user_id="user_id",
-            tenants=[{"tenant_id": "tenant_id"}],
+            tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -114,7 +114,7 @@ class TestTenants:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.users.tenants.with_raw_response.add_multiple(
                 user_id="",
-                tenants=[{"tenant_id": "tenant_id"}],
+                tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -132,7 +132,7 @@ class TestTenants:
         tenant = client.users.tenants.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={"role": "bar"},
         )
         assert tenant is None
 
@@ -336,7 +336,7 @@ class TestAsyncTenants:
     async def test_method_add_multiple(self, async_client: AsyncCourier) -> None:
         tenant = await async_client.users.tenants.add_multiple(
             user_id="user_id",
-            tenants=[{"tenant_id": "tenant_id"}],
+            tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
         )
         assert tenant is None
 
@@ -345,7 +345,7 @@ class TestAsyncTenants:
     async def test_raw_response_add_multiple(self, async_client: AsyncCourier) -> None:
         response = await async_client.users.tenants.with_raw_response.add_multiple(
             user_id="user_id",
-            tenants=[{"tenant_id": "tenant_id"}],
+            tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
         )
 
         assert response.is_closed is True
@@ -358,7 +358,7 @@ class TestAsyncTenants:
     async def test_streaming_response_add_multiple(self, async_client: AsyncCourier) -> None:
         async with async_client.users.tenants.with_streaming_response.add_multiple(
             user_id="user_id",
-            tenants=[{"tenant_id": "tenant_id"}],
+            tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -374,7 +374,7 @@ class TestAsyncTenants:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.users.tenants.with_raw_response.add_multiple(
                 user_id="",
-                tenants=[{"tenant_id": "tenant_id"}],
+                tenants=[{"tenant_id": "tenant_abc"}, {"tenant_id": "tenant_def"}],
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -392,7 +392,7 @@ class TestAsyncTenants:
         tenant = await async_client.users.tenants.add_single(
             tenant_id="tenant_id",
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={"role": "bar"},
         )
         assert tenant is None
 

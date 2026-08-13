@@ -185,7 +185,7 @@ class TestBrands:
     def test_method_update(self, client: Courier) -> None:
         brand = client.brands.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
         )
         assert_matches_type(Brand, brand, path=["response"])
 
@@ -194,11 +194,11 @@ class TestBrands:
     def test_method_update_with_all_params(self, client: Courier) -> None:
         brand = client.brands.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
             settings={
                 "colors": {
-                    "primary": "primary",
-                    "secondary": "secondary",
+                    "primary": "#9D3789",
+                    "secondary": "#FFFFFF",
                 },
                 "email": {
                     "footer": {
@@ -273,7 +273,7 @@ class TestBrands:
     def test_raw_response_update(self, client: Courier) -> None:
         response = client.brands.with_raw_response.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
         )
 
         assert response.is_closed is True
@@ -286,7 +286,7 @@ class TestBrands:
     def test_streaming_response_update(self, client: Courier) -> None:
         with client.brands.with_streaming_response.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -302,7 +302,7 @@ class TestBrands:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `brand_id` but received ''"):
             client.brands.with_raw_response.update(
                 brand_id="",
-                name="name",
+                name="My Brand",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -554,7 +554,7 @@ class TestAsyncBrands:
     async def test_method_update(self, async_client: AsyncCourier) -> None:
         brand = await async_client.brands.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
         )
         assert_matches_type(Brand, brand, path=["response"])
 
@@ -563,11 +563,11 @@ class TestAsyncBrands:
     async def test_method_update_with_all_params(self, async_client: AsyncCourier) -> None:
         brand = await async_client.brands.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
             settings={
                 "colors": {
-                    "primary": "primary",
-                    "secondary": "secondary",
+                    "primary": "#9D3789",
+                    "secondary": "#FFFFFF",
                 },
                 "email": {
                     "footer": {
@@ -642,7 +642,7 @@ class TestAsyncBrands:
     async def test_raw_response_update(self, async_client: AsyncCourier) -> None:
         response = await async_client.brands.with_raw_response.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
         )
 
         assert response.is_closed is True
@@ -655,7 +655,7 @@ class TestAsyncBrands:
     async def test_streaming_response_update(self, async_client: AsyncCourier) -> None:
         async with async_client.brands.with_streaming_response.update(
             brand_id="brand_id",
-            name="name",
+            name="My Brand",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -671,7 +671,7 @@ class TestAsyncBrands:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `brand_id` but received ''"):
             await async_client.brands.with_raw_response.update(
                 brand_id="",
-                name="name",
+                name="My Brand",
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

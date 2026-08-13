@@ -26,7 +26,10 @@ class TestProfiles:
     def test_method_create(self, client: Courier) -> None:
         profile = client.profiles.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
@@ -35,7 +38,10 @@ class TestProfiles:
     def test_method_create_with_all_params(self, client: Courier) -> None:
         profile = client.profiles.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
         )
@@ -46,7 +52,10 @@ class TestProfiles:
     def test_raw_response_create(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
         )
 
         assert response.is_closed is True
@@ -59,7 +68,10 @@ class TestProfiles:
     def test_streaming_response_create(self, client: Courier) -> None:
         with client.profiles.with_streaming_response.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -75,7 +87,10 @@ class TestProfiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.with_raw_response.create(
                 user_id="",
-                profile={"foo": "bar"},
+                profile={
+                    "email": "bar",
+                    "phone_number": "bar",
+                },
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -127,9 +142,9 @@ class TestProfiles:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
-                    "value": "value",
+                    "op": "replace",
+                    "path": "/email",
+                    "value": "jdoe@example.com",
                 }
             ],
         )
@@ -142,9 +157,9 @@ class TestProfiles:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
-                    "value": "value",
+                    "op": "replace",
+                    "path": "/email",
+                    "value": "jdoe@example.com",
                 }
             ],
         )
@@ -161,9 +176,9 @@ class TestProfiles:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
-                    "value": "value",
+                    "op": "replace",
+                    "path": "/email",
+                    "value": "jdoe@example.com",
                 }
             ],
         ) as response:
@@ -183,9 +198,9 @@ class TestProfiles:
                 user_id="",
                 patch=[
                     {
-                        "op": "op",
-                        "path": "path",
-                        "value": "value",
+                        "op": "replace",
+                        "path": "/email",
+                        "value": "jdoe@example.com",
                     }
                 ],
             )
@@ -237,7 +252,11 @@ class TestProfiles:
     def test_method_replace(self, client: Courier) -> None:
         profile = client.profiles.replace(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+                "locale": "bar",
+            },
         )
         assert_matches_type(ProfileReplaceResponse, profile, path=["response"])
 
@@ -246,7 +265,11 @@ class TestProfiles:
     def test_raw_response_replace(self, client: Courier) -> None:
         response = client.profiles.with_raw_response.replace(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+                "locale": "bar",
+            },
         )
 
         assert response.is_closed is True
@@ -259,7 +282,11 @@ class TestProfiles:
     def test_streaming_response_replace(self, client: Courier) -> None:
         with client.profiles.with_streaming_response.replace(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+                "locale": "bar",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -275,7 +302,11 @@ class TestProfiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             client.profiles.with_raw_response.replace(
                 user_id="",
-                profile={"foo": "bar"},
+                profile={
+                    "email": "bar",
+                    "phone_number": "bar",
+                    "locale": "bar",
+                },
             )
 
 
@@ -289,7 +320,10 @@ class TestAsyncProfiles:
     async def test_method_create(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
         )
         assert_matches_type(ProfileCreateResponse, profile, path=["response"])
 
@@ -298,7 +332,10 @@ class TestAsyncProfiles:
     async def test_method_create_with_all_params(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
             idempotency_key="order-ORD-456-user-123",
             x_idempotency_expiration="1785312000",
         )
@@ -309,7 +346,10 @@ class TestAsyncProfiles:
     async def test_raw_response_create(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.with_raw_response.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
         )
 
         assert response.is_closed is True
@@ -322,7 +362,10 @@ class TestAsyncProfiles:
     async def test_streaming_response_create(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.with_streaming_response.create(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -338,7 +381,10 @@ class TestAsyncProfiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.with_raw_response.create(
                 user_id="",
-                profile={"foo": "bar"},
+                profile={
+                    "email": "bar",
+                    "phone_number": "bar",
+                },
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
@@ -390,9 +436,9 @@ class TestAsyncProfiles:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
-                    "value": "value",
+                    "op": "replace",
+                    "path": "/email",
+                    "value": "jdoe@example.com",
                 }
             ],
         )
@@ -405,9 +451,9 @@ class TestAsyncProfiles:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
-                    "value": "value",
+                    "op": "replace",
+                    "path": "/email",
+                    "value": "jdoe@example.com",
                 }
             ],
         )
@@ -424,9 +470,9 @@ class TestAsyncProfiles:
             user_id="user_id",
             patch=[
                 {
-                    "op": "op",
-                    "path": "path",
-                    "value": "value",
+                    "op": "replace",
+                    "path": "/email",
+                    "value": "jdoe@example.com",
                 }
             ],
         ) as response:
@@ -446,9 +492,9 @@ class TestAsyncProfiles:
                 user_id="",
                 patch=[
                     {
-                        "op": "op",
-                        "path": "path",
-                        "value": "value",
+                        "op": "replace",
+                        "path": "/email",
+                        "value": "jdoe@example.com",
                     }
                 ],
             )
@@ -500,7 +546,11 @@ class TestAsyncProfiles:
     async def test_method_replace(self, async_client: AsyncCourier) -> None:
         profile = await async_client.profiles.replace(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+                "locale": "bar",
+            },
         )
         assert_matches_type(ProfileReplaceResponse, profile, path=["response"])
 
@@ -509,7 +559,11 @@ class TestAsyncProfiles:
     async def test_raw_response_replace(self, async_client: AsyncCourier) -> None:
         response = await async_client.profiles.with_raw_response.replace(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+                "locale": "bar",
+            },
         )
 
         assert response.is_closed is True
@@ -522,7 +576,11 @@ class TestAsyncProfiles:
     async def test_streaming_response_replace(self, async_client: AsyncCourier) -> None:
         async with async_client.profiles.with_streaming_response.replace(
             user_id="user_id",
-            profile={"foo": "bar"},
+            profile={
+                "email": "bar",
+                "phone_number": "bar",
+                "locale": "bar",
+            },
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -538,5 +596,9 @@ class TestAsyncProfiles:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `user_id` but received ''"):
             await async_client.profiles.with_raw_response.replace(
                 user_id="",
-                profile={"foo": "bar"},
+                profile={
+                    "email": "bar",
+                    "phone_number": "bar",
+                    "locale": "bar",
+                },
             )
