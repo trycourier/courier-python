@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.26.1](https://github.com/trycourier/courier-python/compare/v7.26.0...v7.26.1) (2026-08-13)
+
+
+### Chores
+
+* **api:** regenerate SDK ([#161](https://github.com/trycourier/courier-python/issues/161)) ([245c1f1](https://github.com/trycourier/courier-python/commit/245c1f1217f41dfb09152b0f9e833611bab97eca))
+
+
+### Documentation
+
+* sync README from api-spec ([#158](https://github.com/trycourier/courier-python/issues/158)) ([051c344](https://github.com/trycourier/courier-python/commit/051c344bdbfa3b4224f144627b5fa4b77147d09f))
+
 ## 7.26.0 (2026-08-10)
 
 Full Changelog: [v7.25.0...v7.26.0](https://github.com/trycourier/courier-python/compare/v7.25.0...v7.26.0)
