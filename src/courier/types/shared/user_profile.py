@@ -4,6 +4,7 @@ from typing import Dict, Optional
 
 from pydantic import Field as FieldInfo
 
+from .apn import Apn
 from .expo import Expo
 from .slack import Slack
 from .aws_sns import AwsSns
@@ -36,7 +37,12 @@ class UserProfile(BaseModel):
 
     airship: Optional[AirshipProfile] = None
 
-    apn: Optional[str] = None
+    apn: Optional[Apn] = None
+    """Apple Push Notification device tokens.
+
+    Supply either a single `token` or a `tokens` value. A bare string is rejected by
+    the provider — the token must be wrapped in this object.
+    """
 
     aws_sns: Optional[AwsSns] = None
     """Routes a push notification through the AWS SNS provider.
@@ -61,6 +67,7 @@ class UserProfile(BaseModel):
     email_verified: Optional[bool] = None
 
     expo: Optional[Expo] = None
+    """Expo push tokens. Supply either a single `token` or a `tokens` value."""
 
     facebook_psid: Optional[str] = FieldInfo(alias="facebookPSID", default=None)
 
