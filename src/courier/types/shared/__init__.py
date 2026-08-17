@@ -6,6 +6,7 @@ from .rule import Rule as Rule
 from .slack import Slack as Slack
 from .token import Token as Token
 from .paging import Paging as Paging
+from .aws_sns import AwsSns as AwsSns
 from .channel import Channel as Channel
 from .discord import Discord as Discord
 from .intercom import Intercom as Intercom

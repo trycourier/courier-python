@@ -25,6 +25,7 @@ from .shared import (
     Rule as Rule,
     Slack as Slack,
     Token as Token,
+    AwsSns as AwsSns,
     Paging as Paging,
     Channel as Channel,
     Discord as Discord,
