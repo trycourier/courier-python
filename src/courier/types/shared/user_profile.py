@@ -6,6 +6,7 @@ from pydantic import Field as FieldInfo
 
 from .expo import Expo
 from .slack import Slack
+from .aws_sns import AwsSns
 from .discord import Discord
 from .intercom import Intercom
 from .ms_teams import MsTeams
@@ -36,6 +37,13 @@ class UserProfile(BaseModel):
     airship: Optional[AirshipProfile] = None
 
     apn: Optional[str] = None
+
+    aws_sns: Optional[AwsSns] = None
+    """Routes a push notification through the AWS SNS provider.
+
+    The target ARN must be nested under `aws_sns` — a top-level `target_arn` on the
+    profile is ignored by the provider.
+    """
 
     birthdate: Optional[str] = None
 
@@ -89,8 +97,6 @@ class UserProfile(BaseModel):
     slack: Optional[Slack] = None
 
     sub: Optional[str] = None
-
-    target_arn: Optional[str] = None
 
     updated_at: Optional[str] = None
 

@@ -8,6 +8,7 @@ from courier.types import (
     AudienceFilter,
     AudienceFilterConfig,
     AudienceRecipient,
+    AwsSns,
     Channel,
     ChannelClassification,
     ChannelMetadata,
