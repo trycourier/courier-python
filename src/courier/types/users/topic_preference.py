@@ -42,3 +42,17 @@ class TopicPreference(BaseModel):
     Whether the user has chosen specific delivery channels for this topic (listed in
     custom_routing) rather than the topic's default routing.
     """
+
+    section_id: Optional[str] = None
+    """The unique identifier of the section this topic belongs to.
+
+    Always present when listing a user's preferences; omitted by the single-topic
+    read when the topic has no resolvable section.
+    """
+
+    section_name: Optional[str] = None
+    """The display name of the section this topic belongs to.
+
+    Always present when listing a user's preferences; omitted by the single-topic
+    read when the topic has no resolvable section.
+    """
