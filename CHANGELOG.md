@@ -1,5 +1,16 @@
 # Changelog
 
+## [9.0.0](https://github.com/trycourier/courier-python/compare/v8.0.0...v9.0.0) (2026-08-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** match the spec to the backend — apn/expo token types and the phantom notifications.duplicate ([#171](https://github.com/trycourier/courier-python/issues/171))
+
+### Features
+
+* **api:** match the spec to the backend — apn/expo token types and the phantom notifications.duplicate ([#171](https://github.com/trycourier/courier-python/issues/171)) ([d73f333](https://github.com/trycourier/courier-python/commit/d73f3339d624a0e9dba130fff7569649424c3fe2))
+
 ## [8.0.0](https://github.com/trycourier/courier-python/compare/v7.26.2...v8.0.0) (2026-08-17)
 
 
