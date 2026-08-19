@@ -177,6 +177,10 @@ Types:
 ```python
 from courier.types import (
     AutomationInvokeResponse,
+    AutomationRunListItem,
+    AutomationRunListResponse,
+    AutomationRunStep,
+    AutomationRunStepsResponse,
     AutomationTemplate,
     AutomationTemplateListResponse,
 )
@@ -193,6 +197,13 @@ Methods:
 - <code title="post /automations/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_ad_hoc</a>(\*\*<a href="src/courier/types/automations/invoke_invoke_ad_hoc_params.py">params</a>) -> <a href="./src/courier/types/automation_invoke_response.py">AutomationInvokeResponse</a></code>
 - <code title="post /automations/{templateId}/invoke">client.automations.invoke.<a href="./src/courier/resources/automations/invoke.py">invoke_by_template</a>(template_id, \*\*<a href="src/courier/types/automations/invoke_invoke_by_template_params.py">params</a>) -> <a href="./src/courier/types/automation_invoke_response.py">AutomationInvokeResponse</a></code>
 
+## Runs
+
+Methods:
+
+- <code title="get /automations/runs">client.automations.runs.<a href="./src/courier/resources/automations/runs.py">list</a>(\*\*<a href="src/courier/types/automations/run_list_params.py">params</a>) -> <a href="./src/courier/types/automation_run_list_response.py">AutomationRunListResponse</a></code>
+- <code title="get /automations/runs/{id}/steps">client.automations.runs.<a href="./src/courier/resources/automations/runs.py">list_steps</a>(id) -> <a href="./src/courier/types/automation_run_steps_response.py">AutomationRunStepsResponse</a></code>
+
 # Journeys
 
 Types:
@@ -205,6 +216,7 @@ from courier.types import (
     Journey,
     JourneyAINode,
     JourneyAPIInvokeTriggerNode,
+    JourneyAudienceTriggerNode,
     JourneyConditionAtom,
     JourneyConditionGroup,
     JourneyConditionNestedGroup,
@@ -220,6 +232,12 @@ from courier.types import (
     JourneyNode,
     JourneyPublishRequest,
     JourneyResponse,
+    JourneyRun,
+    JourneyRunListItem,
+    JourneyRunListResponse,
+    JourneyRunResponse,
+    JourneyRunStep,
+    JourneyRunStepsResponse,
     JourneySegmentTriggerNode,
     JourneySendNode,
     JourneyState,
@@ -233,6 +251,7 @@ from courier.types import (
     JourneyThrottleStaticNode,
     JourneyVersionItem,
     JourneyVersionsListResponse,
+    JourneyWebhookTriggerNode,
     JourneysInvokeRequest,
     JourneysInvokeResponse,
     JourneysListResponse,
@@ -265,6 +284,14 @@ Methods:
 - <code title="put /journeys/{templateId}/templates/{notificationId}/locales/{localeId}">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">put_locale</a>(locale_id, \*, template_id, notification_id, \*\*<a href="src/courier/types/journeys/template_put_locale_params.py">params</a>) -> <a href="./src/courier/types/notification_content_mutation_response.py">NotificationContentMutationResponse</a></code>
 - <code title="put /journeys/{templateId}/templates/{notificationId}">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">replace</a>(notification_id, \*, template_id, \*\*<a href="src/courier/types/journeys/template_replace_params.py">params</a>) -> <a href="./src/courier/types/journey_template_get_response.py">JourneyTemplateGetResponse</a></code>
 - <code title="get /journeys/{templateId}/templates/{notificationId}/content">client.journeys.templates.<a href="./src/courier/resources/journeys/templates.py">retrieve_content</a>(notification_id, \*, template_id, \*\*<a href="src/courier/types/journeys/template_retrieve_content_params.py">params</a>) -> <a href="./src/courier/types/notification_content_get_response.py">NotificationContentGetResponse</a></code>
+
+## Runs
+
+Methods:
+
+- <code title="get /journeys/runs/{run_id}">client.journeys.runs.<a href="./src/courier/resources/journeys/runs.py">retrieve</a>(run_id) -> <a href="./src/courier/types/journey_run_response.py">JourneyRunResponse</a></code>
+- <code title="get /journeys/runs">client.journeys.runs.<a href="./src/courier/resources/journeys/runs.py">list</a>(\*\*<a href="src/courier/types/journeys/run_list_params.py">params</a>) -> <a href="./src/courier/types/journey_run_list_response.py">JourneyRunListResponse</a></code>
+- <code title="get /journeys/runs/{run_id}/steps">client.journeys.runs.<a href="./src/courier/resources/journeys/runs.py">list_steps</a>(run_id) -> <a href="./src/courier/types/journey_run_steps_response.py">JourneyRunStepsResponse</a></code>
 
 # Broadcasts
 

@@ -6,6 +6,14 @@ from typing_extensions import Literal
 
 import httpx
 
+from .runs import (
+    RunsResource,
+    AsyncRunsResource,
+    RunsResourceWithRawResponse,
+    AsyncRunsResourceWithRawResponse,
+    RunsResourceWithStreamingResponse,
+    AsyncRunsResourceWithStreamingResponse,
+)
 from .invoke import (
     InvokeResource,
     AsyncInvokeResource,
@@ -42,6 +50,13 @@ class AutomationsResource(SyncAPIResource):
         Invoke a stored automation template or an ad hoc automation defined in the request.
         """
         return InvokeResource(self._client)
+
+    @cached_property
+    def runs(self) -> RunsResource:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
+        return RunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AutomationsResourceWithRawResponse:
@@ -123,6 +138,13 @@ class AsyncAutomationsResource(AsyncAPIResource):
         Invoke a stored automation template or an ad hoc automation defined in the request.
         """
         return AsyncInvokeResource(self._client)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResource:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
+        return AsyncRunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAutomationsResourceWithRawResponse:
@@ -208,6 +230,13 @@ class AutomationsResourceWithRawResponse:
         """
         return InvokeResourceWithRawResponse(self._automations.invoke)
 
+    @cached_property
+    def runs(self) -> RunsResourceWithRawResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
+        return RunsResourceWithRawResponse(self._automations.runs)
+
 
 class AsyncAutomationsResourceWithRawResponse:
     def __init__(self, automations: AsyncAutomationsResource) -> None:
@@ -223,6 +252,13 @@ class AsyncAutomationsResourceWithRawResponse:
         Invoke a stored automation template or an ad hoc automation defined in the request.
         """
         return AsyncInvokeResourceWithRawResponse(self._automations.invoke)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithRawResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
+        return AsyncRunsResourceWithRawResponse(self._automations.runs)
 
 
 class AutomationsResourceWithStreamingResponse:
@@ -240,6 +276,13 @@ class AutomationsResourceWithStreamingResponse:
         """
         return InvokeResourceWithStreamingResponse(self._automations.invoke)
 
+    @cached_property
+    def runs(self) -> RunsResourceWithStreamingResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
+        return RunsResourceWithStreamingResponse(self._automations.runs)
+
 
 class AsyncAutomationsResourceWithStreamingResponse:
     def __init__(self, automations: AsyncAutomationsResource) -> None:
@@ -255,3 +298,10 @@ class AsyncAutomationsResourceWithStreamingResponse:
         Invoke a stored automation template or an ad hoc automation defined in the request.
         """
         return AsyncInvokeResourceWithStreamingResponse(self._automations.invoke)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithStreamingResponse:
+        """
+        Invoke a stored automation template or an ad hoc automation defined in the request.
+        """
+        return AsyncRunsResourceWithStreamingResponse(self._automations.runs)

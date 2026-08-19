@@ -10,9 +10,12 @@ __all__ = ["JourneySegmentTriggerNodeParam"]
 
 
 class JourneySegmentTriggerNodeParam(TypedDict, total=False):
-    """Trigger fired by a segment event (`identify`, `group`, or `track`)."""
+    """Trigger fired by a segment event (`identify`, `group`, `track`, or `page`).
 
-    request_type: Required[Literal["identify", "group", "track"]]
+    A trigger with no `event_id` fires on any event of its type — the only shape `identify` and `group` can take, and the one that catches a stock `analytics.page()` call.
+    """
+
+    request_type: Required[Literal["identify", "group", "track", "page"]]
 
     trigger_type: Required[Literal["segment"]]
 

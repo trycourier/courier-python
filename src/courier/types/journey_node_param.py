@@ -14,6 +14,8 @@ from .journey_delay_duration_node_param import JourneyDelayDurationNodeParam
 from .journey_fetch_post_put_node_param import JourneyFetchPostPutNodeParam
 from .journey_segment_trigger_node_param import JourneySegmentTriggerNodeParam
 from .journey_throttle_static_node_param import JourneyThrottleStaticNodeParam
+from .journey_webhook_trigger_node_param import JourneyWebhookTriggerNodeParam
+from .journey_audience_trigger_node_param import JourneyAudienceTriggerNodeParam
 from .journey_fetch_get_delete_node_param import JourneyFetchGetDeleteNodeParam
 from .journey_throttle_dynamic_node_param import JourneyThrottleDynamicNodeParam
 from .journey_api_invoke_trigger_node_param import JourneyAPIInvokeTriggerNodeParam
@@ -152,6 +154,8 @@ class JourneyBranchNode(TypedDict, total=False):
 JourneyNodeParam: TypeAlias = Union[
     JourneyAPIInvokeTriggerNodeParam,
     JourneySegmentTriggerNodeParam,
+    JourneyAudienceTriggerNodeParam,
+    JourneyWebhookTriggerNodeParam,
     JourneySendNodeParam,
     JourneyDelayDurationNodeParam,
     JourneyDelayUntilNodeParam,
