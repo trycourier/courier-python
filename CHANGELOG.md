@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.1.0](https://github.com/trycourier/courier-python/compare/v9.0.0...v9.1.0) (2026-08-19)
+
+
+### Features
+
+* **api:** add automation and journey run log endpoints ([#175](https://github.com/trycourier/courier-python/issues/175)) ([514419e](https://github.com/trycourier/courier-python/commit/514419ed4ff8366b85397546eeaaba29d15424a0))
+* **api:** document section_id and section_name on a user's topic preference ([#173](https://github.com/trycourier/courier-python/issues/173)) ([1c5a3df](https://github.com/trycourier/courier-python/commit/1c5a3df1a956e450b22d44cc9d4a974cf3001f22))
+
 ## [9.0.0](https://github.com/trycourier/courier-python/compare/v8.0.0...v9.0.0) (2026-08-17)
 
 
