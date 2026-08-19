@@ -10,9 +10,12 @@ __all__ = ["JourneySegmentTriggerNode"]
 
 
 class JourneySegmentTriggerNode(BaseModel):
-    """Trigger fired by a segment event (`identify`, `group`, or `track`)."""
+    """Trigger fired by a segment event (`identify`, `group`, `track`, or `page`).
 
-    request_type: Literal["identify", "group", "track"]
+    A trigger with no `event_id` fires on any event of its type — the only shape `identify` and `group` can take, and the one that catches a stock `analytics.page()` call.
+    """
+
+    request_type: Literal["identify", "group", "track", "page"]
 
     trigger_type: Literal["segment"]
 

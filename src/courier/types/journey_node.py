@@ -15,6 +15,8 @@ from .journey_delay_duration_node import JourneyDelayDurationNode
 from .journey_fetch_post_put_node import JourneyFetchPostPutNode
 from .journey_segment_trigger_node import JourneySegmentTriggerNode
 from .journey_throttle_static_node import JourneyThrottleStaticNode
+from .journey_webhook_trigger_node import JourneyWebhookTriggerNode
+from .journey_audience_trigger_node import JourneyAudienceTriggerNode
 from .journey_fetch_get_delete_node import JourneyFetchGetDeleteNode
 from .journey_throttle_dynamic_node import JourneyThrottleDynamicNode
 from .journey_api_invoke_trigger_node import JourneyAPIInvokeTriggerNode
@@ -153,6 +155,8 @@ class JourneyBranchNode(BaseModel):
 JourneyNode: TypeAlias = Union[
     JourneyAPIInvokeTriggerNode,
     JourneySegmentTriggerNode,
+    JourneyAudienceTriggerNode,
+    JourneyWebhookTriggerNode,
     JourneySendNode,
     JourneyDelayDurationNode,
     JourneyDelayUntilNode,

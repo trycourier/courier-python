@@ -7,6 +7,14 @@ from typing_extensions import Literal, overload
 
 import httpx
 
+from .runs import (
+    RunsResource,
+    AsyncRunsResource,
+    RunsResourceWithRawResponse,
+    AsyncRunsResourceWithRawResponse,
+    RunsResourceWithStreamingResponse,
+    AsyncRunsResourceWithStreamingResponse,
+)
 from ...types import (
     JourneyState,
     journey_list_params,
@@ -58,6 +66,13 @@ class JourneysResource(SyncAPIResource):
         Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
         """
         return TemplatesResource(self._client)
+
+    @cached_property
+    def runs(self) -> RunsResource:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
+        return RunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> JourneysResourceWithRawResponse:
@@ -578,6 +593,13 @@ class AsyncJourneysResource(AsyncAPIResource):
         Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
         """
         return AsyncTemplatesResource(self._client)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResource:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
+        return AsyncRunsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncJourneysResourceWithRawResponse:
@@ -1126,6 +1148,13 @@ class JourneysResourceWithRawResponse:
         """
         return TemplatesResourceWithRawResponse(self._journeys.templates)
 
+    @cached_property
+    def runs(self) -> RunsResourceWithRawResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
+        return RunsResourceWithRawResponse(self._journeys.runs)
+
 
 class AsyncJourneysResourceWithRawResponse:
     def __init__(self, journeys: AsyncJourneysResource) -> None:
@@ -1165,6 +1194,13 @@ class AsyncJourneysResourceWithRawResponse:
         Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
         """
         return AsyncTemplatesResourceWithRawResponse(self._journeys.templates)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithRawResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
+        return AsyncRunsResourceWithRawResponse(self._journeys.runs)
 
 
 class JourneysResourceWithStreamingResponse:
@@ -1206,6 +1242,13 @@ class JourneysResourceWithStreamingResponse:
         """
         return TemplatesResourceWithStreamingResponse(self._journeys.templates)
 
+    @cached_property
+    def runs(self) -> RunsResourceWithStreamingResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
+        return RunsResourceWithStreamingResponse(self._journeys.runs)
+
 
 class AsyncJourneysResourceWithStreamingResponse:
     def __init__(self, journeys: AsyncJourneysResource) -> None:
@@ -1245,3 +1288,10 @@ class AsyncJourneysResourceWithStreamingResponse:
         Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
         """
         return AsyncTemplatesResourceWithStreamingResponse(self._journeys.templates)
+
+    @cached_property
+    def runs(self) -> AsyncRunsResourceWithStreamingResponse:
+        """
+        Build, version, publish, invoke, and cancel multi-step notification workflows, along with the templates scoped to them.
+        """
+        return AsyncRunsResourceWithStreamingResponse(self._journeys.runs)

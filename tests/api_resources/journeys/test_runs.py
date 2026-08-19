@@ -1,0 +1,274 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+import os
+from typing import Any, cast
+
+import pytest
+
+from courier import Courier, AsyncCourier
+from tests.utils import assert_matches_type
+from courier.types import JourneyRunResponse, JourneyRunListResponse, JourneyRunStepsResponse
+
+base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
+
+
+class TestRuns:
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_retrieve(self, client: Courier) -> None:
+        run = client.journeys.runs.retrieve(
+            "x",
+        )
+        assert_matches_type(JourneyRunResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve(self, client: Courier) -> None:
+        response = client.journeys.runs.with_raw_response.retrieve(
+            "x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = response.parse()
+        assert_matches_type(JourneyRunResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Courier) -> None:
+        with client.journeys.runs.with_streaming_response.retrieve(
+            "x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = response.parse()
+            assert_matches_type(JourneyRunResponse, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_retrieve(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            client.journeys.runs.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list(self, client: Courier) -> None:
+        run = client.journeys.runs.list()
+        assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_with_all_params(self, client: Courier) -> None:
+        run = client.journeys.runs.list(
+            cursor="cursor",
+            end_date="end_date",
+            limit="321669910225",
+            start_date="start_date",
+            status="status",
+            template_id="template_id",
+        )
+        assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list(self, client: Courier) -> None:
+        response = client.journeys.runs.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = response.parse()
+        assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list(self, client: Courier) -> None:
+        with client.journeys.runs.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = response.parse()
+            assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_steps(self, client: Courier) -> None:
+        run = client.journeys.runs.list_steps(
+            "x",
+        )
+        assert_matches_type(JourneyRunStepsResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_steps(self, client: Courier) -> None:
+        response = client.journeys.runs.with_raw_response.list_steps(
+            "x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = response.parse()
+        assert_matches_type(JourneyRunStepsResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_steps(self, client: Courier) -> None:
+        with client.journeys.runs.with_streaming_response.list_steps(
+            "x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = response.parse()
+            assert_matches_type(JourneyRunStepsResponse, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_list_steps(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            client.journeys.runs.with_raw_response.list_steps(
+                "",
+            )
+
+
+class TestAsyncRuns:
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncCourier) -> None:
+        run = await async_client.journeys.runs.retrieve(
+            "x",
+        )
+        assert_matches_type(JourneyRunResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncCourier) -> None:
+        response = await async_client.journeys.runs.with_raw_response.retrieve(
+            "x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = await response.parse()
+        assert_matches_type(JourneyRunResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncCourier) -> None:
+        async with async_client.journeys.runs.with_streaming_response.retrieve(
+            "x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = await response.parse()
+            assert_matches_type(JourneyRunResponse, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_retrieve(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            await async_client.journeys.runs.with_raw_response.retrieve(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list(self, async_client: AsyncCourier) -> None:
+        run = await async_client.journeys.runs.list()
+        assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_with_all_params(self, async_client: AsyncCourier) -> None:
+        run = await async_client.journeys.runs.list(
+            cursor="cursor",
+            end_date="end_date",
+            limit="321669910225",
+            start_date="start_date",
+            status="status",
+            template_id="template_id",
+        )
+        assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list(self, async_client: AsyncCourier) -> None:
+        response = await async_client.journeys.runs.with_raw_response.list()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = await response.parse()
+        assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list(self, async_client: AsyncCourier) -> None:
+        async with async_client.journeys.runs.with_streaming_response.list() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = await response.parse()
+            assert_matches_type(JourneyRunListResponse, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_steps(self, async_client: AsyncCourier) -> None:
+        run = await async_client.journeys.runs.list_steps(
+            "x",
+        )
+        assert_matches_type(JourneyRunStepsResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_steps(self, async_client: AsyncCourier) -> None:
+        response = await async_client.journeys.runs.with_raw_response.list_steps(
+            "x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        run = await response.parse()
+        assert_matches_type(JourneyRunStepsResponse, run, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_steps(self, async_client: AsyncCourier) -> None:
+        async with async_client.journeys.runs.with_streaming_response.list_steps(
+            "x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            run = await response.parse()
+            assert_matches_type(JourneyRunStepsResponse, run, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_list_steps(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `run_id` but received ''"):
+            await async_client.journeys.runs.with_raw_response.list_steps(
+                "",
+            )
