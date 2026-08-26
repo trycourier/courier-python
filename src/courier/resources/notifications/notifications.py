@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Iterable, Optional, cast
+from typing import Any, Dict, Union, Iterable, Optional, cast
+from datetime import datetime
 from typing_extensions import Literal
 
 import httpx
@@ -23,6 +24,7 @@ from ...types import (
     notification_replace_params,
     notification_retrieve_params,
     notification_put_locale_params,
+    notification_get_metrics_params,
     notification_put_content_params,
     notification_put_element_params,
     notification_list_versions_params,
@@ -41,6 +43,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.notification_list_response import NotificationListResponse
 from ...types.notification_template_state import NotificationTemplateState
+from ...types.notification_metrics_response import NotificationMetricsResponse
 from ...types.notification_template_response import NotificationTemplateResponse
 from ...types.notification_content_mutation_response import NotificationContentMutationResponse
 from ...types.notification_retrieve_content_response import NotificationRetrieveContentResponse
@@ -268,6 +271,92 @@ class NotificationsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    def get_metrics(
+        self,
+        id: str,
+        *,
+        end: Union[str, datetime] | Omit = omit,
+        granularity: Literal["HOUR", "DAY", "WEEK", "MONTH"] | Omit = omit,
+        lookback: str | Omit = omit,
+        start: Union[str, datetime] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationMetricsResponse:
+        """
+        Fetch the delivery funnel for one Notification Template as a time series — sent,
+        delivered, opened, clicked, errors, and undeliverable — broken out per provider
+        and channel inside each bucket. Sum the entries in a bucket for its totals;
+        there is no bucket-level total.
+
+        Choose the window absolutely with `start` and `end`, or relatively with
+        `lookback` (an ISO 8601 duration). `start` and `end` take precedence when both
+        are supplied, and a request carrying neither defaults to `lookback=P30D`. The
+        window is snapped outwards onto the `granularity` grid so every bucket it
+        overlaps is returned whole, and the snapped boundaries come back as `start` and
+        `end` — align a chart on those rather than on what was requested. Every boundary
+        is UTC; there is no timezone support.
+
+        Every bucket in the window is returned, including the quiet ones, whose `data`
+        array is empty, so a series is directly plottable with no gap filling
+        client-side. An unknown template id returns `200` with an all-empty series
+        rather than `404`, and messages sent without a Notification Template never
+        appear here.
+
+        Available in the US region only.
+
+        Args:
+          end: The end of the window, as an ISO 8601 timestamp with an offset. Must be supplied
+              together with `start`. An `end` in the future is accepted and not clamped — the
+              trailing buckets come back empty.
+
+          granularity: The size of each bucket in the series. Defaults to `DAY`. `WEEK` buckets start
+              on Sunday. A fine granularity caps the window it can cover: `HOUR` spans at most
+              7 days and `DAY` at most 90 days, and a wider window returns `400` — request a
+              coarser granularity instead. `WEEK` and `MONTH` are uncapped, subject to the
+              1000-bucket limit on a single response.
+
+          lookback: The length of the window, counted back from now, as an ISO 8601 duration
+              (`P30D`, `P12W`, `PT12H`). Defaults to `P30D`, and is ignored when `start` and
+              `end` are supplied. A malformed or non-positive duration returns `400`.
+
+          start: The inclusive start of the window, as an ISO 8601 timestamp with an offset
+              (`2026-04-01T00:00:00Z`). Must be supplied together with `end` and be earlier
+              than it; either one alone returns `400`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            path_template("/notifications/{id}/metrics", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "end": end,
+                        "granularity": granularity,
+                        "lookback": lookback,
+                        "start": start,
+                    },
+                    notification_get_metrics_params.NotificationGetMetricsParams,
+                ),
+            ),
+            cast_to=NotificationMetricsResponse,
         )
 
     def list_versions(
@@ -852,6 +941,92 @@ class AsyncNotificationsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def get_metrics(
+        self,
+        id: str,
+        *,
+        end: Union[str, datetime] | Omit = omit,
+        granularity: Literal["HOUR", "DAY", "WEEK", "MONTH"] | Omit = omit,
+        lookback: str | Omit = omit,
+        start: Union[str, datetime] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> NotificationMetricsResponse:
+        """
+        Fetch the delivery funnel for one Notification Template as a time series — sent,
+        delivered, opened, clicked, errors, and undeliverable — broken out per provider
+        and channel inside each bucket. Sum the entries in a bucket for its totals;
+        there is no bucket-level total.
+
+        Choose the window absolutely with `start` and `end`, or relatively with
+        `lookback` (an ISO 8601 duration). `start` and `end` take precedence when both
+        are supplied, and a request carrying neither defaults to `lookback=P30D`. The
+        window is snapped outwards onto the `granularity` grid so every bucket it
+        overlaps is returned whole, and the snapped boundaries come back as `start` and
+        `end` — align a chart on those rather than on what was requested. Every boundary
+        is UTC; there is no timezone support.
+
+        Every bucket in the window is returned, including the quiet ones, whose `data`
+        array is empty, so a series is directly plottable with no gap filling
+        client-side. An unknown template id returns `200` with an all-empty series
+        rather than `404`, and messages sent without a Notification Template never
+        appear here.
+
+        Available in the US region only.
+
+        Args:
+          end: The end of the window, as an ISO 8601 timestamp with an offset. Must be supplied
+              together with `start`. An `end` in the future is accepted and not clamped — the
+              trailing buckets come back empty.
+
+          granularity: The size of each bucket in the series. Defaults to `DAY`. `WEEK` buckets start
+              on Sunday. A fine granularity caps the window it can cover: `HOUR` spans at most
+              7 days and `DAY` at most 90 days, and a wider window returns `400` — request a
+              coarser granularity instead. `WEEK` and `MONTH` are uncapped, subject to the
+              1000-bucket limit on a single response.
+
+          lookback: The length of the window, counted back from now, as an ISO 8601 duration
+              (`P30D`, `P12W`, `PT12H`). Defaults to `P30D`, and is ignored when `start` and
+              `end` are supplied. A malformed or non-positive duration returns `400`.
+
+          start: The inclusive start of the window, as an ISO 8601 timestamp with an offset
+              (`2026-04-01T00:00:00Z`). Must be supplied together with `end` and be earlier
+              than it; either one alone returns `400`.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            path_template("/notifications/{id}/metrics", id=id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "end": end,
+                        "granularity": granularity,
+                        "lookback": lookback,
+                        "start": start,
+                    },
+                    notification_get_metrics_params.NotificationGetMetricsParams,
+                ),
+            ),
+            cast_to=NotificationMetricsResponse,
+        )
+
     async def list_versions(
         self,
         id: str,
@@ -1230,6 +1405,9 @@ class NotificationsResourceWithRawResponse:
         self.archive = to_raw_response_wrapper(
             notifications.archive,
         )
+        self.get_metrics = to_raw_response_wrapper(
+            notifications.get_metrics,
+        )
         self.list_versions = to_raw_response_wrapper(
             notifications.list_versions,
         )
@@ -1275,6 +1453,9 @@ class AsyncNotificationsResourceWithRawResponse:
         )
         self.archive = async_to_raw_response_wrapper(
             notifications.archive,
+        )
+        self.get_metrics = async_to_raw_response_wrapper(
+            notifications.get_metrics,
         )
         self.list_versions = async_to_raw_response_wrapper(
             notifications.list_versions,
@@ -1322,6 +1503,9 @@ class NotificationsResourceWithStreamingResponse:
         self.archive = to_streamed_response_wrapper(
             notifications.archive,
         )
+        self.get_metrics = to_streamed_response_wrapper(
+            notifications.get_metrics,
+        )
         self.list_versions = to_streamed_response_wrapper(
             notifications.list_versions,
         )
@@ -1367,6 +1551,9 @@ class AsyncNotificationsResourceWithStreamingResponse:
         )
         self.archive = async_to_streamed_response_wrapper(
             notifications.archive,
+        )
+        self.get_metrics = async_to_streamed_response_wrapper(
+            notifications.get_metrics,
         )
         self.list_versions = async_to_streamed_response_wrapper(
             notifications.list_versions,
