@@ -481,6 +481,7 @@ from courier.types import (
     NotificationElementPutRequest,
     NotificationGetContent,
     NotificationLocalePutRequest,
+    NotificationMetricsResponse,
     NotificationTemplateAlias,
     NotificationTemplateCreateRequest,
     NotificationTemplatePayload,
@@ -503,6 +504,7 @@ Methods:
 - <code title="get /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">retrieve</a>(id, \*\*<a href="src/courier/types/notification_retrieve_params.py">params</a>) -> <a href="./src/courier/types/notification_template_response.py">NotificationTemplateResponse</a></code>
 - <code title="get /notifications">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">list</a>(\*\*<a href="src/courier/types/notification_list_params.py">params</a>) -> <a href="./src/courier/types/notification_list_response.py">NotificationListResponse</a></code>
 - <code title="delete /notifications/{id}">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">archive</a>(id) -> None</code>
+- <code title="get /notifications/{id}/metrics">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">get_metrics</a>(id, \*\*<a href="src/courier/types/notification_get_metrics_params.py">params</a>) -> <a href="./src/courier/types/notification_metrics_response.py">NotificationMetricsResponse</a></code>
 - <code title="get /notifications/{id}/versions">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">list_versions</a>(id, \*\*<a href="src/courier/types/notification_list_versions_params.py">params</a>) -> <a href="./src/courier/types/notification_template_version_list_response.py">NotificationTemplateVersionListResponse</a></code>
 - <code title="post /notifications/{id}/publish">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">publish</a>(id, \*\*<a href="src/courier/types/notification_publish_params.py">params</a>) -> None</code>
 - <code title="put /notifications/{id}/content">client.notifications.<a href="./src/courier/resources/notifications/notifications.py">put_content</a>(id, \*\*<a href="src/courier/types/notification_put_content_params.py">params</a>) -> <a href="./src/courier/types/notification_content_mutation_response.py">NotificationContentMutationResponse</a></code>
