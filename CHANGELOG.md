@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.0](https://github.com/trycourier/courier-python/compare/v9.1.0...v9.2.0) (2026-08-26)
+
+
+### Features
+
+* **api:** document the template send metrics endpoint ([#176](https://github.com/trycourier/courier-python/issues/176)) ([8307640](https://github.com/trycourier/courier-python/commit/830764063a3259ce8672b87e34cb445e1564a35d))
+
 ## [9.1.0](https://github.com/trycourier/courier-python/compare/v9.0.0...v9.1.0) (2026-08-19)
 
 
