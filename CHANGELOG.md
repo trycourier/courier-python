@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.3.0](https://github.com/trycourier/courier-python/compare/v9.2.0...v9.3.0) (2026-08-27)
+
+
+### Features
+
+* **api:** document Slack and MS Teams on journey send nodes, and fix over-strict MsTeams tenant requirements [C-20302] ([#178](https://github.com/trycourier/courier-python/issues/178)) ([fdb4c62](https://github.com/trycourier/courier-python/commit/fdb4c629a2d2f716473b28592271caf9b1871162))
+
 ## [9.2.0](https://github.com/trycourier/courier-python/compare/v9.1.0...v9.2.0) (2026-08-26)
 
 
