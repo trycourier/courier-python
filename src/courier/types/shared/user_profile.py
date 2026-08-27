@@ -86,6 +86,10 @@ class UserProfile(BaseModel):
     middle_name: Optional[str] = None
 
     ms_teams: Optional[MsTeams] = None
+    """Provide at least one of `tenant_id` or `service_url`.
+
+    If you provide both, they must agree.
+    """
 
     name: Optional[str] = None
 

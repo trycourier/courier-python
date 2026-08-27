@@ -10,3 +10,7 @@ class MsTeamsRecipient(BaseModel):
     """Send via Microsoft Teams"""
 
     ms_teams: MsTeams
+    """Provide at least one of `tenant_id` or `service_url`.
+
+    If you provide both, they must agree.
+    """

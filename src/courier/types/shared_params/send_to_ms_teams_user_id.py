@@ -8,8 +8,13 @@ __all__ = ["SendToMsTeamsUserID"]
 
 
 class SendToMsTeamsUserID(TypedDict, total=False):
-    service_url: Required[str]
+    """Provide at least one of `tenant_id` or `service_url`.
 
-    tenant_id: Required[str]
+    If you provide both, they must agree.
+    """
 
     user_id: Required[str]
+
+    service_url: str
+
+    tenant_id: str
