@@ -6,6 +6,8 @@ from typing_extensions import Literal
 from .._models import BaseModel
 from .journey_experiment import JourneyExperiment
 from .journey_conditions_field import JourneyConditionsField
+from .journey_send_node_to_slack import JourneySendNodeToSlack
+from .journey_send_node_to_ms_teams import JourneySendNodeToMsTeams
 
 __all__ = ["JourneySendNode", "Message", "MessageContext", "MessageDelay", "MessageTo"]
 
@@ -39,9 +41,32 @@ class MessageDelay(BaseModel):
 
 
 class MessageTo(BaseModel):
+    """Recipient override for this send.
+
+    Provide exactly one of `email_override`, `phone_number_override`, `user_id_override`, `slack`, or `ms_teams` — not a combination.
+    """
+
     email_override: Optional[str] = None
 
+    ms_teams: Optional[JourneySendNodeToMsTeams] = None
+    """
+    Send to a Microsoft Teams address directly, bypassing the recipient's stored
+    profile. Requires exactly one target: `channel_id`, `channel_name` (with
+    `team_id`), `user_id`, or `email`. `channel_name`, `user_id`, and `email` also
+    need at least one of `service_url` or `tenant_id` — if you provide both, they
+    must agree. `channel_id` doesn't require tenant context to publish, but provide
+    `service_url` or `tenant_id` anyway: sends without either have failed at
+    delivery in testing. `conversation_id` and `reply_to_activity_id`, available on
+    the send API's `MsTeams` profile, aren't supported here yet.
+    """
+
     phone_number_override: Optional[str] = None
+
+    slack: Optional[JourneySendNodeToSlack] = None
+    """Send to a Slack address directly, bypassing the recipient's stored profile.
+
+    Requires exactly one of `channel`, `user_id`, or `email`.
+    """
 
     user_id_override: Optional[str] = None
 
@@ -61,6 +86,11 @@ class Message(BaseModel):
     template: Optional[str] = None
 
     to: Optional[MessageTo] = None
+    """Recipient override for this send.
+
+    Provide exactly one of `email_override`, `phone_number_override`,
+    `user_id_override`, `slack`, or `ms_teams` — not a combination.
+    """
 
 
 class JourneySendNode(BaseModel):

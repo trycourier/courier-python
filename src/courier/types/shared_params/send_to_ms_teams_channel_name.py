@@ -8,10 +8,15 @@ __all__ = ["SendToMsTeamsChannelName"]
 
 
 class SendToMsTeamsChannelName(TypedDict, total=False):
-    channel_name: Required[str]
+    """`team_id` is required alongside `channel_name`.
 
-    service_url: Required[str]
+    Also provide at least one of `tenant_id` or `service_url`; if you provide both, they must agree.
+    """
+
+    channel_name: Required[str]
 
     team_id: Required[str]
 
-    tenant_id: Required[str]
+    service_url: str
+
+    tenant_id: str
