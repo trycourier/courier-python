@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.4.0](https://github.com/trycourier/courier-python/compare/v9.3.0...v9.4.0) (2026-08-28)
+
+
+### Features
+
+* **api:** document channel on journey send nodes [C-20309] ([#180](https://github.com/trycourier/courier-python/issues/180)) ([1e80867](https://github.com/trycourier/courier-python/commit/1e8086776e6a4f7b1a1aa5a2f40c5b28abda24a3))
+
 ## [9.3.0](https://github.com/trycourier/courier-python/compare/v9.2.0...v9.3.0) (2026-08-27)
 
 
