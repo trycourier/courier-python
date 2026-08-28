@@ -106,6 +106,14 @@ class JourneySendNodeParam(TypedDict, total=False):
 
     id: str
 
+    channel: Literal["email", "sms", "push", "inbox", "slack", "msteams"]
+    """The channel this node sends through.
+
+    Optional — when omitted, the field is absent from the node, including on `GET`;
+    nodes created before this field existed have it unset. Setting it makes the
+    node's channel explicit to any client reading the journey.
+    """
+
     conditions: JourneyConditionsFieldParam
     """Condition spec for a journey node.
 

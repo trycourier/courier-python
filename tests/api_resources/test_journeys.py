@@ -85,6 +85,7 @@ class TestJourneys:
                     },
                     "type": "send",
                     "id": "send-1",
+                    "channel": "email",
                     "conditions": ["string", "string"],
                     "experiment": {
                         "bucketing_key": "x",
@@ -695,6 +696,7 @@ class TestAsyncJourneys:
                     },
                     "type": "send",
                     "id": "send-1",
+                    "channel": "email",
                     "conditions": ["string", "string"],
                     "experiment": {
                         "bucketing_key": "x",
