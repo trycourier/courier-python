@@ -3,10 +3,12 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .elemental_base_node import ElementalBaseNode
+from .elemental_action_node import ElementalActionNode
 
 __all__ = ["ElementalActionNodeWithType"]
 
 
-class ElementalActionNodeWithType(ElementalBaseNode):
+class ElementalActionNodeWithType(ElementalActionNode):
+    """Allows the user to execute an action. Can be a button or a link."""
+
     type: Optional[Literal["action"]] = None

@@ -51,15 +51,7 @@ class TestTemplates:
             notification={
                 "brand": {"id": "id"},
                 "content": {
-                    "elements": [
-                        {
-                            "channels": ["string"],
-                            "if": "if",
-                            "loop": "loop",
-                            "ref": "ref",
-                            "type": "text",
-                        }
-                    ],
+                    "elements": [{"type": "text"}],
                     "version": "2022-01-01",
                     "scope": "default",
                 },
@@ -594,15 +586,7 @@ class TestTemplates:
             notification={
                 "brand": {"id": "id"},
                 "content": {
-                    "elements": [
-                        {
-                            "channels": ["string"],
-                            "if": "if",
-                            "loop": "loop",
-                            "ref": "ref",
-                            "type": "text",
-                        }
-                    ],
+                    "elements": [{"type": "text"}],
                     "version": "2022-01-01",
                     "scope": "default",
                 },
@@ -793,15 +777,7 @@ class TestAsyncTemplates:
             notification={
                 "brand": {"id": "id"},
                 "content": {
-                    "elements": [
-                        {
-                            "channels": ["string"],
-                            "if": "if",
-                            "loop": "loop",
-                            "ref": "ref",
-                            "type": "text",
-                        }
-                    ],
+                    "elements": [{"type": "text"}],
                     "version": "2022-01-01",
                     "scope": "default",
                 },
@@ -1336,15 +1312,7 @@ class TestAsyncTemplates:
             notification={
                 "brand": {"id": "id"},
                 "content": {
-                    "elements": [
-                        {
-                            "channels": ["string"],
-                            "if": "if",
-                            "loop": "loop",
-                            "ref": "ref",
-                            "type": "text",
-                        }
-                    ],
+                    "elements": [{"type": "text"}],
                     "version": "2022-01-01",
                     "scope": "default",
                 },

@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import Literal
 
-from .elemental_base_node import ElementalBaseNode
+from .elemental_quote_node import ElementalQuoteNode
 
 __all__ = ["ElementalQuoteNodeWithType"]
 
 
-class ElementalQuoteNodeWithType(ElementalBaseNode, total=False):
+class ElementalQuoteNodeWithType(ElementalQuoteNode, total=False):
+    """Renders a quote block."""
+
     type: Literal["quote"]

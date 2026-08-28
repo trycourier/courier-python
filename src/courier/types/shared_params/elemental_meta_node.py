@@ -2,16 +2,20 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
+from typing import Optional
 
-from .elemental_meta_node import ElementalMetaNode
+from .elemental_base_node import ElementalBaseNode
 
-__all__ = ["ElementalMetaNodeWithType"]
+__all__ = ["ElementalMetaNode"]
 
 
-class ElementalMetaNodeWithType(ElementalMetaNode, total=False):
+class ElementalMetaNode(ElementalBaseNode, total=False):
     """
     The meta element contains information describing the notification that may  be used by a particular channel or provider. One important field is the title  field which will be used as the title for channels that support it.
     """
 
-    type: Literal["meta"]
+    title: Optional[str]
+    """The title to be displayed by supported channels.
+
+    For example, the email subject.
+    """

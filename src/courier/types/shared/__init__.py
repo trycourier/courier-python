@@ -10,6 +10,7 @@ from .paging import Paging as Paging
 from .aws_sns import AwsSns as AwsSns
 from .channel import Channel as Channel
 from .discord import Discord as Discord
+from .locales import Locales as Locales
 from .intercom import Intercom as Intercom
 from .metadata import Metadata as Metadata
 from .ms_teams import MsTeams as MsTeams
@@ -46,10 +47,16 @@ from .channel_preference import ChannelPreference as ChannelPreference
 from .intercom_recipient import IntercomRecipient as IntercomRecipient
 from .ms_teams_recipient import MsTeamsRecipient as MsTeamsRecipient
 from .elemental_base_node import ElementalBaseNode as ElementalBaseNode
+from .elemental_html_node import ElementalHTMLNode as ElementalHTMLNode
+from .elemental_meta_node import ElementalMetaNode as ElementalMetaNode
+from .elemental_text_node import ElementalTextNode as ElementalTextNode
 from .pagerduty_recipient import PagerdutyRecipient as PagerdutyRecipient
 from .send_direct_message import SendDirectMessage as SendDirectMessage
 from .send_to_slack_email import SendToSlackEmail as SendToSlackEmail
+from .elemental_image_node import ElementalImageNode as ElementalImageNode
+from .elemental_quote_node import ElementalQuoteNode as ElementalQuoteNode
 from .webhook_profile_type import WebhookProfileType as WebhookProfileType
+from .elemental_action_node import ElementalActionNode as ElementalActionNode
 from .recipient_preferences import RecipientPreferences as RecipientPreferences
 from .send_to_slack_channel import SendToSlackChannel as SendToSlackChannel
 from .send_to_slack_user_id import SendToSlackUserID as SendToSlackUserID
@@ -57,6 +64,7 @@ from .slack_base_properties import SlackBaseProperties as SlackBaseProperties
 from .audience_filter_config import AudienceFilterConfig as AudienceFilterConfig
 from .channel_classification import ChannelClassification as ChannelClassification
 from .elemental_channel_node import ElementalChannelNode as ElementalChannelNode
+from .elemental_divider_node import ElementalDividerNode as ElementalDividerNode
 from .list_pattern_recipient import ListPatternRecipient as ListPatternRecipient
 from .message_providers_type import MessageProvidersType as MessageProvidersType
 from .send_to_ms_teams_email import SendToMsTeamsEmail as SendToMsTeamsEmail

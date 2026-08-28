@@ -325,22 +325,7 @@ class TestBroadcasts:
         broadcast = client.broadcasts.put_content(
             broadcast_id="broadcastId",
             content={
-                "elements": [
-                    {
-                        "channels": ["string"],
-                        "if": "if",
-                        "loop": "loop",
-                        "ref": "ref",
-                        "type": "meta",
-                    },
-                    {
-                        "channels": ["string"],
-                        "if": "if",
-                        "loop": "loop",
-                        "ref": "ref",
-                        "type": "text",
-                    },
-                ],
+                "elements": [{"type": "meta"}, {"type": "text"}],
                 "version": "2022-01-01",
             },
             state="DRAFT",
@@ -860,22 +845,7 @@ class TestAsyncBroadcasts:
         broadcast = await async_client.broadcasts.put_content(
             broadcast_id="broadcastId",
             content={
-                "elements": [
-                    {
-                        "channels": ["string"],
-                        "if": "if",
-                        "loop": "loop",
-                        "ref": "ref",
-                        "type": "meta",
-                    },
-                    {
-                        "channels": ["string"],
-                        "if": "if",
-                        "loop": "loop",
-                        "ref": "ref",
-                        "type": "text",
-                    },
-                ],
+                "elements": [{"type": "meta"}, {"type": "text"}],
                 "version": "2022-01-01",
             },
             state="DRAFT",

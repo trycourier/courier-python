@@ -3,10 +3,12 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .elemental_base_node import ElementalBaseNode
+from .elemental_text_node import ElementalTextNode
 
 __all__ = ["ElementalTextNodeWithType"]
 
 
-class ElementalTextNodeWithType(ElementalBaseNode):
+class ElementalTextNodeWithType(ElementalTextNode):
+    """Represents a body of text to be rendered inside of the notification."""
+
     type: Optional[Literal["text"]] = None
