@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.4.1](https://github.com/trycourier/courier-python/compare/v9.4.0...v9.4.1) (2026-08-28)
+
+
+### Bug Fixes
+
+* **api:** give Elemental nodes their properties in every SDK ([#182](https://github.com/trycourier/courier-python/issues/182)) ([3a22668](https://github.com/trycourier/courier-python/commit/3a226680784e2843b1c3bee41d79ac4cc2dac5d6))
+
 ## [9.4.0](https://github.com/trycourier/courier-python/compare/v9.3.0...v9.4.0) (2026-08-28)
 
 
