@@ -3,10 +3,12 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .elemental_base_node import ElementalBaseNode
+from .elemental_quote_node import ElementalQuoteNode
 
 __all__ = ["ElementalQuoteNodeWithType"]
 
 
-class ElementalQuoteNodeWithType(ElementalBaseNode):
+class ElementalQuoteNodeWithType(ElementalQuoteNode):
+    """Renders a quote block."""
+
     type: Optional[Literal["quote"]] = None

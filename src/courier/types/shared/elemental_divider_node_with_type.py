@@ -3,10 +3,12 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .elemental_base_node import ElementalBaseNode
+from .elemental_divider_node import ElementalDividerNode
 
 __all__ = ["ElementalDividerNodeWithType"]
 
 
-class ElementalDividerNodeWithType(ElementalBaseNode):
+class ElementalDividerNodeWithType(ElementalDividerNode):
+    """Renders a dividing line between elements."""
+
     type: Optional[Literal["divider"]] = None

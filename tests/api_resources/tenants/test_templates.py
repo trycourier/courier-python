@@ -265,15 +265,7 @@ class TestTemplates:
             tenant_id="tenant_id",
             template={
                 "content": {
-                    "elements": [
-                        {
-                            "channels": ["string"],
-                            "if": "if",
-                            "loop": "loop",
-                            "ref": "ref",
-                            "type": "text",
-                        }
-                    ],
+                    "elements": [{"type": "text"}],
                     "version": "2022-01-01",
                 },
                 "channels": {
@@ -637,15 +629,7 @@ class TestAsyncTemplates:
             tenant_id="tenant_id",
             template={
                 "content": {
-                    "elements": [
-                        {
-                            "channels": ["string"],
-                            "if": "if",
-                            "loop": "loop",
-                            "ref": "ref",
-                            "type": "text",
-                        }
-                    ],
+                    "elements": [{"type": "text"}],
                     "version": "2022-01-01",
                 },
                 "channels": {

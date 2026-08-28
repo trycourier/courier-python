@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import Literal
 
-from .elemental_base_node import ElementalBaseNode
+from .elemental_image_node import ElementalImageNode
 
 __all__ = ["ElementalImageNodeWithType"]
 
 
-class ElementalImageNodeWithType(ElementalBaseNode, total=False):
+class ElementalImageNodeWithType(ElementalImageNode, total=False):
+    """Used to embed an image into the notification."""
+
     type: Literal["image"]

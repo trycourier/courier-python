@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import Literal
 
-from .elemental_base_node import ElementalBaseNode
+from .elemental_divider_node import ElementalDividerNode
 
 __all__ = ["ElementalDividerNodeWithType"]
 
 
-class ElementalDividerNodeWithType(ElementalBaseNode, total=False):
+class ElementalDividerNodeWithType(ElementalDividerNode, total=False):
+    """Renders a dividing line between elements."""
+
     type: Literal["divider"]
