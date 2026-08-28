@@ -105,6 +105,14 @@ class JourneySendNode(BaseModel):
 
     id: Optional[str] = None
 
+    channel: Optional[Literal["email", "sms", "push", "inbox", "slack", "msteams"]] = None
+    """The channel this node sends through.
+
+    Optional — when omitted, the field is absent from the node, including on `GET`;
+    nodes created before this field existed have it unset. Setting it makes the
+    node's channel explicit to any client reading the journey.
+    """
+
     conditions: Optional[JourneyConditionsField] = None
     """Condition spec for a journey node.
 
