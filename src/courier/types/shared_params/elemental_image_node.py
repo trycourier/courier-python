@@ -3,9 +3,8 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, Annotated
+from typing_extensions import Required
 
-from ..._utils import PropertyInfo
 from ..shared.alignment import Alignment
 from .elemental_base_node import ElementalBaseNode
 
@@ -21,7 +20,7 @@ class ElementalImageNode(ElementalBaseNode, total=False):
     align: Optional[Alignment]
     """The alignment of the image."""
 
-    alt_text: Annotated[Optional[str], PropertyInfo(alias="altText")]
+    alt_text: Optional[str]
     """Alternate text for the image."""
 
     border_color: Optional[str]
