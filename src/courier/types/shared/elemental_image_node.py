@@ -2,8 +2,6 @@
 
 from typing import Optional
 
-from pydantic import Field as FieldInfo
-
 from .alignment import Alignment
 from .elemental_base_node import ElementalBaseNode
 
@@ -19,7 +17,7 @@ class ElementalImageNode(ElementalBaseNode):
     align: Optional[Alignment] = None
     """The alignment of the image."""
 
-    alt_text: Optional[str] = FieldInfo(alias="altText", default=None)
+    alt_text: Optional[str] = None
     """Alternate text for the image."""
 
     border_color: Optional[str] = None

@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, Annotated
+from typing_extensions import Required
 
 from .locales import Locales
-from ..._utils import PropertyInfo
 from ..shared.alignment import Alignment
 from ..shared.text_style import TextStyle
 from .elemental_base_node import ElementalBaseNode
@@ -23,7 +22,7 @@ class ElementalQuoteNode(ElementalBaseNode, total=False):
     align: Optional[Alignment]
     """Alignment of the quote."""
 
-    border_color: Annotated[Optional[str], PropertyInfo(alias="borderColor")]
+    border_color: Optional[str]
     """CSS border color property. For example, `#fff`"""
 
     font_size: Optional[str]

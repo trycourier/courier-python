@@ -2,8 +2,6 @@
 
 from typing import Optional
 
-from pydantic import Field as FieldInfo
-
 from .locales import Locales
 from .alignment import Alignment
 from .text_style import TextStyle
@@ -21,7 +19,7 @@ class ElementalQuoteNode(ElementalBaseNode):
     align: Optional[Alignment] = None
     """Alignment of the quote."""
 
-    border_color: Optional[str] = FieldInfo(alias="borderColor", default=None)
+    border_color: Optional[str] = None
     """CSS border color property. For example, `#fff`"""
 
     font_size: Optional[str] = None
