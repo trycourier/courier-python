@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.4.2](https://github.com/trycourier/courier-python/compare/v9.4.1...v9.4.2) (2026-08-29)
+
+
+### Bug Fixes
+
+* **api:** correct two Elemental field names the REST API rejects ([#184](https://github.com/trycourier/courier-python/issues/184)) ([b73c040](https://github.com/trycourier/courier-python/commit/b73c040955f588ba4e09ccba8df5de5970d26bac))
+
 ## [9.4.1](https://github.com/trycourier/courier-python/compare/v9.4.0...v9.4.1) (2026-08-28)
 
 
