@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.4.3](https://github.com/trycourier/courier-python/compare/v9.4.2...v9.4.3) (2026-08-29)
+
+
+### Bug Fixes
+
+* **api:** text content is not required ([#186](https://github.com/trycourier/courier-python/issues/186)) ([8d3354a](https://github.com/trycourier/courier-python/commit/8d3354ae5d553a6b6bbfb33acbddfc86abfd762f))
+
 ## [9.4.2](https://github.com/trycourier/courier-python/compare/v9.4.1...v9.4.2) (2026-08-29)
 
 
