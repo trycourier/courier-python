@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required
+from typing_extensions import Literal
 
 from .locales import Locales
 from ..shared.text_style import TextStyle
@@ -15,12 +15,6 @@ __all__ = ["ElementalTextNode"]
 class ElementalTextNode(ElementalBaseNode, total=False):
     """Represents a body of text to be rendered inside of the notification."""
 
-    content: Required[str]
-    """The text content displayed in the notification.
-
-    Either this field must be specified, or the elements field
-    """
-
     align: Literal["left", "center", "right"]
     """Text alignment."""
 
@@ -29,6 +23,12 @@ class ElementalTextNode(ElementalBaseNode, total=False):
 
     color: Optional[str]
     """Specifies the color of text. Can be any valid css color value"""
+
+    content: str
+    """The text content displayed in the notification.
+
+    Either this field must be specified, or the elements field
+    """
 
     font_size: Optional[str]
     """CSS px font size for this text block, e.g.

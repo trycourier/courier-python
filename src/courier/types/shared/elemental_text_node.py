@@ -13,12 +13,6 @@ __all__ = ["ElementalTextNode"]
 class ElementalTextNode(ElementalBaseNode):
     """Represents a body of text to be rendered inside of the notification."""
 
-    content: str
-    """The text content displayed in the notification.
-
-    Either this field must be specified, or the elements field
-    """
-
     align: Optional[Literal["left", "center", "right"]] = None
     """Text alignment."""
 
@@ -27,6 +21,12 @@ class ElementalTextNode(ElementalBaseNode):
 
     color: Optional[str] = None
     """Specifies the color of text. Can be any valid css color value"""
+
+    content: Optional[str] = None
+    """The text content displayed in the notification.
+
+    Either this field must be specified, or the elements field
+    """
 
     font_size: Optional[str] = None
     """CSS px font size for this text block, e.g.
