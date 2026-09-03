@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.4.4](https://github.com/trycourier/courier-python/compare/v9.4.3...v9.4.4) (2026-09-03)
+
+
+### Documentation
+
+* **api:** document the channel-block requirement on template creation ([#188](https://github.com/trycourier/courier-python/issues/188)) ([130cf6e](https://github.com/trycourier/courier-python/commit/130cf6e7d739a33ca46f3e2be3411953680a59a7))
+
 ## [9.4.3](https://github.com/trycourier/courier-python/compare/v9.4.2...v9.4.3) (2026-08-29)
 
 
