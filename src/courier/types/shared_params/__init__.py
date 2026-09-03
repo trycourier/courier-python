@@ -57,6 +57,7 @@ from .webhook_authentication import WebhookAuthentication as WebhookAuthenticati
 from .elemental_content_sugar import ElementalContentSugar as ElementalContentSugar
 from .message_routing_channel import MessageRoutingChannel as MessageRoutingChannel
 from .send_to_ms_teams_user_id import SendToMsTeamsUserID as SendToMsTeamsUserID
+from .elemental_node_non_channel import ElementalNodeNonChannel as ElementalNodeNonChannel
 from .send_to_ms_teams_channel_id import SendToMsTeamsChannelID as SendToMsTeamsChannelID
 from .elemental_html_node_with_type import ElementalHTMLNodeWithType as ElementalHTMLNodeWithType
 from .elemental_meta_node_with_type import ElementalMetaNodeWithType as ElementalMetaNodeWithType

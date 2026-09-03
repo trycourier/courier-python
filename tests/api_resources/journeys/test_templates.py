@@ -51,7 +51,7 @@ class TestTemplates:
             notification={
                 "brand": {"id": "id"},
                 "content": {
-                    "elements": [{"type": "text"}],
+                    "elements": [{"type": "channel"}],
                     "version": "2022-01-01",
                     "scope": "default",
                 },
@@ -777,7 +777,7 @@ class TestAsyncTemplates:
             notification={
                 "brand": {"id": "id"},
                 "content": {
-                    "elements": [{"type": "text"}],
+                    "elements": [{"type": "channel"}],
                     "version": "2022-01-01",
                     "scope": "default",
                 },

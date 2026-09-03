@@ -265,7 +265,7 @@ class TestTemplates:
             tenant_id="tenant_id",
             template={
                 "content": {
-                    "elements": [{"type": "text"}],
+                    "elements": [{"type": "channel"}],
                     "version": "2022-01-01",
                 },
                 "channels": {
@@ -629,7 +629,7 @@ class TestAsyncTemplates:
             tenant_id="tenant_id",
             template={
                 "content": {
-                    "elements": [{"type": "text"}],
+                    "elements": [{"type": "channel"}],
                     "version": "2022-01-01",
                 },
                 "channels": {

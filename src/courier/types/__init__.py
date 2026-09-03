@@ -95,6 +95,7 @@ from .shared import (
     WebhookAuthentication as WebhookAuthentication,
     AirshipProfileAudience as AirshipProfileAudience,
     SendToMsTeamsChannelID as SendToMsTeamsChannelID,
+    ElementalNodeNonChannel as ElementalNodeNonChannel,
     SendToMsTeamsChannelName as SendToMsTeamsChannelName,
     UserProfileFirebaseToken as UserProfileFirebaseToken,
     ElementalHTMLNodeWithType as ElementalHTMLNodeWithType,

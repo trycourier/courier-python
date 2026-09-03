@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict, Iterable, Optional
 
 from .elemental_base_node import ElementalBaseNode
+from .elemental_node_non_channel import ElementalNodeNonChannel
 
 __all__ = ["ElementalChannelNode"]
 
@@ -18,6 +19,13 @@ class ElementalChannelNode(ElementalBaseNode, total=False):
     """The channel the contents of this element should be applied to.
 
     Can be `email`, `push`, `direct_message`, `sms` or a provider such as slack
+    """
+
+    elements: Optional[Iterable[ElementalNodeNonChannel]]
+    """An array of elements to apply to the channel.
+
+    If `raw` has not been specified, `elements` is `required`. Channel elements
+    cannot nest, so these are any node except another channel block.
     """
 
     font_size: Optional[str]

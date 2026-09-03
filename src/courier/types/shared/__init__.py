@@ -74,6 +74,7 @@ from .message_routing_channel import MessageRoutingChannel as MessageRoutingChan
 from .airship_profile_audience import AirshipProfileAudience as AirshipProfileAudience
 from .ms_teams_base_properties import MsTeamsBaseProperties as MsTeamsBaseProperties
 from .send_to_ms_teams_user_id import SendToMsTeamsUserID as SendToMsTeamsUserID
+from .elemental_node_non_channel import ElementalNodeNonChannel as ElementalNodeNonChannel
 from .send_to_ms_teams_channel_id import SendToMsTeamsChannelID as SendToMsTeamsChannelID
 from .user_profile_firebase_token import UserProfileFirebaseToken as UserProfileFirebaseToken
 from .elemental_html_node_with_type import ElementalHTMLNodeWithType as ElementalHTMLNodeWithType

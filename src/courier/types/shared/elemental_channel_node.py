@@ -1,8 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from .elemental_base_node import ElementalBaseNode
+from .elemental_node_non_channel import ElementalNodeNonChannel
 
 __all__ = ["ElementalChannelNode"]
 
@@ -16,6 +17,13 @@ class ElementalChannelNode(ElementalBaseNode):
     """The channel the contents of this element should be applied to.
 
     Can be `email`, `push`, `direct_message`, `sms` or a provider such as slack
+    """
+
+    elements: Optional[List[ElementalNodeNonChannel]] = None
+    """An array of elements to apply to the channel.
+
+    If `raw` has not been specified, `elements` is `required`. Channel elements
+    cannot nest, so these are any node except another channel block.
     """
 
     font_size: Optional[str] = None
