@@ -254,6 +254,16 @@ class TemplatesResource(SyncAPIResource):
         Creates or updates a notification template scoped to one tenant, letting a
         tenant override the content the workspace template would send.
 
+        This is an upsert: it creates when the tenant has no template under
+        `template_id`, and updates when it does. On the create half, content must place
+        its elements inside a channel block —
+        `{ "type": "channel", "channel": "email", "elements": [...] }` — or the request
+        returns `400`. The template designer renders only the channel block matching the
+        tab it draws, so content stored without one cannot be opened. An empty
+        `elements` array is accepted, as is the `{ title, body }` shorthand, which has
+        no elements to wrap. Updates are not checked, so tenant templates already stored
+        without a wrapper stay editable.
+
         Args:
           template: Template configuration for creating or updating a tenant notification template
 
@@ -507,6 +517,16 @@ class AsyncTemplatesResource(AsyncAPIResource):
         """
         Creates or updates a notification template scoped to one tenant, letting a
         tenant override the content the workspace template would send.
+
+        This is an upsert: it creates when the tenant has no template under
+        `template_id`, and updates when it does. On the create half, content must place
+        its elements inside a channel block —
+        `{ "type": "channel", "channel": "email", "elements": [...] }` — or the request
+        returns `400`. The template designer renders only the channel block matching the
+        tab it draws, so content stored without one cannot be opened. An empty
+        `elements` array is accepted, as is the `{ title, body }` shorthand, which has
+        no elements to wrap. Updates are not checked, so tenant templates already stored
+        without a wrapper stay editable.
 
         Args:
           template: Template configuration for creating or updating a tenant notification template

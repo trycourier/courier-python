@@ -32,6 +32,7 @@ from courier.types import (
     ElementalMetaNode,
     ElementalMetaNodeWithType,
     ElementalNode,
+    ElementalNodeNonChannel,
     ElementalQuoteNode,
     ElementalQuoteNodeWithType,
     ElementalTextNode,
