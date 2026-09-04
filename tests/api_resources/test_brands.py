@@ -41,8 +41,15 @@ class TestBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": "content",
                         "inherit_default": True,
+                        "markdown": "markdown",
+                        "social": {
+                            "facebook": {"url": "url"},
+                            "instagram": {"url": "url"},
+                            "linkedin": {"url": "url"},
+                            "medium": {"url": "url"},
+                            "twitter": {"url": "url"},
+                        },
                     },
                     "head": {
                         "inherit_default": True,
@@ -202,8 +209,15 @@ class TestBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": "content",
                         "inherit_default": True,
+                        "markdown": "markdown",
+                        "social": {
+                            "facebook": {"url": "url"},
+                            "instagram": {"url": "url"},
+                            "linkedin": {"url": "url"},
+                            "medium": {"url": "url"},
+                            "twitter": {"url": "url"},
+                        },
                     },
                     "head": {
                         "inherit_default": True,
@@ -410,8 +424,15 @@ class TestAsyncBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": "content",
                         "inherit_default": True,
+                        "markdown": "markdown",
+                        "social": {
+                            "facebook": {"url": "url"},
+                            "instagram": {"url": "url"},
+                            "linkedin": {"url": "url"},
+                            "medium": {"url": "url"},
+                            "twitter": {"url": "url"},
+                        },
                     },
                     "head": {
                         "inherit_default": True,
@@ -571,8 +592,15 @@ class TestAsyncBrands:
                 },
                 "email": {
                     "footer": {
-                        "content": "content",
                         "inherit_default": True,
+                        "markdown": "markdown",
+                        "social": {
+                            "facebook": {"url": "url"},
+                            "instagram": {"url": "url"},
+                            "linkedin": {"url": "url"},
+                            "medium": {"url": "url"},
+                            "twitter": {"url": "url"},
+                        },
                     },
                     "head": {
                         "inherit_default": True,
