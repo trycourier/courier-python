@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Dict, Union, Iterable
 from typing_extensions import Required, TypedDict
 
 __all__ = ["TokenUpdateParams", "Patch"]
@@ -21,5 +21,9 @@ class Patch(TypedDict, total=False):
     path: Required[str]
     """The JSON path specifying the part of the profile to operate on."""
 
-    value: Optional[str]
-    """The value for the operation."""
+    value: Union[str, bool, Dict[str, object], None]
+    """The value for the operation.
+
+    A string for most fields; boolean `false` when disabling token expiration via
+    `expiry_date`, which cannot be expressed as a string.
+    """
