@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.5.0](https://github.com/trycourier/courier-python/compare/v9.4.4...v9.5.0) (2026-09-04)
+
+
+### Features
+
+* **api:** document the expiry_date contract and allow boolean patch values ([#190](https://github.com/trycourier/courier-python/issues/190)) ([c366dfd](https://github.com/trycourier/courier-python/commit/c366dfd43d2d69231797698b528a2d4283e705e7))
+
 ## [9.4.4](https://github.com/trycourier/courier-python/compare/v9.4.3...v9.4.4) (2026-09-03)
 
 
