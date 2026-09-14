@@ -425,7 +425,7 @@ class TestBroadcasts:
     def test_method_schedule(self, client: Courier) -> None:
         broadcast = client.broadcasts.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
         )
@@ -436,7 +436,7 @@ class TestBroadcasts:
     def test_method_schedule_with_all_params(self, client: Courier) -> None:
         broadcast = client.broadcasts.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
             timezone="America/New_York",
@@ -448,7 +448,7 @@ class TestBroadcasts:
     def test_raw_response_schedule(self, client: Courier) -> None:
         response = client.broadcasts.with_raw_response.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
         )
@@ -463,7 +463,7 @@ class TestBroadcasts:
     def test_streaming_response_schedule(self, client: Courier) -> None:
         with client.broadcasts.with_streaming_response.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
         ) as response:
@@ -481,7 +481,7 @@ class TestBroadcasts:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `broadcast_id` but received ''"):
             client.broadcasts.with_raw_response.schedule(
                 broadcast_id="",
-                recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+                recipient_id="active-business-users",
                 recipient_type="audience",
                 scheduled_to="2026-08-01T15:00:00",
             )
@@ -945,7 +945,7 @@ class TestAsyncBroadcasts:
     async def test_method_schedule(self, async_client: AsyncCourier) -> None:
         broadcast = await async_client.broadcasts.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
         )
@@ -956,7 +956,7 @@ class TestAsyncBroadcasts:
     async def test_method_schedule_with_all_params(self, async_client: AsyncCourier) -> None:
         broadcast = await async_client.broadcasts.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
             timezone="America/New_York",
@@ -968,7 +968,7 @@ class TestAsyncBroadcasts:
     async def test_raw_response_schedule(self, async_client: AsyncCourier) -> None:
         response = await async_client.broadcasts.with_raw_response.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
         )
@@ -983,7 +983,7 @@ class TestAsyncBroadcasts:
     async def test_streaming_response_schedule(self, async_client: AsyncCourier) -> None:
         async with async_client.broadcasts.with_streaming_response.schedule(
             broadcast_id="broadcastId",
-            recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+            recipient_id="active-business-users",
             recipient_type="audience",
             scheduled_to="2026-08-01T15:00:00",
         ) as response:
@@ -1001,7 +1001,7 @@ class TestAsyncBroadcasts:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `broadcast_id` but received ''"):
             await async_client.broadcasts.with_raw_response.schedule(
                 broadcast_id="",
-                recipient_id="aud_01kx4h2jdafq8bk9amzvy6hbv0",
+                recipient_id="active-business-users",
                 recipient_type="audience",
                 scheduled_to="2026-08-01T15:00:00",
             )
