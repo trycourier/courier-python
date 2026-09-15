@@ -4,3 +4,4 @@ from __future__ import annotations
 
 from .topic_create_params import TopicCreateParams as TopicCreateParams
 from .topic_replace_params import TopicReplaceParams as TopicReplaceParams
+from .topic_release_digest_params import TopicReleaseDigestParams as TopicReleaseDigestParams

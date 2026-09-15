@@ -45,9 +45,6 @@ class WorkspacePreferencesResource(SyncAPIResource):
 
     @cached_property
     def topics(self) -> TopicsResource:
-        """
-        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-        """
         return TopicsResource(self._client)
 
     @cached_property
@@ -350,9 +347,6 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
 
     @cached_property
     def topics(self) -> AsyncTopicsResource:
-        """
-        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-        """
         return AsyncTopicsResource(self._client)
 
     @cached_property
@@ -673,9 +667,6 @@ class WorkspacePreferencesResourceWithRawResponse:
 
     @cached_property
     def topics(self) -> TopicsResourceWithRawResponse:
-        """
-        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-        """
         return TopicsResourceWithRawResponse(self._workspace_preferences.topics)
 
 
@@ -704,9 +695,6 @@ class AsyncWorkspacePreferencesResourceWithRawResponse:
 
     @cached_property
     def topics(self) -> AsyncTopicsResourceWithRawResponse:
-        """
-        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-        """
         return AsyncTopicsResourceWithRawResponse(self._workspace_preferences.topics)
 
 
@@ -735,9 +723,6 @@ class WorkspacePreferencesResourceWithStreamingResponse:
 
     @cached_property
     def topics(self) -> TopicsResourceWithStreamingResponse:
-        """
-        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-        """
         return TopicsResourceWithStreamingResponse(self._workspace_preferences.topics)
 
 
@@ -766,7 +751,4 @@ class AsyncWorkspacePreferencesResourceWithStreamingResponse:
 
     @cached_property
     def topics(self) -> AsyncTopicsResourceWithStreamingResponse:
-        """
-        Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-        """
         return AsyncTopicsResourceWithStreamingResponse(self._workspace_preferences.topics)

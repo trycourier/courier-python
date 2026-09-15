@@ -135,6 +135,7 @@ from .digest_instance import DigestInstance as DigestInstance
 from .journey_ai_node import JourneyAINode as JourneyAINode
 from .message_details import MessageDetails as MessageDetails
 from .base_check_param import BaseCheckParam as BaseCheckParam
+from .digest_frequency import DigestFrequency as DigestFrequency
 from .email_head_param import EmailHeadParam as EmailHeadParam
 from .journey_response import JourneyResponse as JourneyResponse
 from .journey_run_step import JourneyRunStep as JourneyRunStep
@@ -146,6 +147,7 @@ from .subscription_list import SubscriptionList as SubscriptionList
 from .widget_background import WidgetBackground as WidgetBackground
 from .brand_colors_param import BrandColorsParam as BrandColorsParam
 from .broadcast_schedule import BroadcastSchedule as BroadcastSchedule
+from .digest_day_of_week import DigestDayOfWeek as DigestDayOfWeek
 from .email_footer_param import EmailFooterParam as EmailFooterParam
 from .email_header_param import EmailHeaderParam as EmailHeaderParam
 from .journey_experiment import JourneyExperiment as JourneyExperiment
@@ -188,6 +190,8 @@ from .message_list_response import MessageListResponse as MessageListResponse
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
 from .send_message_response import SendMessageResponse as SendMessageResponse
+from .topic_digest_category import TopicDigestCategory as TopicDigestCategory
+from .topic_digest_response import TopicDigestResponse as TopicDigestResponse
 from .audience_list_response import AudienceListResponse as AudienceListResponse
 from .audience_update_params import AudienceUpdateParams as AudienceUpdateParams
 from .automation_list_params import AutomationListParams as AutomationListParams
@@ -256,6 +260,7 @@ from .journey_send_node_to_slack import JourneySendNodeToSlack as JourneySendNod
 from .notification_create_params import NotificationCreateParams as NotificationCreateParams
 from .notification_list_response import NotificationListResponse as NotificationListResponse
 from .tenant_list_users_response import TenantListUsersResponse as TenantListUsersResponse
+from .topic_digest_request_param import TopicDigestRequestParam as TopicDigestRequestParam
 from .brand_settings_in_app_param import BrandSettingsInAppParam as BrandSettingsInAppParam
 from .journey_delay_duration_node import JourneyDelayDurationNode as JourneyDelayDurationNode
 from .journey_fetch_post_put_node import JourneyFetchPostPutNode as JourneyFetchPostPutNode
@@ -264,6 +269,7 @@ from .notification_replace_params import NotificationReplaceParams as Notificati
 from .notification_template_alias import NotificationTemplateAlias as NotificationTemplateAlias
 from .notification_template_state import NotificationTemplateState as NotificationTemplateState
 from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
+from .topic_digest_category_param import TopicDigestCategoryParam as TopicDigestCategoryParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
 from .automation_run_list_response import AutomationRunListResponse as AutomationRunListResponse
 from .broadcast_put_content_params import BroadcastPutContentParams as BroadcastPutContentParams
@@ -301,6 +307,7 @@ from .notification_put_locale_params import NotificationPutLocaleParams as Notif
 from .notification_template_response import NotificationTemplateResponse as NotificationTemplateResponse
 from .routing_strategy_create_params import RoutingStrategyCreateParams as RoutingStrategyCreateParams
 from .routing_strategy_list_response import RoutingStrategyListResponse as RoutingStrategyListResponse
+from .topic_digest_schedule_response import TopicDigestScheduleResponse as TopicDigestScheduleResponse
 from .inbound_bulk_message_user_param import InboundBulkMessageUserParam as InboundBulkMessageUserParam
 from .journey_api_invoke_trigger_node import JourneyAPIInvokeTriggerNode as JourneyAPIInvokeTriggerNode
 from .notification_get_metrics_params import NotificationGetMetricsParams as NotificationGetMetricsParams
@@ -331,6 +338,7 @@ from .journey_fetch_get_delete_node_param import JourneyFetchGetDeleteNodeParam 
 from .journey_send_node_to_ms_teams_param import JourneySendNodeToMsTeamsParam as JourneySendNodeToMsTeamsParam
 from .journey_throttle_dynamic_node_param import JourneyThrottleDynamicNodeParam as JourneyThrottleDynamicNodeParam
 from .notification_template_payload_param import NotificationTemplatePayloadParam as NotificationTemplatePayloadParam
+from .topic_digest_schedule_request_param import TopicDigestScheduleRequestParam as TopicDigestScheduleRequestParam
 from .workspace_preference_publish_params import WorkspacePreferencePublishParams as WorkspacePreferencePublishParams
 from .workspace_preference_replace_params import WorkspacePreferenceReplaceParams as WorkspacePreferenceReplaceParams
 from .journey_condition_nested_group_param import JourneyConditionNestedGroupParam as JourneyConditionNestedGroupParam

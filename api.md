@@ -396,7 +396,14 @@ Methods:
 Types:
 
 ```python
-from courier.types import DigestCategory, DigestInstance, DigestInstanceListResponse
+from courier.types import (
+    DigestCategory,
+    DigestDayOfWeek,
+    DigestFrequency,
+    DigestInstance,
+    DigestInstanceListResponse,
+    TopicDigestScheduleResponse,
+)
 ```
 
 ## Schedules
@@ -573,6 +580,11 @@ Types:
 from courier.types import (
     PublishPreferencesRequest,
     PublishPreferencesResponse,
+    TopicDigestCategory,
+    TopicDigestReleaseRequest,
+    TopicDigestRequest,
+    TopicDigestResponse,
+    TopicDigestScheduleRequest,
     WorkspacePreferenceCreateRequest,
     WorkspacePreferenceGetResponse,
     WorkspacePreferenceListResponse,
@@ -601,6 +613,8 @@ Methods:
 - <code title="get /preferences/sections/{section_id}/topics/{topic_id}">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">retrieve</a>(topic_id, \*, section_id) -> <a href="./src/courier/types/workspace_preference_topic_get_response.py">WorkspacePreferenceTopicGetResponse</a></code>
 - <code title="get /preferences/sections/{section_id}/topics">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">list</a>(section_id) -> <a href="./src/courier/types/workspace_preference_topic_list_response.py">WorkspacePreferenceTopicListResponse</a></code>
 - <code title="delete /preferences/sections/{section_id}/topics/{topic_id}">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">archive</a>(topic_id, \*, section_id) -> None</code>
+- <code title="delete /preferences/sections/{section_id}/topics/{topic_id}/digest">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">delete_digest</a>(topic_id, \*, section_id) -> None</code>
+- <code title="post /preferences/sections/{section_id}/topics/{topic_id}/digest/release">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">release_digest</a>(topic_id, \*, section_id, \*\*<a href="src/courier/types/workspace_preferences/topic_release_digest_params.py">params</a>) -> None</code>
 - <code title="put /preferences/sections/{section_id}/topics/{topic_id}">client.workspace_preferences.topics.<a href="./src/courier/resources/workspace_preferences/topics.py">replace</a>(topic_id, \*, section_id, \*\*<a href="src/courier/types/workspace_preferences/topic_replace_params.py">params</a>) -> <a href="./src/courier/types/workspace_preference_topic_get_response.py">WorkspacePreferenceTopicGetResponse</a></code>
 
 # Profiles

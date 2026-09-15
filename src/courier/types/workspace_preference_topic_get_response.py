@@ -4,6 +4,7 @@ from typing import Dict, List, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
+from .topic_digest_response import TopicDigestResponse
 from .shared.channel_classification import ChannelClassification
 
 __all__ = ["WorkspacePreferenceTopicGetResponse"]
@@ -44,6 +45,9 @@ class WorkspacePreferenceTopicGetResponse(BaseModel):
 
     description: Optional[str] = None
     """Optional description shown under the topic on the hosted preferences page."""
+
+    digest: Optional[TopicDigestResponse] = None
+    """A topic's digest configuration."""
 
     updater: Optional[str] = None
     """Id of the last updater."""
