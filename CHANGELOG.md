@@ -1,5 +1,18 @@
 # Changelog
 
+## [9.6.0](https://github.com/trycourier/courier-python/compare/v9.5.0...v9.6.0) (2026-09-15)
+
+
+### Features
+
+* **api:** digest configuration, per-recipient schedules, and release ([#196](https://github.com/trycourier/courier-python/issues/196)) ([df27b70](https://github.com/trycourier/courier-python/commit/df27b709f4d09fb80a49a3ed7fcc79e176726e9a))
+
+
+### Documentation
+
+* **api:** group the topic digest endpoints under Digests, and match the docs voice ([#197](https://github.com/trycourier/courier-python/issues/197)) ([7c7afe3](https://github.com/trycourier/courier-python/commit/7c7afe32d1ecd5d507d9acfe3ae818534487c587))
+* **api:** stop teaching an aud_ prefix that Courier does not issue ([#194](https://github.com/trycourier/courier-python/issues/194)) ([271942e](https://github.com/trycourier/courier-python/commit/271942e2f9b2b75db19ec1243aa563e4ec6b7723))
+
 ## [9.5.0](https://github.com/trycourier/courier-python/compare/v9.4.4...v9.5.0) (2026-09-04)
 
 
