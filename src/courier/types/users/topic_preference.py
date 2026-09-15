@@ -40,9 +40,9 @@ class TopicPreference(BaseModel):
     digest_schedule_id: Optional[str] = None
     """The digest schedule this recipient is on for the topic.
 
-    Omitted -- not null -- when they have not chosen one, in which case the topic's
-    default schedule applies. Ids come from the topic's digest configuration or from
-    `GET /digests/schedules`.
+    Omitted rather than null when they have not chosen one, in which case the
+    topic's default schedule applies. Ids come from the topic's digest configuration
+    or from `GET /digests/schedules`.
     """
 
     has_custom_routing: Optional[bool] = None
