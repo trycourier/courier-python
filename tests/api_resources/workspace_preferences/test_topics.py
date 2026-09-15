@@ -36,6 +36,32 @@ class TestTopics:
             name="Marketing",
             allowed_preferences=["snooze"],
             description="description",
+            digest={
+                "schedules": [
+                    {
+                        "frequency": "instant",
+                        "day_of_month": 1,
+                        "day_of_week": "sunday",
+                        "days_of_week": ["sunday"],
+                        "disabled": True,
+                        "is_default": True,
+                        "schedule_id": "schedule_id",
+                        "time": "time",
+                        "timezone": "timezone",
+                    }
+                ],
+                "template_id": "template_id",
+                "audience_id": "audience_id",
+                "categories": [
+                    {
+                        "category_key": "category_key",
+                        "limit": 1,
+                        "retain": "FIRST",
+                        "sort_key": "sort_key",
+                    }
+                ],
+                "trigger_empty": True,
+            },
             include_unsubscribe_header=True,
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
@@ -232,6 +258,126 @@ class TestTopics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_delete_digest(self, client: Courier) -> None:
+        topic = client.workspace_preferences.topics.delete_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+        )
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_delete_digest(self, client: Courier) -> None:
+        response = client.workspace_preferences.topics.with_raw_response.delete_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        topic = response.parse()
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_delete_digest(self, client: Courier) -> None:
+        with client.workspace_preferences.topics.with_streaming_response.delete_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            topic = response.parse()
+            assert topic is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_delete_digest(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
+            client.workspace_preferences.topics.with_raw_response.delete_digest(
+                topic_id="topic_id",
+                section_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
+            client.workspace_preferences.topics.with_raw_response.delete_digest(
+                topic_id="",
+                section_id="section_id",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_release_digest(self, client: Courier) -> None:
+        topic = client.workspace_preferences.topics.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+        )
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_release_digest_with_all_params(self, client: Courier) -> None:
+        topic = client.workspace_preferences.topics.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+            tenant_id="x",
+        )
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_release_digest(self, client: Courier) -> None:
+        response = client.workspace_preferences.topics.with_raw_response.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        topic = response.parse()
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_release_digest(self, client: Courier) -> None:
+        with client.workspace_preferences.topics.with_streaming_response.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            topic = response.parse()
+            assert topic is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_release_digest(self, client: Courier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
+            client.workspace_preferences.topics.with_raw_response.release_digest(
+                topic_id="topic_id",
+                section_id="",
+                user_id="user_01h1p2c3d4e5f6g7h8",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
+            client.workspace_preferences.topics.with_raw_response.release_digest(
+                topic_id="",
+                section_id="section_id",
+                user_id="user_01h1p2c3d4e5f6g7h8",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_replace(self, client: Courier) -> None:
         topic = client.workspace_preferences.topics.replace(
             topic_id="topic_id",
@@ -251,6 +397,32 @@ class TestTopics:
             name="Product Updates",
             allowed_preferences=["channel_preferences"],
             description="description",
+            digest={
+                "schedules": [
+                    {
+                        "frequency": "instant",
+                        "day_of_month": 1,
+                        "day_of_week": "sunday",
+                        "days_of_week": ["sunday"],
+                        "disabled": True,
+                        "is_default": True,
+                        "schedule_id": "schedule_id",
+                        "time": "time",
+                        "timezone": "timezone",
+                    }
+                ],
+                "template_id": "template_id",
+                "audience_id": "audience_id",
+                "categories": [
+                    {
+                        "category_key": "category_key",
+                        "limit": 1,
+                        "retain": "FIRST",
+                        "sort_key": "sort_key",
+                    }
+                ],
+                "trigger_empty": True,
+            },
             include_unsubscribe_header=True,
             routing_options=["email", "inbox"],
             topic_data={"foo": "bar"},
@@ -333,6 +505,32 @@ class TestAsyncTopics:
             name="Marketing",
             allowed_preferences=["snooze"],
             description="description",
+            digest={
+                "schedules": [
+                    {
+                        "frequency": "instant",
+                        "day_of_month": 1,
+                        "day_of_week": "sunday",
+                        "days_of_week": ["sunday"],
+                        "disabled": True,
+                        "is_default": True,
+                        "schedule_id": "schedule_id",
+                        "time": "time",
+                        "timezone": "timezone",
+                    }
+                ],
+                "template_id": "template_id",
+                "audience_id": "audience_id",
+                "categories": [
+                    {
+                        "category_key": "category_key",
+                        "limit": 1,
+                        "retain": "FIRST",
+                        "sort_key": "sort_key",
+                    }
+                ],
+                "trigger_empty": True,
+            },
             include_unsubscribe_header=True,
             routing_options=["direct_message"],
             topic_data={"foo": "bar"},
@@ -529,6 +727,126 @@ class TestAsyncTopics:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_delete_digest(self, async_client: AsyncCourier) -> None:
+        topic = await async_client.workspace_preferences.topics.delete_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+        )
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_delete_digest(self, async_client: AsyncCourier) -> None:
+        response = await async_client.workspace_preferences.topics.with_raw_response.delete_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        topic = await response.parse()
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_delete_digest(self, async_client: AsyncCourier) -> None:
+        async with async_client.workspace_preferences.topics.with_streaming_response.delete_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            topic = await response.parse()
+            assert topic is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_delete_digest(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
+            await async_client.workspace_preferences.topics.with_raw_response.delete_digest(
+                topic_id="topic_id",
+                section_id="",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
+            await async_client.workspace_preferences.topics.with_raw_response.delete_digest(
+                topic_id="",
+                section_id="section_id",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_release_digest(self, async_client: AsyncCourier) -> None:
+        topic = await async_client.workspace_preferences.topics.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+        )
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_release_digest_with_all_params(self, async_client: AsyncCourier) -> None:
+        topic = await async_client.workspace_preferences.topics.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+            tenant_id="x",
+        )
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_release_digest(self, async_client: AsyncCourier) -> None:
+        response = await async_client.workspace_preferences.topics.with_raw_response.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        topic = await response.parse()
+        assert topic is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_release_digest(self, async_client: AsyncCourier) -> None:
+        async with async_client.workspace_preferences.topics.with_streaming_response.release_digest(
+            topic_id="topic_id",
+            section_id="section_id",
+            user_id="user_01h1p2c3d4e5f6g7h8",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            topic = await response.parse()
+            assert topic is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_release_digest(self, async_client: AsyncCourier) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `section_id` but received ''"):
+            await async_client.workspace_preferences.topics.with_raw_response.release_digest(
+                topic_id="topic_id",
+                section_id="",
+                user_id="user_01h1p2c3d4e5f6g7h8",
+            )
+
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `topic_id` but received ''"):
+            await async_client.workspace_preferences.topics.with_raw_response.release_digest(
+                topic_id="",
+                section_id="section_id",
+                user_id="user_01h1p2c3d4e5f6g7h8",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_replace(self, async_client: AsyncCourier) -> None:
         topic = await async_client.workspace_preferences.topics.replace(
             topic_id="topic_id",
@@ -548,6 +866,32 @@ class TestAsyncTopics:
             name="Product Updates",
             allowed_preferences=["channel_preferences"],
             description="description",
+            digest={
+                "schedules": [
+                    {
+                        "frequency": "instant",
+                        "day_of_month": 1,
+                        "day_of_week": "sunday",
+                        "days_of_week": ["sunday"],
+                        "disabled": True,
+                        "is_default": True,
+                        "schedule_id": "schedule_id",
+                        "time": "time",
+                        "timezone": "timezone",
+                    }
+                ],
+                "template_id": "template_id",
+                "audience_id": "audience_id",
+                "categories": [
+                    {
+                        "category_key": "category_key",
+                        "limit": 1,
+                        "retain": "FIRST",
+                        "sort_key": "sort_key",
+                    }
+                ],
+                "trigger_empty": True,
+            },
             include_unsubscribe_header=True,
             routing_options=["email", "inbox"],
             topic_data={"foo": "bar"},

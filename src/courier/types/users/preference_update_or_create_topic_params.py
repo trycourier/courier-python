@@ -34,6 +34,15 @@ class Topic(TypedDict, total=False):
     One or more of: direct_message, email, push, sms, webhook, inbox.
     """
 
+    digest_schedule_id: Optional[str]
+    """Put this recipient on one of the topic's digest schedules.
+
+    Send `null` to clear the choice and return them to the topic's default. Omit to
+    leave an existing choice alone -- unlike the routing fields, which this endpoint
+    replaces. An id that is not an active schedule on the topic is rejected with a
+    `400` before anything is written.
+    """
+
     has_custom_routing: Optional[bool]
     """
     Set to true to route this topic to the channels in custom_routing instead of the

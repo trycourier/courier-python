@@ -18,7 +18,8 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.workspace_preferences import topic_create_params, topic_replace_params
+from ...types.workspace_preferences import topic_create_params, topic_replace_params, topic_release_digest_params
+from ...types.topic_digest_request_param import TopicDigestRequestParam
 from ...types.shared.channel_classification import ChannelClassification
 from ...types.workspace_preference_topic_get_response import WorkspacePreferenceTopicGetResponse
 from ...types.workspace_preference_topic_list_response import WorkspacePreferenceTopicListResponse
@@ -27,10 +28,6 @@ __all__ = ["TopicsResource", "AsyncTopicsResource"]
 
 
 class TopicsResource(SyncAPIResource):
-    """
-    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-    """
-
     @cached_property
     def with_raw_response(self) -> TopicsResourceWithRawResponse:
         """
@@ -58,6 +55,7 @@ class TopicsResource(SyncAPIResource):
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
         description: Optional[str] | Omit = omit,
+        digest: Optional[TopicDigestRequestParam] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -84,6 +82,14 @@ class TopicsResource(SyncAPIResource):
               if omitted.
 
           description: Optional description shown under the topic on the hosted preferences page.
+
+          digest: A topic's digest configuration: the template that renders it, the cadences it
+              delivers on, and how collected events are retained.
+
+              Send `null` for the whole object to turn a digest off, which unlinks the
+              template and removes its schedules. There is no `enabled` flag, and
+              `schedules: []` is rejected -- both states are un-deliverable rather than merely
+              off.
 
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
@@ -118,6 +124,7 @@ class TopicsResource(SyncAPIResource):
                     "name": name,
                     "allowed_preferences": allowed_preferences,
                     "description": description,
+                    "digest": digest,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,
@@ -243,6 +250,115 @@ class TopicsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def delete_digest(
+        self,
+        topic_id: str,
+        *,
+        section_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Turn off a topic's digest, leaving the topic itself in place.
+
+        The template is
+        unlinked and the digest's schedules are removed along with their delivery rules.
+        Equivalent to sending `digest: null` on a topic replace.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not section_id:
+            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
+        if not topic_id:
+            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._delete(
+            path_template(
+                "/preferences/sections/{section_id}/topics/{topic_id}/digest", section_id=section_id, topic_id=topic_id
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    def release_digest(
+        self,
+        topic_id: str,
+        *,
+        section_id: str,
+        user_id: str,
+        tenant_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Send one recipient's held digest now, instead of waiting for its schedule.
+
+        Use
+        it to preview what a digest will look like, or to let someone flush their own.
+
+        Keyed on the topic because that is how a held digest is stored: one per
+        recipient per topic, with the schedule recorded on it rather than part of its
+        identity. To flush every recipient on a schedule instead, use
+        `POST /digests/schedules/{schedule_id}/trigger`.
+
+        Args:
+          user_id: The recipient whose digest to release. Required: there is no "release everyone
+              on this topic" form, because a whole-schedule flush already has its own endpoint
+              and a body-shaped difference between one recipient and all of them is too easy
+              to get wrong.
+
+          tenant_id: The recipient's tenant, when they were sent to as part of one -- the same value
+              returned as `tenant_id` on a digest instance and sent as
+              `message.context.tenant_id`. It is part of the held digest's key, so a tenanted
+              recipient cannot be found without it. Omit for an ordinary recipient.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not section_id:
+            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
+        if not topic_id:
+            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._post(
+            path_template(
+                "/preferences/sections/{section_id}/topics/{topic_id}/digest/release",
+                section_id=section_id,
+                topic_id=topic_id,
+            ),
+            body=maybe_transform(
+                {
+                    "user_id": user_id,
+                    "tenant_id": tenant_id,
+                },
+                topic_release_digest_params.TopicReleaseDigestParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     def replace(
         self,
         topic_id: str,
@@ -252,6 +368,7 @@ class TopicsResource(SyncAPIResource):
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
         description: Optional[str] | Omit = omit,
+        digest: Optional[TopicDigestRequestParam] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -276,6 +393,14 @@ class TopicsResource(SyncAPIResource):
 
           description: Optional description shown under the topic on the hosted preferences page. Omit
               to clear.
+
+          digest: A topic's digest configuration: the template that renders it, the cadences it
+              delivers on, and how collected events are retained.
+
+              Send `null` for the whole object to turn a digest off, which unlinks the
+              template and removes its schedules. There is no `enabled` flag, and
+              `schedules: []` is rejected -- both states are un-deliverable rather than merely
+              off.
 
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
@@ -305,6 +430,7 @@ class TopicsResource(SyncAPIResource):
                     "name": name,
                     "allowed_preferences": allowed_preferences,
                     "description": description,
+                    "digest": digest,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,
@@ -319,10 +445,6 @@ class TopicsResource(SyncAPIResource):
 
 
 class AsyncTopicsResource(AsyncAPIResource):
-    """
-    Manage the workspace catalog of subscription topics, the sections that group them, and publishing the preference page.
-    """
-
     @cached_property
     def with_raw_response(self) -> AsyncTopicsResourceWithRawResponse:
         """
@@ -350,6 +472,7 @@ class AsyncTopicsResource(AsyncAPIResource):
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
         description: Optional[str] | Omit = omit,
+        digest: Optional[TopicDigestRequestParam] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -376,6 +499,14 @@ class AsyncTopicsResource(AsyncAPIResource):
               if omitted.
 
           description: Optional description shown under the topic on the hosted preferences page.
+
+          digest: A topic's digest configuration: the template that renders it, the cadences it
+              delivers on, and how collected events are retained.
+
+              Send `null` for the whole object to turn a digest off, which unlinks the
+              template and removes its schedules. There is no `enabled` flag, and
+              `schedules: []` is rejected -- both states are un-deliverable rather than merely
+              off.
 
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
@@ -410,6 +541,7 @@ class AsyncTopicsResource(AsyncAPIResource):
                     "name": name,
                     "allowed_preferences": allowed_preferences,
                     "description": description,
+                    "digest": digest,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,
@@ -535,6 +667,115 @@ class AsyncTopicsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def delete_digest(
+        self,
+        topic_id: str,
+        *,
+        section_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Turn off a topic's digest, leaving the topic itself in place.
+
+        The template is
+        unlinked and the digest's schedules are removed along with their delivery rules.
+        Equivalent to sending `digest: null` on a topic replace.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not section_id:
+            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
+        if not topic_id:
+            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._delete(
+            path_template(
+                "/preferences/sections/{section_id}/topics/{topic_id}/digest", section_id=section_id, topic_id=topic_id
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
+    async def release_digest(
+        self,
+        topic_id: str,
+        *,
+        section_id: str,
+        user_id: str,
+        tenant_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Send one recipient's held digest now, instead of waiting for its schedule.
+
+        Use
+        it to preview what a digest will look like, or to let someone flush their own.
+
+        Keyed on the topic because that is how a held digest is stored: one per
+        recipient per topic, with the schedule recorded on it rather than part of its
+        identity. To flush every recipient on a schedule instead, use
+        `POST /digests/schedules/{schedule_id}/trigger`.
+
+        Args:
+          user_id: The recipient whose digest to release. Required: there is no "release everyone
+              on this topic" form, because a whole-schedule flush already has its own endpoint
+              and a body-shaped difference between one recipient and all of them is too easy
+              to get wrong.
+
+          tenant_id: The recipient's tenant, when they were sent to as part of one -- the same value
+              returned as `tenant_id` on a digest instance and sent as
+              `message.context.tenant_id`. It is part of the held digest's key, so a tenanted
+              recipient cannot be found without it. Omit for an ordinary recipient.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not section_id:
+            raise ValueError(f"Expected a non-empty value for `section_id` but received {section_id!r}")
+        if not topic_id:
+            raise ValueError(f"Expected a non-empty value for `topic_id` but received {topic_id!r}")
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._post(
+            path_template(
+                "/preferences/sections/{section_id}/topics/{topic_id}/digest/release",
+                section_id=section_id,
+                topic_id=topic_id,
+            ),
+            body=await async_maybe_transform(
+                {
+                    "user_id": user_id,
+                    "tenant_id": tenant_id,
+                },
+                topic_release_digest_params.TopicReleaseDigestParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
     async def replace(
         self,
         topic_id: str,
@@ -544,6 +785,7 @@ class AsyncTopicsResource(AsyncAPIResource):
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
         description: Optional[str] | Omit = omit,
+        digest: Optional[TopicDigestRequestParam] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -568,6 +810,14 @@ class AsyncTopicsResource(AsyncAPIResource):
 
           description: Optional description shown under the topic on the hosted preferences page. Omit
               to clear.
+
+          digest: A topic's digest configuration: the template that renders it, the cadences it
+              delivers on, and how collected events are retained.
+
+              Send `null` for the whole object to turn a digest off, which unlinks the
+              template and removes its schedules. There is no `enabled` flag, and
+              `schedules: []` is rejected -- both states are un-deliverable rather than merely
+              off.
 
           include_unsubscribe_header: Whether to include a list-unsubscribe header on emails for this topic.
 
@@ -597,6 +847,7 @@ class AsyncTopicsResource(AsyncAPIResource):
                     "name": name,
                     "allowed_preferences": allowed_preferences,
                     "description": description,
+                    "digest": digest,
                     "include_unsubscribe_header": include_unsubscribe_header,
                     "routing_options": routing_options,
                     "topic_data": topic_data,
@@ -626,6 +877,12 @@ class TopicsResourceWithRawResponse:
         self.archive = to_raw_response_wrapper(
             topics.archive,
         )
+        self.delete_digest = to_raw_response_wrapper(
+            topics.delete_digest,
+        )
+        self.release_digest = to_raw_response_wrapper(
+            topics.release_digest,
+        )
         self.replace = to_raw_response_wrapper(
             topics.replace,
         )
@@ -646,6 +903,12 @@ class AsyncTopicsResourceWithRawResponse:
         )
         self.archive = async_to_raw_response_wrapper(
             topics.archive,
+        )
+        self.delete_digest = async_to_raw_response_wrapper(
+            topics.delete_digest,
+        )
+        self.release_digest = async_to_raw_response_wrapper(
+            topics.release_digest,
         )
         self.replace = async_to_raw_response_wrapper(
             topics.replace,
@@ -668,6 +931,12 @@ class TopicsResourceWithStreamingResponse:
         self.archive = to_streamed_response_wrapper(
             topics.archive,
         )
+        self.delete_digest = to_streamed_response_wrapper(
+            topics.delete_digest,
+        )
+        self.release_digest = to_streamed_response_wrapper(
+            topics.release_digest,
+        )
         self.replace = to_streamed_response_wrapper(
             topics.replace,
         )
@@ -688,6 +957,12 @@ class AsyncTopicsResourceWithStreamingResponse:
         )
         self.archive = async_to_streamed_response_wrapper(
             topics.archive,
+        )
+        self.delete_digest = async_to_streamed_response_wrapper(
+            topics.delete_digest,
+        )
+        self.release_digest = async_to_streamed_response_wrapper(
+            topics.release_digest,
         )
         self.replace = async_to_streamed_response_wrapper(
             topics.replace,
