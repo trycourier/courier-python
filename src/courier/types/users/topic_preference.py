@@ -41,8 +41,13 @@ class TopicPreference(BaseModel):
     """The digest schedule this recipient is on for the topic.
 
     Omitted rather than null when they have not chosen one, in which case the
-    topic's default schedule applies. Ids come from the topic's digest configuration
-    or from `GET /digests/schedules`.
+    topic's default schedule applies. Ids come from the topic's digest
+    configuration, returned on any read of the topic.
+
+    Also omitted when the schedule they chose has since been deleted or disabled:
+    the recipient is on the topic's default from that point on, which is how a send
+    already resolves it, so the field reports what would actually be used rather
+    than a dead id.
     """
 
     has_custom_routing: Optional[bool] = None
