@@ -398,6 +398,16 @@ class TestTopics:
             allowed_preferences=["channel_preferences"],
             description="description",
             digest={
+                "template_id": "template_id",
+                "audience_id": "audience_id",
+                "categories": [
+                    {
+                        "category_key": "category_key",
+                        "limit": 1,
+                        "retain": "FIRST",
+                        "sort_key": "sort_key",
+                    }
+                ],
                 "schedules": [
                     {
                         "frequency": "instant",
@@ -409,16 +419,6 @@ class TestTopics:
                         "schedule_id": "schedule_id",
                         "time": "time",
                         "timezone": "timezone",
-                    }
-                ],
-                "template_id": "template_id",
-                "audience_id": "audience_id",
-                "categories": [
-                    {
-                        "category_key": "category_key",
-                        "limit": 1,
-                        "retain": "FIRST",
-                        "sort_key": "sort_key",
                     }
                 ],
                 "trigger_empty": True,
@@ -867,6 +867,16 @@ class TestAsyncTopics:
             allowed_preferences=["channel_preferences"],
             description="description",
             digest={
+                "template_id": "template_id",
+                "audience_id": "audience_id",
+                "categories": [
+                    {
+                        "category_key": "category_key",
+                        "limit": 1,
+                        "retain": "FIRST",
+                        "sort_key": "sort_key",
+                    }
+                ],
                 "schedules": [
                     {
                         "frequency": "instant",
@@ -878,16 +888,6 @@ class TestAsyncTopics:
                         "schedule_id": "schedule_id",
                         "time": "time",
                         "timezone": "timezone",
-                    }
-                ],
-                "template_id": "template_id",
-                "audience_id": "audience_id",
-                "categories": [
-                    {
-                        "category_key": "category_key",
-                        "limit": 1,
-                        "retain": "FIRST",
-                        "sort_key": "sort_key",
                     }
                 ],
                 "trigger_empty": True,

@@ -55,7 +55,7 @@ class TopicsResource(SyncAPIResource):
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
         description: Optional[str] | Omit = omit,
-        digest: Optional[TopicDigestRequestParam] | Omit = omit,
+        digest: Optional[topic_create_params.Digest] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -83,8 +83,13 @@ class TopicsResource(SyncAPIResource):
 
           description: Optional description shown under the topic on the hosted preferences page.
 
-          digest: A topic's digest configuration: the template that renders it, the cadences it
-              delivers on, and how collected events are retained.
+          digest: A topic's digest, as supplied when the topic itself is created: the template
+              that renders it, the cadences it delivers on, and how collected events are
+              retained.
+
+              Identical to `TopicDigestRequest`, which a replace uses, except that `schedules`
+              is required — a topic being created has no stored schedules for an absent key to
+              leave alone.
 
               Send `null` for the whole object to turn a digest off, which unlinks the
               template and removes its schedules. There is no `enabled` flag, and
@@ -472,7 +477,7 @@ class AsyncTopicsResource(AsyncAPIResource):
         name: str,
         allowed_preferences: Optional[List[Literal["snooze", "channel_preferences"]]] | Omit = omit,
         description: Optional[str] | Omit = omit,
-        digest: Optional[TopicDigestRequestParam] | Omit = omit,
+        digest: Optional[topic_create_params.Digest] | Omit = omit,
         include_unsubscribe_header: Optional[bool] | Omit = omit,
         routing_options: Optional[List[ChannelClassification]] | Omit = omit,
         topic_data: Optional[Dict[str, object]] | Omit = omit,
@@ -500,8 +505,13 @@ class AsyncTopicsResource(AsyncAPIResource):
 
           description: Optional description shown under the topic on the hosted preferences page.
 
-          digest: A topic's digest configuration: the template that renders it, the cadences it
-              delivers on, and how collected events are retained.
+          digest: A topic's digest, as supplied when the topic itself is created: the template
+              that renders it, the cadences it delivers on, and how collected events are
+              retained.
+
+              Identical to `TopicDigestRequest`, which a replace uses, except that `schedules`
+              is required — a topic being created has no stored schedules for an absent key to
+              leave alone.
 
               Send `null` for the whole object to turn a digest off, which unlinks the
               template and removes its schedules. There is no `enabled` flag, and
