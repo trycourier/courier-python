@@ -98,6 +98,7 @@ class JourneysResource(SyncAPIResource):
         *,
         name: str,
         nodes: Iterable[JourneyNodeParam],
+        cancelation_token: str | Omit = omit,
         enabled: bool | Omit = omit,
         state: JourneyState | Omit = omit,
         idempotency_key: str | Omit = omit,
@@ -114,6 +115,12 @@ class JourneysResource(SyncAPIResource):
         published state. Send nodes cannot be included until their templates exist.
 
         Args:
+          cancelation_token: Cancelation token stored on the journey definition. It tags every run the
+              journey creates so that `POST /journeys/cancel` can later cancel those runs by
+              token. Accepts a templated string such as `order-{{data.order_id}}`, which is
+              resolved per run when the journey is invoked. On a replace, omitting this field
+              preserves any existing token and sending a value replaces it.
+
           state: Lifecycle state of a journey.
 
           extra_headers: Send extra headers
@@ -139,6 +146,7 @@ class JourneysResource(SyncAPIResource):
                 {
                     "name": name,
                     "nodes": nodes,
+                    "cancelation_token": cancelation_token,
                     "enabled": enabled,
                     "state": state,
                 },
@@ -538,6 +546,7 @@ class JourneysResource(SyncAPIResource):
         *,
         name: str,
         nodes: Iterable[JourneyNodeParam],
+        cancelation_token: str | Omit = omit,
         enabled: bool | Omit = omit,
         state: JourneyState | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -552,6 +561,12 @@ class JourneysResource(SyncAPIResource):
         publish. Reach for this when editing a journey already running.
 
         Args:
+          cancelation_token: Cancelation token stored on the journey definition. It tags every run the
+              journey creates so that `POST /journeys/cancel` can later cancel those runs by
+              token. Accepts a templated string such as `order-{{data.order_id}}`, which is
+              resolved per run when the journey is invoked. On a replace, omitting this field
+              preserves any existing token and sending a value replaces it.
+
           state: Lifecycle state of a journey.
 
           extra_headers: Send extra headers
@@ -570,6 +585,7 @@ class JourneysResource(SyncAPIResource):
                 {
                     "name": name,
                     "nodes": nodes,
+                    "cancelation_token": cancelation_token,
                     "enabled": enabled,
                     "state": state,
                 },
@@ -625,6 +641,7 @@ class AsyncJourneysResource(AsyncAPIResource):
         *,
         name: str,
         nodes: Iterable[JourneyNodeParam],
+        cancelation_token: str | Omit = omit,
         enabled: bool | Omit = omit,
         state: JourneyState | Omit = omit,
         idempotency_key: str | Omit = omit,
@@ -641,6 +658,12 @@ class AsyncJourneysResource(AsyncAPIResource):
         published state. Send nodes cannot be included until their templates exist.
 
         Args:
+          cancelation_token: Cancelation token stored on the journey definition. It tags every run the
+              journey creates so that `POST /journeys/cancel` can later cancel those runs by
+              token. Accepts a templated string such as `order-{{data.order_id}}`, which is
+              resolved per run when the journey is invoked. On a replace, omitting this field
+              preserves any existing token and sending a value replaces it.
+
           state: Lifecycle state of a journey.
 
           extra_headers: Send extra headers
@@ -666,6 +689,7 @@ class AsyncJourneysResource(AsyncAPIResource):
                 {
                     "name": name,
                     "nodes": nodes,
+                    "cancelation_token": cancelation_token,
                     "enabled": enabled,
                     "state": state,
                 },
@@ -1065,6 +1089,7 @@ class AsyncJourneysResource(AsyncAPIResource):
         *,
         name: str,
         nodes: Iterable[JourneyNodeParam],
+        cancelation_token: str | Omit = omit,
         enabled: bool | Omit = omit,
         state: JourneyState | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1079,6 +1104,12 @@ class AsyncJourneysResource(AsyncAPIResource):
         publish. Reach for this when editing a journey already running.
 
         Args:
+          cancelation_token: Cancelation token stored on the journey definition. It tags every run the
+              journey creates so that `POST /journeys/cancel` can later cancel those runs by
+              token. Accepts a templated string such as `order-{{data.order_id}}`, which is
+              resolved per run when the journey is invoked. On a replace, omitting this field
+              preserves any existing token and sending a value replaces it.
+
           state: Lifecycle state of a journey.
 
           extra_headers: Send extra headers
@@ -1097,6 +1128,7 @@ class AsyncJourneysResource(AsyncAPIResource):
                 {
                     "name": name,
                     "nodes": nodes,
+                    "cancelation_token": cancelation_token,
                     "enabled": enabled,
                     "state": state,
                 },

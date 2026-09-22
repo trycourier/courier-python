@@ -112,6 +112,7 @@ class TestJourneys:
                     "id": "exit-1",
                 },
             ],
+            cancelation_token="order-{{data.order_id}}",
             enabled=True,
             state="DRAFT",
             idempotency_key="order-ORD-456-user-123",
@@ -568,6 +569,7 @@ class TestJourneys:
                     "schema": {"foo": "bar"},
                 }
             ],
+            cancelation_token="order-{{data.order_id}}",
             enabled=True,
             state="DRAFT",
         )
@@ -723,6 +725,7 @@ class TestAsyncJourneys:
                     "id": "exit-1",
                 },
             ],
+            cancelation_token="order-{{data.order_id}}",
             enabled=True,
             state="DRAFT",
             idempotency_key="order-ORD-456-user-123",
@@ -1179,6 +1182,7 @@ class TestAsyncJourneys:
                     "schema": {"foo": "bar"},
                 }
             ],
+            cancelation_token="order-{{data.order_id}}",
             enabled=True,
             state="DRAFT",
         )

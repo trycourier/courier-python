@@ -15,6 +15,13 @@ class JourneyResponse(BaseModel):
 
     id: str
 
+    cancelation_token: Optional[str] = None
+    """The journey cancelation token, or null when none is set.
+
+    A token authored in the dashboard is returned in its raw templated form, such as
+    `order-{{data.order_id}}`, so it can be read back and asserted.
+    """
+
     created: Optional[int] = None
 
     creator: Optional[str] = None
