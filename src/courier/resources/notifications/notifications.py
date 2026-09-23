@@ -201,6 +201,7 @@ class NotificationsResource(SyncAPIResource):
         cursor: Optional[str] | Omit = omit,
         event_id: str | Omit = omit,
         notes: Optional[bool] | Omit = omit,
+        tags: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -219,6 +220,10 @@ class NotificationsResource(SyncAPIResource):
           event_id: Filter to templates linked to this event map ID.
 
           notes: Include template notes in the response. Only applies to legacy templates.
+
+          tags: Comma-delimited list of tag names. Only templates carrying all of the listed
+              tags are returned. Matching is case-insensitive. Filtering is applied before
+              pagination.
 
           extra_headers: Send extra headers
 
@@ -240,6 +245,7 @@ class NotificationsResource(SyncAPIResource):
                         "cursor": cursor,
                         "event_id": event_id,
                         "notes": notes,
+                        "tags": tags,
                     },
                     notification_list_params.NotificationListParams,
                 ),
@@ -879,6 +885,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
         cursor: Optional[str] | Omit = omit,
         event_id: str | Omit = omit,
         notes: Optional[bool] | Omit = omit,
+        tags: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -897,6 +904,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
           event_id: Filter to templates linked to this event map ID.
 
           notes: Include template notes in the response. Only applies to legacy templates.
+
+          tags: Comma-delimited list of tag names. Only templates carrying all of the listed
+              tags are returned. Matching is case-insensitive. Filtering is applied before
+              pagination.
 
           extra_headers: Send extra headers
 
@@ -918,6 +929,7 @@ class AsyncNotificationsResource(AsyncAPIResource):
                         "cursor": cursor,
                         "event_id": event_id,
                         "notes": notes,
+                        "tags": tags,
                     },
                     notification_list_params.NotificationListParams,
                 ),
