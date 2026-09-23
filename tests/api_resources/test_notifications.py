@@ -175,6 +175,7 @@ class TestNotifications:
             cursor="cursor",
             event_id="event_id",
             notes=True,
+            tags="tags",
         )
         assert_matches_type(NotificationListResponse, notification, path=["response"])
 
@@ -915,6 +916,7 @@ class TestAsyncNotifications:
             cursor="cursor",
             event_id="event_id",
             notes=True,
+            tags="tags",
         )
         assert_matches_type(NotificationListResponse, notification, path=["response"])
 
