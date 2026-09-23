@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.7.0](https://github.com/trycourier/courier-python/compare/v9.6.0...v9.7.0) (2026-09-22)
+
+
+### Features
+
+* **api:** add cancelation_token to journey create, replace, and get ([#200](https://github.com/trycourier/courier-python/issues/200)) ([a9be810](https://github.com/trycourier/courier-python/commit/a9be810b9e8b14b74bb8325f1a8753277609a444))
+
+
+### Documentation
+
+* **api:** correct the digest schedule contract, and make `schedules` optional ([#198](https://github.com/trycourier/courier-python/issues/198)) ([6faebce](https://github.com/trycourier/courier-python/commit/6faebce8705f1c01462e78023b68ddbf86e91307))
+
 ## [9.6.0](https://github.com/trycourier/courier-python/compare/v9.5.0...v9.6.0) (2026-09-15)
 
 
