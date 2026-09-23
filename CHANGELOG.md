@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.8.0](https://github.com/trycourier/courier-python/compare/v9.7.0...v9.8.0) (2026-09-23)
+
+
+### Features
+
+* **api:** publish the secondary and tertiary action styles [C-19961] ([#201](https://github.com/trycourier/courier-python/issues/201)) ([0c79138](https://github.com/trycourier/courier-python/commit/0c79138d11805da1c3ca3b04536cb4c7592cfde5))
+
 ## [9.7.0](https://github.com/trycourier/courier-python/compare/v9.6.0...v9.7.0) (2026-09-22)
 
 
