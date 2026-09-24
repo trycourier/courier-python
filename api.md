@@ -337,6 +337,29 @@ Methods:
 - <code title="post /broadcasts/{broadcastId}/schedule">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">schedule</a>(broadcast_id, \*\*<a href="src/courier/types/broadcast_schedule_params.py">params</a>) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
 - <code title="post /broadcasts/{broadcastId}/send">client.broadcasts.<a href="./src/courier/resources/broadcasts.py">send</a>(broadcast_id, \*\*<a href="src/courier/types/broadcast_send_params.py">params</a>) -> <a href="./src/courier/types/broadcast.py">Broadcast</a></code>
 
+# Previews
+
+Types:
+
+```python
+from courier.types import (
+    CreateDeviceSetRequest,
+    DeviceSet,
+    DeviceSetListResponse,
+    PreviewDevice,
+    PreviewDeviceListResponse,
+)
+```
+
+Methods:
+
+- <code title="delete /previews/device-sets/{deviceSetId}">client.previews.<a href="./src/courier/resources/previews.py">archive_device_set</a>(device_set_id) -> <a href="./src/courier/types/device_set.py">DeviceSet</a></code>
+- <code title="post /previews/device-sets">client.previews.<a href="./src/courier/resources/previews.py">create_device_set</a>(\*\*<a href="src/courier/types/preview_create_device_set_params.py">params</a>) -> <a href="./src/courier/types/device_set.py">DeviceSet</a></code>
+- <code title="get /previews/device-sets">client.previews.<a href="./src/courier/resources/previews.py">list_device_sets</a>() -> <a href="./src/courier/types/device_set_list_response.py">DeviceSetListResponse</a></code>
+- <code title="get /previews/devices">client.previews.<a href="./src/courier/resources/previews.py">list_devices</a>() -> <a href="./src/courier/types/preview_device_list_response.py">PreviewDeviceListResponse</a></code>
+- <code title="get /previews/device-sets/{deviceSetId}">client.previews.<a href="./src/courier/resources/previews.py">retrieve_device_set</a>(device_set_id) -> <a href="./src/courier/types/device_set.py">DeviceSet</a></code>
+- <code title="put /previews/device-sets/{deviceSetId}">client.previews.<a href="./src/courier/resources/previews.py">update_device_set</a>(device_set_id, \*\*<a href="src/courier/types/preview_update_device_set_params.py">params</a>) -> <a href="./src/courier/types/device_set.py">DeviceSet</a></code>
+
 # Bulk
 
 Types:
@@ -547,6 +570,32 @@ Methods:
 - <code title="put /notifications/{id}/{submissionId}/checks">client.notifications.checks.<a href="./src/courier/resources/notifications/checks.py">update</a>(submission_id, \*, id, \*\*<a href="src/courier/types/notifications/check_update_params.py">params</a>) -> <a href="./src/courier/types/notifications/check_update_response.py">CheckUpdateResponse</a></code>
 - <code title="get /notifications/{id}/{submissionId}/checks">client.notifications.checks.<a href="./src/courier/resources/notifications/checks.py">list</a>(submission_id, \*, id) -> <a href="./src/courier/types/notifications/check_list_response.py">CheckListResponse</a></code>
 - <code title="delete /notifications/{id}/{submissionId}/checks">client.notifications.checks.<a href="./src/courier/resources/notifications/checks.py">delete</a>(submission_id, \*, id) -> None</code>
+
+## Previews
+
+### Runs
+
+Types:
+
+```python
+from courier.types.notifications.previews import (
+    CreatePreviewRunRequest,
+    PreviewResult,
+    PreviewResultFailureReason,
+    PreviewResultStatus,
+    PreviewRun,
+    PreviewRunDetail,
+    PreviewRunFailureReason,
+    PreviewRunListResponse,
+    PreviewRunStatus,
+)
+```
+
+Methods:
+
+- <code title="post /notifications/{id}/previews/runs">client.notifications.previews.runs.<a href="./src/courier/resources/notifications/previews/runs.py">create</a>(id, \*\*<a href="src/courier/types/notifications/previews/run_create_params.py">params</a>) -> <a href="./src/courier/types/notifications/previews/preview_run.py">PreviewRun</a></code>
+- <code title="get /notifications/{id}/previews/runs/{previewRunId}">client.notifications.previews.runs.<a href="./src/courier/resources/notifications/previews/runs.py">retrieve</a>(preview_run_id, \*, id) -> <a href="./src/courier/types/notifications/previews/preview_run_detail.py">PreviewRunDetail</a></code>
+- <code title="get /notifications/{id}/previews/runs">client.notifications.previews.runs.<a href="./src/courier/resources/notifications/previews/runs.py">list</a>(id, \*\*<a href="src/courier/types/notifications/previews/run_list_params.py">params</a>) -> <a href="./src/courier/types/notifications/previews/preview_run_list_response.py">PreviewRunListResponse</a></code>
 
 # RoutingStrategies
 
