@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.11.0](https://github.com/trycourier/courier-python/compare/v9.10.0...v9.11.0) (2026-09-24)
+
+
+### Features
+
+* **api:** cross-client previews endpoints ([#208](https://github.com/trycourier/courier-python/issues/208)) ([8b7be91](https://github.com/trycourier/courier-python/commit/8b7be9105781d7ab18a66491ac458c9f77d8bd39))
+
 ## [9.10.0](https://github.com/trycourier/courier-python/compare/v9.9.0...v9.10.0) (2026-09-24)
 
 
