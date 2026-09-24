@@ -18,6 +18,7 @@ from ...types import (
     workspace_preference_create_params,
     workspace_preference_publish_params,
     workspace_preference_replace_params,
+    workspace_preference_list_logs_params,
 )
 from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ..._utils import path_template, maybe_transform, strip_not_given, async_maybe_transform
@@ -31,6 +32,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.publish_preferences_response import PublishPreferencesResponse
+from ...types.preference_logs_list_response import PreferenceLogsListResponse
 from ...types.shared.channel_classification import ChannelClassification
 from ...types.workspace_preference_get_response import WorkspacePreferenceGetResponse
 from ...types.workspace_preference_list_response import WorkspacePreferenceListResponse
@@ -220,6 +222,71 @@ class WorkspacePreferencesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=NoneType,
+        )
+
+    def list_logs(
+        self,
+        *,
+        cursor: str | Omit = omit,
+        limit: int | Omit = omit,
+        since: str | Omit = omit,
+        tenant_id: str | Omit = omit,
+        user_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PreferenceLogsListResponse:
+        """
+        Returns the history of preference changes in this environment, newest first.
+        Each entry records one change a user made to one subscription topic, and carries
+        the value before it where there was one. Supply user_id to read a single user's
+        history instead of the whole environment.
+
+        Args:
+          cursor: A cursor from a previous response's paging.cursor. Continue only while
+              paging.more is true; the cursor is omitted on the last page.
+
+          limit: How many entries to return. Defaults to 25.
+
+          since: Return only changes at or after this time, as an ISO-8601 date or date-time. A
+              date alone is read as the start of that day in UTC.
+
+          tenant_id: Narrow to the changes this user made in one tenant context. Only valid together
+              with user_id.
+
+          user_id: Return only this user's changes. Omit it to read every change in the
+              environment.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/preferences/logs",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                        "since": since,
+                        "tenant_id": tenant_id,
+                        "user_id": user_id,
+                    },
+                    workspace_preference_list_logs_params.WorkspacePreferenceListLogsParams,
+                ),
+            ),
+            cast_to=PreferenceLogsListResponse,
         )
 
     def publish(
@@ -524,6 +591,71 @@ class AsyncWorkspacePreferencesResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def list_logs(
+        self,
+        *,
+        cursor: str | Omit = omit,
+        limit: int | Omit = omit,
+        since: str | Omit = omit,
+        tenant_id: str | Omit = omit,
+        user_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PreferenceLogsListResponse:
+        """
+        Returns the history of preference changes in this environment, newest first.
+        Each entry records one change a user made to one subscription topic, and carries
+        the value before it where there was one. Supply user_id to read a single user's
+        history instead of the whole environment.
+
+        Args:
+          cursor: A cursor from a previous response's paging.cursor. Continue only while
+              paging.more is true; the cursor is omitted on the last page.
+
+          limit: How many entries to return. Defaults to 25.
+
+          since: Return only changes at or after this time, as an ISO-8601 date or date-time. A
+              date alone is read as the start of that day in UTC.
+
+          tenant_id: Narrow to the changes this user made in one tenant context. Only valid together
+              with user_id.
+
+          user_id: Return only this user's changes. Omit it to read every change in the
+              environment.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/preferences/logs",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "limit": limit,
+                        "since": since,
+                        "tenant_id": tenant_id,
+                        "user_id": user_id,
+                    },
+                    workspace_preference_list_logs_params.WorkspacePreferenceListLogsParams,
+                ),
+            ),
+            cast_to=PreferenceLogsListResponse,
+        )
+
     async def publish(
         self,
         *,
@@ -658,6 +790,9 @@ class WorkspacePreferencesResourceWithRawResponse:
         self.archive = to_raw_response_wrapper(
             workspace_preferences.archive,
         )
+        self.list_logs = to_raw_response_wrapper(
+            workspace_preferences.list_logs,
+        )
         self.publish = to_raw_response_wrapper(
             workspace_preferences.publish,
         )
@@ -685,6 +820,9 @@ class AsyncWorkspacePreferencesResourceWithRawResponse:
         )
         self.archive = async_to_raw_response_wrapper(
             workspace_preferences.archive,
+        )
+        self.list_logs = async_to_raw_response_wrapper(
+            workspace_preferences.list_logs,
         )
         self.publish = async_to_raw_response_wrapper(
             workspace_preferences.publish,
@@ -714,6 +852,9 @@ class WorkspacePreferencesResourceWithStreamingResponse:
         self.archive = to_streamed_response_wrapper(
             workspace_preferences.archive,
         )
+        self.list_logs = to_streamed_response_wrapper(
+            workspace_preferences.list_logs,
+        )
         self.publish = to_streamed_response_wrapper(
             workspace_preferences.publish,
         )
@@ -741,6 +882,9 @@ class AsyncWorkspacePreferencesResourceWithStreamingResponse:
         )
         self.archive = async_to_streamed_response_wrapper(
             workspace_preferences.archive,
+        )
+        self.list_logs = async_to_streamed_response_wrapper(
+            workspace_preferences.list_logs,
         )
         self.publish = async_to_streamed_response_wrapper(
             workspace_preferences.publish,
