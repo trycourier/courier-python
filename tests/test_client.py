@@ -909,7 +909,7 @@ class TestCourier:
             if nb_retries < failures_before_success:
                 nb_retries += 1
                 if failure_mode == "exception":
-                    raise RuntimeError("oops")
+                    raise httpx.ConnectError("oops")
                 return httpx.Response(500)
             return httpx.Response(200)
 
@@ -919,6 +919,23 @@ class TestCourier:
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
+
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    def test_non_transport_exception_is_not_retried(self, client: Courier, respx_mock: MockRouter) -> None:
+        # Stands in for Celery's SoftTimeLimitExceeded, which a signal handler raises
+        # mid-request. It is not a network failure, so it must propagate unretried.
+        class TaskCancelled(Exception):
+            pass
+
+        client = client.with_options(max_retries=4)
+
+        respx_mock.post("/send").mock(side_effect=TaskCancelled())
+
+        with pytest.raises(TaskCancelled):
+            client.send.with_raw_response.message(message={})
+
+        assert len(respx_mock.calls) == 1
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
     @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
@@ -1841,7 +1858,7 @@ class TestAsyncCourier:
             if nb_retries < failures_before_success:
                 nb_retries += 1
                 if failure_mode == "exception":
-                    raise RuntimeError("oops")
+                    raise httpx.ConnectError("oops")
                 return httpx.Response(500)
             return httpx.Response(200)
 
@@ -1851,6 +1868,25 @@ class TestAsyncCourier:
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
+
+    @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
+    @pytest.mark.respx(base_url=base_url)
+    async def test_non_transport_exception_is_not_retried(
+        self, async_client: AsyncCourier, respx_mock: MockRouter
+    ) -> None:
+        # Stands in for Celery's SoftTimeLimitExceeded, which a signal handler raises
+        # mid-request. It is not a network failure, so it must propagate unretried.
+        class TaskCancelled(Exception):
+            pass
+
+        client = async_client.with_options(max_retries=4)
+
+        respx_mock.post("/send").mock(side_effect=TaskCancelled())
+
+        with pytest.raises(TaskCancelled):
+            await client.send.with_raw_response.message(message={})
+
+        assert len(respx_mock.calls) == 1
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
     @mock.patch("courier._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
