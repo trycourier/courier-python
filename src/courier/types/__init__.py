@@ -268,6 +268,8 @@ from .notification_publish_params import NotificationPublishParams as Notificati
 from .notification_replace_params import NotificationReplaceParams as NotificationReplaceParams
 from .notification_template_alias import NotificationTemplateAlias as NotificationTemplateAlias
 from .notification_template_state import NotificationTemplateState as NotificationTemplateState
+from .preference_change_log_entry import PreferenceChangeLogEntry as PreferenceChangeLogEntry
+from .preference_change_log_value import PreferenceChangeLogValue as PreferenceChangeLogValue
 from .tenant_template_input_param import TenantTemplateInputParam as TenantTemplateInputParam
 from .topic_digest_category_param import TopicDigestCategoryParam as TopicDigestCategoryParam
 from .audience_list_members_params import AudienceListMembersParams as AudienceListMembersParams
@@ -295,6 +297,7 @@ from .journey_throttle_dynamic_node import JourneyThrottleDynamicNode as Journey
 from .notification_metrics_response import NotificationMetricsResponse as NotificationMetricsResponse
 from .notification_template_payload import NotificationTemplatePayload as NotificationTemplatePayload
 from .notification_template_summary import NotificationTemplateSummary as NotificationTemplateSummary
+from .preference_logs_list_response import PreferenceLogsListResponse as PreferenceLogsListResponse
 from .routing_strategy_get_response import RoutingStrategyGetResponse as RoutingStrategyGetResponse
 from .translation_retrieve_response import TranslationRetrieveResponse as TranslationRetrieveResponse
 from .audience_list_members_response import AudienceListMembersResponse as AudienceListMembersResponse
@@ -351,6 +354,9 @@ from .post_tenant_template_publish_response import (
     PostTenantTemplatePublishResponse as PostTenantTemplatePublishResponse,
 )
 from .subscribe_to_lists_request_item_param import SubscribeToListsRequestItemParam as SubscribeToListsRequestItemParam
+from .workspace_preference_list_logs_params import (
+    WorkspacePreferenceListLogsParams as WorkspacePreferenceListLogsParams,
+)
 from .journey_send_node_to_slack_email_param import JourneySendNodeToSlackEmailParam as JourneySendNodeToSlackEmailParam
 from .notification_content_mutation_response import (
     NotificationContentMutationResponse as NotificationContentMutationResponse,

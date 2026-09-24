@@ -10,6 +10,7 @@ import pytest
 from courier import Courier, AsyncCourier
 from tests.utils import assert_matches_type
 from courier.types import (
+    PreferenceLogsListResponse,
     PublishPreferencesResponse,
     WorkspacePreferenceGetResponse,
     WorkspacePreferenceListResponse,
@@ -179,6 +180,46 @@ class TestWorkspacePreferences:
             client.workspace_preferences.with_raw_response.archive(
                 "",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_logs(self, client: Courier) -> None:
+        workspace_preference = client.workspace_preferences.list_logs()
+        assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_list_logs_with_all_params(self, client: Courier) -> None:
+        workspace_preference = client.workspace_preferences.list_logs(
+            cursor="cursor",
+            limit=1,
+            since="since",
+            tenant_id="tenant_id",
+            user_id="user_id",
+        )
+        assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_list_logs(self, client: Courier) -> None:
+        response = client.workspace_preferences.with_raw_response.list_logs()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workspace_preference = response.parse()
+        assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_list_logs(self, client: Courier) -> None:
+        with client.workspace_preferences.with_streaming_response.list_logs() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workspace_preference = response.parse()
+            assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -442,6 +483,46 @@ class TestAsyncWorkspacePreferences:
             await async_client.workspace_preferences.with_raw_response.archive(
                 "",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_logs(self, async_client: AsyncCourier) -> None:
+        workspace_preference = await async_client.workspace_preferences.list_logs()
+        assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_list_logs_with_all_params(self, async_client: AsyncCourier) -> None:
+        workspace_preference = await async_client.workspace_preferences.list_logs(
+            cursor="cursor",
+            limit=1,
+            since="since",
+            tenant_id="tenant_id",
+            user_id="user_id",
+        )
+        assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_list_logs(self, async_client: AsyncCourier) -> None:
+        response = await async_client.workspace_preferences.with_raw_response.list_logs()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        workspace_preference = await response.parse()
+        assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_logs(self, async_client: AsyncCourier) -> None:
+        async with async_client.workspace_preferences.with_streaming_response.list_logs() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            workspace_preference = await response.parse()
+            assert_matches_type(PreferenceLogsListResponse, workspace_preference, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
