@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.9.0](https://github.com/trycourier/courier-python/compare/v9.8.0...v9.9.0) (2026-09-24)
+
+
+### Features
+
+* **api:** filter notification templates by tag [C-21172] ([#203](https://github.com/trycourier/courier-python/issues/203)) ([adc2b66](https://github.com/trycourier/courier-python/commit/adc2b66db605cd20fd910202deac9d69add23337))
+
+
+### Bug Fixes
+
+* **client:** retry only httpx transport errors, not every exception ([6f9e7ba](https://github.com/trycourier/courier-python/commit/6f9e7baff1ab41d0c3194beffec5eeaeca8c5fd6))
+
 ## [9.8.0](https://github.com/trycourier/courier-python/compare/v9.7.0...v9.8.0) (2026-09-23)
 
 
