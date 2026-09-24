@@ -88,6 +88,14 @@ from .messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
+from .previews import (
+    PreviewsResource,
+    AsyncPreviewsResource,
+    PreviewsResourceWithRawResponse,
+    AsyncPreviewsResourceWithRawResponse,
+    PreviewsResourceWithStreamingResponse,
+    AsyncPreviewsResourceWithStreamingResponse,
+)
 from .profiles import (
     ProfilesResource,
     AsyncProfilesResource,
@@ -226,6 +234,12 @@ __all__ = [
     "AsyncBroadcastsResourceWithRawResponse",
     "BroadcastsResourceWithStreamingResponse",
     "AsyncBroadcastsResourceWithStreamingResponse",
+    "PreviewsResource",
+    "AsyncPreviewsResource",
+    "PreviewsResourceWithRawResponse",
+    "AsyncPreviewsResourceWithRawResponse",
+    "PreviewsResourceWithStreamingResponse",
+    "AsyncPreviewsResourceWithStreamingResponse",
     "BulkResource",
     "AsyncBulkResource",
     "BulkResourceWithRawResponse",

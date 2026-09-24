@@ -41,6 +41,14 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from .previews.previews import (
+    PreviewsResource,
+    AsyncPreviewsResource,
+    PreviewsResourceWithRawResponse,
+    AsyncPreviewsResourceWithRawResponse,
+    PreviewsResourceWithStreamingResponse,
+    AsyncPreviewsResourceWithStreamingResponse,
+)
 from ...types.notification_list_response import NotificationListResponse
 from ...types.notification_template_state import NotificationTemplateState
 from ...types.notification_metrics_response import NotificationMetricsResponse
@@ -64,6 +72,10 @@ class NotificationsResource(SyncAPIResource):
         Create, update, version, publish, and localize notification templates and their content.
         """
         return ChecksResource(self._client)
+
+    @cached_property
+    def previews(self) -> PreviewsResource:
+        return PreviewsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> NotificationsResourceWithRawResponse:
@@ -746,6 +758,10 @@ class AsyncNotificationsResource(AsyncAPIResource):
         Create, update, version, publish, and localize notification templates and their content.
         """
         return AsyncChecksResource(self._client)
+
+    @cached_property
+    def previews(self) -> AsyncPreviewsResource:
+        return AsyncPreviewsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncNotificationsResourceWithRawResponse:
@@ -1469,6 +1485,10 @@ class NotificationsResourceWithRawResponse:
         """
         return ChecksResourceWithRawResponse(self._notifications.checks)
 
+    @cached_property
+    def previews(self) -> PreviewsResourceWithRawResponse:
+        return PreviewsResourceWithRawResponse(self._notifications.previews)
+
 
 class AsyncNotificationsResourceWithRawResponse:
     def __init__(self, notifications: AsyncNotificationsResource) -> None:
@@ -1517,6 +1537,10 @@ class AsyncNotificationsResourceWithRawResponse:
         Create, update, version, publish, and localize notification templates and their content.
         """
         return AsyncChecksResourceWithRawResponse(self._notifications.checks)
+
+    @cached_property
+    def previews(self) -> AsyncPreviewsResourceWithRawResponse:
+        return AsyncPreviewsResourceWithRawResponse(self._notifications.previews)
 
 
 class NotificationsResourceWithStreamingResponse:
@@ -1567,6 +1591,10 @@ class NotificationsResourceWithStreamingResponse:
         """
         return ChecksResourceWithStreamingResponse(self._notifications.checks)
 
+    @cached_property
+    def previews(self) -> PreviewsResourceWithStreamingResponse:
+        return PreviewsResourceWithStreamingResponse(self._notifications.previews)
+
 
 class AsyncNotificationsResourceWithStreamingResponse:
     def __init__(self, notifications: AsyncNotificationsResource) -> None:
@@ -1615,3 +1643,7 @@ class AsyncNotificationsResourceWithStreamingResponse:
         Create, update, version, publish, and localize notification templates and their content.
         """
         return AsyncChecksResourceWithStreamingResponse(self._notifications.checks)
+
+    @cached_property
+    def previews(self) -> AsyncPreviewsResourceWithStreamingResponse:
+        return AsyncPreviewsResourceWithStreamingResponse(self._notifications.previews)

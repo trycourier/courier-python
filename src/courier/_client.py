@@ -47,6 +47,7 @@ if TYPE_CHECKING:
         tenants,
         journeys,
         messages,
+        previews,
         profiles,
         requests,
         audiences,
@@ -65,6 +66,7 @@ if TYPE_CHECKING:
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.inbound import InboundResource, AsyncInboundResource
     from .resources.messages import MessagesResource, AsyncMessagesResource
+    from .resources.previews import PreviewsResource, AsyncPreviewsResource
     from .resources.requests import RequestsResource, AsyncRequestsResource
     from .resources.audiences import AudiencesResource, AsyncAudiencesResource
     from .resources.broadcasts import BroadcastsResource, AsyncBroadcastsResource
@@ -221,6 +223,15 @@ class Courier(SyncAPIClient):
         from .resources.broadcasts import BroadcastsResource
 
         return BroadcastsResource(self)
+
+    @cached_property
+    def previews(self) -> PreviewsResource:
+        """
+        Render a template's email content on real email clients and read back the screenshots, so you can check how it looks before you send it.
+        """
+        from .resources.previews import PreviewsResource
+
+        return PreviewsResource(self)
 
     @cached_property
     def bulk(self) -> BulkResource:
@@ -587,6 +598,15 @@ class AsyncCourier(AsyncAPIClient):
         return AsyncBroadcastsResource(self)
 
     @cached_property
+    def previews(self) -> AsyncPreviewsResource:
+        """
+        Render a template's email content on real email clients and read back the screenshots, so you can check how it looks before you send it.
+        """
+        from .resources.previews import AsyncPreviewsResource
+
+        return AsyncPreviewsResource(self)
+
+    @cached_property
     def bulk(self) -> AsyncBulkResource:
         from .resources.bulk import AsyncBulkResource
 
@@ -893,6 +913,15 @@ class CourierWithRawResponse:
         return BroadcastsResourceWithRawResponse(self._client.broadcasts)
 
     @cached_property
+    def previews(self) -> previews.PreviewsResourceWithRawResponse:
+        """
+        Render a template's email content on real email clients and read back the screenshots, so you can check how it looks before you send it.
+        """
+        from .resources.previews import PreviewsResourceWithRawResponse
+
+        return PreviewsResourceWithRawResponse(self._client.previews)
+
+    @cached_property
     def bulk(self) -> bulk.BulkResourceWithRawResponse:
         from .resources.bulk import BulkResourceWithRawResponse
 
@@ -1085,6 +1114,15 @@ class AsyncCourierWithRawResponse:
         from .resources.broadcasts import AsyncBroadcastsResourceWithRawResponse
 
         return AsyncBroadcastsResourceWithRawResponse(self._client.broadcasts)
+
+    @cached_property
+    def previews(self) -> previews.AsyncPreviewsResourceWithRawResponse:
+        """
+        Render a template's email content on real email clients and read back the screenshots, so you can check how it looks before you send it.
+        """
+        from .resources.previews import AsyncPreviewsResourceWithRawResponse
+
+        return AsyncPreviewsResourceWithRawResponse(self._client.previews)
 
     @cached_property
     def bulk(self) -> bulk.AsyncBulkResourceWithRawResponse:
@@ -1281,6 +1319,15 @@ class CourierWithStreamedResponse:
         return BroadcastsResourceWithStreamingResponse(self._client.broadcasts)
 
     @cached_property
+    def previews(self) -> previews.PreviewsResourceWithStreamingResponse:
+        """
+        Render a template's email content on real email clients and read back the screenshots, so you can check how it looks before you send it.
+        """
+        from .resources.previews import PreviewsResourceWithStreamingResponse
+
+        return PreviewsResourceWithStreamingResponse(self._client.previews)
+
+    @cached_property
     def bulk(self) -> bulk.BulkResourceWithStreamingResponse:
         from .resources.bulk import BulkResourceWithStreamingResponse
 
@@ -1473,6 +1520,15 @@ class AsyncCourierWithStreamedResponse:
         from .resources.broadcasts import AsyncBroadcastsResourceWithStreamingResponse
 
         return AsyncBroadcastsResourceWithStreamingResponse(self._client.broadcasts)
+
+    @cached_property
+    def previews(self) -> previews.AsyncPreviewsResourceWithStreamingResponse:
+        """
+        Render a template's email content on real email clients and read back the screenshots, so you can check how it looks before you send it.
+        """
+        from .resources.previews import AsyncPreviewsResourceWithStreamingResponse
+
+        return AsyncPreviewsResourceWithStreamingResponse(self._client.previews)
 
     @cached_property
     def bulk(self) -> bulk.AsyncBulkResourceWithStreamingResponse:
