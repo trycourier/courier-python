@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.10.0](https://github.com/trycourier/courier-python/compare/v9.9.0...v9.10.0) (2026-09-24)
+
+
+### Features
+
+* **api:** add GET /preferences/logs [C-21018] ([c6b2015](https://github.com/trycourier/courier-python/commit/c6b201573c5912ba1fdac1b4b3505c71a67c86d4))
+
 ## [9.9.0](https://github.com/trycourier/courier-python/compare/v9.8.0...v9.9.0) (2026-09-24)
 
 
