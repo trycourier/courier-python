@@ -20,7 +20,12 @@ class Provider(BaseModel):
     """The provider key (e.g. "sendgrid", "twilio", "slack")."""
 
     settings: Dict[str, object]
-    """Provider-specific settings (snake_case keys on the wire)."""
+    """Provider-specific settings (snake_case keys on the wire).
+
+    `rate_limit` is this configuration's send rate limit,
+    `{ "rate": number, "period": "second" | "minute" | "hour" }`, or null for no
+    limit.
+    """
 
     title: str
     """Display title. Defaults to "Default Configuration" when not explicitly set."""
