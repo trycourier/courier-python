@@ -7,6 +7,7 @@ from typing_extensions import Required, TypedDict
 
 from .._types import SequenceNotStr
 from .shared_params.elemental_content import ElementalContent
+from .notification_template_email_param import NotificationTemplateEmailParam
 
 __all__ = ["NotificationTemplatePayloadParam", "Brand", "Routing", "Subscription"]
 
@@ -51,3 +52,16 @@ class NotificationTemplatePayloadParam(TypedDict, total=False):
 
     tags: Required[SequenceNotStr[str]]
     """Tags for categorization. Send empty array for none."""
+
+    email: Optional[NotificationTemplateEmailParam]
+    """
+    Email header fields for the template's email channel: the From, Reply-to, CC and
+    BCC values set in the Studio email channel settings. Each value may use template
+    variables, such as `{{data.cc}}`, which are resolved at send time. Reads omit
+    `email` when no header is set, and omit each unset field. Writes treat it as
+    optional, with three meanings. Omit it to keep the stored headers. Send null to
+    clear all four. Send an object to replace all four: a field the object leaves
+    out is cleared. Other email channel settings, such as the subject, are kept
+    either way. Headers only apply while `content` has an email channel; with no
+    email channel they are not stored.
+    """

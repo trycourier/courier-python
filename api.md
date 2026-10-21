@@ -528,6 +528,7 @@ from courier.types import (
     NotificationMetricsResponse,
     NotificationTemplateAlias,
     NotificationTemplateCreateRequest,
+    NotificationTemplateEmail,
     NotificationTemplatePayload,
     NotificationTemplatePublishRequest,
     NotificationTemplateResponse,
