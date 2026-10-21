@@ -191,6 +191,7 @@ from .journey_run_list_item import JourneyRunListItem as JourneyRunListItem
 from .message_list_response import MessageListResponse as MessageListResponse
 from .profile_create_params import ProfileCreateParams as ProfileCreateParams
 from .profile_update_params import ProfileUpdateParams as ProfileUpdateParams
+from .provider_patch_params import ProviderPatchParams as ProviderPatchParams
 from .send_message_response import SendMessageResponse as SendMessageResponse
 from .topic_digest_category import TopicDigestCategory as TopicDigestCategory
 from .topic_digest_response import TopicDigestResponse as TopicDigestResponse

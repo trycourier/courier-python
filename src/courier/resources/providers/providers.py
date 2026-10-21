@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, Optional
 
 import httpx
 
-from ...types import provider_list_params, provider_create_params, provider_update_params
+from ...types import provider_list_params, provider_patch_params, provider_create_params, provider_update_params
 from .catalog import (
     CatalogResource,
     AsyncCatalogResource,
@@ -313,6 +313,67 @@ class ProvidersResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
+    def patch(
+        self,
+        id: str,
+        *,
+        alias: Optional[str] | Omit = omit,
+        provider: str | Omit = omit,
+        settings: Dict[str, object] | Omit = omit,
+        title: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Provider:
+        """
+        Updates part of a provider's configuration and keeps every field you omit.
+        Settings merge into the stored settings key by key, and a setting sent as null
+        is removed.
+
+        Args:
+          alias: Updated alias. Set to null to clear it.
+
+          provider: The provider key identifying the type. Optional. When sent, it must match the
+              stored provider, otherwise the request returns a 400.
+
+          settings: Provider-specific settings (snake_case keys) to merge into the stored settings,
+              using JSON Merge Patch (RFC 7396). Each key you send replaces the stored value,
+              a key set to null is removed, nested objects merge recursively, and arrays
+              replace the stored value. Keys you omit keep their stored values. Set
+              `rate_limit` to null to remove this configuration's send rate limit.
+
+          title: Updated display title.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._patch(
+            path_template("/providers/{id}", id=id),
+            body=maybe_transform(
+                {
+                    "alias": alias,
+                    "provider": provider,
+                    "settings": settings,
+                    "title": title,
+                },
+                provider_patch_params.ProviderPatchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Provider,
+        )
+
 
 class AsyncProvidersResource(AsyncAPIResource):
     """
@@ -595,6 +656,67 @@ class AsyncProvidersResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
+    async def patch(
+        self,
+        id: str,
+        *,
+        alias: Optional[str] | Omit = omit,
+        provider: str | Omit = omit,
+        settings: Dict[str, object] | Omit = omit,
+        title: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> Provider:
+        """
+        Updates part of a provider's configuration and keeps every field you omit.
+        Settings merge into the stored settings key by key, and a setting sent as null
+        is removed.
+
+        Args:
+          alias: Updated alias. Set to null to clear it.
+
+          provider: The provider key identifying the type. Optional. When sent, it must match the
+              stored provider, otherwise the request returns a 400.
+
+          settings: Provider-specific settings (snake_case keys) to merge into the stored settings,
+              using JSON Merge Patch (RFC 7396). Each key you send replaces the stored value,
+              a key set to null is removed, nested objects merge recursively, and arrays
+              replace the stored value. Keys you omit keep their stored values. Set
+              `rate_limit` to null to remove this configuration's send rate limit.
+
+          title: Updated display title.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._patch(
+            path_template("/providers/{id}", id=id),
+            body=await async_maybe_transform(
+                {
+                    "alias": alias,
+                    "provider": provider,
+                    "settings": settings,
+                    "title": title,
+                },
+                provider_patch_params.ProviderPatchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Provider,
+        )
+
 
 class ProvidersResourceWithRawResponse:
     def __init__(self, providers: ProvidersResource) -> None:
@@ -614,6 +736,9 @@ class ProvidersResourceWithRawResponse:
         )
         self.delete = to_raw_response_wrapper(
             providers.delete,
+        )
+        self.patch = to_raw_response_wrapper(
+            providers.patch,
         )
 
     @cached_property
@@ -643,6 +768,9 @@ class AsyncProvidersResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             providers.delete,
         )
+        self.patch = async_to_raw_response_wrapper(
+            providers.patch,
+        )
 
     @cached_property
     def catalog(self) -> AsyncCatalogResourceWithRawResponse:
@@ -671,6 +799,9 @@ class ProvidersResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             providers.delete,
         )
+        self.patch = to_streamed_response_wrapper(
+            providers.patch,
+        )
 
     @cached_property
     def catalog(self) -> CatalogResourceWithStreamingResponse:
@@ -698,6 +829,9 @@ class AsyncProvidersResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             providers.delete,
+        )
+        self.patch = async_to_streamed_response_wrapper(
+            providers.patch,
         )
 
     @cached_property
