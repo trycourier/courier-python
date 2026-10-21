@@ -141,6 +141,7 @@ Methods:
 - <code title="put /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">update</a>(id, \*\*<a href="src/courier/types/provider_update_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
 - <code title="get /providers">client.providers.<a href="./src/courier/resources/providers/providers.py">list</a>(\*\*<a href="src/courier/types/provider_list_params.py">params</a>) -> <a href="./src/courier/types/provider_list_response.py">ProviderListResponse</a></code>
 - <code title="delete /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">delete</a>(id) -> None</code>
+- <code title="patch /providers/{id}">client.providers.<a href="./src/courier/resources/providers/providers.py">patch</a>(id, \*\*<a href="src/courier/types/provider_patch_params.py">params</a>) -> <a href="./src/courier/types/provider.py">Provider</a></code>
 
 ## Catalog
 
