@@ -265,7 +265,41 @@ class TestTemplates:
             tenant_id="tenant_id",
             template={
                 "content": {
-                    "elements": [{"type": "channel"}],
+                    "elements": [
+                        {
+                            "channels": ["string"],
+                            "if": "if",
+                            "loop": "loop",
+                            "ref": "ref",
+                            "channel": "email",
+                            "elements": [
+                                {
+                                    "channels": ["string"],
+                                    "if": "if",
+                                    "loop": "loop",
+                                    "ref": "ref",
+                                    "align": "left",
+                                    "bold": "bold",
+                                    "color": "color",
+                                    "content": "Hello {{name}}",
+                                    "font_size": "font_size",
+                                    "format": "markdown",
+                                    "italic": "italic",
+                                    "line_height": "line_height",
+                                    "locales": {"foo": {"content": "content"}},
+                                    "strikethrough": "strikethrough",
+                                    "text_style": "text",
+                                    "underline": "underline",
+                                    "type": "text",
+                                }
+                            ],
+                            "font_size": "font_size",
+                            "line_height": "line_height",
+                            "padding": "padding",
+                            "raw": {"foo": "bar"},
+                            "type": "channel",
+                        }
+                    ],
                     "version": "2022-01-01",
                 },
                 "channels": {
@@ -629,7 +663,41 @@ class TestAsyncTemplates:
             tenant_id="tenant_id",
             template={
                 "content": {
-                    "elements": [{"type": "channel"}],
+                    "elements": [
+                        {
+                            "channels": ["string"],
+                            "if": "if",
+                            "loop": "loop",
+                            "ref": "ref",
+                            "channel": "email",
+                            "elements": [
+                                {
+                                    "channels": ["string"],
+                                    "if": "if",
+                                    "loop": "loop",
+                                    "ref": "ref",
+                                    "align": "left",
+                                    "bold": "bold",
+                                    "color": "color",
+                                    "content": "Hello {{name}}",
+                                    "font_size": "font_size",
+                                    "format": "markdown",
+                                    "italic": "italic",
+                                    "line_height": "line_height",
+                                    "locales": {"foo": {"content": "content"}},
+                                    "strikethrough": "strikethrough",
+                                    "text_style": "text",
+                                    "underline": "underline",
+                                    "type": "text",
+                                }
+                            ],
+                            "font_size": "font_size",
+                            "line_height": "line_height",
+                            "padding": "padding",
+                            "raw": {"foo": "bar"},
+                            "type": "channel",
+                        }
+                    ],
                     "version": "2022-01-01",
                 },
                 "channels": {
