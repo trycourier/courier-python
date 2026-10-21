@@ -1,5 +1,24 @@
 # Changelog
 
+## [9.12.0](https://github.com/trycourier/courier-python/compare/v9.11.0...v9.12.0) (2026-10-21)
+
+
+### Features
+
+* **api:** add PATCH /providers/{id} for partial provider updates [C-21790] ([#216](https://github.com/trycourier/courier-python/issues/216)) ([f4e639a](https://github.com/trycourier/courier-python/commit/f4e639a3069026d88b21e5418c49f23e3fce7235))
+* **api:** expose email From, Reply-to, CC and BCC on notification templates [C-21709] ([#214](https://github.com/trycourier/courier-python/issues/214)) ([78b0992](https://github.com/trycourier/courier-python/commit/78b0992444e9915b604a874bdb25987154e0ec28))
+
+
+### Chores
+
+* **api:** regenerate SDK ([#215](https://github.com/trycourier/courier-python/issues/215)) ([93aa7cf](https://github.com/trycourier/courier-python/commit/93aa7cf1302e91a1584e471f65c79934ebb3ec9e))
+
+
+### Documentation
+
+* **api:** describe the AI node model constraint [C-21614] ([#210](https://github.com/trycourier/courier-python/issues/210)) ([5c0a5b7](https://github.com/trycourier/courier-python/commit/5c0a5b700238233a3d9540f6375faaec6053c244))
+* **api:** document provider settings.rate_limit [C-21732] ([#212](https://github.com/trycourier/courier-python/issues/212)) ([5e7b2f4](https://github.com/trycourier/courier-python/commit/5e7b2f446dd94b8e3a85f837b4a635631f153e52))
+
 ## [9.11.0](https://github.com/trycourier/courier-python/compare/v9.10.0...v9.11.0) (2026-09-24)
 
 
