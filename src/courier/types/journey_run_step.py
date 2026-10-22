@@ -4,7 +4,18 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["JourneyRunStep"]
+__all__ = ["JourneyRunStep", "Error"]
+
+
+class Error(BaseModel):
+    """Why the step failed. Set when `status` is `ERROR`, `null` otherwise."""
+
+    message: str
+    """The reason, e.g.
+
+    `Fetch failed: GET api.example.com returned 404` or
+    `AI step timed out after 15 minutes`.
+    """
 
 
 class JourneyRunStep(BaseModel):
@@ -15,6 +26,15 @@ class JourneyRunStep(BaseModel):
 
     action: str
     """The kind of node that ran, e.g. `send`, `delay`, or `exit`."""
+
+    error: Optional[Error] = None
+    """Why the step failed. Set when `status` is `ERROR`, `null` otherwise."""
+
+    skip_reason: Optional[str] = None
+    """Why the step was skipped, e.g.
+
+    `Node conditions not met`. Set when `status` is `SKIPPED`, `null` otherwise.
+    """
 
     status: str
     """The state of the step: the seven run statuses, plus `SKIPPED` and `COMPUTING`.
