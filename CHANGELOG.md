@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.13.0](https://github.com/trycourier/courier-python/compare/v9.12.0...v9.13.0) (2026-10-23)
+
+
+### Features
+
+* **api:** journey run steps return error and skip_reason ([#217](https://github.com/trycourier/courier-python/issues/217)) ([6157bac](https://github.com/trycourier/courier-python/commit/6157bacd4126047238fabf07ebbcafd93129c051))
+
+
+### Bug Fixes
+
+* import lazy resources through the package to avoid a Python 3.14 deadlock ([04e1233](https://github.com/trycourier/courier-python/commit/04e1233d00ee54436ab6bea100eff6fbff768231))
+
 ## [9.12.0](https://github.com/trycourier/courier-python/compare/v9.11.0...v9.12.0) (2026-10-21)
 
 
