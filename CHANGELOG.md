@@ -1,5 +1,16 @@
 # Changelog
 
+## [10.0.0](https://github.com/trycourier/courier-python/compare/v9.13.0...v10.0.0) (2026-10-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** PATCH /providers/{id} takes JSON Patch operations [C-22022] ([#220](https://github.com/trycourier/courier-python/issues/220))
+
+### Features
+
+* **api:** PATCH /providers/{id} takes JSON Patch operations [C-22022] ([#220](https://github.com/trycourier/courier-python/issues/220)) ([58b351a](https://github.com/trycourier/courier-python/commit/58b351ab0dbdb5f21d878e082325620e8783da83))
+
 ## [9.13.0](https://github.com/trycourier/courier-python/compare/v9.12.0...v9.13.0) (2026-10-23)
 
 
