@@ -250,18 +250,16 @@ class TestProviders:
     def test_method_patch(self, client: Courier) -> None:
         provider = client.providers.patch(
             id="id",
-        )
-        assert_matches_type(Provider, provider, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_patch_with_all_params(self, client: Courier) -> None:
-        provider = client.providers.patch(
-            id="id",
-            alias="alias",
-            provider="provider",
-            settings={"api_key": "bar"},
-            title="Production SendGrid",
+            patch=[
+                {
+                    "op": "replace",
+                    "path": "/title",
+                },
+                {
+                    "op": "replace",
+                    "path": "/settings/api_key",
+                },
+            ],
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -270,6 +268,16 @@ class TestProviders:
     def test_raw_response_patch(self, client: Courier) -> None:
         response = client.providers.with_raw_response.patch(
             id="id",
+            patch=[
+                {
+                    "op": "replace",
+                    "path": "/title",
+                },
+                {
+                    "op": "replace",
+                    "path": "/settings/api_key",
+                },
+            ],
         )
 
         assert response.is_closed is True
@@ -282,6 +290,16 @@ class TestProviders:
     def test_streaming_response_patch(self, client: Courier) -> None:
         with client.providers.with_streaming_response.patch(
             id="id",
+            patch=[
+                {
+                    "op": "replace",
+                    "path": "/title",
+                },
+                {
+                    "op": "replace",
+                    "path": "/settings/api_key",
+                },
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -297,6 +315,16 @@ class TestProviders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             client.providers.with_raw_response.patch(
                 id="",
+                patch=[
+                    {
+                        "op": "replace",
+                        "path": "/title",
+                    },
+                    {
+                        "op": "replace",
+                        "path": "/settings/api_key",
+                    },
+                ],
             )
 
 
@@ -535,18 +563,16 @@ class TestAsyncProviders:
     async def test_method_patch(self, async_client: AsyncCourier) -> None:
         provider = await async_client.providers.patch(
             id="id",
-        )
-        assert_matches_type(Provider, provider, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_patch_with_all_params(self, async_client: AsyncCourier) -> None:
-        provider = await async_client.providers.patch(
-            id="id",
-            alias="alias",
-            provider="provider",
-            settings={"api_key": "bar"},
-            title="Production SendGrid",
+            patch=[
+                {
+                    "op": "replace",
+                    "path": "/title",
+                },
+                {
+                    "op": "replace",
+                    "path": "/settings/api_key",
+                },
+            ],
         )
         assert_matches_type(Provider, provider, path=["response"])
 
@@ -555,6 +581,16 @@ class TestAsyncProviders:
     async def test_raw_response_patch(self, async_client: AsyncCourier) -> None:
         response = await async_client.providers.with_raw_response.patch(
             id="id",
+            patch=[
+                {
+                    "op": "replace",
+                    "path": "/title",
+                },
+                {
+                    "op": "replace",
+                    "path": "/settings/api_key",
+                },
+            ],
         )
 
         assert response.is_closed is True
@@ -567,6 +603,16 @@ class TestAsyncProviders:
     async def test_streaming_response_patch(self, async_client: AsyncCourier) -> None:
         async with async_client.providers.with_streaming_response.patch(
             id="id",
+            patch=[
+                {
+                    "op": "replace",
+                    "path": "/title",
+                },
+                {
+                    "op": "replace",
+                    "path": "/settings/api_key",
+                },
+            ],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -582,4 +628,14 @@ class TestAsyncProviders:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
             await async_client.providers.with_raw_response.patch(
                 id="",
+                patch=[
+                    {
+                        "op": "replace",
+                        "path": "/title",
+                    },
+                    {
+                        "op": "replace",
+                        "path": "/settings/api_key",
+                    },
+                ],
             )

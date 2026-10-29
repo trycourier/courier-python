@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict, Iterable
 
 import httpx
 
@@ -317,10 +317,7 @@ class ProvidersResource(SyncAPIResource):
         self,
         id: str,
         *,
-        alias: Optional[str] | Omit = omit,
-        provider: str | Omit = omit,
-        settings: Dict[str, object] | Omit = omit,
-        title: str | Omit = omit,
+        patch: Iterable[provider_patch_params.Patch],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -329,23 +326,19 @@ class ProvidersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
         """
-        Updates part of a provider's configuration and keeps every field you omit.
-        Settings merge into the stored settings key by key, and a setting sent as null
-        is removed.
+        Applies JSON Patch (RFC 6902) operations to a provider configuration and keeps
+        every field the operations don't touch. Paths address the provider as it is
+        returned: /title, /alias and /settings/<key>. The operations apply in order, and
+        if one fails, nothing is saved.
 
         Args:
-          alias: Updated alias. Set to null to clear it.
-
-          provider: The provider key identifying the type. Optional. When sent, it must match the
-              stored provider, otherwise the request returns a 400.
-
-          settings: Provider-specific settings (snake_case keys) to merge into the stored settings,
-              using JSON Merge Patch (RFC 7396). Each key you send replaces the stored value,
-              a key set to null is removed, nested objects merge recursively, and arrays
-              replace the stored value. Keys you omit keep their stored values. Set
-              `rate_limit` to null to remove this configuration's send rate limit.
-
-          title: Updated display title.
+          patch:
+              Operations to apply, in order. Paths address the provider as it is returned:
+              `/title`, `/alias`, `/provider`, and `/settings/<key>` with the snake_case
+              setting keys, including nested paths such as `/settings/rate_limit/rate`. If any
+              operation fails, for example a `test`, nothing is saved and the request returns
+              a 400. The result can't change `provider`, remove `title`, or add other
+              top-level fields. Removing `/alias` clears it.
 
           extra_headers: Send extra headers
 
@@ -359,15 +352,7 @@ class ProvidersResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return self._patch(
             path_template("/providers/{id}", id=id),
-            body=maybe_transform(
-                {
-                    "alias": alias,
-                    "provider": provider,
-                    "settings": settings,
-                    "title": title,
-                },
-                provider_patch_params.ProviderPatchParams,
-            ),
+            body=maybe_transform({"patch": patch}, provider_patch_params.ProviderPatchParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -660,10 +645,7 @@ class AsyncProvidersResource(AsyncAPIResource):
         self,
         id: str,
         *,
-        alias: Optional[str] | Omit = omit,
-        provider: str | Omit = omit,
-        settings: Dict[str, object] | Omit = omit,
-        title: str | Omit = omit,
+        patch: Iterable[provider_patch_params.Patch],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -672,23 +654,19 @@ class AsyncProvidersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Provider:
         """
-        Updates part of a provider's configuration and keeps every field you omit.
-        Settings merge into the stored settings key by key, and a setting sent as null
-        is removed.
+        Applies JSON Patch (RFC 6902) operations to a provider configuration and keeps
+        every field the operations don't touch. Paths address the provider as it is
+        returned: /title, /alias and /settings/<key>. The operations apply in order, and
+        if one fails, nothing is saved.
 
         Args:
-          alias: Updated alias. Set to null to clear it.
-
-          provider: The provider key identifying the type. Optional. When sent, it must match the
-              stored provider, otherwise the request returns a 400.
-
-          settings: Provider-specific settings (snake_case keys) to merge into the stored settings,
-              using JSON Merge Patch (RFC 7396). Each key you send replaces the stored value,
-              a key set to null is removed, nested objects merge recursively, and arrays
-              replace the stored value. Keys you omit keep their stored values. Set
-              `rate_limit` to null to remove this configuration's send rate limit.
-
-          title: Updated display title.
+          patch:
+              Operations to apply, in order. Paths address the provider as it is returned:
+              `/title`, `/alias`, `/provider`, and `/settings/<key>` with the snake_case
+              setting keys, including nested paths such as `/settings/rate_limit/rate`. If any
+              operation fails, for example a `test`, nothing is saved and the request returns
+              a 400. The result can't change `provider`, remove `title`, or add other
+              top-level fields. Removing `/alias` clears it.
 
           extra_headers: Send extra headers
 
@@ -702,15 +680,7 @@ class AsyncProvidersResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
         return await self._patch(
             path_template("/providers/{id}", id=id),
-            body=await async_maybe_transform(
-                {
-                    "alias": alias,
-                    "provider": provider,
-                    "settings": settings,
-                    "title": title,
-                },
-                provider_patch_params.ProviderPatchParams,
-            ),
+            body=await async_maybe_transform({"patch": patch}, provider_patch_params.ProviderPatchParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

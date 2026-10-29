@@ -2,31 +2,42 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
-from typing_extensions import TypedDict
+from typing import Iterable
+from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["ProviderPatchParams"]
+__all__ = ["ProviderPatchParams", "Patch"]
 
 
 class ProviderPatchParams(TypedDict, total=False):
-    alias: Optional[str]
-    """Updated alias. Set to null to clear it."""
+    patch: Required[Iterable[Patch]]
+    """Operations to apply, in order.
 
-    provider: str
-    """The provider key identifying the type.
-
-    Optional. When sent, it must match the stored provider, otherwise the request
-    returns a 400.
+    Paths address the provider as it is returned: `/title`, `/alias`, `/provider`,
+    and `/settings/<key>` with the snake_case setting keys, including nested paths
+    such as `/settings/rate_limit/rate`. If any operation fails, for example a
+    `test`, nothing is saved and the request returns a 400. The result can't change
+    `provider`, remove `title`, or add other top-level fields. Removing `/alias`
+    clears it.
     """
 
-    settings: Dict[str, object]
-    """
-    Provider-specific settings (snake_case keys) to merge into the stored settings,
-    using JSON Merge Patch (RFC 7396). Each key you send replaces the stored value,
-    a key set to null is removed, nested objects merge recursively, and arrays
-    replace the stored value. Keys you omit keep their stored values. Set
-    `rate_limit` to null to remove this configuration's send rate limit.
-    """
 
-    title: str
-    """Updated display title."""
+_PatchReservedKeywords = TypedDict(
+    "_PatchReservedKeywords",
+    {
+        "from": str,
+    },
+    total=False,
+)
+
+
+class Patch(_PatchReservedKeywords, total=False):
+    """One JSON Patch (RFC 6902) operation."""
+
+    op: Required[Literal["add", "remove", "replace", "move", "copy", "test"]]
+    """The operation to perform."""
+
+    path: Required[str]
+    """JSON Pointer to the field to operate on, such as `/settings/api_key`."""
+
+    value: object
+    """The value for `add`, `replace` and `test`. Any JSON value."""
