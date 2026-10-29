@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.1](https://github.com/trycourier/courier-python/compare/v10.0.0...v10.0.1) (2026-10-29)
+
+
+### Documentation
+
+* **api:** add gpt-6.1-terra to AI node model ids [C-22053] ([#222](https://github.com/trycourier/courier-python/issues/222)) ([51e1954](https://github.com/trycourier/courier-python/commit/51e1954a93a28b07fd0b7187628949eaed8a9760))
+
 ## [10.0.0](https://github.com/trycourier/courier-python/compare/v9.13.0...v10.0.0) (2026-10-29)
 
 
