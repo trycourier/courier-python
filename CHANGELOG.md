@@ -1,5 +1,18 @@
 # Changelog
 
+## [10.0.1](https://github.com/trycourier/courier-python/compare/v10.0.0...v10.0.1) (2026-11-17)
+
+
+### Chores
+
+* **api:** regenerate SDK ([#224](https://github.com/trycourier/courier-python/issues/224)) ([2043c47](https://github.com/trycourier/courier-python/commit/2043c4739466666c10c17f110f5e58d68f87d210))
+
+
+### Documentation
+
+* **api:** add gpt-6.1-terra to AI node model ids [C-22053] ([#222](https://github.com/trycourier/courier-python/issues/222)) ([51e1954](https://github.com/trycourier/courier-python/commit/51e1954a93a28b07fd0b7187628949eaed8a9760))
+* **api:** list Claude Fable 5.2 as a JourneyAINode model [C-22567] ([#225](https://github.com/trycourier/courier-python/issues/225)) ([ce5324d](https://github.com/trycourier/courier-python/commit/ce5324d7ec4762f9bc63184e8d787998825f1d64))
+
 ## [10.0.0](https://github.com/trycourier/courier-python/compare/v9.13.0...v10.0.0) (2026-10-29)
 
 
