@@ -201,6 +201,7 @@ from .automation_list_params import AutomationListParams as AutomationListParams
 from .bulk_create_job_params import BulkCreateJobParams as BulkCreateJobParams
 from .bulk_list_users_params import BulkListUsersParams as BulkListUsersParams
 from .element_with_checksums import ElementWithChecksums as ElementWithChecksums
+from .feedback_create_params import FeedbackCreateParams as FeedbackCreateParams
 from .journey_condition_atom import JourneyConditionAtom as JourneyConditionAtom
 from .journey_merge_strategy import JourneyMergeStrategy as JourneyMergeStrategy
 from .journey_publish_params import JourneyPublishParams as JourneyPublishParams
@@ -231,6 +232,7 @@ from .automation_run_list_item import AutomationRunListItem as AutomationRunList
 from .bulk_create_job_response import BulkCreateJobResponse as BulkCreateJobResponse
 from .bulk_list_users_response import BulkListUsersResponse as BulkListUsersResponse
 from .device_set_list_response import DeviceSetListResponse as DeviceSetListResponse
+from .feedback_create_response import FeedbackCreateResponse as FeedbackCreateResponse
 from .journey_conditions_field import JourneyConditionsField as JourneyConditionsField
 from .journey_delay_until_node import JourneyDelayUntilNode as JourneyDelayUntilNode
 from .journey_experiment_param import JourneyExperimentParam as JourneyExperimentParam
