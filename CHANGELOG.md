@@ -1,5 +1,17 @@
 # Changelog
 
+## [10.1.0](https://github.com/trycourier/courier-python/compare/v10.0.1...v10.1.0) (2026-11-19)
+
+
+### Features
+
+* **api:** add POST /feedback for agent and tool feedback [C-22903] ([#228](https://github.com/trycourier/courier-python/issues/228)) ([16e4143](https://github.com/trycourier/courier-python/commit/16e414358942ce504dbbb8ca266b67be771b32a7))
+
+
+### Documentation
+
+* **api:** list GPT-6.2 Astra and Sol as JourneyAINode models [C-22881] ([#226](https://github.com/trycourier/courier-python/issues/226)) ([04394ec](https://github.com/trycourier/courier-python/commit/04394ec26cbb23a4060895cf3460fca5b988fb87))
+
 ## [10.0.1](https://github.com/trycourier/courier-python/compare/v10.0.0...v10.0.1) (2026-11-17)
 
 
