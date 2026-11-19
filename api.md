@@ -437,6 +437,18 @@ Methods:
 - <code title="get /digests/schedules/{schedule_id}/instances">client.digests.schedules.<a href="./src/courier/resources/digests/schedules.py">list_instances</a>(schedule_id, \*\*<a href="src/courier/types/digests/schedule_list_instances_params.py">params</a>) -> <a href="./src/courier/types/digest_instance_list_response.py">DigestInstanceListResponse</a></code>
 - <code title="post /digests/schedules/{schedule_id}/trigger">client.digests.schedules.<a href="./src/courier/resources/digests/schedules.py">release</a>(schedule_id) -> None</code>
 
+# Feedback
+
+Types:
+
+```python
+from courier.types import FeedbackCreateResponse
+```
+
+Methods:
+
+- <code title="post /feedback">client.feedback.<a href="./src/courier/resources/feedback.py">create</a>(\*\*<a href="src/courier/types/feedback_create_params.py">params</a>) -> <a href="./src/courier/types/feedback_create_response.py">FeedbackCreateResponse</a></code>
+
 # Inbound
 
 Types:

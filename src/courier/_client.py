@@ -45,6 +45,7 @@ if TYPE_CHECKING:
         digests,
         inbound,
         tenants,
+        feedback,
         journeys,
         messages,
         previews,
@@ -65,6 +66,7 @@ if TYPE_CHECKING:
     from .resources.send import SendResource, AsyncSendResource
     from .resources.brands import BrandsResource, AsyncBrandsResource
     from .resources.inbound import InboundResource, AsyncInboundResource
+    from .resources.feedback import FeedbackResource, AsyncFeedbackResource
     from .resources.messages import MessagesResource, AsyncMessagesResource
     from .resources.previews import PreviewsResource, AsyncPreviewsResource
     from .resources.requests import RequestsResource, AsyncRequestsResource
@@ -253,6 +255,15 @@ class Courier(SyncAPIClient):
         from .resources import digests
 
         return digests.DigestsResource(self)
+
+    @cached_property
+    def feedback(self) -> FeedbackResource:
+        """
+        Report suspected bugs, confusing behavior and missing features in Courier, from an AI agent, a developer tool or by hand.
+        """
+        from .resources import feedback
+
+        return feedback.FeedbackResource(self)
 
     @cached_property
     def inbound(self) -> InboundResource:
@@ -628,6 +639,15 @@ class AsyncCourier(AsyncAPIClient):
         return digests.AsyncDigestsResource(self)
 
     @cached_property
+    def feedback(self) -> AsyncFeedbackResource:
+        """
+        Report suspected bugs, confusing behavior and missing features in Courier, from an AI agent, a developer tool or by hand.
+        """
+        from .resources import feedback
+
+        return feedback.AsyncFeedbackResource(self)
+
+    @cached_property
     def inbound(self) -> AsyncInboundResource:
         """
         Record an inbound event that triggers the journeys and automations mapped to it.
@@ -943,6 +963,15 @@ class CourierWithRawResponse:
         return digests.DigestsResourceWithRawResponse(self._client.digests)
 
     @cached_property
+    def feedback(self) -> feedback.FeedbackResourceWithRawResponse:
+        """
+        Report suspected bugs, confusing behavior and missing features in Courier, from an AI agent, a developer tool or by hand.
+        """
+        from .resources import feedback
+
+        return feedback.FeedbackResourceWithRawResponse(self._client.feedback)
+
+    @cached_property
     def inbound(self) -> inbound.InboundResourceWithRawResponse:
         """
         Record an inbound event that triggers the journeys and automations mapped to it.
@@ -1144,6 +1173,15 @@ class AsyncCourierWithRawResponse:
         from .resources import digests
 
         return digests.AsyncDigestsResourceWithRawResponse(self._client.digests)
+
+    @cached_property
+    def feedback(self) -> feedback.AsyncFeedbackResourceWithRawResponse:
+        """
+        Report suspected bugs, confusing behavior and missing features in Courier, from an AI agent, a developer tool or by hand.
+        """
+        from .resources import feedback
+
+        return feedback.AsyncFeedbackResourceWithRawResponse(self._client.feedback)
 
     @cached_property
     def inbound(self) -> inbound.AsyncInboundResourceWithRawResponse:
@@ -1351,6 +1389,15 @@ class CourierWithStreamedResponse:
         return digests.DigestsResourceWithStreamingResponse(self._client.digests)
 
     @cached_property
+    def feedback(self) -> feedback.FeedbackResourceWithStreamingResponse:
+        """
+        Report suspected bugs, confusing behavior and missing features in Courier, from an AI agent, a developer tool or by hand.
+        """
+        from .resources import feedback
+
+        return feedback.FeedbackResourceWithStreamingResponse(self._client.feedback)
+
+    @cached_property
     def inbound(self) -> inbound.InboundResourceWithStreamingResponse:
         """
         Record an inbound event that triggers the journeys and automations mapped to it.
@@ -1554,6 +1601,15 @@ class AsyncCourierWithStreamedResponse:
         from .resources import digests
 
         return digests.AsyncDigestsResourceWithStreamingResponse(self._client.digests)
+
+    @cached_property
+    def feedback(self) -> feedback.AsyncFeedbackResourceWithStreamingResponse:
+        """
+        Report suspected bugs, confusing behavior and missing features in Courier, from an AI agent, a developer tool or by hand.
+        """
+        from .resources import feedback
+
+        return feedback.AsyncFeedbackResourceWithStreamingResponse(self._client.feedback)
 
     @cached_property
     def inbound(self) -> inbound.AsyncInboundResourceWithStreamingResponse:

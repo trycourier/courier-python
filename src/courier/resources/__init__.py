@@ -72,6 +72,14 @@ from .tenants import (
     TenantsResourceWithStreamingResponse,
     AsyncTenantsResourceWithStreamingResponse,
 )
+from .feedback import (
+    FeedbackResource,
+    AsyncFeedbackResource,
+    FeedbackResourceWithRawResponse,
+    AsyncFeedbackResourceWithRawResponse,
+    FeedbackResourceWithStreamingResponse,
+    AsyncFeedbackResourceWithStreamingResponse,
+)
 from .journeys import (
     JourneysResource,
     AsyncJourneysResource,
@@ -258,6 +266,12 @@ __all__ = [
     "AsyncDigestsResourceWithRawResponse",
     "DigestsResourceWithStreamingResponse",
     "AsyncDigestsResourceWithStreamingResponse",
+    "FeedbackResource",
+    "AsyncFeedbackResource",
+    "FeedbackResourceWithRawResponse",
+    "AsyncFeedbackResourceWithRawResponse",
+    "FeedbackResourceWithStreamingResponse",
+    "AsyncFeedbackResourceWithStreamingResponse",
     "InboundResource",
     "AsyncInboundResource",
     "InboundResourceWithRawResponse",
