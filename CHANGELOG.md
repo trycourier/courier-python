@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.1.1](https://github.com/trycourier/courier-python/compare/v10.1.0...v10.1.1) (2026-11-20)
+
+
+### Chores
+
+* add context7.json to claim the Context7 library ([#229](https://github.com/trycourier/courier-python/issues/229)) ([eec9275](https://github.com/trycourier/courier-python/commit/eec9275ccf40b224dec805d2c5c248c9c57d0b52))
+
 ## [10.1.0](https://github.com/trycourier/courier-python/compare/v10.0.1...v10.1.0) (2026-11-19)
 
 
