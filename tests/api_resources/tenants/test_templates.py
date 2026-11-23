@@ -301,6 +301,7 @@ class TestTemplates:
                         }
                     ],
                     "version": "2022-01-01",
+                    "scope": "default",
                 },
                 "channels": {
                     "foo": {
@@ -699,6 +700,7 @@ class TestAsyncTemplates:
                         }
                     ],
                     "version": "2022-01-01",
+                    "scope": "default",
                 },
                 "channels": {
                     "foo": {
