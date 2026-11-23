@@ -1,5 +1,17 @@
 # Changelog
 
+## [10.2.0](https://github.com/trycourier/courier-python/compare/v10.1.0...v10.2.0) (2026-11-23)
+
+
+### Features
+
+* **api:** document `scope` on Elemental content [C-23066] ([#231](https://github.com/trycourier/courier-python/issues/231)) ([3bdb790](https://github.com/trycourier/courier-python/commit/3bdb7904a5f60f070a591d0a2ba81a61a40f0c1a))
+
+
+### Chores
+
+* add context7.json to claim the Context7 library ([#229](https://github.com/trycourier/courier-python/issues/229)) ([eec9275](https://github.com/trycourier/courier-python/commit/eec9275ccf40b224dec805d2c5c248c9c57d0b52))
+
 ## [10.1.0](https://github.com/trycourier/courier-python/compare/v10.0.1...v10.1.0) (2026-11-19)
 
 
