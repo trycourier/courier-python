@@ -499,6 +499,7 @@ class TestTemplates:
                         "type": "channel",
                     }
                 ],
+                "scope": "default",
                 "version": "2022-01-01",
             },
             state="DRAFT",
@@ -1321,6 +1322,7 @@ class TestAsyncTemplates:
                         "type": "channel",
                     }
                 ],
+                "scope": "default",
                 "version": "2022-01-01",
             },
             state="DRAFT",
