@@ -94,7 +94,6 @@ class TestNotifications:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
@@ -509,7 +508,6 @@ class TestNotifications:
                         "type": "channel",
                     }
                 ],
-                "scope": "default",
                 "version": "2022-01-01",
             },
             state="DRAFT",
@@ -765,7 +763,6 @@ class TestNotifications:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "Updated Name",
                 "routing": {"strategy_id": "strategy_id"},
@@ -976,7 +973,6 @@ class TestAsyncNotifications:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "Welcome Email",
                 "routing": {"strategy_id": "rs_01kx4h2jdafq8bk9amzvy6hbv0"},
@@ -1391,7 +1387,6 @@ class TestAsyncNotifications:
                         "type": "channel",
                     }
                 ],
-                "scope": "default",
                 "version": "2022-01-01",
             },
             state="DRAFT",
@@ -1647,7 +1642,6 @@ class TestAsyncNotifications:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "Updated Name",
                 "routing": {"strategy_id": "strategy_id"},

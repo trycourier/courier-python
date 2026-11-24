@@ -41,8 +41,6 @@ class NotificationContent(TypedDict, total=False):
 
     version: Required[Literal["2022-01-01"]]
 
-    scope: Literal["default", "strict"]
-
 
 class NotificationSubscription(TypedDict, total=False):
     topic_id: Required[str]

@@ -87,7 +87,6 @@ class TestTemplates:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "Welcome email",
                 "subscription": {"topic_id": "topic_id"},
@@ -499,7 +498,6 @@ class TestTemplates:
                         "type": "channel",
                     }
                 ],
-                "scope": "default",
                 "version": "2022-01-01",
             },
             state="DRAFT",
@@ -685,7 +683,6 @@ class TestTemplates:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "name",
                 "subscription": {"topic_id": "topic_id"},
@@ -910,7 +907,6 @@ class TestAsyncTemplates:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "Welcome email",
                 "subscription": {"topic_id": "topic_id"},
@@ -1322,7 +1318,6 @@ class TestAsyncTemplates:
                         "type": "channel",
                     }
                 ],
-                "scope": "default",
                 "version": "2022-01-01",
             },
             state="DRAFT",
@@ -1508,7 +1503,6 @@ class TestAsyncTemplates:
                         }
                     ],
                     "version": "2022-01-01",
-                    "scope": "default",
                 },
                 "name": "name",
                 "subscription": {"topic_id": "topic_id"},
