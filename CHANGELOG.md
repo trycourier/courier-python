@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.3.0](https://github.com/trycourier/courier-python/compare/v10.2.0...v10.3.0) (2026-11-24)
+
+
+### Features
+
+* **api:** remove `scope` from v2 notification, journey and broadcast template content ([#232](https://github.com/trycourier/courier-python/issues/232)) ([68304d8](https://github.com/trycourier/courier-python/commit/68304d8cb4a28581a9a1b52a458f65f0eaa66642))
+
 ## [10.2.0](https://github.com/trycourier/courier-python/compare/v10.1.0...v10.2.0) (2026-11-23)
 
 
