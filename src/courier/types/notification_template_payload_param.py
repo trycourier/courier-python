@@ -6,8 +6,8 @@ from typing import Optional
 from typing_extensions import Required, TypedDict
 
 from .._types import SequenceNotStr
-from .shared_params.elemental_content import ElementalContent
 from .notification_template_email_param import NotificationTemplateEmailParam
+from .notification_template_content_param import NotificationTemplateContentParam
 
 __all__ = ["NotificationTemplatePayloadParam", "Brand", "Routing", "Subscription"]
 
@@ -38,7 +38,7 @@ class NotificationTemplatePayloadParam(TypedDict, total=False):
     brand: Required[Optional[Brand]]
     """Brand reference, or null for no brand."""
 
-    content: Required[ElementalContent]
+    content: Required[NotificationTemplateContentParam]
     """Elemental content definition."""
 
     name: Required[str]

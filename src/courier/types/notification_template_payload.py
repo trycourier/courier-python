@@ -3,8 +3,8 @@
 from typing import List, Optional
 
 from .._models import BaseModel
-from .shared.elemental_content import ElementalContent
 from .notification_template_email import NotificationTemplateEmail
+from .notification_template_content import NotificationTemplateContent
 
 __all__ = ["NotificationTemplatePayload", "Brand", "Routing", "Subscription"]
 
@@ -35,7 +35,7 @@ class NotificationTemplatePayload(BaseModel):
     brand: Optional[Brand] = None
     """Brand reference, or null for no brand."""
 
-    content: ElementalContent
+    content: NotificationTemplateContent
     """Elemental content definition."""
 
     name: str

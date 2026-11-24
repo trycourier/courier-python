@@ -18,8 +18,6 @@ class Content(BaseModel):
 
     version: Literal["2022-01-01"]
 
-    scope: Optional[Literal["default", "strict"]] = None
-
 
 class Subscription(BaseModel):
     topic_id: str
